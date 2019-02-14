@@ -116,12 +116,13 @@ Project Expectations:
 
 -----------------
 **Omar Thabet**
+
 NetID : othabet
 
-Personal Development Plan
 What are two of your strong points?
-1-I can easily communicate with others  .
-2- I'm usually a fast learner.
+
+1 - I can easily communicate with others  .
+2 - I'm usually a fast learner.
 How is this point shown in a team?
 In a team this would improve the efficiency and I it would be more pleasant to my teammates to work with me 
 What are two of your weaker points?
