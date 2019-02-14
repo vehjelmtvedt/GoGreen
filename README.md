@@ -65,3 +65,47 @@ guidelines we are going to be able to achieve this goal. I strongly believe that
 teammates are serious about this project and that we are going to do a really good job.
 
 
+**Evaldas Latoškinas**:
+
+NetID: elatoskinas
+
+Strong Points:
+
+1.Complex Problem Solving - mainly algorithmic problems,
+coming up with efficient and fully working solutions for various
+problems. I believe this will be useful in a team environment
+for handling various complex aspects (mainly features/functionality)
+of the application as well as providing code analysis.
+
+2.Planning & Analysis - I have a strong tendency to first analyze
+and research what's the quickest and most effective approach to
+a certain problem (e.g. what data structures to use, what to use
+to implement certain functionality, what database to implement, etc.).
+I believe this is highly useful in a team to avoid issues later on
+and have an effective solution on the first or second attempt at a
+problem.
+
+Weak Points:
+
+1.Design - I feel like I lack creativity and
+control on design in general (UI mainly), therefore I feel
+like this should not be my main role in a team.
+
+2.Lack of Team Work Experience - the majority of my time I have
+only worked on independent projects and tasks, therefore I believe
+there will be some difficulty adapting to team work, but I am
+prepared to fix this issue and adapt to a team based environment.
+
+Goals:
+* Learn to work efficiently in a team (learn Scrum, Agile)
+* Learn to reach high and efficient test coverage.
+* Learn to plan effectively in a team-based environment.
+
+I believe I will have successfully achieved this goal if we (me and my team)
+manage to finish the project in time and according to plan in the period of the course.
+
+Project Expectations:
+* Learn efficient planning & team work (Scrum, Agile)
+* Become more comfortable in git
+* Learn some new, undiscovered things in Java (JavaFX, database implementation, APIs)
+* Gain feedback on the process (rather than the product) of our work
