@@ -159,6 +159,8 @@ I’m really passionate about my study and how I’m going use my skills to impr
 How my team is going to help me?
 My team mate are great people and Im sure they will help me along the way.
 
+![](doc/photos/they_see_me_sailen_they_haten.jpeg)
+
 
 ----
 
@@ -166,7 +168,7 @@ My team mate are great people and Im sure they will help me along the way.
 
 NetID: JClemente
 
-![](doc/Photos/JeanLouis.jpeg)
+![](doc/photos/JeanLouis.jpeg)
 
 The strong points that I think I contribute to the team are my problem solving and organization skills.
 I previous group projects I was able to contribute by effectively delegating work amongst members as well as 
@@ -194,3 +196,6 @@ keep up with the pace of the group and maybe even push ahead.
 I strongly believe that I will rely on my team members to help me achieve this, 
 and I think they will be able to this with the
 prior experience that they have in programming.
+
+
+
