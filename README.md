@@ -115,8 +115,8 @@ Project Expectations:
 * Gain feedback on the process (rather than the product) of our work
 
 -----------------
-Name : Omar Thabet
-Netid : othabet
+**Omar Thabet**
+NetID : othabet
 
 Personal Development Plan
 What are two of your strong points?
