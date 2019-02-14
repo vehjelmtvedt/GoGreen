@@ -77,6 +77,8 @@ teammates are serious about this project and that we are going to do a really go
 
 NetID: elatoskinas
 
+![](doc/Photos/EvaldasLatoskinas.jpg)
+
 Strong Points:
 
 1.Complex Problem Solving - mainly algorithmic problems,
@@ -125,6 +127,8 @@ Project Expectations:
 
 NetID : othabet
 
+![](doc/Photos/they_see_me_sailen_they_haten.jpeg)
+
 What are two of your strong points?
 
 1 - I can easily communicate with others.
@@ -168,7 +172,7 @@ My team mate are great people and Im sure they will help me along the way.
 
 NetID: JClemente
 
-![](doc/photos/JeanLouis.jpeg)
+![](doc/Photos/JeanLouis.jpeg)
 
 The strong points that I think I contribute to the team are my problem solving and organization skills.
 I previous group projects I was able to contribute by effectively delegating work amongst members as well as 
