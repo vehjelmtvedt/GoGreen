@@ -208,7 +208,7 @@ prior experience that they have in programming.
 NetID: shashankanand
 Student ID: 4790987
 
-![](doc/Photos/ShashankAnand.jpeg)
+![](doc/Photos/ShashankAnand.jpg)
 
 My strong points are being able to solve complex programming problems, also devising 
 algorithms to solve them. I am also good at recovering from any mistakes made midway 
