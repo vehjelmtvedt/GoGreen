@@ -24,6 +24,8 @@ Run `maven site`
 
 Person Development Plan
 
+-----------------
+
 **Vetle Grim Hjelmtvedt**
 
 NetID: vhjelmtvedt
@@ -42,6 +44,8 @@ As of now, I am working with my team to achieve this goal.
 What’s stopping me from reaching my goal is laziness. Planning ahead of a project is “less fun” than just starting. However, in this project I will do my best not to do that.
 
 The first step to reaching my goal is am writing this, becoming aware of my goals and how to reach them.
+
+-----------------
 
 **Alexandru Radu Moraru**:
 
@@ -66,6 +70,7 @@ willing to do the same), since I think as long as we put in the work and follow 
 guidelines we are going to be able to achieve this goal. I strongly believe that my
 teammates are serious about this project and that we are going to do a really good job. 
 
+-----------------
 
 **Evaldas Latoškinas**:
 
