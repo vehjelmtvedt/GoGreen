@@ -203,3 +203,29 @@ prior experience that they have in programming.
 
 ----
 
+**Shashank Anand**:
+
+NetID: shashankanand
+Student ID: 4790987
+
+![](doc/Photos/ShashankAnand.jpeg)
+
+My strong points are being able to solve complex programming problems, also devising 
+algorithms to solve them. I am also good at recovering from any mistakes made midway 
+through, and being able to identify errors and fix them. I also tend to completely analyze 
+the situation before starting to program. 
+
+My weak points are not being able to think creatively, and come up with solutions to vague problems. 
+When provided with the exact requirements, I am very good at coming up with a solution 
+but, I am quite incapable of being able to creatively solve something. I am also quite weak and 
+programming together with other people as I have not had any experience programming as a team prior to this project.
+
+My goals for this project are to be able to work together as a team and get better at being able to split 
+tasks, for an entire team to handle. I would also like to improve my creative skills. 
+Overall, I would certainly love to become a better programmer than I was before.
+
+I would say that our team is off to a great start, and I believe that we will achieve 
+great success by the end of this project.
+
+---
+
