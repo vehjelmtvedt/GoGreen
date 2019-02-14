@@ -121,15 +121,23 @@ NetID : othabet
 
 What are two of your strong points?
 
-1 - I can easily communicate with others  .
+1 - I can easily communicate with others.
 2 - I'm usually a fast learner.
+
 How is this point shown in a team?
+
 In a team this would improve the efficiency and I it would be more pleasant to my teammates to work with me 
+
 What are two of your weaker points?
+
 I still have a long way to be a proper programmer, I still have a lot to learn in shot amount 
+
 What is your learning goal during this course? , Why is this important to you?
+
 My goal is to have a practical programing experience that would help me in future job and in my everyday life as well as improve my teamwork skills.
+
 When will you have succeeded in achieving this goal?
+
 I would consider it a success if I manage to keep up with my mates and understand all the structures of the program.
 
 
