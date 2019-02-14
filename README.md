@@ -27,7 +27,6 @@ Person Development Plan
 **Vetle Grim Hjelmtvedt**
 
 NetID: vhjelmtvedt
-Student number: 4813928
 
 My strong points that would be applicable to working in a team is flexibility and communication. In previous group projects I have been flexible in terms of what task I have to do in that group that may not have been what I wanted to do. Also, I communicated the issues that I had with that task, and other team members were able to help me. 
 
@@ -46,7 +45,6 @@ The first step to reaching my goal is am writing this, becoming aware of my goal
 **Alexandru Radu Moraru**:
 
 NetID: amoraru
-Student number: 4798961
 
 My strong points regarding this project, meaning what would be applicable in this case,
 are communication and planning. I think these are shown in a team-based project since I
@@ -111,9 +109,3 @@ Project Expectations:
 * Become more comfortable in git
 * Learn some new, undiscovered things in Java (JavaFX, database implementation, APIs)
 * Gain feedback on the process (rather than the product) of our work
-
-
-**Kostas Lyrakis**
-
-NetID: klyrakis
-Student number: 4799364
