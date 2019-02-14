@@ -41,7 +41,27 @@ What’s stopping me from reaching my goal is laziness. Planning ahead of a proj
 The first step to reaching my goal is am writing this, becoming aware of my goals and how to reach them.
 
 
+-->
 
+Alexandru Radu Moraru - 4798961
 
+My strong points regarding this project, meaning what would be applicable in this case, 
+are communication and planning. I think these are shown in a team-based project since I
+am able to communicate and interact well with others while also planning ahead of time.
+
+However, one of my weak points might be that I sometimes seem to be a bit bossy and 
+therefore tend to influnece my ideas on others. Other than that, I think that I am 
+suitable for a team-project.
+
+My goal regarding this project is to learn useful skills for a future job in IT, since
+this is one of my first real big team-based project. I would also like to learn more
+regarding graphical interfaces, since I really enjoy this part in such a project and
+I feel like I can improve more.
+
+Right now, my team and I are just starting this project. I am willing to dedicate
+as much time as possible in order to get a maximum grade(and I think my teammates are
+willing to do the same), since I think as long as we put in the work and follow the 
+guidelines we are going to be able to achieve this goal. I strongly believe that my 
+teammates are serious about this project and that we are going to do a really good job.
 
 
