@@ -27,6 +27,7 @@ Person Development Plan
 **Vetle Grim Hjelmtvedt**
 
 NetID: vhjelmtvedt
+Student number: 4813928
 
 My strong points that would be applicable to working in a team is flexibility and communication. In previous group projects I have been flexible in terms of what task I have to do in that group that may not have been what I wanted to do. Also, I communicated the issues that I had with that task, and other team members were able to help me. 
 
@@ -45,6 +46,7 @@ The first step to reaching my goal is am writing this, becoming aware of my goal
 **Alexandru Radu Moraru**:
 
 NetID: amoraru
+Student number: 4798961
 
 My strong points regarding this project, meaning what would be applicable in this case,
 are communication and planning. I think these are shown in a team-based project since I
@@ -100,6 +102,8 @@ Goals:
 * Learn to work efficiently in a team (learn Scrum, Agile)
 * Learn to reach high and efficient test coverage.
 * Learn to plan effectively in a team-based environment.
+* 
+
 
 I believe I will have successfully achieved this goal if we (me and my team)
 manage to finish the project in time and according to plan in the period of the course.
@@ -109,3 +113,38 @@ Project Expectations:
 * Become more comfortable in git
 * Learn some new, undiscovered things in Java (JavaFX, database implementation, APIs)
 * Gain feedback on the process (rather than the product) of our work
+
+-----------------
+Name : Omar Thabet
+Netid : othabet
+
+Personal Development Plan
+What are two of your strong points?
+1-I can easily communicate with others  .
+2- I'm usually a fast learner.
+How is this point shown in a team?
+In a team this would improve the efficiency and I it would be more pleasant to my teammates to work with me 
+What are two of your weaker points?
+I still have a long way to be a proper programmer, I still have a lot to learn in shot amount 
+What is your learning goal during this course? , Why is this important to you?
+My goal is to have a practical programing experience that would help me in future job and in my everyday life as well as improve my teamwork skills.
+When will you have succeeded in achieving this goal?
+I would consider it a success if I manage to keep up with my mates and understand all the structures of the program.
+
+
+
+
+
+
+
+Are you actively working on your goal?
+What can use improvement?
+I think I still need a lot of work to reach my gold
+I’m still a beginner in programming and I need to expand my knowledge
+I still need to improve my time management skills 
+
+What's my motivation ?
+I’m really passionate about my study and how I’m going use my skills to improve humanity also get a ferrari at some point of my life is a great motivation as well.
+
+How my team is going to help me?
+My team mate are great people and Im sure they will help me along the way.
