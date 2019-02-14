@@ -22,6 +22,10 @@ Run `maven install` ([Intellij](https://www.jetbrains.com/help/idea/2016.3/getti
 **Checkstyle**:  
 Run `maven site`
 
+
+-----------------------------------------------------------------------------------------------------------
+
+
 Person Development Plan
 
 Vetle Grim Hjelmtvedt - 4813928
@@ -41,7 +45,7 @@ What’s stopping me from reaching my goal is laziness. Planning ahead of a proj
 The first step to reaching my goal is am writing this, becoming aware of my goals and how to reach them.
 
 
--->
+-----------------------------------------------------------------------------------------------------------
 
 Alexandru Radu Moraru - 4798961
 
@@ -64,6 +68,7 @@ willing to do the same), since I think as long as we put in the work and follow 
 guidelines we are going to be able to achieve this goal. I strongly believe that my 
 teammates are serious about this project and that we are going to do a really good job.
 
+-----------------------------------------------------------------------------------------------------------
 
 **Evaldas Latoškinas**:
 
@@ -109,3 +114,41 @@ Project Expectations:
 * Become more comfortable in git
 * Learn some new, undiscovered things in Java (JavaFX, database implementation, APIs)
 * Gain feedback on the process (rather than the product) of our work
+
+-----------------------------------------------------------------------------------------------------------
+
+***Jean Louis Clemente***
+
+NetID: JClemente
+
+Personal Development Plan
+
+The strong points that I think I contribute to the team are my problem solving and organization skills.
+In previous group projects I was able to contribute by effectively delegating work amongst members as well as,
+contributing to harder aspects of the project.
+
+I think that some of my weaker points would include, 
+my lack of knowledge in subject and hence I feel that I might not be able to 
+contribute as much as would like, but I will still try my best to help push my group and myself further.
+
+I would say that my main goal for the project would be, 
+to be  able to become an overall better programmer 
+and to be able to work more effectively within a group. 
+I strongly believe by the end of the project I would have achieved these goals 
+and much more, as I believe this project will really help me get out of my programming shell.
+
+Yes, I am actively working on my goals but have not achieved 
+them yet. I think I can improve on this by getting a head start 
+and making sure I am well prepared before heading into any challenge.
+
+I have a few options in mind, but nothing set in concrete at the moment.
+
+To reach my main goals I am willing to go above and beyond, 
+mainly because I don’t won’t to feel like  the weakest link in the group. 
+I am going to start right away, so that I can get a ahead start 
+and keep up with the pace of the group and maybe even push ahead. 
+I strongly believe that I will rely on my team members to help me achieve this, 
+and I think they will be able to this with the prior experience that they have in programming.
+
+
+-----------------------------------------------------------------------------------------------------------
