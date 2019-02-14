@@ -111,3 +111,9 @@ Project Expectations:
 * Become more comfortable in git
 * Learn some new, undiscovered things in Java (JavaFX, database implementation, APIs)
 * Gain feedback on the process (rather than the product) of our work
+
+
+**Kostas Lyrakis**
+
+NetID: klyrakis
+Student number: 4799364
