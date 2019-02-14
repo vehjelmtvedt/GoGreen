@@ -170,6 +170,8 @@ My team mate are great people and Im sure they will help me along the way.
 
 NetID: JClemente
 
+![] (JeanLouis.jpeg)
+
 The strong points that I think I contribute to the team are my problem solving and organization skills.
 I previous group projects I was able to contribute by effectively delegating work amongst members as well as 
 contributing to harder aspects of the project.
