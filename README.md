@@ -50,7 +50,8 @@ The first step to reaching my goal is am writing this, becoming aware of my goal
 **Alexandru Radu Moraru**:
 
 NetID: amoraru
-Student number: 4798961
+
+![](doc/Photos/Alexandru.jpeg)
 
 My strong points regarding this project, meaning what would be applicable in this case,
 are communication and planning. I think these are shown in a team-based project since I
@@ -146,11 +147,6 @@ When will you have succeeded in achieving this goal?
 I would consider it a success if I manage to keep up with my mates and understand all the structures of the program.
 
 
-
-
-
-
-
 Are you actively working on your goal?
 What can use improvement?
 I think I still need a lot of work to reach my gold
@@ -170,7 +166,7 @@ My team mate are great people and Im sure they will help me along the way.
 
 NetID: JClemente
 
-![](doc/Photos/JeanLouis.jpeg)
+![](doc/photos/JeanLouis.jpeg)
 
 The strong points that I think I contribute to the team are my problem solving and organization skills.
 I previous group projects I was able to contribute by effectively delegating work amongst members as well as 
