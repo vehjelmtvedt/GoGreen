@@ -110,8 +110,6 @@ Goals:
 * Learn to work efficiently in a team (learn Scrum, Agile)
 * Learn to reach high and efficient test coverage.
 * Learn to plan effectively in a team-based environment.
-* 
-
 
 I believe I will have successfully achieved this goal if we (me and my team)
 manage to finish the project in time and according to plan in the period of the course.
