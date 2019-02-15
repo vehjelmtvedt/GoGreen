@@ -227,3 +227,29 @@ great success by the end of this project.
 
 ---
 
+
+**Kostas Lyrakis**
+
+NetID: klyrakis
+
+![](doc/Photos/klyrakis.jpg)
+
+Strong Points:
+
+* Analytical skills. I am usually able to break a big problem into very small parts and find my way through an efficient solution.
+* Quick learner. I am able to learn new tools and understand new topics fast. 
+
+Weak Points:
+
+* Until now I would prefer to work alone, or with at most one partner, so I tend to be less productive when I work in teams. I hope that I really improve this during the project
+* I would describe myself as someone who likes to be involved in every part of a project, so I expect to learn to be trustful towards my partners and not mess with their responsibilities. My team seems a very good place to start since they are all good programmers.
+
+What I expect to get from this project:
+* Learn how to work in an agile environment and understand scrum methodology
+* Learn to work with the popular tools like git, maven, trello that we will use 
+* Obtain marketable skills that will make me more competitive in future job applications
+
+
+
+
+
