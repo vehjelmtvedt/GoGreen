@@ -11,9 +11,4 @@ public class RequestHandler {
     public String respond() {
         return "Success!";
     }
-
-
-
-
-
 }
