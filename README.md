@@ -28,10 +28,10 @@ Person Development Plan
 
 **Vetle Grim Hjelmtvedt**
 
-![](doc/Photos/vetlehjelmtvedt.jpg)
-
 NetID: vhjelmtvedt
 Student number: 4813928
+
+![](doc/Photos/vetlehjelmtvedt.jpg)
 
 My strong points that would be applicable to working in a team is flexibility and communication. In previous group projects I have been flexible in terms of what task I have to do in that group that may not have been what I wanted to do. Also, I communicated the issues that I had with that task, and other team members were able to help me. 
 
