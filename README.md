@@ -28,7 +28,7 @@ Person Development Plan
 
 **Vetle Grim Hjelmtvedt**
 
-![](doc/Photos/vetlehjelmtvedt.jpeg)
+![](doc/Photos/vetlehjelmtvedt.jpg)
 
 NetID: vhjelmtvedt
 Student number: 4813928
