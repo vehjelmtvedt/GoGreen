@@ -1,19 +1,23 @@
 package Backend.data;
 
+import org.springframework.data.annotation.Id;
+
 public class User {
+
+    @Id
+    private String email;
 
     private String firstName;
     private String lastName;
     private int age;
-    private String email;
     private String password;
 
-    public User(String firstNameIn, String lastNameIn, int ageIn, String emailIn, String passwordIn) {
-        this.firstName = firstNameIn;
-        this.lastName = lastNameIn;
-        this.age = ageIn;
-        this.email = emailIn;
-        this.password = passwordIn;
+    public User(String firstName, String lastName, int age, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
+        this.password = password;
     }
 
     public String getFirstName() {
