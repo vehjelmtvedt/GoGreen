@@ -1,5 +1,6 @@
 # Maven ignores
 .idea
+workspace.xml
 target/
 pom.xml.tag
 pom.xml.releaseBackup
