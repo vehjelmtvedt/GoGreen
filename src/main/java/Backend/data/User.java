@@ -15,13 +15,13 @@ public class User {
     private String password;
     private ArrayList<String> friends;
 
-    public User(String firstName, String lastName, int age, String email, String password, ArrayList<String> friends) {
+    public User(String firstName, String lastName, int age, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
-        this.friends = friends;
+        this.friends = new ArrayList<String>();
     }
 
     public String getFirstName() {
