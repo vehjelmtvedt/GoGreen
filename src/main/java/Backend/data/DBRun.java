@@ -33,6 +33,9 @@ public class DBRun implements CommandLineRunner
         users.save(user);
     }
 
+    /** Deletes a user from the database */
+    public void deleteUser(User user) { users.delete(user); }
+
     /** Gets a user from the database */
     public User getUser(String email)
     {
@@ -63,6 +66,6 @@ public class DBRun implements CommandLineRunner
     @Override
     public void run(String... args) throws Exception
     {
-
+        System.out.println(getUser("test@email.com"));
     }
 }
