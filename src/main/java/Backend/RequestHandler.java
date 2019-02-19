@@ -1,57 +1,20 @@
 package Backend;
 
 import Backend.data.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.Charset;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.List;
-import java.util.Optional;
+
 
 
 @RestController
 public class RequestHandler {
-
-    @Autowired
-    private UserRepository users;
-
-    @Autowired
-    private MongoTemplate mongoTemplate;
-
-    /** Adds a user to the database */
-    public void addUser(User user)
-    {
-        users.save(user);
-    }
-
-    /** Gets a user from the database */
-    public User getUser(String email)
-    {
-        // User may not be present in the database
-        Optional<User> user = users.findById(email);
-
-        // Returns user if found, else returns null
-        return user.orElse(null);
-    }
-
-    /** Gets users' friends */
-    public List<User> getFriends(String email)
-    {
-        User user = getUser(email);
-
-        if (user == null)
-            return null;
-        else
-        {
-            // Query that returns a list of all the user's friends
-            return mongoTemplate.find(
-                    new Query(Criteria.where("email") // Compare against User email
-                            .in(user.getFriends())), // Email must be in users friend list
-                    User.class); // Resulting Object type User
-        }
-    }
 
 
     @RequestMapping("/greeting")
@@ -62,21 +25,82 @@ public class RequestHandler {
     //Handles authentication
     @RequestMapping("/login")
     public String loginController(@RequestBody LoginDetails loginDetails) {
-        User user = getUser(loginDetails.getEmail());
-        if(user==null)
-            return "user does not exist";
-        if(user.getPassword().equals(loginDetails.getPassword()))
-            return "auth success";
-        else
-            return "auth fail";
+
+        try {
+            HttpURLConnection con =
+                    (HttpURLConnection) new URL(null, "http://localhost:8080/DBauthenticate")
+                            .openConnection();
+
+            con.setRequestMethod("POST");
+            con.setDoOutput(true);
+            con.setDoInput(true);
+            con.setRequestProperty("Content-Type", "application/json");
+
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(loginDetails);
+
+            con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
+            con.getOutputStream().flush();
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+
+            if(response.toString().equals("success"))
+                return "auth success";
+            else
+                return "auth failed";
+        }
+        catch(Exception E){
+            System.out.println(E);
+            return "error try again";
+        }
     }
 
     //Handles creating a new user
     @RequestMapping("/signup")
     public String signupController(@RequestBody User user){
-        if(getUser(user.getEmail())!=null)
-            return "email already exists";
-        addUser(user);
-        return "success";
+        try {
+            HttpURLConnection con =
+                    (HttpURLConnection) new URL(null, "http://localhost:8080/DBaddUser").openConnection();
+
+            con.setRequestMethod("POST");
+            con.setDoOutput(true);
+            con.setDoInput(true);
+            con.setRequestProperty("Content-Type", "application/json");
+
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(user);
+
+            con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
+            con.getOutputStream().flush();
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            if(response.toString().equals("success"))
+                return "User added successfully";
+            else
+                return "Error existing email id";
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return "error try again";
+        }
+
     }
 }
