@@ -1,27 +1,20 @@
 package Backend.data;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Optional;
 
-import com.mongodb.BasicDBObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.LookupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
-import javax.websocket.RemoteEndpoint;
+// TBD: Combine this with Server, possibly?
 
 @SpringBootApplication
-public class DBTest implements CommandLineRunner
+public class DBRun implements CommandLineRunner
 {
     @Autowired
     private UserRepository users;
@@ -31,7 +24,7 @@ public class DBTest implements CommandLineRunner
 
     public static void main(String[] args)
     {
-        SpringApplication.run(DBTest.class, args);
+        SpringApplication.run(DBRun.class, args);
     }
 
     /** Adds a user to the database */
@@ -70,6 +63,6 @@ public class DBTest implements CommandLineRunner
     @Override
     public void run(String... args) throws Exception
     {
-        
+
     }
 }
