@@ -13,11 +13,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-// TBD: Combine this with Server, possibly?
-
-@SpringBootApplication
-public class DBRun implements CommandLineRunner
+@Service("DBService")
+@Transactional
+public class DBService
 {
     @Autowired
     private UserRepository users;
@@ -33,7 +34,7 @@ public class DBRun implements CommandLineRunner
 
     public static void main(String[] args)
     {
-        SpringApplication.run(DBRun.class, args);
+        SpringApplication.run(DBService.class, args);
     }
 
     /** Adds a user to the database */
@@ -86,19 +87,5 @@ public class DBRun implements CommandLineRunner
                         .in(user.getFriends())), // Email must be in users friend list
                     User.class); // Resulting Object type User
         }
-    }
-
-    @Override
-    public void run(String... args) throws Exception
-    {
-        users.deleteAll();
-        addUser(new User("Test", "User", 55, "test@email.com", "pwd123"));
-
-        User user = getUser("test@email.com");
-
-        System.out.println(user);
-        System.out.println(grantAccess("test@email.com", "pwd123"));
-        System.out.println(grantAccess("test@email.com", "pwd1234"));
-        System.out.println(grantAccess("test2@email.com", "pwd123"));
     }
 }
