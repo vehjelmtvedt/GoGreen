@@ -44,6 +44,8 @@ public class User {
         return this.password;
     }
 
+    public void setPassword(String password) { this.password = password; }
+
     public ArrayList<String> getFriends() { return this.friends; }
 
     public String toString() {
