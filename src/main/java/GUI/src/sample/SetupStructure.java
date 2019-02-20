@@ -114,11 +114,11 @@ public class SetupStructure {
             // Add Email Text Field
             TextField emailField = new TextField();
             emailField.setPrefHeight(40);
-            gridPane.add(emailField, 0, 2);
+            gridPane.add(emailField, 1, 1);
 
             // Add Password Label
             Label passwordLabel = new Label("Password : ");
-            gridPane.add(passwordLabel, 1, 1);
+            gridPane.add(passwordLabel, 0, 2);
 
             // Add Password Field
             PasswordField passwordField = new PasswordField();
@@ -130,7 +130,7 @@ public class SetupStructure {
             loginButton.setPrefHeight(40);
             loginButton.setDefaultButton(true);
             loginButton.setPrefWidth(100);
-            gridPane.add(loginButton, 3, 2, 2, 1);
+            gridPane.add(loginButton, 0, 3, 2, 1);
             GridPane.setHalignment(loginButton, HPos.CENTER);
             GridPane.setMargin(loginButton, new Insets(20, 0, 20, 0));
         }

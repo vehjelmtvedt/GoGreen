@@ -1,22 +1,10 @@
 package GUI.src.sample;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import jdk.internal.util.xml.impl.Input;
-
-import java.util.Set;
 
 public class Main extends Application {
     @Override
@@ -43,13 +31,14 @@ public class Main extends Application {
         SetupStructure.addUIControls(loginForm, 2);
 
         //set top/right/bottom/center/left for main borderPane
-        mainLayout.setCenter(signupForm);
-//        mainLayout.setTop(loginForm);
+        mainLayout.setRight(signupForm);
+        mainLayout.setLeft(loginForm);
 
         //set final primary stage aka window
         Scene scene = new Scene(mainLayout, 600, 400);
+//        scene.getStylesheets().add("C:\\Users\\Alexandru\\Documents\\template\\src\\main\\java\\GUI\\src\\sample\\Style.css");
         window.setScene(scene);
-//        window.setMaximized(true);
+        window.setMaximized(true);
         window.show();
     }
 
