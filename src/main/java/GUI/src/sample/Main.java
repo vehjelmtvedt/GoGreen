@@ -52,7 +52,7 @@ public class Main extends Application {
             GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
 
             // Add First Name Label
-            Label firstNameLabel = new Label("*First Name : ");
+            Label firstNameLabel = new Label("First Name : ");
             gridPane.add(firstNameLabel, 0, 1);
 
             // Add First Name Text Field
@@ -62,7 +62,7 @@ public class Main extends Application {
             gridPane.add(firstNameField, 1, 1);
 
             // Add Last Name Label
-            Label lastNameLabel = new Label("*Last Name : ");
+            Label lastNameLabel = new Label("Last Name : ");
             gridPane.add(lastNameLabel, 0, 2);
 
             // Add Last Name Text Field
@@ -72,7 +72,7 @@ public class Main extends Application {
             gridPane.add(lastNameField, 1, 2);
 
             // Add Email Label
-            Label emailLabel = new Label("*Email ID : ");
+            Label emailLabel = new Label("Email ID : ");
             gridPane.add(emailLabel, 0, 3);
 
             // Add Email Text Field
@@ -82,7 +82,7 @@ public class Main extends Application {
             gridPane.add(emailField, 1, 3);
 
             // Add Password Label
-            Label passwordLabel = new Label("*Password : ");
+            Label passwordLabel = new Label("Password : ");
             gridPane.add(passwordLabel, 0, 4);
 
             // Add Password Field
@@ -98,7 +98,7 @@ public class Main extends Application {
             // Add Age Text Field
             TextField ageField = new TextField();
             ageField.setPrefHeight(40);
-            ageField.setPromptText("Your age (optional)");
+            ageField.setPromptText("Your age");
             gridPane.add(ageField, 1, 5);
 
             // Add Submit Button
@@ -107,9 +107,7 @@ public class Main extends Application {
             submitButton.setDefaultButton(true);
             submitButton.setPrefWidth(100);
             submitButton.setOnAction(e -> {
-                AlertBox.submitValidate(firstNameField, lastNameField, emailField, passwordField, gridPane);
-                System.out.println(InputValidation.validatePassword(passwordField, passwordField.getText()));
-                System.out.println(InputValidation.validateAge(ageField, ageField.getText()));
+                InputValidation.submitValidate(firstNameField, lastNameField, emailField, passwordField, ageField, gridPane);
             });
 
             gridPane.add(submitButton, 0, 6, 2, 1);
