@@ -15,13 +15,9 @@ import javax.annotation.Resource;
 
 @RestController
 public class RequestHandler {
-<<<<<<< HEAD
-=======
-
     @Resource(name="DBService")
     private DBService dbService;
 
->>>>>>> c946e559159c809310ce6381c315d0e1e3b4791f
     @RequestMapping("/greeting")
     public String respond() {
         return "TestGreeting";
