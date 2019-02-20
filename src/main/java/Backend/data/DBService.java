@@ -37,6 +37,11 @@ public class DBService
         SpringApplication.run(DBService.class, args);
     }
 
+    //REMOVE THIS: ONLY FOR TESTING
+    public UserRepository getAllUsers() {
+        return this.users;
+    }
+
     /** Adds a user to the database */
     public void addUser(User user)
     {

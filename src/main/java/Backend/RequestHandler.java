@@ -29,7 +29,7 @@ public class RequestHandler {
 
         try {
             HttpURLConnection con =
-                    (HttpURLConnection) new URL(null, "http://localhost:8080/DBauthenticate")
+                    (HttpURLConnection) new URL(null, "http://localhost:8090/DBauthenticate")
                             .openConnection();
 
             con.setRequestMethod("POST");
@@ -70,7 +70,7 @@ public class RequestHandler {
     public String signupController(@RequestBody User user){
         try {
             HttpURLConnection con =
-                    (HttpURLConnection) new URL(null, "http://localhost:8080/DBaddUser").openConnection();
+                    (HttpURLConnection) new URL(null, "http://localhost:8090/DBaddUser").openConnection();
 
             con.setRequestMethod("POST");
             con.setDoOutput(true);

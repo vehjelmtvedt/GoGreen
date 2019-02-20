@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 @RestController
@@ -25,7 +26,7 @@ public class DBHandler {
     @ResponseBody
     @RequestMapping("/DBaddUser")
     public String DBaddUserHandler(@RequestBody User user){
-        if(dbService.getUser(user.getEmail())!=null)
+        if (dbService.getUser(user.getEmail()) != null)
             return "fail";
         dbService.addUser(user);
         return "success";
@@ -41,15 +42,20 @@ public class DBHandler {
 
     //Adds a friend given by their email.
     @RequestMapping("/addfriend")
-    public ResponseEntity addFriend(@RequestParam String myEmail, @RequestParam String friendEmail) {
-        dbService.getUser(myEmail).addFriend(friendEmail);
-        return ResponseEntity.ok(HttpStatus.OK);
+    public String addFriend(@RequestParam String myEmail, @RequestParam String friendEmail) {
+        if (dbService.getUser(friendEmail) != null) {
+            dbService.getUser(myEmail).addFriend(friendEmail);
+            return "success";
+        }
+        else {
+            return "fail";
+        }
     }
 
     //Returns all friends of a user to be displayed in friends page/dashboard.
     @RequestMapping("/getallfriends")
-    public ResponseEntity<List<User>> getallfriends(@RequestParam String myEmail) {
-        List<User> allfriends = dbService.getFriends(myEmail);
-        return new ResponseEntity<>(allfriends, HttpStatus.OK);
+    public ResponseEntity<String> getallfriends(@RequestParam String myEmail) {
+        String allfriends = dbService.getFriends(myEmail).get(0).toString();
+        return new ResponseEntity<String>(allfriends, HttpStatus.OK);
     }
 }
