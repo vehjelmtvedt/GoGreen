@@ -43,5 +43,13 @@ public class ConfirmBox {
 
         return answer;
     }
+
+    public static void closeProgram(Stage stage){
+        boolean answer = ConfirmBox.display("Close request safety", "Are you sure you want to close this application?");
+        if(answer){
+            System.out.println("Contents are saved!(not true)");
+            stage.close();
+        }
+    }
 }
 

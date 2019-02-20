@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import jdk.internal.util.xml.impl.Input;
 
 public class Main extends Application {
 
@@ -40,14 +41,16 @@ public class Main extends Application {
     }
 
     private void addUIControls(GridPane gridPane, int type) {
-        Label headerLabel = new Label("Sign-up Form");
-        headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-
-        gridPane.add(headerLabel, 0, 0, 2, 1);
-        GridPane.setHalignment(headerLabel, HPos.CENTER);
-        GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
 
         if (type == 1) {
+            //add header label
+            Label headerLabel = new Label("Sign-up Form");
+            headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+
+            gridPane.add(headerLabel, 0, 0, 2, 1);
+            GridPane.setHalignment(headerLabel, HPos.CENTER);
+            GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
+
             // Add Email Label
             Label emailLabel = new Label("*Email ID : ");
             gridPane.add(emailLabel, 0, 1);
@@ -55,6 +58,7 @@ public class Main extends Application {
             // Add Email Text Field
             TextField emailField = new TextField();
             emailField.setPrefHeight(40);
+            emailField.setPromptText("Email");
             gridPane.add(emailField, 1, 1);
 
             // Add Password Label
@@ -64,6 +68,7 @@ public class Main extends Application {
             // Add Password Field
             PasswordField passwordField = new PasswordField();
             passwordField.setPrefHeight(40);
+            passwordField.setPromptText("New Password");
             gridPane.add(passwordField, 1, 2);
 
             // Add First Name Label
@@ -73,6 +78,7 @@ public class Main extends Application {
             // Add First Name Text Field
             TextField firstNameField = new TextField();
             firstNameField.setPrefHeight(40);
+            firstNameField.setPromptText("First Name");
             gridPane.add(firstNameField, 1, 3);
 
             // Add Last Name Label
@@ -82,6 +88,7 @@ public class Main extends Application {
             // Add Last Name Text Field
             TextField lastNameField = new TextField();
             lastNameField.setPrefHeight(40);
+            lastNameField.setPromptText("Last Name");
             gridPane.add(lastNameField, 1, 4);
 
             // Add Age Label
@@ -91,6 +98,7 @@ public class Main extends Application {
             // Add Age Text Field
             TextField ageField = new TextField();
             ageField.setPrefHeight(40);
+            ageField.setPromptText("Your age (optional)");
             gridPane.add(ageField, 1, 5);
 
             // Add Submit Button
@@ -98,12 +106,15 @@ public class Main extends Application {
             submitButton.setPrefHeight(40);
             submitButton.setDefaultButton(true);
             submitButton.setPrefWidth(100);
+            submitButton.setOnAction(e -> {
+//                System.out.println(InputValidation.isEmail(emailField, emailField.getText()));
+                System.out.println(InputValidation.validatePassword(passwordField, passwordField.getText()));
+                System.out.println(InputValidation.validateAge(ageField, ageField.getText()));
+            });
+
             gridPane.add(submitButton, 0, 6, 2, 1);
-            GridPane.setHalignment(submitButton, HPos.CENTER);
-            GridPane.setMargin(submitButton, new Insets(20, 0, 20, 0));
         }
         if (type == 2) {
-            headerLabel.setText("Login form");
             // Add Email Label
             Label emailLabel = new Label("Email : ");
             gridPane.add(emailLabel, 0, 1);
@@ -111,11 +122,11 @@ public class Main extends Application {
             // Add Email Text Field
             TextField emailField = new TextField();
             emailField.setPrefHeight(40);
-            gridPane.add(emailField, 1, 1);
+            gridPane.add(emailField, 0, 2);
 
             // Add Password Label
             Label passwordLabel = new Label("Password : ");
-            gridPane.add(passwordLabel, 0, 2);
+            gridPane.add(passwordLabel, 1, 1);
 
             // Add Password Field
             PasswordField passwordField = new PasswordField();
@@ -127,7 +138,7 @@ public class Main extends Application {
             loginButton.setPrefHeight(40);
             loginButton.setDefaultButton(true);
             loginButton.setPrefWidth(100);
-            gridPane.add(loginButton, 0, 3, 2, 1);
+            gridPane.add(loginButton, 3, 2, 2, 1);
             GridPane.setHalignment(loginButton, HPos.CENTER);
             GridPane.setMargin(loginButton, new Insets(20, 0, 20, 0));
         }
@@ -144,7 +155,7 @@ public class Main extends Application {
         //close button handling
         window.setOnCloseRequest(e -> {
             e.consume();
-            closeProgram();
+            ConfirmBox.closeProgram(window);
         });
         //create borderPane for quick form setup
         BorderPane mainLayout = new BorderPane();
@@ -158,23 +169,16 @@ public class Main extends Application {
         addUIControls(loginForm, 2);
 
         //set top/right/bottom/center/left for main borderPane
-        mainLayout.setRight(signupForm);
-        mainLayout.setLeft(loginForm);
+        mainLayout.setCenter(signupForm);
+//        mainLayout.setTop(loginForm);
 
         //set final primary stage aka window
-        Scene scene = new Scene(mainLayout, 300, 300);
+        Scene scene = new Scene(mainLayout, 600, 400);
         window.setScene(scene);
-        window.setMaximized(true);
+//        window.setMaximized(true);
         window.show();
     }
 
-    private void closeProgram(){
-        boolean answer = ConfirmBox.display("Close request safety", "Are you sure you want to close this application?");
-        if(answer){
-            System.out.println("Contents are saved!(not true)");
-            window.close();
-        }
-    }
     public static void main(String[] args) {
         launch(args);
     }
