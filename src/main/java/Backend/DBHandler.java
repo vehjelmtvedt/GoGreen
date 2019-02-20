@@ -36,4 +36,10 @@ public class DBHandler {
             return "success";
         return "failure";
     }
+
+    @RequestMapping("/Test")
+    public void Test()
+    {
+
+    }
 }

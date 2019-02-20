@@ -15,8 +15,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class RequestHandler {
-
-
     @RequestMapping("/greeting")
     public String respond() {
         return "Success!";
