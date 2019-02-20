@@ -10,24 +10,46 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
+import javax.annotation.Resource;
 
 
 @RestController
 public class RequestHandler {
 
+    @Resource(name="DBService")
+    private DBService dbService;
 
     @RequestMapping("/greeting")
     public String respond() {
-        return "Success!";
+        return "TestGreeting";
     }
 
     //Handles authentication
     @RequestMapping("/login")
     public String loginController(@RequestBody LoginDetails loginDetails) {
 
-        try {
-            HttpURLConnection con =
+        if(dbService.grantAccess(loginDetails.getEmail(),loginDetails.getPassword()))
+            return "success";
+        return "failure";
+    }
+
+    //Handles creating a new user
+    @RequestMapping("/signup")
+    public String signupController(@RequestBody User user){
+        if(dbService.getUser(user.getEmail())!=null)
+            return "user exists already";
+        dbService.addUser(user);
+        return "success";
+        //return new ResponseEntity<>("Success", HttpStatus.OK);
+
+    }
+}
+
+
+
+
+/*for future reference
+HttpURLConnection con =
                     (HttpURLConnection) new URL(null, "http://localhost:8080/DBauthenticate")
                             .openConnection();
 
@@ -51,56 +73,4 @@ public class RequestHandler {
                 response.append(inputLine);
             }
             in.close();
-
-
-            if(response.toString().equals("success"))
-                return "auth success";
-            else
-                return "auth failed";
-        }
-        catch(Exception E){
-            System.out.println(E);
-            return "error try again";
-        }
-    }
-
-    //Handles creating a new user
-    @RequestMapping("/signup")
-    public String signupController(@RequestBody User user){
-        try {
-            HttpURLConnection con =
-                    (HttpURLConnection) new URL(null, "http://localhost:8080/DBaddUser").openConnection();
-
-            con.setRequestMethod("POST");
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("Content-Type", "application/json");
-
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(user);
-
-            con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
-            con.getOutputStream().flush();
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            if(response.toString().equals("success"))
-                return "User added successfully";
-            else
-                return "Error existing email id";
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            return "error try again";
-        }
-
-    }
-}
+ */

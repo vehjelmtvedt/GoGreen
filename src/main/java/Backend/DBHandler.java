@@ -17,7 +17,7 @@ import java.util.*;
 
 @RestController
 public class DBHandler {
-    @Resource(name="DBService")
+   /* @Resource(name="DBService")
     private DBService dbService;
 
     @ResponseBody
@@ -36,4 +36,5 @@ public class DBHandler {
             return "success";
         return "failure";
     }
+    */
 }
