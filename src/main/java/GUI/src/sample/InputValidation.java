@@ -44,7 +44,7 @@ public class InputValidation {
             return;
         }
         showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Registration Successful!",
-                "Welcome " + firstNameField.getText() + " " + lastNameField.getText() + "!");
+                "Welcome " + firstNameField.getText() + " " + lastNameField.getText() + "!!!");
     }
     private static boolean validateAge(TextField input, String message){
         try{
