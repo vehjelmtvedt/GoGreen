@@ -46,10 +46,10 @@ public class DBHandler {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    // Returns all friends of a user to be displayed in friends page/dashboard.
-//    @RequestMapping("/getallfriends")
-//    public ResponseEntity<List<User>> getallfriends(@RequestParam String myEmail) {
-//        List<User> allfriends = dbService.getFriends(myEmail);
-//        return new ResponseEntity<>(allfriends, HttpStatus.OK);
-//    }
+    //Returns all friends of a user to be displayed in friends page/dashboard.
+    @RequestMapping("/getallfriends")
+    public ResponseEntity<List<User>> getallfriends(@RequestParam String myEmail) {
+        List<User> allfriends = dbService.getFriends(myEmail);
+        return new ResponseEntity<>(allfriends, HttpStatus.OK);
+    }
 }
