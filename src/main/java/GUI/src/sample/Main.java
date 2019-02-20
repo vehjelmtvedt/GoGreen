@@ -1,4 +1,4 @@
-package sample;
+package GUI.src.sample;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
