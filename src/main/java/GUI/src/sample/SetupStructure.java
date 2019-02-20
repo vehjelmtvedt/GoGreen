@@ -31,7 +31,6 @@ public class SetupStructure {
         columnTwoConstrains.setHgrow(Priority.ALWAYS);
 
         gridPane.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains);
-
         return gridPane;
     }
 
