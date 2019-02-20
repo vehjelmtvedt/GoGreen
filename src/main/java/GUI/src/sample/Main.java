@@ -51,45 +51,45 @@ public class Main extends Application {
             GridPane.setHalignment(headerLabel, HPos.CENTER);
             GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
 
-            // Add Email Label
-            Label emailLabel = new Label("*Email ID : ");
-            gridPane.add(emailLabel, 0, 1);
-
-            // Add Email Text Field
-            TextField emailField = new TextField();
-            emailField.setPrefHeight(40);
-            emailField.setPromptText("Email");
-            gridPane.add(emailField, 1, 1);
-
-            // Add Password Label
-            Label passwordLabel = new Label("*Password : ");
-            gridPane.add(passwordLabel, 0, 2);
-
-            // Add Password Field
-            PasswordField passwordField = new PasswordField();
-            passwordField.setPrefHeight(40);
-            passwordField.setPromptText("New Password");
-            gridPane.add(passwordField, 1, 2);
-
             // Add First Name Label
             Label firstNameLabel = new Label("*First Name : ");
-            gridPane.add(firstNameLabel, 0, 3);
+            gridPane.add(firstNameLabel, 0, 1);
 
             // Add First Name Text Field
             TextField firstNameField = new TextField();
             firstNameField.setPrefHeight(40);
             firstNameField.setPromptText("First Name");
-            gridPane.add(firstNameField, 1, 3);
+            gridPane.add(firstNameField, 1, 1);
 
             // Add Last Name Label
             Label lastNameLabel = new Label("*Last Name : ");
-            gridPane.add(lastNameLabel, 0, 4);
+            gridPane.add(lastNameLabel, 0, 2);
 
             // Add Last Name Text Field
             TextField lastNameField = new TextField();
             lastNameField.setPrefHeight(40);
             lastNameField.setPromptText("Last Name");
-            gridPane.add(lastNameField, 1, 4);
+            gridPane.add(lastNameField, 1, 2);
+
+            // Add Email Label
+            Label emailLabel = new Label("*Email ID : ");
+            gridPane.add(emailLabel, 0, 3);
+
+            // Add Email Text Field
+            TextField emailField = new TextField();
+            emailField.setPrefHeight(40);
+            emailField.setPromptText("Email");
+            gridPane.add(emailField, 1, 3);
+
+            // Add Password Label
+            Label passwordLabel = new Label("*Password : ");
+            gridPane.add(passwordLabel, 0, 4);
+
+            // Add Password Field
+            PasswordField passwordField = new PasswordField();
+            passwordField.setPrefHeight(40);
+            passwordField.setPromptText("New Password");
+            gridPane.add(passwordField, 1, 4);
 
             // Add Age Label
             Label ageLabel = new Label("Age : ");
@@ -107,7 +107,7 @@ public class Main extends Application {
             submitButton.setDefaultButton(true);
             submitButton.setPrefWidth(100);
             submitButton.setOnAction(e -> {
-//                System.out.println(InputValidation.isEmail(emailField, emailField.getText()));
+                AlertBox.submitValidate(firstNameField, lastNameField, emailField, passwordField, gridPane);
                 System.out.println(InputValidation.validatePassword(passwordField, passwordField.getText()));
                 System.out.println(InputValidation.validateAge(ageField, ageField.getText()));
             });
