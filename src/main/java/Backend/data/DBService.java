@@ -38,6 +38,7 @@ public class DBService
         SpringApplication.run(DBService.class, args);
     }
 
+
     /** Adds a user to the database */
     public void addUser(User user)
     {
