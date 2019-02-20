@@ -1,5 +1,6 @@
 package Backend.data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,8 +65,8 @@ public class DBService
         return (passwordEncoder().matches(password, user.getPassword()));
     }
 
-    /** Deletes a user from the database */
-    public void deleteUser(User user) { users.delete(user); }
+    /** Deletes a user from the database (by email) */
+    public void deleteUser(String email) { users.deleteById(email); }
 
     /** Gets a user from the database */
     public User getUser(String email)
@@ -83,7 +84,7 @@ public class DBService
         User user = getUser(email);
 
         if (user == null)
-            return null;
+            return new ArrayList<User>(); // return empty list
         else
         {
             // Query that returns a list of all the user's friends
