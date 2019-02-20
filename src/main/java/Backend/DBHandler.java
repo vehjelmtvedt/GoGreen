@@ -1,15 +1,6 @@
 package Backend;
 
-import Backend.data.*;
-import Backend.data.User;
-import Backend.data.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

@@ -2,15 +2,11 @@ package Backend;
 
 import Backend.data.*;
 import org.springframework.web.bind.annotation.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.Charset;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -46,13 +42,24 @@ public class RequestHandler {
 
     @RequestMapping("/addfriend")
     public String addFriend(@RequestParam String myEmail, @RequestParam String friendEmail) {
+        //TODO: Add friend request feature in the future
+        //POSSIBLE SOLUTION: store friend request in db, send to that user when accessing
+        //friends page.
+        //Keep it like this for now for testing.
         if (dbService.getUser(friendEmail) != null) {
-            dbService.getUser(myEmail).addFriend(friendEmail);
+            User currUser = dbService.getUser(myEmail);
+            currUser.addFriend(friendEmail);
+            dbService.addUser(currUser);
             return "Success";
         }
         else {
             return "fail";
         }
+    }
+
+    @RequestMapping("/getallfriends")
+    public ArrayList<String> getAllFriends(@RequestParam String myEmail) {
+        return dbService.getUser(myEmail).getFriends();
     }
 }
 
