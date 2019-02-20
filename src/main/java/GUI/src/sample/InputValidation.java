@@ -23,6 +23,10 @@ public class InputValidation {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter your email");
             return;
         }
+        if(!validateEmail(emailField, emailField.getText())) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter a valid email");
+            return;
+        }
         if(passField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter a password");
             return;
@@ -69,6 +73,17 @@ public class InputValidation {
         return false;
     }
 
+    private static boolean validateEmail(TextField input, String message){
+        String email = input.getText();
+        Pattern p = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
+        Matcher m = p.matcher(email);
+        if(m.matches()){
+            System.out.println("Email is: " + email);
+            return true;
+        }
+        System.out.println("Error: " + email + " is not a valid email");
+        return false;
+    }
     private static void showAlert(Alert.AlertType alertType, Window window, String title, String message){
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
