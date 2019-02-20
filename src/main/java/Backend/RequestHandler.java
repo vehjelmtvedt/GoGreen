@@ -43,6 +43,17 @@ public class RequestHandler {
         //return new ResponseEntity<>("Success", HttpStatus.OK);
 
     }
+
+    @RequestMapping("/addfriend")
+    public String addFriend(@RequestParam String myEmail, @RequestParam String friendEmail) {
+        if (dbService.getUser(friendEmail) != null) {
+            dbService.getUser(myEmail).addFriend(friendEmail);
+            return "Success";
+        }
+        else {
+            return "fail";
+        }
+    }
 }
 
 
