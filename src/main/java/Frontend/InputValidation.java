@@ -1,4 +1,4 @@
-package GUI.src.sample;
+package Frontend;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;

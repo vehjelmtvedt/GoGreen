@@ -1,4 +1,4 @@
-package GUI.src.sample;
+package Frontend;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -12,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 public class SetupStructure {
     public static GridPane createRegistrationForm() {
@@ -35,11 +34,12 @@ public class SetupStructure {
     }
 
     public static void addUIControls(GridPane gridPane, int type) {
+        Label headerLabel = new Label("Sign-up Form");
+        headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
 
         if (type == 1) {
             //add header label
-            Label headerLabel = new Label("Sign-up Form");
-            headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+
 
             gridPane.add(headerLabel, 0, 0, 2, 1);
             GridPane.setHalignment(headerLabel, HPos.CENTER);

@@ -1,4 +1,4 @@
-package GUI.src.sample;
+package Frontend;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

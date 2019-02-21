@@ -1,10 +1,9 @@
-package GUI.src.sample;
+package Frontend;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import jdk.internal.util.xml.impl.Input;
 
 public class Main extends Application {
     @Override
@@ -36,7 +35,9 @@ public class Main extends Application {
 
         //set final primary stage aka window
         Scene scene = new Scene(mainLayout, 600, 400);
-//        scene.getStylesheets().add("C:\\Users\\Alexandru\\Documents\\template\\src\\main\\java\\GUI\\src\\sample\\Style.css");
+//        scene.getStylesheets().add("C:\\Users\\Alexandru\\Documents\\template\\src\\java\\Frontend\\Style.css");
+        String css = this.getClass().getResource("C:\\Users\\Alexandru\\Documents\\template\\main\\src\\java\\Frontend\\Style.css").toExternalForm();
+        scene.getStylesheets().add(css);
         window.setScene(scene);
         window.setMaximized(true);
         window.show();
