@@ -17,8 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("DBService")
 @Transactional
-public class DBService
-{
+public class DBService {
     @Autowired
     private UserRepository users;
 
@@ -26,17 +25,21 @@ public class DBService
     private MongoTemplate mongoTemplate;
 
     @Bean
+<<<<<<< HEAD
     private PasswordEncoder passwordEncoder()
     {
+=======
+    public PasswordEncoder passwordEncoder() {
+>>>>>>> f2d839935c8f184a087d2977d5e74a740575aeed
         return new BCryptPasswordEncoder();
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         SpringApplication.run(DBService.class, args);
     }
 
 
+<<<<<<< HEAD
     /** Adds a user to the database */
     public void addUser(User user)
     {
@@ -46,25 +49,47 @@ public class DBService
 
     private String encodePassword(String password)
     {
+=======
+    /**.
+     * Adds a user to the database
+     */
+    public void addUser(User user) {
+        user.setPassword(encodePassowrd(user.getPassword()));
+        users.save(user);
+    }
+
+    private String encodePassowrd(String password) {
+>>>>>>> f2d839935c8f184a087d2977d5e74a740575aeed
         return passwordEncoder().encode(password);
     }
 
-    public boolean grantAccess(String email, String password)
-    {
+    /**.
+     * Returns true or false whether to grant access to user with specified login details
+     * @param email - input e-mail
+     * @param password - input password
+     * @return true if access granted
+     */
+    public boolean grantAccess(String email, String password) {
         User user = getUser(email);
 
-        if (user == null)
+        if (user == null) {
             return false;
+        }
 
-        return (passwordEncoder().matches(password, user.getPassword()));
+        return passwordEncoder().matches(password, user.getPassword());
     }
 
-    /** Deletes a user from the database (by email) */
-    public void deleteUser(String email) { users.deleteById(email); }
+    /**.
+     * Deletes a user from the database (by email)
+     */
+    void deleteUser(String email) {
+        users.deleteById(email);
+    }
 
-    /** Gets a user from the database */
-    public User getUser(String email)
-    {
+    /**.
+     * Gets a user from the database
+     */
+    public User getUser(String email) {
         // User may not be present in the database
         Optional<User> user = users.findById(email);
 
@@ -72,19 +97,26 @@ public class DBService
         return user.orElse(null);
     }
 
-    /** Gets users' friends */
-    public List<User> getFriends(String email)
-    {
+    /**.
+     * Gets users' friends
+     */
+    List<User> getFriends(String email) {
         User user = getUser(email);
 
+<<<<<<< HEAD
         if (user == null)
             return new ArrayList<>(); // return empty list
         else
         {
+=======
+        if (user == null) {
+            return new ArrayList<User>(); // return empty list
+        } else {
+>>>>>>> f2d839935c8f184a087d2977d5e74a740575aeed
             // Query that returns a list of all the user's friends
             return mongoTemplate.find(
                     new Query(Criteria.where("email") // Compare against User email
-                        .in(user.getFriends())), // Email must be in users friend list
+                            .in(user.getFriends())), // Email must be in users friend list
                     User.class); // Resulting Object type User
         }
     }
