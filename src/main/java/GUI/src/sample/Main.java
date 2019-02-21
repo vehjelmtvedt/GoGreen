@@ -1,13 +1,9 @@
 package GUI.src.sample;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -18,6 +14,11 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     Stage window;
+
+    public static void main(String[] args) {
+
+        launch(args);
+    }
 
     private GridPane createRegistrationForm() {
         GridPane gridPane = new GridPane();
@@ -163,6 +164,8 @@ public class Main extends Application {
 
         //set final primary stage aka window
         Scene scene = new Scene(mainLayout, 300, 300);
+        String css = this.getClass().getResource("/GUI/stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(css);
         window.setScene(scene);
         window.setMaximized(true);
         window.show();
@@ -175,7 +178,5 @@ public class Main extends Application {
             window.close();
         }
     }
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 }
