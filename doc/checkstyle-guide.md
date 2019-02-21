@@ -31,3 +31,11 @@
 4.Run CheckStyle analysis
 
 5.Fix warnings
+
+
+### Other
+* Make sure to use autoformatting. This will automatically fix (most) of the ChcekStyle formatting issues!
+* Assuming IntelliJ, these are the hotkeys:
+* For Windows: Ctrl + Alt + L
+* For Ubuntu: Ctrl + Alt + windows + L
+* For Mac: Command + Option + L
