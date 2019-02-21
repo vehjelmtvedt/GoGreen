@@ -3,14 +3,12 @@ package Backend.data;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -19,12 +17,12 @@ import static org.junit.Assert.*;
 @AutoConfigureDataMongo
 public class DBServiceTest {
     @Autowired
-    DBService dbService;
+    private DBService dbService;
 
-    User testUser = new User("Test", "User", 24, "test@email.com", "pwd");
-    User testUserNonExistant = new User("This User", "Will Not Exist", 55,
+    private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd");
+    private final User testUserNonExistent = new User("This User", "Will Not Exist", 55,
             "non-exist@email.com", "pwd123");
-    User testUserHasFriends = new User("Person", "With Friends", 42,
+    private final User testUserHasFriends = new User("Person", "With Friends", 42,
             "fperson@email.com", "pwd456");
 
     @Before
@@ -40,7 +38,7 @@ public class DBServiceTest {
     @Test
     public void getUserNull()
     {
-        assertNull(dbService.getUser(testUserNonExistant.getEmail()));
+        assertNull(dbService.getUser(testUserNonExistent.getEmail()));
     }
 
     @Test
@@ -52,15 +50,15 @@ public class DBServiceTest {
     @Test
     public void testDeleteUser()
     {
-        dbService.addUser(testUserNonExistant);
-        dbService.deleteUser(testUserNonExistant.getEmail());
-        assertNull(dbService.getUser(testUserNonExistant.getEmail()));
+        dbService.addUser(testUserNonExistent);
+        dbService.deleteUser(testUserNonExistent.getEmail());
+        assertNull(dbService.getUser(testUserNonExistent.getEmail()));
     }
 
     @Test
     public void testGrantAccessNull()
     {
-        assertFalse(dbService.grantAccess(testUserNonExistant.getEmail(), testUserNonExistant.getPassword()));
+        assertFalse(dbService.grantAccess(testUserNonExistent.getEmail(), testUserNonExistent.getPassword()));
     }
 
     @Test
@@ -78,12 +76,12 @@ public class DBServiceTest {
     @Test
     public void testEncryption()
     {
-        String oldPwd = testUserNonExistant.getPassword();
-        dbService.addUser(testUserNonExistant);
-        assertNotEquals(testUserNonExistant.getPassword(), oldPwd);
+        String oldPwd = testUserNonExistent.getPassword();
+        dbService.addUser(testUserNonExistent);
+        assertNotEquals(testUserNonExistent.getPassword(), oldPwd);
 
         // Delete user after the test, because this user shouldn't be in the db
-        dbService.deleteUser(testUserNonExistant.getEmail());
+        dbService.deleteUser(testUserNonExistent.getEmail());
     }
 
     @Test
@@ -95,7 +93,7 @@ public class DBServiceTest {
     @Test
     public void testFriendsNull()
     {
-        assertEquals(new ArrayList<User>(), dbService.getFriends(testUserNonExistant.getEmail()));
+        assertEquals(new ArrayList<User>(), dbService.getFriends(testUserNonExistent.getEmail()));
     }
 
     @Test

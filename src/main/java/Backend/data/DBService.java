@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -28,7 +26,7 @@ public class DBService
     private MongoTemplate mongoTemplate;
 
     @Bean
-    public PasswordEncoder passwordEncoder()
+    private PasswordEncoder passwordEncoder()
     {
         return new BCryptPasswordEncoder();
     }
@@ -42,11 +40,11 @@ public class DBService
     /** Adds a user to the database */
     public void addUser(User user)
     {
-        user.setPassword(encodePassowrd(user.getPassword()));
+        user.setPassword(encodePassword(user.getPassword()));
         users.save(user);
     }
 
-    private String encodePassowrd(String password)
+    private String encodePassword(String password)
     {
         return passwordEncoder().encode(password);
     }
@@ -80,7 +78,7 @@ public class DBService
         User user = getUser(email);
 
         if (user == null)
-            return new ArrayList<User>(); // return empty list
+            return new ArrayList<>(); // return empty list
         else
         {
             // Query that returns a list of all the user's friends
