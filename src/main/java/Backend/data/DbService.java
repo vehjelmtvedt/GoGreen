@@ -1,9 +1,5 @@
 package Backend.data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,9 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("DBService")
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Service("DbService")
 @Transactional
-public class DBService {
+public class DbService {
     @Autowired
     private UserRepository users;
 
@@ -25,41 +25,24 @@ public class DBService {
     private MongoTemplate mongoTemplate;
 
     @Bean
-<<<<<<< HEAD
-    private PasswordEncoder passwordEncoder()
-    {
-=======
     public PasswordEncoder passwordEncoder() {
->>>>>>> f2d839935c8f184a087d2977d5e74a740575aeed
         return new BCryptPasswordEncoder();
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(DBService.class, args);
+        SpringApplication.run(DbService.class, args);
     }
 
 
-<<<<<<< HEAD
-    /** Adds a user to the database */
-    public void addUser(User user)
-    {
-        user.setPassword(encodePassword(user.getPassword()));
-        users.save(user);
-    }
-
-    private String encodePassword(String password)
-    {
-=======
     /**.
      * Adds a user to the database
      */
     public void addUser(User user) {
-        user.setPassword(encodePassowrd(user.getPassword()));
+        user.setPassword(encodePassword(user.getPassword()));
         users.save(user);
     }
 
-    private String encodePassowrd(String password) {
->>>>>>> f2d839935c8f184a087d2977d5e74a740575aeed
+    private String encodePassword(String password) {
         return passwordEncoder().encode(password);
     }
 
@@ -103,16 +86,9 @@ public class DBService {
     List<User> getFriends(String email) {
         User user = getUser(email);
 
-<<<<<<< HEAD
-        if (user == null)
-            return new ArrayList<>(); // return empty list
-        else
-        {
-=======
         if (user == null) {
             return new ArrayList<User>(); // return empty list
         } else {
->>>>>>> f2d839935c8f184a087d2977d5e74a740575aeed
             // Query that returns a list of all the user's friends
             return mongoTemplate.find(
                     new Query(Criteria.where("email") // Compare against User email

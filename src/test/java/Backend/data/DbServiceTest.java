@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureDataMongo
-public class DBServiceTest {
+public class DbServiceTest {
     @Autowired
-    private DBService dbService;
+    private DbService dbService;
 
     private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd");
     private final User testUserNonExistent = new User("This User", "Will Not Exist", 55,
