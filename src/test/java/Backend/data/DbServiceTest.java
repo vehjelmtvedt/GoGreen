@@ -26,8 +26,7 @@ public class DbServiceTest {
             "fperson@email.com", "pwd456");
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         dbService.addUser(testUser);
 
         testUserHasFriends.addFriend(testUser.getEmail());
@@ -36,46 +35,39 @@ public class DbServiceTest {
     }
 
     @Test
-    public void getUserNull()
-    {
+    public void getUserNull() {
         assertNull(dbService.getUser(testUserNonExistent.getEmail()));
     }
 
     @Test
-    public void testAddUser()
-    {
+    public void testAddUser() {
         assertNotNull(dbService.getUser(testUser.getEmail()));
     }
 
     @Test
-    public void testDeleteUser()
-    {
+    public void testDeleteUser() {
         dbService.addUser(testUserNonExistent);
         dbService.deleteUser(testUserNonExistent.getEmail());
         assertNull(dbService.getUser(testUserNonExistent.getEmail()));
     }
 
     @Test
-    public void testGrantAccessNull()
-    {
+    public void testGrantAccessNull() {
         assertFalse(dbService.grantAccess(testUserNonExistent.getEmail(), testUserNonExistent.getPassword()));
     }
 
     @Test
-    public void testAuthenticationGrant()
-    {
+    public void testAuthenticationGrant() {
         assertTrue(dbService.grantAccess(testUser.getEmail(), "pwd"));
     }
 
     @Test
-    public void testAuthenticationReject()
-    {
+    public void testAuthenticationReject() {
         assertFalse(dbService.grantAccess(testUser.getEmail(), "someRandomPWD"));
     }
 
     @Test
-    public void testEncryption()
-    {
+    public void testEncryption() {
         String oldPwd = testUserNonExistent.getPassword();
         dbService.addUser(testUserNonExistent);
         assertNotEquals(testUserNonExistent.getPassword(), oldPwd);
@@ -85,20 +77,17 @@ public class DbServiceTest {
     }
 
     @Test
-    public void testFriendsNoFriends()
-    {
+    public void testFriendsNoFriends() {
         assertEquals(new ArrayList<User>(), dbService.getFriends(testUser.getEmail()));
     }
 
     @Test
-    public void testFriendsNull()
-    {
+    public void testFriendsNull() {
         assertEquals(new ArrayList<User>(), dbService.getFriends(testUserNonExistent.getEmail()));
     }
 
     @Test
-    public void testFriends()
-    {
+    public void testFriends() {
         // Rewrite this test to be more helpful after User equals implementation
         assertEquals(1, dbService.getFriends(testUserHasFriends.getEmail()).size());
     }

@@ -25,7 +25,7 @@ public class DbService {
     private MongoTemplate mongoTemplate;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    private PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
