@@ -55,16 +55,18 @@ public class SetupStructure {
         return gridPane;
     }
 
-    public static void addUIControls(GridPane gridPane, int type, Stage currStage, Scene nextScene) {
+    public static void addUIControls(GridPane gridPane, int type, Stage currStage, Scene nextScene, Scene prevScene) {
         Label headerLabel = new Label("Sign-up Form");
         headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         headerLabel.setId("headerLabel");
         gridPane.add(headerLabel, 0, 0, 2, 1);
-        GridPane.setHalignment(headerLabel, HPos.CENTER);
+//        GridPane.setHalignment(headerLabel, HPos.CENTER);
         GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
 
+        //signup type form
         if (type == 1) {
             //add header label
+            headerLabel.setPadding(new Insets(0, 30, 0, 0));
 
             // Add First Name Label
             Label firstNameLabel = new Label("First Name : ");
@@ -118,7 +120,7 @@ public class SetupStructure {
 
             // Add Submit Button
             Button signUpButton = new Button("Sign up");
-            signUpButton.setId("submitButton");
+            signUpButton.setId("signUpButton");
             signUpButton.setPrefHeight(40);
             signUpButton.setDefaultButton(true);
             signUpButton.setPrefWidth(100);
@@ -132,11 +134,18 @@ public class SetupStructure {
             signInButton.setDefaultButton(true);
             signInButton.setPrefWidth(100);
 
+            StageSwitcher.buttonSwitch(signInButton, currStage, prevScene);
+
             HBox buttons = new HBox();
+            buttons.setPadding(new Insets(10,0,0,0));
             buttons.getChildren().addAll(signInButton, signUpButton);
             gridPane.add(buttons, 1, 6, 2, 1);
         }
+
+        //sign in type form
         if (type == 2) {
+            headerLabel.setPadding(new Insets(0, 80, 0, 0));
+
             //reset login label
             headerLabel.setText("User login");
             // Add Email Label
@@ -173,6 +182,7 @@ public class SetupStructure {
             StageSwitcher.buttonSwitch(signUpButton, currStage, nextScene);
 
             HBox buttons = new HBox();
+            buttons.setPadding(new Insets(10,0,0,0));
             buttons.getChildren().addAll(signInButton, signUpButton);
             gridPane.add(buttons, 1, 3, 1, 1);
             GridPane.setHalignment(buttons, HPos.CENTER);

@@ -1,6 +1,7 @@
 package Frontend;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
@@ -86,6 +87,9 @@ public class InputValidation {
     }
     private static void showAlert(Alert.AlertType alertType, Window window, String title, String message){
         Alert alert = new Alert(alertType);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(Main.getCSS());
+        dialogPane.setId("alertDialog");
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
