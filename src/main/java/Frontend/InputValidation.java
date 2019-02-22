@@ -1,11 +1,19 @@
 package Frontend;
 
+import Backend.data.LoginDetails;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +21,45 @@ public class InputValidation {
     public static void signInValidate(TextField emailField, TextField passField, GridPane form){
         if(!validateEmail(emailField, emailField.getText())) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Typing Error!", "Please enter a valid email");
+            return;
+        }
+        LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
+//        ObjectMapper mapper = new ObjectMapper();
+//        String json = "";
+//        try{
+//            json = mapper.writeValueAsString(loginDetails);
+//        } catch (JsonProcessingException e){
+//            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Log Error!",
+//                    "JsonProcessingException while converting Entity into string");
+//            return;
+//        }
+
+        try{
+            URL url = new URL("http://localhost:8080/login");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setDoOutput(true);
+            con.setDoInput(true);
+            con.setRequestProperty("Content-Type", "application/json");
+
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(loginDetails);
+
+            con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
+            con.getOutputStream().flush();
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
         }
     }
     public static void signUpValidate(TextField firstNameField, TextField lastNameField,

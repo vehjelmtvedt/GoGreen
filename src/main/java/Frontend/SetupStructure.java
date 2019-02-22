@@ -55,7 +55,7 @@ public class SetupStructure {
         return gridPane;
     }
 
-    public static void addUIControls(GridPane gridPane, int type, Stage currStage, Scene nextScene, Scene prevScene) {
+    public static void addUIControls(GridPane gridPane, int type, Stage currStage, Scene nextScene, Scene prevScene){
         Label headerLabel = new Label("Sign-up Form");
         headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         headerLabel.setId("headerLabel");
