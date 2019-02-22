@@ -125,7 +125,7 @@ public class SetupStructure {
             signUpButton.setDefaultButton(true);
             signUpButton.setPrefWidth(100);
             signUpButton.setOnAction(e -> {
-                InputValidation.submitValidate(firstNameField, lastNameField, emailField, passwordField, ageField, gridPane);
+                InputValidation.signUpValidate(firstNameField, lastNameField, emailField, passwordField, ageField, gridPane);
             });
 
             Button signInButton = new Button("Sign in");
@@ -173,6 +173,10 @@ public class SetupStructure {
             signInButton.setPrefHeight(40);
             signInButton.setDefaultButton(true);
             signInButton.setPrefWidth(100);
+
+            signInButton.setOnAction(e -> {
+                InputValidation.signInValidate(emailField, passwordField, gridPane);
+            });
 
             signUpButton.setId("signUpButton");
             signUpButton.setPrefHeight(40);

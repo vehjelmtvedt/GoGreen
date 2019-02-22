@@ -10,7 +10,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidation {
-    public static void submitValidate(TextField firstNameField, TextField lastNameField,
+    public static void signInValidate(TextField emailField, TextField passField, GridPane form){
+        if(!validateEmail(emailField, emailField.getText())) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Typing Error!", "Please enter a valid email");
+        }
+    }
+    public static void signUpValidate(TextField firstNameField, TextField lastNameField,
                                       TextField emailField, TextField passField, TextField ageField, GridPane form){
         if(firstNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter your First Name");
