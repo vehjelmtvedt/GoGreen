@@ -3,20 +3,39 @@ package Frontend;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 public class SetupStructure {
+    public static void setPrimaryStage(Stage stage, String title){
+        stage.setTitle(title);
+        stage.getIcons().addAll(new Image("file:C:\\Users\\Alexandru\\Documents\\template\\src\\main\\Resources\\Frontend\\Pics\\GoGreenIcon.png"));
+        stage.setOnCloseRequest(e -> {
+            e.consume();
+            ConfirmBox.closeProgram(stage);
+        });
+    }
+
+    public static void finaliseStage(Stage stage, Scene scene){
+        stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.show();
+    }
+
     public static GridPane createRegistrationForm() {
         GridPane gridPane = new GridPane();
 
@@ -159,5 +178,16 @@ public class SetupStructure {
             GridPane.setHalignment(buttons, HPos.CENTER);
             GridPane.setMargin(buttons, new Insets(20, 0, 20, 0));
         }
+    }
+
+    public static Double[] getBounds(){
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        Double[] sizes = new Double[2];
+        sizes[0] = bounds.getWidth();
+        sizes[1] = bounds.getHeight();
+
+        return sizes;
     }
 }
