@@ -1,6 +1,7 @@
 package Frontend;
 
 import Backend.data.LoginDetails;
+import Backend.data.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.Alert;
@@ -24,43 +25,36 @@ public class InputValidation {
             return;
         }
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
-//        ObjectMapper mapper = new ObjectMapper();
-//        String json = "";
+
+        Requests.sendRequest(1, loginDetails, new User());
 //        try{
-//            json = mapper.writeValueAsString(loginDetails);
-//        } catch (JsonProcessingException e){
-//            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Log Error!",
-//                    "JsonProcessingException while converting Entity into string");
+//            URL url = new URL("http://localhost:8080/login");
+//            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//            con.setRequestMethod("POST");
+//            con.setDoOutput(true);
+//            con.setDoInput(true);
+//            con.setRequestProperty("Content-Type", "application/json");
+//
+//            ObjectMapper mapper = new ObjectMapper();
+//            String json = mapper.writeValueAsString(loginDetails);
+//
+//            con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
+//            con.getOutputStream().flush();
+//
+//            BufferedReader in = new BufferedReader(
+//                    new InputStreamReader(con.getInputStream()));
+//            String inputLine;
+//            StringBuilder response = new StringBuilder();
+//
+//            while ((inputLine = in.readLine()) != null) {
+//                response.append(inputLine);
+//            }
+//            in.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
 //            return;
 //        }
-
-        try{
-            URL url = new URL("http://localhost:8080/login");
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("POST");
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("Content-Type", "application/json");
-
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(loginDetails);
-
-            con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
-            con.getOutputStream().flush();
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+//        System.out.println();
     }
     public static void signUpValidate(TextField firstNameField, TextField lastNameField,
                                       TextField emailField, TextField passField, TextField ageField, GridPane form){
@@ -96,6 +90,12 @@ public class InputValidation {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter a valid age number");
             return;
         }
+
+        User user = new User(firstNameField.getText(), lastNameField.getText(), Integer.parseInt(ageField.getText()),
+                emailField.getText(), passField.getText());
+
+        Requests.sendRequest(2, new LoginDetails(), user);
+
         showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Registration Successful!",
                 "Welcome " + firstNameField.getText() + " " + lastNameField.getText() + "!!!");
     }

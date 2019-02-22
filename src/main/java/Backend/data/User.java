@@ -24,6 +24,8 @@ public class User {
         this.friends = new ArrayList<String>();
     }
 
+    public User(){ }
+
     public String getFirstName() {
         return this.firstName;
     }

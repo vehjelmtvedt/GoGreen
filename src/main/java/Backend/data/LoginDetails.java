@@ -14,6 +14,7 @@ public class LoginDetails {
         this.password = password;
     }
 
+    public LoginDetails(){ }
     public String getEmail(){return this.email;}
 
     public String getPassword(){return this.password;}
