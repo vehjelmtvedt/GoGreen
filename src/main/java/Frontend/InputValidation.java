@@ -26,35 +26,13 @@ public class InputValidation {
         }
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
-        Requests.sendRequest(1, loginDetails, new User());
-//        try{
-//            URL url = new URL("http://localhost:8080/login");
-//            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-//            con.setRequestMethod("POST");
-//            con.setDoOutput(true);
-//            con.setDoInput(true);
-//            con.setRequestProperty("Content-Type", "application/json");
-//
-//            ObjectMapper mapper = new ObjectMapper();
-//            String json = mapper.writeValueAsString(loginDetails);
-//
-//            con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
-//            con.getOutputStream().flush();
-//
-//            BufferedReader in = new BufferedReader(
-//                    new InputStreamReader(con.getInputStream()));
-//            String inputLine;
-//            StringBuilder response = new StringBuilder();
-//
-//            while ((inputLine = in.readLine()) != null) {
-//                response.append(inputLine);
-//            }
-//            in.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return;
-//        }
-//        System.out.println();
+        String response = Requests.sendRequest(1, loginDetails, new User());
+        if(response.equals("success"))
+            showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Welcome!",
+                    "Login successful");
+        else
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Typing Error!", "Incorrect credentials. Try again");
+
     }
     public static void signUpValidate(TextField firstNameField, TextField lastNameField,
                                       TextField emailField, TextField passField, TextField ageField, GridPane form){
@@ -94,10 +72,14 @@ public class InputValidation {
         User user = new User(firstNameField.getText(), lastNameField.getText(), Integer.parseInt(ageField.getText()),
                 emailField.getText(), passField.getText());
 
-        Requests.sendRequest(2, new LoginDetails(), user);
+        String response = Requests.sendRequest(2, new LoginDetails(), user);
 
-        showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Registration Successful!",
-                "Welcome " + firstNameField.getText() + " " + lastNameField.getText() + "!!!");
+        if(response.equals("success"))
+            showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Registration Successful!",
+                "Welcome " + firstNameField.getText() + " " + lastNameField.getText() + "!");
+        else
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Email Error!", "An user already exists with this email address. " +
+                    "Use another email");
     }
     private static boolean validateAge(TextField input, String message){
         try{
