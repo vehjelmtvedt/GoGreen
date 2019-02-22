@@ -40,6 +40,7 @@ public class Requests {
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
+            System.out.println(response);
             in.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,7 +50,7 @@ public class Requests {
     @SuppressWarnings("all")
     public static void sendSignUpRequest(User user){
         try{
-            URL url = new URL("http://localhost:8080/login");
+            URL url = new URL("http://localhost:8080/signup");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.setDoOutput(true);
@@ -70,6 +71,8 @@ public class Requests {
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
+
+            System.out.println(response);
             in.close();
         } catch (Exception e) {
             e.printStackTrace();
