@@ -187,7 +187,6 @@ public class SetupStructure {
         Double[] sizes = new Double[2];
         sizes[0] = bounds.getWidth();
         sizes[1] = bounds.getHeight();
-
         return sizes;
     }
 }

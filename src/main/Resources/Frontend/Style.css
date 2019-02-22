@@ -1,9 +1,4 @@
-/*.root{*/
-    /*-fx-background-color: #00ff00;*/
-/*}*/
-
 #mainLayout{
-    /*-fx-background-image: url("fielFrontend/loginWall1.jpg");*/
     -fx-background-color: #009933;
 }
 .label{
@@ -34,6 +29,3 @@
 #signInButton:hover, #signUpButton:hover{
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
-/*.text-field:focused, .password-field:focused{*/
-    /*-fx-border-color: #86878b;*/
-/*}*/
