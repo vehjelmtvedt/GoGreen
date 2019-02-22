@@ -8,6 +8,9 @@ public class UserTest {
     User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com", "password123");
 
     @Test
+    public void testConstructor() { Assert.assertNotNull(userOne);}
+
+    @Test
     public void getFirstNameSuccess() {
         Assert.assertEquals("Vetle", userOne.getFirstName());
     }
@@ -56,5 +59,9 @@ public class UserTest {
     public void getPasswordFail() {
         Assert.assertNotEquals("password124", userOne.getPassword());
     }
+
+    @Test
+    public void toStringSuccess() { Assert.assertEquals(userOne.toString(),"First name: Vetle\nLast name: " +
+            "Hjelmtvedt\nAge: 19\nEmail: vetle@hjelmtvedt.com\nPassword: password123\nFriend emails: \n");}
 
 }
