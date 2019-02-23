@@ -1,7 +1,6 @@
 package Backend.data;
 
 import org.springframework.data.annotation.Id;
-
 import java.util.ArrayList;
 
 public class User {
@@ -23,6 +22,8 @@ public class User {
         this.password = password;
         this.friends = new ArrayList<String>();
     }
+
+    public User(){ }
 
     public String getFirstName() {
         return this.firstName;

@@ -1,4 +1,4 @@
-package GUI.src.sample;
+package Frontend;
 
 public class Controller {
 }

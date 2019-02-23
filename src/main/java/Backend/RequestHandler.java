@@ -2,17 +2,14 @@ package Backend;
 
 import Backend.data.*;
 import org.springframework.web.bind.annotation.*;
-
-
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.List;
 
 
 @RestController
 public class RequestHandler {
-    @Resource(name="DBService")
-    private DBService dbService;
+    @Resource(name="DbService")
+    private DbService dbService;
 
     @RequestMapping("/greeting")
     public String respond() {
@@ -36,7 +33,6 @@ public class RequestHandler {
         dbService.addUser(user);
         return "success";
         //return new ResponseEntity<>("Success", HttpStatus.OK);
-
     }
 
     @RequestMapping("/addfriend")

@@ -1,9 +1,5 @@
 package Backend.data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,9 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("DBService")
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Service("DbService")
 @Transactional
-public class DBService {
+public class DbService {
     @Autowired
     private UserRepository users;
 
@@ -25,12 +25,12 @@ public class DBService {
     private MongoTemplate mongoTemplate;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    private PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(DBService.class, args);
+        SpringApplication.run(DbService.class, args);
     }
 
 
@@ -38,11 +38,11 @@ public class DBService {
      * Adds a user to the database
      */
     public void addUser(User user) {
-        user.setPassword(encodePassowrd(user.getPassword()));
+        user.setPassword(encodePassword(user.getPassword()));
         users.save(user);
     }
 
-    private String encodePassowrd(String password) {
+    private String encodePassword(String password) {
         return passwordEncoder().encode(password);
     }
 

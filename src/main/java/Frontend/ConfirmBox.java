@@ -1,4 +1,4 @@
-package GUI.src.sample;
+package Frontend;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -38,10 +38,19 @@ public class ConfirmBox {
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout);
+//        scene.getStylesheets().add(Main.getCSS());
         window.setScene(scene);
         window.showAndWait();
 
         return answer;
+    }
+
+    public static void closeProgram(Stage stage){
+        boolean answer = ConfirmBox.display("Close request safety", "Are you sure you want to close this application?");
+        if(answer){
+            System.out.println("Contents are saved!(not true)");
+            stage.close();
+        }
     }
 }
 
