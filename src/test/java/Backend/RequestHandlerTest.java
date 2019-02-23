@@ -46,8 +46,14 @@ public class RequestHandlerTest
 
     @Test
     public void testLoginSuccess() {
-        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(true);
         assertEquals("success", requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
+    }
+
+    @Test
+    public void testLoginFail() {
+        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(false);
+        assertEquals("failure", requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
 }
