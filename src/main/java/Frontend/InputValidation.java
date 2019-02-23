@@ -4,15 +4,19 @@ import Backend.data.LoginDetails;
 import Backend.data.User;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+
+import java.util.ArrayList;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidation {
-    public static void signInValidate(TextField emailField, TextField passField, GridPane form, Stage stage){
+    public static void signInValidate(TextField emailField, PasswordField passField, GridPane form, Stage stage){
         if(!validateEmail(emailField, emailField.getText())) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Typing Error!", "Please enter a valid email");
             return;
@@ -30,7 +34,8 @@ public class InputValidation {
         }
     }
     public static void signUpValidate(TextField firstNameField, TextField lastNameField,
-                                      TextField emailField, TextField passField, TextField ageField, GridPane form, Stage stage){
+                                      TextField emailField, PasswordField passField, TextField ageField, GridPane form, Stage stage){
+        ArrayList<TextField> fields = new ArrayList<>();
         if(firstNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter your First Name");
             return;
@@ -73,6 +78,7 @@ public class InputValidation {
             if (response.equals("success")) {
                 showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Registration Successful!",
                         "Go to login screen and enter your new credentials!");
+                SetupStructure.resetFields(1, firstNameField, lastNameField, emailField, passField, ageField);
             } else {
                 showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Email Error!", "An user already exists with this email address. " +
                         "Use another email");

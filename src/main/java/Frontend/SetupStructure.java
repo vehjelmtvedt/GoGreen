@@ -20,6 +20,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import java.util.ArrayList;
+
 public class SetupStructure {
     public static void setPrimaryStage(Stage stage, String title){
         stage.setTitle(title);
@@ -202,5 +204,13 @@ public class SetupStructure {
         sizes[0] = bounds.getWidth();
         sizes[1] = bounds.getHeight();
         return sizes;
+    }
+
+    public static void resetFields(int type, TextField firstName, TextField lastName, TextField email, PasswordField pass, TextField age){
+        firstName.setText(null);
+        lastName.setText(null);
+        email.setText(null);
+        pass.setText(null);
+        age.setText(null);
     }
 }
