@@ -66,7 +66,7 @@ public class SetupStructure {
         //signup type form
         if (type == 1) {
             //add header label
-            headerLabel.setPadding(new Insets(0, 30, 0, 0));
+            headerLabel.setPadding(new Insets(0, 80, 0, 0));
 
             // Add First Name Label
             Label firstNameLabel = new Label("First Name : ");
@@ -125,7 +125,7 @@ public class SetupStructure {
             signUpButton.setDefaultButton(true);
             signUpButton.setPrefWidth(100);
             signUpButton.setOnAction(e -> {
-                InputValidation.signUpValidate(firstNameField, lastNameField, emailField, passwordField, ageField, gridPane);
+                InputValidation.signUpValidate(firstNameField, lastNameField, emailField, passwordField, ageField, gridPane, currStage);
             });
 
             Button signInButton = new Button("Sign in");
@@ -144,7 +144,7 @@ public class SetupStructure {
 
         //sign in type form
         if (type == 2) {
-            headerLabel.setPadding(new Insets(0, 80, 0, 0));
+            headerLabel.setPadding(new Insets(0, 100, 0, 0));
 
             //reset login label
             headerLabel.setText("User login");
@@ -175,7 +175,7 @@ public class SetupStructure {
             signInButton.setPrefWidth(100);
 
             signInButton.setOnAction(e -> {
-                InputValidation.signInValidate(emailField, passwordField, gridPane);
+                InputValidation.signInValidate(emailField, passwordField, gridPane, currStage);
             });
 
             signUpButton.setId("signUpButton");

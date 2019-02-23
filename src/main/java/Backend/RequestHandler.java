@@ -2,8 +2,6 @@ package Backend;
 
 import Backend.data.*;
 import org.springframework.web.bind.annotation.*;
-
-
 import javax.annotation.Resource;
 import java.util.ArrayList;
 
@@ -35,7 +33,6 @@ public class RequestHandler {
         dbService.addUser(user);
         return "success";
         //return new ResponseEntity<>("Success", HttpStatus.OK);
-
     }
 
     @RequestMapping("/addfriend")
