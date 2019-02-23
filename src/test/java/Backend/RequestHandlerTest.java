@@ -1,6 +1,7 @@
 package Backend;
 
 import Backend.data.DbService;
+import Backend.data.LoginDetails;
 import Backend.data.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,4 +43,11 @@ public class RequestHandlerTest
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(null);
         assertEquals("success", requestHandler.signupController(testUser));
     }
+
+    @Test
+    public void testLoginSuccess() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        assertEquals("success", requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
+    }
+
 }
