@@ -1,4 +1,6 @@
 # Maven ignores
+.idea
+workspace.xml
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -8,6 +10,8 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+.idea
+
 
 # Exclude maven wrapper
 !/.mvn/wrapper/maven-wrapper.jar
