@@ -2,62 +2,40 @@ package Frontend;
 
 import Backend.data.LoginDetails;
 import Backend.data.User;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidation {
-    public static void signInValidate(TextField emailField, TextField passField, GridPane form){
+    public static void signInValidate(TextField emailField, PasswordField passField, GridPane form, Stage stage){
         if(!validateEmail(emailField, emailField.getText())) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Typing Error!", "Please enter a valid email");
             return;
         }
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
-        Requests.sendRequest(1, loginDetails, new User());
-//        try{
-//            URL url = new URL("http://localhost:8080/login");
-//            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-//            con.setRequestMethod("POST");
-//            con.setDoOutput(true);
-//            con.setDoInput(true);
-//            con.setRequestProperty("Content-Type", "application/json");
-//
-//            ObjectMapper mapper = new ObjectMapper();
-//            String json = mapper.writeValueAsString(loginDetails);
-//
-//            con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
-//            con.getOutputStream().flush();
-//
-//            BufferedReader in = new BufferedReader(
-//                    new InputStreamReader(con.getInputStream()));
-//            String inputLine;
-//            StringBuilder response = new StringBuilder();
-//
-//            while ((inputLine = in.readLine()) != null) {
-//                response.append(inputLine);
-//            }
-//            in.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return;
-//        }
-//        System.out.println();
+        String response = Requests.sendRequest(1, loginDetails, new User());
+        if(response.equals("success")) {
+            showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Login successful",
+                    "Welcome to GoGreen!");
+//            StageSwitcher.buttonSwitch();
+        }
+        else {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Login failed", "Incorrect credentials. Try again");
+        }
     }
     public static void signUpValidate(TextField firstNameField, TextField lastNameField,
-                                      TextField emailField, TextField passField, TextField ageField, GridPane form){
+                                      TextField emailField, PasswordField passField, TextField ageField, GridPane form, Stage stage){
+        ArrayList<TextField> fields = new ArrayList<>();
         if(firstNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter your First Name");
             return;
@@ -94,10 +72,18 @@ public class InputValidation {
         User user = new User(firstNameField.getText(), lastNameField.getText(), Integer.parseInt(ageField.getText()),
                 emailField.getText(), passField.getText());
 
-        Requests.sendRequest(2, new LoginDetails(), user);
+        String response = Requests.sendRequest(2, new LoginDetails(), user);
 
-        showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Registration Successful!",
-                "Welcome " + firstNameField.getText() + " " + lastNameField.getText() + "!!!");
+        if(response != null) {
+            if (response.equals("success")) {
+                showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Registration Successful!",
+                        "Go to login screen and enter your new credentials!");
+                SetupStructure.resetFields(1, firstNameField, lastNameField, emailField, passField, ageField);
+            } else {
+                showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Email Error!", "An user already exists with this email address. " +
+                        "Use another email");
+            }
+        }
     }
     private static boolean validateAge(TextField input, String message){
         try{

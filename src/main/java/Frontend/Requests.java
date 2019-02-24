@@ -11,15 +11,14 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 public class Requests {
-    public static void sendRequest(int type, LoginDetails loginDetails, User user){
-        if(type == 1) sendSignInRequest(loginDetails);
-        if(type == 2) sendSignUpRequest(user);
-    }
-
-    @SuppressWarnings("all")
-    public static void sendSignInRequest(LoginDetails loginDetails){
+    public static String sendRequest(int type, LoginDetails loginDetails, User user){
         try{
-            URL url = new URL("http://localhost:8080/login");
+            URL url;
+            if(type == 1)
+                url = new URL("http://localhost:8080/login");
+            else
+                url = new URL("http://localhost:8080/signup");
+
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.setDoOutput(true);
@@ -27,7 +26,12 @@ public class Requests {
             con.setRequestProperty("Content-Type", "application/json");
 
             ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(loginDetails);
+            String json;
+
+            if(type == 1)
+                json = mapper.writeValueAsString(loginDetails);
+            else
+                json = mapper.writeValueAsString(user);
 
             con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
             con.getOutputStream().flush();
@@ -42,40 +46,11 @@ public class Requests {
             }
             System.out.println(response);
             in.close();
+            return response.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    @SuppressWarnings("all")
-    public static void sendSignUpRequest(User user){
-        try{
-            URL url = new URL("http://localhost:8080/signup");
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("POST");
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("Content-Type", "application/json");
-
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(user);
-
-            con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
-            con.getOutputStream().flush();
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-
-            System.out.println(response);
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return null;
     }
 }
