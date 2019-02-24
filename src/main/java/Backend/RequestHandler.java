@@ -11,10 +11,10 @@ public class RequestHandler {
     @Resource(name="DbService")
     private DbService dbService;
 
-    @RequestMapping("/greeting")
+/*    @RequestMapping("/greeting")
     public String respond() {
         return "TestGreeting";
-    }
+    }*/
 
     //Handles authentication
     @RequestMapping("/login")
@@ -35,7 +35,10 @@ public class RequestHandler {
         //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
-    @RequestMapping("/addfriend")
+
+    // Temporarily commented out to see real code coverage
+    // This code will be revised on next Sprint
+/*    @RequestMapping("/addfriend")
     public String addFriend(@RequestParam String myEmail, @RequestParam String friendEmail) {
         //TODO: Add friend request feature in the future
         //POSSIBLE SOLUTION: store friend request in db, send to that user when accessing
@@ -55,7 +58,7 @@ public class RequestHandler {
     @RequestMapping("/getallfriends")
     public ArrayList<String> getAllFriends(@RequestParam String myEmail) {
         return dbService.getUser(myEmail).getFriends();
-    }
+    }*/
 }
 
 
