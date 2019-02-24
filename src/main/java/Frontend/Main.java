@@ -5,17 +5,14 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.util.Set;
-
 public class Main extends Application {
 
-    private static Scene signIn, signUp;
     private static String css;
 
     @Override
-    public void start(Stage window) throws Exception {
-        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+    public void start(Stage window) {
         //setup stage
+        Scene signIn, signUp;
         SetupStructure.setPrimaryStage(window, "Go Green sign in");
 
         //create borderPane for quick form setup

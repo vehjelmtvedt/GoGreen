@@ -46,9 +46,8 @@
 }
 
 #alertDialog .content.label{
-    /*-fx-background-color: #000;*/
     -fx-text-fill: #000;
 }
-#alertDialog .button:hover {
+/*#alertDialog .button:hover {*/
 
-}
+/*}*/

@@ -18,9 +18,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.util.Pair;
-
-import java.util.ArrayList;
 
 public class SetupStructure {
     public static void setPrimaryStage(Stage stage, String title){
@@ -62,10 +59,25 @@ public class SetupStructure {
         headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         headerLabel.setId("headerLabel");
         gridPane.add(headerLabel, 0, 0, 2, 1);
-//        GridPane.setHalignment(headerLabel, HPos.CENTER);
         GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
 
-        //signup type form
+
+        Button signUpButton = new Button("Sign up");
+        signUpButton.setId("signUpButton");
+        signUpButton.setPrefHeight(40);
+        signUpButton.setDefaultButton(true);
+        signUpButton.setPrefWidth(100);
+
+        Button signInButton = new Button("Sign in");
+        signInButton.setId("signInButton");
+        signInButton.setPrefHeight(40);
+        signInButton.setDefaultButton(true);
+        signInButton.setPrefWidth(100);
+
+        HBox buttons = new HBox();
+        buttons.setPadding(new Insets(10,0,0,0));
+        buttons.getChildren().addAll(signInButton, signUpButton);
+        //sign up type form
         if (type == 1) {
             //add header label
             headerLabel.setPadding(new Insets(0, 80, 0, 0));
@@ -120,27 +132,10 @@ public class SetupStructure {
             ageField.setPromptText("Your age");
             gridPane.add(ageField, 1, 5);
 
-            // Add Submit Button
-            Button signUpButton = new Button("Sign up");
-            signUpButton.setId("signUpButton");
-            signUpButton.setPrefHeight(40);
-            signUpButton.setDefaultButton(true);
-            signUpButton.setPrefWidth(100);
-            signUpButton.setOnAction(e -> {
-                InputValidation.signUpValidate(firstNameField, lastNameField, emailField, passwordField, ageField, gridPane, currStage);
-            });
 
-            Button signInButton = new Button("Sign in");
-            signInButton.setId("signInButton");
-            signInButton.setPrefHeight(40);
-            signInButton.setDefaultButton(true);
-            signInButton.setPrefWidth(100);
-
+            signUpButton.setOnAction(e -> InputValidation.signUpValidate(firstNameField, lastNameField, emailField, passwordField, ageField, gridPane, currStage));
             StageSwitcher.buttonSwitch(signInButton, currStage, prevScene);
 
-            HBox buttons = new HBox();
-            buttons.setPadding(new Insets(10,0,0,0));
-            buttons.getChildren().addAll(signInButton, signUpButton);
             gridPane.add(buttons, 1, 6, 2, 1);
         }
 
@@ -168,28 +163,9 @@ public class SetupStructure {
             passwordField.setPrefHeight(40);
             gridPane.add(passwordField, 1, 2);
 
-            // Add Submit Button
-            Button signInButton = new Button("Sign in");
-            Button signUpButton = new Button("Sign up");
-            signInButton.setId("signInButton");
-            signInButton.setPrefHeight(40);
-            signInButton.setDefaultButton(true);
-            signInButton.setPrefWidth(100);
-
-            signInButton.setOnAction(e -> {
-                InputValidation.signInValidate(emailField, passwordField, gridPane, currStage);
-            });
-
-            signUpButton.setId("signUpButton");
-            signUpButton.setPrefHeight(40);
-            signUpButton.setDefaultButton(true);
-            signUpButton.setPrefWidth(100);
-
+            signInButton.setOnAction(e -> InputValidation.signInValidate(emailField, passwordField, gridPane, currStage));
             StageSwitcher.buttonSwitch(signUpButton, currStage, nextScene);
 
-            HBox buttons = new HBox();
-            buttons.setPadding(new Insets(10,0,0,0));
-            buttons.getChildren().addAll(signInButton, signUpButton);
             gridPane.add(buttons, 1, 3, 1, 1);
             GridPane.setHalignment(buttons, HPos.CENTER);
             GridPane.setMargin(buttons, new Insets(20, 0, 20, 0));

@@ -9,25 +9,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
-import java.util.ArrayList;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidation {
     public static void signInValidate(TextField emailField, PasswordField passField, GridPane form, Stage stage){
-        if(!validateEmail(emailField, emailField.getText())) {
+        if(validateEmail(emailField)) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Typing Error!", "Please enter a valid email");
             return;
         }
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
         String response = Requests.sendRequest(1, loginDetails, new User());
-        if(response.equals("success")) {
+        if(response != null && response.equals("success")) {
             showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Login successful",
                     "Welcome to GoGreen!");
-//            StageSwitcher.buttonSwitch();
         }
         else {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Login failed", "Incorrect credentials. Try again");
@@ -47,7 +43,7 @@ public class InputValidation {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter your email");
             return;
         }
-        if(!validateEmail(emailField, emailField.getText())) {
+        if(validateEmail(emailField)) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter a valid email");
             return;
         }
@@ -55,7 +51,7 @@ public class InputValidation {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter a password");
             return;
         }
-        if(!validatePassword(passField, passField.getText())) {
+        if(!validatePassword(passField)) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter a valid password");
             return;
         }
@@ -99,7 +95,7 @@ public class InputValidation {
         }
     }
 
-    private static boolean validatePassword(TextField input, String message){
+    private static boolean validatePassword(TextField input){
         String pass = input.getText();
         Pattern p = Pattern.compile("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})");
         Matcher m = p.matcher(pass);
@@ -111,16 +107,16 @@ public class InputValidation {
         return false;
     }
 
-    private static boolean validateEmail(TextField input, String message){
+    private static boolean validateEmail(TextField input){
         String email = input.getText();
         Pattern p = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
         Matcher m = p.matcher(email);
         if(m.matches()){
             System.out.println("Email is: " + email);
-            return true;
+            return false;
         }
         System.out.println("Error: " + email + " is not a valid email");
-        return false;
+        return true;
     }
     private static void showAlert(Alert.AlertType alertType, Window window, String title, String message){
         Alert alert = new Alert(alertType);
