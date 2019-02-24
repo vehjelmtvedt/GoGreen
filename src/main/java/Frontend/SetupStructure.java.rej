@@ -1,0 +1,10 @@
+diff a/src/main/java/Frontend/SetupStructure.java b/src/main/java/Frontend/SetupStructure.java	(rejected hunks)
+@@ -55,7 +55,7 @@
+         return gridPane;
+     }
+ 
+-    public static void addUIControls(GridPane gridPane, int type, Stage currStage, Scene nextScene, Scene prevScene) {
++    public static void addUIControls(GridPane gridPane, int type, Stage currStage, Scene nextScene, Scene prevScene){
+         Label headerLabel = new Label("Sign-up Form");
+         headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+         headerLabel.setId("headerLabel");

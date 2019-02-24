@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @RestController
 public class RequestHandler {
-    @Resource(name="DbService")
+    @Resource(name = "DbService")
     private DbService dbService;
 
     @RequestMapping("/greeting")
@@ -29,9 +29,11 @@ public class RequestHandler {
 
     //Handles creating a new user
     @RequestMapping("/signup")
-    public String signupController(@RequestBody User user){
-        if(dbService.getUser(user.getEmail())!=null)
+    public String signupController(@RequestBody User user) {
+        System.out.println(user);
+        if (dbService.getUser(user.getEmail()) != null) {
             return "user exists already";
+        }
         dbService.addUser(user);
         return "success";
         //return new ResponseEntity<>("Success", HttpStatus.OK);
@@ -49,8 +51,7 @@ public class RequestHandler {
             currUser.addFriend(friendEmail);
             dbService.addUser(currUser);
             return "Success";
-        }
-        else {
+        } else {
             return "fail";
         }
     }

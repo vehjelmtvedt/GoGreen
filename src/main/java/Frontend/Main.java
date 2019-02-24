@@ -15,8 +15,8 @@ public class Main extends Application {
     private static String css;
 
     @Override
-    public void start(Stage window) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+    public void start(Stage window) throws Exception {
+        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         //setup stage
         SetupStructure.setPrimaryStage(window, "Go Green sign in");
 
@@ -52,7 +52,7 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static String getCSS(){
+    public static String getCSS() {
         return css;
     }
 }
