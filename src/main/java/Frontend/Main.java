@@ -13,6 +13,7 @@ public class Main extends Application {
     public void start(Stage window) {
         //setup stage
         Scene signIn, signUp;
+        String cssPath = "/Frontend/Style.css";
         SetupStructure.setPrimaryStage(window, "Go Green sign in");
 
         //create borderPane for quick form setup
@@ -33,7 +34,7 @@ public class Main extends Application {
 
         //set final primary stage aka window and add css
         signIn = new Scene(mainLayoutSignIn, SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
-        css = this.getClass().getResource("/Frontend/Style.css").toExternalForm();
+        css = this.getClass().getResource(cssPath).toExternalForm();
         signIn.getStylesheets().add(css);
         signUp.getStylesheets().add(css);
 

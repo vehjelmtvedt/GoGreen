@@ -13,6 +13,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidation {
+    private static final String passPattern = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})";
+    private static final String emailPattern = "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+";
+
     public static void signInValidate(TextField emailField, PasswordField passField, GridPane form, Stage stage){
         if(validateEmail(emailField)) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Typing Error!", "Please enter a valid email");
@@ -97,7 +100,7 @@ public class InputValidation {
 
     private static boolean validatePassword(TextField input){
         String pass = input.getText();
-        Pattern p = Pattern.compile("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})");
+        Pattern p = Pattern.compile(passPattern);
         Matcher m = p.matcher(pass);
         if(m.matches()){
             System.out.println("Password is: " +  pass);
@@ -109,7 +112,7 @@ public class InputValidation {
 
     private static boolean validateEmail(TextField input){
         String email = input.getText();
-        Pattern p = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
+        Pattern p = Pattern.compile(emailPattern);
         Matcher m = p.matcher(email);
         if(m.matches()){
             System.out.println("Email is: " + email);
