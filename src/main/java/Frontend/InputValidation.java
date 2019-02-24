@@ -35,7 +35,6 @@ public class InputValidation {
     }
     public static void signUpValidate(TextField firstNameField, TextField lastNameField,
                                       TextField emailField, PasswordField passField, TextField ageField, GridPane form, Stage stage){
-        ArrayList<TextField> fields = new ArrayList<>();
         if(firstNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Form Error!", "Please enter your First Name");
             return;
