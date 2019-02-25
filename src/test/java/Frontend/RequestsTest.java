@@ -6,6 +6,7 @@ import Backend.data.DbService;
 import Backend.data.LoginDetails;
 import Backend.data.User;
 import org.junit.Test;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
@@ -36,14 +37,14 @@ public class RequestsTest {
     public void testType1(){
         Requests requests = new Requests();
         String response = requests.sendRequest(1, testUserDetails, testUser);
-        assertNotNull(response);
+        assertNotEquals("", response);
     }
 
     @Test
     public void testType2(){
         Requests requests = new Requests();
         String response = requests.sendRequest(2, testUserDetails, testUser);
-        assertNotNull(response);
+        assertNotEquals("", response);
     }
 
     @Test
