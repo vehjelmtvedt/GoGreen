@@ -34,7 +34,7 @@ public class Requests {
                 url = new URL("http://localhost:8080/signup");
                 this.setUrl(url);
             }
-//            System.out.println(this.getUrl().toString());
+            //            System.out.println(this.getUrl().toString());
 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
