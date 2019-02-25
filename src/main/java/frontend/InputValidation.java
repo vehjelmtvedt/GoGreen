@@ -1,7 +1,7 @@
-package Frontend;
+package frontend;
 
-import Backend.data.LoginDetails;
-import Backend.data.User;
+import backend.data.LoginDetails;
+import backend.data.User;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;

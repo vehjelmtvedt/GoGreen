@@ -1,9 +1,5 @@
 package backend.data;
-import backend.data.LoginDetails;
 import org.junit.*;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 

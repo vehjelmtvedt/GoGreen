@@ -1,4 +1,4 @@
-package Frontend;
+package frontend;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -30,7 +30,7 @@ public class SetupStructure {
         stage.setTitle(title);
         stage.getIcons().addAll(new Image("file:C:"
                 + "\\Users\\Alexandru\\Documents\\template\\src\\main\\"
-                + "Resources\\Frontend\\Pics\\GoGreenIcon.png"));
+                + "Resources\\frontend\\Pics\\GoGreenIcon.png"));
         stage.setOnCloseRequest(e -> {
             e.consume();
             ConfirmBox.closeProgram(stage);

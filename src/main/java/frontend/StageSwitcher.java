@@ -1,4 +1,4 @@
-package Frontend;
+package frontend;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
