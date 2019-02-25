@@ -1,14 +1,15 @@
 package backend;
 
-
 import backend.data.DbService;
+
 import backend.data.LoginDetails;
 import backend.data.User;
 
-import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 @RestController
 public class RequestHandler {
@@ -20,7 +21,8 @@ public class RequestHandler {
             return "TestGreeting";
         }*/
 
-    /**.
+    /**
+     * .
      * Login REST Method
      */
     @RequestMapping("/login")
@@ -32,7 +34,8 @@ public class RequestHandler {
         return "failure";
     }
 
-    /**.
+    /**
+     * .
      * Sign-up REST Method
      */
     @RequestMapping("/signup")

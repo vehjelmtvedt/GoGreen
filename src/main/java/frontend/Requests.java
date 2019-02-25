@@ -1,6 +1,5 @@
 package frontend;
 
-
 import backend.data.LoginDetails;
 import backend.data.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +11,13 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 public class Requests {
+    /**.
+     * Send request
+     * @param type - type of Request
+     * @param loginDetails - Login Details object (email and password pair)
+     * @param user - User object
+     * @return Request Response
+     */
     public static String sendRequest(int type, LoginDetails loginDetails, User user) {
         try {
             URL url;
