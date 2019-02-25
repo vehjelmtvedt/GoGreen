@@ -18,17 +18,17 @@ public class Requests {
     public void setUrl(URL url){ this.url = url;}
 
     public String sendRequest(int type, LoginDetails loginDetails, User user){
-        Requests requests = new Requests();
         try{
             URL url;
-            if(type == 1)
+            if(type == 1) {
                 url = new URL("http://localhost:8080/login");
-            else
+                this.setUrl(url);
+            }
+            else {
                 url = new URL("http://localhost:8080/signup");
-
-            requests.setUrl(url);
-
-//            System.out.println(Requests.getUrl().toString());
+                this.setUrl(url);
+            }
+//            System.out.println(this.getUrl().toString());
 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
