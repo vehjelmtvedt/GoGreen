@@ -16,9 +16,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Server.class)
+@SpringBootTest(classes = Server.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class RequestsTest {
 
     @MockBean
@@ -34,12 +35,26 @@ public class RequestsTest {
     @Test
     public void testType1(){
         Requests requests = new Requests();
+        String response = requests.sendRequest(1, testUserDetails, testUser);
+        assertNotNull(response);
+    }
+
+    @Test
+    public void testType2(){
+        Requests requests = new Requests();
+        String response = requests.sendRequest(2, testUserDetails, testUser);
+        assertNotNull(response);
+    }
+
+    @Test
+    public void testGetUrl1(){
+        Requests requests = new Requests();
         requests.sendRequest(1, testUserDetails, testUser);
         assertEquals("http://localhost:8080/login", requests.getUrl().toString());
     }
 
     @Test
-    public void testType2(){
+    public void testGetUrl2(){
         Requests requests = new Requests();
         requests.sendRequest(2, testUserDetails, testUser);
         assertEquals("http://localhost:8080/signup", requests.getUrl().toString());
