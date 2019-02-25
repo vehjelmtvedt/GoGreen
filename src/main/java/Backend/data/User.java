@@ -15,6 +15,14 @@ public class User {
     private String password;
     private ArrayList<String> friends;
 
+    /**
+     * Constructor of User object.
+     * @param firstName - first name of user.
+     * @param lastName - last name of user.
+     * @param age - age of user.
+     * @param email - email of user.
+     * @param password - user's password.
+     */
     public User(String firstName, String lastName, int age, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -55,6 +63,10 @@ public class User {
         return this.friends;
     }
 
+    /**
+     * Returns string representation of the User object.
+     * @return String
+     */
     public String toString() {
         StringBuilder userString = new StringBuilder();
         userString.append("First name: ").append(this.firstName).append('\n');
@@ -64,14 +76,16 @@ public class User {
         userString.append("Password: ").append(this.password).append('\n');
 
         userString.append("Friend emails: \n");
-        for (String friendEmail : friends)
+        for (String friendEmail : friends) {
             userString.append("-").append(friendEmail).append("\n");
+        }
+
 
         return userString.toString();
     }
 
     /**
-     * Adds a friend to friends list
+     * Adds a friend to friends list.
      *
      * @param email - email of the user to become friends with
      */
@@ -83,9 +97,10 @@ public class User {
      * Removes a friend from the friends list
      *
      * @param email - email of the user to not be friends with anymore
-     * @return true if the user was successfully removed from friends list (found & removed from the list)
+     * @return true if the user was successfully removed from
+     * friends list (found & removed from the list)
      */
-//    public boolean removeFriend(String email) {
-//        return friends.remove(email);
-//    }
+    //    public boolean removeFriend(String email) {
+    //        return friends.remove(email);
+    //    }
 }
