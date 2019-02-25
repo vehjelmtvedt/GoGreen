@@ -1,6 +1,7 @@
-package Backend.data;
+package backend.data;
 
 import org.springframework.data.annotation.Id;
+
 import java.util.ArrayList;
 
 public class User {
@@ -20,7 +21,7 @@ public class User {
         this.age = age;
         this.email = email;
         this.password = password;
-        this.friends = new ArrayList<String>();
+        this.friends = new ArrayList<>();
     }
 
     public User() {
@@ -56,15 +57,15 @@ public class User {
 
     public String toString() {
         StringBuilder userString = new StringBuilder();
-        userString.append("First name: " + this.firstName + '\n');
-        userString.append("Last name: " + this.lastName + '\n');
-        userString.append("Age: " + this.age + '\n');
-        userString.append("Email: " + this.email + '\n');
-        userString.append("Password: " + this.password + '\n');
+        userString.append("First name: ").append(this.firstName).append('\n');
+        userString.append("Last name: ").append(this.lastName).append('\n');
+        userString.append("Age: ").append(this.age).append('\n');
+        userString.append("Email: ").append(this.email).append('\n');
+        userString.append("Password: ").append(this.password).append('\n');
 
         userString.append("Friend emails: \n");
         for (String friendEmail : friends)
-            userString.append("-" + friendEmail + "\n");
+            userString.append("-").append(friendEmail).append("\n");
 
         return userString.toString();
     }
@@ -78,13 +79,13 @@ public class User {
         friends.add(email);
     }
 
-    /**
+    /*
      * Removes a friend from the friends list
      *
-     * @param email - email of the user to unfriend
-     * @return true if the user was successfully unfriended (found & removed from the list)
+     * @param email - email of the user to not be friends with anymore
+     * @return true if the user was successfully removed from friends list (found & removed from the list)
      */
-    public boolean removeFriend(String email) {
-        return friends.remove(email);
-    }
+//    public boolean removeFriend(String email) {
+//        return friends.remove(email);
+//    }
 }

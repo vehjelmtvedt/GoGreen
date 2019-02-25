@@ -1,23 +1,23 @@
-package Frontend;
+package frontend;
 
-import Backend.RequestHandler;
-import Backend.Server;
-import Backend.data.DbService;
-import Backend.data.LoginDetails;
-import Backend.data.User;
+
+import backend.RequestHandler;
+import backend.Server;
+import backend.data.DbService;
+import backend.data.LoginDetails;
+import backend.data.User;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Server.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)

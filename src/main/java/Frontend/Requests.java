@@ -1,7 +1,8 @@
-package Frontend;
+package frontend;
 
-import Backend.data.LoginDetails;
-import Backend.data.User;
+
+import backend.data.LoginDetails;
+import backend.data.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;

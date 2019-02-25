@@ -1,5 +1,6 @@
-package Backend.data;
+package backend.data;
 
+import backend.data.User;
 import org.junit.Assert;
 import org.junit.Test;
 

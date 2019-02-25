@@ -1,4 +1,5 @@
-package Backend.data;
+package backend.data;
+import backend.data.LoginDetails;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

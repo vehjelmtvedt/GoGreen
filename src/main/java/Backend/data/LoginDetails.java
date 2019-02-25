@@ -1,4 +1,4 @@
-package Backend.data;
+package backend.data;
 
 import org.springframework.data.annotation.Id;
 

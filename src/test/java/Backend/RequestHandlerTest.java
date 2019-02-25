@@ -1,13 +1,12 @@
-package Backend;
+package backend;
 
-import Backend.data.DbService;
-import Backend.data.LoginDetails;
-import Backend.data.User;
-import org.junit.Before;
+
+import backend.data.DbService;
+import backend.data.LoginDetails;
+import backend.data.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;

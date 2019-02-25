@@ -1,9 +1,10 @@
-package Backend;
+package backend;
 
-import Backend.data.*;
+import backend.data.DbService;
+import backend.data.LoginDetails;
+import backend.data.User;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
-import java.util.ArrayList;
 
 
 @RestController
