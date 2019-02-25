@@ -1,32 +1,42 @@
 package backend;
 
+
 import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 
 @RestController
 public class RequestHandler {
     @Resource(name = "DbService")
     private DbService dbService;
 
-/*    @RequestMapping("/greeting")
-    public String respond() {
-        return "TestGreeting";
-    }*/
+    /*    @RequestMapping("/greeting")
+        public String respond() {
+            return "TestGreeting";
+        }*/
 
-    //Handles authentication
+    /**.
+     * Login REST Method
+     */
     @RequestMapping("/login")
     public String loginController(@RequestBody LoginDetails loginDetails) {
 
-        if(dbService.grantAccess(loginDetails.getEmail(),loginDetails.getPassword()))
+        if (dbService.grantAccess(loginDetails.getEmail(), loginDetails.getPassword())) {
             return "success";
+        }
         return "failure";
     }
 
-    //Handles creating a new user
+    /**.
+     * Sign-up REST Method
+     */
     @RequestMapping("/signup")
     public String signupController(@RequestBody User user) {
         System.out.println(user);
@@ -41,26 +51,26 @@ public class RequestHandler {
 
     // Temporarily commented out to see real code coverage
     // This code will be revised on next Sprint
-/*    @RequestMapping("/addfriend")
-    public String addFriend(@RequestParam String myEmail, @RequestParam String friendEmail) {
-        //TODO: Add friend request feature in the future
-        //POSSIBLE SOLUTION: store friend request in db, send to that user when accessing
-        //friends page.
-        //Keep it like this for now for testing.
-        if (dbService.getUser(friendEmail) != null) {
-            User currUser = dbService.getUser(myEmail);
-            currUser.addFriend(friendEmail);
-            dbService.addUser(currUser);
-            return "Success";
-        } else {
-            return "fail";
+    /*    @RequestMapping("/addfriend")
+        public String addFriend(@RequestParam String myEmail, @RequestParam String friendEmail) {
+            //TODO: Add friend request feature in the future
+            //POSSIBLE SOLUTION: store friend request in db, send to that user when accessing
+            //friends page.
+            //Keep it like this for now for testing.
+            if (dbService.getUser(friendEmail) != null) {
+                User currUser = dbService.getUser(myEmail);
+                currUser.addFriend(friendEmail);
+                dbService.addUser(currUser);
+                return "Success";
+            } else {
+                return "fail";
+            }
         }
-    }
 
-    @RequestMapping("/getallfriends")
-    public ArrayList<String> getAllFriends(@RequestParam String myEmail) {
-        return dbService.getUser(myEmail).getFriends();
-    }*/
+        @RequestMapping("/getallfriends")
+        public ArrayList<String> getAllFriends(@RequestParam String myEmail) {
+            return dbService.getUser(myEmail).getFriends();
+        }*/
 }
 
 

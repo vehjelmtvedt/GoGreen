@@ -35,29 +35,13 @@ public class RequestsTest {
 
     @Test
     public void testType1(){
-        Requests requests = new Requests();
-        String response = requests.sendRequest(1, testUserDetails, testUser);
+        String response = Requests.sendRequest(1, testUserDetails, testUser);
         assertNotEquals("", response);
     }
 
     @Test
     public void testType2(){
-        Requests requests = new Requests();
-        String response = requests.sendRequest(2, testUserDetails, testUser);
+        String response = Requests.sendRequest(2, testUserDetails, testUser);
         assertNotEquals("", response);
-    }
-
-    @Test
-    public void testGetUrl1(){
-        Requests requests = new Requests();
-        requests.sendRequest(1, testUserDetails, testUser);
-        assertEquals("http://localhost:8080/login", requests.getUrl().toString());
-    }
-
-    @Test
-    public void testGetUrl2(){
-        Requests requests = new Requests();
-        requests.sendRequest(2, testUserDetails, testUser);
-        assertEquals("http://localhost:8080/signup", requests.getUrl().toString());
     }
 }

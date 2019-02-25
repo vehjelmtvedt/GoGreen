@@ -12,7 +12,7 @@ public class ConfirmBox {
 
     private static boolean answer;
 
-    private static boolean display(){
+    private static boolean display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Close request safety");
@@ -44,9 +44,13 @@ public class ConfirmBox {
         return answer;
     }
 
-    public static void closeProgram(Stage stage){
+    /**.
+     *
+     * @param stage stage to close on answer
+     */
+    public static void closeProgram(Stage stage) {
         boolean answer = ConfirmBox.display();
-        if(answer){
+        if (answer) {
             System.out.println("Contents are saved!(not true)");
             stage.close();
         }
