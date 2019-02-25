@@ -13,18 +13,24 @@ import java.nio.charset.Charset;
 public class Requests {
     private URL url;
 
-    public URL getUrl(){ return this.url; }
-    public Requests(){ }
-    public void setUrl(URL url){ this.url = url;}
+    public Requests() {
+    }
 
-    public String sendRequest(int type, LoginDetails loginDetails, User user){
-        try{
+    public URL getUrl() {
+        return this.url;
+    }
+
+    public void setUrl(URL url) {
+        this.url = url;
+    }
+
+    public String sendRequest(int type, LoginDetails loginDetails, User user) {
+        try {
             URL url;
-            if(type == 1) {
+            if (type == 1) {
                 url = new URL("http://localhost:8080/login");
                 this.setUrl(url);
-            }
-            else {
+            } else {
                 url = new URL("http://localhost:8080/signup");
                 this.setUrl(url);
             }
@@ -39,10 +45,11 @@ public class Requests {
             ObjectMapper mapper = new ObjectMapper();
             String json;
 
-            if(type == 1)
+            if (type == 1) {
                 json = mapper.writeValueAsString(loginDetails);
-            else
+            } else {
                 json = mapper.writeValueAsString(user);
+            }
 
             con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
             con.getOutputStream().flush();
