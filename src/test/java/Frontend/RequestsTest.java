@@ -31,7 +31,7 @@ public class RequestsTest {
     RequestHandler requestHandler;
 
     private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd");
-    private final LoginDetails testUserDetials = new LoginDetails("test@email.com", "pwd");
+    private final LoginDetails testUserDetails = new LoginDetails("test@email.com", "pwd");
 
 //    @Test
 //    public void testLoginSuccess() {
@@ -48,7 +48,9 @@ public class RequestsTest {
     @Test
     public void testType1() {
         Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(true);
-        System.out.println(Requests.getURL().toString());
+        Requests requests = new Requests();
+        requests.sendRequest(1, testUserDetails, testUser);
+        System.out.println(requests.getUrl().toString());
 //        assertEquals("http://localhost:8080/login", Requests.getURL().toString());
     }
 

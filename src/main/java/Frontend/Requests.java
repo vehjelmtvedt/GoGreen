@@ -11,13 +11,24 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 public class Requests {
-    public static String sendRequest(int type, LoginDetails loginDetails, User user){
+    private URL url;
+
+    public URL getUrl(){ return this.url; }
+    public Requests(){ }
+    public void setUrl(URL url){ this.url = url;}
+
+    public String sendRequest(int type, LoginDetails loginDetails, User user){
+        Requests requests = new Requests();
         try{
             URL url;
             if(type == 1)
                 url = new URL("http://localhost:8080/login");
             else
                 url = new URL("http://localhost:8080/signup");
+
+            requests.setUrl(url);
+
+//            System.out.println(Requests.getUrl().toString());
 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
@@ -50,7 +61,6 @@ public class Requests {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 }

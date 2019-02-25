@@ -23,10 +23,13 @@ public class InputValidation {
         }
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
-        String response = Requests.sendRequest(1, loginDetails, new User());
+        Requests requests = new Requests();
+        String response = requests.sendRequest(1, loginDetails, new User());
+
         if(response != null && response.equals("success")) {
             showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Login successful",
                     "Welcome to GoGreen!");
+            SetupStructure.resetFields(null, null, emailField, passField, null);
         }
         else {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Login failed", "Incorrect credentials. Try again");
@@ -70,13 +73,14 @@ public class InputValidation {
         User user = new User(firstNameField.getText(), lastNameField.getText(), Integer.parseInt(ageField.getText()),
                 emailField.getText(), passField.getText());
 
-        String response = Requests.sendRequest(2, new LoginDetails(), user);
+        Requests requests = new Requests();
+        String response = requests.sendRequest(2, new LoginDetails(), user);
 
         if(response != null) {
             if (response.equals("success")) {
                 showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Registration Successful!",
                         "Go to login screen and enter your new credentials!");
-                SetupStructure.resetFields(1, firstNameField, lastNameField, emailField, passField, ageField);
+                SetupStructure.resetFields(firstNameField, lastNameField, emailField, passField, ageField);
             } else {
                 showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(), "Email Error!", "An user already exists with this email address. " +
                         "Use another email");

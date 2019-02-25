@@ -182,11 +182,11 @@ public class SetupStructure {
         return sizes;
     }
 
-    public static void resetFields(int type, TextField firstName, TextField lastName, TextField email, PasswordField pass, TextField age){
-        firstName.setText(null);
-        lastName.setText(null);
-        email.setText(null);
-        pass.setText(null);
-        age.setText(null);
+    public static void resetFields(TextField firstName, TextField lastName, TextField email, PasswordField pass, TextField age){
+        if(firstName != null) firstName.setText(null);
+        if(lastName != null) lastName.setText(null);
+        if(email != null) email.setText(null);
+        if(pass != null)pass.setText(null);
+        if(age != null) age.setText(null);
     }
 }
