@@ -11,30 +11,14 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 public class Requests {
-    private URL url;
-
-    public Requests() {
-    }
-
-    public URL getUrl() {
-        return this.url;
-    }
-
-    public void setUrl(URL url) {
-        this.url = url;
-    }
-
-    public String sendRequest(int type, LoginDetails loginDetails, User user) {
+    public static String sendRequest(int type, LoginDetails loginDetails, User user) {
         try {
             URL url;
             if (type == 1) {
                 url = new URL("http://localhost:8080/login");
-                this.setUrl(url);
             } else {
                 url = new URL("http://localhost:8080/signup");
-                this.setUrl(url);
             }
-            //            System.out.println(this.getUrl().toString());
 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");

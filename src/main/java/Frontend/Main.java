@@ -12,8 +12,6 @@ public class Main extends Application {
     @Override
     public void start(Stage window) {
         //setup stage
-        Scene signIn, signUp;
-        String cssPath = "/Frontend/Style.css";
         SetupStructure.setPrimaryStage(window, "Go Green sign in");
 
         //create borderPane for quick form setup
@@ -26,20 +24,24 @@ public class Main extends Application {
         GridPane signUpForm = SetupStructure.createRegistrationForm();
         GridPane signInForm = SetupStructure.createRegistrationForm();
 
-        signUp = new Scene(mainLayoutSignUp, SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
-
         //set top/right/bottom/center/left for main borderPane
         mainLayoutSignIn.setCenter(signInForm);
         mainLayoutSignUp.setCenter(signUpForm);
 
         //set final primary stage aka window and add css
-        signIn = new Scene(mainLayoutSignIn, SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
+        Scene signIn = new Scene(mainLayoutSignIn,
+                SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
+
+        Scene signUp = new Scene(mainLayoutSignUp,
+                SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
+
+        String cssPath = "/Frontend/Style.css";
         css = this.getClass().getResource(cssPath).toExternalForm();
         signIn.getStylesheets().add(css);
         signUp.getStylesheets().add(css);
 
-        SetupStructure.addUIControls(signUpForm, 1, window, signUp, signIn);
-        SetupStructure.addUIControls(signInForm, 2, window, signUp, signIn);
+        SetupStructure.addUiControls(signUpForm, 1, window, signUp, signIn);
+        SetupStructure.addUiControls(signInForm, 2, window, signUp, signIn);
 
         SetupStructure.finaliseStage(window, signIn);
     }
@@ -48,7 +50,7 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static String getCSS() {
+    public static String getCss() {
         return css;
     }
 }

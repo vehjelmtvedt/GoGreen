@@ -20,21 +20,38 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class SetupStructure {
-    public static void setPrimaryStage(Stage stage, String title){
+
+    /**.
+     *
+     * @param stage Initial stage window
+     * @param title Title for the window
+     */
+    public static void setPrimaryStage(Stage stage, String title) {
         stage.setTitle(title);
-        stage.getIcons().addAll(new Image("file:C:\\Users\\Alexandru\\Documents\\template\\src\\main\\Resources\\Frontend\\Pics\\GoGreenIcon.png"));
+        stage.getIcons().addAll(new Image("file:C:"
+                + "\\Users\\Alexandru\\Documents\\template\\src\\main\\"
+                + "Resources\\Frontend\\Pics\\GoGreenIcon.png"));
         stage.setOnCloseRequest(e -> {
             e.consume();
             ConfirmBox.closeProgram(stage);
         });
     }
 
-    public static void finaliseStage(Stage stage, Scene scene){
+    /**.
+     *
+     * @param stage Stage to switch from
+     * @param scene Scene to set stage for
+     */
+    public static void finaliseStage(Stage stage, Scene scene) {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
     }
 
+    /**.
+     *
+     * @return Registration form for both sign in and sign up
+     */
     public static GridPane createRegistrationForm() {
         GridPane gridPane = new GridPane();
 
@@ -47,14 +64,23 @@ public class SetupStructure {
         columnOneConstraints.setHalignment(HPos.RIGHT);
 
         // columnTwoConstraints will be applied to all the nodes placed in column two.
-        ColumnConstraints columnTwoConstrains = new ColumnConstraints(200,200, 250);
+        ColumnConstraints columnTwoConstrains = new ColumnConstraints(200, 200, 250);
         columnTwoConstrains.setHgrow(Priority.ALWAYS);
 
         gridPane.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains);
         return gridPane;
     }
 
-    public static void addUIControls(GridPane gridPane, int type, Stage currStage, Scene nextScene, Scene prevScene) {
+    /**.
+     *
+     * @param gridPane grid pane for forms
+     * @param type type of from
+     * @param currStage current stage
+     * @param nextScene next scene to go to
+     * @param prevScene previous scene for other methods
+     */
+    public static void addUiControls(GridPane gridPane, int type,
+                                     Stage currStage, Scene nextScene, Scene prevScene) {
         Label headerLabel = new Label("Sign-up Form");
         headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         headerLabel.setId("headerLabel");
@@ -75,7 +101,7 @@ public class SetupStructure {
         signInButton.setPrefWidth(100);
 
         HBox buttons = new HBox();
-        buttons.setPadding(new Insets(10,0,0,0));
+        buttons.setPadding(new Insets(10, 0, 0, 0));
         buttons.getChildren().addAll(signInButton, signUpButton);
         //sign up type form
         if (type == 1) {
@@ -133,7 +159,9 @@ public class SetupStructure {
             gridPane.add(ageField, 1, 5);
 
 
-            signUpButton.setOnAction(e -> InputValidation.signUpValidate(firstNameField, lastNameField, emailField, passwordField, ageField, gridPane, currStage));
+            signUpButton.setOnAction(e ->
+                    InputValidation.signUpValidate(firstNameField, lastNameField,
+                            emailField, passwordField, ageField, gridPane, currStage));
             StageSwitcher.buttonSwitch(signInButton, currStage, prevScene);
 
             gridPane.add(buttons, 1, 6, 2, 1);
@@ -163,7 +191,8 @@ public class SetupStructure {
             passwordField.setPrefHeight(40);
             gridPane.add(passwordField, 1, 2);
 
-            signInButton.setOnAction(e -> InputValidation.signInValidate(emailField, passwordField, gridPane, currStage));
+            signInButton.setOnAction(e ->
+                    InputValidation.signInValidate(emailField, passwordField, gridPane, currStage));
             StageSwitcher.buttonSwitch(signUpButton, currStage, nextScene);
 
             gridPane.add(buttons, 1, 3, 1, 1);
@@ -172,6 +201,10 @@ public class SetupStructure {
         }
     }
 
+    /**.
+     *
+     * @return gets array of width and height of screen
+     */
     public static Double[] getBounds() {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
@@ -182,11 +215,31 @@ public class SetupStructure {
         return sizes;
     }
 
-    public static void resetFields(TextField firstName, TextField lastName, TextField email, PasswordField pass, TextField age){
-        if(firstName != null) firstName.setText(null);
-        if(lastName != null) lastName.setText(null);
-        if(email != null) email.setText(null);
-        if(pass != null)pass.setText(null);
-        if(age != null) age.setText(null);
+    /**.
+     *
+     * @param firstName first Name field
+     * @param lastName last Name field
+     * @param email email field
+     * @param pass password field
+     * @param age age field field
+     */
+    public static void resetFields(TextField firstName,
+                                   TextField lastName, TextField email,
+                                   PasswordField pass, TextField age) {
+        if (firstName != null) {
+            firstName.setText(null);
+        }
+        if (lastName != null) {
+            lastName.setText(null);
+        }
+        if (email != null) {
+            email.setText(null);
+        }
+        if (pass != null) {
+            pass.setText(null);
+        }
+        if (age != null) {
+            age.setText(null);
+        }
     }
 }
