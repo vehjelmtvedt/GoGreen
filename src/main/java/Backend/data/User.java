@@ -1,7 +1,6 @@
 package Backend.data;
 
 import org.springframework.data.annotation.Id;
-
 import java.util.ArrayList;
 
 public class User {
@@ -24,6 +23,9 @@ public class User {
         this.friends = new ArrayList<String>();
     }
 
+    public User() {
+    }
+
     public String getFirstName() {
         return this.firstName;
     }
@@ -44,9 +46,13 @@ public class User {
         return this.password;
     }
 
-    public void setPassword(String password) { this.password = password; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public ArrayList<String> getFriends() { return this.friends; }
+    public ArrayList<String> getFriends() {
+        return this.friends;
+    }
 
     public String toString() {
         StringBuilder userString = new StringBuilder();
@@ -63,21 +69,22 @@ public class User {
         return userString.toString();
     }
 
-    /** Adds a friend to friends list
+    /**
+     * Adds a friend to friends list
+     *
      * @param email - email of the user to become friends with
      */
-    public void addFriend(String email)
-    {
+    public void addFriend(String email) {
         friends.add(email);
     }
 
     /**
      * Removes a friend from the friends list
+     *
      * @param email - email of the user to unfriend
      * @return true if the user was successfully unfriended (found & removed from the list)
      */
-    public boolean removeFriend(String email)
-    {
+    public boolean removeFriend(String email) {
         return friends.remove(email);
     }
 }

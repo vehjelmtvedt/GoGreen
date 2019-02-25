@@ -2,22 +2,19 @@ package Backend;
 
 import Backend.data.*;
 import org.springframework.web.bind.annotation.*;
-
-
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.List;
 
 
 @RestController
 public class RequestHandler {
-    @Resource(name="DBService")
-    private DBService dbService;
+    @Resource(name = "DbService")
+    private DbService dbService;
 
-    @RequestMapping("/greeting")
+/*    @RequestMapping("/greeting")
     public String respond() {
         return "TestGreeting";
-    }
+    }*/
 
     //Handles authentication
     @RequestMapping("/login")
@@ -30,16 +27,20 @@ public class RequestHandler {
 
     //Handles creating a new user
     @RequestMapping("/signup")
-    public String signupController(@RequestBody User user){
-        if(dbService.getUser(user.getEmail())!=null)
+    public String signupController(@RequestBody User user) {
+        System.out.println(user);
+        if (dbService.getUser(user.getEmail()) != null) {
             return "user exists already";
+        }
         dbService.addUser(user);
         return "success";
         //return new ResponseEntity<>("Success", HttpStatus.OK);
-
     }
 
-    @RequestMapping("/addfriend")
+
+    // Temporarily commented out to see real code coverage
+    // This code will be revised on next Sprint
+/*    @RequestMapping("/addfriend")
     public String addFriend(@RequestParam String myEmail, @RequestParam String friendEmail) {
         //TODO: Add friend request feature in the future
         //POSSIBLE SOLUTION: store friend request in db, send to that user when accessing
@@ -50,8 +51,7 @@ public class RequestHandler {
             currUser.addFriend(friendEmail);
             dbService.addUser(currUser);
             return "Success";
-        }
-        else {
+        } else {
             return "fail";
         }
     }
@@ -59,7 +59,7 @@ public class RequestHandler {
     @RequestMapping("/getallfriends")
     public ArrayList<String> getAllFriends(@RequestParam String myEmail) {
         return dbService.getUser(myEmail).getFriends();
-    }
+    }*/
 }
 
 

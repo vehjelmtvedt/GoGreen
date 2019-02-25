@@ -1,10 +1,15 @@
 package Backend.data;
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 
 public class LoginDetailsTest {
+
     LoginDetails detailOne = new LoginDetails("test","pass");
+
 
     @Test
     public void getEmailSuccess(){
@@ -27,7 +32,13 @@ public class LoginDetailsTest {
     }
 
     @Test
+    public void toStringSuccess() {  assertEquals(detailOne.toString(),"Email: test\nPassword: pass\n");}
+
+    @Test
+    public void toStrinFailuccess() {  assertNotEquals(detailOne.toString(),"");}
+
+    @Test
     public void testConstructor(){
-        assertNotNull(new LoginDetails("email","pass"));
+        assertNotNull(new LoginDetails("",""));
     }
 }

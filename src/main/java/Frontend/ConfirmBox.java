@@ -1,4 +1,4 @@
-package GUI.src.sample;
+package Frontend;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,14 +12,14 @@ public class ConfirmBox {
 
     private static boolean answer;
 
-    public static boolean display(String title, String message){
+    private static boolean display(){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle(title);
+        window.setTitle("Close request safety");
         window.setMinWidth(400);
         window.setMinHeight(200);
         Label label = new Label();
-        label.setText(message);
+        label.setText("Are you sure you want to close this application?");
 
         Button yesButton = new Button("Yes");
         Button noButton = new Button("No");
@@ -42,6 +42,14 @@ public class ConfirmBox {
         window.showAndWait();
 
         return answer;
+    }
+
+    public static void closeProgram(Stage stage){
+        boolean answer = ConfirmBox.display();
+        if(answer){
+            System.out.println("Contents are saved!(not true)");
+            stage.close();
+        }
     }
 }
 

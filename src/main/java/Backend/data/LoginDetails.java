@@ -9,16 +9,24 @@ public class LoginDetails {
 
     private String password;
 
-    public LoginDetails(String email,String password){
+    public LoginDetails(String email,String password) {
         this.email = email;
         this.password = password;
     }
 
-    public String getEmail(){return this.email;}
+    public LoginDetails(){ }
 
-    public String getPassword(){return this.password;}
+    public String getEmail() {
+        return this.email;
+    }
 
-    public String toString(){return "Email: "+this.email+"\nPassword: "+this.password+"\n";}
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String toString() {
+        return "Email: " + this.email + "\nPassword: " + this.password + "\n";
+    }
 
 
 }
