@@ -36,7 +36,8 @@ maven_install:
   stage: test
   script:
     - echo "Running install with maven"
-    - mvn $MAVEN_CLI_OPTS install
+    - mvn $MAVEN_CLI_OPTS instal
+    - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed -e 's/Total/Jacoco-Test-Coverage:/g'
   artifacts:
     paths:
       - target/site/jacoco/
