@@ -53,7 +53,8 @@ code_quality:
   - mvn $MAVEN_CLI_OPTS site
  artifacts:
    reports:
-     codequality: gl-code-quality-report.json
+     codequality:
+       - target/checkstyle-result.xml
 
 #pages:
 #  stage: deploy
