@@ -73,6 +73,6 @@ public class UserTest {
     public void toStringSuccess() {
         userOne.addFriend("friend1");
         Assert.assertEquals(userOne.toString(),"First name: Vetle\nLast name: " +
-            "Hjelmtvedt\nAge: 19\n..Email: vetle@hjelmtvedt.com\nUsername: test\nPassword: password123\nFriend emails: \n"
+            "Hjelmtvedt\nAge: 19\nEmail: vetle@hjelmtvedt.com\nUsername: test\nPassword: password123\nFriend emails: \n"
                 + "-friend1\n");}
 }
