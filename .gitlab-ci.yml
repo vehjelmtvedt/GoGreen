@@ -41,7 +41,7 @@ maven_install:
   artifacts:
     paths:
       - target/site/jacoco/'
-  coverage: '\d+%'
+  coverage: '/\d+%/'
 
 #pages:
 #  stage: deploy
