@@ -85,7 +85,6 @@
             <artifactId>byte-buddy</artifactId>
             <version>1.9.10</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -132,6 +131,16 @@
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludes>
+                        <!-- Exclude GUI classes -->
+                        <exclude>**/frontend/ConfirmBox*</exclude>
+                        <exclude>**/frontend/InputValidation*</exclude>
+                        <exclude>**/frontend/Main*</exclude>
+                        <exclude>**/frontend/SetupStructure*</exclude>
+                        <exclude>**/frontend/StageSwitcher*</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
 
             <plugin>
