@@ -53,49 +53,49 @@ public class RequestHandler {
      * @param friendUsername - Username of the person he/she wants to befriend.
      * @return - OK if successful.
      */
-//    @RequestMapping("/addfriend")
-//    public String friendRequest(@RequestParam String yourUsername, @RequestParam String friendUsername) {
-//        User thisUser = dbService.getUser(yourUsername);
-//
-//        if (dbService.getUser(friendUsername) == null) {
-//            return "Not valid username";
-//        }
-//
-//        else {
-//            thisUser.newFriendRequest(friendUsername);
-//            dbService.addUser(thisUser);
-//            return "OK";
-//        }
-//
-//    }
-//
-//    /**
-//     * Returns all friend requests for a certain User.
-//     * @param yourUsername - Username of the User requesting all their friend requests.
-//     * @return - all the friend requests of this user.
-//     */
-//    @RequestMapping("/getfriendreq")
-//    public ArrayList<String> getAllFriendRequests(@RequestParam String yourUsername) {
-//        User thisUser = dbService.getUser(yourUsername);
-//        return thisUser.getFriendRequests();
-//
-//    }
-//
-//    /**
-//     * Accept a friend request and add that person to each others friend list.
-//     * @param yourUsername - Username of person who wants to accept the request.
-//     * @param friendUsername - Username of the person User wants to accept.
-//     * @return
-//     */
-//    @RequestMapping("/acceptfriendreq")
-//    public String acceptFriend(@RequestParam String yourUsername, @RequestParam String friendUsername) {
-//        User thisUser = dbService.getUser(yourUsername);
-//        User friendUser = dbService.getUser(friendUsername);
-//        thisUser.addFriend(friendUsername);
-//        friendUser.addFriend(yourUsername);
-//        thisUser.deleteFriendRequest(friendUsername);
-//        return "OK";
-//    }
+    @RequestMapping("/addfriend")
+    public String friendRequest(@RequestParam String yourUsername, @RequestParam String friendUsername) {
+        User thisUser = dbService.getUser(yourUsername);
+
+        if (dbService.getUser(friendUsername) == null) {
+            return "Not valid username";
+        }
+
+        else {
+            thisUser.newFriendRequest(friendUsername);
+            dbService.addUser(thisUser);
+            return "OK";
+        }
+
+    }
+
+    /**
+     * Returns all friend requests for a certain User.
+     * @param yourUsername - Username of the User requesting all their friend requests.
+     * @return - all the friend requests of this user.
+     */
+    @RequestMapping("/getfriendreq")
+    public ArrayList<String> getAllFriendRequests(@RequestParam String yourUsername) {
+        User thisUser = dbService.getUser(yourUsername);
+        return thisUser.getFriendRequests();
+
+    }
+
+    /**
+     * Accept a friend request and add that person to each others friend list.
+     * @param yourUsername - Username of person who wants to accept the request.
+     * @param friendUsername - Username of the person User wants to accept.
+     * @return
+     */
+    @RequestMapping("/acceptfriendreq")
+    public String acceptFriend(@RequestParam String yourUsername, @RequestParam String friendUsername) {
+        User thisUser = dbService.getUser(yourUsername);
+        User friendUser = dbService.getUser(friendUsername);
+        thisUser.addFriend(friendUsername);
+        friendUser.addFriend(yourUsername);
+        thisUser.deleteFriendRequest(friendUsername);
+        return "OK";
+    }
 
 
 
