@@ -50,7 +50,7 @@ checkstyle:
  stage: test
  script:
    - echo "Creating checkstyle report"
-   - mvn clean checkstyle:check
+   - mvn clean checkstyle:checkstyle
  allow_failure: true
 
 # artifacts:
