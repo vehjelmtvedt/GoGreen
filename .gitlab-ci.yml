@@ -49,8 +49,8 @@ coverage:
 checkstyle:
  stage: test
  script:
-   - echo "Creating checkstyle report"
-   - mvn clean checkstyle:checkstyle
+   - echo "Checkstyle check"
+   - mvn checkstyle:check
  allow_failure: true
 
 # artifacts:
