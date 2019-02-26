@@ -29,7 +29,7 @@ public class RequestHandlerTest
     @Resource
     RequestHandler requestHandler;
 
-    private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd");
+    private final User testUser = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
 
     @Test
     public void testSignupExists()
