@@ -134,11 +134,11 @@
                 <configuration>
                     <excludes>
                         <!-- Exclude GUI classes -->
-                        <exclude>**/frontend/ConfirmBox.java</exclude>
-                        <exclude>**/frontend/InputValidation.java</exclude>
-                        <exclude>**/frontend/Main.java</exclude>
-                        <exclude>**/frontend/SetupStructure.java</exclude>
-                        <exclude>**/frontend/StageSwitcher.java</exclude>
+                        <exclude>**/frontend/ConfirmBox*</exclude>
+                        <exclude>**/frontend/InputValidation*</exclude>
+                        <exclude>**/frontend/Main*</exclude>
+                        <exclude>**/frontend/SetupStructure*</exclude>
+                        <exclude>**/frontend/StageSwitcher*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
