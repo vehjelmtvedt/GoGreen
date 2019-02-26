@@ -16,13 +16,15 @@ stages:
  - test
  - deploy
 
-maven_compile:
+# Passes if the code compiles
+compile:
  stage: build
  script:
   - echo "Compiling project with maven"
   - mvn $MAVEN_CLI_OPTS compile
 
-maven_test:
+# Passes if all tests succeed
+test:
   stage: test
   script:
     - echo "Testing project with maven"
@@ -32,7 +34,8 @@ maven_test:
       junit:
         - target/surefire-reports/TEST-*.xml
 
-maven_install:
+# Generates coverage report using JaCoCo and puts it on the badge
+coverage:
   stage: test
   script:
     - echo "Running install with maven"
