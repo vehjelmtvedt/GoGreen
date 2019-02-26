@@ -46,15 +46,14 @@ coverage:
       - target/site/jacoco/
   coverage: '/\d+%$/'
 
-checkstyle:
+code_quality:
  stage: test
  script:
   - echo "Running site with maven"
   - mvn $MAVEN_CLI_OPTS site
  artifacts:
    reports:
-     codequality:
-       - target/site/checkstyle.html
+     codequality: gl-code-quality-report.json
 
 #pages:
 #  stage: deploy
