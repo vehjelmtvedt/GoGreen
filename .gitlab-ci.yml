@@ -35,6 +35,7 @@ test:
         - target/surefire-reports/TEST-*.xml
 
 # Generates coverage report using JaCoCo and puts it on the badge
+# Passes if code coverage >= 90%
 coverage:
   stage: test
   script:
@@ -46,25 +47,14 @@ coverage:
       - target/site/jacoco/
   coverage: '/\d+%$/'
 
+# Checks style of the code and fails if >= 5 warnings/errors
 checkstyle:
  stage: test
  script:
    - echo "Checkstyle check"
    - mvn checkstyle:check
  allow_failure: true
-
-# artifacts:
-#   reports:
-#     codequality:
-#       - target/checkstyle-result.xml
-
-#pages:
-#  stage: deploy
-#  dependencies:
-#    - maven_install
-#  script:
-#    - mv target/site/jacoco/ public/
-#  artifacts:
-#    paths:
-#      - public
-#    expire_in: 30 days/'
+ artifacts:
+   reports:
+     codequality:
+       - target/checkstyle-*.xml
