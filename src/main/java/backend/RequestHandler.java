@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
+import javax.annotation.Resource;
 
 @RestController
 public class RequestHandler {
@@ -54,14 +54,13 @@ public class RequestHandler {
      * @return - OK if successful.
      */
     @RequestMapping("/addfriend")
-    public String friendRequest(@RequestParam String yourUsername, @RequestParam String friendUsername) {
+    public String friendRequest(@RequestParam String yourUsername,
+                                @RequestParam String friendUsername) {
         User thisUser = dbService.getUser(yourUsername);
 
         if (dbService.getUser(friendUsername) == null) {
             return "Not valid username";
-        }
-
-        else {
+        } else {
             thisUser.newFriendRequest(friendUsername);
             dbService.addUser(thisUser);
             return "OK";
@@ -88,7 +87,8 @@ public class RequestHandler {
      * @return - OK when done.
      */
     @RequestMapping("/acceptfriendreq")
-    public String acceptFriend(@RequestParam String yourUsername, @RequestParam String friendUsername) {
+    public String acceptFriend(@RequestParam String yourUsername,
+                               @RequestParam String friendUsername) {
         User thisUser = dbService.getUser(yourUsername);
         User friendUser = dbService.getUser(friendUsername);
         thisUser.addFriend(friendUsername);

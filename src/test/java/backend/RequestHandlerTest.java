@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -28,8 +29,8 @@ public class RequestHandlerTest
     @Resource
     RequestHandler requestHandler;
 
-    private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd");
-    private final User testUser2 = new User("Test2", "User2", 22, "test2@email.com", "pwd2");
+    private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd", "user1");
+    private final User testUser2 = new User("Test2", "User2", 22, "test2@email.com", "pwd2", "user2");
 
     @Test
     public void testSignupExists()
