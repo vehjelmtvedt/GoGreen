@@ -3,6 +3,8 @@ package backend.data;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class UserTest {
 
     User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com", "password123");
@@ -62,6 +64,27 @@ public class UserTest {
 
     @Test
     public void toStringSuccess() { Assert.assertEquals(userOne.toString(),"First name: Vetle\nLast name: " +
-            "Hjelmtvedt\nAge: 19\nEmail: vetle@hjelmtvedt.com\nPassword: password123\nFriend emails: \n");}
+            "Hjelmtvedt\nAge: 19\nEmail: vetle@hjelmtvedt.com\nPassword: password123\nFriend emails: \n");
+    }
+
+    @Test
+    public void testGetFriendRequestsEmpty() {
+        Assert.assertEquals(new ArrayList<>(), userOne.getFriendRequests());
+    }
+
+    @Test
+    public void testAddOneFriendRequest() {
+        userOne.newFriendRequest("vehjelmtvedt");
+        Assert.assertEquals("vehjelmtvedt", userOne.getFriendRequests().get(0));
+    }
+
+    @Test
+    public void testDeleteOneFriendRequest() {
+        userOne.newFriendRequest("vehjelmtvedt");
+        userOne.deleteFriendRequest("vehjelmtvedt");
+        Assert.assertEquals(new ArrayList<>(), userOne.getFriendRequests());
+    }
+
+
 
 }

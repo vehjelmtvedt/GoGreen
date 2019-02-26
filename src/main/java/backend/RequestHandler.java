@@ -94,6 +94,8 @@ public class RequestHandler {
         thisUser.addFriend(friendUsername);
         friendUser.addFriend(yourUsername);
         thisUser.deleteFriendRequest(friendUsername);
+        dbService.addUser(thisUser);
+        dbService.addUser(friendUser);
         return "OK";
     }
 
