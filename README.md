@@ -1,4 +1,4 @@
-![coverage](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/setup/ci/coverage.svg?job=maven_test)
+![coverage](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/setup/ci-tests/coverage.svg?job=coveraget)
 ![pipeline](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/setup/ci/pipeline.svg)
 
 # CSE1105 Template Repository
