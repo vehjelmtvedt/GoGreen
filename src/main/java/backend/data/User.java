@@ -104,13 +104,17 @@ public class User {
      * @param username - username of the person who sent the request.
      */
 
-    public void newFriendRequest(String username) {friendRequests.add(username);}
+    public void newFriendRequest(String username) {
+        friendRequests.add(username);
+    }
 
     /**
      * Delete a request from the friend request list.
      * @param username - username of the request to delete.
      */
-    public void deleteFriendRequest(String username) { friendRequests.remove(username); }
+    public void deleteFriendRequest(String username) {
+        friendRequests.remove(username);
+    }
 
 
     /*

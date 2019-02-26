@@ -28,6 +28,7 @@ public class RequestHandlerTest
     RequestHandler requestHandler;
 
     private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd");
+    private final User testUser2 = new User("Test", "User", 24, "test@email.com", "pwd");
 
     @Test
     public void testSignupExists()
@@ -53,6 +54,11 @@ public class RequestHandlerTest
     public void testLoginFail() {
         Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(false);
         assertEquals("failure", requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
+    }
+
+    @Test
+    public void testAddFriend() {
+
     }
 
 }

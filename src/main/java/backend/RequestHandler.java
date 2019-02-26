@@ -85,7 +85,7 @@ public class RequestHandler {
      * Accept a friend request and add that person to each others friend list.
      * @param yourUsername - Username of person who wants to accept the request.
      * @param friendUsername - Username of the person User wants to accept.
-     * @return
+     * @return - OK when done.
      */
     @RequestMapping("/acceptfriendreq")
     public String acceptFriend(@RequestParam String yourUsername, @RequestParam String friendUsername) {
