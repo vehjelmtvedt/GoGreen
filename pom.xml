@@ -102,6 +102,8 @@
                 </dependencies>
                 <configuration>
                     <configLocation>CSE1105.checkstyle.xml</configLocation>
+                    <violationSeverity>warning</violationSeverity>
+                    <maxAllowedViolations>4</maxAllowedViolations>
                 </configuration>
             </plugin>
 
