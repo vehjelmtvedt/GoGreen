@@ -13,6 +13,7 @@ public class User {
     private String lastName;
     private int age;
     private String password;
+    private String username;
     private ArrayList<String> friends;
     private ArrayList<String> friendRequests;
 
@@ -23,13 +24,15 @@ public class User {
      * @param age - age of user.
      * @param email - email of user.
      * @param password - user's password.
+     * @param username - user's username.
      */
-    public User(String firstName, String lastName, int age, String email, String password) {
+    public User(String firstName, String lastName, int age, String email, String password, String username) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
+        this.username = username;
         this.friends = new ArrayList<>();
         this.friendRequests = new ArrayList<>();
     }
@@ -56,6 +59,8 @@ public class User {
     public String getPassword() {
         return this.password;
     }
+
+    public String getUsername() { return this.username; }
 
     public void setPassword(String password) {
         this.password = password;

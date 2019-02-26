@@ -4,6 +4,7 @@ package backend;
 import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -28,7 +29,7 @@ public class RequestHandlerTest
     RequestHandler requestHandler;
 
     private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd");
-    private final User testUser2 = new User("Test", "User", 24, "test@email.com", "pwd");
+    private final User testUser2 = new User("Test2", "User2", 22, "test2@email.com", "pwd2");
 
     @Test
     public void testSignupExists()
@@ -55,10 +56,4 @@ public class RequestHandlerTest
         Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(false);
         assertEquals("failure", requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
-
-    @Test
-    public void testAddFriend() {
-
-    }
-
 }
