@@ -131,6 +131,16 @@
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludes>
+                        <!-- Exclude GUI classes -->
+                        <exclude>**/frontend/ConfirmBox.java</exclude>
+                        <exclude>**/frontend/InputValidation.java</exclude>
+                        <exclude>**/frontend/Main.java</exclude>
+                        <exclude>**/frontend/SetupStructure.java</exclude>
+                        <exclude>**/frontend/StageSwitcher.java</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
 
             <plugin>
