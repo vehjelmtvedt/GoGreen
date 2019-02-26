@@ -24,7 +24,7 @@ compile:
   - mvn $MAVEN_CLI_OPTS compile
 
 # Passes if all tests succeed
-test:
+run-tests:
   stage: test
   script:
     - echo "Testing project with maven"
@@ -45,7 +45,7 @@ coverage:
   artifacts:
     paths:
       - target/site/jacoco/
-  coverage: '/\d+%$/'
+  coverage: '/(\d+\.?\d+)%$/'
 
 # Checks style of the code and fails if >= 5 warnings/errors
 checkstyle:
@@ -54,7 +54,3 @@ checkstyle:
    - echo "Checkstyle check"
    - mvn checkstyle:check
  allow_failure: true
- artifacts:
-   reports:
-     codequality:
-       - target/checkstyle-result.xml
