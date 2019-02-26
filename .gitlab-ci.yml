@@ -1,5 +1,5 @@
 # For JavaFX support
-image: kaiwinter/docker-java8-maven
+image: "tgalopin/maven-javafx"
 
 variables:
   MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
@@ -36,8 +36,7 @@ maven_install:
   stage: test
   script:
     - echo "Running install with maven"
-    - mvn $MAVEN_CLI_OPTS install -B
-    - cat target/site/jacoco/index.html
+    - mvn $MAVEN_CLI_OPTS install
   artifacts:
     paths:
       - target/site/jacoco/
