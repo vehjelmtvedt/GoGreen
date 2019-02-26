@@ -59,7 +59,7 @@ public class RequestHandler {
         User thisUser = dbService.getUser(yourUsername);
 
         if (dbService.getUser(friendUsername) == null) {
-            return "Not valid username";
+            return "Not a valid username";
         } else {
             thisUser.newFriendRequest(friendUsername);
             dbService.addUser(thisUser);

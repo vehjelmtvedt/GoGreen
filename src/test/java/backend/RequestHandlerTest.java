@@ -59,4 +59,16 @@ public class RequestHandlerTest
         Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(false);
         assertEquals("failure", requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
+
+    @Test
+    public void testFriendRequestNotValid() {
+        dbService.addUser(testUser);
+        assertEquals("Not a valid username", requestHandler.friendRequest(testUser.getUsername(), testUser2.getUsername()));
+    }
+
+    @Test
+    public void testFriendRequestValid() {
+        Mockito.doAnswer(dbService.addUser(testUser));
+        assertEquals("OK", requestHandler.friendRequest(testUser.getUsername(), testUser2.getUsername()));
+    }
 }
