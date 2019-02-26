@@ -38,7 +38,6 @@ maven_install:
     - echo "Running install with maven"
     - mvn $MAVEN_CLI_OPTS install -B
     - cat target/site/jacoco/index.html
-  coverage: 'Total.*?([0-9]{1,3})%'
   artifacts:
     paths:
       - target/site/jacoco/
