@@ -38,7 +38,7 @@ public class RequestsTest {
     @Test
     public void testType1(){
         String response = Requests.sendRequest(1, testUserDetails, testUser);
-        assertNotEquals("", response);
+        assertNotEquals(" ", response);
     }
 
     @Test
