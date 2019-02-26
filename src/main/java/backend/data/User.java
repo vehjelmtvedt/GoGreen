@@ -26,7 +26,8 @@ public class User {
      * @param password - user's password.
      * @param username - user's username.
      */
-    public User(String firstName, String lastName, int age, String email, String password, String username) {
+    public User(String firstName, String lastName, int age,
+                String email, String password, String username) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -60,7 +61,9 @@ public class User {
         return this.password;
     }
 
-    public String getUsername() { return this.username; }
+    public String getUsername() {
+        return this.username;
+    }
 
     public void setPassword(String password) {
         this.password = password;
