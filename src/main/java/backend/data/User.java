@@ -9,13 +9,12 @@ public class User {
     @Id
     private String email;
 
+    private String username;
     private String firstName;
     private String lastName;
     private int age;
     private String password;
-    private String username;
     private ArrayList<String> friends;
-    private ArrayList<String> friendRequests;
 
     /**
      * Constructor of User object.
@@ -24,18 +23,16 @@ public class User {
      * @param age - age of user.
      * @param email - email of user.
      * @param password - user's password.
-     * @param username - user's username.
      */
-    public User(String firstName, String lastName, int age,
-                String email, String password, String username) {
+    public User(String firstName, String lastName, int age, String email,
+                String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
-        this.password = password;
         this.username = username;
+        this.password = password;
         this.friends = new ArrayList<>();
-        this.friendRequests = new ArrayList<>();
     }
 
     public User() {
@@ -57,12 +54,12 @@ public class User {
         return this.email;
     }
 
-    public String getPassword() {
-        return this.password;
-    }
-
     public String getUsername() {
         return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -71,10 +68,6 @@ public class User {
 
     public ArrayList<String> getFriends() {
         return this.friends;
-    }
-
-    public ArrayList<String> getFriendRequests() {
-        return this.friendRequests;
     }
 
     /**
@@ -87,6 +80,7 @@ public class User {
         userString.append("Last name: ").append(this.lastName).append('\n');
         userString.append("Age: ").append(this.age).append('\n');
         userString.append("Email: ").append(this.email).append('\n');
+        userString.append("Username: ").append(this.username).append('\n');
         userString.append("Password: ").append(this.password).append('\n');
 
         userString.append("Friend emails: \n");
@@ -101,29 +95,11 @@ public class User {
     /**
      * Adds a friend to friends list.
      *
-     * @param username - username of the user to become friends with
+     * @param friend - user to become friends with
      */
-    public void addFriend(String username) {
-        friends.add(username);
+    public void addFriend(String friend) {
+        friends.add(friend);
     }
-
-    /**
-     * Adds a friend request to friend request list.
-     * @param username - username of the person who sent the request.
-     */
-
-    public void newFriendRequest(String username) {
-        friendRequests.add(username);
-    }
-
-    /**
-     * Delete a request from the friend request list.
-     * @param username - username of the request to delete.
-     */
-    public void deleteFriendRequest(String username) {
-        friendRequests.remove(username);
-    }
-
 
     /*
      * Removes a friend from the friends list

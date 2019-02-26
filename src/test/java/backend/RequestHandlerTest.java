@@ -4,11 +4,9 @@ package backend;
 import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,14 +29,14 @@ public class RequestHandlerTest
     @Resource
     RequestHandler requestHandler;
 
-    private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd", "user1");
-    private final User testUser2 = new User("Test2", "User2", 22, "test2@email.com", "pwd2", "user2");
+    private final User testUser = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
 
     @Test
     public void testSignupExists()
     {
+        Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(null);
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        assertEquals("user exists already", requestHandler.signupController(testUser));
+        assertEquals("email exists", requestHandler.signupController(testUser));
     }
 
     @Test
@@ -51,24 +49,25 @@ public class RequestHandlerTest
     @Test
     public void testLoginSuccess() {
         Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(true);
-        assertEquals("success", requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        assertEquals(testUser, requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
     @Test
     public void testLoginFail() {
         Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(false);
-        assertEquals("failure", requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
+        assertEquals(null, requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
     @Test
-    public void testFriendRequestNotValid() {
-        dbService.addUser(testUser);
-        assertEquals("Not a valid username", requestHandler.friendRequest(testUser.getUsername(), testUser2.getUsername()));
+    public void signUpFailUsername() {
+        Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(testUser);
+        assertEquals("username exists",requestHandler.signupController(testUser));
+    }
+    @Test
+    public void testgetUser() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        assertEquals(testUser, requestHandler.getUser(testUser.getEmail()));
     }
 
-    @Test
-    public void testFriendRequestValid() {
-        Mockito.doAnswer(dbService.addUser(testUser));
-        assertEquals("OK", requestHandler.friendRequest(testUser.getUsername(), testUser2.getUsername()));
-    }
 }
