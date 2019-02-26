@@ -39,7 +39,6 @@ maven_install:
     - mvn $MAVEN_CLI_OPTS install
   artifacts:
     paths:
-      - target/jacoco.exec
       - target/site/jacoco/
 
 pages:
@@ -47,9 +46,9 @@ pages:
   dependencies:
     - maven_install
   script:
-    - mv target/jacoco.exec public/
     - mv target/site/jacoco/ public/
   artifacts:
     paths:
-      - public/
+      - public
     expire_in: 30 days
+  coverage: '/TOTAL.+ ([0-9]{1,3}%)/'
