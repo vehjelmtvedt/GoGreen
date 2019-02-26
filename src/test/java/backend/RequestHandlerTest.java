@@ -58,4 +58,10 @@ public class RequestHandlerTest
         assertEquals(null, requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
+    @Test
+    public void testgetUser() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        assertEquals(testUser, requestHandler.getUser(testUser.getEmail()));
+    }
+
 }
