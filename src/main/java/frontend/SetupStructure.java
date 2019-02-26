@@ -134,8 +134,8 @@ public class SetupStructure {
 
             //Add Username Text Field
             TextField usernameField = new TextField();
-            lastNameField.setPrefHeight(40);
-            lastNameField.setPromptText("Username");
+            usernameField.setPrefHeight(40);
+            usernameField.setPromptText("Username");
             gridPane.add(usernameField, 1, 3);
 
             // Add Email Label
@@ -158,6 +158,16 @@ public class SetupStructure {
             passwordField.setPromptText("New Password");
             gridPane.add(passwordField, 1, 5);
 
+            //Add Password confirm Label
+            Label passReLabel = new Label("Re-Password : ");
+            gridPane.add(passReLabel, 0, 5);
+
+            //Add Password confirm texfield
+            PasswordField passReField = new PasswordField();
+            passReField.setPrefHeight(40);
+            passReField.setPromptText("Confirm Password");
+            gridPane.add(passReField, 1, 5);
+
             // Add Age Label
             Label ageLabel = new Label("Age : ");
             gridPane.add(ageLabel, 0, 6);
@@ -170,8 +180,8 @@ public class SetupStructure {
 
 
             signUpButton.setOnAction(e ->
-                    InputValidation.signUpValidate(usernameField, firstNameField, lastNameField,
-                            emailField, passwordField, ageField, gridPane, currStage));
+                    InputValidation.signUpValidate(firstNameField, lastNameField, usernameField,
+                            emailField, passwordField, passReField, ageField, gridPane, currStage));
             StageSwitcher.buttonSwitch(signInButton, currStage, prevScene);
 
             gridPane.add(buttons, 1, 7, 2, 1);

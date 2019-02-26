@@ -57,8 +57,9 @@ public class InputValidation {
      * @param form form where fields are at
      * @param stage current stage
      */
-    public static void signUpValidate(TextField usernameField, TextField firstNameField, TextField lastNameField,
-                                      TextField emailField, PasswordField passField,
+    public static void signUpValidate(TextField firstNameField, TextField lastNameField,
+                                      TextField usernameField, TextField emailField,
+                                      PasswordField passField, PasswordField passReField,
                                       TextField ageField, GridPane form, Stage stage) {
         if (firstNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
@@ -68,6 +69,11 @@ public class InputValidation {
         if (lastNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Form Error!", "Please enter your Last Name");
+            return;
+        }
+        if (usernameField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Form Error!", "Please enter a username");
             return;
         }
         if (emailField.getText().isEmpty()) {
@@ -88,6 +94,11 @@ public class InputValidation {
         if (!validatePassword(passField)) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Form Error!", "Please enter a valid password");
+            return;
+        }
+        if (passReField.getText().isEmpty() || !passField.getText().equals(passField.getText())) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Form Error!", "Passwords do not match");
             return;
         }
         if (ageField.getText().isEmpty()) {
