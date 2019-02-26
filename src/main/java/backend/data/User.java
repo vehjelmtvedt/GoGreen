@@ -9,6 +9,7 @@ public class User {
     @Id
     private String email;
 
+    private String username;
     private String firstName;
     private String lastName;
     private int age;
@@ -23,11 +24,13 @@ public class User {
      * @param email - email of user.
      * @param password - user's password.
      */
-    public User(String firstName, String lastName, int age, String email, String password) {
+    public User(String firstName, String lastName, int age, String email,
+                String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
+        this.username = username;
         this.password = password;
         this.friends = new ArrayList<>();
     }
@@ -49,6 +52,10 @@ public class User {
 
     public String getEmail() {
         return this.email;
+    }
+
+    public String getUsername() {
+        return this.username;
     }
 
     public String getPassword() {
@@ -73,6 +80,7 @@ public class User {
         userString.append("Last name: ").append(this.lastName).append('\n');
         userString.append("Age: ").append(this.age).append('\n');
         userString.append("Email: ").append(this.email).append('\n');
+        userString.append("Username: ").append(this.username).append('\n');
         userString.append("Password: ").append(this.password).append('\n');
 
         userString.append("Friend emails: \n");
@@ -87,10 +95,10 @@ public class User {
     /**
      * Adds a friend to friends list.
      *
-     * @param email - email of the user to become friends with
+     * @param friend - user to become friends with
      */
-    public void addFriend(String email) {
-        friends.add(email);
+    public void addFriend(String friend) {
+        friends.add(friend);
     }
 
     /*

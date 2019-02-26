@@ -26,12 +26,13 @@ public class RequestHandler {
      * Login REST Method
      */
     @RequestMapping("/login")
-    public String loginController(@RequestBody LoginDetails loginDetails) {
+    public User loginController(@RequestBody LoginDetails loginDetails) {
 
-        if (dbService.grantAccess(loginDetails.getEmail(), loginDetails.getPassword())) {
-            return "success";
+        if (dbService.grantAccess(loginDetails.getIdentifier(), loginDetails.getPassword())) {
+            return dbService.getUser(loginDetails.getIdentifier());
         }
-        return "failure";
+
+        return null;
     }
 
     /**
@@ -42,11 +43,19 @@ public class RequestHandler {
     public String signupController(@RequestBody User user) {
         System.out.println(user);
         if (dbService.getUser(user.getEmail()) != null) {
-            return "user exists already";
+            return "email exists";
+        }
+        if (dbService.getUser(user.getUsername()) != null) {
+            return "username exists";
         }
         dbService.addUser(user);
         return "success";
         //return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
+
+    @RequestMapping("/getUser")
+    public User getUser(@RequestBody String identifier) {
+        return dbService.getUser(identifier);
     }
 
 
