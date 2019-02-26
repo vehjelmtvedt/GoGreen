@@ -46,6 +46,7 @@ pages:
   dependencies:
     - maven_install
   script:
+    - cat target/site/jacoco/index.html
     - mv target/site/jacoco/ public/
   artifacts:
     paths:
