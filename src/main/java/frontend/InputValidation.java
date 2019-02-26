@@ -57,7 +57,7 @@ public class InputValidation {
      * @param form form where fields are at
      * @param stage current stage
      */
-    public static void signUpValidate(TextField firstNameField, TextField lastNameField,
+    public static void signUpValidate(TextField usernameField, TextField firstNameField, TextField lastNameField,
                                       TextField emailField, PasswordField passField,
                                       TextField ageField, GridPane form, Stage stage) {
         if (firstNameField.getText().isEmpty()) {
@@ -103,7 +103,7 @@ public class InputValidation {
 
         User user = new User(firstNameField.getText(),
                 lastNameField.getText(), Integer.parseInt(ageField.getText()),
-                emailField.getText(), passField.getText());
+                emailField.getText(), passField.getText(), usernameField.getText());
 
         String response = Requests.sendRequest(2, new LoginDetails(), user);
 

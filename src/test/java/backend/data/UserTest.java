@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class UserTest {
 
-    User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com", "password123");
+    User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com", "password123", "vehjelmtvedt");
     User empty = new User();
 
     @Test
