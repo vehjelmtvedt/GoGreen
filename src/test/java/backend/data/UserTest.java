@@ -8,9 +8,13 @@ import java.util.ArrayList;
 public class UserTest {
 
     User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com", "password123");
+    User empty = new User();
 
     @Test
     public void testConstructor() { Assert.assertNotNull(userOne);}
+
+    @Test
+    public void testEmptyConstructor() { Assert.assertNotNull(empty);}
 
     @Test
     public void getFirstNameSuccess() {
@@ -63,9 +67,27 @@ public class UserTest {
     }
 
     @Test
-    public void toStringSuccess() { Assert.assertEquals(userOne.toString(),"First name: Vetle\nLast name: " +
-            "Hjelmtvedt\nAge: 19\nEmail: vetle@hjelmtvedt.com\nPassword: password123\nFriend emails: \n");
+    public void testSetPassword() {
+        userOne.setPassword("pwd123");
+        Assert.assertEquals("pwd123", userOne.getPassword());
     }
+
+    @Test
+    public void toStringSuccess() {
+        userOne.addFriend("friend@email.com");
+        Assert.assertEquals(userOne.toString(),"First name: Vetle\nLast name: " +
+            "Hjelmtvedt\nAge: 19\nEmail: vetle@hjelmtvedt.com\nPassword: password123\nFriend emails: \n-friend@email.com\n" );
+    }
+
+    @Test
+    public void getFriends() {Assert.assertEquals(new ArrayList<>(), userOne.getFriends());}
+
+    @Test
+    public void addFriend() {
+        userOne.addFriend("vehjelmtvedt");
+        Assert.assertEquals("vehjelmtvedt", userOne.getFriends().get(0));
+    }
+
 
     @Test
     public void testGetFriendRequestsEmpty() {
