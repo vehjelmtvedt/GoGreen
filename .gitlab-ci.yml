@@ -57,4 +57,4 @@ checkstyle:
  artifacts:
    reports:
      codequality:
-       - target/checkstyle-*.xml
+       - target/checkstyle-result.xml
