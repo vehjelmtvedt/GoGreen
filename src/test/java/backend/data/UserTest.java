@@ -64,7 +64,15 @@ public class UserTest {
     public void getUsernameSuccess() { Assert.assertEquals(userOne.getUsername(),"test"); }
 
     @Test
-    public void toStringSuccess() { Assert.assertEquals(userOne.toString(),"First name: Vetle\nLast name: " +
-            "Hjelmtvedt\nAge: 19\nEmail: vetle@hjelmtvedt.com\nUsername: test\nPassword: password123\nFriend emails: \n");}
+    public void testAddFriend() {
+        userOne.addFriend("friend1");
+        Assert.assertEquals(userOne.getFriends().get(0),"friend1");
+    }
 
+    @Test
+    public void toStringSuccess() {
+        userOne.addFriend("friend1");
+        Assert.assertEquals(userOne.toString(),"First name: Vetle\nLast name: " +
+            "Hjelmtvedt\nAge: 19\n..Email: vetle@hjelmtvedt.com\nUsername: test\nPassword: password123\nFriend emails: \n"
+                + "-friend1\n");}
 }
