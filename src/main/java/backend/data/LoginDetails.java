@@ -5,19 +5,19 @@ import org.springframework.data.annotation.Id;
 public class LoginDetails {
 
     @Id
-    private String email;
+    private String identifier;
 
     private String password;
 
-    public LoginDetails(String email,String password) {
-        this.email = email;
+    public LoginDetails(String identifier,String password) {
+        this.identifier = identifier;
         this.password = password;
     }
 
     public LoginDetails(){ }
 
-    public String getEmail() {
-        return this.email;
+    public String getIdentifier() {
+        return this.identifier;
     }
 
     public String getPassword() {
@@ -25,7 +25,7 @@ public class LoginDetails {
     }
 
     public String toString() {
-        return "Email: " + this.email + "\nPassword: " + this.password + "\n";
+        return "Email: " + this.identifier + "\nPassword: " + this.password + "\n";
     }
 
 

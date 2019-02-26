@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class UserTest {
 
-    User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com", "password123");
+    User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
 
     @Test
     public void testConstructor() { Assert.assertNotNull(userOne);}
@@ -61,7 +61,18 @@ public class UserTest {
     }
 
     @Test
-    public void toStringSuccess() { Assert.assertEquals(userOne.toString(),"First name: Vetle\nLast name: " +
-            "Hjelmtvedt\nAge: 19\nEmail: vetle@hjelmtvedt.com\nPassword: password123\nFriend emails: \n");}
+    public void getUsernameSuccess() { Assert.assertEquals(userOne.getUsername(),"test"); }
 
+    @Test
+    public void testAddFriend() {
+        userOne.addFriend("friend1");
+        Assert.assertEquals(userOne.getFriends().get(0),"friend1");
+    }
+
+    @Test
+    public void toStringSuccess() {
+        userOne.addFriend("friend1");
+        Assert.assertEquals(userOne.toString(),"First name: Vetle\nLast name: " +
+            "Hjelmtvedt\nAge: 19\nEmail: vetle@hjelmtvedt.com\nUsername: test\nPassword: password123\nFriend emails: \n"
+                + "-friend1\n");}
 }

@@ -103,7 +103,7 @@ public class InputValidation {
 
         User user = new User(firstNameField.getText(),
                 lastNameField.getText(), Integer.parseInt(ageField.getText()),
-                emailField.getText(), passField.getText());
+                emailField.getText(), "dummyusername", passField.getText());
 
         String response = Requests.sendRequest(2, new LoginDetails(), user);
 

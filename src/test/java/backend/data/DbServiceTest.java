@@ -22,11 +22,11 @@ public class DbServiceTest {
     @Autowired
     private DbService dbService;
 
-    private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd");
+    private final User testUser = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
     private final User testUserNonExistent = new User("This User", "Will Not Exist", 55,
-            "non-exist@email.com", "pwd123");
+            "non-exist@email.com","dummy", "pwd123");
     private final User testUserHasFriends = new User("Person", "With Friends", 42,
-            "fperson@email.com", "pwd456");
+            "fperson@email.com","dummy", "pwd456");
 
     @Before
     public void setup() {
