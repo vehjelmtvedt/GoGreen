@@ -46,10 +46,9 @@ pages:
   dependencies:
     - maven_install
   script:
-    - cat target/site/jacoco/index.html
     - mv target/site/jacoco/ public/
   artifacts:
     paths:
       - public
     expire_in: 30 days
-  coverage: '/Code Coverage \d+\.\d+/'
+  coverage: '/LOC \((\d+\.\d+%)\) covered.$/'
