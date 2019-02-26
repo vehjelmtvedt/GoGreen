@@ -1,5 +1,5 @@
 # For JavaFX support
-image: "tgalopin/maven-javafx"
+image: kaiwinter/docker-java8-maven
 
 variables:
   MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
@@ -36,19 +36,20 @@ maven_install:
   stage: test
   script:
     - echo "Running install with maven"
-    - mvn $MAVEN_CLI_OPTS install
+    - mvn $MAVEN_CLI_OPTS install -B
+    - cat target/site/jacoco/index.html
+  coverage: 'Total.*?([0-9]{1,3})%'
   artifacts:
     paths:
       - target/site/jacoco/
 
-pages:
-  stage: deploy
-  dependencies:
-    - maven_install
-  script:
-    - mv target/site/jacoco/ public/
-  artifacts:
-    paths:
-      - public
-    expire_in: 30 days
-  coverage: '/LOC \((\d+\.\d+%)\) covered.$/'
+#pages:
+#  stage: deploy
+#  dependencies:
+#    - maven_install
+#  script:
+#    - mv target/site/jacoco/ public/
+#  artifacts:
+#    paths:
+#      - public
+#    expire_in: 30 days/'
