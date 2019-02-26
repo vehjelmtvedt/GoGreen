@@ -51,5 +51,5 @@ pages:
     - mv target/site/jacoco/ public/
   artifacts:
     paths:
-      - public
+      - public/
     expire_in: 30 days
