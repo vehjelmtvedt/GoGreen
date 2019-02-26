@@ -102,6 +102,7 @@
                 </dependencies>
                 <configuration>
                     <configLocation>CSE1105.checkstyle.xml</configLocation>
+                    <!-- Max. Checkstyle errors/warnings is 4 -->
                     <violationSeverity>warning</violationSeverity>
                     <maxAllowedViolations>4</maxAllowedViolations>
                 </configuration>
@@ -145,6 +146,18 @@
                         <exclude>**/frontend/SetupStructure*</exclude>
                         <exclude>**/frontend/StageSwitcher*</exclude>
                     </excludes>
+
+                    <rules>
+                        <rule>
+                            <limits>
+                                <!-- Minimum coverage 90% -->
+                                <limit>
+                                    <counter>BRANCH</counter>
+                                    <minimum>0.90</minimum>
+                                </limit>
+                            </limits>
+                        </rule>
+                    </rules>
                 </configuration>
             </plugin>
 
