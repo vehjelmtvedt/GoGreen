@@ -32,7 +32,7 @@ maven_test:
       junit:
         - target/surefire-reports/TEST-*.xml
 
-maven_setup:
+maven_install:
   stage: test
   script:
     - echo "Running install with maven"
@@ -40,3 +40,14 @@ maven_setup:
   artifacts:
     paths:
       - target/site/jacoco/
+
+pages:
+  stage: deploy
+  dependencies:
+    - maven_install
+  script:
+    - mv target/site/jacoco/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
