@@ -150,7 +150,7 @@ public class DbService {
             users.save(user);
         }
     }
-    
+
     /**.
      * Gets users' friends
      */
