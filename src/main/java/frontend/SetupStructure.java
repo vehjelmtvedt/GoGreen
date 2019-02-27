@@ -60,7 +60,7 @@ public class SetupStructure {
         gridPane.setHgap(10);
         gridPane.setVgap(10);
 
-        ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 100, 250);
+        ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 100, 400);
         columnOneConstraints.setHalignment(HPos.RIGHT);
 
         // columnTwoConstraints will be applied to all the nodes placed in column two.

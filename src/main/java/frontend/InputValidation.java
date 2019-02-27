@@ -19,12 +19,13 @@ public class InputValidation {
     private static final String emailPattern =
             "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+";
 
-    /**.
+    /**
+     * .
      *
      * @param emailField email field
-     * @param passField password field
-     * @param form form where fields are taken from
-     * @param stage current stage
+     * @param passField  password field
+     * @param form       form where fields are taken from
+     * @param stage      current stage
      */
     public static void signInValidate(TextField emailField,
                                       PasswordField passField, GridPane form, Stage stage) {
@@ -32,25 +33,30 @@ public class InputValidation {
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
         String response = Requests.sendRequest(1, loginDetails, new User());
-        if (response != null) {
+        System.out.println(response);
+        if (response != null && !response.isEmpty()) {
             showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Login successful",
-                    "Welcome to GoGreen!");
+                    "Welcome to GoGreen, " + response);
             SetupStructure.resetFields(null, null, null, emailField, passField, null, null);
+
+            StageSwitcher.loginSwitch(stage, Homepage.setHomepage());
+
         } else {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Login failed", "Incorrect credentials. Try again");
         }
     }
 
-    /**.
+    /**
+     * .
      *
      * @param firstNameField first name field
-     * @param lastNameField last name field
-     * @param emailField email field
-     * @param passField password field
-     * @param ageField age field
-     * @param form form where fields are at
-     * @param stage current stage
+     * @param lastNameField  last name field
+     * @param emailField     email field
+     * @param passField      password field
+     * @param ageField       age field
+     * @param form           form where fields are at
+     * @param stage          current stage
      */
     public static void signUpValidate(TextField firstNameField, TextField lastNameField,
                                       TextField usernameField, TextField emailField,
@@ -101,7 +107,7 @@ public class InputValidation {
                     "Form Error!", "Please enter your age");
             return;
         }
-        if (!validateAge(ageField, ageField.getText())) {
+        if (!validateAge(ageField)) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Form Error!", "Please enter a valid age number");
             return;
@@ -120,26 +126,27 @@ public class InputValidation {
                         "Registration Successful!",
                         "Go to login screen and enter your new credentials!");
                 SetupStructure.resetFields(firstNameField, lastNameField, usernameField,
-                        emailField, passField,passReField, ageField);
+                        emailField, passField, passReField, ageField);
+            } else if (response.equals("username exists")) {
+                showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                        "Email Error!", "An user already exists with this username."
+                                + "Use another username");
             } else {
                 showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                        "Email Error!", "An user already exists with this email address. "
+                        "Email Error!", "An user already exists with this email."
                                 + "Use another email");
             }
         }
     }
 
-    private static boolean validateAge(TextField input, String message) {
+    private static boolean validateAge(TextField input) {
         try {
             int age = Integer.parseInt(input.getText());
             if (age >= 0) {
-                System.out.println("User's age is: " + age);
                 return true;
             }
-            System.out.println("Error: " + message + " is not a valid number");
             return false;
         } catch (NumberFormatException e) {
-            System.out.println("Error: " + message + " is not a number");
             return false;
         }
     }
@@ -152,7 +159,6 @@ public class InputValidation {
             System.out.println("Password is: " + pass);
             return true;
         }
-        System.out.println("Error: " + pass + " is not a valid password");
         return false;
     }
 
@@ -164,7 +170,6 @@ public class InputValidation {
             System.out.println("Email is: " + email);
             return false;
         }
-        System.out.println("Error: " + email + " is not a valid email");
         return true;
     }
 

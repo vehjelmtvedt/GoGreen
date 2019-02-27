@@ -36,7 +36,7 @@ public class Main extends Application {
         Scene signUp = new Scene(mainLayoutSignUp,
                 SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
 
-        String cssPath = "/Frontend/Style.css";
+        String cssPath = "/frontend/Style.css";
         css = this.getClass().getResource(cssPath).toExternalForm();
         signIn.getStylesheets().add(css);
         signUp.getStylesheets().add(css);
