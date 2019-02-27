@@ -152,6 +152,17 @@ public class DbService {
     }
 
     /**.
+     * Finds all usernames matching specified string
+     * @param pattern - part of username to match
+     * @return A list of strings containing all matching usernames
+     */
+    List<String> getMatchingUsers(String pattern) {
+//        return mongoTemplate.find(
+//                new Query(Criteria.where("username").
+//                        regex("/$" + pattern + "$/")));
+    }
+
+    /**.
      * Gets users' friends
      */
     List<User> getFriends(String email) {
