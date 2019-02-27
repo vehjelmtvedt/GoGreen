@@ -114,14 +114,14 @@ public class DbServiceTest {
     // TBD tests
     @Test
     public void testBefriendUsersNull() {
-        dbService.befriendUsers(testUser2.getEmail(), testUserNonExistent.getEmail());
+        dbService.acceptFriendRequest(testUser2.getEmail(), testUserNonExistent.getEmail());
 
         // --- Some assert here ---
     }
 
     @Test
     public void testBefriendUsers() {
-        dbService.befriendUsers(testUser2.getEmail(), testUser3.getEmail());
+        dbService.acceptFriendRequest(testUser2.getEmail(), testUser3.getEmail());
 
         // --- Some assert here ---
     }
@@ -142,14 +142,14 @@ public class DbServiceTest {
 
     @Test
     public void testRejectFriendRequestNull() {
-        dbService.rejectFriendReqeuest(testUser2.getEmail(), testUserNonExistent.getEmail());
+        dbService.rejectFriendRequest(testUser2.getEmail(), testUserNonExistent.getEmail());
 
         // --- Some assert here ---
     }
 
     @Test
     public void testRejectFriendRequest() {
-        dbService.rejectFriendReqeuest(testUser2.getEmail(), testUser3.getEmail());
+        dbService.rejectFriendRequest(testUser2.getEmail(), testUser3.getEmail());
 
         // --- Some assert here ---
     }
