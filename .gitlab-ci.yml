@@ -1,0 +1,56 @@
+# For JavaFX support
+image: "tgalopin/maven-javafx"
+
+variables:
+  MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+
+# Cache downloaded dependencies and plugins between builds.
+# To keep cache across branches add 'key: "$CI_JOB_NAME"'
+cache:
+  paths:
+    - .m2/repository
+
+stages:
+ - build
+ - test
+ - deploy
+
+# Passes if the code compiles
+compile:
+ stage: build
+ script:
+  - echo "Compiling project with maven"
+  - mvn $MAVEN_CLI_OPTS compile
+
+# Passes if all tests succeed
+run-tests:
+  stage: test
+  script:
+    - echo "Testing project with maven"
+    - mvn $MAVEN_CLI_OPTS test
+  artifacts:
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+
+# Generates coverage report using JaCoCo and puts it on the badge
+# Passes if code coverage >= 90%
+coverage:
+  stage: test
+  script:
+    - echo "Running install with maven"
+    - mvn $MAVEN_CLI_OPTS install
+    - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%[^%]*%' | sed -e 's/Total/Jacoco-Test-Coverage:/g'
+  artifacts:
+    paths:
+      - target/site/jacoco/
+  coverage: '/(\d+\.?\d+)%$/'
+
+# Checks style of the code and fails if >= 5 warnings/errors
+checkstyle:
+ stage: test
+ script:
+   - echo "Checkstyle check"
+   - mvn checkstyle:check
+ allow_failure: true

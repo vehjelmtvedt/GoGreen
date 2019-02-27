@@ -36,7 +36,8 @@ public class DbService {
 
 
     /**.
-     * Adds a user to the database
+     * Adds a user to the database, also encoding the password of the User object
+     * @param user - User object to add
      */
     public void addUser(User user) {
         user.setPassword(encodePassword(user.getPassword()));
@@ -64,14 +65,17 @@ public class DbService {
     }
 
     /**.
-     * Deletes a user from the database (by email)
+     * Deletes a user from the database (by e-mail)
+     * @param email - e-mail of the User to delete
      */
     void deleteUser(String email) {
         users.deleteById(email);
     }
 
     /**.
-     * Gets a user from the database
+     * Gets a user from the database (by e-mail)
+     * @param email - e-mail of the user
+     * @return User object (password encoded!), or null if not present
      */
     public User getUser(String email) {
         // User may not be present in the database
@@ -79,6 +83,72 @@ public class DbService {
 
         // Returns user if found, else returns null
         return user.orElse(null);
+    }
+
+    /**.
+     * Gets a user from the database (by username)
+     * @param username - Username of the User
+     * @return User object (password encoded!), or null if not present
+     */
+    User getUserByUsername(String username) {
+        // User may not be present in the database
+        Optional<User> user = users.findByUsername(username);
+
+        // Returns user if found, else returns null
+        return user.orElse(null);
+    }
+
+    /**.
+     * Befriends two users
+     * @param email1 - e-mail of first User
+     * @param email2 - e-mail of second User
+     */
+    void befriendUsers(String email1, String email2) {
+        User user1 = getUser(email1);
+        User user2 = getUser(email2);
+
+        // Make sure both users exist
+        if (user1 != null && user2 != null) {
+            // --- Logic to be filled by Vetle ---
+
+            // Update changes in database
+            users.save(user1);
+            users.save(user2);
+        }
+    }
+
+    /**.
+     * Adds a friend request to a user's list of friend requests
+     * @param senderEmail - The e-mail of the friend request sender
+     * @param receiverEmail - The e-mail of the user receiving the request
+     */
+    void addFriendRequest(String senderEmail, String receiverEmail) {
+        User sender = getUser(senderEmail);
+        User receiver = getUser(receiverEmail);
+
+        if (sender != null && receiver != null) {
+            // --- Logic to be filled by Vetle ---
+
+            // Update only the User that received the friend request
+            users.save(receiver);
+        }
+    }
+
+    /**.
+     * Rejects a friend request of a specific user
+     * @param userEmail - the user rejecting the friend request
+     * @param rejectedUserEmail - the user whose friend request should be rejected
+     */
+    void rejectFriendReqeuest(String userEmail, String rejectedUserEmail) {
+        User user = getUser(userEmail);
+        User rejectedUser = getUser(rejectedUserEmail);
+
+        if (user != null && rejectedUser != null) {
+            // -- Logic to be filled by Vetle --
+
+            // Update only the User that rejected the friend request
+            users.save(user);
+        }
     }
 
     /**.

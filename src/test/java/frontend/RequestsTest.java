@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ import javax.annotation.Resource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Server.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_CLASS)
 public class RequestsTest {
 
     @MockBean
@@ -30,13 +32,13 @@ public class RequestsTest {
     @Resource
     RequestHandler requestHandler;
 
-    private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd");
+    private final User testUser = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
     private final LoginDetails testUserDetails = new LoginDetails("alex@email.com", "123456AAaa@@$$");
 
     @Test
     public void testType1(){
         String response = Requests.sendRequest(1, testUserDetails, testUser);
-        assertNotEquals("", response);
+        assertNotEquals(" ", response);
     }
 
     @Test

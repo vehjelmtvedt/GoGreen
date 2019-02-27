@@ -10,12 +10,12 @@ public class LoginDetailsTest {
 
     @Test
     public void getEmailSuccess(){
-        assertEquals(detailOne.getEmail(),"test");
+        assertEquals(detailOne.getIdentifier(),"test");
     }
 
     @Test
     public void getEmailFail(){
-        assertNotEquals(detailOne.getEmail(),"pass");
+        assertNotEquals(detailOne.getIdentifier(),"pass");
     }
 
     @Test

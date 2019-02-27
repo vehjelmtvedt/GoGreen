@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
@@ -16,15 +17,21 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureDataMongo
+@DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_CLASS)
 public class DbServiceTest {
     @Autowired
     private DbService dbService;
 
-    private final User testUser = new User("Test", "User", 24, "test@email.com", "pwd");
+    private final User testUser = new User("Test", "User", 24, "test@email.com","test_user", "pwd");
     private final User testUserNonExistent = new User("This User", "Will Not Exist", 55,
-            "non-exist@email.com", "pwd123");
+            "non-exist@email.com","test_user_non_exist", "pwd123");
     private final User testUserHasFriends = new User("Person", "With Friends", 42,
-            "fperson@email.com", "pwd456");
+            "fperson@email.com","test_user_friends", "pwd456");
+
+
+    // --- Declare new test uesrs for friend test functionality ---
+    private final User testUser2 = new User("Friend", "User", 22, "testF@email.com", "test_userF", "pwd");
+    private final User testUser3 = new User("Friended", "User", 21, "testFr@email.com", "test_userFr", "pwd");
 
     @Before
     public void setup() {
@@ -33,6 +40,9 @@ public class DbServiceTest {
         testUserHasFriends.addFriend(testUser.getEmail());
 
         dbService.addUser(testUserHasFriends);
+
+        dbService.addUser(testUser2);
+        dbService.addUser(testUser3);
     }
 
     @Test
@@ -41,8 +51,15 @@ public class DbServiceTest {
     }
 
     @Test
-    public void testAddUser() {
+    public void testGetUser() {
+        // User added in setup()
         assertNotNull(dbService.getUser(testUser.getEmail()));
+    }
+
+    @Test
+    public void testGetUserByUsername() {
+        // User added in setup()
+        assertNotNull(dbService.getUserByUsername(testUser.getUsername()));
     }
 
     @Test
@@ -91,5 +108,49 @@ public class DbServiceTest {
     public void testFriends() {
         // Rewrite this test to be more helpful after User equals implementation
         assertEquals(1, dbService.getFriends(testUserHasFriends.getEmail()).size());
+    }
+
+
+    // TBD tests
+    @Test
+    public void testBefriendUsersNull() {
+        dbService.befriendUsers(testUser2.getEmail(), testUserNonExistent.getEmail());
+
+        // --- Some assert here ---
+    }
+
+    @Test
+    public void testBefriendUsers() {
+        dbService.befriendUsers(testUser2.getEmail(), testUser3.getEmail());
+
+        // --- Some assert here ---
+    }
+
+    @Test
+    public void testAddFriendRequestNull() {
+        dbService.addFriendRequest(testUser2.getEmail(), testUserNonExistent.getEmail());
+
+        // --- Some assert here ---
+    }
+
+    @Test
+    public void testAddFriendRequest() {
+        dbService.addFriendRequest(testUser2.getEmail(), testUser3.getEmail());
+
+        // --- Some assert here ---
+    }
+
+    @Test
+    public void testRejectFriendRequestNull() {
+        dbService.rejectFriendReqeuest(testUser2.getEmail(), testUserNonExistent.getEmail());
+
+        // --- Some assert here ---
+    }
+
+    @Test
+    public void testRejectFriendRequest() {
+        dbService.rejectFriendReqeuest(testUser2.getEmail(), testUser3.getEmail());
+
+        // --- Some assert here ---
     }
 }

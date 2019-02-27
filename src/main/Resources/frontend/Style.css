@@ -30,7 +30,7 @@
 #signInButton, #signUpButton{
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-font-size: 22;
+    -fx-font-size: 18px;
     -fx-background-color: linear-gradient(#61a2b1, #2A5058);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
     -fx-background-radius: 10 , 10;
@@ -48,6 +48,3 @@
 #alertDialog .content.label{
     -fx-text-fill: #000;
 }
-/*#alertDialog .button:hover {*/
-
-/*}*/
