@@ -30,6 +30,8 @@ public class RequestHandlerTest
     RequestHandler requestHandler;
 
     private final User testUser = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
+    private final User testUser2 = new User("Test2", "User2", 24, "test2@email.com","dummy2", "pwd2");
+
 
     @Test
     public void testSignupExists()
@@ -68,6 +70,13 @@ public class RequestHandlerTest
     public void testgetUser() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         assertEquals(testUser, requestHandler.getUser(testUser.getEmail()));
+    }
+
+    @Test
+    public void InvalidFriendrequest() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
+        assertEquals("Not a valid username", requestHandler.friendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
 }

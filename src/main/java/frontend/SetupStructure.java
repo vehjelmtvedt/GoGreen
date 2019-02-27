@@ -170,8 +170,7 @@ public class SetupStructure {
 
 
             signUpButton.setOnAction(e ->
-                    InputValidation.signUpValidate(usernameField, firstNameField, lastNameField,
-                            emailField, passwordField, ageField, gridPane, currStage));
+                    InputValidation.signUpValidate(firstNameField, lastNameField, ageField, emailField, usernameField, passwordField, gridPane, currStage));
             StageSwitcher.buttonSwitch(signInButton, currStage, prevScene);
 
             gridPane.add(buttons, 1, 7, 2, 1);

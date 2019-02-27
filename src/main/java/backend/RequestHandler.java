@@ -7,9 +7,11 @@ import backend.data.User;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 
 @RestController
 public class RequestHandler {
@@ -60,57 +62,62 @@ public class RequestHandler {
         return dbService.getUser(identifier);
     }
 
+    /**
+     * Processes a friend request.
+     * @param yourUsername - Username of the person requesting another to befriend him.
+     * @param friendUsername - Username of the person he/she wants to befriend.
+     * @return - OK if successful.
+     */
+    @RequestMapping("/addfriend")
+    public String friendRequest(@RequestParam String yourUsername,
+                                @RequestParam String friendUsername) {
+        User thisUser = dbService.getUser(yourUsername);
 
-    // Temporarily commented out to see real code coverage
-    // This code will be revised on next Sprint
-    /*    @RequestMapping("/addfriend")
-        public String addFriend(@RequestParam String myEmail, @RequestParam String friendEmail) {
-            //TODO: Add friend request feature in the future
-            //POSSIBLE SOLUTION: store friend request in db, send to that user when accessing
-            //friends page.
-            //Keep it like this for now for testing.
-            if (dbService.getUser(friendEmail) != null) {
-                User currUser = dbService.getUser(myEmail);
-                currUser.addFriend(friendEmail);
-                dbService.addUser(currUser);
-                return "Success";
-            } else {
-                return "fail";
-            }
+        if (dbService.getUser(friendUsername) == null) {
+            return "Not a valid username";
+        } else {
+            thisUser.newFriendRequest(friendUsername);
+            dbService.addUser(thisUser);
+            return "OK";
         }
 
-        @RequestMapping("/getallfriends")
-        public ArrayList<String> getAllFriends(@RequestParam String myEmail) {
-            return dbService.getUser(myEmail).getFriends();
-        }*/
+    }
+
+    /**
+     * Returns all friend requests for a certain User.
+     * @param yourUsername - Username of the User requesting all their friend requests.
+     * @return - all the friend requests of this user.
+     */
+    @RequestMapping("/getfriendreq")
+    public ArrayList<String> getAllFriendRequests(@RequestParam String yourUsername) {
+        User thisUser = dbService.getUser(yourUsername);
+        return thisUser.getFriendRequests();
+
+    }
+
+    /**
+     * Accept a friend request and add that person to each others friend list.
+     * @param yourUsername - Username of person who wants to accept the request.
+     * @param friendUsername - Username of the person User wants to accept.
+     * @return - OK when done.
+     */
+    @RequestMapping("/acceptfriendreq")
+    public String acceptFriend(@RequestParam String yourUsername,
+                               @RequestParam String friendUsername) {
+        User thisUser = dbService.getUser(yourUsername);
+        User friendUser = dbService.getUser(friendUsername);
+        thisUser.addFriend(friendUsername);
+        friendUser.addFriend(yourUsername);
+        thisUser.deleteFriendRequest(friendUsername);
+        dbService.addUser(thisUser);
+        dbService.addUser(friendUser);
+        return "OK";
+    }
+
+
+
 }
 
 
 
 
-/*for future reference
-HttpURLConnection con =
-                    (HttpURLConnection) new URL(null, "http://localhost:8080/DBauthenticate")
-                            .openConnection();
-
-            con.setRequestMethod("POST");
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("Content-Type", "application/json");
-
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(loginDetails);
-
-            con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
-            con.getOutputStream().flush();
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
- */

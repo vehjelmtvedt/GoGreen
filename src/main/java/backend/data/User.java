@@ -15,6 +15,7 @@ public class User {
     private int age;
     private String password;
     private ArrayList<String> friends;
+    private ArrayList<String> friendRequests;
 
     /**
      * Constructor of User object.
@@ -33,6 +34,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.friends = new ArrayList<>();
+        this.friendRequests = new ArrayList<>();
     }
 
     public User() {
@@ -70,6 +72,9 @@ public class User {
         return this.friends;
     }
 
+    public ArrayList<String> getFriendRequests() { return this.friendRequests; }
+
+
     /**
      * Returns string representation of the User object.
      * @return String
@@ -100,6 +105,25 @@ public class User {
     public void addFriend(String friend) {
         friends.add(friend);
     }
+
+    /**
+     * Adds a friend request to friend request list.
+     * @param username - username of the person who sent the request.
+     */
+
+    public void newFriendRequest(String username) {
+        friendRequests.add(username);
+    }
+
+    /**
+     * Delete a request from the friend request list.
+     * @param username - username of the request to delete.
+     */
+    public void deleteFriendRequest(String username) {
+        friendRequests.remove(username);
+    }
+
+
 
     /*
      * Removes a friend from the friends list
