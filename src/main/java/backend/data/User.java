@@ -72,7 +72,9 @@ public class User {
         return this.friends;
     }
 
-    public ArrayList<String> getFriendRequests() { return this.friendRequests; }
+    public ArrayList<String> getFriendRequests() {
+        return this.friendRequests;
+    }
 
 
     /**
@@ -122,6 +124,7 @@ public class User {
     public void deleteFriendRequest(String username) {
         friendRequests.remove(username);
     }
+
 
 
 

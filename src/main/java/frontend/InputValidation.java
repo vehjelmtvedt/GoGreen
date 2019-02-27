@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class InputValidation {
     private static final String passPattern =
-            "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})";
+            "((?=.*[a-z]).{6,15})";
     private static final String emailPattern =
             "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+";
 
@@ -28,19 +28,14 @@ public class InputValidation {
      */
     public static void signInValidate(TextField emailField,
                                       PasswordField passField, GridPane form, Stage stage) {
-        if (validateEmail(emailField)) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Typing Error!", "Please enter a valid email");
-            return;
-        }
+
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
         String response = Requests.sendRequest(1, loginDetails, new User());
-
-        if (response != null && response.equals("success")) {
+        if (response != null) {
             showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Login successful",
                     "Welcome to GoGreen!");
-            SetupStructure.resetFields(null, null, emailField, passField, null);
+            SetupStructure.resetFields(null, null, null, emailField, passField, null, null);
         } else {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Login failed", "Incorrect credentials. Try again");
@@ -58,7 +53,8 @@ public class InputValidation {
      * @param stage current stage
      */
     public static void signUpValidate(TextField firstNameField, TextField lastNameField,
-                                      TextField emailField, PasswordField passField,
+                                      TextField usernameField, TextField emailField,
+                                      PasswordField passField, PasswordField passReField,
                                       TextField ageField, GridPane form, Stage stage) {
         if (firstNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
@@ -68,6 +64,11 @@ public class InputValidation {
         if (lastNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Form Error!", "Please enter your Last Name");
+            return;
+        }
+        if (usernameField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Form Error!", "Please enter a username");
             return;
         }
         if (emailField.getText().isEmpty()) {
@@ -83,6 +84,11 @@ public class InputValidation {
         if (passField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Form Error!", "Please enter a password");
+            return;
+        }
+        if (passReField.getText().isEmpty() || !passReField.getText().equals(passField.getText())) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Form Error!", "Passwords do not match");
             return;
         }
         if (!validatePassword(passField)) {
@@ -102,8 +108,9 @@ public class InputValidation {
         }
 
         User user = new User(firstNameField.getText(),
-                lastNameField.getText(), Integer.parseInt(ageField.getText()),
-                emailField.getText(), "dummyusername", passField.getText());
+                lastNameField.getText(),
+                Integer.parseInt(ageField.getText()), usernameField.getText(),
+                emailField.getText(), passField.getText());
 
         String response = Requests.sendRequest(2, new LoginDetails(), user);
 
@@ -112,8 +119,8 @@ public class InputValidation {
                 showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(),
                         "Registration Successful!",
                         "Go to login screen and enter your new credentials!");
-                SetupStructure.resetFields(firstNameField, lastNameField,
-                        emailField, passField, ageField);
+                SetupStructure.resetFields(firstNameField, lastNameField, usernameField,
+                        emailField, passField,passReField, ageField);
             } else {
                 showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                         "Email Error!", "An user already exists with this email address. "

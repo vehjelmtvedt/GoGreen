@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
+import javax.annotation.Resource;
+
 
 @RestController
 public class RequestHandler {
@@ -64,20 +65,20 @@ public class RequestHandler {
 
     /**
      * Processes a friend request.
-     * @param yourUsername - Username of the person requesting another to befriend him.
-     * @param friendUsername - Username of the person he/she wants to befriend.
+     * @param yourEmail - Username of the person requesting another to befriend him.
+     * @param friendEmail - Username of the person he/she wants to befriend.
      * @return - OK if successful.
      */
     @RequestMapping("/addfriend")
-    public String friendRequest(@RequestParam String yourUsername,
-                                @RequestParam String friendUsername) {
-        User thisUser = dbService.getUser(yourUsername);
+    public String friendRequest(@RequestParam String yourEmail,
+                                @RequestParam String friendEmail) {
+        User thatUser = dbService.getUser(friendEmail);
 
-        if (dbService.getUser(friendUsername) == null) {
+        if (dbService.getUser(friendEmail) == null) {
             return "Not a valid username";
         } else {
-            thisUser.newFriendRequest(friendUsername);
-            dbService.addUser(thisUser);
+            thatUser.newFriendRequest(yourEmail);
+            dbService.addUser(thatUser);
             return "OK";
         }
 
@@ -85,30 +86,30 @@ public class RequestHandler {
 
     /**
      * Returns all friend requests for a certain User.
-     * @param yourUsername - Username of the User requesting all their friend requests.
+     * @param yourEmail - Username of the User requesting all their friend requests.
      * @return - all the friend requests of this user.
      */
     @RequestMapping("/getfriendreq")
-    public ArrayList<String> getAllFriendRequests(@RequestParam String yourUsername) {
-        User thisUser = dbService.getUser(yourUsername);
+    public ArrayList<String> getAllFriendRequests(@RequestParam String yourEmail) {
+        User thisUser = dbService.getUser(yourEmail);
         return thisUser.getFriendRequests();
 
     }
 
     /**
      * Accept a friend request and add that person to each others friend list.
-     * @param yourUsername - Username of person who wants to accept the request.
-     * @param friendUsername - Username of the person User wants to accept.
+     * @param yourEmail - Username of person who wants to accept the request.
+     * @param friendEmail - Username of the person User wants to accept.
      * @return - OK when done.
      */
     @RequestMapping("/acceptfriendreq")
-    public String acceptFriend(@RequestParam String yourUsername,
-                               @RequestParam String friendUsername) {
-        User thisUser = dbService.getUser(yourUsername);
-        User friendUser = dbService.getUser(friendUsername);
-        thisUser.addFriend(friendUsername);
-        friendUser.addFriend(yourUsername);
-        thisUser.deleteFriendRequest(friendUsername);
+    public String acceptFriend(@RequestParam String yourEmail,
+                               @RequestParam String friendEmail) {
+        User thisUser = dbService.getUser(yourEmail);
+        User friendUser = dbService.getUser(friendEmail);
+        thisUser.addFriend(friendEmail);
+        friendUser.addFriend(yourEmail);
+        thisUser.deleteFriendRequest(friendEmail);
         dbService.addUser(thisUser);
         dbService.addUser(friendUser);
         return "OK";
