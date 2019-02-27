@@ -45,7 +45,7 @@ public class RequestHandler {
         if (dbService.getUser(user.getEmail()) != null) {
             return "email exists";
         }
-        if (dbService.getUser(user.getUsername()) != null) {
+        if (dbService.getUserByUsername(user.getUsername()) != null) {
             return "username exists";
         }
         dbService.addUser(user);

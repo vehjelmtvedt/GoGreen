@@ -36,7 +36,8 @@ public class DbService {
 
 
     /**.
-     * Adds a user to the database
+     * Adds a user to the database, also encoding the password of the User object
+     * @param user - User object to add
      */
     public void addUser(User user) {
         user.setPassword(encodePassword(user.getPassword()));
@@ -64,18 +65,34 @@ public class DbService {
     }
 
     /**.
-     * Deletes a user from the database (by email)
+     * Deletes a user from the database (by e-mail)
+     * @param email - e-mail of the User to delete
      */
     void deleteUser(String email) {
         users.deleteById(email);
     }
 
     /**.
-     * Gets a user from the database
+     * Gets a user from the database (by e-mail)
+     * @param email - e-mail of the user
+     * @return User object (password encoded!), or null if not present
      */
     public User getUser(String email) {
         // User may not be present in the database
         Optional<User> user = users.findById(email);
+
+        // Returns user if found, else returns null
+        return user.orElse(null);
+    }
+
+    /**.
+     * Gets a user from the database (by username)
+     * @param username - Username of the User
+     * @return User object (password encoded!), or null if not present
+     */
+    public User getUserByUsername(String username) {
+        // User may not be present in the database
+        Optional<User> user = users.findByUsername(username);
 
         // Returns user if found, else returns null
         return user.orElse(null);

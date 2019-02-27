@@ -22,11 +22,11 @@ public class DbServiceTest {
     @Autowired
     private DbService dbService;
 
-    private final User testUser = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
+    private final User testUser = new User("Test", "User", 24, "test@email.com","test_user", "pwd");
     private final User testUserNonExistent = new User("This User", "Will Not Exist", 55,
-            "non-exist@email.com","dummy", "pwd123");
+            "non-exist@email.com","test_user_non_exist", "pwd123");
     private final User testUserHasFriends = new User("Person", "With Friends", 42,
-            "fperson@email.com","dummy", "pwd456");
+            "fperson@email.com","test_user_friends", "pwd456");
 
     @Before
     public void setup() {
@@ -43,8 +43,15 @@ public class DbServiceTest {
     }
 
     @Test
-    public void testAddUser() {
+    public void testGetUser() {
+        // User added in setup()
         assertNotNull(dbService.getUser(testUser.getEmail()));
+    }
+
+    @Test
+    public void testGetUserByUsername() {
+        // User added in setup()
+        assertNotNull(dbService.getUserByUsername(testUser.getUsername()));
     }
 
     @Test
