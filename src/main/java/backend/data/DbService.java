@@ -99,6 +99,59 @@ public class DbService {
     }
 
     /**.
+     * Befriends two users
+     * @param email1 - e-mail of first User
+     * @param email2 - e-mail of second User
+     */
+    void befriendUsers(String email1, String email2) {
+        User user1 = getUser(email1);
+        User user2 = getUser(email2);
+
+        // Make sure both users exist
+        if (user1 != null && user2 != null) {
+            // --- Logic to be filled by Vetle ---
+
+            // Update changes in database
+            users.save(user1);
+            users.save(user2);
+        }
+    }
+
+    /**.
+     * Adds a friend request to a user's list of friend requests
+     * @param senderEmail - The e-mail of the friend request sender
+     * @param receiverEmail - The e-mail of the user receiving the request
+     */
+    void addFriendRequest(String senderEmail, String receiverEmail) {
+        User sender = getUser(senderEmail);
+        User receiver = getUser(receiverEmail);
+
+        if (sender != null && receiver != null) {
+            // --- Logic to be filled by Vetle ---
+
+            // Update only the User that received the friend request
+            users.save(receiver);
+        }
+    }
+
+    /**.
+     * Rejects a friend request of a specific user
+     * @param userEmail - the user rejecting the friend request
+     * @param rejectedUserEmail - the user whose friend request should be rejected
+     */
+    void rejectFriendReqeuest(String userEmail, String rejectedUserEmail) {
+        User user = getUser(userEmail);
+        User rejectedUser = getUser(rejectedUserEmail);
+
+        if (user != null && rejectedUser != null) {
+            // -- Logic to be filled by Vetle --
+
+            // Update only the User that rejected the friend request
+            users.save(user);
+        }
+    }
+    
+    /**.
      * Gets users' friends
      */
     List<User> getFriends(String email) {
