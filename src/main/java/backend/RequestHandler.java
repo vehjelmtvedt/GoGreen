@@ -42,17 +42,9 @@ public class RequestHandler {
     @RequestMapping("/signup")
     public String signupController(@RequestBody User user) {
         System.out.println(user);
-<<<<<<< HEAD
-        if (dbService.getUser(user.getEmail()) != null) {
-            return "email exists";
-        }
-        if (dbService.getUserByUsername(user.getUsername()) != null) {
-=======
         if (dbService.getUser(user.getUsername()) != null) {
->>>>>>> 1aadacabfba5da8cfdb0ed67eba9bc24c7601593
             return "username exists";
         }
-
         if (dbService.getUser(user.getEmail()) != null) {
             return "email exists";
         }
