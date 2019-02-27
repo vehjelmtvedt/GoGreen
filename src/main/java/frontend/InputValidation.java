@@ -96,11 +96,6 @@ public class InputValidation {
                     "Form Error!", "Please enter a valid password");
             return;
         }
-        if (passReField.getText().isEmpty() || !passField.getText().equals(passField.getText())) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Form Error!", "Passwords do not match");
-            return;
-        }
         if (ageField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Form Error!", "Please enter your age");
