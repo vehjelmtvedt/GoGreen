@@ -164,12 +164,6 @@ public class DbServiceTest {
         assertEquals(expected, result);
     }
 
-    @Test
-    public void test() {
-        List<String> result = dbService.getTopUsers(5);
-        System.out.println(result);
-    }
-
     // TBD tests
     @Test
     public void testBefriendUsersNull() {
