@@ -100,52 +100,52 @@ public class DbService {
 
     /**.
      * Befriends two users
-     * @param email1 - e-mail of first User
-     * @param email2 - e-mail of second User
+     * @param receivingUsername - username of User accepting the request.
+     * @param requestingUsername - username of User who sent the request.
      */
-    void befriendUsers(String email1, String email2) {
-        User user1 = getUser(email1);
-        User user2 = getUser(email2);
+    public void acceptFriendRequest(String requestingUsername, String receivingUsername) {
+        User requestingUser = getUserByUsername(requestingUsername);
+        User receivingUser = getUserByUsername(receivingUsername);
 
         // Make sure both users exist
-        if (user1 != null && user2 != null) {
-            // --- Logic to be filled by Vetle ---
-
+        if (requestingUser != null && receivingUser != null) {
+            requestingUser.addFriend(receivingUser.getEmail());
+            receivingUser.addFriend(requestingUser.getEmail());
+            receivingUser.deleteFriendRequest(requestingUsername);
             // Update changes in database
-            users.save(user1);
-            users.save(user2);
+            users.save(requestingUser);
+            users.save(receivingUser);
         }
     }
 
     /**.
      * Adds a friend request to a user's list of friend requests
-     * @param senderEmail - The e-mail of the friend request sender
-     * @param receiverEmail - The e-mail of the user receiving the request
+     * @param senderUsername - The username of the friend request sender
+     * @param receiverUsername - The username of the user receiving the request
      */
-    void addFriendRequest(String senderEmail, String receiverEmail) {
-        User sender = getUser(senderEmail);
-        User receiver = getUser(receiverEmail);
+    public void addFriendRequest(String senderUsername, String receiverUsername) {
+        User sender = getUserByUsername(senderUsername);
+        User receiver = getUserByUsername(receiverUsername);
 
         if (sender != null && receiver != null) {
-            // --- Logic to be filled by Vetle ---
-
+            receiver.newFriendRequest(receiverUsername);
             // Update only the User that received the friend request
             users.save(receiver);
         }
     }
 
+
     /**.
      * Rejects a friend request of a specific user
-     * @param userEmail - the user rejecting the friend request
-     * @param rejectedUserEmail - the user whose friend request should be rejected
+     * @param userUsername - the user rejecting the friend request
+     * @param rejectedUsername - the user whose friend request should be rejected
      */
-    void rejectFriendReqeuest(String userEmail, String rejectedUserEmail) {
-        User user = getUser(userEmail);
-        User rejectedUser = getUser(rejectedUserEmail);
+    public void rejectFriendRequest(String userUsername, String rejectedUsername) {
+        User user = getUserByUsername(userUsername);
+        User rejectedUser = getUserByUsername(rejectedUsername);
 
         if (user != null && rejectedUser != null) {
-            // -- Logic to be filled by Vetle --
-
+            user.deleteFriendRequest(rejectedUsername);
             // Update only the User that rejected the friend request
             users.save(user);
         }
