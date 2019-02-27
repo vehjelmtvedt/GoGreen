@@ -81,6 +81,7 @@ public class DbService {
         // User may not be present in the database
         Optional<User> user = users.findById(email);
 
+
         // Returns user if found, else returns null
         return user.orElse(null);
     }

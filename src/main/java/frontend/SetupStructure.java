@@ -128,8 +128,8 @@ public class SetupStructure {
             lastNameField.setPromptText("Last Name");
             gridPane.add(lastNameField, 1, 2);
 
-            //Add Username Label
-            Label usernameLabel = new Label("Username : ");
+            // Add Username Label
+            Label usernameLabel = new Label("Username: ");
             gridPane.add(usernameLabel, 0, 3);
 
             //Add Username Text Field
@@ -158,25 +158,25 @@ public class SetupStructure {
             passwordField.setPromptText("New Password");
             gridPane.add(passwordField, 1, 5);
 
-            // Add Password Confirm Label
+            //Add Password confirm Label
             Label passReLabel = new Label("Re-Password : ");
-            gridPane.add(passReLabel, 0, 6);
+            gridPane.add(passReLabel, 0, 5);
 
-            // Add Password Confirm field
+            //Add Password confirm texfield
             PasswordField passReField = new PasswordField();
             passReField.setPrefHeight(40);
             passReField.setPromptText("Confirm Password");
-            gridPane.add(passReField, 1, 6);
+            gridPane.add(passReField, 1, 5);
 
             // Add Age Label
             Label ageLabel = new Label("Age : ");
-            gridPane.add(ageLabel, 0, 7);
+            gridPane.add(ageLabel, 0, 6);
 
             // Add Age Text Field
             TextField ageField = new TextField();
             ageField.setPrefHeight(40);
             ageField.setPromptText("Your age");
-            gridPane.add(ageField, 1, 7);
+            gridPane.add(ageField, 1, 6);
 
 
             signUpButton.setOnAction(e ->
@@ -184,7 +184,7 @@ public class SetupStructure {
                             emailField, passwordField, passReField, ageField, gridPane, currStage));
             StageSwitcher.buttonSwitch(signInButton, currStage, prevScene);
 
-            gridPane.add(buttons, 1, 8, 2, 1);
+            gridPane.add(buttons, 1, 7, 2, 1);
         }
 
         //sign in type form
@@ -194,7 +194,7 @@ public class SetupStructure {
             //reset login label
             headerLabel.setText("User login");
             // Add Email Label
-            Label emailLabel = new Label("Email or\nUsername : ");
+            Label emailLabel = new Label("Email : ");
             gridPane.add(emailLabel, 0, 1);
 
             // Add Email Text Field
@@ -243,27 +243,20 @@ public class SetupStructure {
      * @param pass password field
      * @param age age field field
      */
-    public static void resetFields(TextField firstName, TextField lastName,
-                                   TextField username, TextField email,
-                                   PasswordField pass, PasswordField passRe,
-                                   TextField age) {
+    public static void resetFields(TextField firstName,
+                                   TextField lastName, TextField email,
+                                   PasswordField pass, TextField age) {
         if (firstName != null) {
             firstName.setText(null);
         }
         if (lastName != null) {
             lastName.setText(null);
         }
-        if (username != null) {
-            username.setText(null);
-        }
         if (email != null) {
             email.setText(null);
         }
         if (pass != null) {
             pass.setText(null);
-        }
-        if (passRe != null) {
-            passRe.setText(null);
         }
         if (age != null) {
             age.setText(null);
