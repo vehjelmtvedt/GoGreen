@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -33,6 +34,11 @@ public class DbServiceTest {
     private final User testUser2 = new User("Friend", "User", 22, "testF@email.com", "test_userF", "pwd");
     private final User testUser3 = new User("Friended", "User", 21, "testFr@email.com", "test_userFr", "pwd");
 
+    private List<User> regexTestUsers = new ArrayList<User>();
+    private String[] regexTestUsernames = {"a_user", "abcdefg_user", "bcd_user", "b_user", "def", "powerUser",
+            "casual_user", "123user456", "UsEr", "soomeone", "anyone", "abcdefghuser123ab", "idontknow", "i_am_user_566",
+            "regular"};
+
     @Before
     public void setup() {
         dbService.addUser(testUser);
@@ -44,6 +50,18 @@ public class DbServiceTest {
         dbService.addUser(testUser2);
         dbService.addUser(testUser3);
     }
+
+    @Before
+    public void setupRegexUsers() {
+        String emailFormat = "regexTest%d@email.com";
+
+        for (int i = 0; i < regexTestUsernames.length; ++i) {
+            String email = String.format(emailFormat, i);
+            User regexUser = new User("Regex", "Test", 20, email, regexTestUsernames[i], "pwd");
+            dbService.addUser(regexUser);
+        }
+    }
+
 
     @Test
     public void getUserNull() {
@@ -110,6 +128,47 @@ public class DbServiceTest {
         assertEquals(1, dbService.getFriends(testUserHasFriends.getEmail()).size());
     }
 
+    @Test
+    public void testRegexNoMatch() {
+        List<String> result = dbService.getMatchingUsers("random-pattern-not-exist");
+
+        assertEquals(0, result.size());
+    }
+
+    private List<String> returnExpectedRegex(String username) {
+        List<String> matching = new ArrayList<String>();
+        List<User> users = dbService.getAllUsers();
+
+        for (User u : users) {
+            if (u.getUsername().toLowerCase().contains(username)) {
+                matching.add(u.getUsername());
+            }
+        }
+
+        return matching;
+    }
+
+    @Test
+    public void testRegexMatch1() {
+        List<String> result = dbService.getMatchingUsers("user");
+        List<String> expected = returnExpectedRegex("user");
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testRegexMatch2() {
+        List<String> result = dbService.getMatchingUsers("def");
+        List<String> expected = returnExpectedRegex("def");
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void test() {
+        List<String> result = dbService.getTopUsers(5);
+        System.out.println(result);
+    }
 
     // TBD tests
     @Test
