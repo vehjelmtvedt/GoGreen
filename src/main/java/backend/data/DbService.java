@@ -90,7 +90,7 @@ public class DbService {
      * @param username - Username of the User
      * @return User object (password encoded!), or null if not present
      */
-    public User getUserByUsername(String username) {
+    User getUserByUsername(String username) {
         // User may not be present in the database
         Optional<User> user = users.findByUsername(username);
 
