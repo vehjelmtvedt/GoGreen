@@ -1,5 +1,6 @@
 package backend.data;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,9 +30,9 @@ public class DbServiceTest {
             "fperson@email.com","test_user_friends", "pwd456");
 
 
-    // --- Declare new test uesrs for friend test functionality ---
-    private final User testUser2 = new User("Friend", "User", 22, "testF@email.com", "test_userF", "pwd");
-    private final User testUser3 = new User("Friended", "User", 21, "testFr@email.com", "test_userFr", "pwd");
+    // --- Declare new test users for friend test functionality ---
+    private User testUser2 = new User("Friend", "User", 22, "testF@email.com", "test_userF", "pwd");
+    private User testUser3 = new User("Friended", "User", 21, "testFr@email.com", "test_userFr", "pwd");
 
     @Before
     public void setup() {
@@ -114,43 +115,53 @@ public class DbServiceTest {
     // TBD tests
     @Test
     public void testBefriendUsersNull() {
+        dbService.addUser(testUser2);
         dbService.acceptFriendRequest(testUser2.getEmail(), testUserNonExistent.getEmail());
-
-        // --- Some assert here ---
+        Assert.assertEquals(0, dbService.getUser(testUser2.getEmail()).getFriends().size());
+        dbService.deleteUser(testUser2.getEmail());
     }
 
     @Test
     public void testBefriendUsers() {
-        dbService.acceptFriendRequest(testUser2.getEmail(), testUser3.getEmail());
-
-        // --- Some assert here ---
+        dbService.addUser(testUser2);
+        dbService.addUser(testUser3);
+        dbService.addFriendRequest(testUser2.getUsername(), testUser3.getUsername());
+        Assert.assertEquals(1, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
+        dbService.acceptFriendRequest(dbService.getUser(testUser2.getEmail()).getUsername(), dbService.getUser(testUser3.getEmail()).getUsername());
+        Assert.assertEquals("test_userFr",dbService.getUser(testUser2.getEmail()).getFriends().get(0));
+        Assert.assertEquals("test_userF",dbService.getUser(testUser3.getEmail()).getFriends().get(0));
+        Assert.assertEquals(0, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
+        dbService.deleteUser(testUser2.getEmail());
+        dbService.deleteUser(testUser3.getEmail());
     }
 
     @Test
     public void testAddFriendRequestNull() {
-        dbService.addFriendRequest(testUser2.getEmail(), testUserNonExistent.getEmail());
-
-        // --- Some assert here ---
+        dbService.addUser(testUser2);
+        dbService.addFriendRequest(testUserNonExistent.getUsername(), testUser2.getEmail());
+        Assert.assertEquals(0, dbService.getUser(testUser2.getEmail()).getFriendRequests().size());
+        dbService.deleteUser(testUser2.getEmail());
     }
 
     @Test
     public void testAddFriendRequest() {
-        dbService.addFriendRequest(testUser2.getEmail(), testUser3.getEmail());
-
-        // --- Some assert here ---
-    }
-
-    @Test
-    public void testRejectFriendRequestNull() {
-        dbService.rejectFriendRequest(testUser2.getEmail(), testUserNonExistent.getEmail());
-
-        // --- Some assert here ---
+        dbService.addUser(testUser2);
+        dbService.addUser(testUser3);
+        dbService.addFriendRequest(testUser2.getUsername(), testUser3.getUsername());
+        Assert.assertEquals(1, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
+        dbService.deleteUser(testUser2.getEmail());
+        dbService.deleteUser(testUser3.getEmail());
     }
 
     @Test
     public void testRejectFriendRequest() {
-        dbService.rejectFriendRequest(testUser2.getEmail(), testUser3.getEmail());
-
-        // --- Some assert here ---
+        dbService.addUser(testUser2);
+        dbService.addUser(testUser3);
+        dbService.addFriendRequest(testUser2.getUsername(), testUser3.getUsername());
+        Assert.assertEquals(1, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
+        dbService.rejectFriendRequest(dbService.getUser(testUser3.getEmail()).getUsername(), dbService.getUser(testUser2.getEmail()).getUsername());
+        Assert.assertEquals(0, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
+        dbService.deleteUser(testUser2.getEmail());
+        dbService.deleteUser(testUser3.getEmail());
     }
 }

@@ -110,8 +110,8 @@ public class DbService {
 
         // Make sure both users exist
         if (requestingUser != null && receivingUser != null) {
-            requestingUser.addFriend(receivingUser.getEmail());
-            receivingUser.addFriend(requestingUser.getEmail());
+            requestingUser.addFriend(receivingUser.getUsername());
+            receivingUser.addFriend(requestingUser.getUsername());
             receivingUser.deleteFriendRequest(requestingUsername);
             // Update changes in database
             users.save(requestingUser);
@@ -129,18 +129,20 @@ public class DbService {
         User receiver = getUserByUsername(receiverUsername);
 
         if (sender != null && receiver != null) {
-            receiver.newFriendRequest(receiverUsername);
+            receiver.newFriendRequest(sender.getUsername());
             // Update only the User that received the friend request
             users.save(receiver);
+            users.save(sender);
         }
+
+
     }
-
-
     /**.
      * Rejects a friend request of a specific user
      * @param userUsername - the user rejecting the friend request
      * @param rejectedUsername - the user whose friend request should be rejected
      */
+
     public void rejectFriendRequest(String userUsername, String rejectedUsername) {
         User user = getUserByUsername(userUsername);
         User rejectedUser = getUserByUsername(rejectedUsername);
