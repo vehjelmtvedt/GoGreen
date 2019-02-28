@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private static String css;
+    private static Scene signIn;
+    private static Scene signUp;
+    private static Stage primaryStage;
 
     @Override
     public void start(Stage window) {
@@ -30,10 +33,10 @@ public class Main extends Application {
         mainLayoutSignUp.setCenter(signUpForm);
 
         //set final primary stage aka window and add css
-        Scene signIn = new Scene(mainLayoutSignIn,
+        signIn = new Scene(mainLayoutSignIn,
                 SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
 
-        Scene signUp = new Scene(mainLayoutSignUp,
+        signUp = new Scene(mainLayoutSignUp,
                 SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
 
         String cssPath = "/frontend/Style.css";
@@ -45,6 +48,7 @@ public class Main extends Application {
         SetupStructure.addUiControls(signInForm, 2, window, signUp, signIn);
 
         SetupStructure.finaliseStage(window, signIn);
+        primaryStage = window;
     }
 
     public static void main(String[] args) {
@@ -53,5 +57,17 @@ public class Main extends Application {
 
     public static String getCss() {
         return css;
+    }
+
+    public static Scene getSignIn() {
+        return signIn;
+    }
+
+    public static Scene getSignUp() {
+        return signUp;
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 }

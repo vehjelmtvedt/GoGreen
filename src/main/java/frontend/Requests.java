@@ -53,7 +53,6 @@ public class Requests {
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
-            System.out.println(response);
             in.close();
             return response.toString();
         } catch (Exception e) {
