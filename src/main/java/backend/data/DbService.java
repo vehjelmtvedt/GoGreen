@@ -117,8 +117,7 @@ public class DbService {
             users.save(requestingUser);
             users.save(receivingUser);
             return "OK";
-        }
-        else {
+        } else {
             return "Invalid username";
         }
     }

@@ -143,6 +143,7 @@
                         <exclude>**/frontend/ConfirmBox*</exclude>
                         <exclude>**/frontend/InputValidation*</exclude>
                         <exclude>**/frontend/Main*</exclude>
+                        <exclude>**/frontend/Homepage*</exclude>
                         <exclude>**/frontend/SetupStructure*</exclude>
                         <exclude>**/frontend/StageSwitcher*</exclude>
                     </excludes>
