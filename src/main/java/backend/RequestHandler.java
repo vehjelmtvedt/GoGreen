@@ -78,12 +78,6 @@ public class RequestHandler {
         return dbService.rejectFriendRequest(sender, rejecting);
 
     }
-
-    @RequestMapping("/getFriendRequests")
-    public List<String> getAllFriendRequests(@RequestParam String email) {
-        return dbService.getUser(email).getFriendRequests();
-    }
-
 }
 
 
