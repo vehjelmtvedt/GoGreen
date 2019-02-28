@@ -159,7 +159,7 @@ public class DbServiceTest {
         dbService.addUser(testUser3);
         dbService.addFriendRequest(testUser2.getUsername(), testUser3.getUsername());
         Assert.assertEquals(1, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
-        dbService.rejectFriendRequest(dbService.getUser(testUser3.getEmail()).getUsername(), dbService.getUser(testUser2.getEmail()).getUsername());
+        dbService.rejectFriendRequest(dbService.getUser(testUser2.getEmail()).getUsername(), dbService.getUser(testUser3.getEmail()).getUsername());
         Assert.assertEquals(0, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
         dbService.deleteUser(testUser2.getEmail());
         dbService.deleteUser(testUser3.getEmail());
