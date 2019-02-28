@@ -1,4 +1,5 @@
 # For JavaFX support
+# For JavaFX support
 image: "tgalopin/maven-javafx"
 
 variables:

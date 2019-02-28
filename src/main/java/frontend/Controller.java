@@ -1,6 +1,10 @@
-package frontend;
-
-// --Commented out by Inspection START (24/02/2019 13:19):
+//package frontend;
+//
+//import javafx.fxml.FXML;
+//import javafx.scene.layout.GridPane;
+//
 //public class Controller {
+//    @FXML
+//    private GridPane grid;
 //}
-// --Commented out by Inspection STOP (24/02/2019 13:19)
+//
