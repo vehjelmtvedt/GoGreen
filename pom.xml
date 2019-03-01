@@ -24,7 +24,7 @@
         <checkstyle.version>7.2</checkstyle.version>
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
 
-        <jacoco-maven-plugin.version>0.7.8</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
         <java.version>1.8</java.version>
     </properties>
 
@@ -78,7 +78,13 @@
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
             <scope>test</scope>
         </dependency>
-
+        
+        <!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy -->
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.9.10</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -94,6 +100,12 @@
                         <version>${checkstyle.version}</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <configLocation>CSE1105.checkstyle.xml</configLocation>
+                    <!-- Max. Checkstyle errors/warnings is 4 -->
+                    <violationSeverity>warning</violationSeverity>
+                    <maxAllowedViolations>4</maxAllowedViolations>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -125,6 +137,28 @@
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludes>
+                        <!-- Exclude GUI classes -->
+                        <exclude>**/frontend/ConfirmBox*</exclude>
+                        <exclude>**/frontend/InputValidation*</exclude>
+                        <exclude>**/frontend/Main*</exclude>
+                        <exclude>**/frontend/SetupStructure*</exclude>
+                        <exclude>**/frontend/StageSwitcher*</exclude>
+                    </excludes>
+
+                    <rules>
+                        <rule>
+                            <limits>
+                                <!-- Minimum coverage 90% -->
+                                <limit>
+                                    <counter>BRANCH</counter>
+                                    <minimum>0.90</minimum>
+                                </limit>
+                            </limits>
+                        </rule>
+                    </rules>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -141,6 +175,17 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
         </plugins>
     </build>
 
@@ -155,6 +200,12 @@
                 <configuration>
                     <configLocation>CSE1105.checkstyle.xml</configLocation>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
             </plugin>
         </plugins>
     </reporting>
