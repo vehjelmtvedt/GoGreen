@@ -97,15 +97,17 @@ final class CarbonCalculator {
      * @param organicFoodConsumption Amount of organic food a user consumes (none, some, most, all)
      * @return annual carbon emissions in kg
      */
-    public static double nonOrganicFoodEmissions(String organicFoodConsumption) {
+    public static int nonOrganicFoodEmissions(String organicFoodConsumption) {
         if (organicFoodConsumption.toLowerCase().equals("none")) {
             return 700;
         } else if (organicFoodConsumption.toLowerCase().equals("some")) {
             return 500;
         } else if (organicFoodConsumption.toLowerCase().equals("most")) {
             return 200;
-        } else { // if the answer is all
+        } else if  (organicFoodConsumption.toLowerCase().equals("all")) {
             return 0;
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -114,17 +116,19 @@ final class CarbonCalculator {
      * @param meatAndDairyConsumption how much meat and dairy a user consumes
      * @return annual carbon emissions in kg
      */
-    public static double meatConsumptionEmissions(String meatAndDairyConsumption) {
-        if (meatAndDairyConsumption.toLowerCase().equals("above average ")) {
+    public static int meatAndDairyConsumptionEmissions(String meatAndDairyConsumption) {
+        if (meatAndDairyConsumption.toLowerCase().equals("above average")) {
             return 600;
         } else if (meatAndDairyConsumption.toLowerCase().equals("average")) {
             return 400;
-        } else if (meatAndDairyConsumption.toLowerCase().equals("below-average")) {
+        } else if (meatAndDairyConsumption.toLowerCase().equals("below average")) {
             return 250;
-        } else if ( meatAndDairyConsumption.toLowerCase().equals("lacto-vegetarian ")) {
+        } else if ( meatAndDairyConsumption.toLowerCase().equals("lacto-vegetarian")) {
             return 100;
-        } else { // if the user is vegan
+        } else if (meatAndDairyConsumption.toLowerCase().equals("vegan")) {
             return 0;
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -133,16 +137,17 @@ final class CarbonCalculator {
      * @param localyProducedFood How much of a user's food is produced locally
      * @return annual carbon emissions in kg
      */
-    public static double foodMilesEmissions(String localyProducedFood) {
-        if (localyProducedFood.toLowerCase().equals("very little ")) {
+    public static int foodMilesEmissions(String localyProducedFood) {
+        if (localyProducedFood.toLowerCase().equals("very little")) {
             return 500;
         } else if (localyProducedFood.toLowerCase().equals("average")) {
             return 300;
         } else if (localyProducedFood.toLowerCase().equals("above average")) {
             return 200;
-
-        } else { // almost all
+        } else if (localyProducedFood.toLowerCase().equals("almost all")) {
             return 100;
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -151,15 +156,17 @@ final class CarbonCalculator {
      * @param processedFood how much of a user's food is packaged/processed
      * @return annual carbon emissions in kg
      */
-    public static double processedFoodEmissions(String processedFood) {
+    public static int processedFoodEmissions(String processedFood) {
         if (processedFood.toLowerCase().equals("above average")) {
             return 600;
         } else if (processedFood.toLowerCase().equals("average")) {
             return 400;
         } else if (processedFood.toLowerCase().equals("below average")) {
             return 200;
-        } else { // very little
+        } else if (processedFood.toLowerCase().equals("very little")) {
             return 50;
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 }
