@@ -14,19 +14,19 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class Homepage {
+public class HomepageTest {
 
     /**.
-     * returns the scene of the Homepage to Input Validation, once user is logged in
-     * @return Scene of Homepage
+     * returns the scene of the HomepageTest to Input Validation, once user is logged in
+     * @return Scene of HomepageTest
      */
     public static Scene setHomepage() {
         BorderPane border = new BorderPane();
-        HBox hbox = Homepage.addHBox();
+        HBox hbox = HomepageTest.addHBox();
         border.setTop(hbox);
-        border.setLeft(Homepage.addVBox());
-        border.setCenter(Homepage.addCenter());
-        border.setRight(Homepage.addFlowPane());
+        border.setLeft(HomepageTest.addVBox());
+        border.setCenter(HomepageTest.addCenter());
+        border.setRight(HomepageTest.addFlowPane());
         border.getStylesheets().add(Main.getCssHomepage());
         return new Scene(border, SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
     }

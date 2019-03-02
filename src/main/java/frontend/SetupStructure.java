@@ -33,7 +33,8 @@ public class SetupStructure {
                 + "Resources\\frontend\\Pics\\GoGreenIcon.png"));
         stage.setOnCloseRequest(e -> {
             e.consume();
-            ConfirmBox.closeProgram(stage);
+            String message = "Are you sure you want to close the application?";
+            ConfirmBox.closeProgram(stage, message);
         });
     }
 

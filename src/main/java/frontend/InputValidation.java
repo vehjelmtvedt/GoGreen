@@ -2,6 +2,7 @@ package frontend;
 
 import backend.data.LoginDetails;
 import backend.data.User;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
@@ -39,7 +40,9 @@ public class InputValidation {
                     "Welcome to GoGreen, " + response);
             SetupStructure.resetFields(null, null, null, emailField, passField, null, null);
 
-            StageSwitcher.loginSwitch(stage, Homepage.setHomepage());
+            Homepage homepage = new Homepage();
+            Homepage.main(homepage);
+            StageSwitcher.loginSwitch(stage, new Scene(homepage.getBorder(), SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]));
 
         } else {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
@@ -177,7 +180,7 @@ public class InputValidation {
                                   Window window, String title, String message) {
         Alert alert = new Alert(alertType);
         DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(Main.getCss());
+        dialogPane.getStylesheets().add(Main.getCssIntro());
         dialogPane.setId("alertDialog");
         alert.setTitle(title);
         alert.setHeaderText(null);

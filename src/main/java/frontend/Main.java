@@ -8,7 +8,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static String css;
+    private static String cssIntro;
+    private static String cssHomepage;
     private static Scene signIn;
     private static Scene signUp;
     private static Stage primaryStage;
@@ -39,10 +40,13 @@ public class Main extends Application {
         signUp = new Scene(mainLayoutSignUp,
                 SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
 
-        String cssPath = "/frontend/Style.css";
-        css = this.getClass().getResource(cssPath).toExternalForm();
-        signIn.getStylesheets().add(css);
-        signUp.getStylesheets().add(css);
+        String cssPathIntro = "/frontend/Style.css";
+        String cssPathHomepage = "/frontend/Homepage.css";
+        cssIntro = this.getClass().getResource(cssPathIntro).toExternalForm();
+        cssHomepage = this.getClass().getResource(cssPathHomepage).toExternalForm();
+
+        signIn.getStylesheets().add(cssIntro);
+        signUp.getStylesheets().add(cssIntro);
 
         SetupStructure.addUiControls(signUpForm, 1, window, signUp, signIn);
         SetupStructure.addUiControls(signInForm, 2, window, signUp, signIn);
@@ -55,8 +59,12 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static String getCss() {
-        return css;
+    public static String getCssIntro() {
+        return cssIntro;
+    }
+
+    public static String getCssHomepage() {
+        return cssHomepage;
     }
 
     public static Scene getSignIn() {
