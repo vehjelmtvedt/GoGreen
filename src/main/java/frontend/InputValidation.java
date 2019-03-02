@@ -42,7 +42,8 @@ public class InputValidation {
 
             Homepage homepage = new Homepage();
             Homepage.main(homepage);
-            StageSwitcher.loginSwitch(stage, new Scene(homepage.getBorder(), SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]));
+            StageSwitcher.loginSwitch(stage, new Scene(homepage.getBorder(),
+                    SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]));
 
         } else {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),

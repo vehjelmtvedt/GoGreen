@@ -6,15 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 public class Homepage {
     private BorderPane border;
@@ -27,6 +18,10 @@ public class Homepage {
         return this.border;
     }
 
+    /**.
+     * create homepage
+     * @param homepage returns Homepage instance
+     */
     public static void main(Homepage homepage) {
         HBox box = new HBox();
         box.setStyle("-fx-background-color: #0f0;");
