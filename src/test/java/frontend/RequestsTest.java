@@ -7,8 +7,6 @@ import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

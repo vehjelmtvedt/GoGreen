@@ -11,12 +11,13 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 public class Requests {
+
     /**.
-     * Send request
-     * @param type - type of Request
-     * @param loginDetails - Login Details object (email and password pair)
-     * @param user - User object
-     * @return Request Response
+     * Send request to server
+     * @param type type of post request
+     * @param loginDetails user login details
+     * @param user user details for sign up
+     * @return String response from server
      */
     public static String sendRequest(int type, LoginDetails loginDetails, User user) {
         try {
@@ -53,7 +54,6 @@ public class Requests {
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
-            System.out.println(response);
             in.close();
             return response.toString();
         } catch (Exception e) {

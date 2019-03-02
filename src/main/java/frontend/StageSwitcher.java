@@ -8,4 +8,12 @@ public class StageSwitcher {
     public static void buttonSwitch(Button button, Stage from, Scene to) {
         button.setOnAction(e -> from.setScene(to));
     }
+
+    public static void loginSwitch(Stage from, Scene to) {
+        from.setScene(to);
+    }
+
+    public static void closeApp(Button button, Stage from) {
+        button.setOnAction(e -> from.close());
+    }
 }
