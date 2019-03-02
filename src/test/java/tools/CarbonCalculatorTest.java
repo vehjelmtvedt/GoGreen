@@ -50,56 +50,35 @@ public class CarbonCalculatorTest {
 
     @Test
     public void nonOrganicFoodEmissions() {
-        assertEquals(700, CarbonCalculator.nonOrganicFoodEmissions("none"));
-        assertEquals(500, CarbonCalculator.nonOrganicFoodEmissions("some"));
-        assertEquals(200, CarbonCalculator.nonOrganicFoodEmissions("most"));
-        assertEquals(0, CarbonCalculator.nonOrganicFoodEmissions("all"));
+        assertEquals(CarbonCalculator.nonOrganicFoodEmissions(CarbonCalculator.OrganicFoodConsumption.NONE), 700);
+        assertEquals(CarbonCalculator.nonOrganicFoodEmissions(CarbonCalculator.OrganicFoodConsumption.SOME), 500);
+        assertEquals(CarbonCalculator.nonOrganicFoodEmissions(CarbonCalculator.OrganicFoodConsumption.MOST), 200);
+        assertEquals(CarbonCalculator.nonOrganicFoodEmissions(CarbonCalculator.OrganicFoodConsumption.ALL), 0);
     }
 
     @Test
     public void meatAndDairyConsumptionEmissions() {
-        assertEquals(600, CarbonCalculator.meatAndDairyConsumptionEmissions("above average"));
-        assertEquals(400, CarbonCalculator.meatAndDairyConsumptionEmissions("average"));
-        assertEquals(250, CarbonCalculator.meatAndDairyConsumptionEmissions("below average"));
-        assertEquals(100, CarbonCalculator.meatAndDairyConsumptionEmissions("lacto-vegetarian"));
-        assertEquals(0, CarbonCalculator.meatAndDairyConsumptionEmissions("vegan"));
+        assertEquals(CarbonCalculator.meatAndDairyConsumptionEmissions(CarbonCalculator.MeatAndDairyConsumption.ABOVE_AVERAGE), 600);
+        assertEquals(CarbonCalculator.meatAndDairyConsumptionEmissions(CarbonCalculator.MeatAndDairyConsumption.AVERAGE), 400);
+        assertEquals(CarbonCalculator.meatAndDairyConsumptionEmissions(CarbonCalculator.MeatAndDairyConsumption.BELOW_AVERAGE), 250);
+        assertEquals(CarbonCalculator.meatAndDairyConsumptionEmissions(CarbonCalculator.MeatAndDairyConsumption.LACTO_VEGETARIAN), 100);
+        assertEquals(CarbonCalculator.meatAndDairyConsumptionEmissions(CarbonCalculator.MeatAndDairyConsumption.VEGAN), 0);
     }
 
     @Test
     public void foodMilesEmissions() {
-        assertEquals(500, CarbonCalculator.foodMilesEmissions("very little"));
-        assertEquals(300, CarbonCalculator.foodMilesEmissions("average"));
-        assertEquals(200, CarbonCalculator.foodMilesEmissions("above average"));
-        assertEquals(100, CarbonCalculator.foodMilesEmissions("almost all"));
+        assertEquals(CarbonCalculator.foodMilesEmissions(CarbonCalculator.LocallyProducedFoodConsumption.VERY_LITTLE), 500);
+        assertEquals(CarbonCalculator.foodMilesEmissions(CarbonCalculator.LocallyProducedFoodConsumption.AVERAGE), 300);
+        assertEquals(CarbonCalculator.foodMilesEmissions(CarbonCalculator.LocallyProducedFoodConsumption.ABOVE_AVERAGE), 200);
+        assertEquals(CarbonCalculator.foodMilesEmissions(CarbonCalculator.LocallyProducedFoodConsumption.ALMOST_ALL), 100);
     }
 
     @Test
     public void processedFoodEmissions() {
-        assertEquals(600, CarbonCalculator.processedFoodEmissions("above average"));
-        assertEquals(400, CarbonCalculator.processedFoodEmissions("average"));
-        assertEquals(200, CarbonCalculator.processedFoodEmissions("below average"));
-        assertEquals(50, CarbonCalculator. processedFoodEmissions("very little"));
+        assertEquals(CarbonCalculator.processedFoodEmissions(CarbonCalculator.ProcessedFoodConsumption.ABOVE_AVERAGE), 600);
+        assertEquals(CarbonCalculator.processedFoodEmissions(CarbonCalculator.ProcessedFoodConsumption.AVERAGE), 400);
+        assertEquals(CarbonCalculator.processedFoodEmissions(CarbonCalculator.ProcessedFoodConsumption.BELOW_AVERAGE), 200);
+        assertEquals(CarbonCalculator.processedFoodEmissions(CarbonCalculator.ProcessedFoodConsumption.VERY_LITTLE), 50);
     }
 
-
-    // exception tests
-    @Test(expected = IllegalArgumentException.class)
-    public void nonOrganicFoodEmissionsExceptionTest(){
-        int i = CarbonCalculator.nonOrganicFoodEmissions("irrelevant string");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void meatAndDairyConsumptionEmissionsExceptionTest(){
-        int i = CarbonCalculator.meatAndDairyConsumptionEmissions("random string");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void foodMilesEmissionsExceptionTest(){
-        int i = CarbonCalculator.foodMilesEmissions("completely random string");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void processedFoodEmissionsExceptionTest(){
-        int i = CarbonCalculator.processedFoodEmissions("Roses are red, violets are blue");
-    }
 }
