@@ -23,19 +23,19 @@ public class DbServiceTest {
     @Autowired
     private DbService dbService;
 
-    private final User testUser = new User("Test", "User", 24, "test@email.com","test_user", "pwd");
-    private final User testUserNonExistent = new User("This User", "Will Not Exist", 55,
+    private static final User testUser = new User("Test", "User", 24, "test@email.com","test_user", "pwd");
+    private static final User testUserNonExistent = new User("This User", "Will Not Exist", 55,
             "non-exist@email.com","test_user_non_exist", "pwd123");
-    private final User testUserHasFriends = new User("Person", "With Friends", 42,
+    private static final User testUserHasFriends = new User("Person", "With Friends", 42,
             "fperson@email.com","test_user_friends", "pwd456");
 
 
     // --- Declare new test uesrs for friend test functionality ---
-    private final User testUser2 = new User("Friend", "User", 22, "testF@email.com", "test_userF", "pwd");
-    private final User testUser3 = new User("Friended", "User", 21, "testFr@email.com", "test_userFr", "pwd");
+    private static final User testUser2 = new User("Friend", "User", 22, "testF@email.com", "test_userF", "pwd");
+    private static final User testUser3 = new User("Friended", "User", 21, "testFr@email.com", "test_userFr", "pwd");
 
-    private List<User> regexTestUsers = new ArrayList<User>();
-    private String[] regexTestUsernames = {"a_user", "abcdefg_user", "bcd_user", "b_user", "def", "powerUser",
+    private static List<User> regexTestUsers = new ArrayList<User>();
+    private static String[] regexTestUsernames = {"a_user", "abcdefg_user", "bcd_user", "b_user", "def", "powerUser",
             "casual_user", "123user456", "UsEr", "soomeone", "anyone", "abcdefghuser123ab", "idontknow", "i_am_user_566",
             "regular"};
 

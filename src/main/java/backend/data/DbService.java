@@ -49,12 +49,25 @@ public class DbService {
 
     /**
      * .
-     * Adds a user to the database, also encoding the password of the User object
+     * Adds a new user to the database, also encoding the password of the User object (if new User)
      *
      * @param user - User object to add
      */
     public void addUser(User user) {
-        user.setPassword(encodePassword(user.getPassword()));
+        // New User, encrypt password
+        if (getUser(user.getEmail()) == null) {
+            user.setPassword(encodePassword(user.getPassword()));
+        }
+
+        users.save(user);
+    }
+
+    /**
+     * .
+     * @param user
+     */
+
+    public void updateUser(User user) {
         users.save(user);
     }
 
