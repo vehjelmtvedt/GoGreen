@@ -5,6 +5,7 @@ import backend.data.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -53,10 +54,9 @@ public class Requests {
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
-            System.out.println(response);
             in.close();
             return response.toString();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
