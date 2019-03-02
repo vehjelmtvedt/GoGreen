@@ -2,7 +2,6 @@ package frontend;
 
 import backend.data.LoginDetails;
 import backend.data.User;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
@@ -20,16 +19,15 @@ public class InputValidation {
     private static final String emailPattern =
             "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+";
 
-    /**
-     * .
-     *
-     * @param emailField email field
-     * @param passField  password field
-     * @param form       form where fields are taken from
-     * @param stage      current stage
+
+    /**.
+     * Validation for signing in
+     * @param emailField email input field
+     * @param passField password input field
+     * @param form form containing input fields
      */
     public static void signInValidate(TextField emailField,
-                                      PasswordField passField, GridPane form, Stage stage) {
+                                      PasswordField passField, GridPane form) {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
@@ -38,12 +36,8 @@ public class InputValidation {
         if (response != null && !response.isEmpty()) {
             showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Login successful",
                     "Welcome to GoGreen, " + response);
-            SetupStructure.resetFields(null, null, null, emailField, passField, null, null);
-
-            Homepage homepage = new Homepage();
-            Homepage.main(homepage);
-            StageSwitcher.loginSwitch(stage, new Scene(homepage.getBorder(),
-                    SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]));
+            General.resetFields(SignIn.getFields());
+            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage());
 
         } else {
             showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
@@ -51,16 +45,17 @@ public class InputValidation {
         }
     }
 
-    /**
-     * .
-     *
-     * @param firstNameField first name field
-     * @param lastNameField  last name field
-     * @param emailField     email field
-     * @param passField      password field
-     * @param ageField       age field
-     * @param form           form where fields are at
-     * @param stage          current stage
+    /**.
+     * Validation for input in sign up form
+     * @param firstNameField User's first name field
+     * @param lastNameField User's last name field
+     * @param usernameField User's username name field
+     * @param emailField User's email field
+     * @param passField User's password field
+     * @param passReField User's re-password field
+     * @param ageField User's age field
+     * @param form Form containing input fields
+     * @param stage Stage of application
      */
     public static void signUpValidate(TextField firstNameField, TextField lastNameField,
                                       TextField usernameField, TextField emailField,
@@ -129,8 +124,7 @@ public class InputValidation {
                 showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(),
                         "Registration Successful!",
                         "Go to login screen and enter your new credentials!");
-                SetupStructure.resetFields(firstNameField, lastNameField, usernameField,
-                        emailField, passField, passReField, ageField);
+                General.resetFields(SignUp.getFields());
             } else if (response.equals("username exists")) {
                 showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                         "Email Error!", "An user already exists with this username."
@@ -146,10 +140,7 @@ public class InputValidation {
     private static boolean validateAge(TextField input) {
         try {
             int age = Integer.parseInt(input.getText());
-            if (age >= 0) {
-                return true;
-            }
-            return false;
+            return age >= 0;
         } catch (NumberFormatException e) {
             return false;
         }

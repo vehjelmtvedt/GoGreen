@@ -2,69 +2,40 @@ package frontend;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
-    private static String cssIntro;
-    private static String cssHomepage;
+    private static Stage primaryStage;
     private static Scene signIn;
     private static Scene signUp;
-    private static Stage primaryStage;
+    private static Scene homepage;
+    private static String cssIntro;
 
     @Override
     public void start(Stage window) {
-        //setup stage
-        SetupStructure.setPrimaryStage(window, "Go Green sign in");
+        primaryStage = window;
+        General.setPrimaryStage(primaryStage, "Go Green");
 
-        //create borderPane for quick form setup
-        BorderPane mainLayoutSignIn = new BorderPane();
-        BorderPane mainLayoutSignUp = new BorderPane();
-        mainLayoutSignIn.setId("mainLayoutSignIn");
-        mainLayoutSignUp.setId("mainLayoutSignUp");
+        signIn = SignIn.createScene();
+        signUp = SignUp.createScene();
+        homepage = Homepage.createScene();
 
-        //initialise forms
-        GridPane signUpForm = SetupStructure.createRegistrationForm();
-        GridPane signInForm = SetupStructure.createRegistrationForm();
-
-        //set top/right/bottom/center/left for main borderPane
-        mainLayoutSignIn.setCenter(signInForm);
-        mainLayoutSignUp.setCenter(signUpForm);
-
-        //set final primary stage aka window and add css
-        signIn = new Scene(mainLayoutSignIn,
-                SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
-
-        signUp = new Scene(mainLayoutSignUp,
-                SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
+        StageSwitcher.buttonSwitch(SignIn.getSignUpButton(), primaryStage, signUp);
 
         String cssPathIntro = "/frontend/Style.css";
-        String cssPathHomepage = "/frontend/Homepage.css";
         cssIntro = this.getClass().getResource(cssPathIntro).toExternalForm();
-        cssHomepage = this.getClass().getResource(cssPathHomepage).toExternalForm();
-
         signIn.getStylesheets().add(cssIntro);
         signUp.getStylesheets().add(cssIntro);
 
-        SetupStructure.addUiControls(signUpForm, 1, window, signUp, signIn);
-        SetupStructure.addUiControls(signInForm, 2, window, signUp, signIn);
-
-        SetupStructure.finaliseStage(window, signIn);
-        primaryStage = window;
+        General.finaliseStage(primaryStage, signIn);
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    public static String getCssIntro() {
-        return cssIntro;
-    }
-
-    public static String getCssHomepage() {
-        return cssHomepage;
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     public static Scene getSignIn() {
@@ -75,7 +46,11 @@ public class Main extends Application {
         return signUp;
     }
 
-    public static Stage getPrimaryStage() {
-        return primaryStage;
+    public static Scene getHomepage() {
+        return homepage;
+    }
+
+    public static String getCssIntro() {
+        return cssIntro;
     }
 }

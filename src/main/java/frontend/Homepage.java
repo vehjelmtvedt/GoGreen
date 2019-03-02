@@ -2,40 +2,36 @@ package frontend;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
 public class Homepage {
-    private BorderPane border;
-
-    public Homepage() {
-        this.border = new BorderPane();
-    }
-
-    public BorderPane getBorder() {
-        return this.border;
-    }
 
     /**.
-     * create homepage
-     * @param homepage returns Homepage instance
+     * Creates scene for Homepage
+     * @return scene for Homepage
      */
-    public static void main(Homepage homepage) {
+    public static Scene createScene() {
         HBox box = new HBox();
         box.setStyle("-fx-background-color: #0f0;");
 
-        HBox left = homepage.addHbox(1);
-        HBox right = homepage.addHbox(2);
+        HBox left = addHbox(1);
+        HBox right = addHbox(2);
         left.setAlignment(Pos.CENTER_LEFT);
         right.setAlignment(Pos.CENTER_RIGHT);
         box.getChildren().addAll(left, right);
         HBox.setHgrow(right, Priority.ALWAYS);
-        homepage.getBorder().setTop(box);
+
+        BorderPane border = new BorderPane();
+        border.setTop(box);
+
+        return new Scene(border, General.getBounds()[0], General.getBounds()[1]);
     }
 
-    private HBox addHbox(int type) {
+    private static HBox addHbox(int type) {
         HBox hbox = new HBox();
         hbox.setPadding(new Insets(15, 12, 15, 12));
         hbox.setSpacing(10);
