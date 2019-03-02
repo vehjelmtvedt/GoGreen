@@ -114,9 +114,17 @@ public class DbServiceTest {
 
     // TBD tests
     @Test
-    public void testBefriendUsersNull() {
+    public void testBefriendUsersNull1() {
         dbService.addUser(testUser2);
-        dbService.acceptFriendRequest(testUser2.getEmail(), testUserNonExistent.getEmail());
+        dbService.acceptFriendRequest(testUser2.getUsername(), null);
+        Assert.assertEquals(0, dbService.getUser(testUser2.getEmail()).getFriends().size());
+        dbService.deleteUser(testUser2.getEmail());
+    }
+
+    @Test
+    public void testBefriendUsersNull2() {
+        dbService.addUser(testUser2);
+        dbService.acceptFriendRequest(null, testUser2.getUsername());
         Assert.assertEquals(0, dbService.getUser(testUser2.getEmail()).getFriends().size());
         dbService.deleteUser(testUser2.getEmail());
     }
@@ -136,9 +144,22 @@ public class DbServiceTest {
     }
 
     @Test
-    public void testAddFriendRequestNull() {
+    public void testBefriendUsersBothNull() {
+        assertEquals("Invalid username", dbService.acceptFriendRequest(null, null));
+    }
+
+    @Test
+    public void testAddFriendRequestNull1() {
         dbService.addUser(testUser2);
-        dbService.addFriendRequest(testUserNonExistent.getUsername(), testUser2.getEmail());
+        dbService.addFriendRequest(null, testUser2.getUsername()); //false, true
+        Assert.assertEquals(0, dbService.getUser(testUser2.getEmail()).getFriendRequests().size());
+        dbService.deleteUser(testUser2.getEmail());
+    }
+
+    @Test
+    public void testAddFriendRequestNull2() {
+        dbService.addUser(testUser2);
+        dbService.addFriendRequest(testUser2.getUsername(), null); //true, false
         Assert.assertEquals(0, dbService.getUser(testUser2.getEmail()).getFriendRequests().size());
         dbService.deleteUser(testUser2.getEmail());
     }
@@ -147,10 +168,15 @@ public class DbServiceTest {
     public void testAddFriendRequest() {
         dbService.addUser(testUser2);
         dbService.addUser(testUser3);
-        dbService.addFriendRequest(testUser2.getUsername(), testUser3.getUsername());
+        dbService.addFriendRequest(testUser2.getUsername(), testUser3.getUsername()); //true true
         Assert.assertEquals(1, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
         dbService.deleteUser(testUser2.getEmail());
         dbService.deleteUser(testUser3.getEmail());
+    }
+
+    @Test
+    public void testAddFriendRequestBothNull() { //false, false
+        assertEquals("Invalid username", dbService.addFriendRequest(null, null));
     }
 
     @Test
@@ -163,5 +189,26 @@ public class DbServiceTest {
         Assert.assertEquals(0, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
         dbService.deleteUser(testUser2.getEmail());
         dbService.deleteUser(testUser3.getEmail());
+    }
+
+    @Test
+    public void testRejectFriendRequestNull() {
+        dbService.addUser(testUser2);
+        dbService.rejectFriendRequest(null, testUser2.getUsername());
+        Assert.assertEquals(0, dbService.getUser(testUser2.getEmail()).getFriendRequests().size());
+        dbService.deleteUser(testUser2.getEmail());
+    }
+
+    @Test
+    public void testRejectFriendRequestNull2() {
+        dbService.addUser(testUser2);
+        dbService.rejectFriendRequest(testUser2.getUsername(), null);
+        Assert.assertEquals(0, dbService.getUser(testUser2.getEmail()).getFriendRequests().size());
+        dbService.deleteUser(testUser2.getEmail());
+    }
+
+    @Test
+    public void testRejectFriendRequestBothNull() {
+        assertEquals("Invalid username", dbService.rejectFriendRequest(null, null));
     }
 }
