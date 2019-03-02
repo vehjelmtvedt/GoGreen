@@ -62,15 +62,6 @@ public class DbService {
         users.save(user);
     }
 
-    /**
-     * .
-     * @param user
-     */
-
-    public void updateUser(User user) {
-        users.save(user);
-    }
-
     private String encodePassword(String password) {
         return passwordEncoder().encode(password);
     }

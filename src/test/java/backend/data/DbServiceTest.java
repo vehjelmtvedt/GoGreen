@@ -69,6 +69,13 @@ public class DbServiceTest {
     }
 
     @Test
+    public void addUserExisting() {
+        String password = testUser.getPassword();
+        dbService.addUser(testUser);
+        assertEquals(password, dbService.getUser(testUser.getEmail()).getPassword());
+    }
+
+    @Test
     public void testGetUser() {
         // User added in setup()
         assertNotNull(dbService.getUser(testUser.getEmail()));
