@@ -64,8 +64,6 @@ public class SignUp {
         HBox buttons = new HBox();
         buttons.setPadding(new Insets(10, 0, 0, 0));
         buttons.getChildren().addAll(signInButton, signUpButton);
-        buttons.setSpacing(10);
-
 
         // Add First Name Label
         Label firstNameLabel = new Label("First Name : ");
@@ -143,9 +141,13 @@ public class SignUp {
         grid.add(ageField, 1, 7);
         fields.add(ageField);
 
+        TextField[] nameFields = new TextField[2];
+        nameFields[0] = firstNameField;
+        nameFields[1] = lastNameField;
+
         signUpButton.setOnAction(e ->
-                InputValidation.signUpValidate(firstNameField, lastNameField, usernameField,
-                        emailField, passwordField, passReField, ageField, grid, currStage));
+                InputValidation.signUpValidate(nameFields, usernameField,
+                        emailField, passwordField, passReField, ageField, grid));
 
         StageSwitcher.buttonSwitch(signInButton, currStage, prevScene);
 

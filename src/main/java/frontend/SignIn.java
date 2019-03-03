@@ -8,7 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -85,7 +89,6 @@ public class SignIn {
         HBox buttons = new HBox();
         buttons.setPadding(new Insets(10, 0, 0, 0));
         buttons.getChildren().addAll(signInButton, signUpButton);
-        buttons.setSpacing(10);
 
         Label emailLabel = new Label("Email or\nUsername : ");
         grid.add(emailLabel, 0, 1);

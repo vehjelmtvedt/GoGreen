@@ -5,6 +5,7 @@ import backend.data.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -36,7 +37,6 @@ public class Requests {
 
             ObjectMapper mapper = new ObjectMapper();
             String json;
-
             if (type == 1) {
                 json = mapper.writeValueAsString(loginDetails);
             } else {
@@ -56,7 +56,7 @@ public class Requests {
             }
             in.close();
             return response.toString();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
