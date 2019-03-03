@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -23,16 +24,21 @@ public class DbServiceTest {
     @Autowired
     private DbService dbService;
 
-    private final User testUser = new User("Test", "User", 24, "test@email.com","test_user", "pwd");
-    private final User testUserNonExistent = new User("This User", "Will Not Exist", 55,
+    private static final User testUser = new User("Test", "User", 24, "test@email.com","test_user", "pwd");
+    private static final User testUserNonExistent = new User("This User", "Will Not Exist", 55,
             "non-exist@email.com","test_user_non_exist", "pwd123");
-    private final User testUserHasFriends = new User("Person", "With Friends", 42,
+    private static final User testUserHasFriends = new User("Person", "With Friends", 42,
             "fperson@email.com","test_user_friends", "pwd456");
 
 
-    // --- Declare new test users for friend test functionality ---
-    private User testUser2 = new User("Friend", "User", 22, "testF@email.com", "test_userF", "pwd");
-    private User testUser3 = new User("Friended", "User", 21, "testFr@email.com", "test_userFr", "pwd");
+    // --- Declare new test uesrs for friend test functionality ---
+    private static final User testUser2 = new User("Friend", "User", 22, "testF@email.com", "test_userF", "pwd");
+    private static final User testUser3 = new User("Friended", "User", 21, "testFr@email.com", "test_userFr", "pwd");
+
+    private static List<User> regexTestUsers = new ArrayList<User>();
+    private static String[] regexTestUsernames = {"a_user", "abcdefg_user", "bcd_user", "b_user", "def", "powerUser",
+            "casual_user", "123user456", "UsEr", "soomeone", "anyone", "abcdefghuser123ab", "idontknow", "i_am_user_566",
+            "regular"};
 
     @Before
     public void setup() {
@@ -46,9 +52,28 @@ public class DbServiceTest {
         dbService.addUser(testUser3);
     }
 
+    @Before
+    public void setupRegexUsers() {
+        String emailFormat = "regexTest%d@email.com";
+
+        for (int i = 0; i < regexTestUsernames.length; ++i) {
+            String email = String.format(emailFormat, i);
+            User regexUser = new User("Regex", "Test", 20, email, regexTestUsernames[i], "pwd");
+            dbService.addUser(regexUser);
+        }
+    }
+
+
     @Test
     public void getUserNull() {
         assertNull(dbService.getUser(testUserNonExistent.getEmail()));
+    }
+
+    @Test
+    public void addUserExisting() {
+        String password = testUser.getPassword();
+        dbService.addUser(testUser);
+        assertEquals(password, dbService.getUser(testUser.getEmail()).getPassword());
     }
 
     @Test
@@ -111,6 +136,41 @@ public class DbServiceTest {
         assertEquals(1, dbService.getFriends(testUserHasFriends.getEmail()).size());
     }
 
+    @Test
+    public void testRegexNoMatch() {
+        List<String> result = dbService.getMatchingUsers("random-pattern-not-exist");
+
+        assertEquals(0, result.size());
+    }
+
+    private List<String> returnExpectedRegex(String username) {
+        List<String> matching = new ArrayList<String>();
+        List<User> users = dbService.getAllUsers();
+
+        for (User u : users) {
+            if (u.getUsername().toLowerCase().contains(username)) {
+                matching.add(u.getUsername());
+            }
+        }
+
+        return matching;
+    }
+
+    @Test
+    public void testRegexMatch1() {
+        List<String> result = dbService.getMatchingUsers("user");
+        List<String> expected = returnExpectedRegex("user");
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testRegexMatch2() {
+        List<String> result = dbService.getMatchingUsers("def");
+        List<String> expected = returnExpectedRegex("def");
+
+        assertEquals(expected, result);
+    }
 
     // TBD tests
     @Test
