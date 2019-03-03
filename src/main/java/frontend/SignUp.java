@@ -64,6 +64,8 @@ public class SignUp {
         HBox buttons = new HBox();
         buttons.setPadding(new Insets(10, 0, 0, 0));
         buttons.getChildren().addAll(signInButton, signUpButton);
+        buttons.setSpacing(10);
+
 
         // Add First Name Label
         Label firstNameLabel = new Label("First Name : ");
