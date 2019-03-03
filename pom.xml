@@ -148,6 +148,7 @@
                         <exclude>**/frontend/SignIn*</exclude>
                         <exclude>**/frontend/SignUp*</exclude>
                         <exclude>**/frontend/StageSwitcher*</exclude>
+                        <exclude>**/frontend/Questionnaire</exclude>
                     </excludes>
 
                     <rules>
