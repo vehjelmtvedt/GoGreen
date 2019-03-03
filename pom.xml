@@ -141,9 +141,12 @@
                     <excludes>
                         <!-- Exclude GUI classes -->
                         <exclude>**/frontend/ConfirmBox*</exclude>
+                        <exclude>**/frontend/General*</exclude>
+                        <exclude>**/frontend/Homepage*</exclude>
                         <exclude>**/frontend/InputValidation*</exclude>
                         <exclude>**/frontend/Main*</exclude>
-                        <exclude>**/frontend/SetupStructure*</exclude>
+                        <exclude>**/frontend/SignIn*</exclude>
+                        <exclude>**/frontend/SignUp*</exclude>
                         <exclude>**/frontend/StageSwitcher*</exclude>
                     </excludes>
 
