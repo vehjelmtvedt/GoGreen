@@ -8,7 +8,7 @@ package tools;
  * @author Kostas Lyrakis
  *
  */
-final class CarbonCalculator {
+public final class CarbonCalculator {
 
     private CarbonCalculator() {
         super();

@@ -2,28 +2,35 @@ package frontend;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import tools.CarbonCalculator;
+//import tools.CarbonCalculator;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
-
-import javax.xml.soap.Text;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 
 public class Questionnaire {
 
-    public static Scene createScene(){
-// grid setup
+    /**
+     * Creates the questionnaire scene,
+     * where users provides information necessary to calculate their carbon emissions.
+     * @return questionnaire scene
+     */
+    public static Scene createScene() {
+        // grid setup
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(10);
         grid.setHgap(10);
 
-// How many people live in your household?
+        // How many people live in your household?
         TextField household = new TextField();
         Label labelHousehold = new Label("How many people live in your household?");
         Spinner<Integer> spinnerHousehold = new Spinner<>(1, 10, 1);
@@ -31,27 +38,33 @@ public class Questionnaire {
         GridPane.setConstraints(spinnerHousehold, 1, 0);
         grid.getChildren().addAll(labelHousehold, spinnerHousehold);
 
-// Electricity
-        Label labelElectricity = new Label("How much electricity is used in our household? (kWh per year)");
+        // Electricity
+        Label labelElectricity = new Label(
+                "How much electricity is used in our household? (kWh per year)");
         TextField textElectricity = new TextField();
         GridPane.setConstraints(labelElectricity, 0, 1);
         GridPane.setConstraints(textElectricity, 1, 1);
         grid.getChildren().addAll(labelElectricity, textElectricity);
         textElectricity.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
                 if (!newValue.matches("^[0-9]{0,7}$")) {
                     textElectricity.setText(oldValue);
                 }
             }
         });
 
-// Heating Oil
-        Label labelOil = new Label("How much heating oil is used in our household? (litres per year)");
+        // Heating Oil
+        Label labelOil = new Label(
+                "How much heating oil is used in our household? (litres per year)");
         TextField textOil = new TextField();
         textOil.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
                 if (!newValue.matches("^[0-9]{0,7}$")) {
                     textOil.setText(oldValue);
                 }
@@ -62,30 +75,32 @@ public class Questionnaire {
         GridPane.setConstraints(textOil, 1, 2);
         grid.getChildren().addAll(labelOil, textOil);
 
-// Car Type
-        Label labelCarSize = new Label ("Size of car");
-        ComboBox<String> carSizes = new ComboBox<String >();
+        // Car Type
+        Label labelCarSize = new Label("Size of car");
+        ComboBox<String> carSizes = new ComboBox<String>();
         carSizes.getItems().addAll("I don't own a car","small", "medium", "large");
         carSizes.getSelectionModel().selectFirst();
         GridPane.setConstraints(labelCarSize, 0, 3);
         GridPane.setConstraints(carSizes, 1, 3);
         grid.getChildren().addAll(labelCarSize, carSizes);
 
-// Car usage
+        // Car usage
         Label labelCarUsage = new Label("How many kilometres do you travel by car each year?");
         TextField textCarUsage = new TextField();
         GridPane.setConstraints(labelCarUsage, 0, 4);
         GridPane.setConstraints(textCarUsage, 1, 4);
-// Meat and Dairy
+
+        // Meat and Dairy
         Label labelMeatAndDairy = new Label("How much meat/dairy do you eat?");
         ComboBox<String> meatAndDairiyOptions = new ComboBox<String>();
-        meatAndDairiyOptions.getItems().addAll("above average", "average", "below average", "lactovegetarian", "vegan");
+        meatAndDairiyOptions.getItems().addAll(
+                "above average", "average", "below average", "lactovegetarian", "vegan");
         meatAndDairiyOptions.getSelectionModel().selectFirst();
         GridPane.setConstraints(labelMeatAndDairy, 0, 5);
         GridPane.setConstraints(meatAndDairiyOptions, 1, 5);
         grid.getChildren().addAll(labelMeatAndDairy, meatAndDairiyOptions);
 
-// Food Miles
+        // Food Miles
         Label labelFoodMiles = new Label("How much of your food is produced locally?");
         ComboBox<String> foodMilesOptions = new ComboBox<String>();
         foodMilesOptions.getItems().addAll("very little", "average", "above average", "almost all");
@@ -94,7 +109,7 @@ public class Questionnaire {
         GridPane.setConstraints(foodMilesOptions, 1, 6);
         grid.getChildren().addAll(labelFoodMiles, foodMilesOptions);
 
-// Organic Food
+        // Organic Food
         Label labelOrganic = new Label("How much of the food that you eat is organic?");
         ComboBox<String> organicOptions = new ComboBox<String>();
         organicOptions.getItems().addAll("none", "some", "most", "all");
@@ -104,16 +119,18 @@ public class Questionnaire {
         grid.getChildren().addAll(labelOrganic, organicOptions);
 
 
-// Processed Food
-        Label labelProcesed = new Label("How much of your food is packaged / processed (e.g. 'ready meals', tins)?");
+        // Processed Food
+        Label labelProcesed = new Label(
+                "How much of your food is packaged / processed (e.g. 'ready meals', tins)?");
         ComboBox<String> processedOptions = new ComboBox<String>();
-        processedOptions.getItems().addAll("above average", "average", "below average", "very little");
+        processedOptions.getItems().addAll(
+                "above average", "average", "below average", "very little");
         processedOptions.getSelectionModel().selectFirst();
         GridPane.setConstraints(labelProcesed, 0, 8);
         GridPane.setConstraints(processedOptions, 1, 8);
         grid.getChildren().addAll(labelProcesed, processedOptions);
 
-// Submit button
+        // Submit button
         Button submit = new Button("Submit");
         GridPane.setConstraints(submit, 0, 9);
         grid.getChildren().add(submit);
