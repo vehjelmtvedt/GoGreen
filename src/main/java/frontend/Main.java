@@ -2,61 +2,40 @@ package frontend;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
-    private static String css;
+    private static Stage primaryStage;
     private static Scene signIn;
     private static Scene signUp;
-    private static Stage primaryStage;
+    private static Scene homepage;
+    private static String cssIntro;
 
     @Override
     public void start(Stage window) {
-        //setup stage
-        SetupStructure.setPrimaryStage(window, "Go Green sign in");
-
-        //create borderPane for quick form setup
-        BorderPane mainLayoutSignIn = new BorderPane();
-        BorderPane mainLayoutSignUp = new BorderPane();
-        mainLayoutSignIn.setId("mainLayoutSignIn");
-        mainLayoutSignUp.setId("mainLayoutSignUp");
-
-        //initialise forms
-        GridPane signUpForm = SetupStructure.createRegistrationForm();
-        GridPane signInForm = SetupStructure.createRegistrationForm();
-
-        //set top/right/bottom/center/left for main borderPane
-        mainLayoutSignIn.setCenter(signInForm);
-        mainLayoutSignUp.setCenter(signUpForm);
-
-        //set final primary stage aka window and add css
-        signIn = new Scene(mainLayoutSignIn,
-                SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
-
-        signUp = new Scene(mainLayoutSignUp,
-                SetupStructure.getBounds()[0], SetupStructure.getBounds()[1]);
-
-        String cssPath = "/frontend/Style.css";
-        css = this.getClass().getResource(cssPath).toExternalForm();
-        signIn.getStylesheets().add(css);
-        signUp.getStylesheets().add(css);
-
-        SetupStructure.addUiControls(signUpForm, 1, window, signUp, signIn);
-        SetupStructure.addUiControls(signInForm, 2, window, signUp, signIn);
-
-        SetupStructure.finaliseStage(window, signIn);
         primaryStage = window;
+        General.setPrimaryStage(primaryStage, "Go Green");
+
+        signIn = SignIn.createScene();
+        signUp = SignUp.createScene();
+        homepage = Homepage.createScene();
+
+        StageSwitcher.buttonSwitch(SignIn.getSignUpButton(), primaryStage, signUp);
+
+        String cssPathIntro = "/frontend/Style.css";
+        cssIntro = this.getClass().getResource(cssPathIntro).toExternalForm();
+        signIn.getStylesheets().add(cssIntro);
+        signUp.getStylesheets().add(cssIntro);
+
+        General.finaliseStage(primaryStage, signIn);
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    public static String getCss() {
-        return css;
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     public static Scene getSignIn() {
@@ -67,7 +46,11 @@ public class Main extends Application {
         return signUp;
     }
 
-    public static Stage getPrimaryStage() {
-        return primaryStage;
+    public static Scene getHomepage() {
+        return homepage;
+    }
+
+    public static String getCssIntro() {
+        return cssIntro;
     }
 }
