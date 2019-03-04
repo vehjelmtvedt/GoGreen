@@ -98,4 +98,33 @@ public class Requests {
         System.out.println(responseEntity.getBody());
         return responseEntity.getBody();
     }
+
+    public static String rejectFriendRequest(String sender, String accepting) {
+
+        String url = "http://localhost:8080/rejectfriend";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+
+        HttpHeaders requestHeaders = new HttpHeaders();
+
+        //request entity is created with request headers
+        HttpEntity<String> requestEntity = new HttpEntity<>(requestHeaders);
+
+        //adding the query params to the URL
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+                .queryParam("sender", sender)
+                .queryParam("rejecting", accepting);
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(
+                uriBuilder.toUriString(),
+                HttpMethod.GET,
+                requestEntity,
+                String.class
+        );
+        System.out.println(responseEntity.getBody());
+        return responseEntity.getBody();
+    }
+
+
 }

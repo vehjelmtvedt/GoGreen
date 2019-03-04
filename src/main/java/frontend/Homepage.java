@@ -38,7 +38,7 @@ public class Homepage {
         if (type == 1) {
             Button buttonFriends = new Button("Friends");
             buttonFriends.setPrefSize(100, 20);
-            buttonFriends.setOnAction(e -> Requests.acceptFriendRequest("benwil", "kjehans"));
+            //buttonFriends.setOnAction(e -> Requests.rejectFriendRequest("benwil", "kjehans"));
             //buttton action just used for testing.
 
             Button buttonProfile = new Button("My Profile");
