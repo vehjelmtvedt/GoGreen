@@ -72,9 +72,9 @@ public class Requests {
         return responseEntity.getBody();
     }
 
-    public static String acceptFriendRequest(String sender, String receiver) {
+    public static String acceptFriendRequest(String sender, String accepting) {
 
-        String url = "http://localhost:8080/friendrequest";
+        String url = "http://localhost:8080/acceptfriend";
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -87,7 +87,7 @@ public class Requests {
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("sender", sender)
-                .queryParam("receiver", receiver);
+                .queryParam("accepting", accepting);
 
         ResponseEntity<String> responseEntity = restTemplate.exchange(
                 uriBuilder.toUriString(),
