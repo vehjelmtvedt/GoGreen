@@ -2,14 +2,8 @@ package frontend;
 
 import backend.data.LoginDetails;
 import backend.data.User;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.Charset;
+import com.google.gson.Gson;
+import org.springframework.web.client.RestTemplate;
 
 public class Requests {
 
@@ -21,42 +15,29 @@ public class Requests {
      * @return String response from server
      */
     public static String sendRequest(int type, LoginDetails loginDetails, User user) {
-        try {
-            URL url;
+        String url;
+
+        try{
             if (type == 1) {
-                url = new URL("http://localhost:8080/login");
+                url = "http://localhost:8080/login";
             } else {
-                url = new URL("http://localhost:8080/signup");
+                url = "http://localhost:8080/signup";
             }
 
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("POST");
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("Content-Type", "application/json");
+            RestTemplate rest = new RestTemplate();
+            Gson gson  = new Gson();
 
-            ObjectMapper mapper = new ObjectMapper();
-            String json;
             if (type == 1) {
-                json = mapper.writeValueAsString(loginDetails);
+                String json = gson.toJson(loginDetails);
+                rest.postForEntity(url, json, String.class);
+                return url;
             } else {
-                json = mapper.writeValueAsString(user);
+                String json = gson.toJson(user);
+                rest.postForEntity(url, json, String.class);
+                return url;
             }
 
-            con.getOutputStream().write(json.getBytes(Charset.forName("UTF-8")));
-            con.getOutputStream().flush();
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-            return response.toString();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

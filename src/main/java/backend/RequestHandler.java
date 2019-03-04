@@ -5,6 +5,7 @@ import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
 
+import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,10 @@ public class RequestHandler {
      * Login REST Method
      */
     @RequestMapping("/login")
-    public User loginController(@RequestBody LoginDetails loginDetails) {
+    public User loginController(@RequestBody String loginDetails1) {
+
+        Gson gson = new Gson();
+        LoginDetails loginDetails = gson.fromJson(loginDetails1, LoginDetails.class);
 
         if (dbService.grantAccess(loginDetails.getIdentifier(), loginDetails.getPassword())) {
             return dbService.getUser(loginDetails.getIdentifier());
@@ -40,8 +44,9 @@ public class RequestHandler {
      * Sign-up REST Method
      */
     @RequestMapping("/signup")
-    public String signupController(@RequestBody User user) {
-        System.out.println(user);
+    public String signupController(@RequestBody String user1) {
+        Gson gson = new Gson();
+        User user = gson.fromJson(user1, User.class);
         if (dbService.getUser(user.getUsername()) != null) {
             return "username exists";
         }
