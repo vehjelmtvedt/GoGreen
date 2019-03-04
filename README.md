@@ -3,27 +3,6 @@
 
 # CSE1105 Template Repository
 
-This a template repository to help you get started on making the best project possible!
-
-You can download the latest version [here](https://github.com/SERG-Delft/TI1216/releases)
-
-http://stackoverflow.com/a/6466993
-
-## How to import into your IDE
-
-Eclipse:
-[http://javapapers.com/java/import-maven-project-into-eclipse/](http://javapapers.com/java/import-maven-project-into-eclipse/)
-
-Intellij:  
-[https://www.jetbrains.com/help/idea/2016.2/importing-project-from-maven-model.html](https://www.jetbrains.com/help/idea/2016.2/importing-project-from-maven-model.html)
-
-## Getting your weekly reports
-
-**Jacoco**:  
-Run `maven install` ([Intellij](https://www.jetbrains.com/help/idea/2016.3/getting-started-with-maven.html#execute_maven_goal)/[Eclipse](http://imgur.com/a/6q7pV))
-
-**Checkstyle**:  
-Run `maven site`
 
 Person Development Plan
 
@@ -34,7 +13,7 @@ Person Development Plan
 NetID: vhjelmtvedt
 Student number: 4813928
 
-![](doc/Photos/vetlehjelmtvedt.jpg)
+![](doc/photos/ourProfilePictures/vetlehjelmtvedt.jpg)
 
 My strong points that would be applicable to working in a team is flexibility and communication. In previous group projects I have been flexible in terms of what task I have to do in that group that may not have been what I wanted to do. Also, I communicated the issues that I had with that task, and other team members were able to help me. 
 
@@ -56,7 +35,7 @@ The first step to reaching my goal is am writing this, becoming aware of my goal
 
 NetID: amoraru
 
-![](doc/Photos/Alexandru.jpeg)
+![](doc/photos/ourProfilePictures/Alexandru.jpeg)
 
 My strong points regarding this project, meaning what would be applicable in this case,
 are communication and planning. I think these are shown in a team-based project since I
@@ -82,7 +61,7 @@ teammates are serious about this project and that we are going to do a really go
 
 NetID: elatoskinas
 
-![](doc/Photos/EvaldasLatoskinas.jpg)
+![](doc/photos/ourProfilePictures/EvaldasLatoskinas.jpg)
 
 Strong Points:
 
@@ -130,7 +109,7 @@ Project Expectations:
 
 NetID : othabet
 
-![](doc/Photos/they_see_me_sailen_they_haten.jpeg)
+![](doc/photos/ourProfilePictures/they_see_me_sailen_they_haten.jpeg)
 
 What are two of your strong points?
 
@@ -175,7 +154,7 @@ My team mate are great people and Im sure they will help me along the way.
 
 NetID: JClemente
 
-![](doc/Photos/JeanLouis.jpeg)
+![](doc/photos/ourProfilePictures/JeanLouis.jpeg)
 
 The strong points that I think I contribute to the team are my problem solving and organization skills.
 I previous group projects I was able to contribute by effectively delegating work amongst members as well as 
@@ -211,7 +190,7 @@ prior experience that they have in programming.
 NetID: shashankanand
 Student ID: 4790987
 
-![](doc/Photos/ShashankAnand.JPG)
+![](doc/photos/ourProfilePictures/ShashankAnand.JPG)
 
 My strong points are being able to solve complex programming problems, also devising 
 algorithms to solve them. I am also good at recovering from any mistakes made midway 
@@ -238,7 +217,7 @@ great success by the end of this project.
 NetID: klyrakis
 Student number: 4799364
 
-![](doc/Photos/klyrakis.jpg)
+![](doc/photos/ourProfilePictures/klyrakis.jpg)
 
 Strong Points:
 
