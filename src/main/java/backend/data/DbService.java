@@ -54,7 +54,8 @@ public class DbService {
      * @param user - User object to add
      */
     public void addUser(User user) {
-        // New User, encrypt password
+
+        //New User, encrypt password
         if (getUser(user.getEmail()) == null) {
             user.setPassword(encodePassword(user.getPassword()));
         }
@@ -104,7 +105,7 @@ public class DbService {
     public User getUser(String email) {
         // User may not be present in the database
         Optional<User> user = users.findById(email);
-        System.out.println(user);
+        System.out.println(user); //this causes issues appearently cuz of friends in toString is null on signup
 
         // Returns user if found, else returns null
         return user.orElse(null);

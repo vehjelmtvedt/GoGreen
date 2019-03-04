@@ -44,6 +44,9 @@ public class RequestHandler {
      */
     @RequestMapping("/signup")
     public String signupController(@RequestBody User user) {
+        System.out.println(user.getUsername());
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
 
         if (dbService.getUserByUsername(user.getUsername()) != null) {
             return "Username exists";
@@ -52,9 +55,9 @@ public class RequestHandler {
         if (dbService.getUser(user.getEmail()) != null) {
             return "Email exists";
         }
+
         dbService.addUser(user);
         return "success";
-        //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
     @RequestMapping("/getUser")
