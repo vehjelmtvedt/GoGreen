@@ -38,4 +38,7 @@ public class LoginDetailsTest {
     public void testConstructor(){
         assertNotNull(new LoginDetails("",""));
     }
+
+    @Test
+    public void testEmptyConstructor() { assertNotNull(new LoginDetails());}
 }

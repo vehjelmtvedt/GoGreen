@@ -16,7 +16,7 @@ public class Homepage {
      */
     public static Scene createScene() {
         HBox box = new HBox();
-        box.setStyle("-fx-background-color: #0f0;");
+        box.setStyle("-fx-background-color: #009933;");
 
         HBox left = addHbox(1);
         HBox right = addHbox(2);

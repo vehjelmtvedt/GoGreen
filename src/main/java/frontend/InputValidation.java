@@ -7,7 +7,6 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.util.regex.Matcher;
@@ -20,11 +19,13 @@ public class InputValidation {
             "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+";
 
 
-    /**.
+    /**
+     * .
      * Validation for signing in
+     *
      * @param emailField email input field
-     * @param passField password input field
-     * @param form form containing input fields
+     * @param passField  password input field
+     * @param form       form containing input fields
      */
     public static void signInValidate(TextField emailField,
                                       PasswordField passField, GridPane form) {
@@ -45,75 +46,32 @@ public class InputValidation {
         }
     }
 
-    /**.
+    /**
+     * .
      * Validation for input in sign up form
-     * @param firstNameField User's first name field
-     * @param lastNameField User's last name field
+     *
+     * @param nameFields    array of fields containing the user's name
      * @param usernameField User's username name field
-     * @param emailField User's email field
-     * @param passField User's password field
-     * @param passReField User's re-password field
-     * @param ageField User's age field
-     * @param form Form containing input fields
-     * @param stage Stage of application
+     * @param emailField    User's email field
+     * @param passField     User's password field
+     * @param passReField   User's re-password field
+     * @param ageField      User's age field
+     * @param form          Form containing input fields
      */
-    public static void signUpValidate(TextField firstNameField, TextField lastNameField,
+    public static void signUpValidate(TextField[] nameFields,
                                       TextField usernameField, TextField emailField,
                                       PasswordField passField, PasswordField passReField,
-                                      TextField ageField, GridPane form, Stage stage) {
-        if (firstNameField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Form Error!", "Please enter your First Name");
+                                      TextField ageField, GridPane form) {
+
+        if (!signUpValidateFields(nameFields, usernameField, form)) {
             return;
         }
-        if (lastNameField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Form Error!", "Please enter your Last Name");
-            return;
-        }
-        if (usernameField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Form Error!", "Please enter a username");
-            return;
-        }
-        if (emailField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Form Error!", "Please enter your email");
-            return;
-        }
-        if (validateEmail(emailField)) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Form Error!", "Please enter a valid email");
-            return;
-        }
-        if (passField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Form Error!", "Please enter a password");
-            return;
-        }
-        if (passReField.getText().isEmpty() || !passReField.getText().equals(passField.getText())) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Form Error!", "Passwords do not match");
-            return;
-        }
-        if (!validatePassword(passField)) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Form Error!", "Please enter a valid password");
-            return;
-        }
-        if (ageField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Form Error!", "Please enter your age");
-            return;
-        }
-        if (!validateAge(ageField)) {
-            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Form Error!", "Please enter a valid age number");
+        if (!signUpValidatePass(emailField, passField, passReField, ageField, form)) {
             return;
         }
 
-        User user = new User(firstNameField.getText(),
-                lastNameField.getText(),
+        User user = new User(nameFields[0].getText(),
+                nameFields[1].getText(),
                 Integer.parseInt(ageField.getText()), usernameField.getText(),
                 emailField.getText(), passField.getText());
 
@@ -146,6 +104,52 @@ public class InputValidation {
         }
     }
 
+    private static boolean signUpValidateFields(TextField[] nameFields,
+                                                TextField usernameField, GridPane form) {
+        if (nameFields[0].getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Form Error!", "Please enter your First Name");
+            return false;
+        }
+        if (nameFields[1].getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Form Error!", "Please enter your Last Name");
+            return false;
+        }
+        if (usernameField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Form Error!", "Please enter a username");
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean signUpValidatePass(TextField emailField,
+                                              PasswordField passField, PasswordField passReField,
+                                              TextField ageField, GridPane form) {
+        if (emailField.getText().isEmpty() || !validateEmail(emailField)) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Form Error!", "Please enter a valid email");
+            return false;
+        }
+        if (passField.getText().isEmpty() || !validatePassword(passField)) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Form Error!", "Please enter a valid password");
+            return false;
+        }
+        if (passReField.getText().isEmpty() || !passReField.getText().equals(passField.getText())) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Form Error!", "Passwords do not match");
+            return false;
+        }
+        if (ageField.getText().isEmpty() || !validateAge(ageField)) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Form Error!", "Please enter a valid age number");
+            return false;
+        }
+        return true;
+    }
+
     private static boolean validatePassword(TextField input) {
         String pass = input.getText();
         Pattern pattern = Pattern.compile(passPattern);
@@ -163,9 +167,9 @@ public class InputValidation {
         Matcher matcher = pattern.matcher(email);
         if (matcher.matches()) {
             System.out.println("Email is: " + email);
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     private static void showAlert(Alert.AlertType alertType,
