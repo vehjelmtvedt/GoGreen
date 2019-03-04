@@ -41,7 +41,7 @@ public class RequestHandlerTest
     {
         Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(null);
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        assertEquals("email exists", requestHandler.signupController(testUser));
+        assertEquals("Email exists", requestHandler.signupController(testUser));
     }
 
     @Test
@@ -66,8 +66,8 @@ public class RequestHandlerTest
 
     @Test
     public void signUpFailUsername() {
-        Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(testUser);
-        assertEquals("username exists",requestHandler.signupController(testUser));
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        assertEquals("Username exists",requestHandler.signupController(testUser));
     }
     @Test
     public void testgetUser() {
