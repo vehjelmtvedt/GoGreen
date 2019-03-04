@@ -1,14 +1,21 @@
 package backend.data;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class UserTest {
 
-    User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com", "password123");
+    User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
+    User emptyUser = new User();
 
     @Test
     public void testConstructor() { Assert.assertNotNull(userOne);}
+
+    @Test
+    public void testEmptyConstructor() { Assert.assertNotNull(emptyUser);}
 
     @Test
     public void getFirstNameSuccess() {
@@ -61,7 +68,55 @@ public class UserTest {
     }
 
     @Test
-    public void toStringSuccess() { Assert.assertEquals(userOne.toString(),"First name: Vetle\nLast name: " +
-            "Hjelmtvedt\nAge: 19\nEmail: vetle@hjelmtvedt.com\nPassword: password123\nFriend emails: \n");}
+    public void setPasswordSuccess() {
+        userOne.setPassword("pwd123");
+        Assert.assertEquals("pwd123", userOne.getPassword());
+    }
+
+    @Test
+    public void getUsernameSuccess() { Assert.assertEquals(userOne.getUsername(),"test"); }
+
+    @Test
+    public void getFriendRequestsSuccessEmpty() {
+        Assert.assertEquals(0, userOne.getFriendRequests().size());
+    }
+
+    @Test
+    public void getFriendRequestsSuccessNotEmpty() {
+        userOne.newFriendRequest("testname");
+        Assert.assertEquals(1, userOne.getFriendRequests().size());
+        Assert.assertEquals("testname", userOne.getFriendRequests().get(0));
+    }
+
+    @Test
+    public void testAddFriend() {
+        userOne.addFriend("friend1");
+        Assert.assertEquals(userOne.getFriends().get(0),"friend1");
+    }
+
+    @Test
+    public void toStringSuccess() {
+        userOne.addFriend("friend1");
+        Assert.assertEquals(userOne.toString(),"First name: Vetle\nLast name: " +
+            "Hjelmtvedt\nAge: 19\nEmail: vetle@hjelmtvedt.com\nUsername: test\nPassword: password123\nFriend emails: \n"
+                + "-friend1\n");
+    }
+
+    @Test
+    public void testNewFriendRequest() {
+        userOne.newFriendRequest("testfriend");
+        Assert.assertEquals(1, userOne.getFriendRequests().size());
+        Assert.assertEquals("testfriend", userOne.getFriendRequests().get(0));
+    }
+
+    @Test
+    public void testDeleteFriendRequest() {
+        userOne.newFriendRequest("testfriend");
+        userOne.newFriendRequest("testfriend2");
+        Assert.assertEquals("testfriend2", userOne.getFriendRequests().get(1));
+        userOne.deleteFriendRequest("testfriend");
+        Assert.assertEquals("testfriend2", userOne.getFriendRequests().get(0));
+    }
+
 
 }

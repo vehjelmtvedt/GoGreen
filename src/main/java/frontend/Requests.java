@@ -5,18 +5,20 @@ import backend.data.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 
 public class Requests {
+
     /**.
-     * Send request
-     * @param type - type of Request
-     * @param loginDetails - Login Details object (email and password pair)
-     * @param user - User object
-     * @return Request Response
+     * Send request to server
+     * @param type type of post request
+     * @param loginDetails user login details
+     * @param user user details for sign up
+     * @return String response from server
      */
     public static String sendRequest(int type, LoginDetails loginDetails, User user) {
         try {
@@ -35,7 +37,6 @@ public class Requests {
 
             ObjectMapper mapper = new ObjectMapper();
             String json;
-
             if (type == 1) {
                 json = mapper.writeValueAsString(loginDetails);
             } else {
@@ -53,10 +54,9 @@ public class Requests {
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
-            System.out.println(response);
             in.close();
             return response.toString();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
