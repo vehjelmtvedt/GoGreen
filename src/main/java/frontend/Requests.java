@@ -2,8 +2,8 @@ package frontend;
 
 import backend.data.LoginDetails;
 import backend.data.User;
-import com.google.gson.Gson;
 import org.springframework.web.client.RestTemplate;
+import com.google.gson.Gson;
 
 public class Requests {
 
