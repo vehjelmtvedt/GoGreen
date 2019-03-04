@@ -33,15 +33,15 @@ public class RequestsTest {
     private final User testUser = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
     private final LoginDetails testUserDetails = new LoginDetails("alex@email.com", "123456AAaa@@$$");
 
-    @Test
-    public void testType1(){
-        String response = Requests.sendRequest(1, testUserDetails, testUser);
-        assertNotEquals(" ", response);
-    }
-
-    @Test
-    public void testType2(){
-        String response = Requests.sendRequest(2, testUserDetails, testUser);
-        assertNotEquals("", response);
-    }
+//    @Test
+//    public void testType1(){
+//        String response = Requests.sendRequest(1, testUserDetails, testUser);
+//        assertNotEquals(" ", response);
+//    }
+//
+//    @Test
+//    public void testType2(){
+//        String response = Requests.sendRequest(2, testUserDetails, testUser);
+//        assertNotEquals("", response);
+//    }
 }

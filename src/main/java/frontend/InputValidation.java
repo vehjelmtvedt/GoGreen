@@ -32,7 +32,7 @@ public class InputValidation {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
-        String response = Requests.sendRequest(1, loginDetails, new User());
+        String response = Requests.signupRequest(new User());
         System.out.println(response);
         if (response != null && !response.isEmpty()) {
             showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Login successful",
@@ -75,7 +75,8 @@ public class InputValidation {
                 Integer.parseInt(ageField.getText()), emailField.getText(),
                 usernameField.getText(), passField.getText());
 
-        String response = Requests.sendRequest(2, new LoginDetails(), user);
+        String response = Requests.signupRequest(user);
+        System.out.println(response);
 
         if (response != null) {
             if (response.equals("success")) {

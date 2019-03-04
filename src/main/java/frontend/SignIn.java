@@ -110,8 +110,11 @@ public class SignIn {
         grid.add(passwordField, 1, 2);
 
         fields.add(passwordField);
-        signInButton.setOnAction(e ->
-                InputValidation.signInValidate(emailField, passwordField, grid));
+        //Commented for testing RestTemplate
+//        signInButton.setOnAction(e ->
+//                InputValidation.signInValidate(emailField, passwordField, grid));
+
+        signInButton.setOnAction(e -> Requests.getrequest("http://localhost:8080/greeting"));
 
         grid.add(buttons, 1, 3, 1, 1);
         GridPane.setHalignment(buttons, HPos.CENTER);
