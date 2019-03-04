@@ -72,8 +72,8 @@ public class InputValidation {
 
         User user = new User(nameFields[0].getText(),
                 nameFields[1].getText(),
-                Integer.parseInt(ageField.getText()), usernameField.getText(),
-                emailField.getText(), passField.getText());
+                Integer.parseInt(ageField.getText()), emailField.getText(),
+                usernameField.getText(), passField.getText());
 
         String response = Requests.sendRequest(2, new LoginDetails(), user);
 

@@ -1,8 +1,7 @@
 ![coverage](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/develop/coverage.svg)
 ![pipeline](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/develop/pipeline.svg)
 
-# CSE1105 Template Repository
-
+# CSE1105 Group 38 Project
 
 Person Development Plan
 
