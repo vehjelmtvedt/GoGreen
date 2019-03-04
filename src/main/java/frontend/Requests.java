@@ -37,7 +37,6 @@ public class Requests {
 
             ObjectMapper mapper = new ObjectMapper();
             String json;
-
             if (type == 1) {
                 json = mapper.writeValueAsString(loginDetails);
             } else {

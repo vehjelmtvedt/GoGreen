@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class SignUp {
     private static final ArrayList<TextField> fields = new ArrayList<>();
-    private static ArrayList<TextField> textFields = new ArrayList<>();
 
     /**.
      * Creates scene for SignUp form
@@ -65,8 +64,6 @@ public class SignUp {
         HBox buttons = new HBox();
         buttons.setPadding(new Insets(10, 0, 0, 0));
         buttons.getChildren().addAll(signInButton, signUpButton);
-        buttons.setSpacing(10);
-
 
         // Add First Name Label
         Label firstNameLabel = new Label("First Name : ");
@@ -78,7 +75,6 @@ public class SignUp {
         firstNameField.setPromptText("First Name");
         grid.add(firstNameField, 1, 1);
         fields.add(firstNameField);
-        textFields.add(firstNameField);
 
         // Add Last Name Label
         Label lastNameLabel = new Label("Last Name : ");
@@ -90,8 +86,6 @@ public class SignUp {
         lastNameField.setPromptText("Last Name");
         grid.add(lastNameField, 1, 2);
         fields.add(lastNameField);
-        textFields.add(lastNameField);
-
         //Add Username Label
         Label usernameLabel = new Label("Username : ");
         grid.add(usernameLabel, 0, 3);
@@ -102,7 +96,6 @@ public class SignUp {
         usernameField.setPromptText("Username");
         grid.add(usernameField, 1, 3);
         fields.add(usernameField);
-        textFields.add(usernameField);
 
         // Add Email Label
         Label emailLabel = new Label("Email ID : ");
@@ -114,7 +107,6 @@ public class SignUp {
         emailField.setPromptText("Email");
         grid.add(emailField, 1, 4);
         fields.add(emailField);
-        textFields.add(emailField);
 
         // Add Password Label
         Label passwordLabel = new Label("Password : ");
@@ -148,11 +140,14 @@ public class SignUp {
         ageField.setPromptText("Your age");
         grid.add(ageField, 1, 7);
         fields.add(ageField);
-        textFields.add(ageField);
+
+        TextField[] nameFields = new TextField[2];
+        nameFields[0] = firstNameField;
+        nameFields[1] = lastNameField;
 
         signUpButton.setOnAction(e ->
-                InputValidation.signUpValidate(textFields,
-                        passwordField, passReField, grid, currStage));
+                InputValidation.signUpValidate(nameFields, usernameField,
+                        emailField, passwordField, passReField, ageField, grid));
 
         StageSwitcher.buttonSwitch(signInButton, currStage, prevScene);
 

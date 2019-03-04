@@ -89,7 +89,6 @@ public class SignIn {
         HBox buttons = new HBox();
         buttons.setPadding(new Insets(10, 0, 0, 0));
         buttons.getChildren().addAll(signInButton, signUpButton);
-        buttons.setSpacing(10);
 
         Label emailLabel = new Label("Email or\nUsername : ");
         grid.add(emailLabel, 0, 1);
