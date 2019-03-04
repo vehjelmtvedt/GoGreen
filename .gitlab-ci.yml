@@ -1,4 +1,5 @@
 # For JavaFX support
+# For JavaFX support
 image: "tgalopin/maven-javafx"
 
 variables:
@@ -12,16 +13,16 @@ cache:
     - .m2/repository
 
 stages:
- - build
- - test
- - deploy
+  - build
+  - test
+  - deploy
 
 # Passes if the code compiles
 compile:
- stage: build
- script:
-  - echo "Compiling project with maven"
-  - mvn $MAVEN_CLI_OPTS compile
+  stage: build
+  script:
+    - echo "Compiling project with maven"
+    - mvn $MAVEN_CLI_OPTS compile
 
 # Passes if all tests succeed
 run-tests:
@@ -49,8 +50,8 @@ coverage:
 
 # Checks style of the code and fails if >= 5 warnings/errors
 checkstyle:
- stage: test
- script:
-   - echo "Checkstyle check"
-   - mvn checkstyle:check
- allow_failure: true
+  stage: test
+  script:
+    - echo "Checkstyle check"
+    - mvn checkstyle:check
+  allow_failure: true
