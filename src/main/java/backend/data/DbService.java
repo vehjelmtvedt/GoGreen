@@ -105,8 +105,7 @@ public class DbService {
     public User getUser(String email) {
         // User may not be present in the database
         Optional<User> user = users.findById(email);
-        System.out.println(user); //this causes issues appearently cuz of friends in toString is null on signup
-
+        System.out.println(user);
         // Returns user if found, else returns null
         return user.orElse(null);
     }

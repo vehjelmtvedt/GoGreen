@@ -11,6 +11,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class Requests {
 
+    /**
+     * Sends signup request to the server.
+     * @param user - user signing up
+     * @return response from the server.
+     */
     public static String signupRequest(User user) {
         String url = "http://localhost:8080/signup";
 
@@ -23,6 +28,11 @@ public class Requests {
 
     }
 
+    /**
+     * Sends login request to the server.
+     * @param loginDetails - login details of user wanting to log in
+     * @return response from server
+     */
     public static String loginRequest(LoginDetails loginDetails) {
         String url = "http://localhost:8080/login";
 
@@ -34,6 +44,11 @@ public class Requests {
         return response.getBody();
     }
 
+    /**
+     * Get User identified by username or email from server.
+     * @param identifier - username or email
+     * @return - the User of the identifier (if any)
+     */
     public static User getUserRequest(String identifier) {
         String url = "http://localhost:8080/getUser";
 
@@ -45,6 +60,12 @@ public class Requests {
         return response.getBody();
     }
 
+    /**
+     * Sends a friend request from one user to another.
+     * @param sender - user sending the friend request
+     * @param receiver - user receiving the friend request
+     * @return
+     */
     public static String sendFriendRequest(String sender, String receiver) {
 
         String url = "http://localhost:8080/friendrequest";
@@ -72,6 +93,12 @@ public class Requests {
         return responseEntity.getBody();
     }
 
+    /**
+     * Request from a user to accept a friend request.
+     * @param sender - user who sent the friend request
+     * @param accepting - user who accepts the request
+     * @return
+     */
     public static String acceptFriendRequest(String sender, String accepting) {
 
         String url = "http://localhost:8080/acceptfriend";
@@ -99,7 +126,13 @@ public class Requests {
         return responseEntity.getBody();
     }
 
-    public static String rejectFriendRequest(String sender, String accepting) {
+    /**
+     * Request from a user to reject a friend request.
+     * @param sender - user who sent the request
+     * @param rejecting - user who is rejecting the request
+     * @return
+     */
+    public static String rejectFriendRequest(String sender, String rejecting) {
 
         String url = "http://localhost:8080/rejectfriend";
 
@@ -114,7 +147,7 @@ public class Requests {
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("sender", sender)
-                .queryParam("rejecting", accepting);
+                .queryParam("rejecting", rejecting);
 
         ResponseEntity<String> responseEntity = restTemplate.exchange(
                 uriBuilder.toUriString(),
