@@ -44,14 +44,14 @@ public class RequestHandler {
      */
     @RequestMapping("/signup")
     public String signupController(@RequestBody User user) {
-        System.out.println(user);
-        if (dbService.getUser(user.getUsername()) != null) {
-            return "username exists";
-        }
-        if (dbService.getUser(user.getEmail()) != null) {
-            return "email exists";
+
+        if (dbService.getUserByUsername(user.getUsername()) != null) {
+            return "Username exists";
         }
 
+        if (dbService.getUser(user.getEmail()) != null) {
+            return "Email exists";
+        }
         dbService.addUser(user);
         return "success";
         //return new ResponseEntity<>("Success", HttpStatus.OK);
