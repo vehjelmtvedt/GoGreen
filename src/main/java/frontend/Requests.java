@@ -7,17 +7,19 @@ import org.springframework.web.client.RestTemplate;
 
 public class Requests {
 
-    /**.
+    /**
+     * .
      * Send request to server
-     * @param type type of post request
+     *
+     * @param type         type of post request
      * @param loginDetails user login details
-     * @param user user details for sign up
+     * @param user         user details for sign up
      * @return String response from server
      */
     public static String sendRequest(int type, LoginDetails loginDetails, User user) {
         String url;
 
-        try{
+        try {
             if (type == 1) {
                 url = "http://localhost:8080/login";
             } else {
@@ -25,7 +27,7 @@ public class Requests {
             }
 
             RestTemplate rest = new RestTemplate();
-            Gson gson  = new Gson();
+            Gson gson = new Gson();
 
             if (type == 1) {
                 String json = gson.toJson(loginDetails);
