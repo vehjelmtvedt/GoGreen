@@ -7,7 +7,7 @@ import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
@@ -17,6 +17,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringRunner.class)
@@ -109,6 +112,23 @@ public class RequestsTest {
         assertEquals(testUser2, Requests.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
         Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
         assertEquals(testUser2, Requests.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+    }
+
+    @Test
+    public void testValidateUserRequestEmail() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        assertTrue(Requests.validateUserRequest(testUser.getEmail()));
+    }
+
+    @Test
+    public void testValidateUserRequestUsername() {
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        assertTrue(Requests.validateUserRequest(testUser.getUsername()));
+    }
+
+    @Test
+    public void testValidateUserRequestInvalid() {
+        assertFalse(Requests.validateUserRequest("Invalid"));
     }
 
 //    @Test
