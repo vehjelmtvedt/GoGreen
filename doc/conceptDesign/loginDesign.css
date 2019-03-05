@@ -1,0 +1,326 @@
+/*CSS for login page*/
+
+/*!* Main *! - the whole window*/
+
+/*position: relative;*/
+/*width: 1440px;*/
+/*height: 1024px;*/
+
+/*background: #FFFFFF;*/
+
+/*!* Graphics *! - right side of the screen*/
+
+/*position: absolute;*/
+/*width: 616px;*/
+/*height: 1024px;*/
+/*left: 0px;*/
+/*top: 0px;*/
+
+/*background: rgba(55, 155, 30, 0.8);*/
+/*opacity: 0.6;*/
+
+/*!* icon *!*/
+
+/*position: absolute;*/
+/*width: 423px;*/
+/*height: 373px;*/
+/*left: 97px;*/
+/*top: 0px;*/
+
+/*background: url(icon.png);*/
+
+/*!* tree *!*/
+
+/*position: absolute;*/
+/*width: 900px;*/
+/*height: 1024px;*/
+/*left: -284px;*/
+/*top: 0px;*/
+
+/*background: url(tree.jpg);*/
+
+/*!* GoGreen *!*/
+
+/*position: absolute;*/
+/*width: 373px;*/
+/*height: 144px;*/
+/*left: 122px;*/
+/*top: 373px;*/
+
+/*font-family: Reenie Beanie;*/
+/*font-style: normal;*/
+/*font-weight: 500;*/
+/*line-height: normal;*/
+/*font-size: 144px;*/
+
+/*color: #FFFFFF;*/
+
+/*!* Line 1 *!*/
+
+/*position: absolute;*/
+/*width: 513px;*/
+/*height: 72px;*/
+/*left: 52px;*/
+/*top: 569px;*/
+
+/*font-family: Reenie Beanie;*/
+/*font-style: normal;*/
+/*font-weight: 500;*/
+/*line-height: normal;*/
+/*font-size: 72px;*/
+
+/*color: #FFFFFF;*/
+
+/*!* Line 2 *!*/
+
+/*position: absolute;*/
+/*width: 590px;*/
+/*height: 72px;*/
+/*left: 13px;*/
+/*top: 693px;*/
+
+/*font-family: Reenie Beanie;*/
+/*font-style: normal;*/
+/*font-weight: 500;*/
+/*line-height: normal;*/
+/*font-size: 72px;*/
+
+/*color: #FFFFFF;*/
+
+/*!* Line 3 *!*/
+
+/*position: absolute;*/
+/*width: 463px;*/
+/*height: 72px;*/
+/*left: 52px;*/
+/*top: 837px;*/
+
+/*font-family: Reenie Beanie;*/
+/*font-style: normal;*/
+/*font-weight: 500;*/
+/*line-height: normal;*/
+/*font-size: 72px;*/
+
+/*color: #FFFFFF;*/
+
+/*!* Input *! - left side of the screen*/
+
+/*position: absolute;*/
+/*width: 824px;*/
+/*height: 1024px;*/
+/*left: 616px;*/
+/*top: 0px;*/
+
+/*background: #FFFFFF;*/
+
+/*!* Login *!*/
+
+/*position: absolute;*/
+/*width: 146px;*/
+/*height: 45px;*/
+/*left: 71px;*/
+/*top: 89px;*/
+
+/*font-family: Roboto;*/
+/*font-style: normal;*/
+/*font-weight: normal;*/
+/*line-height: normal;*/
+/*font-size: 48px;*/
+
+/*color: #379B1E;*/
+
+/*mix-blend-mode: normal;*/
+
+/*!* / Signup *!*/
+
+/*position: absolute;*/
+/*width: 276px;*/
+/*height: 37px;*/
+/*left: 200px;*/
+/*top: 93px;*/
+
+/*font-family: Roboto;*/
+/*font-style: normal;*/
+/*font-weight: normal;*/
+/*line-height: normal;*/
+/*font-size: 48px;*/
+
+/*color: #868282;*/
+
+/*!* Username / Email *!*/
+
+/*position: absolute;*/
+/*width: 372px;*/
+/*height: 14px;*/
+/*left: 89px;*/
+/*top: 327px;*/
+
+/*font-family: Roboto;*/
+/*font-style: normal;*/
+/*font-weight: normal;*/
+/*line-height: normal;*/
+/*font-size: 24px;*/
+
+/*color: rgba(70, 68, 68, 0.3);*/
+
+/*!* Line *!*/
+
+/*position: absolute;*/
+/*width: 653px;*/
+/*height: 0px;*/
+/*left: 89px;*/
+/*top: 368px;*/
+
+/*border: 1px solid #464444;*/
+
+/*!* Password *! - icon*/
+
+/*position: absolute;*/
+/*width: 372px;*/
+/*height: 14px;*/
+/*left: 89px;*/
+/*top: 457px;*/
+
+/*font-family: Roboto;*/
+/*font-style: normal;*/
+/*font-weight: normal;*/
+/*line-height: normal;*/
+/*font-size: 24px;*/
+
+/*color: rgba(70, 68, 68, 0.3);*/
+
+/*!* person *! - icon*/
+
+/*position: absolute;*/
+/*width: 31px;*/
+/*height: 36px;*/
+/*left: 711px;*/
+/*top: 316px;*/
+
+/*background: url(person.png);*/
+
+/*!* Button Login *!*/
+
+/*position: absolute;*/
+/*width: 172px;*/
+/*height: 73px;*/
+/*left: 89px;*/
+/*top: 565px;*/
+
+/*background: #FFFFFF;*/
+/*border: 5px solid #AFCF2C;*/
+/*border-radius: 30px;*/
+
+
+/*!* LOGIN *!*/
+
+/*position: absolute;*/
+/*width: 260px;*/
+/*height: 24px;*/
+/*left: 121px;*/
+/*top: 579px;*/
+
+/*font-family: Roboto;*/
+/*font-style: normal;*/
+/*font-weight: 200;*/
+/*line-height: normal;*/
+/*font-size: 36px;*/
+
+/*color: #000000;*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
