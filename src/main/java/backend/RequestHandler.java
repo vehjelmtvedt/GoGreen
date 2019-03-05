@@ -75,9 +75,15 @@ public class RequestHandler {
 
     }
 
+    /**
+     * Checks if the user is a valid user.
+     * @param identifier username or email
+     * @return - OK if valid user, NONE otherwise
+     */
     @RequestMapping("/validateUser")
     public String validateUser(@RequestBody String identifier) {
-        if  (dbService.getUser(identifier) != null || dbService.getUserByUsername(identifier) != null) {
+        if  (dbService.getUser(identifier) != null
+                || dbService.getUserByUsername(identifier) != null) {
             return "OK";
         } else {
             return "NONE";

@@ -150,6 +150,11 @@ public class Requests {
         return responseEntity.getBody();
     }
 
+    /**
+     * Sends request to server/db to check if user is valid.
+     * @param identifier - username or email
+     * @return - returns true if user is validated, false if not.
+     */
     public static boolean validateUserRequest(String identifier) {
         String url = "http://localhost:8080/validateUser";
         RestTemplate rest = new RestTemplate();

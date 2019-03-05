@@ -1,6 +1,5 @@
 package frontend;
 
-import backend.data.LoginDetails;
 import backend.data.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
