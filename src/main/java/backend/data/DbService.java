@@ -87,8 +87,9 @@ public class DbService {
 
         System.out.println(user);
 
-        if(passwordEncoder().matches(password, user.getPassword()))
+        if (passwordEncoder().matches(password, user.getPassword())) {
             return user;
+        }
 
         return null;
     }

@@ -77,12 +77,12 @@ public class RequestHandler {
 
     @RequestMapping("/validateEmail")
     public boolean validateEmail(@RequestParam String email) {
-        return dbService.getUser(email)!=null;
+        return dbService.getUser(email) != null;
     }
 
     @RequestMapping("/validateUsername")
     public boolean validateUsername(@RequestParam String username) {
-        return dbService.getUserByUsername(username)!=null;
+        return dbService.getUserByUsername(username) != null;
     }
 }
 

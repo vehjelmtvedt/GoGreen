@@ -102,7 +102,7 @@ public class DbServiceTest {
 
     @Test
     public void testAuthenticationGrant() {
-        assertEquals(testUser,dbService.grantAccess(testUser.getEmail(), "pwd"));
+        assertEquals(testUser.getUsername(),dbService.grantAccess(testUser.getEmail(), "pwd").getUsername());
     }
 
     @Test
