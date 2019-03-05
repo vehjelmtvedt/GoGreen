@@ -146,7 +146,6 @@ public class Questionnaire {
             String locallyProducedFoodConsumption = locallyProducedFoodOptions.getValue();
             String organicFoodConsumption = organicOptions.getValue();
             String processedFoodConsumption = processedOptions.getValue();
-
             User testUser = new User("Ash",
                     "Ketchum",
                     10, "pokemonMaster@PalletTown.com",
@@ -159,6 +158,7 @@ public class Questionnaire {
             testUser.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
             testUser.setOrganicFoodConsumption(organicFoodConsumption);
             testUser.setProcessedFoodConsumption(processedFoodConsumption);
+
             String response = Requests.sendRequest(2, new LoginDetails(), testUser);
             if (response != null) {
                 if (response.equals("success")) {
@@ -187,3 +187,4 @@ public class Questionnaire {
 //            System.out.println("Organic Food Consumption: " + organicFoodConsumption);
 //            System.out.println("Processed Food Consmption: " + processedFoodConsumption);
 //            System.out.println("");
+
