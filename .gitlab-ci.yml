@@ -65,3 +65,12 @@ checkstyle-report:
   artifacts:
     paths:
       - target/site/checkstyle.html
+
+site:
+  stage: deploy
+  script:
+    - echo "Run maven site (generates all reports)"
+    - mvn site
+  artifacts:
+    paths:
+      - target/site/
