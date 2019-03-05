@@ -3,6 +3,7 @@ package backend.data;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class User {
 
@@ -125,6 +126,20 @@ public class User {
         friendRequests.remove(username);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return age == user.age &&
+                email.equals(user.email) &&
+                username.equals(user.username) &&
+                firstName.equals(user.firstName) &&
+                lastName.equals(user.lastName) &&
+                password.equals(user.password) &&
+                friends.equals(user.friends) &&
+                friendRequests.equals(user.friendRequests);
+    }
 
     /*
      * Removes a friend from the friends list

@@ -2,12 +2,15 @@ package frontend;
 
 import backend.data.LoginDetails;
 import backend.data.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.io.IOException;
 
 public class Requests {
 
@@ -23,7 +26,6 @@ public class Requests {
         ResponseEntity<String> response;
 
         response = rest.postForEntity(url,user,String.class);
-        System.out.println(response);
         return response.getBody();
 
     }
@@ -33,15 +35,11 @@ public class Requests {
      * @param loginDetails - login details of user wanting to log in
      * @return response from server
      */
-    public static String loginRequest(LoginDetails loginDetails) {
+    public static User loginRequest(LoginDetails loginDetails) {
         String url = "http://localhost:8080/login";
-
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<String> response;
-
-        response = rest.postForEntity(url, loginDetails, String.class);
-        System.out.println(response);
-        return response.getBody();
+        ResponseEntity<User> returned = rest.postForEntity(url, loginDetails, User.class);
+        return returned.getBody();
     }
 
     /**
@@ -51,13 +49,9 @@ public class Requests {
      */
     public static User getUserRequest(String identifier) {
         String url = "http://localhost:8080/getUser";
-
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<User> response;
-
-        response = rest.getForEntity(url, User.class);
-        System.out.println(response);
-        return response.getBody();
+        ResponseEntity<User> returned = rest.postForEntity(url, identifier, User.class);
+        return returned.getBody();
     }
 
     /**
@@ -157,6 +151,16 @@ public class Requests {
         );
         System.out.println(responseEntity.getBody());
         return responseEntity.getBody();
+    }
+
+    public static User JSONtoUser(String json) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(json, User.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

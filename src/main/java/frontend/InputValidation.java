@@ -32,9 +32,9 @@ public class InputValidation {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
-        String response = Requests.loginRequest(loginDetails);
+        User response = Requests.loginRequest(loginDetails);
         System.out.println(response);
-        if (response != null && !response.isEmpty()) {
+        if (response != null) {
             showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(), "Login successful",
                     "Welcome to GoGreen, " + response);
             General.resetFields(SignIn.getFields());
