@@ -150,6 +150,13 @@ public class Requests {
         return responseEntity.getBody();
     }
 
+    public static boolean validateUserRequest(String identifier) {
+        String url = "http://localhost:8080/getUser";
+        RestTemplate rest = new RestTemplate();
+        ResponseEntity<String> returned = rest.postForEntity(url, identifier, String.class);
+        return returned.getBody().equals("OK");
+    }
+
 
 
 

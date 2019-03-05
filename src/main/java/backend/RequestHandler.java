@@ -75,18 +75,24 @@ public class RequestHandler {
 
     }
 
-    @RequestMapping
-    public boolean validateUser()
-
-    @RequestMapping("/validateEmail")
-    public boolean validateEmail(@RequestBody String email) {
-        return dbService.getUser(email) != null;
+    @RequestMapping("/validateUser")
+    public String validateUser(@RequestBody String identifier) {
+        if  (dbService.getUser(identifier) != null || dbService.getUserByUsername(identifier) != null) {
+            return "OK";
+        } else {
+            return "NONE";
+        }
     }
 
-    @RequestMapping("/validateUsername")
-    public boolean validateUsername(@RequestBody String username) {
-        return dbService.getUserByUsername(username) != null;
-    }
+//    @RequestMapping("/validateEmail")
+//    public boolean validateEmail(@RequestBody String email) {
+//        return dbService.getUser(email) != null;
+//    }
+//
+//    @RequestMapping("/validateUsername")
+//    public boolean validateUsername(@RequestBody String username) {
+//        return dbService.getUserByUsername(username) != null;
+//    }
 }
 
 
