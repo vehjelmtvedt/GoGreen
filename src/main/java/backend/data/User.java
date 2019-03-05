@@ -134,10 +134,8 @@ public class User {
             return false;
         }
         User user = (User) obj;
-        return age == user.age && email.equals(user.email)
-                && username.equals(user.username) && firstName.equals(user.firstName)
-                && lastName.equals(user.lastName) && password.equals(user.password)
-                && friends.equals(user.friends) && friendRequests.equals(user.friendRequests);
+        return email.equals(user.email)
+                || username.equals(user.username);
     }
 
     /*
