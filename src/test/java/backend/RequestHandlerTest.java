@@ -50,14 +50,14 @@ public class RequestHandlerTest
 
     @Test
     public void testLoginSuccess() {
-        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(true);
+        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         assertEquals(testUser, requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
     @Test
     public void testLoginFail() {
-        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(false);
+        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(null);
         assertEquals(null, requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
@@ -119,5 +119,17 @@ public class RequestHandlerTest
         Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
         Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), "invalid")).thenReturn(null); //test2 accepts test
         assertEquals(null, requestHandler.rejectFriendRequest(testUser.getUsername(), "invalid"));
+    }
+
+    @Test
+    public void testValidateEmail() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        assertEquals(true, requestHandler.validateEmail(testUser.getEmail()));
+    }
+
+    @Test
+    public void testValidateUsername() {
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        assertEquals(true, requestHandler.validateUsername(testUser.getUsername()));
     }
 }

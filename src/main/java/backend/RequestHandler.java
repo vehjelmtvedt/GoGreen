@@ -4,6 +4,7 @@ import backend.data.DbService;
 
 import backend.data.LoginDetails;
 import backend.data.User;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,11 +31,7 @@ public class RequestHandler {
     @RequestMapping("/login")
     public User loginController(@RequestBody LoginDetails loginDetails) {
 
-        if (dbService.grantAccess(loginDetails.getIdentifier(), loginDetails.getPassword())) {
-            return dbService.getUser(loginDetails.getIdentifier());
-        }
-
-        return null;
+        return dbService.grantAccess(loginDetails.getIdentifier(),loginDetails.getPassword());
     }
 
     /**
@@ -54,6 +51,7 @@ public class RequestHandler {
 
         dbService.addUser(user);
         return "success";
+        //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
     @RequestMapping("/getUser")
@@ -77,7 +75,18 @@ public class RequestHandler {
 
     }
 
+    @RequestMapping
+    public boolean validateUser()
 
+    @RequestMapping("/validateEmail")
+    public boolean validateEmail(@RequestBody String email) {
+        return dbService.getUser(email) != null;
+    }
+
+    @RequestMapping("/validateUsername")
+    public boolean validateUsername(@RequestBody String username) {
+        return dbService.getUserByUsername(username) != null;
+    }
 }
 
 

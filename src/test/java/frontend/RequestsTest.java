@@ -6,7 +6,6 @@ import backend.Server;
 import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
-import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import org.junit.runner.RunWith;
@@ -14,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.mongodb.core.mapping.TextScore;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -57,7 +55,7 @@ public class RequestsTest {
 
     @Test
     public void loginRequest() {
-        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(true);
+        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         assertEquals(testUser, Requests.loginRequest(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
@@ -113,5 +111,15 @@ public class RequestsTest {
         assertEquals(testUser2, Requests.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
-
+//    @Test
+//    public void testRequestValidate1() {
+//        boolean response = Requests.requestValidate(1, testUser.getUsername());
+//        assertFalse(!response);
+//    }
+//
+//    @Test
+//    public void testRequestValidate2() {
+//        boolean response = Requests.requestValidate(2, testUser.getEmail());
+//        assertFalse(!response);
+//    }
 }
