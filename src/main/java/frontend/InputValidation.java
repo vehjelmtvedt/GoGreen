@@ -72,45 +72,47 @@ public class InputValidation {
 
         //send requests to the server to see if username and password already exist
         //before proceeding to the questionnaire page
-        //        String username = usernameField.getText();
-        //        String email = emailField.getText();
-        //
-        //        if (!Requests.requestValidate(1, username)) {
-        //            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-        //                    "Username Error!", "An user already exists with this username."
-        //                            + "Use another username");
-        //        }
-        //
-        //        if (!Requests.requestValidate(2, email)) {
-        //            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-        //                    "Email Error!", "A user already exists with this email."
-        //                            + "Use another email");
-        //        }
-        //
+        String username = usernameField.getText();
+        String email = emailField.getText();
+
+        if (Requests.requestValidate(1, username)) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Username Error!", "A user already exists with this username."
+                            + "Use another username");
+            return;
+        }
+
+        if (Requests.requestValidate(2, email)) {
+            showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+                    "Email Error!", "A user already exists with this email."
+                            + "Use another email");
+            return;
+        }
 
         User user = new User(nameFields[0].getText(),
                 nameFields[1].getText(),
                 Integer.parseInt(ageField.getText()), emailField.getText(),
                 usernameField.getText(), passField.getText());
 
-        String response = Requests.sendRequest(2, new LoginDetails(), user);
-
-        if (response != null) {
-            if (response.equals("success")) {
-                showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(),
-                        "Registration Successful!",
-                        "Go to login screen and enter your new credentials!");
-                General.resetFields(SignUp.getFields());
-            } else if (response.equals("username exists")) {
-                showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                        "Username Error!", "A user already exists with this username."
-                                + "Use another username");
-            } else {
-                showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                        "Email Error!", "A user already exists with this email."
-                                + "Use another email");
-            }
-        }
+        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Questionnaire.createScene(user));
+//        String response = Requests.sendRequest(2, new LoginDetails(), user);
+//
+//        if (response != null) {
+//            if (response.equals("success")) {
+//                showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(),
+//                        "Registration Successful!",
+//                        "Go to login screen and enter your new credentials!");
+//                General.resetFields(SignUp.getFields());
+//            } else if (response.equals("username exists")) {
+//                showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+//                        "Username Error!", "A user already exists with this username."
+//                                + "Use another username");
+//            } else {
+//                showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+//                        "Email Error!", "A user already exists with this email."
+//                                + "Use another email");
+//            }
+//        }
     }
 
     private static boolean validateAge(TextField input) {
