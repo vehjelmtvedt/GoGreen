@@ -18,12 +18,13 @@ public class User {
     private ArrayList<String> friendRequests;
     private int electricityDailyConsumption;
     private double heatingOilDailyConsumption;
-    private int DailyCarKilometres;
+    private int dailyCarKilometres;
     private String carType;
     private String meatAndDairyConsumption;
     private String locallyProducedFoodConsumption;
     private String organicFoodConsumption;
     private String processedFoodConsumption;
+    private float totalCarbonSaved;
 
     /**
      * Constructor of User object.
@@ -46,11 +47,12 @@ public class User {
         this.electricityDailyConsumption = 0;
         this.heatingOilDailyConsumption = 0;
         this.carType = "default";
-        this.DailyCarKilometres = 0;
+        this.dailyCarKilometres = 0;
         this.meatAndDairyConsumption = "default";
         this.locallyProducedFoodConsumption = "default";
         this.organicFoodConsumption = "default";
         this.processedFoodConsumption = "default";
+        this.totalCarbonSaved = 0;
     }
 
     public User() {
@@ -109,11 +111,11 @@ public class User {
     }
 
     public void setDailyCarKilometres(int dailyCarKilometres) {
-        this.DailyCarKilometres = dailyCarKilometres;
+        this.dailyCarKilometres = dailyCarKilometres;
     }
 
     public int getDailyCarKilometres() {
-        return this.DailyCarKilometres;
+        return this.dailyCarKilometres;
     }
 
     public void setCarType(String carType) {
@@ -153,7 +155,15 @@ public class User {
     }
 
     public String getProcessedFoodConsumption() {
-        return this.organicFoodConsumption;
+        return this.processedFoodConsumption;
+    }
+
+    public void setTotalCarbonSaved(float totalCarbonSaved) {
+        this.totalCarbonSaved = totalCarbonSaved;
+    }
+
+    public float getTotalCarbonSaved() {
+        return this.totalCarbonSaved;
     }
 
     /**

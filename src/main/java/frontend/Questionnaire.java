@@ -8,7 +8,11 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 
@@ -20,22 +24,17 @@ public class Questionnaire {
      * @return questionnaire scene
      */
     public static Scene createScene() {
-        // grid setup
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(10);
         grid.setHgap(10);
-
-        // How many people live in your household?
         TextField household = new TextField();
         Label labelHousehold = new Label("How many people live in your household?");
         Spinner<Integer> spinnerHousehold = new Spinner<>(1, 10, 1);
         GridPane.setConstraints(labelHousehold, 0, 0);
         GridPane.setConstraints(spinnerHousehold, 1, 0);
         grid.getChildren().addAll(labelHousehold, spinnerHousehold);
-
-        // Electricity
         Label labelElectricity = new Label(
                 "How much electricity is used in our household? (kWh per year)");
         TextField textElectricity = new TextField();
@@ -52,8 +51,6 @@ public class Questionnaire {
                 }
             }
         });
-
-        // Heating Oil
         Label labelOil = new Label(
                 "How much heating oil is used in our household? (litres per year)");
         TextField textOil = new TextField();
@@ -70,16 +67,12 @@ public class Questionnaire {
         GridPane.setConstraints(labelOil, 0, 2);
         GridPane.setConstraints(textOil, 1, 2);
         grid.getChildren().addAll(labelOil, textOil);
-
-        // Car Size
         Label labelCarSize = new Label("Size of car");
         ComboBox<String> carSizes = new ComboBox<String>();
         carSizes.getItems().addAll("I don't own a car","small", "medium", "large");
         GridPane.setConstraints(labelCarSize, 0, 3);
         GridPane.setConstraints(carSizes, 1, 3);
         grid.getChildren().addAll(labelCarSize, carSizes);
-
-        // Car usage
         Label labelCarUsage = new Label("How many kilometres do you travel by car each year?");
         TextField textCarUsage = new TextField();
         GridPane.setConstraints(labelCarUsage, 0, 4);
@@ -106,8 +99,6 @@ public class Questionnaire {
                 }
             }
         });
-
-        // Meat and Dairy
         Label labelMeatAndDairy = new Label("How much meat/dairy do you eat?");
         ComboBox<String> meatAndDairiyOptions = new ComboBox<String>();
         meatAndDairiyOptions.getItems().addAll(
@@ -116,17 +107,14 @@ public class Questionnaire {
         GridPane.setConstraints(labelMeatAndDairy, 0, 5);
         GridPane.setConstraints(meatAndDairiyOptions, 1, 5);
         grid.getChildren().addAll(labelMeatAndDairy, meatAndDairiyOptions);
-
-        // Food Miles
         Label labelFoodMiles = new Label("How much of your food is produced locally?");
         ComboBox<String> locallyProducedFoodOptions = new ComboBox<String>();
-        locallyProducedFoodOptions.getItems().addAll("very little", "average", "above average", "almost all");
+        locallyProducedFoodOptions.getItems().addAll(
+                "very little", "average", "above average", "almost all");
         locallyProducedFoodOptions.getSelectionModel().selectFirst();
         GridPane.setConstraints(labelFoodMiles, 0, 6);
         GridPane.setConstraints(locallyProducedFoodOptions, 1, 6);
         grid.getChildren().addAll(labelFoodMiles, locallyProducedFoodOptions);
-
-        // Organic Food
         Label labelOrganic = new Label("How much of the food that you eat is organic?");
         ComboBox<String> organicOptions = new ComboBox<String>();
         organicOptions.getItems().addAll("none", "some", "most", "all");
@@ -134,9 +122,6 @@ public class Questionnaire {
         GridPane.setConstraints(labelOrganic, 0, 7);
         GridPane.setConstraints(organicOptions, 1, 7);
         grid.getChildren().addAll(labelOrganic, organicOptions);
-
-
-        // Processed Food
         Label labelProcesed = new Label(
                 "How much of your food is packaged / processed (e.g. 'ready meals', tins)?");
         ComboBox<String> processedOptions = new ComboBox<String>();
@@ -146,17 +131,17 @@ public class Questionnaire {
         GridPane.setConstraints(labelProcesed, 0, 8);
         GridPane.setConstraints(processedOptions, 1, 8);
         grid.getChildren().addAll(labelProcesed, processedOptions);
-
-        // Submit button
         Button submit = new Button("Submit");
         GridPane.setConstraints(submit, 0, 9);
         grid.getChildren().add(submit);
         submit.setOnAction(e -> {
             int householdMembers = spinnerHousehold.getValue();
-            int dailyElectricityConsumption = Integer.parseInt(textElectricity.getText())/365/householdMembers;
-            double dailyHeatingOilConsumption = Integer.parseInt(textOil.getText())/365.0/householdMembers;
+            int dailyElectricityConsumption =
+                    Integer.parseInt(textElectricity.getText()) / 365 / householdMembers;
+            double dailyHeatingOilConsumption =
+                    Integer.parseInt(textOil.getText()) / 365.0 / householdMembers;
             String carType = carSizes.getValue();
-            int dailyCarKilometres = Integer.parseInt(textCarUsage.getText())/365;
+            int dailyCarKilometres = Integer.parseInt(textCarUsage.getText()) / 365;
             String meatAndDairyConsumption = meatAndDairiyOptions.getValue();
             String locallyProducedFoodConsumption = locallyProducedFoodOptions.getValue();
             String organicFoodConsumption = organicOptions.getValue();
@@ -166,7 +151,6 @@ public class Questionnaire {
                     "Ketchum",
                     10, "pokemonMaster@PalletTown.com",
                     "gottaCatchemAll", "pikachu");
-
             testUser.setElectricityDailyConsumption(dailyElectricityConsumption);
             testUser.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
             testUser.setCarType(carType);
@@ -175,7 +159,6 @@ public class Questionnaire {
             testUser.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
             testUser.setOrganicFoodConsumption(organicFoodConsumption);
             testUser.setProcessedFoodConsumption(processedFoodConsumption);
-
             String response = Requests.sendRequest(2, new LoginDetails(), testUser);
             if (response != null) {
                 if (response.equals("success")) {
@@ -186,21 +169,21 @@ public class Questionnaire {
                     System.out.println("A user already exists with this email.");
                 }
             }
+        });
+        Scene questionnaire = new Scene(grid, General.getBounds()[0], General.getBounds()[1]);
+        return questionnaire;
+    }
+}
 
-            // used for debugging
+// used for debugging put them in the setOnAction method
 //            System.out.println("household members: " + householdMembers);
 //            System.out.println("daily electricity consumption: " + dailyElectricityConsumption);
 //            System.out.println("daily oil consumption: " + dailyHeatingOilConsumption);
 //            System.out.printf("You have a %s car\n", carType);
 //            System.out.println("Kilometres per day: " + dailyCarKilometres);
 //            System.out.println("Meat and Dairy consumption: " + meatAndDairyConsumption);
-//            System.out.println("Locally produced food consumption: " + locallyProducedFoodConsumption);
+//            System.out.println("Locally produced food consumption: "
+//            + locallyProducedFoodConsumption);
 //            System.out.println("Organic Food Consumption: " + organicFoodConsumption);
 //            System.out.println("Processed Food Consmption: " + processedFoodConsumption);
 //            System.out.println("");
-        });
-
-        Scene questionnaire = new Scene(grid, General.getBounds()[0], General.getBounds()[1]);
-        return questionnaire;
-    }
-}
