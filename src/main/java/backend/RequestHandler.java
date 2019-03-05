@@ -31,10 +31,10 @@ public class RequestHandler {
      * Login REST Method
      */
     @RequestMapping("/login")
-    public ResponseEntity<User> loginController(@RequestBody LoginDetails loginDetails) {
+    public User loginController(@RequestBody LoginDetails loginDetails) {
 
         if (dbService.grantAccess(loginDetails.getIdentifier(), loginDetails.getPassword())) {
-            return new ResponseEntity<>(dbService.getUser(loginDetails.getIdentifier()), HttpStatus.OK);
+            return dbService.getUser(loginDetails.getIdentifier());
         }
 
         return null;
