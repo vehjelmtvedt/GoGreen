@@ -16,6 +16,7 @@ public class User {
     private String password;
     private ArrayList<String> friends;
     private ArrayList<String> friendRequests;
+    private int electricityDailyConsumption;
 
     /**
      * Constructor of User object.
@@ -35,6 +36,7 @@ public class User {
         this.password = password;
         this.friends = new ArrayList<>();
         this.friendRequests = new ArrayList<>();
+        this.electricityDailyConsumption = 0;
     }
 
     public User() {

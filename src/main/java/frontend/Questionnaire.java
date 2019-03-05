@@ -3,7 +3,6 @@ package frontend;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 //import tools.CarbonCalculator;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-
 
 public class Questionnaire {
 
@@ -70,16 +68,14 @@ public class Questionnaire {
                 }
             }
         });
-
         GridPane.setConstraints(labelOil, 0, 2);
         GridPane.setConstraints(textOil, 1, 2);
         grid.getChildren().addAll(labelOil, textOil);
 
-        // Car Type
+        // Car Size
         Label labelCarSize = new Label("Size of car");
         ComboBox<String> carSizes = new ComboBox<String>();
         carSizes.getItems().addAll("I don't own a car","small", "medium", "large");
-        carSizes.getSelectionModel().selectFirst();
         GridPane.setConstraints(labelCarSize, 0, 3);
         GridPane.setConstraints(carSizes, 1, 3);
         grid.getChildren().addAll(labelCarSize, carSizes);
@@ -89,6 +85,28 @@ public class Questionnaire {
         TextField textCarUsage = new TextField();
         GridPane.setConstraints(labelCarUsage, 0, 4);
         GridPane.setConstraints(textCarUsage, 1, 4);
+        grid.getChildren().addAll(labelCarUsage, textCarUsage);
+        textCarUsage.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                if (!newValue.matches("^[0-9]{0,7}$")) {
+                    textCarUsage.setText(oldValue);
+                }
+            }
+        });
+        carSizes.valueProperty().addListener(new ChangeListener<String>() {
+            public void changed(ObservableValue<? extends String>
+                                        composant, String oldValue, String newValue) {
+                if (newValue.equals("I don't own a car")) {
+                    textCarUsage.setText("0");
+                    textCarUsage.setEditable(false);
+                } else {
+                    textCarUsage.setEditable(true);
+                }
+            }
+        });
 
         // Meat and Dairy
         Label labelMeatAndDairy = new Label("How much meat/dairy do you eat?");
