@@ -74,7 +74,7 @@ public class DbService {
      * @param password - input password
      * @return true if access granted
      */
-    public boolean grantAccess(String identifier, String password) {
+    public User grantAccess(String identifier, String password) {
         User user = getUser(identifier);
         System.out.println(user);
         if (user == null) {
@@ -82,12 +82,15 @@ public class DbService {
         }
 
         if (user == null) {
-            return false;
+            return null;
         }
 
         System.out.println(user);
 
-        return passwordEncoder().matches(password, user.getPassword());
+        if(passwordEncoder().matches(password, user.getPassword()))
+            return user;
+
+        return null;
     }
 
     /**

@@ -31,14 +31,7 @@ public class RequestHandler {
     @RequestMapping("/login")
     public User loginController(@RequestBody LoginDetails loginDetails) {
 
-        if (dbService.grantAccess(loginDetails.getIdentifier(), loginDetails.getPassword())) {
-            User user = dbService.getUser(loginDetails.getIdentifier());
-            if (user == null)
-                user = dbService.getUserByUsername(loginDetails.getIdentifier());
-            return user;
-        }
-
-        return null;
+        return dbService.grantAccess(loginDetails.getIdentifier(),loginDetails.getPassword());
     }
 
     /**
@@ -80,6 +73,16 @@ public class RequestHandler {
     public String rejectFriendRequest(@RequestParam String sender, @RequestParam String rejecting) {
         return dbService.rejectFriendRequest(sender, rejecting);
 
+    }
+
+    @RequestMapping("/validateEmail")
+    public boolean validateEmail(@RequestParam String email) {
+        return dbService.getUser(email)!=null;
+    }
+
+    @RequestMapping("/validateUsername")
+    public boolean validateUsername(@RequestParam String username) {
+        return dbService.getUserByUsername(username)!=null;
     }
 }
 
