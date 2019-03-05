@@ -135,7 +135,7 @@ public class User {
         }
         User user = (User) obj;
         return email.equals(user.email)
-                || username.equals(user.username);
+                && username.equals(user.username);
     }
 
     /*
