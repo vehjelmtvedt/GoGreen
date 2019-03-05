@@ -23,7 +23,7 @@ public class Questionnaire {
      * where users provides information necessary to calculate their carbon emissions.
      * @return questionnaire scene
      */
-    public static Scene createScene() {
+    public static Scene createScene(User user) {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(10, 10, 10, 10));
@@ -170,8 +170,8 @@ public class Questionnaire {
                 }
             }
         });
-        Scene questionnaire = new Scene(grid, General.getBounds()[0], General.getBounds()[1]);
-        return questionnaire;
+
+        return new Scene(grid, General.getBounds()[0], General.getBounds()[1]);
     }
 }
 
