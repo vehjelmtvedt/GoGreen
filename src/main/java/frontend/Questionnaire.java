@@ -23,7 +23,7 @@ public class Questionnaire {
      * where users provides information necessary to calculate their carbon emissions.
      * @return questionnaire scene
      */
-    public static Scene createScene(User user) {
+    public static Scene createScene(User user, GridPane form) {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(10, 10, 10, 10));
@@ -146,23 +146,20 @@ public class Questionnaire {
             String locallyProducedFoodConsumption = locallyProducedFoodOptions.getValue();
             String organicFoodConsumption = organicOptions.getValue();
             String processedFoodConsumption = processedOptions.getValue();
-            User testUser = new User("Ash",
-                    "Ketchum",
-                    10, "pokemonMaster@PalletTown.com",
-                    "gottaCatchemAll", "pikachu");
-            testUser.setElectricityDailyConsumption(dailyElectricityConsumption);
-            testUser.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
-            testUser.setCarType(carType);
-            testUser.setDailyCarKilometres(dailyCarKilometres);
-            testUser.setMeatAndDairyConsumption(meatAndDairyConsumption);
-            testUser.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
-            testUser.setOrganicFoodConsumption(organicFoodConsumption);
-            testUser.setProcessedFoodConsumption(processedFoodConsumption);
+            user.setElectricityDailyConsumption(dailyElectricityConsumption);
+            user.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
+            user.setCarType(carType);
+            user.setDailyCarKilometres(dailyCarKilometres);
+            user.setMeatAndDairyConsumption(meatAndDairyConsumption);
+            user.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
+            user.setOrganicFoodConsumption(organicFoodConsumption);
+            user.setProcessedFoodConsumption(processedFoodConsumption);
 
-            String response = Requests.sendRequest(2, new LoginDetails(), testUser);
+            String response = Requests.sendRequest(2, new LoginDetails(), user);
             if (response != null) {
                 if (response.equals("success")) {
                     System.out.println("Success!");
+                    StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getHomepage());
                 } else if (response.equals("username exists")) {
                     System.out.println("username exists");
                 } else {

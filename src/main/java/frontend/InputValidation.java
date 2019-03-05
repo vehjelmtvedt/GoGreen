@@ -94,7 +94,7 @@ public class InputValidation {
                 Integer.parseInt(ageField.getText()), emailField.getText(),
                 usernameField.getText(), passField.getText());
 
-        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Questionnaire.createScene(user));
+        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Questionnaire.createScene(user, form));
 //        String response = Requests.sendRequest(2, new LoginDetails(), user);
 //
 //        if (response != null) {
