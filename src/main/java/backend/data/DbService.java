@@ -70,18 +70,28 @@ public class DbService {
      * .
      * Returns true or false whether to grant access to user with specified login details
      *
-     * @param email    - input e-mail
+     * @param identifier    - input e-mail
      * @param password - input password
      * @return true if access granted
      */
-    public boolean grantAccess(String email, String password) {
-        User user = getUser(email);
-
+    public User grantAccess(String identifier, String password) {
+        User user = getUser(identifier);
+        System.out.println(user);
         if (user == null) {
-            return false;
+            user = getUserByUsername(identifier);
         }
 
-        return passwordEncoder().matches(password, user.getPassword());
+        if (user == null) {
+            return null;
+        }
+
+        System.out.println(user);
+
+        if (passwordEncoder().matches(password, user.getPassword())) {
+            return user;
+        }
+
+        return null;
     }
 
     /**
@@ -98,13 +108,12 @@ public class DbService {
      * .
      * Gets a user from the database (by e-mail)
      *
-     * @param email - e-mail of the user
+     * @param identifier - e-mail/username of the user
      * @return User object (password encoded!), or null if not present
      */
-    public User getUser(String email) {
+    public User getUser(String identifier) {
         // User may not be present in the database
-        Optional<User> user = users.findById(email);
-        System.out.println(user);
+        Optional<User> user = users.findById(identifier);
 
         // Returns user if found, else returns null
         return user.orElse(null);
