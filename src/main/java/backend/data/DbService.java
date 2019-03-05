@@ -104,7 +104,7 @@ public class DbService {
     public User getUser(String email) {
         // User may not be present in the database
         Optional<User> user = users.findById(email);
-
+        System.out.println(user);
 
         // Returns user if found, else returns null
         return user.orElse(null);
@@ -117,10 +117,9 @@ public class DbService {
      * @param username - Username of the User
      * @return User object (password encoded!), or null if not present
      */
-    User getUserByUsername(String username) {
+    public User getUserByUsername(String username) {
         // User may not be present in the database
         Optional<User> user = users.findByUsername(username);
-
         // Returns user if found, else returns null
         return user.orElse(null);
     }

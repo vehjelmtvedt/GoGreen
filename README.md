@@ -1,11 +1,7 @@
-<<<<<<< README.md
-![coverage](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/master/coverage.svg)
-![pipeline](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/master/pipeline.svg)
+![coverage](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/develop/coverage.svg)
+![pipeline](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/develop/pipeline.svg)
 
-# CSE1105 Template Repository
-=======
->>>>>>> README.md
-
+# CSE1105 Group 38 Project
 
 Person Development Plan
 
@@ -16,7 +12,7 @@ Person Development Plan
 NetID: vhjelmtvedt
 Student number: 4813928
 
-![](doc/Photos/vetlehjelmtvedt.jpg)
+![](doc/photos/ourProfilePictures/vetlehjelmtvedt.jpg)
 
 My strong points that would be applicable to working in a team is flexibility and communication. In previous group projects I have been flexible in terms of what task I have to do in that group that may not have been what I wanted to do. Also, I communicated the issues that I had with that task, and other team members were able to help me. 
 
@@ -38,7 +34,7 @@ The first step to reaching my goal is am writing this, becoming aware of my goal
 
 NetID: amoraru
 
-![](doc/Photos/Alexandru.jpeg)
+![](doc/photos/ourProfilePictures/Alexandru.jpeg)
 
 My strong points regarding this project, meaning what would be applicable in this case,
 are communication and planning. I think these are shown in a team-based project since I
@@ -64,7 +60,7 @@ teammates are serious about this project and that we are going to do a really go
 
 NetID: elatoskinas
 
-![](doc/Photos/EvaldasLatoskinas.jpg)
+![](doc/photos/ourProfilePictures/EvaldasLatoskinas.jpg)
 
 Strong Points:
 
@@ -112,7 +108,7 @@ Project Expectations:
 
 NetID : othabet
 
-![](doc/Photos/they_see_me_sailen_they_haten.jpeg)
+![](doc/photos/ourProfilePictures/they_see_me_sailen_they_haten.jpeg)
 
 What are two of your strong points?
 
@@ -157,7 +153,7 @@ My team mate are great people and Im sure they will help me along the way.
 
 NetID: JClemente
 
-![](doc/Photos/JeanLouis.jpeg)
+![](doc/photos/ourProfilePictures/JeanLouis.jpeg)
 
 The strong points that I think I contribute to the team are my problem solving and organization skills.
 I previous group projects I was able to contribute by effectively delegating work amongst members as well as 
@@ -193,7 +189,7 @@ prior experience that they have in programming.
 NetID: shashankanand
 Student ID: 4790987
 
-![](doc/Photos/ShashankAnand.JPG)
+![](doc/photos/ourProfilePictures/ShashankAnand.JPG)
 
 My strong points are being able to solve complex programming problems, also devising 
 algorithms to solve them. I am also good at recovering from any mistakes made midway 
@@ -220,7 +216,7 @@ great success by the end of this project.
 NetID: klyrakis
 Student number: 4799364
 
-![](doc/Photos/klyrakis.jpg)
+![](doc/photos/ourProfilePictures/klyrakis.jpg)
 
 Strong Points:
 
