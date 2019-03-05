@@ -2,7 +2,6 @@ package frontend;
 
 import backend.data.LoginDetails;
 import backend.data.User;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 
 public class Requests {
 
@@ -83,7 +81,7 @@ public class Requests {
                 requestEntity,
                 User.class
         );
-        System.out.println("Response: " + responseEntity.getBody());
+
         return responseEntity.getBody();
     }
 
@@ -93,7 +91,7 @@ public class Requests {
      * @param accepting - user who accepts the request
      * @return
      */
-    public static String acceptFriendRequest(String sender, String accepting) {
+    public static User acceptFriendRequest(String sender, String accepting) {
 
         String url = "http://localhost:8080/acceptfriend";
 
@@ -110,11 +108,11 @@ public class Requests {
                 .queryParam("sender", sender)
                 .queryParam("accepting", accepting);
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(
+        ResponseEntity<User> responseEntity = restTemplate.exchange(
                 uriBuilder.toUriString(),
                 HttpMethod.GET,
                 requestEntity,
-                String.class
+                User.class
         );
         System.out.println(responseEntity.getBody());
         return responseEntity.getBody();
@@ -126,7 +124,7 @@ public class Requests {
      * @param rejecting - user who is rejecting the request
      * @return
      */
-    public static String rejectFriendRequest(String sender, String rejecting) {
+    public static User rejectFriendRequest(String sender, String rejecting) {
 
         String url = "http://localhost:8080/rejectfriend";
 
@@ -143,25 +141,17 @@ public class Requests {
                 .queryParam("sender", sender)
                 .queryParam("rejecting", rejecting);
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(
+        ResponseEntity<User> responseEntity = restTemplate.exchange(
                 uriBuilder.toUriString(),
                 HttpMethod.GET,
                 requestEntity,
-                String.class
+                User.class
         );
         System.out.println(responseEntity.getBody());
         return responseEntity.getBody();
     }
 
-    public static User JSONtoUser(String json) {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.readValue(json, User.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+
 
 
 }

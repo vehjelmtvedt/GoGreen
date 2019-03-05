@@ -162,7 +162,6 @@ public class DbService {
             receiver.newFriendRequest(sender.getUsername());
             // Update only the User that received the friend request
             users.save(receiver);
-            users.save(sender);
             return receiver;
         } else {
             return null;

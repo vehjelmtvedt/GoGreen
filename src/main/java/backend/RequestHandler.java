@@ -4,9 +4,6 @@ import backend.data.DbService;
 
 import backend.data.LoginDetails;
 import backend.data.User;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,17 +61,17 @@ public class RequestHandler {
         return dbService.getUser(identifier);
     }
 
-    @GetMapping("/friendrequest")
+    @RequestMapping("/friendrequest")
     public User friendRequest(@RequestParam String sender, @RequestParam String receiver) {
         return dbService.addFriendRequest(sender, receiver);
     }
 
-    @GetMapping("/acceptfriend")
+    @RequestMapping("/acceptfriend")
     public User acceptFriendRequest(@RequestParam String sender, @RequestParam String accepting) {
         return dbService.acceptFriendRequest(sender, accepting);
     }
 
-    @GetMapping("/rejectfriend")
+    @RequestMapping("/rejectfriend")
     public User rejectFriendRequest(@RequestParam String sender, @RequestParam String rejecting) {
         return dbService.rejectFriendRequest(sender, rejecting);
 
