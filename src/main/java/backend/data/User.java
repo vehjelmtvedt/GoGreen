@@ -17,6 +17,13 @@ public class User {
     private ArrayList<String> friends;
     private ArrayList<String> friendRequests;
     private int electricityDailyConsumption;
+    private double heatingOilDailyConsumption;
+    private int DailyCarKilometres;
+    private String carType;
+    private String meatAndDairyConsumption;
+    private String locallyProducedFoodConsumption;
+    private String organicFoodConsumption;
+    private String processedFoodConsumption;
 
     /**
      * Constructor of User object.
@@ -37,6 +44,13 @@ public class User {
         this.friends = new ArrayList<>();
         this.friendRequests = new ArrayList<>();
         this.electricityDailyConsumption = 0;
+        this.heatingOilDailyConsumption = 0;
+        this.carType = "default";
+        this.DailyCarKilometres = 0;
+        this.meatAndDairyConsumption = "default";
+        this.locallyProducedFoodConsumption = "default";
+        this.organicFoodConsumption = "default";
+        this.processedFoodConsumption = "default";
     }
 
     public User() {
@@ -78,6 +92,69 @@ public class User {
         return this.friendRequests;
     }
 
+    public void setElectricityDailyConsumption(int electricityDailyConsumption) {
+        this.electricityDailyConsumption = electricityDailyConsumption;
+    }
+
+    public int getElectricityDailyConsumption() {
+        return this.electricityDailyConsumption;
+    }
+
+    public void setHeatingOilDailyConsumption(double heatingOilDailyConsumption) {
+        this.heatingOilDailyConsumption = heatingOilDailyConsumption;
+    }
+
+    public double getHeatingOilDailyConsumption() {
+        return this.heatingOilDailyConsumption;
+    }
+
+    public void setDailyCarKilometres(int dailyCarKilometres) {
+        this.DailyCarKilometres = dailyCarKilometres;
+    }
+
+    public int getDailyCarKilometres() {
+        return this.DailyCarKilometres;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
+    }
+
+    public String getCarType() {
+        return this.carType;
+    }
+
+    public void setMeatAndDairyConsumption(String meatAndDairyConsumption) {
+        this.meatAndDairyConsumption = meatAndDairyConsumption;
+    }
+
+    public String getMeatAndDairyConsumption() {
+        return meatAndDairyConsumption;
+    }
+
+    public void setLocallyProducedFoodConsumption(String locallyProducedFoodConsumption) {
+        this.locallyProducedFoodConsumption = locallyProducedFoodConsumption;
+    }
+
+    public String getLocallyProducedFoodConsumption() {
+        return this.locallyProducedFoodConsumption;
+    }
+
+    public void setOrganicFoodConsumption(String organicFoodConsumption) {
+        this.organicFoodConsumption = organicFoodConsumption;
+    }
+
+    public String getOrganicFoodConsumption() {
+        return this.organicFoodConsumption;
+    }
+
+    public void setProcessedFoodConsumption(String processedFoodConsumption) {
+        this.processedFoodConsumption = processedFoodConsumption;
+    }
+
+    public String getProcessedFoodConsumption() {
+        return this.organicFoodConsumption;
+    }
 
     /**
      * Returns string representation of the User object.
