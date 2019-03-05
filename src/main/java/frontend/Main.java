@@ -8,25 +8,32 @@ public class Main extends Application {
     private static Stage primaryStage;
     private static Scene signIn;
     private static Scene signUp;
+    private static Scene questionnaire;
     private static Scene homepage;
     private static String cssIntro;
 
     @Override
     public void start(Stage window) {
+        //setup the primary stage
         primaryStage = window;
         General.setPrimaryStage(primaryStage, "Go Green");
 
+        //create scenes necessary for scene switching
         signIn = SignIn.createScene();
         signUp = SignUp.createScene();
+        questionnaire = Questionnaire.createScene();
         homepage = Homepage.createScene();
 
+        //add button switching due to java being a synchronous programming language
         StageSwitcher.buttonSwitch(SignIn.getSignUpButton(), primaryStage, signUp);
 
+        //add path for css files and add them to the specific scenes they belong
         String cssPathIntro = "/frontend/Style.css";
         cssIntro = this.getClass().getResource(cssPathIntro).toExternalForm();
         signIn.getStylesheets().add(cssIntro);
         signUp.getStylesheets().add(cssIntro);
 
+        //setup the first scene for the primary stage
         General.finaliseStage(primaryStage, signIn);
     }
 
@@ -44,6 +51,10 @@ public class Main extends Application {
 
     public static Scene getSignUp() {
         return signUp;
+    }
+
+    public static Scene getQuestionnaire() {
+        return questionnaire;
     }
 
     public static Scene getHomepage() {
