@@ -60,7 +60,7 @@ public class Requests {
      * @param receiver - user receiving the friend request
      * @return
      */
-    public static String sendFriendRequest(String sender, String receiver) {
+    public static User sendFriendRequest(String sender, String receiver) {
 
         String url = "http://localhost:8080/friendrequest";
 
@@ -70,20 +70,20 @@ public class Requests {
         HttpHeaders requestHeaders = new HttpHeaders();
 
         //request entity is created with request headers
-        HttpEntity<String> requestEntity = new HttpEntity<>(requestHeaders);
+        HttpEntity<User> requestEntity = new HttpEntity<>(requestHeaders);
 
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("sender", sender)
                 .queryParam("receiver", receiver);
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(
+        ResponseEntity<User> responseEntity = restTemplate.exchange(
                 uriBuilder.toUriString(),
                 HttpMethod.GET,
                 requestEntity,
-                String.class
+                User.class
         );
-        System.out.println(responseEntity.getBody());
+        System.out.println("Response: " + responseEntity.getBody());
         return responseEntity.getBody();
     }
 

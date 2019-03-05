@@ -65,17 +65,17 @@ public class RequestHandler {
     }
 
     @GetMapping("/friendrequest")
-    public String friendRequest(@RequestParam String sender, @RequestParam String receiver) {
+    public User friendRequest(@RequestParam String sender, @RequestParam String receiver) {
         return dbService.addFriendRequest(sender, receiver);
     }
 
     @GetMapping("/acceptfriend")
-    public String acceptFriendRequest(@RequestParam String sender, @RequestParam String accepting) {
+    public User acceptFriendRequest(@RequestParam String sender, @RequestParam String accepting) {
         return dbService.acceptFriendRequest(sender, accepting);
     }
 
     @GetMapping("/rejectfriend")
-    public String rejectFriendRequest(@RequestParam String sender, @RequestParam String rejecting) {
+    public User rejectFriendRequest(@RequestParam String sender, @RequestParam String rejecting) {
         return dbService.rejectFriendRequest(sender, rejecting);
 
     }

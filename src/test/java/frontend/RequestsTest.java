@@ -6,6 +6,7 @@ import backend.Server;
 import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import org.junit.runner.RunWith;
@@ -13,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.mongodb.core.mapping.TextScore;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -74,5 +76,12 @@ public class RequestsTest {
     @Test
     public void testgetUserfail() {
         assertEquals(null, Requests.getUserRequest(testUser.getEmail()));
+    }
+
+    @Test
+    public void testSendFriendRequest() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
+        Assert.assertEquals("OK", Requests.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 }
