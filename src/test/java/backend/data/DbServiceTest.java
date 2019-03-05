@@ -97,17 +97,17 @@ public class DbServiceTest {
 
     @Test
     public void testGrantAccessNull() {
-        assertFalse(dbService.grantAccess(testUserNonExistent.getEmail(), testUserNonExistent.getPassword()));
+        assertEquals(null,dbService.grantAccess(testUserNonExistent.getEmail(), testUserNonExistent.getPassword()));
     }
 
     @Test
     public void testAuthenticationGrant() {
-        assertTrue(dbService.grantAccess(testUser.getEmail(), "pwd"));
+        assertEquals(testUser.getUsername(),dbService.grantAccess(testUser.getEmail(), "pwd").getUsername());
     }
 
     @Test
     public void testAuthenticationReject() {
-        assertFalse(dbService.grantAccess(testUser.getEmail(), "someRandomPWD"));
+        assertEquals(null,dbService.grantAccess(testUser.getEmail(), "someRandomPWD"));
     }
 
     @Test
