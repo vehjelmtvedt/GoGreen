@@ -55,3 +55,6 @@ checkstyle:
     - echo "Checkstyle check"
     - mvn checkstyle:check
   allow_failure: true
+  artifacts:
+    paths:
+      - target/site/checkstyle.html
