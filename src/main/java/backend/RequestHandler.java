@@ -32,7 +32,10 @@ public class RequestHandler {
     public User loginController(@RequestBody LoginDetails loginDetails) {
 
         if (dbService.grantAccess(loginDetails.getIdentifier(), loginDetails.getPassword())) {
-            return dbService.getUser(loginDetails.getIdentifier());
+            User user = dbService.getUser(loginDetails.getIdentifier());
+            if (user == null)
+                user = dbService.getUserByUsername(loginDetails.getIdentifier());
+            return user;
         }
 
         return null;
@@ -45,10 +48,11 @@ public class RequestHandler {
     @RequestMapping("/signup")
     public String signupController(@RequestBody User user) {
 
+        System.out.println(user);
         if (dbService.getUserByUsername(user.getUsername()) != null) {
             return "Username exists";
         }
-
+        System.out.println("IN1");
         if (dbService.getUser(user.getEmail()) != null) {
             return "Email exists";
         }
