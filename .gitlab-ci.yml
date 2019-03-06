@@ -55,7 +55,7 @@ checkstyle:
     - mvn checkstyle:check
   allow_failure: true
 
-# Generates report artifact
+# Generates checkstyle report artifact
 checkstyle-report:
   stage: test
   script:
@@ -66,6 +66,7 @@ checkstyle-report:
     paths:
       - target/site/checkstyle.html
 
+# Generates -ALL- reports (only on master)
 site:
   stage: deploy
   script:
