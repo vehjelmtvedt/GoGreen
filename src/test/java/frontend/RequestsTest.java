@@ -47,15 +47,5 @@ public class RequestsTest {
         assertNotEquals("", response);
     }
 
-    @Test
-    public void testRequestValidate1() {
-        boolean response = Requests.requestValidate(1, testUser.getUsername());
-        assertFalse(!response);
-    }
 
-    @Test
-    public void testRequestValidate2() {
-        boolean response = Requests.requestValidate(2, testUser.getEmail());
-        assertFalse(!response);
-    }
 }
