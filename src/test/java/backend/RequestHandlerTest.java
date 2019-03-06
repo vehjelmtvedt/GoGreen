@@ -131,8 +131,20 @@ public class RequestHandlerTest
     }
 
     @Test
+    public void testValidateEmailFail() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(null);
+        assertEquals(false,requestHandler.validateEmail(testUser.getEmail()));
+    }
+
+    @Test
     public void testValidateUsername() {
         Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
         assertEquals(true, requestHandler.validateUsername(testUser.getUsername()));
+    }
+
+    @Test
+    public void testValidateUsernameFail() {
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(null);
+        assertEquals(false,requestHandler.validateUsername(testUser.getUsername()));
     }
 }
