@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module version="4">
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <webroots />
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/Resources" />
+        </sourceRoots>
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -81,5 +95,11 @@
     <orderEntry type="library" scope="TEST" name="Maven: net.java.dev.jna:jna-platform:4.5.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-compress:1.10" level="project" />
     <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy:1.9.10" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:12-ea+14" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:12-ea+14" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:12-ea+14" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:12-ea+14" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:12-ea+14" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:12-ea+14" level="project" />
   </component>
 </module>
