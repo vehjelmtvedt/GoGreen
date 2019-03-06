@@ -99,7 +99,6 @@ public class User {
         return this.friendRequests;
     }
 
-<<<<<<< src/main/java/backend/data/User.java
     public void setElectricityDailyConsumption(int electricityDailyConsumption) {
         this.electricityDailyConsumption = electricityDailyConsumption;
     }
@@ -170,14 +169,13 @@ public class User {
 
     public double getTotalCarbonSaved() {
         return this.totalCarbonSaved;
-=======
+    }
     public Date getLastLoginDate() {
         return this.lastLoginDate;
     }
 
-    void setLastLoginDate() {
+    public void setLastLoginDate() {
         this.lastLoginDate = Calendar.getInstance().getTime();
->>>>>>> src/main/java/backend/data/User.java
     }
 
     /**
