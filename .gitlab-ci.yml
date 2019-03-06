@@ -53,18 +53,12 @@ checkstyle:
   script:
     - echo "Checkstyle check"
     - mvn checkstyle:check
-  allow_failure: true
-
-# Generates checkstyle report artifact
-checkstyle-report:
-  stage: test
-  script:
-    - echo "Checkstyle report"
     - mvn checkstyle:checkstyle
   allow_failure: true
   artifacts:
     paths:
       - target/site/checkstyle.html
+
 
 # Generates -ALL- reports (only on master)
 site:
