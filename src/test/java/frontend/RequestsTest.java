@@ -7,6 +7,8 @@ import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -43,5 +45,17 @@ public class RequestsTest {
     public void testType2(){
         String response = Requests.sendRequest(2, testUserDetails, testUser);
         assertNotEquals("", response);
+    }
+
+    @Test
+    public void testRequestValidate1() {
+        boolean response = Requests.requestValidate(1, testUser.getUsername());
+        assertFalse(!response);
+    }
+
+    @Test
+    public void testRequestValidate2() {
+        boolean response = Requests.requestValidate(2, testUser.getEmail());
+        assertFalse(!response);
     }
 }

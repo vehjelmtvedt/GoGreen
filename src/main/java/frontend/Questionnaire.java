@@ -7,6 +7,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -157,12 +158,10 @@ public class Questionnaire {
             String response = Requests.sendRequest(2, new LoginDetails(), user);
             if (response != null) {
                 if (response.equals("success")) {
-                    System.out.println("Success!");
-                    StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getHomepage());
-                } else if (response.equals("username exists")) {
-                    System.out.println("username exists");
-                } else {
-                    System.out.println("A user already exists with this email.");
+                    General.showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(),
+                            "Registration Successful!",
+                            "Enter your new credentials!");
+                    StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn());
                 }
             }
         });
