@@ -139,21 +139,21 @@ public class DbService {
      * @param accepting - username of User accepting the request.
      * @param requester - username of User who sent the request.
      */
-    public String acceptFriendRequest(String requester, String accepting) {
+    public User acceptFriendRequest(String requester, String accepting) {
         User requestingUser = getUserByUsername(requester);
-        User receivingUser = getUserByUsername(accepting);
+        User acceptingUser = getUserByUsername(accepting);
 
         // Make sure both users exist
-        if (requestingUser != null && receivingUser != null) {
-            requestingUser.addFriend(receivingUser.getUsername());
-            receivingUser.addFriend(requestingUser.getUsername());
-            receivingUser.deleteFriendRequest(requester);
+        if (requestingUser != null && acceptingUser != null) {
+            requestingUser.addFriend(acceptingUser.getUsername());
+            acceptingUser.addFriend(requestingUser.getUsername());
+            acceptingUser.deleteFriendRequest(requester);
             // Update changes in database
             users.save(requestingUser);
-            users.save(receivingUser);
-            return "OK";
+            users.save(acceptingUser);
+            return acceptingUser;
         } else {
-            return "Invalid username";
+            return null;
         }
     }
 
@@ -163,7 +163,7 @@ public class DbService {
      * @param senderUsername - The username of the friend request sender
      * @param receiverUsername - The username of the user receiving the request
      */
-    public String addFriendRequest(String senderUsername, String receiverUsername) {
+    public User addFriendRequest(String senderUsername, String receiverUsername) {
         User sender = getUserByUsername(senderUsername);
         User receiver = getUserByUsername(receiverUsername);
 
@@ -171,10 +171,9 @@ public class DbService {
             receiver.newFriendRequest(sender.getUsername());
             // Update only the User that received the friend request
             users.save(receiver);
-            users.save(sender);
-            return "OK";
+            return receiver;
         } else {
-            return "Invalid username";
+            return null;
         }
     }
     /**.
@@ -183,7 +182,7 @@ public class DbService {
      * @param rejectingUser - the user whose friend request should be rejected
      */
 
-    public String rejectFriendRequest(String rejectedUser, String rejectingUser) {
+    public User rejectFriendRequest(String rejectedUser, String rejectingUser) {
         User rejected = getUserByUsername(rejectedUser);
         User rejecting = getUserByUsername(rejectingUser);
 
@@ -192,9 +191,9 @@ public class DbService {
             rejecting.deleteFriendRequest(rejectedUser);
             // Update only the User that rejected the friend request
             users.save(rejecting);
-            return "OK";
+            return rejecting;
         } else {
-            return "Invalid username";
+            return null;
         }
     }
 

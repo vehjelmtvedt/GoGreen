@@ -78,7 +78,7 @@
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy -->
         <dependency>
             <groupId>net.bytebuddy</groupId>
@@ -164,12 +164,12 @@
                         <exclude>**/frontend/ConfirmBox*</exclude>
                         <exclude>**/frontend/General*</exclude>
                         <exclude>**/frontend/Homepage*</exclude>
+                        <exclude>**/frontend/Questionnaire*</exclude>
                         <exclude>**/frontend/InputValidation*</exclude>
                         <exclude>**/frontend/Main*</exclude>
                         <exclude>**/frontend/SignIn*</exclude>
                         <exclude>**/frontend/SignUp*</exclude>
                         <exclude>**/frontend/StageSwitcher*</exclude>
-                        <exclude>**/frontend/Questionnaire*</exclude>
                     </excludes>
 
                     <rules>

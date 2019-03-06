@@ -30,9 +30,9 @@ public class InputValidation {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
-        String response = Requests.sendRequest(1, loginDetails, new User());
+        User response = Requests.loginRequest(loginDetails);
         System.out.println(response);
-        if (response != null && !response.isEmpty()) {
+        if (response != null) {
             General.showAlert(Alert.AlertType.CONFIRMATION,
                     form.getScene().getWindow(), "Login successful",
                     "Welcome to GoGreen, " + response);
@@ -74,14 +74,14 @@ public class InputValidation {
         String username = usernameField.getText();
         String email = emailField.getText();
 
-        if (Requests.requestValidate(1, username)) {
+        if (Requests.validateUserRequest(username)) {
             General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Username Error!", "A user already exists with this username."
                             + "Use another username");
             return;
         }
 
-        if (Requests.requestValidate(2, email)) {
+        if (Requests.validateUserRequest(email)) {
             General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Email Error!", "A user already exists with this email."
                             + "Use another email");

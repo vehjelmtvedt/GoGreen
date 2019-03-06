@@ -8,16 +8,18 @@ import backend.data.LoginDetails;
 import backend.data.User;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringRunner.class)
@@ -33,19 +35,111 @@ public class RequestsTest {
     RequestHandler requestHandler;
 
     private final User testUser = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
-    private final LoginDetails testUserDetails = new LoginDetails("alex@email.com", "123456AAaa@@$$");
+    private final User testUser2 = new User("Test2", "User2", 24, "test2@email.com","dummy2", "pwd2");
+
 
     @Test
-    public void testType1(){
-        String response = Requests.sendRequest(1, testUserDetails, testUser);
-        assertNotEquals(" ", response);
+    public void testSignupRequest(){
+        assertEquals("success", Requests.signupRequest(testUser));
     }
 
     @Test
-    public void testType2(){
-        String response = Requests.sendRequest(2, testUserDetails, testUser);
-        assertNotEquals("", response);
+    public void testSignupRequestUsernameExists() {
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        assertEquals("Username exists", Requests.signupRequest(testUser));
     }
 
+    @Test
+    public void testSignupRequestEmailExists() {
+        Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(null);
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        assertEquals("Email exists", Requests.signupRequest(testUser));
+    }
 
+    @Test
+    public void loginRequest() {
+        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(testUser);
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        assertEquals(testUser, Requests.loginRequest(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
+    }
+
+    @Test
+    public void loginRequestFail() {
+        assertEquals(null, Requests.loginRequest(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
+    }
+
+    @Test
+    public void testgetUser() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        assertEquals(testUser, Requests.getUserRequest(testUser.getEmail()));
+    }
+
+    @Test
+    public void testgetUserfail() {
+        assertEquals(null, Requests.getUserRequest(testUser.getEmail()));
+    }
+
+    @Test
+    public void testSendFriendRequestValid() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
+        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
+        assertEquals(testUser2, Requests.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+    }
+
+    @Test
+    public void testSendFriendRequestInvalid() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        Mockito.when(dbService.addFriendRequest("invalid", testUser2.getUsername())).thenReturn(null);
+        assertEquals(null, Requests.sendFriendRequest("invalid", testUser2.getUsername()));
+    }
+
+    @Test
+    public void testAcceptFriendRequest() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
+        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
+        assertEquals(testUser2, Requests.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+        Mockito.when(dbService.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
+        assertEquals(testUser2, Requests.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+    }
+
+    @Test
+    public void testRejectFriendRequest() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
+        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
+        assertEquals(testUser2, Requests.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+        Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
+        assertEquals(testUser2, Requests.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+    }
+
+    @Test
+    public void testValidateUserRequestEmail() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        assertTrue(Requests.validateUserRequest(testUser.getEmail()));
+    }
+
+    @Test
+    public void testValidateUserRequestUsername() {
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        assertTrue(Requests.validateUserRequest(testUser.getUsername()));
+    }
+
+    @Test
+    public void testValidateUserRequestInvalid() {
+        assertFalse(Requests.validateUserRequest("Invalid"));
+    }
+
+//    @Test
+//    public void testRequestValidate1() {
+//        boolean response = Requests.requestValidate(1, testUser.getUsername());
+//        assertFalse(!response);
+//    }
+//
+//    @Test
+//    public void testRequestValidate2() {
+//        boolean response = Requests.requestValidate(2, testUser.getEmail());
+//        assertFalse(!response);
+//    }
 }

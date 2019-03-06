@@ -1,6 +1,5 @@
 package frontend;
 
-import backend.data.LoginDetails;
 import backend.data.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -155,7 +154,7 @@ public class Questionnaire {
             user.setOrganicFoodConsumption(organicFoodConsumption);
             user.setProcessedFoodConsumption(processedFoodConsumption);
 
-            String response = Requests.sendRequest(2, new LoginDetails(), user);
+            String response = Requests.signupRequest(user);
             if (response != null) {
                 if (response.equals("success")) {
                     General.showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(),
