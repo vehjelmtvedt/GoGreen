@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import javax.validation.constraints.AssertTrue;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class UserTest {
 
@@ -304,5 +306,17 @@ public class UserTest {
         Assert.assertFalse(userOne.equals(userOne2));
     }
 
+    public void testGetLastLoginDate() {
+        // Test prone to failure on >1second executions. Consider using Mockito to test this.
+        User newUser = new User("FirstName", "LastName", 25, "test@email.com", "test_user", "pwd123");
+        Date dateNow = Calendar.getInstance().getTime();
+        Assert.assertEquals(dateNow, newUser.getLastLoginDate());
+    }
 
+    @Test
+    public void testSetLastLoginDate() {
+        userOne.setLastLoginDate();
+        Date dateNow = Calendar.getInstance().getTime();
+        Assert.assertEquals(dateNow, userOne.getLastLoginDate());
+    }
 }

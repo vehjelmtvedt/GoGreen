@@ -88,6 +88,8 @@ public class DbService {
         System.out.println(user);
 
         if (passwordEncoder().matches(password, user.getPassword())) {
+            // Update last login date
+            user.setLastLoginDate();
             return user;
         }
 
