@@ -24,7 +24,7 @@ public class User {
     private String locallyProducedFoodConsumption;
     private String organicFoodConsumption;
     private String processedFoodConsumption;
-    private float totalCarbonSaved;
+    private double totalCarbonSaved;
 
     /**
      * Constructor of User object.
@@ -158,11 +158,11 @@ public class User {
         return this.processedFoodConsumption;
     }
 
-    public void setTotalCarbonSaved(float totalCarbonSaved) {
+    public void setTotalCarbonSaved(double totalCarbonSaved) {
         this.totalCarbonSaved = totalCarbonSaved;
     }
 
-    public float getTotalCarbonSaved() {
+    public double getTotalCarbonSaved() {
         return this.totalCarbonSaved;
     }
 

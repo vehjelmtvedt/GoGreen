@@ -3,7 +3,6 @@ package frontend;
 import backend.data.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-//import tools.CarbonCalculator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
