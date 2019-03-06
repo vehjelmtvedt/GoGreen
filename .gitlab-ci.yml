@@ -61,7 +61,7 @@ checkstyle:
 
 
 # Generates -ALL- reports (only on master)
-site:
+full-report:
   stage: deploy
   script:
     - echo "Run maven site (generates all reports)"
