@@ -306,6 +306,7 @@ public class UserTest {
         Assert.assertFalse(userOne.equals(userOne2));
     }
 
+    @Test
     public void testGetLastLoginDate() {
         // Test prone to failure on >1second executions. Consider using Mockito to test this.
         User newUser = new User("FirstName", "LastName", 25, "test@email.com", "test_user", "pwd123");
@@ -318,5 +319,25 @@ public class UserTest {
         userOne.setLastLoginDate();
         Date dateNow = Calendar.getInstance().getTime();
         Assert.assertEquals(dateNow, userOne.getLastLoginDate());
+    }
+
+    @Test
+    public void testGetActivitiesEmpty() {
+        Assert.assertNotNull(userOne.getActivities());
+    }
+
+    @Test
+    public void testGetActivities() {
+        // TBD
+    }
+
+    @Test
+    public void testAddActivity() {
+        // TBD
+    }
+
+    @Test
+    public void testRemoveActivity() {
+        // TBD
     }
 }
