@@ -18,6 +18,15 @@ public class User {
     private String password;
     private ArrayList<String> friends;
     private ArrayList<String> friendRequests;
+    private int electricityDailyConsumption;
+    private double heatingOilDailyConsumption;
+    private int dailyCarKilometres;
+    private String carType;
+    private String meatAndDairyConsumption;
+    private String locallyProducedFoodConsumption;
+    private String organicFoodConsumption;
+    private String processedFoodConsumption;
+    private double totalCarbonSaved;
     private Date lastLoginDate;
 
     /**
@@ -39,6 +48,15 @@ public class User {
         this.password = password;
         this.friends = new ArrayList<>();
         this.friendRequests = new ArrayList<>();
+        this.electricityDailyConsumption = 0;
+        this.heatingOilDailyConsumption = 0;
+        this.carType = "default";
+        this.dailyCarKilometres = 0;
+        this.meatAndDairyConsumption = "default";
+        this.locallyProducedFoodConsumption = "default";
+        this.organicFoodConsumption = "default";
+        this.processedFoodConsumption = "default";
+        this.totalCarbonSaved = 0;
         this.lastLoginDate = Calendar.getInstance().getTime();
     }
 
@@ -81,11 +99,82 @@ public class User {
         return this.friendRequests;
     }
 
+    public void setElectricityDailyConsumption(int electricityDailyConsumption) {
+        this.electricityDailyConsumption = electricityDailyConsumption;
+    }
+
+    public int getElectricityDailyConsumption() {
+        return this.electricityDailyConsumption;
+    }
+
+    public void setHeatingOilDailyConsumption(double heatingOilDailyConsumption) {
+        this.heatingOilDailyConsumption = heatingOilDailyConsumption;
+    }
+
+    public double getHeatingOilDailyConsumption() {
+        return this.heatingOilDailyConsumption;
+    }
+
+    public void setDailyCarKilometres(int dailyCarKilometres) {
+        this.dailyCarKilometres = dailyCarKilometres;
+    }
+
+    public int getDailyCarKilometres() {
+        return this.dailyCarKilometres;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
+    }
+
+    public String getCarType() {
+        return this.carType;
+    }
+
+    public void setMeatAndDairyConsumption(String meatAndDairyConsumption) {
+        this.meatAndDairyConsumption = meatAndDairyConsumption;
+    }
+
+    public String getMeatAndDairyConsumption() {
+        return meatAndDairyConsumption;
+    }
+
+    public void setLocallyProducedFoodConsumption(String locallyProducedFoodConsumption) {
+        this.locallyProducedFoodConsumption = locallyProducedFoodConsumption;
+    }
+
+    public String getLocallyProducedFoodConsumption() {
+        return this.locallyProducedFoodConsumption;
+    }
+
+    public void setOrganicFoodConsumption(String organicFoodConsumption) {
+        this.organicFoodConsumption = organicFoodConsumption;
+    }
+
+    public String getOrganicFoodConsumption() {
+        return this.organicFoodConsumption;
+    }
+
+    public void setProcessedFoodConsumption(String processedFoodConsumption) {
+        this.processedFoodConsumption = processedFoodConsumption;
+    }
+
+    public String getProcessedFoodConsumption() {
+        return this.processedFoodConsumption;
+    }
+
+    public void setTotalCarbonSaved(double totalCarbonSaved) {
+        this.totalCarbonSaved = totalCarbonSaved;
+    }
+
+    public double getTotalCarbonSaved() {
+        return this.totalCarbonSaved;
+    }
     public Date getLastLoginDate() {
         return this.lastLoginDate;
     }
 
-    void setLastLoginDate() {
+    public void setLastLoginDate() {
         this.lastLoginDate = Calendar.getInstance().getTime();
     }
 
@@ -140,6 +229,18 @@ public class User {
         friendRequests.remove(username);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        User user = (User) obj;
+        return email.equals(user.email)
+                && username.equals(user.username);
+    }
 
     /*
      * Removes a friend from the friends list
