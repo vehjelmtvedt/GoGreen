@@ -13,6 +13,7 @@ public class UserTest {
 
     User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
     User emptyUser = new User();
+    User activeUser = new User("Active", "User", 20, "active_user@email.com", "active_user", "pwd123");
 
     @Test
     public void testConstructor() { Assert.assertNotNull(userOne);}
@@ -306,10 +307,11 @@ public class UserTest {
         Assert.assertFalse(userOne.equals(userOne2));
     }
 
+    @Test
     public void testGetLastLoginDate() {
         // Test prone to failure on >1second executions. Consider using Mockito to test this.
-        User newUser = new User("FirstName", "LastName", 25, "test@email.com", "test_user", "pwd123");
         Date dateNow = Calendar.getInstance().getTime();
+        User newUser = new User("FirstName", "LastName", 25, "test@email.com", "test_user", "pwd123");
         Assert.assertEquals(dateNow, newUser.getLastLoginDate());
     }
 
@@ -318,5 +320,59 @@ public class UserTest {
         userOne.setLastLoginDate();
         Date dateNow = Calendar.getInstance().getTime();
         Assert.assertEquals(dateNow, userOne.getLastLoginDate());
+    }
+
+    @Test
+    public void testGetActivitiesEmpty() {
+        Assert.assertNotNull(userOne.getActivities());
+    }
+
+    @Test
+    public void testGetActivities() {
+        Activity activity1 = new EatVegetarianMeal();
+        Activity activity2 = new EatVegetarianMeal();
+        activeUser.addActivity(activity1);
+        activeUser.addActivity(activity2);
+        Assert.assertEquals(2, activeUser.getActivities().size());
+    }
+
+    @Test
+    public void testAddActivity() {
+        Activity activity = new EatVegetarianMeal();
+        activeUser.addActivity(activity);
+        Activity lastActivity = activeUser.getActivities().get(activeUser.getActivities().size()-1);
+        Assert.assertEquals(activity, lastActivity);
+    }
+
+    @Test
+    public void testRemoveActivity() {
+        Activity activity = new EatVegetarianMeal();
+        activeUser.addActivity(activity);
+        activeUser.removeActivity(activity);
+
+        Assert.assertEquals(0, activeUser.getActivities().size());
+    }
+
+    @Test
+    public void testSimilarActivities() {
+        Activity activity1 = new EatVegetarianMeal();
+        Activity activity2 = new EatVegetarianMeal();
+        Activity activity3 = new EatVegetarianMeal();
+
+        activeUser.addActivity(activity1);
+        activeUser.addActivity(activity2);
+        activeUser.addActivity(activity3);
+
+        Assert.assertEquals(2, activeUser.getSimilarActivities(activity2).size());
+    }
+
+    @Test
+    public void testSimilarActivitiesNone() {
+        Assert.assertEquals(0, activeUser.getSimilarActivities(new EatVegetarianMeal()).size());
+    }
+
+    @Test
+    public void testSimilarActivitiesNonMatching() {
+        // TBD when more activities are available
     }
 }
