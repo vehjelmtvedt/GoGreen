@@ -5,8 +5,6 @@ import java.util.Date;
 public abstract class Activity {
     private Date date;
     private int carbonSaved;
-    private User user;
-
 
     public Date getDate() {
         return date;
@@ -24,11 +22,5 @@ public abstract class Activity {
         this.carbonSaved = carbonSaved;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public abstract int dailylMeatAndDairyConsumption(User user);
 }
