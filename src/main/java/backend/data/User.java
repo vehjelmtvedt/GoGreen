@@ -268,6 +268,23 @@ public class User {
         this.activities.remove(activity);
     }
 
+    /**.
+     * Returns a list of activities that are of the same type of the specified activity.
+     * @param activity - Activity to compare to
+     * @return List of activities of same type
+     */
+    public ArrayList<Activity> getSimilarActivities(Activity activity) {
+        ArrayList<Activity> result = new ArrayList<>();
+
+        for (Activity userActivity : activities) {
+            if (userActivity.getClass() == activity.getClass() && !userActivity.equals(activity)) {
+                result.add(activity);
+            }
+        }
+
+        return result;
+    }
+
     /*
      * Removes a friend from the friends list
      *

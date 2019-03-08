@@ -340,4 +340,9 @@ public class UserTest {
     public void testRemoveActivity() {
         // TBD
     }
+
+    @Test
+    public void testSimilarActivities() {
+        // TBD
+    }
 }
