@@ -101,7 +101,7 @@ public class User {
     }
 
     public ArrayList<Activity> getActivities() {
-        return this.getActivities();
+        return this.activities;
     }
 
     public ArrayList<String> getFriendRequests() {
