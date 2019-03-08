@@ -13,6 +13,7 @@ public class UserTest {
 
     User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
     User emptyUser = new User();
+    User activeUser = new User("Active", "User", 20, "active_user@email.com", "active_user", "pwd123");
 
     @Test
     public void testConstructor() { Assert.assertNotNull(userOne);}
@@ -328,21 +329,50 @@ public class UserTest {
 
     @Test
     public void testGetActivities() {
-        // TBD
+        Activity activity1 = new EatVegetarianMeal();
+        Activity activity2 = new EatVegetarianMeal();
+        activeUser.addActivity(activity1);
+        activeUser.addActivity(activity2);
+        Assert.assertEquals(2, activeUser.getActivities().size());
     }
 
     @Test
     public void testAddActivity() {
-        // TBD
+        Activity activity = new EatVegetarianMeal();
+        activeUser.addActivity(activity);
+        Activity lastActivity = activeUser.getActivities().get(activeUser.getActivities().size()-1);
+        Assert.assertEquals(activity, lastActivity);
     }
 
     @Test
     public void testRemoveActivity() {
-        // TBD
+        Activity activity = new EatVegetarianMeal();
+        activeUser.addActivity(activity);
+        activeUser.removeActivity(activity);
+
+        Assert.assertEquals(0, activeUser.getActivities().size());
     }
 
     @Test
     public void testSimilarActivities() {
-        // TBD
+        Activity activity1 = new EatVegetarianMeal();
+        Activity activity2 = new EatVegetarianMeal();
+        Activity activity3 = new EatVegetarianMeal();
+
+        activeUser.addActivity(activity1);
+        activeUser.addActivity(activity2);
+        activeUser.addActivity(activity3);
+
+        Assert.assertEquals(2, activeUser.getSimilarActivities(activity2).size());
+    }
+
+    @Test
+    public void testSimilarActivitiesNone() {
+        Assert.assertEquals(0, activeUser.getSimilarActivities(new EatVegetarianMeal()).size());
+    }
+
+    @Test
+    public void testSimilarActivitiesNonMatching() {
+        // TBD when more activities are available
     }
 }
