@@ -2,11 +2,13 @@ package frontend;
 
 import backend.data.LoginDetails;
 import backend.data.User;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,7 +39,11 @@ public class InputValidation {
                     form.getScene().getWindow(), "Login successful",
                     "Welcome to GoGreen, " + response);
             General.resetFields(SignIn.getFields());
-            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage());
+            try {
+                StageSwitcher.loginSwitch(Main.getPrimaryStage(), FXMLLoader.load(InputValidation.class.getResource("/frontend/Homepage.fxml")));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         } else {
             General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
