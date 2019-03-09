@@ -6,13 +6,14 @@ import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-
+import java.io.IOException;
 
 
 @RestController
@@ -92,9 +93,13 @@ public class RequestHandler {
     }
 
     @RequestMapping("addActivity")
-    public User addActivity(@RequestBody Activity activity, @RequestParam String identifier) {
+    public User addActivity(@RequestBody String activity, @RequestParam String identifier) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Activity activity1 = mapper.readValue(activity, Activity.class);
+        System.out.println(activity);
         User tmp = dbService.getUserByUsername(identifier);
-        tmp.addActivity(activity);
+        System.out.println(tmp.toString());
+
         dbService.addUser(tmp);
         return dbService.getUserByUsername(identifier);
     }

@@ -4,10 +4,8 @@ import backend.data.Activity;
 import backend.data.EatVegetarianMeal;
 import backend.data.LoginDetails;
 import backend.data.User;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -22,13 +20,8 @@ public class Requests {
      */
     public static String signupRequest(User user) {
         String url = "http://localhost:8080/signup";
-
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<String> response;
-
-        response = rest.postForEntity(url,user,String.class);
-        return response.getBody();
-
+        return rest.postForEntity(url,user,String.class).getBody();
     }
 
     /**
@@ -39,8 +32,7 @@ public class Requests {
     public static User loginRequest(LoginDetails loginDetails) {
         String url = "http://localhost:8080/login";
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<User> returned = rest.postForEntity(url, loginDetails, User.class);
-        return returned.getBody();
+        return rest.postForEntity(url, loginDetails, User.class).getBody();
     }
 
     /**
@@ -51,8 +43,7 @@ public class Requests {
     public static User getUserRequest(String identifier) {
         String url = "http://localhost:8080/getUser";
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<User> returned = rest.postForEntity(url, identifier, User.class);
-        return returned.getBody();
+        return rest.postForEntity(url, identifier, User.class).getBody();
     }
 
     /**
@@ -67,25 +58,12 @@ public class Requests {
 
         RestTemplate restTemplate = new RestTemplate();
 
-
-        HttpHeaders requestHeaders = new HttpHeaders();
-
-        //request entity is created with request headers
-        HttpEntity<User> requestEntity = new HttpEntity<>(requestHeaders);
-
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("sender", sender)
                 .queryParam("receiver", receiver);
 
-        ResponseEntity<User> responseEntity = restTemplate.exchange(
-                uriBuilder.toUriString(),
-                HttpMethod.GET,
-                requestEntity,
-                User.class
-        );
-
-        return responseEntity.getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
     }
 
     /**
@@ -100,25 +78,12 @@ public class Requests {
 
         RestTemplate restTemplate = new RestTemplate();
 
-
-        HttpHeaders requestHeaders = new HttpHeaders();
-
-        //request entity is created with request headers
-        HttpEntity<String> requestEntity = new HttpEntity<>(requestHeaders);
-
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("sender", sender)
                 .queryParam("accepting", accepting);
 
-        ResponseEntity<User> responseEntity = restTemplate.exchange(
-                uriBuilder.toUriString(),
-                HttpMethod.GET,
-                requestEntity,
-                User.class
-        );
-        System.out.println(responseEntity.getBody());
-        return responseEntity.getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
     }
 
     /**
@@ -133,25 +98,12 @@ public class Requests {
 
         RestTemplate restTemplate = new RestTemplate();
 
-
-        HttpHeaders requestHeaders = new HttpHeaders();
-
-        //request entity is created with request headers
-        HttpEntity<String> requestEntity = new HttpEntity<>(requestHeaders);
-
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("sender", sender)
                 .queryParam("rejecting", rejecting);
 
-        ResponseEntity<User> responseEntity = restTemplate.exchange(
-                uriBuilder.toUriString(),
-                HttpMethod.GET,
-                requestEntity,
-                User.class
-        );
-        System.out.println(responseEntity.getBody());
-        return responseEntity.getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
     }
 
     /**
@@ -162,11 +114,10 @@ public class Requests {
     public static boolean validateUserRequest(String identifier) {
         String url = "http://localhost:8080/validateUser";
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<String> returned = rest.postForEntity(url, identifier, String.class);
-        return returned.getBody().equals("OK");
+        return rest.postForEntity(url, identifier, String.class).getBody().equals("OK");
     }
 
-    public static User addActivityRequest(Activity activity, String identifier) {
+    public static User addActivityRequest(Activity activity, String identifier) throws JsonProcessingException {
 
         String url = "http://localhost:8080/addActivity";
 
@@ -177,16 +128,18 @@ public class Requests {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("identifier", identifier);
 
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enableDefaultTyping();
+        String jsonDataString = mapper.writeValueAsString(activity);
 
-        ResponseEntity<User> returned = restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class);
-        System.out.println(returned.getBody());
-        return returned.getBody();
+
+
+        return restTemplate.postForEntity(uriBuilder.toUriString(), jsonDataString, User.class).getBody();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JsonProcessingException {
         EatVegetarianMeal activity = new EatVegetarianMeal();
         Date date = new Date();
-        activity.setDate(date);
         User received = addActivityRequest(activity, "vehjelmtvedt1");
         System.out.println(received.toString());
     }

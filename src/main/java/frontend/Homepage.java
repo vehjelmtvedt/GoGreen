@@ -1,5 +1,6 @@
 package frontend;
 
+import backend.data.EatVegetarianMeal;
 import backend.data.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -30,10 +31,18 @@ public class Homepage {
         BorderPane border = new BorderPane();
 
         //Button testing
-        Button addMealTest = new Button("Add vegetarian meal");
-        addMealTest.setOnAction(e -> General.showAlert(Alert.AlertType.CONFIRMATION,
-                border.getScene().getWindow(), "Current user: ",
-                user.toString()));
+        Button addMealTest = new Button("Eat vegetarian meal");
+        addMealTest.setOnAction(e -> {
+            EatVegetarianMeal vegetarianMeal = new EatVegetarianMeal();
+            vegetarianMeal.performActivity(user);
+            user.addActivity(vegetarianMeal);
+            String message = "carbon saved: " + user.getTotalCarbonSaved();
+            message += "\n" + "times repeated today: "
+                    + vegetarianMeal.timesPerformedInTheSameDay(user);
+            General.showAlert(Alert.AlertType.CONFIRMATION,
+                    border.getScene().getWindow(), "Activity results",
+                    message);
+        });
         //testing
 
         border.setTop(box);
