@@ -101,7 +101,7 @@ public class Questionnaire {
         Label labelMeatAndDairy = new Label("How much meat/dairy do you eat?");
         ComboBox<String> meatAndDairiyOptions = new ComboBox<String>();
         meatAndDairiyOptions.getItems().addAll(
-                "above average", "average", "below average", "lacto-vegetarian", "vegan");
+                "above average", "average", "below average", "vegan");
         meatAndDairiyOptions.getSelectionModel().selectFirst();
         GridPane.setConstraints(labelMeatAndDairy, 0, 5);
         GridPane.setConstraints(meatAndDairiyOptions, 1, 5);
