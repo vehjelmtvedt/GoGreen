@@ -5,8 +5,7 @@ import java.util.Date;
 public abstract class Activity {
     private Date date;
     private int carbonSaved;
-
-    public Activity() {}
+    
 
     public Date getDate() {
         return date;
