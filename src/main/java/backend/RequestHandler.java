@@ -101,6 +101,9 @@ public class RequestHandler {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public User addActivity(@RequestBody Activity activity, @RequestParam String identifier) {
         User returned = dbService.getUserByUsername(identifier);
+        if (returned == null || activity == null) {
+            return null;
+        }
         returned.addActivity(activity);
         dbService.addUser(returned);
         return returned;
