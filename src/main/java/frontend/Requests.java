@@ -45,7 +45,7 @@ public class Requests {
      * Sends a friend request from one user to another.
      * @param sender - user sending the friend request
      * @param receiver - user receiving the friend request
-     * @return
+     * @return - returns the User who sent the request
      */
     public static User sendFriendRequest(String sender, String receiver) {
 
@@ -65,7 +65,7 @@ public class Requests {
      * Request from a user to accept a friend request.
      * @param sender - user who sent the friend request
      * @param accepting - user who accepts the request
-     * @return
+     * @return - User accepting the friend request
      */
     public static User acceptFriendRequest(String sender, String accepting) {
 
@@ -85,7 +85,7 @@ public class Requests {
      * Request from a user to reject a friend request.
      * @param sender - user who sent the request
      * @param rejecting - user who is rejecting the request
-     * @return
+     * @return - User rejecting the friend request
      */
     public static User rejectFriendRequest(String sender, String rejecting) {
 
