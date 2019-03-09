@@ -4,6 +4,7 @@ package frontend;
 import backend.RequestHandler;
 import backend.Server;
 import backend.data.DbService;
+import backend.data.EatVegetarianMeal;
 import backend.data.LoginDetails;
 import backend.data.User;
 import org.junit.Test;
@@ -131,5 +132,17 @@ public class RequestsTest {
         assertFalse(Requests.validateUserRequest("Invalid"));
     }
 
+    @Test
+    public void testAddActivityRequest() {
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        EatVegetarianMeal activity = new EatVegetarianMeal();
+        assertEquals(testUser, Requests.addActivityRequest(activity, testUser.getUsername()));
+        assertEquals(1, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
+    }
 
+    @Test
+    public void testAddActivityRequestInvalidUser() {
+        EatVegetarianMeal activity = new EatVegetarianMeal();
+        assertEquals(null, Requests.addActivityRequest(activity, "invalid"));
+    }
 }
