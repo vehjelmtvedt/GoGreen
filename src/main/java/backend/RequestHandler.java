@@ -1,13 +1,17 @@
 package backend;
 
-import backend.data.*;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import backend.data.Activity;
+import backend.data.DbService;
+import backend.data.LoginDetails;
+import backend.data.User;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 
 
 @RestController
@@ -86,7 +90,15 @@ public class RequestHandler {
         }
     }
 
-    @RequestMapping(value = "/addActivity", method = RequestMethod.POST, produces = "application/json; charset=utf-8", consumes= MediaType.APPLICATION_JSON_VALUE)
+    /**
+     * Request to add activity to User.
+     * @param activity - what activity to add.
+     * @param identifier - username of the User
+     * @return - the User the activity was added to
+     */
+    @RequestMapping(value = "/addActivity", method = RequestMethod.POST,
+            produces = "application/json; charset=utf-8",
+            consumes = MediaType.APPLICATION_JSON_VALUE)
     public User addActivity(@RequestBody Activity activity, @RequestParam String identifier) {
         User returned = dbService.getUserByUsername(identifier);
         returned.addActivity(activity);

@@ -1,15 +1,10 @@
 package frontend;
 
 import backend.data.Activity;
-import backend.data.EatVegetarianMeal;
 import backend.data.LoginDetails;
 import backend.data.User;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.Date;
 
 public class Requests {
 
@@ -117,6 +112,12 @@ public class Requests {
         return rest.postForEntity(url, identifier, String.class).getBody().equals("OK");
     }
 
+    /**
+     * Adds an activity to a User.
+     * @param activity - what activity to add to the user.
+     * @param username - of the User to add an activity
+     * @return - User the activity was added to.
+     */
     public static User addActivityRequest(Activity activity, String username) {
 
         String url = "http://localhost:8080/addActivity";
@@ -129,15 +130,4 @@ public class Requests {
 
         return restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class).getBody();
     }
-
-    public static void main(String[] args) throws JsonProcessingException {
-        System.out.println(validateUserRequest("ececen"));
-        EatVegetarianMeal activity = new EatVegetarianMeal();
-        User received = addActivityRequest(activity, "ececen");
-        System.out.println(received.toString());
-    }
-
-
-
-
 }
