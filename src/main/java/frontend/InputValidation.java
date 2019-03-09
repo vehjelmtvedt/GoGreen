@@ -39,11 +39,8 @@ public class InputValidation {
                     form.getScene().getWindow(), "Login successful",
                     "Welcome to GoGreen, " + response);
             General.resetFields(SignIn.getFields());
-            try {
-                StageSwitcher.loginSwitch(Main.getPrimaryStage(), FXMLLoader.load(InputValidation.class.getResource("/frontend/Homepage.fxml")));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage());
 
         } else {
             General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
