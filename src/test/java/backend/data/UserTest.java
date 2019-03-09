@@ -308,6 +308,11 @@ public class UserTest {
     }
 
     @Test
+    public void testEqualsDifferentUser() {
+        Assert.assertFalse(userOne.equals(activeUser));
+    }
+
+    @Test
     public void testGetLastLoginDate() {
         // Test prone to failure on >1second executions. Consider using Mockito to test this.
         Date dateNow = Calendar.getInstance().getTime();

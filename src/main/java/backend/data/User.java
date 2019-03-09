@@ -248,8 +248,7 @@ public class User {
             return false;
         }
         User user = (User) obj;
-        return email.equals(user.email)
-                && username.equals(user.username);
+        return email.equals(user.email) && username.equals(user.username);
     }
 
     /**.
