@@ -1,5 +1,7 @@
 package frontend;
 
+import backend.data.Activity;
+import backend.data.EatVegetarianMeal;
 import backend.data.LoginDetails;
 import backend.data.User;
 import org.springframework.http.HttpEntity;
@@ -8,6 +10,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Date;
 
 public class Requests {
 
@@ -160,6 +164,31 @@ public class Requests {
         RestTemplate rest = new RestTemplate();
         ResponseEntity<String> returned = rest.postForEntity(url, identifier, String.class);
         return returned.getBody().equals("OK");
+    }
+
+    public static User addActivityRequest(Activity activity, String identifier) {
+
+        String url = "http://localhost:8080/addActivity";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+
+        //adding the query params to the URL
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+                .queryParam("identifier", identifier);
+
+
+        ResponseEntity<User> returned = restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class);
+        System.out.println(returned.getBody());
+        return returned.getBody();
+    }
+
+    public static void main(String[] args) {
+        EatVegetarianMeal activity = new EatVegetarianMeal();
+        Date date = new Date();
+        activity.setDate(date);
+        User received = addActivityRequest(activity, "vehjelmtvedt1");
+        System.out.println(received.toString());
     }
 
 

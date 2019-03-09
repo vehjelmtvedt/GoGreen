@@ -1,5 +1,6 @@
 package backend;
 
+import backend.data.Activity;
 import backend.data.DbService;
 
 import backend.data.LoginDetails;
@@ -88,6 +89,14 @@ public class RequestHandler {
         } else {
             return "NONE";
         }
+    }
+
+    @RequestMapping("addActivity")
+    public User addActivity(@RequestBody Activity activity, @RequestParam String identifier) {
+        User tmp = dbService.getUserByUsername(identifier);
+        tmp.addActivity(activity);
+        dbService.addUser(tmp);
+        return dbService.getUserByUsername(identifier);
     }
 
 }
