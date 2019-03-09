@@ -295,11 +295,6 @@ public class UserTest {
         Assert.assertFalse(userOne.equals(emptyUser));
     }
 
-    @Test
-    public void testEqalsDiffUsername() {
-        User userOne2 = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test2", "password123");
-        Assert.assertFalse(userOne.equals(userOne2));
-    }
 
     @Test
     public void testEqalsDiffEmail() {
