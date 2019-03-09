@@ -117,30 +117,23 @@ public class Requests {
         return rest.postForEntity(url, identifier, String.class).getBody().equals("OK");
     }
 
-    public static User addActivityRequest(Activity activity, String identifier) throws JsonProcessingException {
+    public static User addActivityRequest(Activity activity, String username) {
 
         String url = "http://localhost:8080/addActivity";
 
         RestTemplate restTemplate = new RestTemplate();
 
-
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
-                .queryParam("identifier", identifier);
+                .queryParam("identifier", username);
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.enableDefaultTyping();
-        String jsonDataString = mapper.writeValueAsString(activity);
-
-
-
-        return restTemplate.postForEntity(uriBuilder.toUriString(), jsonDataString, User.class).getBody();
+        return restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class).getBody();
     }
 
     public static void main(String[] args) throws JsonProcessingException {
+        System.out.println(validateUserRequest("ececen"));
         EatVegetarianMeal activity = new EatVegetarianMeal();
-        Date date = new Date();
-        User received = addActivityRequest(activity, "vehjelmtvedt1");
+        User received = addActivityRequest(activity, "ececen");
         System.out.println(received.toString());
     }
 

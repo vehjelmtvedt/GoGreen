@@ -1,5 +1,8 @@
 package backend.data;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -7,6 +10,11 @@ import java.util.Date;
  * This class is used as a superclass for the specific activities a user performs.
  * @author Kostas Lyrakis
  */
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = EatVegetarianMeal.class, name = "EatVegetarianMeal"),
+})
 public abstract class Activity {
     private Date date;
     private double carbonSaved;
