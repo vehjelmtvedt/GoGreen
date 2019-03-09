@@ -3,7 +3,6 @@ package backend.data;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class User {
@@ -170,6 +169,7 @@ public class User {
     public double getTotalCarbonSaved() {
         return this.totalCarbonSaved;
     }
+
     public Date getLastLoginDate() {
         return this.lastLoginDate;
     }
