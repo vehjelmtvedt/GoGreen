@@ -30,7 +30,7 @@ public class Homepage {
         BorderPane border = new BorderPane();
 
         //Button testing
-        Button addMealTest = new Button("Add vegetarian meal");
+        Button addMealTest = new Button("Eat vegetarian meal");
         addMealTest.setOnAction(e -> General.showAlert(Alert.AlertType.CONFIRMATION,
                 border.getScene().getWindow(), "Current user: ",
                 user.toString()));
