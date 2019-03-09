@@ -30,14 +30,14 @@ public class InputValidation {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
-        User response = Requests.loginRequest(loginDetails);
-        System.out.println(response);
-        if (response != null) {
+        User userResponse = Requests.loginRequest(loginDetails);
+        System.out.println(userResponse);
+        if (userResponse != null) {
             General.showAlert(Alert.AlertType.CONFIRMATION,
                     form.getScene().getWindow(), "Login successful",
-                    "Welcome to GoGreen, " + response);
+                    "Welcome to GoGreen, " + userResponse);
             General.resetFields(SignIn.getFields());
-            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage());
+            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Homepage.createScene(userResponse));
 
         } else {
             General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),

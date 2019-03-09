@@ -1,8 +1,10 @@
 package frontend;
 
+import backend.data.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -14,7 +16,7 @@ public class Homepage {
      * Creates scene for Homepage
      * @return scene for Homepage
      */
-    public static Scene createScene() {
+    public static Scene createScene(User user) {
         HBox box = new HBox();
         box.setStyle("-fx-background-color: #009933;");
 
@@ -26,8 +28,16 @@ public class Homepage {
         HBox.setHgrow(right, Priority.ALWAYS);
 
         BorderPane border = new BorderPane();
-        border.setTop(box);
 
+        //Button testing
+        Button addMealTest = new Button("Add vegetarian meal");
+        addMealTest.setOnAction(e -> General.showAlert(Alert.AlertType.CONFIRMATION,
+                border.getScene().getWindow(), "Current user: ",
+                user.toString()));
+        //testing
+
+        border.setTop(box);
+        border.setCenter(addMealTest);
         return new Scene(border, General.getBounds()[0], General.getBounds()[1]);
     }
 
