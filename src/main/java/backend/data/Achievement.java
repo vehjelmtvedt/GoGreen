@@ -1,4 +1,4 @@
-package frontend;
+package backend.data;
 
 public class Achievement {
 
@@ -6,6 +6,13 @@ public class Achievement {
     private String name;
     private int bonus;
 
+    /**
+     * contains the data for the Achievement.
+     *
+     * @param id id
+     * @param name  name
+     * @param bonus extra points
+     */
     public Achievement(int id, String name, int bonus) {
         this.id = id;
         this.name = name;

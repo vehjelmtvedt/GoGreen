@@ -1,4 +1,4 @@
-package frontend;
+package backend.data;
 
 import java.util.ArrayList;
 
@@ -31,6 +31,13 @@ public class Progress {
 
     }
 
+    /**
+     * this method is a general way to get
+     * the level, they higher the level the more points it needs to level up
+     * tops up on 8.
+     *
+     * @return level
+     */
     public int getLevel() {
 
         if (this.points == 0) {

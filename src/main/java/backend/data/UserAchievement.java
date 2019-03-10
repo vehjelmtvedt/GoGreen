@@ -1,4 +1,4 @@
-package frontend;
+package backend.data;
 
 import java.util.Date;
 
@@ -7,6 +7,15 @@ public class UserAchievement {
     public int id;
     boolean completed;
     Date date;
+
+    /**
+     * link completed achievement to user
+     * the user should have an array list of achievements .
+     *
+     * @param id reference to the achievement
+     * @param completed flag
+     * @param date date on completion
+     */
 
     public UserAchievement(int id, boolean completed, Date date) {
         this.id = id;
