@@ -2,14 +2,12 @@ package backend;
 
 
 import backend.data.DbService;
+import backend.data.EatVegetarianMeal;
 import backend.data.LoginDetails;
 import backend.data.User;
-import ch.qos.logback.core.net.AbstractSSLSocketAppender;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -139,6 +137,27 @@ public class RequestHandlerTest
     @Test
     public void testInvalidUsernameAndEmail() {
         assertEquals("NONE", requestHandler.validateUser("invalid"));
+    }
+
+    @Test
+    public void testAddActivity() {
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        EatVegetarianMeal act = new EatVegetarianMeal();
+        assertEquals(testUser, requestHandler.addActivity(act, testUser.getUsername()));
+        assertEquals(1, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
+    }
+
+    @Test
+    public void testAddActivityNotValidUsername() {
+        EatVegetarianMeal act = new EatVegetarianMeal();
+        assertEquals(null, requestHandler.addActivity(act, "invalid"));
+    }
+
+    @Test
+    public void testAddActivityNotValidActivity() {
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        assertEquals(null, requestHandler.addActivity(null, testUser.getUsername()));
+        assertEquals(0, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
     }
 
 }

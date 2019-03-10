@@ -1,11 +1,9 @@
 package backend.data;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
-import javax.validation.constraints.AssertTrue;
-import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -295,16 +293,16 @@ public class UserTest {
         Assert.assertFalse(userOne.equals(emptyUser));
     }
 
-    @Test
-    public void testEqalsDiffUsername() {
-        User userOne2 = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test2", "password123");
-        Assert.assertFalse(userOne.equals(userOne2));
-    }
 
     @Test
     public void testEqalsDiffEmail() {
         User userOne2 = new User("Vetle", "Hjelmtvedt", 19, "vetle2@hjelmtvedt.com","test", "password123");
         Assert.assertFalse(userOne.equals(userOne2));
+    }
+
+    @Test
+    public void testEqualsDifferentUser() {
+        Assert.assertFalse(userOne.equals(activeUser));
     }
 
     @Test

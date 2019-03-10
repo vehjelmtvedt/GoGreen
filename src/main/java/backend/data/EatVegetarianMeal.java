@@ -57,7 +57,7 @@ public class EatVegetarianMeal extends Activity {
 
     /**
      * A user with below average meat and dairy consumption behaves like a vegan.
-     * @return
+     * @return - meat and dairy consumption emission KOSTAS FIX THIS IF WRONG
      */
     public double belowAverageToVegan() {
         return CarbonCalculator.meatAndDairyConsumptionEmissions(
