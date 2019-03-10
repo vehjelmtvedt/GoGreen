@@ -2,11 +2,13 @@ package frontend;
 
 import backend.data.LoginDetails;
 import backend.data.User;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,14 +32,15 @@ public class InputValidation {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
-        User userResponse = Requests.loginRequest(loginDetails);
-        System.out.println(userResponse);
-        if (userResponse != null) {
+        User response = Requests.loginRequest(loginDetails);
+        System.out.println(response);
+        if (response != null) {
             General.showAlert(Alert.AlertType.CONFIRMATION,
                     form.getScene().getWindow(), "Login successful",
-                    "Welcome to GoGreen, " + userResponse);
+                    "Welcome to GoGreen, " + response);
             General.resetFields(SignIn.getFields());
-            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Homepage.createScene(userResponse));
+
+            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage());
 
         } else {
             General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),

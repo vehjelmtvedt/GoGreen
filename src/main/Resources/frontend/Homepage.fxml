@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="342.0" prefWidth="315.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="129.0" prefWidth="315.0" style="-fx-background-color: green;">
+               <children>
+                  <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <VBox alignment="CENTER_LEFT" prefHeight="140.0" prefWidth="184.0">
+                     <children>
+                        <Label text="Username">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="197.0">
+                           <children>
+                              <Label prefHeight="20.0" prefWidth="80.0" text="CO2 Saved" wrapText="true">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ProgressBar prefHeight="20.0" prefWidth="100.0" progress="0.0">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </ProgressBar>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="180.0">
+                           <children>
+                              <Label prefHeight="20.0" prefWidth="80.0" text="Level" wrapText="true">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ProgressBar prefHeight="20.0" prefWidth="100.0" progress="0.0">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </ProgressBar>
+                           </children>
+                        </HBox>
+                        <Label prefHeight="20.0" prefWidth="80.0" text="Date_value">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="315.0" style="-fx-background-color: pink;" text="Activities" textAlignment="CENTER">
+               <font>
+                  <Font size="17.0" />
+               </font></Label>
+            <TableView prefHeight="433.0" prefWidth="315.0">
+              <columns>
+                <TableColumn prefWidth="56.0" text="Position" />
+                  <TableColumn prefWidth="211.0" text="Activity Name" />
+                  <TableColumn prefWidth="46.0" text="Points" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="609.0" prefWidth="675.0" style="-fx-background-color: purple;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="925.0" text="Leaderboards" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font></Label>
+            <TableView prefHeight="262.0" prefWidth="925.0">
+              <columns>
+                <TableColumn prefWidth="67.0" text="Positon" />
+                <TableColumn prefWidth="238.0" text="Name" />
+                <TableColumn prefWidth="82.0" text="Score" />
+              </columns>
+            </TableView>
+            <Label alignment="CENTER" prefHeight="26.0" prefWidth="935.0" text="Acheivements" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: grey;">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: pink;">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <Pane prefHeight="37.0" prefWidth="1240.0" style="-fx-background-color: salmon;" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="TOP_RIGHT" contentDisplay="CENTER" layoutX="1075.0" layoutY="5.0" mnemonicParsing="false" text="Settings" textAlignment="CENTER" />
+            <Button contentDisplay="CENTER" layoutX="1157.0" layoutY="5.0" mnemonicParsing="false" text="Logout" textAlignment="CENTER" />
+         </children>
+      </Pane>
+   </top>
+</BorderPane>
