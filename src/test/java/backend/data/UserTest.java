@@ -1,11 +1,9 @@
 package backend.data;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
-import javax.validation.constraints.AssertTrue;
-import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
 
