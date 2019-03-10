@@ -184,8 +184,8 @@ public class User {
         return this.lastLoginDate;
     }
 
-    public void setLastLoginDate() {
-        this.lastLoginDate = Calendar.getInstance().getTime();
+    public void setLastLoginDate(Date date) {
+        this.lastLoginDate = date;
     }
 
     /**

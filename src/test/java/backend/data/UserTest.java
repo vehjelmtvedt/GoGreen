@@ -316,10 +316,8 @@ public class UserTest {
     }
 
     @Test
-    public void testSetLastLoginDate() {
-        userOne.setLastLoginDate();
-        Date dateNow = Calendar.getInstance().getTime();
-        Assert.assertEquals(dateNow, userOne.getLastLoginDate());
+    public void testGetLastLoginDate() {
+        Assert.assertNull(userOne.getLastLoginDate());
     }
 
     @Test
