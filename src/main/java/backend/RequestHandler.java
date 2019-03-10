@@ -41,14 +41,14 @@ public class RequestHandler {
     @RequestMapping("/signup")
     public String signupController(@RequestBody User user) {
 
-        System.out.println(user);
         if (dbService.getUserByUsername(user.getUsername()) != null) {
             return "Username exists";
         }
-        System.out.println("IN1");
+
         if (dbService.getUser(user.getEmail()) != null) {
             return "Email exists";
         }
+
         dbService.addUser(user);
         return "success";
         //return new ResponseEntity<>("Success", HttpStatus.OK);
@@ -60,30 +60,36 @@ public class RequestHandler {
     }
 
     @RequestMapping("/friendrequest")
-    public String friendRequest(@RequestParam String sender, @RequestParam String receiver) {
+    public User friendRequest(@RequestParam String sender, @RequestParam String receiver) {
         return dbService.addFriendRequest(sender, receiver);
     }
 
     @RequestMapping("/acceptfriend")
-    public String acceptFriendRequest(@RequestParam String sender, @RequestParam String accepting) {
+    public User acceptFriendRequest(@RequestParam String sender, @RequestParam String accepting) {
         return dbService.acceptFriendRequest(sender, accepting);
     }
 
     @RequestMapping("/rejectfriend")
-    public String rejectFriendRequest(@RequestParam String sender, @RequestParam String rejecting) {
+    public User rejectFriendRequest(@RequestParam String sender, @RequestParam String rejecting) {
         return dbService.rejectFriendRequest(sender, rejecting);
 
     }
 
-    @RequestMapping("/validateEmail")
-    public boolean validateEmail(@RequestBody String email) {
-        return dbService.getUser(email) != null;
+    /**
+     * Checks if the user is a valid user.
+     * @param identifier username or email
+     * @return - OK if valid user, NONE otherwise
+     */
+    @RequestMapping("/validateUser")
+    public String validateUser(@RequestBody String identifier) {
+        if  (dbService.getUser(identifier) != null
+                || dbService.getUserByUsername(identifier) != null) {
+            return "OK";
+        } else {
+            return "NONE";
+        }
     }
 
-    @RequestMapping("/validateUsername")
-    public boolean validateUsername(@RequestBody String username) {
-        return dbService.getUserByUsername(username) != null;
-    }
 }
 
 

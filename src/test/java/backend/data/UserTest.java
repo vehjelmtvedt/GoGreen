@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import javax.validation.constraints.AssertTrue;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class UserTest {
 
@@ -272,5 +274,49 @@ public class UserTest {
         Assert.assertEquals("testfriend2", userOne.getFriendRequests().get(0));
     }
 
+    @Test
+    public void testEqualsSame() {
+        Assert.assertTrue(userOne.equals(userOne));
+    }
 
+    @Test
+    public void testEqualsNull() {
+        Assert.assertFalse(userOne.equals(null));
+    }
+
+    @Test
+    public void testEqualsAnotherClass() {
+        Assert.assertFalse(userOne.equals(new LoginDetails()));
+    }
+
+    @Test
+    public void testEqualsEmpty() {
+        Assert.assertFalse(userOne.equals(emptyUser));
+    }
+
+    @Test
+    public void testEqalsDiffUsername() {
+        User userOne2 = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test2", "password123");
+        Assert.assertFalse(userOne.equals(userOne2));
+    }
+
+    @Test
+    public void testEqalsDiffEmail() {
+        User userOne2 = new User("Vetle", "Hjelmtvedt", 19, "vetle2@hjelmtvedt.com","test", "password123");
+        Assert.assertFalse(userOne.equals(userOne2));
+    }
+
+    public void testGetLastLoginDate() {
+        // Test prone to failure on >1second executions. Consider using Mockito to test this.
+        User newUser = new User("FirstName", "LastName", 25, "test@email.com", "test_user", "pwd123");
+        Date dateNow = Calendar.getInstance().getTime();
+        Assert.assertEquals(dateNow, newUser.getLastLoginDate());
+    }
+
+    @Test
+    public void testSetLastLoginDate() {
+        userOne.setLastLoginDate();
+        Date dateNow = Calendar.getInstance().getTime();
+        Assert.assertEquals(dateNow, userOne.getLastLoginDate());
+    }
 }

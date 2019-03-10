@@ -1,6 +1,5 @@
-# For JavaFX support
-# For JavaFX support
-image: "tgalopin/maven-javafx"
+# This will use the latest Java version available
+image: "maven:3.6.0-jdk-11"
 
 variables:
   MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
@@ -54,4 +53,21 @@ checkstyle:
   script:
     - echo "Checkstyle check"
     - mvn checkstyle:check
+    - mvn checkstyle:checkstyle
   allow_failure: true
+  artifacts:
+    paths:
+      - target/site/checkstyle.html
+
+
+# Generates -ALL- reports (only on master)
+full-report:
+  stage: deploy
+  script:
+    - echo "Run maven site (generates all reports)"
+    - mvn site
+  artifacts:
+    paths:
+      - target/site/
+  only:
+    - master

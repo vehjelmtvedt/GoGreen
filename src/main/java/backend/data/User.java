@@ -3,6 +3,8 @@ package backend.data;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class User {
 
@@ -25,14 +27,16 @@ public class User {
     private String organicFoodConsumption;
     private String processedFoodConsumption;
     private double totalCarbonSaved;
+    private Date lastLoginDate;
 
     /**
      * Constructor of User object.
+     *
      * @param firstName - first name of user.
-     * @param lastName - last name of user.
-     * @param age - age of user.
-     * @param email - email of user.
-     * @param password - user's password.
+     * @param lastName  - last name of user.
+     * @param age       - age of user.
+     * @param email     - email of user.
+     * @param password  - user's password.
      */
     public User(String firstName, String lastName, int age, String email,
                 String username, String password) {
@@ -53,6 +57,7 @@ public class User {
         this.organicFoodConsumption = "default";
         this.processedFoodConsumption = "default";
         this.totalCarbonSaved = 0;
+        this.lastLoginDate = Calendar.getInstance().getTime();
     }
 
     public User() {
@@ -165,9 +170,17 @@ public class User {
     public double getTotalCarbonSaved() {
         return this.totalCarbonSaved;
     }
+    public Date getLastLoginDate() {
+        return this.lastLoginDate;
+    }
+
+    public void setLastLoginDate() {
+        this.lastLoginDate = Calendar.getInstance().getTime();
+    }
 
     /**
      * Returns string representation of the User object.
+     *
      * @return String
      */
     public String toString() {
@@ -199,6 +212,7 @@ public class User {
 
     /**
      * Adds a friend request to friend request list.
+     *
      * @param username - username of the person who sent the request.
      */
 
@@ -208,12 +222,25 @@ public class User {
 
     /**
      * Delete a request from the friend request list.
+     *
      * @param username - username of the request to delete.
      */
     public void deleteFriendRequest(String username) {
         friendRequests.remove(username);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        User user = (User) obj;
+        return email.equals(user.email)
+                && username.equals(user.username);
+    }
 
     /*
      * Removes a friend from the friends list
