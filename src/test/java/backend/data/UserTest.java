@@ -307,7 +307,7 @@ public class UserTest {
 
     @Test
     public void testGetLastLoginDate() {
-        Assert.assertNull(userOne.getLastLoginDate());
+        Assert.assertNotNull(userOne.getLastLoginDate());
     }
 
     @Test
