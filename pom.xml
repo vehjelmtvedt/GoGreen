@@ -170,6 +170,10 @@
                         <exclude>**/frontend/SignIn*</exclude>
                         <exclude>**/frontend/SignUp*</exclude>
                         <exclude>**/frontend/StageSwitcher*</exclude>
+
+                        <!-- Testing for coverage -->
+                        <exclude>**/backend/Activity*</exclude>
+                        <exclude>**/backend/EatVegetarianMeal*</exclude>
                     </excludes>
 
                     <rules>
