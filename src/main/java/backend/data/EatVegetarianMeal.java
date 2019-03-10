@@ -19,12 +19,17 @@ public class EatVegetarianMeal extends Activity {
         Date currentDate = Calendar.getInstance().getTime();
         String currentMonth = currentDate.toString().split(" ")[1];
         String currentDay = currentDate.toString().split(" ")[2];
+        String currentYear = currentDate.toString().split(" ")[5];
+
         int result = 0;
         for (Activity activity : user.getActivities()) {
-            if (activity instanceof EatVegetarianMeal
-                    && activity.getDate().toString().split(" ")[1].equals(currentMonth)
-                    && activity.getDate().toString().split(" ")[2].equals(currentDay)) {
-                result++;
+            if (activity instanceof EatVegetarianMeal) {
+                String dateNow = currentMonth + currentDay + currentYear;
+                if (dateNow.equals(activity.getDate().toString().split(" ")[1]
+                        + activity.getDate().toString().split(" ")[2]
+                        + activity.getDate().toString().split(" ")[5])) {
+                    result++;
+                }
             }
         }
         return result;
@@ -67,8 +72,8 @@ public class EatVegetarianMeal extends Activity {
      */
     public double calculateCarbonSaved(User user) {
         String meatAndDairyConsumption = user.getMeatAndDairyConsumption();
-        switch (meatAndDairyConsumption) {
-            case "above average":
+
+            if(meatAndDairyConsumption.equals("above average")) {
                 switch (timesPerformedInTheSameDay(user)) {
                     case 0:
                         return aboveAverageToAverage();
@@ -79,7 +84,8 @@ public class EatVegetarianMeal extends Activity {
                     default:
                         return 0;
                 }
-            case "average" :
+            }
+            else if (meatAndDairyConsumption.equals("average")) {
                 switch (timesPerformedInTheSameDay(user)) {
                     case 0:
                         return averageToBelowAverage();
@@ -88,17 +94,19 @@ public class EatVegetarianMeal extends Activity {
                     default:
                         return 0;
                 }
-            case "below average" :
+            }
+            else if (meatAndDairyConsumption.equals("below average")) {
                 switch (timesPerformedInTheSameDay(user)) {
                     case 0:
                         return belowAverageToVegan();
                     default:
                         return 0;
                 }
-            default:
+            }else {
                 return 0;
+            }
         }
-    }
+
 
     /**
      * performs the activity and updates the user object.

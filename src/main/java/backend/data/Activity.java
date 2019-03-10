@@ -20,6 +20,10 @@ public abstract class Activity {
         return date;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public double getCarbonSaved() {
         return carbonSaved;
     }

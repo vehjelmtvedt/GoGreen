@@ -35,10 +35,10 @@ public class Homepage {
         addMealTest.setOnAction(e -> {
             EatVegetarianMeal vegetarianMeal = new EatVegetarianMeal();
             vegetarianMeal.performActivity(user);
-            user.addActivity(vegetarianMeal);
-            String message = "carbon saved: " + user.getTotalCarbonSaved();
+            String message = "total carbon saved: " + user.getTotalCarbonSaved();
             message += "\n" + "times repeated today: "
-                    + vegetarianMeal.timesPerformedInTheSameDay(user);
+                    + vegetarianMeal.timesPerformedInTheSameDay(user)
+                    + "\n This activity saved: " + vegetarianMeal.getCarbonSaved();
             General.showAlert(Alert.AlertType.CONFIRMATION,
                     border.getScene().getWindow(), "Activity results",
                     message);
