@@ -73,39 +73,37 @@ public class EatVegetarianMeal extends Activity {
     public double calculateCarbonSaved(User user) {
         String meatAndDairyConsumption = user.getMeatAndDairyConsumption();
 
-            if(meatAndDairyConsumption.equals("above average")) {
-                switch (timesPerformedInTheSameDay(user)) {
-                    case 0:
-                        return aboveAverageToAverage();
-                    case 1:
-                        return averageToBelowAverage();
-                    case 2:
-                        return belowAverageToVegan();
-                    default:
-                        return 0;
-                }
+        if (meatAndDairyConsumption.equals("above average")) {
+            switch (timesPerformedInTheSameDay(user)) {
+                case 0:
+                    return aboveAverageToAverage();
+                case 1:
+                    return averageToBelowAverage();
+                case 2:
+                    return belowAverageToVegan();
+                default:
+                    return 0;
             }
-            else if (meatAndDairyConsumption.equals("average")) {
-                switch (timesPerformedInTheSameDay(user)) {
-                    case 0:
-                        return averageToBelowAverage();
-                    case 1:
-                        return belowAverageToVegan();
-                    default:
-                        return 0;
-                }
+        } else if (meatAndDairyConsumption.equals("average")) {
+            switch (timesPerformedInTheSameDay(user)) {
+                case 0:
+                    return averageToBelowAverage();
+                case 1:
+                    return belowAverageToVegan();
+                default:
+                    return 0;
             }
-            else if (meatAndDairyConsumption.equals("below average")) {
-                switch (timesPerformedInTheSameDay(user)) {
-                    case 0:
-                        return belowAverageToVegan();
-                    default:
-                        return 0;
-                }
-            }else {
-                return 0;
+        } else if (meatAndDairyConsumption.equals("below average")) {
+            switch (timesPerformedInTheSameDay(user)) {
+                case 0:
+                    return belowAverageToVegan();
+                default:
+                    return 0;
             }
+        } else {
+            return 0;
         }
+    }
 
 
     /**
