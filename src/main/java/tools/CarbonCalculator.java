@@ -160,8 +160,5 @@ public final class CarbonCalculator {
         return processedFoodConsumption.carbonEmissions;
     }
 
-    public static int dummymethod(int sm) {
-        return sm;
-    }
 }
 
