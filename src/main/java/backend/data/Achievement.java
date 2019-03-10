@@ -42,4 +42,6 @@ public class Achievement {
     public void setBonus(int bonus) {
         this.bonus = bonus;
     }
+
+
 }

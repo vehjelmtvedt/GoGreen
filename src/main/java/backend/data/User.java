@@ -29,6 +29,10 @@ public class User {
     private double totalCarbonSaved;
     private Date lastLoginDate;
 
+    //new stuff
+    private Progress progress = new Progress();
+
+
     /**
      * Constructor of User object.
      *
@@ -61,6 +65,14 @@ public class User {
     }
 
     public User() {
+    }
+
+    public Progress getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Progress progress) {
+        this.progress = progress;
     }
 
     public String getFirstName() {
@@ -170,6 +182,7 @@ public class User {
     public double getTotalCarbonSaved() {
         return this.totalCarbonSaved;
     }
+
     public Date getLastLoginDate() {
         return this.lastLoginDate;
     }

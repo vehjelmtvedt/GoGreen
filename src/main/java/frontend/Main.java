@@ -9,7 +9,9 @@ public class Main extends Application {
     private static Scene signIn;
     private static Scene signUp;
     private static Scene homepage;
+    private static Scene progress;
     private static String cssIntro;
+
 
     @Override
     public void start(Stage window) {
@@ -21,6 +23,7 @@ public class Main extends Application {
         signIn = SignIn.createScene();
         signUp = SignUp.createScene();
         homepage = Homepage.createScene();
+        progress = ProgressPage.createScene();
 
         //add button switching due to java being a synchronous programming language
         StageSwitcher.buttonSwitch(SignIn.getSignUpButton(), primaryStage, signUp);
@@ -32,7 +35,7 @@ public class Main extends Application {
         signUp.getStylesheets().add(cssIntro);
 
         //setup the first scene for the primary stage
-        General.finaliseStage(primaryStage, signIn);
+        General.finaliseStage(primaryStage, progress);
     }
 
     public static void main(String[] args) {

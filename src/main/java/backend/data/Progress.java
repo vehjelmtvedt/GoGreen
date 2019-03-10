@@ -16,8 +16,18 @@ public class Progress {
         return points;
     }
 
+
+
     public void setPoints(double points) {
         this.points = points;
+    }
+
+    public ArrayList<UserAchievement> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(ArrayList<UserAchievement> achievements) {
+        this.achievements = achievements;
     }
 
     /**
@@ -58,5 +68,6 @@ public class Progress {
 
 
     }
+
 
 }

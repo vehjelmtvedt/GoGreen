@@ -46,4 +46,8 @@ public class UserAchievement {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public String toString() {
+        return "place holder text here";
+    }
 }
