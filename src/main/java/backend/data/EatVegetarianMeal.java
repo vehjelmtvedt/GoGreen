@@ -5,6 +5,10 @@ import tools.CarbonCalculator;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Activity: eat a vegetarian meal.
+ * @author Kostas Lyrakis
+ */
 public class EatVegetarianMeal extends Activity {
 
     /**
@@ -50,7 +54,7 @@ public class EatVegetarianMeal extends Activity {
      * A user with below average meat and dairy consumption behaves like a vegan.
      * @return
      */
-    public double belowAverageToLactoVegan() {
+    public double belowAverageToVegan() {
         return CarbonCalculator.meatAndDairyConsumptionEmissions(
                 CarbonCalculator.MeatAndDairyConsumption.BELOW_AVERAGE) / 365.0
                 - CarbonCalculator.meatAndDairyConsumptionEmissions(
@@ -71,7 +75,7 @@ public class EatVegetarianMeal extends Activity {
                     case 1:
                         return averageToBelowAverage();
                     case 2:
-                        return belowAverageToLactoVegan();
+                        return belowAverageToVegan();
                     default:
                         return 0;
                 }
@@ -80,25 +84,30 @@ public class EatVegetarianMeal extends Activity {
                     case 0:
                         return averageToBelowAverage();
                     case 1:
-                        return belowAverageToLactoVegan();
+                        return belowAverageToVegan();
                     default:
                         return 0;
                 }
             case "below average" :
                 switch (timesPerformedInTheSameDay(user)) {
                     case 0:
-                        return belowAverageToLactoVegan();
+                        return belowAverageToVegan();
                     default:
                         return 0;
                 }
             default:
-                throw new IllegalArgumentException();
+                return 0;
         }
     }
 
+    /**
+     * performs the activity and updates the user object.
+     * @param user user currently logged in
+     */
     public void performActivity(User user) {
         this.setCarbonSaved(this.calculateCarbonSaved(user));
         user.setTotalCarbonSaved(user.getTotalCarbonSaved() + this.calculateCarbonSaved(user));
+        user.addActivity(this);
     }
 
 }
