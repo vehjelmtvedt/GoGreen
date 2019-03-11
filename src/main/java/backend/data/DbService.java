@@ -26,6 +26,9 @@ public class DbService {
     private UserRepository users;
 
     @Autowired
+    private AchievementRepository achievements;
+
+    @Autowired
     private MongoTemplate mongoTemplate;
 
     @Bean
@@ -252,5 +255,13 @@ public class DbService {
                             .in(user.getFriends())), // Email must be in users friend list
                     User.class); // Resulting Object type User
         }
+    }
+
+    /**.
+     * Returns the list of all achievements.
+     * @return List of all achievements
+     */
+    public List<Achievement> getAchievements() {
+        return achievements.findAll();
     }
 }

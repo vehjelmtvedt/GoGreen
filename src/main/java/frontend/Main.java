@@ -13,7 +13,9 @@ public class Main extends Application {
     private static Scene signIn;
     private static Scene signUp;
     private static Scene homepage;
+    private static Scene progress;
     private static String cssIntro;
+
 
     @Override
     public void start(Stage window) {
@@ -32,6 +34,8 @@ public class Main extends Application {
         //create scenes necessary for scene switching
         signIn = SignIn.createScene();
         signUp = SignUp.createScene();
+//        homepage = Homepage.createScene();
+        progress = ProgressPage.createScene();
 
         //add button switching due to java being a synchronous programming language
         StageSwitcher.buttonSwitch(SignIn.getSignUpButton(), primaryStage, signUp);

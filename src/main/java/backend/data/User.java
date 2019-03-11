@@ -33,6 +33,10 @@ public class User {
     private String processedFoodConsumption;
     private double totalCarbonSaved;
 
+    //new stuff
+    private Progress progress = new Progress();
+
+
     /**
      * Constructor of User object.
      *
@@ -66,6 +70,14 @@ public class User {
     }
 
     public User() {
+    }
+
+    public Progress getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Progress progress) {
+        this.progress = progress;
     }
 
     public String getFirstName() {
