@@ -22,7 +22,7 @@ public class DbLoader {
      * Currently loads only achievements into the achievement repository.
      * @return Populator bean for the database
      */
-    @Bean
+/*    @Bean
     public Jackson2RepositoryPopulatorFactoryBean populateDatabase() {
         // Wipe achievement repository to overwrite with new data
         achievementRepository.deleteAll();
@@ -36,5 +36,5 @@ public class DbLoader {
 
         // Return bean (this will automatically populate the database)
         return factory;
-    }
+    }*/
 }
