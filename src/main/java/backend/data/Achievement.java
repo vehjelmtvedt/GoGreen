@@ -1,10 +1,17 @@
 package backend.data;
 
-public class Achievement {
+import org.springframework.data.annotation.Id;
 
-    public int id;
+public class Achievement {
+    @Id
+    private int id;
+
     private String name;
     private int bonus;
+
+    public Achievement() {
+
+    }
 
     /**
      * contains the data for the Achievement.
