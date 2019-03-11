@@ -1,27 +1,27 @@
 package backend.data;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;
-
-import java.util.ArrayList;
 
 @Configuration
 public class DbLoader {
-    @Autowired
-    AchievementRepository achievementRepository;
-
     // Specify JSON to load here
     private static final Resource achievements = new ClassPathResource("data/achievements.json");
     private static final Resource[] resources = new Resource[] {achievements};
 
+    @Autowired
+    private AchievementRepository achievementRepository;
+
+    /**.
+     * Populator bean for the database.
+     * First wipes all the data and reloads it from JSON files.
+     * Currently loads only achievements into the achievement repository.
+     * @return Populator bean for the database
+     */
     @Bean
     public Jackson2RepositoryPopulatorFactoryBean populateDatabase() {
         // Wipe achievement repository to overwrite with new data

@@ -170,6 +170,7 @@ public class User {
     public double getTotalCarbonSaved() {
         return this.totalCarbonSaved;
     }
+
     public Date getLastLoginDate() {
         return this.lastLoginDate;
     }
