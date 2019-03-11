@@ -256,6 +256,7 @@ public class User {
      * @param activity - Activity to add
      */
     public void addActivity(Activity activity) {
+        this.setTotalCarbonSaved(getTotalCarbonSaved() + activity.getCarbonSaved());
         this.activities.add(activity);
     }
 
