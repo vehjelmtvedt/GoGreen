@@ -78,7 +78,7 @@
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy -->
         <dependency>
             <groupId>net.bytebuddy</groupId>
@@ -90,6 +90,27 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
+            <version>12-ea+14</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-base -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>12-ea+14</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-graphics -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>12-ea+14</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
             <version>12-ea+14</version>
         </dependency>
     </dependencies>
@@ -150,11 +171,13 @@
                         <exclude>**/frontend/ConfirmBox*</exclude>
                         <exclude>**/frontend/General*</exclude>
                         <exclude>**/frontend/Homepage*</exclude>
+                        <exclude>**/frontend/Questionnaire*</exclude>
                         <exclude>**/frontend/InputValidation*</exclude>
                         <exclude>**/frontend/Main*</exclude>
                         <exclude>**/frontend/SignIn*</exclude>
                         <exclude>**/frontend/SignUp*</exclude>
                         <exclude>**/frontend/StageSwitcher*</exclude>
+                        <exclude>**/frontend/ProgressPage*</exclude>
                     </excludes>
 
                     <rules>

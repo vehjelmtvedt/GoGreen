@@ -97,17 +97,17 @@ public class DbServiceTest {
 
     @Test
     public void testGrantAccessNull() {
-        assertFalse(dbService.grantAccess(testUserNonExistent.getEmail(), testUserNonExistent.getPassword()));
+        assertEquals(null,dbService.grantAccess(testUserNonExistent.getEmail(), testUserNonExistent.getPassword()));
     }
 
     @Test
     public void testAuthenticationGrant() {
-        assertTrue(dbService.grantAccess(testUser.getEmail(), "pwd"));
+        assertEquals(testUser.getUsername(),dbService.grantAccess(testUser.getEmail(), "pwd").getUsername());
     }
 
     @Test
     public void testAuthenticationReject() {
-        assertFalse(dbService.grantAccess(testUser.getEmail(), "someRandomPWD"));
+        assertEquals(null,dbService.grantAccess(testUser.getEmail(), "someRandomPWD"));
     }
 
     @Test
@@ -205,7 +205,7 @@ public class DbServiceTest {
 
     @Test
     public void testBefriendUsersBothNull() {
-        assertEquals("Invalid username", dbService.acceptFriendRequest(null, null));
+        assertEquals(null, dbService.acceptFriendRequest(null, null));
     }
 
     @Test
@@ -236,7 +236,7 @@ public class DbServiceTest {
 
     @Test
     public void testAddFriendRequestBothNull() { //false, false
-        assertEquals("Invalid username", dbService.addFriendRequest(null, null));
+        assertEquals(null, dbService.addFriendRequest(null, null));
     }
 
     @Test
@@ -269,6 +269,6 @@ public class DbServiceTest {
 
     @Test
     public void testRejectFriendRequestBothNull() {
-        assertEquals("Invalid username", dbService.rejectFriendRequest(null, null));
+        assertEquals(null, dbService.rejectFriendRequest(null, null));
     }
 }

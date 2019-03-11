@@ -2,14 +2,12 @@ package backend;
 
 
 import backend.data.DbService;
+import backend.data.EatVegetarianMeal;
 import backend.data.LoginDetails;
 import backend.data.User;
-import ch.qos.logback.core.net.AbstractSSLSocketAppender;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -53,14 +51,14 @@ public class RequestHandlerTest
 
     @Test
     public void testLoginSuccess() {
-        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(true);
+        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         assertEquals(testUser, requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
     @Test
     public void testLoginFail() {
-        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(false);
+        Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(null);
         assertEquals(null, requestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
@@ -79,48 +77,87 @@ public class RequestHandlerTest
     public void testAddFriendRequestOK() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
-        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn("OK");
-        assertEquals("OK", requestHandler.friendRequest(testUser.getUsername(), testUser2.getUsername()));
+        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
+        assertEquals(testUser2, requestHandler.friendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
     @Test
     public void testAddFriendRequestNotOK() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), "Invalid")).thenReturn("Invalid username");
-        assertEquals("Invalid username", requestHandler.friendRequest(testUser.getUsername(), "Invalid"));
+        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), "Invalid")).thenReturn(null);
+        assertEquals(null, requestHandler.friendRequest(testUser.getUsername(), "Invalid"));
     }
 
     @Test
     public void testAcceptFriendRequestOK() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
-        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn("OK"); //test requests test2
-        Mockito.when(dbService.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn("OK"); //test2 accepts test
-        assertEquals("OK", requestHandler.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2); //test requests test2
+        Mockito.when(dbService.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2); //test2 accepts test
+        assertEquals(testUser2, requestHandler.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
     @Test
     public void testAcceptFriendRequestInvalid() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
-        Mockito.when(dbService.acceptFriendRequest(testUser.getUsername(), "invalid")).thenReturn("Invalid username"); //test2 accepts test
-        assertEquals("Invalid username", requestHandler.acceptFriendRequest(testUser.getUsername(), "invalid"));
+        Mockito.when(dbService.acceptFriendRequest(testUser.getUsername(), "invalid")).thenReturn(null); //test2 accepts test
+        assertEquals(null, requestHandler.acceptFriendRequest(testUser.getUsername(), "invalid"));
     }
 
     @Test
     public void testRejectFriendRequestOK() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
-        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn("OK"); //test requests test2
-        Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn("OK"); //test2 rejects test
-        assertEquals("OK", requestHandler.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2); //test requests test2
+        Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2); //test2 rejects test
+        assertEquals(testUser2, requestHandler.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
     @Test
     public void testRejectFriendRequestInvalid() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
-        Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), "invalid")).thenReturn("Invalid username"); //test2 accepts test
-        assertEquals("Invalid username", requestHandler.rejectFriendRequest(testUser.getUsername(), "invalid"));
+        Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), "invalid")).thenReturn(null); //test2 accepts test
+        assertEquals(null, requestHandler.rejectFriendRequest(testUser.getUsername(), "invalid"));
     }
+
+    @Test
+    public void testValidateEmail() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        assertEquals("OK", requestHandler.validateUser(testUser.getEmail()));
+    }
+
+    @Test
+    public void testValidateUsername() {
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        assertEquals("OK", requestHandler.validateUser(testUser.getUsername()));
+    }
+
+    @Test
+    public void testInvalidUsernameAndEmail() {
+        assertEquals("NONE", requestHandler.validateUser("invalid"));
+    }
+
+    @Test
+    public void testAddActivity() {
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        EatVegetarianMeal act = new EatVegetarianMeal();
+        assertEquals(testUser, requestHandler.addActivity(act, testUser.getUsername()));
+        assertEquals(1, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
+    }
+
+    @Test
+    public void testAddActivityNotValidUsername() {
+        EatVegetarianMeal act = new EatVegetarianMeal();
+        assertEquals(null, requestHandler.addActivity(act, "invalid"));
+    }
+
+    @Test
+    public void testAddActivityNotValidActivity() {
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        assertEquals(null, requestHandler.addActivity(null, testUser.getUsername()));
+        assertEquals(0, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
+    }
+
 }

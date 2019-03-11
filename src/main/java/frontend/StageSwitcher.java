@@ -16,4 +16,8 @@ public class StageSwitcher {
     public static void closeApp(Button button, Stage from) {
         button.setOnAction(e -> from.close());
     }
+
+    public static void sceneSwitch(Stage from, Scene to) {
+        from.setScene(to);
+    }
 }
