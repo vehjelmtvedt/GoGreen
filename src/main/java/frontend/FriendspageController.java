@@ -1,23 +1,29 @@
 package frontend;
 
+import backend.data.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 
 
 public class FriendspageController {
 
+    private static User user;
+
     @FXML
     private Button getFriends;
 
-    @FXML
-    private Text headerlabel;
-
     public void initialize() {
 
-        getFriends.setOnAction(e -> System.out.println("Button pressed"));
+        getFriends.setOnAction(e -> fillFriendsPane());
 
+    }
+
+    public void fillFriendsPane() {
+        System.out.println(user.toString());
+    }
+
+    public static void setUser(User passedUser) {
+        user = passedUser;
     }
 
 
