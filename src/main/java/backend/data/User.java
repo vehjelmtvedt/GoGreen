@@ -3,6 +3,7 @@ package backend.data;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class User {
@@ -15,8 +16,13 @@ public class User {
     private String lastName;
     private int age;
     private String password;
+
     private ArrayList<String> friends;
     private ArrayList<String> friendRequests;
+    private Date lastLoginDate;
+
+    private ArrayList<Activity> activities;
+
     private int electricityDailyConsumption;
     private double heatingOilDailyConsumption;
     private int dailyCarKilometres;
@@ -26,7 +32,6 @@ public class User {
     private String organicFoodConsumption;
     private String processedFoodConsumption;
     private double totalCarbonSaved;
-    private Date lastLoginDate;
 
     /**
      * Constructor of User object.
@@ -56,7 +61,8 @@ public class User {
         this.organicFoodConsumption = "default";
         this.processedFoodConsumption = "default";
         this.totalCarbonSaved = 0;
-        this.lastLoginDate = null;
+        this.lastLoginDate = Calendar.getInstance().getTime();
+        this.activities = new ArrayList<>();
     }
 
     public User() {
@@ -92,6 +98,10 @@ public class User {
 
     public ArrayList<String> getFriends() {
         return this.friends;
+    }
+
+    public ArrayList<Activity> getActivities() {
+        return this.activities;
     }
 
     public ArrayList<String> getFriendRequests() {
@@ -238,8 +248,40 @@ public class User {
             return false;
         }
         User user = (User) obj;
-        return email.equals(user.email)
-                && username.equals(user.username);
+        return email.equals(user.email);
+    }
+
+    /**.
+     * Adds a new activity to user's activities list
+     * @param activity - Activity to add
+     */
+    public void addActivity(Activity activity) {
+        this.activities.add(activity);
+    }
+
+    /**.
+     * Removes an activity from user's activities list
+     * @param activity - Activity to remove
+     */
+    public void removeActivity(Activity activity) {
+        this.activities.remove(activity);
+    }
+
+    /**.
+     * Returns a list of activities that are of the same type of the specified activity.
+     * @param activity - Activity to compare to
+     * @return List of activities of same type
+     */
+    public ArrayList<Activity> getSimilarActivities(Activity activity) {
+        ArrayList<Activity> result = new ArrayList<>();
+
+        for (Activity userActivity : activities) {
+            if (userActivity.getClass() == activity.getClass() && !userActivity.equals(activity)) {
+                result.add(activity);
+            }
+        }
+
+        return result;
     }
 
     /*

@@ -1,11 +1,8 @@
 package frontend;
 
+import backend.data.Activity;
 import backend.data.LoginDetails;
 import backend.data.User;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -18,13 +15,8 @@ public class Requests {
      */
     public static String signupRequest(User user) {
         String url = "http://localhost:8080/signup";
-
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<String> response;
-
-        response = rest.postForEntity(url,user,String.class);
-        return response.getBody();
-
+        return rest.postForEntity(url,user,String.class).getBody();
     }
 
     /**
@@ -35,8 +27,7 @@ public class Requests {
     public static User loginRequest(LoginDetails loginDetails) {
         String url = "http://localhost:8080/login";
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<User> returned = rest.postForEntity(url, loginDetails, User.class);
-        return returned.getBody();
+        return rest.postForEntity(url, loginDetails, User.class).getBody();
     }
 
     /**
@@ -47,15 +38,14 @@ public class Requests {
     public static User getUserRequest(String identifier) {
         String url = "http://localhost:8080/getUser";
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<User> returned = rest.postForEntity(url, identifier, User.class);
-        return returned.getBody();
+        return rest.postForEntity(url, identifier, User.class).getBody();
     }
 
     /**
      * Sends a friend request from one user to another.
      * @param sender - user sending the friend request
      * @param receiver - user receiving the friend request
-     * @return
+     * @return - returns the User who sent the request
      */
     public static User sendFriendRequest(String sender, String receiver) {
 
@@ -63,32 +53,19 @@ public class Requests {
 
         RestTemplate restTemplate = new RestTemplate();
 
-
-        HttpHeaders requestHeaders = new HttpHeaders();
-
-        //request entity is created with request headers
-        HttpEntity<User> requestEntity = new HttpEntity<>(requestHeaders);
-
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("sender", sender)
                 .queryParam("receiver", receiver);
 
-        ResponseEntity<User> responseEntity = restTemplate.exchange(
-                uriBuilder.toUriString(),
-                HttpMethod.GET,
-                requestEntity,
-                User.class
-        );
-
-        return responseEntity.getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
     }
 
     /**
      * Request from a user to accept a friend request.
      * @param sender - user who sent the friend request
      * @param accepting - user who accepts the request
-     * @return
+     * @return - User accepting the friend request
      */
     public static User acceptFriendRequest(String sender, String accepting) {
 
@@ -96,32 +73,19 @@ public class Requests {
 
         RestTemplate restTemplate = new RestTemplate();
 
-
-        HttpHeaders requestHeaders = new HttpHeaders();
-
-        //request entity is created with request headers
-        HttpEntity<String> requestEntity = new HttpEntity<>(requestHeaders);
-
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("sender", sender)
                 .queryParam("accepting", accepting);
 
-        ResponseEntity<User> responseEntity = restTemplate.exchange(
-                uriBuilder.toUriString(),
-                HttpMethod.GET,
-                requestEntity,
-                User.class
-        );
-        System.out.println(responseEntity.getBody());
-        return responseEntity.getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
     }
 
     /**
      * Request from a user to reject a friend request.
      * @param sender - user who sent the request
      * @param rejecting - user who is rejecting the request
-     * @return
+     * @return - User rejecting the friend request
      */
     public static User rejectFriendRequest(String sender, String rejecting) {
 
@@ -129,25 +93,12 @@ public class Requests {
 
         RestTemplate restTemplate = new RestTemplate();
 
-
-        HttpHeaders requestHeaders = new HttpHeaders();
-
-        //request entity is created with request headers
-        HttpEntity<String> requestEntity = new HttpEntity<>(requestHeaders);
-
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("sender", sender)
                 .queryParam("rejecting", rejecting);
 
-        ResponseEntity<User> responseEntity = restTemplate.exchange(
-                uriBuilder.toUriString(),
-                HttpMethod.GET,
-                requestEntity,
-                User.class
-        );
-        System.out.println(responseEntity.getBody());
-        return responseEntity.getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
     }
 
     /**
@@ -158,11 +109,25 @@ public class Requests {
     public static boolean validateUserRequest(String identifier) {
         String url = "http://localhost:8080/validateUser";
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<String> returned = rest.postForEntity(url, identifier, String.class);
-        return returned.getBody().equals("OK");
+        return rest.postForEntity(url, identifier, String.class).getBody().equals("OK");
     }
 
+    /**
+     * Adds an activity to a User.
+     * @param activity - what activity to add to the user.
+     * @param username - of the User to add an activity
+     * @return - User the activity was added to.
+     */
+    public static User addActivityRequest(Activity activity, String username) {
 
+        String url = "http://localhost:8080/addActivity";
 
+        RestTemplate restTemplate = new RestTemplate();
 
+        //adding the query params to the URL
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+                .queryParam("identifier", username);
+
+        return restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class).getBody();
+    }
 }
