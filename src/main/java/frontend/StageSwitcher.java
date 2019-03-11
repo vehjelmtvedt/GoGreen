@@ -10,7 +10,8 @@ public class StageSwitcher {
         button.setOnAction(e -> from.setScene(to));
     }
 
-    public static void loginSwitch(Stage from, Scene to) {
+    public static void loginSwitch(Stage from, Scene to, User user) {
+        HomepageController.setUser(user);
         from.setScene(to);
     }
 

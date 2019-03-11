@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.HomepageController">
    <left>
       <VBox prefHeight="683.0" prefWidth="360.0" style="-fx-border-color: grey;" BorderPane.alignment="CENTER">
          <children>
@@ -81,7 +81,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <ComboBox prefWidth="150.0" />
+                  <ComboBox id="activityDropDown" prefWidth="150.0" />
                </children>
             </HBox>
             <TableView prefHeight="28.0" prefWidth="373.0">
@@ -171,7 +171,7 @@
                   </Button>
                </children>
             </HBox>
-            <Button id="FriendsButton" mnemonicParsing="false" text="Friends" />
+            <Button id="FriendsButton" fx:id="FriendsButton" mnemonicParsing="false" text="Friends" />
          </children>
       </GridPane>
    </top>

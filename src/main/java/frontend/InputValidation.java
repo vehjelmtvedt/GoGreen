@@ -38,7 +38,7 @@ public class InputValidation {
                     "Welcome to GoGreen, " + response);
             General.resetFields(SignIn.getFields());
 
-            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage());
+            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), response);
 
         } else {
             General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
