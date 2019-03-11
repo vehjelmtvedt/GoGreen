@@ -5,12 +5,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.PathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;
 
 @Configuration
 public class DbLoader {
-    private Resource achievements = new ClassPathResource("achievements.json", this.getClass().getClassLoader());
+    private Resource achievements = new PathResource("src/main/Resources/data/achievements.json");
 
     @Autowired
     private AchievementRepository achievementRepository;
@@ -30,7 +31,7 @@ public class DbLoader {
         Jackson2RepositoryPopulatorFactoryBean factory =
                 new Jackson2RepositoryPopulatorFactoryBean();
 
-        // Load resources
+        // Load specified resources
         Resource[] resources = new Resource[] {achievements};
         factory.setResources(resources);
 
