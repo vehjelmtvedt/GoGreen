@@ -37,6 +37,7 @@ public class InputValidation {
                     form.getScene().getWindow(), "Login successful",
                     "Welcome to GoGreen, " + response);
             General.resetFields(SignIn.getFields());
+
             StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage());
 
         } else {
