@@ -13,6 +13,7 @@ public class Main extends Application {
     private static Scene signIn;
     private static Scene signUp;
     private static Scene homepage;
+    private static Scene friendPage;
     private static Scene progress;
     private static String cssIntro;
 
@@ -21,9 +22,14 @@ public class Main extends Application {
     public void start(Stage window) {
         //setup the primary stage
         try {
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/frontend/Homepage.fxml"));
-            Parent root = loader.load();
-            homepage = new Scene(root, General.getBounds()[0], General.getBounds()[1]);
+            FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("/frontend/fxmlPages/Homepage.fxml"));
+            FXMLLoader loader2 = new FXMLLoader(Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
+
+            Parent root1 = loader1.load();
+            Parent root2 = loader2.load();
+            homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
+            friendPage = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,7 +53,7 @@ public class Main extends Application {
         signUp.getStylesheets().add(cssIntro);
 
         //setup the first scene for the primary stage
-        General.finaliseStage(primaryStage, signIn);
+        General.finaliseStage(primaryStage, friendPage);
     }
 
     public static void main(String[] args) {
@@ -69,6 +75,8 @@ public class Main extends Application {
     public static Scene getHomepage() {
         return homepage;
     }
+
+    public static Scene getFriendsPage() { return friendPage; }
 
     public static String getCssIntro() {
         return cssIntro;
