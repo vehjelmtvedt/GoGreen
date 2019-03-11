@@ -159,5 +159,6 @@ public final class CarbonCalculator {
     public static int processedFoodEmissions(ProcessedFoodConsumption processedFoodConsumption) {
         return processedFoodConsumption.carbonEmissions;
     }
+
 }
 
