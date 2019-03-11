@@ -13,8 +13,7 @@ public class HomepageController {
 
 
     public void initialize() {
-        FriendsButton.setOnAction(e -> switchFriendsPage());
-
+        FriendsButton.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getFriendsPage()));
     }
 
     public static void setUser(User user) {
