@@ -16,8 +16,6 @@ public class Progress {
         return points;
     }
 
-
-
     public void setPoints(double points) {
         this.points = points;
     }
