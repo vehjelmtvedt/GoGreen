@@ -1,8 +1,12 @@
 package frontend;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Main extends Application {
     private static Stage primaryStage;
@@ -14,13 +18,20 @@ public class Main extends Application {
     @Override
     public void start(Stage window) {
         //setup the primary stage
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/frontend/Homepage.fxml"));
+            Parent root = loader.load();
+            homepage = new Scene(root, General.getBounds()[0], General.getBounds()[1]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         primaryStage = window;
         General.setPrimaryStage(primaryStage, "Go Green");
 
         //create scenes necessary for scene switching
         signIn = SignIn.createScene();
         signUp = SignUp.createScene();
-        homepage = Homepage.createScene();
 
         //add button switching due to java being a synchronous programming language
         StageSwitcher.buttonSwitch(SignIn.getSignUpButton(), primaryStage, signUp);
