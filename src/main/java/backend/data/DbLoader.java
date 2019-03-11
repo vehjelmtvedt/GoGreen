@@ -10,7 +10,7 @@ import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFacto
 
 @Configuration
 public class DbLoader {
-    private Resource achievements = new ClassPathResource("achievements.json");
+    private Resource achievements = new ClassPathResource("achievements.json", this.getClass().getClassLoader());
 
     @Autowired
     private AchievementRepository achievementRepository;
