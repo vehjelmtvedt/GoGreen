@@ -43,7 +43,7 @@ public class Main extends Application {
         signUp.getStylesheets().add(cssIntro);
 
         //setup the first scene for the primary stage
-        General.finaliseStage(primaryStage, signIn);
+        General.finaliseStage(primaryStage, homepage);
     }
 
     public static void main(String[] args) {
