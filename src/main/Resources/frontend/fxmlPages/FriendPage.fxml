@@ -20,7 +20,7 @@
                   </Text>
                </children>
             </Pane>
-            <ScrollPane hbarPolicy="NEVER" layoutY="88.0" prefHeight="322.0" prefWidth="275.0">
+            <ScrollPane fx:id="scrollPaneFriends" hbarPolicy="NEVER" layoutY="88.0" prefHeight="322.0" prefWidth="275.0">
                <content>
                   <AnchorPane prefHeight="467.0" prefWidth="264.0" />
                </content>

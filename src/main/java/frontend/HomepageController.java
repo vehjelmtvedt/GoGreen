@@ -15,7 +15,6 @@ public class HomepageController {
     public void initialize() {
         FriendsButton.setOnAction(e -> switchFriendsPage());
 
-
     }
 
     public static void setUser(User user) {
