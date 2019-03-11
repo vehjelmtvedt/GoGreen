@@ -170,6 +170,7 @@
                         <exclude>**/frontend/SignIn*</exclude>
                         <exclude>**/frontend/SignUp*</exclude>
                         <exclude>**/frontend/StageSwitcher*</exclude>
+                        <exclude>**/frontend/ProgressPage*</exclude>
                     </excludes>
 
                     <rules>
