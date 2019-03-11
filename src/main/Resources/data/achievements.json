@@ -1,0 +1,14 @@
+[
+  {
+    "_class": "backend.data.Achievement",
+    "id":0,
+    "name":"Test",
+    "bonus":5
+  },
+  {
+    "_class": "backend.data.Achievement",
+    "id":1,
+    "name":"Test2",
+    "bonus":5
+  }
+]
