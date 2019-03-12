@@ -2,11 +2,12 @@ package frontend;
 
 import backend.data.User;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 
 public class FriendspageController {
@@ -28,8 +29,14 @@ public class FriendspageController {
     public void fillFriendsPane() {
         VBox root = new VBox();
         for (String username : user.getFriends()) {
+            Pane friendPane = new Pane();
+            friendPane.setMinHeight(50);
+            friendPane.setBackground(new Background(new BackgroundFill(Color.web("#F123"), CornerRadii.EMPTY, Insets.EMPTY)));
+
+            friendPane.setMinWidth(root.getMaxWidth());
             Label friendLabel = new Label(username);
-            root.getChildren().add(friendLabel);
+            friendPane.getChildren().add(friendLabel);
+            root.getChildren().add(friendPane);
         }
         scrollPaneFriends.setContent(root);
         scrollPaneFriends.setPannable(true);

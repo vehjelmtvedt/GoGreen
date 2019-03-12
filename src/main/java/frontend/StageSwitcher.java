@@ -23,8 +23,8 @@ public class StageSwitcher {
         from.setScene(to);
     }
 
-    public static void friendsPageSwitch(Button button, Stage from, Scene to, User passed) {
-        button.setOnAction(e -> from.setScene(to));
+    public static void friendsPageSwitch(Stage from, Scene to, User passed) {
+        from.setScene(to);
         FriendspageController.setUser(passed);
     }
 }

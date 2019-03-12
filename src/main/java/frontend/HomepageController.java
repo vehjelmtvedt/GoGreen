@@ -13,16 +13,11 @@ public class HomepageController {
 
 
     public void initialize() {
-        FriendsButton.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getFriendsPage()));
+        FriendsButton.setOnAction(e -> StageSwitcher.friendsPageSwitch(Main.getPrimaryStage(), Main.getFriendsPage(), thisUser));
     }
 
     public static void setUser(User user) {
         thisUser = user;
-    }
-
-    public static void switchFriendsPage() {
-        FriendspageController.setUser(thisUser);
-        Main.getPrimaryStage().setScene(Main.getFriendsPage());
     }
 
 }
