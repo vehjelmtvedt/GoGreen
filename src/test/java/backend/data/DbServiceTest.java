@@ -271,4 +271,10 @@ public class DbServiceTest {
     public void testRejectFriendRequestBothNull() {
         assertEquals(null, dbService.rejectFriendRequest(null, null));
     }
+
+    @Test
+    public void testGetAchievements() {
+        List<Achievement> achievements = dbService.getAchievements();
+        assertNotEquals(0, achievements.size());
+    }
 }
