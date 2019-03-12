@@ -11,18 +11,21 @@ public class HomepageController {
     @FXML
     Button FriendsButton;
 
+    @FXML
+    Button LogoutButton;
+
+    @FXML
+    Button ActivitiesButton;
 
     public void initialize() {
         FriendsButton.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getFriendsPage()));
+        ActivitiesButton.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getActivities()));
     }
 
+    public void logout() {
+        LogoutButton.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn()));
+    }
     public static void setUser(User user) {
         thisUser = user;
     }
-
-    public static void switchFriendsPage() {
-        FriendspageController.setUser(thisUser);
-        Main.getPrimaryStage().setScene(Main.getFriendsPage());
-    }
-
 }

@@ -30,7 +30,7 @@ public class Main extends Application {
             Parent root2 = loader2.load();
             Parent root3 = loader3.load();
             homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
-            activities = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
+            activities = new Scene(root2);
             friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,7 +54,7 @@ public class Main extends Application {
         signUp.getStylesheets().add(cssIntro);
 
         //setup the first scene for the primary stage
-        General.finaliseStage(primaryStage, homepage);
+        General.finaliseStage(primaryStage, activities);
     }
 
     public static void main(String[] args) {
