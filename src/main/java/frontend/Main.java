@@ -23,14 +23,17 @@ public class Main extends Application {
     public void start(Stage window) {
         //setup the primary stage
         try {
-            FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("/frontend/fxmlPages/Homepage.fxml"));
-            FXMLLoader loader2 = new FXMLLoader(Main.class.getResource("/frontend/fxmlPages/Activities.fxml"));
-            FXMLLoader loader3 = new FXMLLoader(Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
+            FXMLLoader loader1 = new FXMLLoader(
+                    Main.class.getResource("/frontend/fxmlPages/Homepage.fxml"));
+            FXMLLoader loader2 = new FXMLLoader(
+                    Main.class.getResource("/frontend/fxmlPages/Activities.fxml"));
+            FXMLLoader loader3 = new FXMLLoader(
+                    Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
             Parent root1 = loader1.load();
             Parent root2 = loader2.load();
             Parent root3 = loader3.load();
             homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
-            activities = new Scene(root2);
+            activities = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
             friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,7 +57,7 @@ public class Main extends Application {
         signUp.getStylesheets().add(cssIntro);
 
         //setup the first scene for the primary stage
-        General.finaliseStage(primaryStage, activities);
+        General.finaliseStage(primaryStage, homepage);
     }
 
     public static void main(String[] args) {
@@ -77,13 +80,17 @@ public class Main extends Application {
         return progress;
     }
 
-    public static Scene getActivities() { return activities; }
+    public static Scene getActivities() {
+        return activities;
+    }
 
     public static Scene getHomepage() {
         return homepage;
     }
 
-    public static Scene getFriendsPage() { return friendPage; }
+    public static Scene getFriendsPage() {
+        return friendPage;
+    }
 
     public static String getCssIntro() {
         return cssIntro;

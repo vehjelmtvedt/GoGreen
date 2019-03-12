@@ -14,6 +14,7 @@ public class StageSwitcher {
         HomepageController.setUser(user);
         from.setScene(to);
     }
+
     public static void closeApp(Button button, Stage from) {
         button.setOnAction(e -> from.close());
     }

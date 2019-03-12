@@ -13,14 +13,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1400.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.ActivitiesController">
    <children>
-      <AnchorPane layoutX="-5.0" prefHeight="860.0" prefWidth="403.0" style="-fx-background-color: #ffe;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="-5.0" prefHeight="860.0" prefWidth="403.0" style="-fx-background-color: #d3e4ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="-1.0" prefHeight="862.0" prefWidth="86.0" style="-fx-background-color: green;" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <effect>
                   <DropShadow />
                </effect>
             </AnchorPane>
-            <JFXButton fx:id="btnFood" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="5.0" layoutY="218.0" prefHeight="48.0" prefWidth="408.0" text="Food">
+            <JFXButton fx:id="btnFood" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="218.0" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="408.0" text="Food">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -29,7 +29,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnTransport" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="7.0" layoutY="306.0" prefHeight="48.0" prefWidth="408.0" text="Transport">
+            <JFXButton fx:id="btnTransport" alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="5.0" layoutY="304.0" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="408.0" text="Transport">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,7 +38,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnSolarPanels" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="5.0" layoutY="395.0" prefHeight="48.0" prefWidth="408.0" text="Solar Panels">
+            <JFXButton fx:id="btnSolarPanels" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="395.0" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="408.0" text="Solar Panels">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -47,11 +47,20 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnHouse" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="7.0" layoutY="490.0" prefHeight="48.0" prefWidth="408.0" text="House">
+            <JFXButton fx:id="btnHouse" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="488.0" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="413.0" text="House">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Pics/houseIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnHistory" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="724.0" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="408.0" text="Activity History">
+               <graphic>
+                  <ImageView fitHeight="60.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Pics/historyIcon.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -63,12 +72,21 @@
       </AnchorPane>
       <AnchorPane layoutX="408.0" prefHeight="860.0" prefWidth="992.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="408.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane fx:id="paneFood" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: blue;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Pane fx:id="paneFood" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <JFXButton buttonType="RAISED" layoutX="376.0" layoutY="370.0" prefHeight="60.0" prefWidth="180.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Add vegetarian meal" />
+               </children>
+            </Pane>
             <Pane fx:id="paneTransport" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: yellow;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <Pane fx:id="paneSolarPanels" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: orange;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <Pane fx:id="paneHouse" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Pane fx:id="paneDefault" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Pane fx:id="paneHistory" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
+      <ImageView fx:id="backIcon" fitHeight="60.0" fitWidth="76.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Pics/backIcon.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -9,22 +9,22 @@ public class HomepageController {
     private static User thisUser;
 
     @FXML
-    Button FriendsButton;
+    Button friendsButton;
+    @FXML
+    Button activitiesButton;
+    @FXML
+    Button logoutButton;
 
     @FXML
-    Button LogoutButton;
-
-    @FXML
-    Button ActivitiesButton;
-
-    public void initialize() {
-        FriendsButton.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getFriendsPage()));
-        ActivitiesButton.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getActivities()));
+    private void initialize() {
+        friendsButton.setOnAction(e ->
+                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getFriendsPage()));
+        activitiesButton.setOnAction(e ->
+                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getActivities()));
+        logoutButton.setOnAction(e ->
+                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn()));
     }
 
-    public void logout() {
-        LogoutButton.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn()));
-    }
     public static void setUser(User user) {
         thisUser = user;
     }

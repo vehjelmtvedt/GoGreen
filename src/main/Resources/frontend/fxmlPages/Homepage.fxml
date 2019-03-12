@@ -170,7 +170,7 @@
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="LogoutButton" mnemonicParsing="false" onAction="#logout" text="Logout">
+                  <Button fx:id="logoutButton" mnemonicParsing="false" text="Logout">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </HBox.margin>
@@ -179,8 +179,8 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button id="FriendsButton" fx:id="FriendsButton" mnemonicParsing="false" text="Friends" />
-                  <Button fx:id="ActivitiesButton" mnemonicParsing="false" text="Activities">
+                  <Button id="FriendsButton" fx:id="friendsButton" mnemonicParsing="false" text="Friends" />
+                  <Button fx:id="activitiesButton" mnemonicParsing="false" text="Activities">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
