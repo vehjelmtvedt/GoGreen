@@ -1,4 +1,4 @@
-package frontend;
+package frontend.controllers;
 
 import backend.data.User;
 import javafx.fxml.FXML;

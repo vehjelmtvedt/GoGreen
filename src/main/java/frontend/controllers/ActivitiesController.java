@@ -1,7 +1,9 @@
-package frontend;
+package frontend.controllers;
 
 import backend.data.TestActivity;
 import com.jfoenix.controls.JFXButton;
+import frontend.Main;
+import frontend.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

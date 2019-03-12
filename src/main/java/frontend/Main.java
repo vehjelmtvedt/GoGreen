@@ -57,7 +57,7 @@ public class Main extends Application {
         signUp.getStylesheets().add(cssIntro);
 
         //setup the first scene for the primary stage
-        General.finaliseStage(primaryStage, activities);
+        General.finaliseStage(primaryStage, signIn);
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,7 @@
 package frontend;
 
 import backend.data.User;
+import frontend.controllers.HomepageController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
