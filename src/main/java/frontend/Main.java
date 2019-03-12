@@ -51,7 +51,7 @@ public class Main extends Application {
         StageSwitcher.buttonSwitch(SignIn.getSignUpButton(), primaryStage, signUp);
 
         //add path for css files and add them to the specific scenes they belong
-        String cssPathIntro = "/frontend/Style.css";
+        String cssPathIntro = "/frontend/Stylesheets/Style.css";
         cssIntro = this.getClass().getResource(cssPathIntro).toExternalForm();
         signIn.getStylesheets().add(cssIntro);
         signUp.getStylesheets().add(cssIntro);

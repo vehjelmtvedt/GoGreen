@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1400.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ActivitiesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1400.0" style="-fx-background-color: #fff;" stylesheets="@../Stylesheets/Activities.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ActivitiesController">
    <children>
       <AnchorPane layoutX="-5.0" prefHeight="860.0" prefWidth="403.0" style="-fx-background-color: #d3e4ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -85,25 +85,6 @@
                      </font>
                   </Text>
                </children></Pane>
-            <Pane fx:id="paneHistory" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Text layoutX="343.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity history">
-                     <effect>
-                        <Glow />
-                     </effect>
-                     <font>
-                        <Font size="50.0" />
-                     </font>
-                  </Text>
-                  <TableView fx:id="activityTable" layoutX="232.0" layoutY="350.0" prefHeight="200.0" prefWidth="546.0">
-                    <columns>
-                      <TableColumn fx:id="categoryColumn" prefWidth="141.0" text="Category" />
-                      <TableColumn fx:id="nameColumn" prefWidth="208.0" text="Name" />
-                        <TableColumn fx:id="dateColumn" prefWidth="196.0" text="Date" />
-                    </columns>
-                  </TableView>
-               </children>
-            </Pane>
             <Pane fx:id="paneFood" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <JFXButton fx:id="btnVegetarianMeal" buttonType="RAISED" layoutX="496.0" layoutY="370.0" onAction="#addVegetarianMeal" prefHeight="60.0" prefWidth="180.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Add vegetarian meal" />
@@ -125,6 +106,25 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
+               </children>
+            </Pane>
+            <Pane fx:id="paneHistory" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Text layoutX="343.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity history">
+                     <effect>
+                        <Glow />
+                     </effect>
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                  </Text>
+                  <TableView fx:id="activityTable" layoutX="180.0" layoutY="350.0" prefHeight="200.0" prefWidth="632.0">
+                    <columns>
+                      <TableColumn fx:id="categoryColumn" prefWidth="141.0" text="Category" />
+                      <TableColumn fx:id="nameColumn" prefWidth="208.0" text="Name" />
+                        <TableColumn fx:id="dateColumn" prefWidth="282.0" text="Date" />
+                    </columns>
+                  </TableView>
                </children>
             </Pane>
          </children>
