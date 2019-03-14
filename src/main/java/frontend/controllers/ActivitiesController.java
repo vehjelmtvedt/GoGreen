@@ -2,7 +2,6 @@ package frontend.controllers;
 
 import backend.data.Activity;
 import backend.data.EatVegetarianMeal;
-import backend.data.TestActivity;
 import backend.data.User;
 import com.jfoenix.controls.JFXButton;
 import frontend.Main;
@@ -25,6 +24,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ActivitiesController implements Initializable {
+    User user;
+
     @FXML
     public ImageView backIcon;
     @FXML
@@ -83,8 +84,8 @@ public class ActivitiesController implements Initializable {
     private void addVegetarianMeal(ActionEvent event) {
         if (event.getSource() == btnVegetarianMeal) {
             EatVegetarianMeal meal = new EatVegetarianMeal();
-            User user = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
-            meal.performActivity(user);
+            User testUser = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
+            meal.performActivity(testUser);
             ObservableList<Activity> activities = getActivities();
 
             activities.add(meal);
