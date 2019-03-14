@@ -70,9 +70,6 @@ public abstract class Activity {
         this.setCarbonSaved(this.calculateCarbonSaved(user));
         user.setTotalCarbonSaved(user.getTotalCarbonSaved() + this.calculateCarbonSaved(user));
         user = Requests.addActivityRequest(this, user.getUsername());
-        System.out.println("it works!");
-        // TODO
-        // connect with database
     }
 
 }

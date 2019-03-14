@@ -39,6 +39,12 @@ public class ActivitiesController implements Initializable {
     @FXML
     private JFXButton btnVegetarianMeal;
     @FXML
+    private JFXButton btnLocalFood;
+    @FXML
+    private JFXButton btnOrganicFood;
+    @FXML
+    private JFXButton btnNonProFood;
+    @FXML
     private Pane paneFood;
     @FXML
     private Pane paneTransportation;
@@ -81,7 +87,7 @@ public class ActivitiesController implements Initializable {
     }
 
     @FXML
-    private void addVegetarianMeal(ActionEvent event) {
+    private void addFoodActivity(ActionEvent event) {
         if (event.getSource() == btnVegetarianMeal) {
             EatVegetarianMeal meal = new EatVegetarianMeal();
             meal.performActivity(loggedUser);
@@ -89,7 +95,16 @@ public class ActivitiesController implements Initializable {
             ObservableList<Activity> activities = getActivities(loggedUser);
 
             activityTable.setItems(activities);
+        } else if (event.getSource() == btnLocalFood) {
+            //todo
+        } else if (event.getSource() == btnOrganicFood) {
+            //todo
+        } else {
+            if (event.getSource() == btnNonProFood) {
+                //todo
+            }
         }
+
     }
 
     @Override

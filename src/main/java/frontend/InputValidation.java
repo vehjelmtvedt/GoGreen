@@ -190,21 +190,15 @@ public class InputValidation {
         String pass = input.getText();
         Pattern pattern = Pattern.compile(passPattern);
         Matcher matcher = pattern.matcher(pass);
-        if (matcher.matches()) {
-            System.out.println("Password is: " + pass);
-            return true;
-        }
-        return false;
+
+        return matcher.matches();
     }
 
     private static boolean validateEmail(TextField input) {
         String email = input.getText();
         Pattern pattern = Pattern.compile(emailPattern);
         Matcher matcher = pattern.matcher(email);
-        if (matcher.matches()) {
-            System.out.println("Email is: " + email);
-            return true;
-        }
-        return false;
+
+        return matcher.matches();
     }
 }

@@ -85,9 +85,29 @@
                      </font>
                   </Text>
                </children></Pane>
+            <Pane fx:id="paneHistory" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Text layoutX="343.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity history">
+                     <effect>
+                        <Glow />
+                     </effect>
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                  </Text>
+                  <TableView fx:id="activityTable" layoutX="180.0" layoutY="350.0" prefHeight="200.0" prefWidth="632.0">
+                    <columns>
+                      <TableColumn fx:id="categoryColumn" prefWidth="141.0" text="Category" />
+                      <TableColumn fx:id="nameColumn" prefWidth="178.0" text="Name" />
+                        <TableColumn fx:id="carbonColumn" prefWidth="159.0" text="CO2 saved (kg)" />
+                        <TableColumn fx:id="dateColumn" prefWidth="153.0" text="Date" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
             <Pane fx:id="paneFood" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <JFXButton fx:id="btnVegetarianMeal" buttonType="RAISED" layoutX="496.0" layoutY="370.0" onAction="#addVegetarianMeal" prefHeight="60.0" prefWidth="180.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Add vegetarian meal" />
+                  <JFXButton fx:id="btnVegetarianMeal" buttonType="RAISED" layoutX="296.0" layoutY="370.0" onAction="#addFoodActivity" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Add vegetarian meal" />
                   <Text layoutX="239.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Why should you be vegetarian?">
                      <font>
                         <Font size="50.0" />
@@ -106,26 +126,9 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="paneHistory" prefHeight="860.0" prefWidth="996.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Text layoutX="343.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity history">
-                     <effect>
-                        <Glow />
-                     </effect>
-                     <font>
-                        <Font size="50.0" />
-                     </font>
-                  </Text>
-                  <TableView fx:id="activityTable" layoutX="180.0" layoutY="350.0" prefHeight="200.0" prefWidth="632.0">
-                    <columns>
-                      <TableColumn fx:id="categoryColumn" prefWidth="141.0" text="Category" />
-                      <TableColumn fx:id="nameColumn" prefWidth="178.0" text="Name" />
-                        <TableColumn fx:id="carbonColumn" prefWidth="159.0" text="CO2 saved" />
-                        <TableColumn fx:id="dateColumn" prefWidth="153.0" text="Date" />
-                    </columns>
-                  </TableView>
+                  <JFXButton fx:id="btnLocalFood" buttonType="RAISED" layoutX="617.0" layoutY="370.0" onAction="#addFoodActivity" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy locally produced food" />
+                  <JFXButton fx:id="btnOrganicFood" buttonType="RAISED" layoutX="296.0" layoutY="512.0" onAction="#addFoodActivity" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy organic food" />
+                  <JFXButton fx:id="btnNonProFood" buttonType="RAISED" layoutX="617.0" layoutY="512.0" onAction="#addFoodActivity" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy non-processed food" />
                </children>
             </Pane>
          </children>
