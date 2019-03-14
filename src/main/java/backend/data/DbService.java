@@ -233,7 +233,7 @@ public class DbService {
     /*
      * Reserved for leaderboard queries
      */
-    List<User> getTopUsers(int top) {
+    public List<User> getTopUsers(int top) {
         return mongoTemplate.find(
                 new Query()
                         .with(new Sort(Sort.Direction.DESC, "totalCarbonSaved"))
