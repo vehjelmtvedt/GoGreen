@@ -3,15 +3,11 @@ package frontend.controllers;
 import backend.data.User;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
-import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -38,8 +34,9 @@ public class FriendspageController {
     private JFXDrawer drawer;
 
     public void initialize() throws IOException {
-        initNavBar();
+        NavPanelController.setup(drawer, menu, main);
         getFriends.setOnAction(e -> fillFriendsPane());
+
     }
 
     public void fillFriendsPane() {
@@ -63,39 +60,4 @@ public class FriendspageController {
     public static void setUser(User passedUser) {
         user = passedUser;
     }
-
-    public void initNavBar() throws IOException {
-        VBox box = FXMLLoader.load(getClass().getResource("/frontend/fxmlPages/navigationpane.fxml"));
-        box.setMinHeight(drawer.getDefaultDrawerSize());
-
-
-        drawer.setVisible(false);
-        drawer.setSidePane(box);
-
-
-        //Handle nav panel
-        HamburgerBasicCloseTransition burgerTask1 = new HamburgerBasicCloseTransition(menu);
-        burgerTask1.setRate(-1);
-        menu.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
-            burgerTask1.setRate(burgerTask1.getRate() * -1);
-            burgerTask1.play();
-            if (drawer.isOpened()) {
-                drawer.close();
-            } else {
-                drawer.open();
-                drawer.setVisible(true);
-            }
-        });
-
-        main.addEventHandler(MouseEvent.MOUSE_PRESSED, ev -> {
-            if (drawer.isOpened()) {
-                drawer.close();
-                burgerTask1.play();
-
-                drawer.setVisible(false);
-            }
-        });
-    }
-
-
 }
