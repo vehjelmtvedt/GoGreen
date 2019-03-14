@@ -91,6 +91,7 @@ public class FriendspageController {
             if (drawer.isOpened()) {
                 drawer.close();
                 burgerTask1.play();
+                
                 drawer.setVisible(false);
             }
         });
