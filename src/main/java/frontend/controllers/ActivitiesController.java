@@ -2,7 +2,6 @@ package frontend.controllers;
 
 import backend.data.Activity;
 import backend.data.EatVegetarianMeal;
-import backend.data.TestActivity;
 import backend.data.User;
 import com.jfoenix.controls.JFXButton;
 import frontend.Main;
@@ -25,6 +24,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ActivitiesController implements Initializable {
+    private static User loggedUser;
+
     @FXML
     public ImageView backIcon;
     @FXML
@@ -83,11 +84,9 @@ public class ActivitiesController implements Initializable {
     private void addVegetarianMeal(ActionEvent event) {
         if (event.getSource() == btnVegetarianMeal) {
             EatVegetarianMeal meal = new EatVegetarianMeal();
-            User user = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
-            meal.performActivity(user);
-            ObservableList<Activity> activities = getActivities();
+            meal.performActivity(loggedUser);
+            ObservableList<Activity> activities = getActivities(loggedUser);
 
-            activities.add(meal);
             activityTable.setItems(activities);
         }
     }
@@ -103,21 +102,26 @@ public class ActivitiesController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
         carbonColumn.setCellValueFactory(new PropertyValueFactory<>("CarbonSaved"));
 
-        //load dummy data
-        activityTable.setItems(getActivities());
-        activityTable.setPlaceholder(new Label("No previous activities"));
+        activityTable.setItems(getActivities(loggedUser));
+        if (loggedUser.getActivities().isEmpty()) {
+            activityTable.setPlaceholder(new Label("No previous activities"));
+        }
     }
 
-    private ObservableList<Activity> getActivities() {
-        return FXCollections.observableArrayList();
+    private ObservableList<Activity> getActivities(User user) {
+        return FXCollections.observableArrayList(user.getActivities());
     }
 
 
     private void resetButtonColors(JFXButton btnFood, JFXButton btnTransportation,
-                                  JFXButton btnHousehold, JFXButton btnHistory) {
+                                   JFXButton btnHousehold, JFXButton btnHistory) {
         btnFood.setStyle("-fx-background-color: transparent;");
         btnTransportation.setStyle("-fx-background-color: transparent;");
         btnHousehold.setStyle("-fx-background-color: transparent;");
         btnHistory.setStyle("-fx-background-color: transparent;");
+    }
+
+    public static void setUser(User passedUser) {
+        loggedUser = passedUser;
     }
 }
