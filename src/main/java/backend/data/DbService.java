@@ -216,7 +216,7 @@ public class DbService {
      * @param username - part of username to match
      * @return A list of strings containing all matching usernames
      */
-    public List<String> getMatchingUsers(String username) {
+    protected List<String> getMatchingUsers(String username) {
         String usernamePattern = "/$%s/$";
         String regexPattern = String.format(username, usernamePattern);
 
@@ -233,7 +233,7 @@ public class DbService {
     /*
      * Reserved for leaderboard queries
      */
-    public List<User> getTopUsers(int top) {
+    protected List<User> getTopUsers(int top) {
         return mongoTemplate.find(
                 new Query()
                         .with(new Sort(Sort.Direction.DESC, "totalCarbonSaved"))
