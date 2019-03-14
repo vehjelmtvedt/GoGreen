@@ -1,6 +1,9 @@
 package frontend.controllers;
 
+import backend.data.Activity;
+import backend.data.EatVegetarianMeal;
 import backend.data.TestActivity;
+import backend.data.User;
 import com.jfoenix.controls.JFXButton;
 import frontend.Main;
 import frontend.StageSwitcher;
@@ -43,13 +46,15 @@ public class ActivitiesController implements Initializable {
     @FXML
     private Pane paneHistory;
     @FXML
-    private TableView<TestActivity> activityTable = new TableView<>();
+    private TableView<Activity> activityTable = new TableView<>();
     @FXML
-    private TableColumn<TestActivity, String> categoryColumn;
+    private TableColumn<Activity, String> categoryColumn;
     @FXML
-    private TableColumn<TestActivity, String> nameColumn;
+    private TableColumn<Activity, String> nameColumn;
     @FXML
-    private TableColumn<TestActivity, Date> dateColumn;
+    private TableColumn<Activity, Date> dateColumn;
+    @FXML
+    private TableColumn<Activity, Double> carbonColumn;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -77,9 +82,12 @@ public class ActivitiesController implements Initializable {
     @FXML
     private void addVegetarianMeal(ActionEvent event) {
         if (event.getSource() == btnVegetarianMeal) {
-            TestActivity testActivity = new TestActivity("Food", "Vegetarian Meal");
-            ObservableList<TestActivity> activities = getActivities();
-            activities.add(testActivity);
+            EatVegetarianMeal meal = new EatVegetarianMeal();
+            User user = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
+            meal.performActivity(user);
+            ObservableList<Activity> activities = getActivities();
+
+            activities.add(meal);
             activityTable.setItems(activities);
         }
     }
@@ -93,15 +101,15 @@ public class ActivitiesController implements Initializable {
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("Category"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        carbonColumn.setCellValueFactory(new PropertyValueFactory<>("CarbonSaved"));
 
         //load dummy data
         activityTable.setItems(getActivities());
         activityTable.setPlaceholder(new Label("No previous activities"));
     }
 
-    private ObservableList<TestActivity> getActivities() {
-        ObservableList<TestActivity> activities = FXCollections.observableArrayList();
-        return activities;
+    private ObservableList<Activity> getActivities() {
+        return FXCollections.observableArrayList();
     }
 
 

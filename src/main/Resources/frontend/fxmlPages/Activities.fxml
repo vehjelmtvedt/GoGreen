@@ -121,8 +121,9 @@
                   <TableView fx:id="activityTable" layoutX="180.0" layoutY="350.0" prefHeight="200.0" prefWidth="632.0">
                     <columns>
                       <TableColumn fx:id="categoryColumn" prefWidth="141.0" text="Category" />
-                      <TableColumn fx:id="nameColumn" prefWidth="208.0" text="Name" />
-                        <TableColumn fx:id="dateColumn" prefWidth="282.0" text="Date" />
+                      <TableColumn fx:id="nameColumn" prefWidth="178.0" text="Name" />
+                        <TableColumn fx:id="carbonColumn" prefWidth="159.0" text="CO2 saved" />
+                        <TableColumn fx:id="dateColumn" prefWidth="153.0" text="Date" />
                     </columns>
                   </TableView>
                </children>
