@@ -66,6 +66,8 @@ public class FriendspageController {
 
     public void initNavBar() throws IOException {
         VBox box = FXMLLoader.load(getClass().getResource("/frontend/fxmlPages/navigationpane.fxml"));
+        //box.setMinHeight(drawer.getDefaultDrawerSize());
+
 
         drawer.setVisible(false);
         drawer.setSidePane(box);
@@ -77,10 +79,8 @@ public class FriendspageController {
         menu.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
             burgerTask1.setRate(burgerTask1.getRate() * -1);
             burgerTask1.play();
-            //drawer.setVisible(true);
             if (drawer.isOpened()) {
                 drawer.close();
-                drawer.setVisible(false);
             } else {
                 drawer.open();
                 drawer.setVisible(true);
@@ -91,7 +91,7 @@ public class FriendspageController {
             if (drawer.isOpened()) {
                 drawer.close();
                 burgerTask1.play();
-                
+
                 drawer.setVisible(false);
             }
         });

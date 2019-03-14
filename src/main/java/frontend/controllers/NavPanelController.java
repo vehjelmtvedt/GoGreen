@@ -15,13 +15,6 @@ import java.io.IOException;
 
 public class NavPanelController {
 
-    @FXML
-    public Button closeButtonNav;
-
-    private static JFXDrawer drawer;
-
-    private static JFXHamburger menu;
-
 
     public void initialize() {
 
