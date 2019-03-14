@@ -93,7 +93,7 @@ public class RequestHandler {
     }
 
     /**
-     * Request to search for users
+     * Request to search for users.
      * @param loginDetails for authentication
      * @param keyword keyword to search
      * @return returns a list of users matching the keyword
@@ -101,7 +101,8 @@ public class RequestHandler {
     @RequestMapping("/searchUsers")
     public List<String> userSearch(@RequestBody LoginDetails loginDetails,
                                    @RequestParam String keyword) {
-        if (dbService.grantAccess(loginDetails.getIdentifier(),loginDetails.getPassword()) != null) {
+        if (dbService.grantAccess(loginDetails.getIdentifier(),
+                loginDetails.getPassword()) != null) {
             return dbService.getMatchingUsers(keyword);
         }
         return null;
@@ -124,6 +125,21 @@ public class RequestHandler {
         returned.addActivity(activity);
         dbService.addUser(returned);
         return returned;
+    }
+
+    /**
+     * Request to retrieve top users.
+     * @param loginDetails for authentication
+     * @param top the top n users
+     * @return a list of users in ascending order of rank
+     */
+    @RequestMapping
+    public List<String> getTopUsers(@RequestBody LoginDetails loginDetails, @RequestParam int top) {
+        if (dbService.grantAccess(loginDetails.getIdentifier(),
+                loginDetails.getPassword()) != null) {
+            return dbService.getTopUsers(top);
+        }
+        return null;
     }
 
 }

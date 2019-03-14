@@ -238,6 +238,12 @@ public class DbService {
                     .map(User::getUsername) // Map User to Username
                     .collect(Collectors.toList()); // Return result as List
         }*/
+    /**
+     * stub.
+     */
+    public List<String> getTopUsers(int top) {
+        return null;
+    }
 
     /**
      * .
