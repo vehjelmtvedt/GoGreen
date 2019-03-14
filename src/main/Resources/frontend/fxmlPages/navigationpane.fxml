@@ -15,22 +15,22 @@
       </ImageView>
       <Pane prefHeight="150.0" prefWidth="200.0">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(71, 89, 164);" text="My Profile" textFill="WHITE" />
+            <JFXButton fx:id="myProfile" buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(71, 89, 164);" text="My Profile" textFill="WHITE" />
          </children>
       </Pane>
       <Pane prefHeight="150.0" prefWidth="200.0">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(91, 141, 91);" text="Home" textFill="WHITE" />
+            <JFXButton fx:id="home" buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(91, 141, 91);" text="Home" textFill="WHITE" />
          </children>
       </Pane>
       <Pane prefHeight="150.0" prefWidth="200.0">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(204, 95, 32)rgb(204, 95, 32);" text="Activity" textFill="WHITE" />
+            <JFXButton fx:id="activity" buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(204, 95, 32)rgb(204, 95, 32);" text="Activity" textFill="WHITE" />
          </children>
       </Pane>
       <Pane prefHeight="150.0" prefWidth="200.0">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(175, 26, 26)rgb(175, 26, 26);" text="Friends" textFill="WHITE" />
+            <JFXButton fx:id="friends" buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(175, 26, 26)rgb(175, 26, 26);" text="Friends" textFill="WHITE" />
          </children>
       </Pane>
    </children>
