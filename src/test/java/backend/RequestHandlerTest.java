@@ -16,6 +16,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static junit.framework.TestCase.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -158,6 +161,24 @@ public class RequestHandlerTest
         Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
         assertEquals(null, requestHandler.addActivity(null, testUser.getUsername()));
         assertEquals(0, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
+    }
+
+    @Test
+    public void testUserSearch() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        List<String> testList = new ArrayList();
+        testList.add(testUser.getUsername());
+        Mockito.when(dbService.getMatchingUsers(testUser.getUsername())).thenReturn(testList);
+        assertEquals(testList,requestHandler.userSearch(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword()),testUser.getUsername()));
+
+    }
+
+    @Test
+    public void testUserSearchNull() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
+        assertEquals(null,requestHandler.userSearch(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword()),testUser.getUsername()));
     }
 
 }

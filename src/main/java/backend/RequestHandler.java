@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import javax.annotation.Resource;
+
 
 
 @RestController
@@ -88,6 +90,21 @@ public class RequestHandler {
         } else {
             return "NONE";
         }
+    }
+
+    /**
+     * Request to search for users
+     * @param loginDetails for authentication
+     * @param keyword keyword to search
+     * @return returns a list of users matching the keyword
+     */
+    @RequestMapping("/searchUsers")
+    public List<String> userSearch(@RequestBody LoginDetails loginDetails,
+                                   @RequestParam String keyword) {
+        if (dbService.grantAccess(loginDetails.getIdentifier(),loginDetails.getPassword()) != null) {
+            return dbService.getMatchingUsers(keyword);
+        }
+        return null;
     }
 
     /**

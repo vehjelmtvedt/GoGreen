@@ -210,7 +210,7 @@ public class DbService {
      * @param username - part of username to match
      * @return A list of strings containing all matching usernames
      */
-    List<String> getMatchingUsers(String username) {
+    public List<String> getMatchingUsers(String username) {
         String usernamePattern = "/$%s/$";
         String regexPattern = String.format(username, usernamePattern);
 
