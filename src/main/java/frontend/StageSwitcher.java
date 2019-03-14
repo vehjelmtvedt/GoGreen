@@ -1,6 +1,7 @@
 package frontend;
 
 import backend.data.User;
+import frontend.controllers.FriendspageController;
 import frontend.controllers.HomepageController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,5 +23,10 @@ public class StageSwitcher {
 
     public static void sceneSwitch(Stage from, Scene to) {
         from.setScene(to);
+    }
+
+    public static void friendPageSwitch(Stage from, Scene to, User passed) {
+        from.setScene(to);
+        FriendspageController.setUser(passed);
     }
 }

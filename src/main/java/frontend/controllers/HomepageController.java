@@ -22,7 +22,7 @@ public class HomepageController {
     @FXML
     private void initialize() {
         friendsButton.setOnAction(e ->
-                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getFriendsPage()));
+                StageSwitcher.friendPageSwitch(Main.getPrimaryStage(), Main.getFriendsPage(), thisUser));
         activitiesButton.setOnAction(e ->
                 StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getActivities()));
         logoutButton.setOnAction(e ->
