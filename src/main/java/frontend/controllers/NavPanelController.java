@@ -53,8 +53,9 @@ public class NavPanelController {
         menu.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
             burgerTask1.setRate(burgerTask1.getRate() * -1);
             burgerTask1.play();
-            if (drawer.isOpened()) {
+            if (drawer.isShown()) {
                 drawer.close();
+                drawer.setVisible(false);
             } else {
                 drawer.open();
                 drawer.setVisible(true);
