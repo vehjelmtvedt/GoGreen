@@ -37,10 +37,17 @@ public class FriendspageController {
 
     public void initialize() throws IOException {
         NavPanelController.setup(drawer, menu);
-        getFriends.setOnAction(e -> fillFriendsPane());
+        //fillFriendsPane(); //TODO: UNCOMMENT THIS WHEN CHANGING TO HOMEPAGE IN MAIN
 
-        goGreen.setAlignment(Pos.BASELINE_CENTER);
+    }
 
+    public void fillFriendsGraph() {
+        //Compare with 5 friends
+        //Get C02 carbon emission for those friends
+        //Make chart
+        //Make it pretty
+
+        
     }
 
     public void fillFriendsPane() {
