@@ -66,7 +66,7 @@ public class FriendspageController {
 
     public void initNavBar() throws IOException {
         VBox box = FXMLLoader.load(getClass().getResource("/frontend/fxmlPages/navigationpane.fxml"));
-        //box.setMinHeight(drawer.getDefaultDrawerSize());
+        box.setMinHeight(drawer.getDefaultDrawerSize());
 
 
         drawer.setVisible(false);

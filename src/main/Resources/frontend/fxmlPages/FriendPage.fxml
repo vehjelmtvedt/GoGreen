@@ -41,6 +41,6 @@
           </children>
        </Pane>
       <Button fx:id="getFriends" layoutX="421.0" layoutY="365.0" mnemonicParsing="false" text="Get Friends" />
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="292.0" layoutX="-1.0" layoutY="44.0" prefHeight="706.0" prefWidth="294.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="44.0" />
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="292.0" layoutY="55.0" prefHeight="695.0" prefWidth="288.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="55.0" />
     </children>
 </AnchorPane>

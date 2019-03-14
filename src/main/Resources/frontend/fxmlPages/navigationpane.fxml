@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="292.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.NavPanelController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="847.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.NavPanelController">
    <children>
-      <ImageView fitHeight="164.0" fitWidth="293.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="166.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../pics/navbackground.png" />
          </image>
       </ImageView>
-      <Button fx:id="closeButtonNav" mnemonicParsing="false" prefHeight="149.0" prefWidth="343.0" style="-fx-background-color: white;" text="My Profile" />
-      <Button fx:id="homeButton" mnemonicParsing="false" prefHeight="145.0" prefWidth="292.0" style="-fx-background-color: white;" text="Home" />
-      <Button fx:id="friendsButtonNav" mnemonicParsing="false" prefHeight="145.0" prefWidth="343.0" style="-fx-background-color: white;" text="Friends" />
-      <Button fx:id="activityButtonNav" mnemonicParsing="false" prefHeight="145.0" prefWidth="343.0" style="-fx-background-color: white;" text="Activity" />
+      <Pane prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <JFXButton buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(71, 89, 164);" text="My Profile" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <JFXButton buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(91, 141, 91);" text="Home" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <JFXButton buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(204, 95, 32)rgb(204, 95, 32);" text="Activity" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <JFXButton buttonType="RAISED" layoutX="87.0" layoutY="51.0" prefHeight="48.0" prefWidth="121.0" style="-fx-background-color: rgb(175, 26, 26)rgb(175, 26, 26);" text="Friends" textFill="WHITE" />
+         </children>
+      </Pane>
    </children>
 </VBox>
