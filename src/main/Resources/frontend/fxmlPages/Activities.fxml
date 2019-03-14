@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
@@ -16,6 +18,14 @@
                <effect>
                   <DropShadow />
                </effect>
+               <children>
+                  <ImageView fx:id="backIcon" fitHeight="60.0" fitWidth="76.0" layoutX="7.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Pics/backIcon.png" />
+                     </image>
+                  </ImageView>
+                  <JFXHamburger fx:id="menu" layoutX="12.0" layoutY="14.0" prefHeight="45.0" prefWidth="50.0" />
+               </children>
             </AnchorPane>
             <JFXButton fx:id="btnFood" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="-5.0" layoutY="218.0" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="413.0" text="Food">
                <graphic>
@@ -53,6 +63,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <JFXDrawer fx:id="drawer" layoutX="87.0" layoutY="-1.0" prefHeight="860.0" prefWidth="331.0" />
          </children>
          <effect>
             <DropShadow />
@@ -130,10 +141,5 @@
             </Pane>
          </children>
       </AnchorPane>
-      <ImageView fx:id="backIcon" fitHeight="60.0" fitWidth="76.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Pics/backIcon.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

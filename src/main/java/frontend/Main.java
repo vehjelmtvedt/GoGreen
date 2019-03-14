@@ -37,7 +37,7 @@ public class Main extends Application {
         signUp.getStylesheets().add(cssIntro);
 
         //setup the first scene for the primary stage
-        General.finaliseStage(primaryStage, friendPage); //TODO: CHANGE TO SIGNIN PAGE WHEN FINISHED WITH DESIGN
+        General.finaliseStage(primaryStage, signIn); //TODO: CHANGE TO SIGNIN PAGE WHEN FINISHED WITH DESIGN
     }
 
     public static void main(String[] args) {

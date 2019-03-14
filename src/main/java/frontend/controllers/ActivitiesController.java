@@ -4,6 +4,8 @@ import backend.data.Activity;
 import backend.data.EatVegetarianMeal;
 import backend.data.User;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
 import frontend.Main;
 import frontend.StageSwitcher;
 import javafx.collections.FXCollections;
@@ -19,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -62,6 +65,10 @@ public class ActivitiesController implements Initializable {
     private TableColumn<Activity, Date> dateColumn;
     @FXML
     private TableColumn<Activity, Double> carbonColumn;
+    @FXML
+    private JFXHamburger menu;
+    @FXML
+    private JFXDrawer drawer;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -109,6 +116,11 @@ public class ActivitiesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            NavPanelController.setup(drawer, menu);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
         backIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->
                 StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getHomepage()));
