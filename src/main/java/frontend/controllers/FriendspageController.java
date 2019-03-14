@@ -5,11 +5,13 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -19,7 +21,7 @@ public class FriendspageController {
     private static User user;
 
     @FXML
-    private AnchorPane main;
+    private Label goGreen;
 
     @FXML
     private Button getFriends;
@@ -34,8 +36,10 @@ public class FriendspageController {
     private JFXDrawer drawer;
 
     public void initialize() throws IOException {
-        NavPanelController.setup(drawer, menu, main);
+        NavPanelController.setup(drawer, menu);
         getFriends.setOnAction(e -> fillFriendsPane());
+
+        goGreen.setAlignment(Pos.BASELINE_CENTER);
 
     }
 

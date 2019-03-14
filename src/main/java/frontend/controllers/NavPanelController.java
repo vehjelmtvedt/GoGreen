@@ -39,7 +39,7 @@ public class NavPanelController {
     }
 
 
-    public static void setup(JFXDrawer drawer, JFXHamburger menu, AnchorPane main) throws IOException {
+    public static void setup(JFXDrawer drawer, JFXHamburger menu) throws IOException {
         VBox box = FXMLLoader.load(NavPanelController.class.getResource("/frontend/fxmlPages/navigationpane.fxml"));
         box.setMinHeight(drawer.getDefaultDrawerSize());
 
