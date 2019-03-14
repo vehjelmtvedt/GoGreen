@@ -1,5 +1,7 @@
 package frontend;
 
+import backend.data.User;
+import frontend.controllers.HomepageController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -9,7 +11,8 @@ public class StageSwitcher {
         button.setOnAction(e -> from.setScene(to));
     }
 
-    public static void loginSwitch(Stage from, Scene to) {
+    public static void loginSwitch(Stage from, Scene to, User user) {
+        HomepageController.setUser(user);
         from.setScene(to);
     }
 
