@@ -1,12 +1,8 @@
 package frontend;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class Main extends Application {
     private static Stage primaryStage;
@@ -22,22 +18,6 @@ public class Main extends Application {
     @Override
     public void start(Stage window) {
         //setup the primary stage
-        try {
-            FXMLLoader loader1 = new FXMLLoader(
-                    Main.class.getResource("/frontend/fxmlPages/Homepage.fxml"));
-            FXMLLoader loader2 = new FXMLLoader(
-                    Main.class.getResource("/frontend/fxmlPages/Activities.fxml"));
-            FXMLLoader loader3 = new FXMLLoader(
-                    Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
-            Parent root1 = loader1.load();
-            Parent root2 = loader2.load();
-            Parent root3 = loader3.load();
-            homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
-            activities = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
-            friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         primaryStage = window;
         General.setPrimaryStage(primaryStage, "Go Green");
@@ -57,7 +37,7 @@ public class Main extends Application {
         signUp.getStylesheets().add(cssIntro);
 
         //setup the first scene for the primary stage
-        General.finaliseStage(primaryStage, friendPage); //TODO: CHANGE TO SIGNIN PAGE WHEN FINISHED WITH DESIGN
+        General.finaliseStage(primaryStage, signIn); //TODO: CHANGE TO SIGNIN PAGE WHEN FINISHED WITH DESIGN
     }
 
     public static void main(String[] args) {
@@ -94,5 +74,18 @@ public class Main extends Application {
 
     public static String getCssIntro() {
         return cssIntro;
+    }
+
+    //testing
+    public static void setActivities(Scene scene) {
+        activities = scene;
+    }
+
+    public static void setHomepage(Scene scene) {
+        homepage = scene;
+    }
+
+    public static void setFriendPage(Scene scene) {
+        friendPage = scene;
     }
 }

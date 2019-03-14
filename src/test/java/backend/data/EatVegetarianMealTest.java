@@ -9,6 +9,10 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
+/**
+ * Implements the "eat a vegetarian meal" activity.
+ * @author Kostas Lyrakis
+ */
 public class EatVegetarianMealTest {
     EatVegetarianMeal meal = new EatVegetarianMeal();
     User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
@@ -41,6 +45,28 @@ public class EatVegetarianMealTest {
     public void testGetCarbonSaved() {
         EatVegetarianMeal meal2 = new EatVegetarianMeal();
         assertEquals(0, (int) meal2.getCarbonSaved());
+    }
+
+    @Test
+    public void testGetCategory() {
+        assertEquals("Food", meal.getCategory());
+    }
+
+    @Test
+    public void testSetCategory() {
+        meal.setCategory("test");
+        assertEquals("test", meal.getCategory());
+    }
+
+    @Test
+    public void testGetName() {
+        assertEquals("Eat Vegetarian Meal", meal.getName());
+    }
+
+    @Test
+    public void testSetName() {
+        meal.setName("testName");
+        assertEquals("testName", meal.getName());
     }
 
     @Test

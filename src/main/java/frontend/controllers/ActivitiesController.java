@@ -1,7 +1,11 @@
 package frontend.controllers;
 
-import backend.data.TestActivity;
+import backend.data.Activity;
+import backend.data.EatVegetarianMeal;
+import backend.data.User;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
 import frontend.Main;
 import frontend.StageSwitcher;
 import javafx.collections.FXCollections;
@@ -17,11 +21,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ActivitiesController implements Initializable {
+    private static User loggedUser;
+
     @FXML
     public ImageView backIcon;
     @FXML
@@ -35,6 +42,12 @@ public class ActivitiesController implements Initializable {
     @FXML
     private JFXButton btnVegetarianMeal;
     @FXML
+    private JFXButton btnLocalFood;
+    @FXML
+    private JFXButton btnOrganicFood;
+    @FXML
+    private JFXButton btnNonProFood;
+    @FXML
     private Pane paneFood;
     @FXML
     private Pane paneTransportation;
@@ -43,13 +56,19 @@ public class ActivitiesController implements Initializable {
     @FXML
     private Pane paneHistory;
     @FXML
-    private TableView<TestActivity> activityTable = new TableView<>();
+    private TableView<Activity> activityTable = new TableView<>();
     @FXML
-    private TableColumn<TestActivity, String> categoryColumn;
+    private TableColumn<Activity, String> categoryColumn;
     @FXML
-    private TableColumn<TestActivity, String> nameColumn;
+    private TableColumn<Activity, String> nameColumn;
     @FXML
-    private TableColumn<TestActivity, Date> dateColumn;
+    private TableColumn<Activity, Date> dateColumn;
+    @FXML
+    private TableColumn<Activity, Double> carbonColumn;
+    @FXML
+    private JFXHamburger menu;
+    @FXML
+    private JFXDrawer drawer;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -75,17 +94,33 @@ public class ActivitiesController implements Initializable {
     }
 
     @FXML
-    private void addVegetarianMeal(ActionEvent event) {
+    private void addFoodActivity(ActionEvent event) {
         if (event.getSource() == btnVegetarianMeal) {
-            TestActivity testActivity = new TestActivity("Food", "Vegetarian Meal");
-            ObservableList<TestActivity> activities = getActivities();
-            activities.add(testActivity);
+            EatVegetarianMeal meal = new EatVegetarianMeal();
+            meal.performActivity(loggedUser);
+            loggedUser.addActivity(meal);
+            ObservableList<Activity> activities = getActivities(loggedUser);
+
             activityTable.setItems(activities);
+        } else if (event.getSource() == btnLocalFood) {
+            //todo
+        } else if (event.getSource() == btnOrganicFood) {
+            //todo
+        } else {
+            if (event.getSource() == btnNonProFood) {
+                //todo
+            }
         }
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            NavPanelController.setup(drawer, menu);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
         backIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->
                 StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getHomepage()));
@@ -93,23 +128,28 @@ public class ActivitiesController implements Initializable {
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("Category"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        carbonColumn.setCellValueFactory(new PropertyValueFactory<>("CarbonSaved"));
 
-        //load dummy data
-        activityTable.setItems(getActivities());
-        activityTable.setPlaceholder(new Label("No previous activities"));
+        activityTable.setItems(getActivities(loggedUser));
+        if (loggedUser.getActivities().isEmpty()) {
+            activityTable.setPlaceholder(new Label("No previous activities"));
+        }
     }
 
-    private ObservableList<TestActivity> getActivities() {
-        ObservableList<TestActivity> activities = FXCollections.observableArrayList();
-        return activities;
+    private ObservableList<Activity> getActivities(User user) {
+        return FXCollections.observableArrayList(user.getActivities());
     }
 
 
     private void resetButtonColors(JFXButton btnFood, JFXButton btnTransportation,
-                                  JFXButton btnHousehold, JFXButton btnHistory) {
+                                   JFXButton btnHousehold, JFXButton btnHistory) {
         btnFood.setStyle("-fx-background-color: transparent;");
         btnTransportation.setStyle("-fx-background-color: transparent;");
         btnHousehold.setStyle("-fx-background-color: transparent;");
         btnHistory.setStyle("-fx-background-color: transparent;");
+    }
+
+    public static void setUser(User passedUser) {
+        loggedUser = passedUser;
     }
 }

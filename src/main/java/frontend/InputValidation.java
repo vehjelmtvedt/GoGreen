@@ -2,11 +2,16 @@ package frontend;
 
 import backend.data.LoginDetails;
 import backend.data.User;
+import frontend.controllers.ActivitiesController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,16 +35,42 @@ public class InputValidation {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
-        User newUser = Requests.loginRequest(loginDetails);
-        System.out.println(newUser);
-        if (newUser != null) {
+        User loggedUser = Requests.loginRequest(loginDetails);
+        System.out.println(loggedUser);
+        if (loggedUser != null) {
             General.showAlert(Alert.AlertType.CONFIRMATION,
                     form.getScene().getWindow(), "Login successful",
-                    "Welcome to GoGreen, " + newUser.getFirstName() + " "
-                            + newUser.getLastName() + "!");
+                    "Welcome to GoGreen, " + loggedUser.getFirstName() + " "
+                            + loggedUser.getLastName() + "!");
+            ActivitiesController.setUser(loggedUser);
+
+            //testing
+            try {
+                FXMLLoader loader1 = new FXMLLoader(
+                        Main.class.getResource("/frontend/fxmlPages/Homepage.fxml"));
+                FXMLLoader loader2 = new FXMLLoader(
+                        Main.class.getResource("/frontend/fxmlPages/Activities.fxml"));
+                FXMLLoader loader3 = new FXMLLoader(
+                        Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
+                Parent root1 = loader1.load();
+                Parent root2 = loader2.load();
+                Parent root3 = loader3.load();
+                Scene homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
+                Scene activities = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
+                Scene friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
+
+                //setup scenes
+                Main.setActivities(activities);
+                Main.setHomepage(homepage);
+                Main.setFriendPage(friendPage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //testing
+
             General.resetFields(SignIn.getFields());
 
-            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), newUser);
+            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), loggedUser);
 
         } else {
             General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
@@ -159,21 +190,15 @@ public class InputValidation {
         String pass = input.getText();
         Pattern pattern = Pattern.compile(passPattern);
         Matcher matcher = pattern.matcher(pass);
-        if (matcher.matches()) {
-            System.out.println("Password is: " + pass);
-            return true;
-        }
-        return false;
+
+        return matcher.matches();
     }
 
     private static boolean validateEmail(TextField input) {
         String email = input.getText();
         Pattern pattern = Pattern.compile(emailPattern);
         Matcher matcher = pattern.matcher(email);
-        if (matcher.matches()) {
-            System.out.println("Email is: " + email);
-            return true;
-        }
-        return false;
+
+        return matcher.matches();
     }
 }

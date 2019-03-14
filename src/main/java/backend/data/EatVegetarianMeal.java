@@ -12,6 +12,15 @@ import java.util.Date;
 public class EatVegetarianMeal extends Activity {
 
     /**
+     * Constructor.
+     */
+    public EatVegetarianMeal() {
+        super();
+        this.setCategory("Food");
+        this.setName("Eat Vegetarian Meal");
+    }
+
+    /**
      * calculates how many times on the same day the user has performed this activity.
      * @param user user currently logged in
      */
@@ -106,14 +115,5 @@ public class EatVegetarianMeal extends Activity {
     }
 
 
-    /**
-     * performs the activity and updates the user object.
-     * @param user user currently logged in
-     */
-    public void performActivity(User user) {
-        this.setCarbonSaved(this.calculateCarbonSaved(user));
-        user.setTotalCarbonSaved(user.getTotalCarbonSaved() + this.calculateCarbonSaved(user));
-        user.addActivity(this);
-    }
 
 }
