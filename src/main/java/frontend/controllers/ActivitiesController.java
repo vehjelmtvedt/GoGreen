@@ -85,6 +85,7 @@ public class ActivitiesController implements Initializable {
         if (event.getSource() == btnVegetarianMeal) {
             EatVegetarianMeal meal = new EatVegetarianMeal();
             meal.performActivity(loggedUser);
+            loggedUser.addActivity(meal);
             ObservableList<Activity> activities = getActivities(loggedUser);
 
             activityTable.setItems(activities);

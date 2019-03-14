@@ -2,6 +2,7 @@ package backend.data;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import frontend.Requests;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -68,8 +69,8 @@ public abstract class Activity {
     public void performActivity(User user) {
         this.setCarbonSaved(this.calculateCarbonSaved(user));
         user.setTotalCarbonSaved(user.getTotalCarbonSaved() + this.calculateCarbonSaved(user));
-        user.addActivity(this);
-
+        user = Requests.addActivityRequest(this, user.getUsername());
+        System.out.println("it works!");
         // TODO
         // connect with database
     }
