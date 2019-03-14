@@ -3,6 +3,7 @@ package frontend.controllers;
 import backend.data.User;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import frontend.Requests;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,6 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 public class FriendspageController {
@@ -46,8 +49,13 @@ public class FriendspageController {
         //Get C02 carbon emission for those friends
         //Make chart
         //Make it pretty
+        Map<String, Double> results = new TreeMap();
+        for (String username : user.getFriends()) {
+            User tmpFriend = Requests.getUserRequest(username);
+            results.put(username, tmpFriend.getTotalCarbonSaved());
+        }
 
-        
+
     }
 
     public void fillFriendsPane() {
