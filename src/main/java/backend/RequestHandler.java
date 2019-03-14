@@ -134,7 +134,7 @@ public class RequestHandler {
      * @return a list of users in ascending order of rank
      */
     @RequestMapping
-    public List<String> getTopUsers(@RequestBody LoginDetails loginDetails, @RequestParam int top) {
+    public List<User> getTopUsers(@RequestBody LoginDetails loginDetails, @RequestParam int top) {
         if (dbService.grantAccess(loginDetails.getIdentifier(),
                 loginDetails.getPassword()) != null) {
             return dbService.getTopUsers(top);

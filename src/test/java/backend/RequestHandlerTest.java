@@ -184,8 +184,8 @@ public class RequestHandlerTest
     @Test
     public void retrieveTopUsers() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
-        List<String> testList = new ArrayList();
-        testList.add(testUser.getUsername());
+        List<User> testList = new ArrayList();
+        testList.add(testUser);
         Mockito.when(dbService.getTopUsers(1)).thenReturn(testList);
         assertEquals(testList,requestHandler.getTopUsers(new LoginDetails(testUser.getUsername(),
                 testUser.getPassword()),1));
