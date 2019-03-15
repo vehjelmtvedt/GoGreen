@@ -53,7 +53,7 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <JFXTextField fx:id="searchField" alignment="TOP_CENTER" promptText=" Enter username..." />
+                  <JFXTextField fx:id="searchField" alignment="TOP_LEFT" promptText=" Enter username..." />
                   <VBox fx:id="results" prefHeight="248.0" prefWidth="176.0" spacing="10.0" />
                </children>
             </VBox>

@@ -77,12 +77,17 @@ public class FriendspageController implements Initializable {
     public void drawFriendRequestDrawer() {
 
         searchField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-            searchresults = getSearchResults(searchField.getText());
-            results.getChildren().clear();
-            for (int i = 0; i < searchresults.size(); i++) {
-                Label tmpLabel = new Label(searchresults.get(i).toString());
-                results.getChildren().add(tmpLabel);
+            if (searchField.getText().trim().isEmpty()) {
+                results.getChildren().clear();
+            } else {
+                searchresults = getSearchResults(searchField.getText());
+                results.getChildren().clear();
+                for (int i = 0; i < searchresults.size(); i++) {
+                    Label tmpLabel = new Label(searchresults.get(i).toString());
+                    results.getChildren().add(tmpLabel);
+                }
             }
+
         });
 
         addFriendDrawer.setVisible(false);
