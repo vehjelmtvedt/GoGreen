@@ -1,36 +1,39 @@
 package frontend.controllers;
 
 import backend.data.User;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.*;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import frontend.Requests;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import javafx.scene.control.TreeItem;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Line;
+
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.TreeMap;
 
 
 public class FriendspageController {
 
-    private static User user;
+    private static User thisUser;
 
     @FXML
     private Label goGreen;
 
     @FXML
-    private Button getFriends;
+    private Line underline;
 
     @FXML
-    private ScrollPane scrollPaneFriends;
+    private AnchorPane centerPane;
+
+    @FXML
+    private JFXTreeTableView friendsPane;
 
     @FXML
     private JFXHamburger menu;
@@ -38,45 +41,69 @@ public class FriendspageController {
     @FXML
     private JFXDrawer drawer;
 
+    @FXML
+    private Button getFriends;
+
     public void initialize() throws IOException {
         NavPanelController.setup(drawer, menu);
-        //fillFriendsPane(); //TODO: UNCOMMENT THIS WHEN CHANGING TO HOMEPAGE IN MAIN
+        getFriends.setOnAction(e -> fillFriendsTreeView());
 
     }
 
-    public void fillFriendsGraph() {
-        //Compare with 5 friends
-        //Get C02 carbon emission for those friends
-        //Make chart
-        //Make it pretty
-        Map<String, Double> results = new TreeMap();
-        for (String username : user.getFriends()) {
+    public void fillFriendsTreeView() {
+
+        JFXTreeTableColumn<UserItem, String> usernameColumn = new JFXTreeTableColumn<>("Friends");
+        usernameColumn.setCellValueFactory(param -> param.getValue().getValue().username);
+
+        JFXTreeTableColumn<UserItem, String> lastActivityColumn = new JFXTreeTableColumn<>("Recent Activity");
+        lastActivityColumn.setCellValueFactory(param -> param.getValue().getValue().lastActivity);
+
+        JFXTreeTableColumn<UserItem, String> totalCarbonSavedColumn = new JFXTreeTableColumn<>("Total carbon Saved");
+        totalCarbonSavedColumn.setCellValueFactory(param -> param.getValue().getValue().carbonSaved);
+
+        totalCarbonSavedColumn.setPrefWidth(150);
+        usernameColumn.setPrefWidth(150);
+        lastActivityColumn.setPrefWidth(300);
+
+        ObservableList<UserItem> friendsList = getTableData();
+        final TreeItem<UserItem> root = new RecursiveTreeItem<>(friendsList, RecursiveTreeObject::getChildren);
+        friendsPane.getColumns().setAll(usernameColumn, lastActivityColumn, totalCarbonSavedColumn);
+        friendsPane.setRoot(root);
+        friendsPane.setShowRoot(false);
+    }
+
+    private ObservableList<UserItem> getTableData() {
+        ObservableList<UserItem> friendsList = FXCollections.observableArrayList();
+        for (String username : thisUser.getFriends()) {
             User tmpFriend = Requests.getUserRequest(username);
-            results.put(username, tmpFriend.getTotalCarbonSaved());
+            String activity = "This user has no activities";
+            if (tmpFriend.getActivities().size() != 0) {
+                activity = tmpFriend.getActivities().get(tmpFriend.getActivities().size() - 1).toString();
+            }
+            String carbonSaved = Double.toString(tmpFriend.getTotalCarbonSaved());
+            friendsList.add(new UserItem(username, activity, carbonSaved));
         }
-
-
-    }
-
-    public void fillFriendsPane() {
-        VBox root = new VBox();
-
-        for (String username : user.getFriends()) {
-            Pane friendPane = new Pane();
-            friendPane.setMinHeight(50);
-            friendPane.prefWidthProperty().bind(root.widthProperty());
-            friendPane.setBackground(new Background(new BackgroundFill(Color.web("#4245f4"), CornerRadii.EMPTY, Insets.EMPTY)));
-            Label friendLabel = new Label(username);
-            friendPane.getChildren().add(friendLabel);
-            root.getChildren().add(friendPane);
-        }
-        scrollPaneFriends.setContent(root);
-        scrollPaneFriends.setPannable(true);
+        return friendsList;
     }
 
 
 
-    public static void setUser(User passedUser) {
-        user = passedUser;
+
+    //Used for constructing TreeView
+    class UserItem extends RecursiveTreeObject<UserItem> {
+        StringProperty username;
+        StringProperty lastActivity;
+        StringProperty carbonSaved;
+
+        public UserItem(String username, String lastActivity, String carbonSaved) {
+            this.username = new SimpleStringProperty(username);
+            this.lastActivity = new SimpleStringProperty(lastActivity);
+            this.carbonSaved = new SimpleStringProperty(carbonSaved);
+
+        }
+    }
+
+    public static void setUser(User user) {
+        thisUser = user;
     }
 }

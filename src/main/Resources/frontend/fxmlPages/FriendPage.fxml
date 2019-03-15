@@ -2,31 +2,21 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="main" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.FriendspageController">
+<AnchorPane fx:id="main" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.FriendspageController">
     <children>
       <AnchorPane layoutY="137.0" prefHeight="117.0" prefWidth="957.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
          <children>
-            <HBox prefHeight="322.0" prefWidth="952.0">
+            <HBox prefHeight="248.0" prefWidth="963.0">
                <children>
-                  <BarChart fx:id="friendsGraph" horizontalGridLinesVisible="false">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </BarChart>
+                  <Button fx:id="getFriends" mnemonicParsing="false" text="Button" />
                </children></HBox>
          </children>
       </AnchorPane>
@@ -40,20 +30,21 @@
             <JFXHamburger fx:id="menu" layoutX="22.0" layoutY="22.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="662.0" layoutY="475.0" prefHeight="381.0" prefWidth="268.0" AnchorPane.bottomAnchor="44.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="475.0">
+      <AnchorPane layoutX="662.0" layoutY="475.0" prefHeight="381.0" prefWidth="268.0" AnchorPane.bottomAnchor="44.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="475.0" />
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="292.0" layoutY="55.0" prefHeight="695.0" prefWidth="288.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="55.0" />
+      <JFXTreeTableView fx:id="friendsPane" layoutX="318.0" layoutY="557.0" prefHeight="343.0" prefWidth="327.0" style="-fx-border-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="318.0" AnchorPane.rightAnchor="318.0" AnchorPane.topAnchor="557.0">
+         <columnResizePolicy>
+            <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </JFXTreeTableView>
+      <AnchorPane fx:id="centerPane" layoutX="305.0" layoutY="426.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="103.0" prefWidth="356.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="302.0">
          <children>
-            <ScrollPane fx:id="scrollPaneFriends" hbarPolicy="NEVER" layoutY="88.0" prefHeight="322.0" prefWidth="275.0" />
-            <Pane prefHeight="88.0" prefWidth="275.0" style="-fx-background-color: #379B1E;">
-               <children>
-                  <Text fill="WHITE" layoutX="80.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Friends">
-                     <font>
-                        <Font size="33.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
+            <Label alignment="BASELINE_CENTER" layoutX="86.0" layoutY="14.0" text="Friends" underline="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font size="53.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="292.0" layoutY="55.0" prefHeight="695.0" prefWidth="288.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="55.0" />
     </children>
 </AnchorPane>
