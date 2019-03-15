@@ -13,6 +13,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
@@ -63,6 +67,9 @@ public class FriendspageController implements Initializable {
     @FXML
     private VBox results;
 
+    @FXML
+    private HBox dataPane;
+
     private List searchresults;
 
 
@@ -75,6 +82,29 @@ public class FriendspageController implements Initializable {
         }
         fillFriendsTreeView();
         drawFriendRequestDrawer();
+        drawFriendsBarChart();
+    }
+
+    public void drawFriendsBarChart() {
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        final BarChart<String,Number> bc =
+                new BarChart<>(xAxis,yAxis);
+        bc.setTitle("Carbon Saved");
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("This Week");
+        populateBarChart(series1);
+
+        bc.getData().addAll(series1);
+        dataPane.getChildren().addAll(bc);
+    }
+
+    public void populateBarChart(XYChart.Series series1) {
+        series1.getData().add(new XYChart.Data(thisUser.getUsername(), thisUser.getTotalCarbonSaved()));
+        for (String username : thisUser.getFriends()) {
+            User friend = Requests.getUserRequest(username);
+            series1.getData().add(new XYChart.Data(friend.getUsername(), friend.getTotalCarbonSaved()));
+        }
     }
 
     public void drawFriendRequestDrawer() {

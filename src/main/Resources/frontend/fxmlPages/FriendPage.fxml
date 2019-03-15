@@ -15,9 +15,9 @@
 
 <AnchorPane fx:id="main" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.FriendspageController">
     <children>
-      <AnchorPane layoutY="137.0" prefHeight="117.0" prefWidth="957.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
+      <AnchorPane layoutY="137.0" prefHeight="117.0" prefWidth="957.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
          <children>
-            <HBox prefHeight="248.0" prefWidth="963.0" />
+            <HBox fx:id="dataPane" prefHeight="285.0" prefWidth="963.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="-7.0" prefHeight="137.0" prefWidth="966.0" style="-fx-background-color: #379B1E #379B1E;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
