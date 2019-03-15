@@ -37,8 +37,15 @@ public class Requests {
      */
     public static User getUserRequest(String identifier) {
         String url = "http://localhost:8080/getUser";
-        RestTemplate rest = new RestTemplate();
-        return rest.postForEntity(url, identifier, User.class).getBody();
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        //adding the query params to the URL
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+                .queryParam("identifier", identifier);
+
+
+        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
     }
 
     /**
@@ -130,4 +137,5 @@ public class Requests {
 
         return restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class).getBody();
     }
+
 }

@@ -57,9 +57,13 @@ public class RequestHandler {
     }
 
     @RequestMapping("/getUser")
-    public User getUser(@RequestBody String identifier) {
+    public User getUser(@RequestParam String identifier) {
+        if (dbService.getUser(identifier) == null) {
+            return dbService.getUserByUsername(identifier);
+        }
         return dbService.getUser(identifier);
     }
+
 
     @RequestMapping("/friendrequest")
     public User friendRequest(@RequestParam String sender, @RequestParam String receiver) {

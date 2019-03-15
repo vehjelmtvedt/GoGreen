@@ -1,8 +1,12 @@
 package frontend;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Main extends Application {
     private static Stage primaryStage;
@@ -16,8 +20,9 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage window) {
+    public void start(Stage window) throws IOException {
         //setup the primary stage
+
 
         primaryStage = window;
         General.setPrimaryStage(primaryStage, "Go Green");
@@ -37,7 +42,7 @@ public class Main extends Application {
         signUp.getStylesheets().add(cssIntro);
 
         //setup the first scene for the primary stage
-        General.finaliseStage(primaryStage, signIn); //TODO: CHANGE TO SIGNIN PAGE WHEN FINISHED WITH DESIGN
+        General.finaliseStage(primaryStage, signIn);
     }
 
     public static void main(String[] args) {
@@ -76,7 +81,6 @@ public class Main extends Application {
         return cssIntro;
     }
 
-    //testing
     public static void setActivities(Scene scene) {
         activities = scene;
     }

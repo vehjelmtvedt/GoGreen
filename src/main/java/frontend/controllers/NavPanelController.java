@@ -55,6 +55,7 @@ public class NavPanelController {
             burgerTask1.play();
             if (drawer.isOpened()) {
                 drawer.close();
+                drawer.setVisible(false);
             } else {
                 drawer.open();
                 drawer.setVisible(true);
