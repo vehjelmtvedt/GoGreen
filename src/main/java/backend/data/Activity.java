@@ -3,7 +3,11 @@ package backend.data;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 /**
  * This class is used as a superclass for the specific activities a user performs.
@@ -54,7 +58,7 @@ public abstract class Activity {
         };
     }
 
-    protected static Comparator<Activity> getCarbonSavedComparator() {
+    private static Comparator<Activity> getCarbonSavedComparator() {
         return new Comparator<Activity>() {
             @Override
             public int compare(Activity o1, Activity o2) {
@@ -63,7 +67,7 @@ public abstract class Activity {
         };
     }
 
-    protected static Comparator<Activity> getClassComparator() {
+    static Comparator<Activity> getClassComparator() {
         return new Comparator<Activity>() {
             @Override
             public int compare(Activity o1, Activity o2) {
@@ -72,20 +76,36 @@ public abstract class Activity {
         };
     }
 
-    private static List<Activity> sortHelper(List<Activity> activityList, Comparator<Activity> comparator) {
+    private static List<Activity> sortHelper(List<Activity> activityList,
+                                             Comparator<Activity> comparator) {
         ArrayList<Activity> sortedList = new ArrayList<>(activityList);
         sortedList.sort(comparator);
         return sortedList;
     }
 
+    /**.
+     * Sorts Activity List by Date
+     * @param activityList - List to sort
+     * @return Activity List sorted by Date
+     */
     public static List<Activity> sortByDate(List<Activity> activityList) {
         return sortHelper(activityList, getDateComparator());
     }
 
+    /**.
+     * Sorts Activity List by Carbon Saved
+     * @param activityList - List to sort
+     * @return Activity List sorted by Carbon Saved
+     */
     public static List<Activity> sortByCarbonSaved(List<Activity> activityList) {
         return sortHelper(activityList, getCarbonSavedComparator());
     }
 
+    /**.
+     * Sorts Activity List by Class
+     * @param activityList - List to sort
+     * @return Activity List sorted by Class
+     */
     public static List<Activity> sortByClass(List<Activity> activityList) {
         return sortHelper(activityList, getClassComparator());
     }
