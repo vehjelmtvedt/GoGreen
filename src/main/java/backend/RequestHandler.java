@@ -5,11 +5,7 @@ import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import javax.annotation.Resource;
@@ -55,14 +51,14 @@ public class RequestHandler {
         return "success";
         //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
-    /*
+
     @RequestMapping("/getUser")
     public User getUser(@RequestParam String identifier) {
         if (dbService.getUser(identifier) == null) {
             return dbService.getUserByUsername(identifier);
         }
         return dbService.getUser(identifier);
-    }*/
+    }
 
 
     @RequestMapping("/friendrequest")
@@ -137,7 +133,7 @@ public class RequestHandler {
      * @param top the top n users
      * @return a list of users in ascending order of rank
      */
-    @RequestMapping
+    @RequestMapping("/getTopUsers")
     public List<User> getTopUsers(@RequestBody LoginDetails loginDetails, @RequestParam int top) {
         if (dbService.grantAccess(loginDetails.getIdentifier(),
                 loginDetails.getPassword()) != null) {
@@ -151,7 +147,7 @@ public class RequestHandler {
      * @param loginDetails for auth
      * @return a list of friends
      */
-    @RequestMapping
+    @RequestMapping("/getFriends")
     public List<User> getFriends(@RequestBody LoginDetails loginDetails) {
         if (dbService.grantAccess(loginDetails.getIdentifier(),
                 loginDetails.getPassword()) != null) {
@@ -159,7 +155,6 @@ public class RequestHandler {
         }
         return null;
     }
-
 }
 
 

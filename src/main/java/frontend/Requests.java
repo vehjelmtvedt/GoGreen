@@ -6,6 +6,8 @@ import backend.data.User;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
+
 public class Requests {
 
     /**
@@ -136,6 +138,24 @@ public class Requests {
                 .queryParam("identifier", username);
 
         return restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class).getBody();
+    }
+
+    public static List getMatchingUsersRequest(String keyword, LoginDetails loginDetails) {
+        String url = "http://localhost:8080/searchUsers";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        //adding the query params to the URL
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+                .queryParam("keyword", keyword);
+
+        return restTemplate.postForEntity(uriBuilder.toUriString(), loginDetails, List.class).getBody();
+    }
+
+    public static void main(String[] args) {
+        LoginDetails loginDetails = new LoginDetails("vehjelm", "$2a$10$g/BuqjsZ3YMQoefbCoe3Y.ftGtxr3CfWXs0UX9c0EnGfnNfG1Jiie");
+        List smth = getMatchingUsersRequest("be", loginDetails);
+        System.out.println(smth.toArray());
     }
 
 }

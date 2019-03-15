@@ -51,9 +51,10 @@
       </AnchorPane>
       <JFXDrawer fx:id="addFriendDrawer" defaultDrawerSize="292.0" direction="TOP" layoutX="675.0" layoutY="72.0" prefHeight="248.0" prefWidth="210.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="61.0">
          <children>
-            <VBox prefHeight="248.0" prefWidth="176.0" spacing="10.0">
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <JFXTextField promptText=" Enter username..." />
+                  <JFXTextField fx:id="searchField" alignment="TOP_CENTER" promptText=" Enter username..." />
+                  <VBox fx:id="results" prefHeight="248.0" prefWidth="176.0" spacing="10.0" />
                </children>
             </VBox>
          </children>

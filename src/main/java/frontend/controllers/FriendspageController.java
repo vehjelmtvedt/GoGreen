@@ -1,5 +1,6 @@
 package frontend.controllers;
 
+import backend.data.LoginDetails;
 import backend.data.User;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
@@ -23,6 +25,7 @@ import javafx.scene.shape.Line;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -51,6 +54,14 @@ public class FriendspageController implements Initializable {
     @FXML
     private Button addFriendButton;
 
+    @FXML
+    private JFXTextField searchField;
+
+    @FXML
+    private VBox results;
+
+    private List searchresults;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -64,17 +75,17 @@ public class FriendspageController implements Initializable {
     }
 
     public void drawFriendRequestDrawer() {
-        VBox results = new VBox();
-        JFXTextField searchField = new JFXTextField();
-        searchField.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-            System.out.println(e.getCharacter());
-        });
-        results.getChildren().add(searchField);
-        results.setMinHeight(drawer.getDefaultDrawerSize());
 
+        searchField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            searchresults = getSearchResults(searchField.getText());
+            results.getChildren().clear();
+            for (int i = 0; i < searchresults.size(); i++) {
+                Label tmpLabel = new Label(searchresults.get(i).toString());
+                results.getChildren().add(tmpLabel);
+            }
+        });
 
         addFriendDrawer.setVisible(false);
-        addFriendDrawer.setContent(results);
 
         addFriendButton.setOnAction(e -> {
             if (addFriendDrawer.isOpened()) {
@@ -85,6 +96,11 @@ public class FriendspageController implements Initializable {
                 addFriendDrawer.setVisible(true);
             }
         });
+    }
+
+    public List getSearchResults(String keyword) {
+
+        return Requests.getMatchingUsersRequest(keyword, new LoginDetails("vehjelm", "Tiger1466"));
     }
 
     public void fillFriendsTreeView() {
