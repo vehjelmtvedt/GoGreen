@@ -138,7 +138,4 @@ public class Requests {
         return restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class).getBody();
     }
 
-    public static void main(String[] args) {
-        System.out.println(getUserRequest("vetle@hjelmtvedt.com"));
-    }
 }

@@ -23,13 +23,6 @@ public class Main extends Application {
     public void start(Stage window) throws IOException {
         //setup the primary stage
 
-        //TODO: DELTE THIS WHEN DONE TESTING
-
-//        FXMLLoader loader3 = new FXMLLoader(
-//                Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
-//        Parent root3 = loader3.load();
-//        friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
-
 
         primaryStage = window;
         General.setPrimaryStage(primaryStage, "Go Green");

@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
@@ -17,9 +18,11 @@ import javafx.scene.shape.Line;
 
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class FriendspageController {
+public class FriendspageController implements Initializable {
 
     private static User thisUser;
 
@@ -44,9 +47,14 @@ public class FriendspageController {
     @FXML
     private Button getFriends;
 
-    public void initialize() throws IOException {
-        NavPanelController.setup(drawer, menu);
-        getFriends.setOnAction(e -> fillFriendsTreeView());
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            NavPanelController.setup(drawer, menu);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        fillFriendsTreeView();
 
     }
 
@@ -76,9 +84,10 @@ public class FriendspageController {
         ObservableList<UserItem> friendsList = FXCollections.observableArrayList();
         for (String username : thisUser.getFriends()) {
             User tmpFriend = Requests.getUserRequest(username);
+            System.out.println(tmpFriend.toString());
             String activity = "This user has no activities";
             if (tmpFriend.getActivities().size() != 0) {
-                activity = tmpFriend.getActivities().get(tmpFriend.getActivities().size() - 1).toString();
+                activity = tmpFriend.getActivities().get(tmpFriend.getActivities().size() - 1).getName();
             }
             String carbonSaved = Double.toString(tmpFriend.getTotalCarbonSaved());
             friendsList.add(new UserItem(username, activity, carbonSaved));
@@ -90,7 +99,7 @@ public class FriendspageController {
 
 
     //Used for constructing TreeView
-    class UserItem extends RecursiveTreeObject<UserItem> {
+    private class UserItem extends RecursiveTreeObject<UserItem> {
         StringProperty username;
         StringProperty lastActivity;
         StringProperty carbonSaved;
