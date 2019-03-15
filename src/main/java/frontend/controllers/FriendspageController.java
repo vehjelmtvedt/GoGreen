@@ -62,6 +62,7 @@ public class FriendspageController implements Initializable {
 
         JFXTreeTableColumn<UserItem, String> usernameColumn = new JFXTreeTableColumn<>("Friends");
         usernameColumn.setCellValueFactory(param -> param.getValue().getValue().username);
+        usernameColumn.setStyle("-fx-alignment: center;");
 
         JFXTreeTableColumn<UserItem, String> lastActivityColumn = new JFXTreeTableColumn<>("Recent Activity");
         lastActivityColumn.setCellValueFactory(param -> param.getValue().getValue().lastActivity);
@@ -78,6 +79,14 @@ public class FriendspageController implements Initializable {
         friendsPane.getColumns().setAll(usernameColumn, lastActivityColumn, totalCarbonSavedColumn);
         friendsPane.setRoot(root);
         friendsPane.setShowRoot(false);
+
+        styleTreeView(usernameColumn, lastActivityColumn, totalCarbonSavedColumn);
+    }
+
+    public void styleTreeView(JFXTreeTableColumn username, JFXTreeTableColumn lastActivity, JFXTreeTableColumn carbon) {
+        username.setStyle("-fx-alignment: center;");
+        lastActivity.setStyle("-fx-alignment: center;");
+        carbon.setStyle("-fx-alignment: center;");
     }
 
     private ObservableList<UserItem> getTableData() {
