@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,6 +20,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 
@@ -81,10 +84,28 @@ public class FriendspageController implements Initializable {
                 results.getChildren().clear();
             } else {
                 searchresults = getSearchResults(searchField.getText());
+
                 results.getChildren().clear();
                 for (int i = 0; i < searchresults.size(); i++) {
-                    Label tmpLabel = new Label(searchresults.get(i).toString());
-                    results.getChildren().add(tmpLabel);
+                    if (!searchresults.get(i).equals(thisUser.getUsername())) {
+                        HBox hBox = new HBox();
+                        VBox.setMargin(hBox, new Insets(0, 20, 0, 20));
+                        hBox.setStyle("-fx-background-color: #4286f4;");
+                        hBox.setPrefWidth(results.getPrefWidth());
+                        hBox.setPrefHeight(50);
+                        Label tmpLabel = new Label(searchresults.get(i).toString());
+                        tmpLabel.setPrefWidth(hBox.getPrefWidth() / 2);
+                        JFXButton addButton = new JFXButton("+");
+                        addButton.setStyle("-fx-background-color: #5b8d5b;");
+                        addButton.setPrefWidth(hBox.getPrefWidth() / 3);
+                        tmpLabel.setStyle("-fx-text-fill: white;");
+                        HBox.setMargin(addButton, new Insets(10, 10, 0, 90));
+                        HBox.setMargin(tmpLabel, new Insets(15, 0, 0,30));
+                        addButton.setMaxWidth(40);
+                        addButton.setOnAction(e -> Requests.sendFriendRequest(thisUser.getUsername(), tmpLabel.getText()));
+                        hBox.getChildren().addAll(tmpLabel, addButton);
+                        results.getChildren().add(hBox);
+                    }
                 }
             }
 
