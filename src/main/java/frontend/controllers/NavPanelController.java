@@ -7,14 +7,17 @@ import frontend.Main;
 import frontend.StageSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class NavPanelController {
+public class NavPanelController implements Initializable {
 
     @FXML
     private Button myProfile;
@@ -29,17 +32,27 @@ public class NavPanelController {
     private Button friends;
 
 
-
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         //TODO: Add scene change to profile page
-        home.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getHomepage()));
-        activity.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getActivities()));
-        friends.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getFriendsPage()));
+        home.setOnAction(e -> StageSwitcher.sceneSwitch(
+                Main.getPrimaryStage(), Main.getHomepage()));
+        activity.setOnAction(e -> StageSwitcher.sceneSwitch(
+                Main.getPrimaryStage(), Main.getActivities()));
+        friends.setOnAction(e -> StageSwitcher.sceneSwitch(
+                Main.getPrimaryStage(), Main.getFriendsPage()));
     }
 
 
+    /**
+     * Set up the navbar for any page.
+     * @param drawer - the drawer containing the nav panel
+     * @param menu - the hamburger button
+     * @throws IOException - if fails to load the navigationpane
+     */
     public static void setup(JFXDrawer drawer, JFXHamburger menu) throws IOException {
-        VBox box = FXMLLoader.load(NavPanelController.class.getResource("/frontend/fxmlPages/navigationpane.fxml"));
+        VBox box = FXMLLoader.load(NavPanelController.class.getResource(
+                "/frontend/fxmlPages/navigationpane.fxml"));
         box.setMinHeight(drawer.getDefaultDrawerSize());
 
 

@@ -2,7 +2,13 @@ package frontend.controllers;
 
 import backend.data.LoginDetails;
 import backend.data.User;
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import frontend.Requests;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,7 +18,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -20,15 +25,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Line;
-
 
 import java.io.IOException;
 import java.net.URL;
@@ -85,11 +85,14 @@ public class FriendspageController implements Initializable {
         drawFriendsBarChart();
     }
 
+    /**
+     * Draws the bar graph to the Friends page.
+     */
     public void drawFriendsBarChart() {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-        final BarChart<String,Number> bc =
-                new BarChart<>(xAxis,yAxis);
+        final BarChart<String, Number> bc =
+                new BarChart<>(xAxis, yAxis);
         bc.setTitle("Carbon Saved");
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("This Week");
@@ -99,14 +102,23 @@ public class FriendspageController implements Initializable {
         dataPane.getChildren().addAll(bc);
     }
 
+    /**
+     * Adds the data to the first bar chart.
+     * @param series1 - the series to add data to
+     */
     public void populateBarChart(XYChart.Series series1) {
-        series1.getData().add(new XYChart.Data(thisUser.getUsername(), thisUser.getTotalCarbonSaved()));
+        series1.getData().add(new XYChart.Data(thisUser.getUsername(),
+                thisUser.getTotalCarbonSaved()));
         for (String username : thisUser.getFriends()) {
             User friend = Requests.getUserRequest(username);
-            series1.getData().add(new XYChart.Data(friend.getUsername(), friend.getTotalCarbonSaved()));
+            series1.getData().add(new XYChart.Data(friend.getUsername(),
+                    friend.getTotalCarbonSaved()));
         }
     }
 
+    /**
+     * Adds the drawer to search for users and send them friend requests.
+     */
     public void drawFriendRequestDrawer() {
 
         searchField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
@@ -118,23 +130,24 @@ public class FriendspageController implements Initializable {
                 results.getChildren().clear();
                 for (int i = 0; i < searchresults.size(); i++) {
                     if (!searchresults.get(i).equals(thisUser.getUsername())) {
-                        HBox hBox = new HBox();
-                        VBox.setMargin(hBox, new Insets(0, 20, 0, 20));
-                        hBox.setStyle("-fx-background-color: #4286f4;");
-                        hBox.setPrefWidth(results.getPrefWidth());
-                        hBox.setPrefHeight(50);
+                        HBox hbox = new HBox();
+                        VBox.setMargin(hbox, new Insets(0, 20, 0, 20));
+                        hbox.setStyle("-fx-background-color: #4286f4;");
+                        hbox.setPrefWidth(results.getPrefWidth());
+                        hbox.setPrefHeight(50);
                         Label tmpLabel = new Label(searchresults.get(i).toString());
-                        tmpLabel.setPrefWidth(hBox.getPrefWidth() / 2);
+                        tmpLabel.setPrefWidth(hbox.getPrefWidth() / 2);
                         JFXButton addButton = new JFXButton("+");
                         addButton.setStyle("-fx-background-color: #5b8d5b;");
-                        addButton.setPrefWidth(hBox.getPrefWidth() / 3);
+                        addButton.setPrefWidth(hbox.getPrefWidth() / 3);
                         tmpLabel.setStyle("-fx-text-fill: white;");
                         HBox.setMargin(addButton, new Insets(10, 10, 0, 90));
-                        HBox.setMargin(tmpLabel, new Insets(15, 0, 0,30));
+                        HBox.setMargin(tmpLabel, new Insets(15, 0, 0, 30));
                         addButton.setMaxWidth(40);
-                        addButton.setOnAction(e -> Requests.sendFriendRequest(thisUser.getUsername(), tmpLabel.getText()));
-                        hBox.getChildren().addAll(tmpLabel, addButton);
-                        results.getChildren().add(hBox);
+                        addButton.setOnAction(e -> Requests.sendFriendRequest(
+                                thisUser.getUsername(), tmpLabel.getText()));
+                        hbox.getChildren().addAll(tmpLabel, addButton);
+                        results.getChildren().add(hbox);
                     }
                 }
             }
@@ -154,29 +167,43 @@ public class FriendspageController implements Initializable {
         });
     }
 
+    /**
+     * Returns list of usernames based on keyword.
+     * @param keyword - keyword to search usernames
+     * @return
+     */
     public List getSearchResults(String keyword) {
-
-        return Requests.getMatchingUsersRequest(keyword, new LoginDetails("vehjelm", "Tiger1466"));
+        //TODO: FIX PASSING ORIGINAL PASSWORD IN THE FUTURE AND NOT HASHED
+        return Requests.getMatchingUsersRequest(keyword,
+                new LoginDetails(thisUser.getUsername(), thisUser.getPassword()));
     }
 
+    /**
+     * Adds the activity table to the GUI.
+     */
     public void fillFriendsTreeView() {
 
-        JFXTreeTableColumn<UserItem, String> usernameColumn = new JFXTreeTableColumn<>("Friends");
+        JFXTreeTableColumn<UserItem, String>
+                usernameColumn = new JFXTreeTableColumn<>("Friends");
         usernameColumn.setCellValueFactory(param -> param.getValue().getValue().username);
         usernameColumn.setStyle("-fx-alignment: center;");
 
-        JFXTreeTableColumn<UserItem, String> lastActivityColumn = new JFXTreeTableColumn<>("Recent Activity");
+        JFXTreeTableColumn<UserItem, String>
+                lastActivityColumn = new JFXTreeTableColumn<>("Recent Activity");
         lastActivityColumn.setCellValueFactory(param -> param.getValue().getValue().lastActivity);
 
-        JFXTreeTableColumn<UserItem, String> totalCarbonSavedColumn = new JFXTreeTableColumn<>("Total carbon Saved");
-        totalCarbonSavedColumn.setCellValueFactory(param -> param.getValue().getValue().carbonSaved);
+        JFXTreeTableColumn<UserItem, String>
+                totalCarbonSavedColumn = new JFXTreeTableColumn<>("Total carbon Saved");
+        totalCarbonSavedColumn
+                .setCellValueFactory(param -> param.getValue().getValue().carbonSaved);
 
         totalCarbonSavedColumn.setPrefWidth(150);
         usernameColumn.setPrefWidth(150);
         lastActivityColumn.setPrefWidth(300);
 
         ObservableList<UserItem> friendsList = getTableData();
-        final TreeItem<UserItem> root = new RecursiveTreeItem<>(friendsList, RecursiveTreeObject::getChildren);
+        final TreeItem<UserItem> root = new RecursiveTreeItem<>(
+                friendsList, RecursiveTreeObject::getChildren);
         friendsPane.getColumns().setAll(usernameColumn, lastActivityColumn, totalCarbonSavedColumn);
         friendsPane.setRoot(root);
         friendsPane.setShowRoot(false);
@@ -184,7 +211,14 @@ public class FriendspageController implements Initializable {
         styleTreeView(usernameColumn, lastActivityColumn, totalCarbonSavedColumn);
     }
 
-    public void styleTreeView(JFXTreeTableColumn username, JFXTreeTableColumn lastActivity, JFXTreeTableColumn carbon) {
+    /**
+     * Gives style to the tree view.
+     * @param username - first column of the table
+     * @param lastActivity - second column
+     * @param carbon - third column
+     */
+    public void styleTreeView(JFXTreeTableColumn username,
+                              JFXTreeTableColumn lastActivity, JFXTreeTableColumn carbon) {
         username.setStyle("-fx-alignment: center;");
         lastActivity.setStyle("-fx-alignment: center;");
         carbon.setStyle("-fx-alignment: center;");
@@ -197,7 +231,8 @@ public class FriendspageController implements Initializable {
             System.out.println(tmpFriend.toString());
             String activity = "This user has no activities";
             if (tmpFriend.getActivities().size() != 0) {
-                activity = tmpFriend.getActivities().get(tmpFriend.getActivities().size() - 1).getName();
+                activity = tmpFriend.getActivities().get(
+                        tmpFriend.getActivities().size() - 1).getName();
             }
             String carbonSaved = Double.toString(tmpFriend.getTotalCarbonSaved());
             friendsList.add(new UserItem(username, activity, carbonSaved));

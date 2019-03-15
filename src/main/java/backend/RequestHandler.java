@@ -5,7 +5,11 @@ import backend.data.DbService;
 import backend.data.LoginDetails;
 import backend.data.User;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import javax.annotation.Resource;
@@ -52,6 +56,11 @@ public class RequestHandler {
         //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
+    /**
+     * Returns user from db.
+     * @param identifier - username or email of that person
+     * @return
+     */
     @RequestMapping("/getUser")
     public User getUser(@RequestParam String identifier) {
         if (dbService.getUser(identifier) == null) {

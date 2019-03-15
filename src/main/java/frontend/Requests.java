@@ -140,6 +140,12 @@ public class Requests {
         return restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class).getBody();
     }
 
+    /**
+     * Gets matching user based on keyword.
+     * @param keyword - keyword to match
+     * @param loginDetails - to authenticate
+     * @return - a list of users matching the keyword
+     */
     public static List getMatchingUsersRequest(String keyword, LoginDetails loginDetails) {
         String url = "http://localhost:8080/searchUsers";
 
@@ -149,13 +155,7 @@ public class Requests {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("keyword", keyword);
 
-        return restTemplate.postForEntity(uriBuilder.toUriString(), loginDetails, List.class).getBody();
+        return restTemplate.postForEntity(
+                uriBuilder.toUriString(), loginDetails, List.class).getBody();
     }
-
-    public static void main(String[] args) {
-        LoginDetails loginDetails = new LoginDetails("vehjelm", "$2a$10$g/BuqjsZ3YMQoefbCoe3Y.ftGtxr3CfWXs0UX9c0EnGfnNfG1Jiie");
-        List smth = getMatchingUsersRequest("be", loginDetails);
-        System.out.println(smth.toArray());
-    }
-
 }
