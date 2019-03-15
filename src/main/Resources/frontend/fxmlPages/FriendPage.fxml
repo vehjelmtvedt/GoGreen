@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.ExpansionPanel?>
+<?import com.gluonhq.charm.glisten.control.ExpansionPanel.ExpandedPanel?>
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="main" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.FriendspageController">
@@ -42,5 +48,27 @@
             </Label>
          </children>
       </AnchorPane>
+      <ExpansionPanel layoutX="725.0" layoutY="410.0" prefHeight="49.0" prefWidth="200.0">
+         <expandedContent>
+            <ExpansionPanel.ExpandedPanel maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="200.0" minWidth="200.0">
+               <content>
+                  <VBox fx:id="displayUsers" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <JFXTextField fx:id="searchField" focusColor="#4286f4" minHeight="50.0" promptText="Enter Username.." unFocusColor="WHITE" />
+                        <Label text="Label" />
+                        <Label text="Label" />
+                        <Label text="Label" />
+                     </children>
+                  </VBox>
+               </content>
+            </ExpansionPanel.ExpandedPanel>
+         </expandedContent>
+         <collapsedContent>
+            <JFXButton text="Add Friend">
+               <graphic>
+                  <Icon content="ADD" />
+               </graphic></JFXButton>
+         </collapsedContent>
+      </ExpansionPanel>
     </children>
 </AnchorPane>

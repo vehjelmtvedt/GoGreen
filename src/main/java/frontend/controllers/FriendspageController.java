@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 
 
@@ -45,7 +46,10 @@ public class FriendspageController implements Initializable {
     private JFXDrawer drawer;
 
     @FXML
-    private Button getFriends;
+    private VBox displayUsers;
+
+    @FXML
+    private JFXTextField searchField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
