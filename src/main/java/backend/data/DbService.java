@@ -231,7 +231,7 @@ public class DbService {
     }
 
     /**
-     * Returns top users
+     * Returns top users.
      * @param top to return a "top" number of users
      * @return top n users
      */

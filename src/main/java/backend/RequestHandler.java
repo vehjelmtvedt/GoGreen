@@ -55,14 +55,14 @@ public class RequestHandler {
         return "success";
         //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
-
+    /*
     @RequestMapping("/getUser")
     public User getUser(@RequestParam String identifier) {
         if (dbService.getUser(identifier) == null) {
             return dbService.getUserByUsername(identifier);
         }
         return dbService.getUser(identifier);
-    }
+    }*/
 
 
     @RequestMapping("/friendrequest")
