@@ -55,14 +55,14 @@ public class RequestHandler {
         return "success";
         //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
-
+    /*
     @RequestMapping("/getUser")
     public User getUser(@RequestParam String identifier) {
         if (dbService.getUser(identifier) == null) {
             return dbService.getUserByUsername(identifier);
         }
         return dbService.getUser(identifier);
-    }
+    }*/
 
 
     @RequestMapping("/friendrequest")
@@ -142,6 +142,20 @@ public class RequestHandler {
         if (dbService.grantAccess(loginDetails.getIdentifier(),
                 loginDetails.getPassword()) != null) {
             return dbService.getTopUsers(top);
+        }
+        return null;
+    }
+
+    /**
+     * Request to retrieve friends.
+     * @param loginDetails for auth
+     * @return a list of friends
+     */
+    @RequestMapping
+    public List<User> getFriends(@RequestBody LoginDetails loginDetails) {
+        if (dbService.grantAccess(loginDetails.getIdentifier(),
+                loginDetails.getPassword()) != null) {
+            return dbService.getFriends(loginDetails.getIdentifier());
         }
         return null;
     }
