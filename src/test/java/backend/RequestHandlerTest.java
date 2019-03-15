@@ -197,4 +197,21 @@ public class RequestHandlerTest
         assertEquals(null,requestHandler.getTopUsers(new LoginDetails(testUser.getUsername(),
                 testUser.getPassword()),1));
     }
+
+    @Test
+    public void getFriends() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        List<User> testList = new ArrayList();
+        testList.add(testUser);
+        Mockito.when(dbService.getFriends(testUser.getUsername())).thenReturn(testList);
+        assertEquals(testList,requestHandler.getFriends(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword())));
+    }
+
+    @Test
+    public void getFriendsNull() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
+        assertEquals(null,requestHandler.getFriends(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword())));
+    }
 }
