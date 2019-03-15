@@ -14,6 +14,7 @@ import java.util.Date;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = EatVegetarianMeal.class, name = "EatVegetarianMeal"),
+        @JsonSubTypes.Type(value = BuyLocallyProducedFood.class, name = "BuyLocallyProducedFood"),
     })
 public abstract class Activity {
     private Date date;
@@ -60,7 +61,30 @@ public abstract class Activity {
 
     public abstract double calculateCarbonSaved(User user);
 
-    public abstract int timesPerformedInTheSameDay(User user);
+    /**
+     * calculates how many times on the same day the user has performed this activity.
+     * @param user user currently logged in
+     */
+    public int timesPerformedInTheSameDay(User user) {
+        Date currentDate = Calendar.getInstance().getTime();
+        String currentMonth = currentDate.toString().split(" ")[1];
+        String currentDay = currentDate.toString().split(" ")[2];
+        String currentYear = currentDate.toString().split(" ")[5];
+
+        int result = 0;
+        for (Activity activity : user.getActivities()) {
+//            System.out.println(this.getClass().getSimpleName());
+            if (activity != null && activity.getClass().getSimpleName().equals(this.getClass().getSimpleName())) {
+                String dateNow = currentMonth + currentDay + currentYear;
+                if (dateNow.equals(activity.getDate().toString().split(" ")[1]
+                        + activity.getDate().toString().split(" ")[2]
+                        + activity.getDate().toString().split(" ")[5])) {
+                    result++;
+                }
+            }
+        }
+        return result;
+    }
 
     /**
      * performs the activity and updates the user object.
@@ -69,7 +93,15 @@ public abstract class Activity {
     public void performActivity(User user) {
         this.setCarbonSaved(this.calculateCarbonSaved(user));
         user.setTotalCarbonSaved(user.getTotalCarbonSaved() + this.calculateCarbonSaved(user));
-        user = Requests.addActivityRequest(this, user.getUsername());
+        // update logged in user for the gui
+        user.addActivity(this);
+        // update user in the database
+        try {
+            user = Requests.addActivityRequest(this, user.getUsername());
+        } catch (Exception e){
+            System.out.println("Activity was not added to the database");
+            System.out.println(e.fillInStackTrace());
+        }
     }
 
 }
