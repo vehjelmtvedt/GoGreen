@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import javax.annotation.Resource;
+
 
 
 @RestController
@@ -91,6 +93,22 @@ public class RequestHandler {
     }
 
     /**
+     * Request to search for users.
+     * @param loginDetails for authentication
+     * @param keyword keyword to search
+     * @return returns a list of users matching the keyword
+     */
+    @RequestMapping("/searchUsers")
+    public List<String> userSearch(@RequestBody LoginDetails loginDetails,
+                                   @RequestParam String keyword) {
+        if (dbService.grantAccess(loginDetails.getIdentifier(),
+                loginDetails.getPassword()) != null) {
+            return dbService.getMatchingUsers(keyword);
+        }
+        return null;
+    }
+
+    /**
      * Request to add activity to User.
      * @param activity - what activity to add.
      * @param identifier - username of the User
@@ -107,6 +125,21 @@ public class RequestHandler {
         returned.addActivity(activity);
         dbService.addUser(returned);
         return returned;
+    }
+
+    /**
+     * Request to retrieve top users.
+     * @param loginDetails for authentication
+     * @param top the top n users
+     * @return a list of users in ascending order of rank
+     */
+    @RequestMapping
+    public List<User> getTopUsers(@RequestBody LoginDetails loginDetails, @RequestParam int top) {
+        if (dbService.grantAccess(loginDetails.getIdentifier(),
+                loginDetails.getPassword()) != null) {
+            return dbService.getTopUsers(top);
+        }
+        return null;
     }
 
 }
