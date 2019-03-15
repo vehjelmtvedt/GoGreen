@@ -137,7 +137,7 @@ public class RequestHandler {
      * @param top the top n users
      * @return a list of users in ascending order of rank
      */
-    @RequestMapping
+    @RequestMapping(value = "/getTopUsers")
     public List<User> getTopUsers(@RequestBody LoginDetails loginDetails, @RequestParam int top) {
         if (dbService.grantAccess(loginDetails.getIdentifier(),
                 loginDetails.getPassword()) != null) {
@@ -151,7 +151,7 @@ public class RequestHandler {
      * @param loginDetails for auth
      * @return a list of friends
      */
-    @RequestMapping
+    @RequestMapping(value = "/getFriends")
     public List<User> getFriends(@RequestBody LoginDetails loginDetails) {
         if (dbService.grantAccess(loginDetails.getIdentifier(),
                 loginDetails.getPassword()) != null) {
