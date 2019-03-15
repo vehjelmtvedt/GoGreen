@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.ExpansionPanel?>
-<?import com.gluonhq.charm.glisten.control.ExpansionPanel.ExpandedPanel?>
-<?import com.gluonhq.charm.glisten.control.Icon?>
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -30,9 +27,13 @@
                </font>
             </Label>
             <JFXHamburger fx:id="menu" layoutX="22.0" layoutY="22.0" />
+            <Button fx:id="addFriendButton" layoutX="712.0" layoutY="26.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="210.0" style="-fx-border-radius: 20%;" text="+ Add Friend" textFill="#363f9a" AnchorPane.bottomAnchor="78.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="26.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="662.0" layoutY="475.0" prefHeight="381.0" prefWidth="268.0" AnchorPane.bottomAnchor="44.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="475.0" />
       <JFXDrawer fx:id="drawer" defaultDrawerSize="292.0" layoutY="55.0" prefHeight="695.0" prefWidth="288.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="55.0" />
       <JFXTreeTableView fx:id="friendsPane" layoutX="318.0" layoutY="557.0" prefHeight="343.0" prefWidth="327.0" style="-fx-border-color: white; -fx-text-fill: #e80000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="318.0" AnchorPane.rightAnchor="318.0" AnchorPane.topAnchor="557.0">
          <columnResizePolicy>
@@ -48,27 +49,14 @@
             </Label>
          </children>
       </AnchorPane>
-      <ExpansionPanel layoutX="725.0" layoutY="410.0" prefHeight="49.0" prefWidth="200.0">
-         <expandedContent>
-            <ExpansionPanel.ExpandedPanel maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="200.0" minWidth="200.0">
-               <content>
-                  <VBox fx:id="displayUsers" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-                     <children>
-                        <JFXTextField fx:id="searchField" focusColor="#4286f4" minHeight="50.0" promptText="Enter Username.." unFocusColor="WHITE" />
-                        <Label text="Label" />
-                        <Label text="Label" />
-                        <Label text="Label" />
-                     </children>
-                  </VBox>
-               </content>
-            </ExpansionPanel.ExpandedPanel>
-         </expandedContent>
-         <collapsedContent>
-            <JFXButton text="Add Friend">
-               <graphic>
-                  <Icon content="ADD" />
-               </graphic></JFXButton>
-         </collapsedContent>
-      </ExpansionPanel>
+      <JFXDrawer fx:id="addFriendDrawer" defaultDrawerSize="292.0" direction="TOP" layoutX="675.0" layoutY="72.0" prefHeight="248.0" prefWidth="210.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="61.0">
+         <children>
+            <VBox prefHeight="248.0" prefWidth="176.0" spacing="10.0">
+               <children>
+                  <JFXTextField promptText=" Enter username..." />
+               </children>
+            </VBox>
+         </children>
+      </JFXDrawer>
     </children>
 </AnchorPane>

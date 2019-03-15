@@ -13,6 +13,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
@@ -31,9 +34,6 @@ public class FriendspageController implements Initializable {
     private Label goGreen;
 
     @FXML
-    private Line underline;
-
-    @FXML
     private AnchorPane centerPane;
 
     @FXML
@@ -46,10 +46,11 @@ public class FriendspageController implements Initializable {
     private JFXDrawer drawer;
 
     @FXML
-    private VBox displayUsers;
+    private JFXDrawer addFriendDrawer;
 
     @FXML
-    private JFXTextField searchField;
+    private Button addFriendButton;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -59,7 +60,31 @@ public class FriendspageController implements Initializable {
             e.printStackTrace();
         }
         fillFriendsTreeView();
+        drawFriendRequestDrawer();
+    }
 
+    public void drawFriendRequestDrawer() {
+        VBox results = new VBox();
+        JFXTextField searchField = new JFXTextField();
+        searchField.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            System.out.println(e.getCharacter());
+        });
+        results.getChildren().add(searchField);
+        results.setMinHeight(drawer.getDefaultDrawerSize());
+
+
+        addFriendDrawer.setVisible(false);
+        addFriendDrawer.setContent(results);
+
+        addFriendButton.setOnAction(e -> {
+            if (addFriendDrawer.isOpened()) {
+                addFriendDrawer.close();
+                addFriendDrawer.setVisible(false);
+            } else {
+                addFriendDrawer.open();
+                addFriendDrawer.setVisible(true);
+            }
+        });
     }
 
     public void fillFriendsTreeView() {
@@ -107,8 +132,6 @@ public class FriendspageController implements Initializable {
         }
         return friendsList;
     }
-
-
 
 
     //Used for constructing TreeView
