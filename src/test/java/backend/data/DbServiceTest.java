@@ -282,6 +282,7 @@ public class DbServiceTest {
     public void testGetAchievements() {
         List<Achievement> achievements = dbService.getAchievements();
         assertNotEquals(0, achievements.size());
+    }
 
     private List<Double> getTopUserScores(int top) {
         List<User> topUsers = dbService.getTopUsers(top);
