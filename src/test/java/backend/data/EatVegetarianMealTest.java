@@ -22,6 +22,8 @@ public class EatVegetarianMealTest {
         assertEquals(currentMonth, meal.getDate().toString().split(" ")[1]);
         assertEquals(currentDay, meal.getDate().toString().split(" ")[2]);
         assertEquals(0, (int) meal.getCarbonSaved());
+        assertEquals("Food", meal.getCategory());
+        assertEquals("Eat Vegetarian Meal", meal.getName());
     }
 
     @Test
@@ -138,6 +140,7 @@ public class EatVegetarianMealTest {
         assertEquals(0, meal.timesPerformedInTheSameDay(userOne));
         meal.performActivity(userOne);
         userOne.addActivity(null);
+        userOne.addActivity(new BuyOrganicFood());
         EatVegetarianMeal meal2 = new EatVegetarianMeal();
         try {
             meal2.setDate(new SimpleDateFormat("dd/MM/yyyy").parse("12/12/1999"));

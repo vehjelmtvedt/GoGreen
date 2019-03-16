@@ -10,8 +10,9 @@ public class BuyOrganicFood extends Activity {
 
     public BuyOrganicFood() {
         this.setCategory("Food");
-        this.setName("Buy organic food");
+        this.setName("Buy Organic Food");
     }
+
 
     /**
      * A user that never used to buy organic food,

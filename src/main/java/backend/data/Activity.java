@@ -3,6 +3,7 @@ package backend.data;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import frontend.Requests;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -100,7 +101,7 @@ public abstract class Activity {
         // update user in the database
         try {
             user = Requests.addActivityRequest(this, user.getUsername());
-        } catch (NullPointerException e) {
+        } catch (HttpClientErrorException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());
         }
