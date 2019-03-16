@@ -16,6 +16,7 @@ import java.util.Date;
         @JsonSubTypes.Type(value = EatVegetarianMeal.class, name = "EatVegetarianMeal"),
         @JsonSubTypes.Type(value = BuyLocallyProducedFood.class, name = "BuyLocallyProducedFood"),
         @JsonSubTypes.Type(value = BuyNonProcessedFood.class, name = "BuyNonProcessedFood"),
+        @JsonSubTypes.Type(value = BuyOrganicFood.class, name = "BuyOrganicFood"),
     })
 public abstract class Activity {
     private Date date;
@@ -74,8 +75,8 @@ public abstract class Activity {
 
         int result = 0;
         for (Activity activity : user.getActivities()) {
-//            System.out.println(this.getClass().getSimpleName());
-            if (activity != null && activity.getClass().getSimpleName().equals(this.getClass().getSimpleName())) {
+            if (activity != null && activity.getClass().getSimpleName()
+                    .equals(this.getClass().getSimpleName())) {
                 String dateNow = currentMonth + currentDay + currentYear;
                 if (dateNow.equals(activity.getDate().toString().split(" ")[1]
                         + activity.getDate().toString().split(" ")[2]
@@ -99,7 +100,7 @@ public abstract class Activity {
         // update user in the database
         try {
             user = Requests.addActivityRequest(this, user.getUsername());
-        } catch (Exception e){
+        } catch (NullPointerException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());
         }
