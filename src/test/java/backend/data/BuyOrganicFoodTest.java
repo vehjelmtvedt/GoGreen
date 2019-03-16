@@ -59,18 +59,18 @@ public class BuyOrganicFoodTest {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setOrganicFoodConsumption("none");
         assertEquals((int) food.nonetoSome(), (int) food.calculateCarbonSaved(user));
-        food.performActivity(user);
+        user.addActivity(food);
         assertEquals((int) food.someToMost(), (int) food.calculateCarbonSaved(user));
-        food.performActivity(user);
+        user.addActivity(food);
         assertEquals((int) food.mostToAll(), (int) food.calculateCarbonSaved(user));
-        food.performActivity(user);
+        user.addActivity(food);
         assertEquals(0, (int) food.calculateCarbonSaved(user));
     }
 
     @Test
     public  void testTimesPerformedInTheSameDay () {
         assertEquals(0, food.timesPerformedInTheSameDay(userOne));
-        food.performActivity(userOne);
+        userOne.addActivity(food);
         userOne.addActivity(null);
         userOne.addActivity(new EatVegetarianMeal());
         BuyOrganicFood food2 = new BuyOrganicFood();
@@ -80,14 +80,15 @@ public class BuyOrganicFoodTest {
         userOne.addActivity(food2);
         assertEquals(1, food.timesPerformedInTheSameDay(userOne));
     }
+
     @Test
     public void testCarbonSavedByUserThatConsumesSomeOrganicFood() {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setOrganicFoodConsumption("some");
         assertEquals((int) food.someToMost(), (int) food.calculateCarbonSaved(user));
-        food.performActivity(user);
+        user.addActivity(food);
         assertEquals((int) food.mostToAll(), (int) food.calculateCarbonSaved(user));
-        food.performActivity(user);
+        user.addActivity(food);
         assertEquals(0, (int) food.calculateCarbonSaved(user));
     }
 
@@ -96,7 +97,7 @@ public class BuyOrganicFoodTest {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setOrganicFoodConsumption("most");
         assertEquals((int) food.mostToAll(), (int) food.calculateCarbonSaved(user));
-        food.performActivity(user);
+        user.addActivity(food);
         assertEquals(0, (int) food.calculateCarbonSaved(user));
     }
 
