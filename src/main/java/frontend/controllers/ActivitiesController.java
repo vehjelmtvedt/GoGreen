@@ -100,7 +100,8 @@ public class ActivitiesController implements Initializable {
             BuyLocallyProducedFood food = new BuyLocallyProducedFood();
             food.performActivity(loggedUser);
         } else if (event.getSource() == btnOrganicFood) {
-            //todo
+            BuyOrganicFood food = new BuyOrganicFood();
+            food.performActivity(loggedUser);
         } else {
             if (event.getSource() == btnNonProFood) {
                 BuyNonProcessedFood food = new BuyNonProcessedFood();

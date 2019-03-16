@@ -9,10 +9,6 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-/**
- * Implements the "eat a vegetarian meal" activity.
- * @author Kostas Lyrakis
- */
 public class EatVegetarianMealTest {
     EatVegetarianMeal meal = new EatVegetarianMeal();
     User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
