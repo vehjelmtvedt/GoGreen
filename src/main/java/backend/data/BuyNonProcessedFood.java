@@ -1,5 +1,9 @@
 package backend.data;
 
+/**
+ * Activity: Buy non-processed food.
+ * @author Kostas Lyrakis
+ */
 public class BuyNonProcessedFood extends Activity {
 
     /**
