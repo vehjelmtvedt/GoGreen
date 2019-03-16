@@ -12,7 +12,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -39,6 +42,8 @@ public class DbServiceTest {
     private static String[] regexTestUsernames = {"a_user", "abcdefg_user", "bcd_user", "b_user", "def", "powerUser",
             "casual_user", "123user456", "UsEr", "soomeone", "anyone", "abcdefghuser123ab", "idontknow", "i_am_user_566",
             "regular"};
+    private static double[] CO2TestScores = {2500.0, 300.0, 543.0, 900.0, 125.0, 9990.0, 12532.0, 1255.0, 4532.0, 1000000.0,
+        4321.0, 500.0, 1000000.0, 55555.0, 90043.0};
 
     @Before
     public void setup() {
@@ -59,6 +64,7 @@ public class DbServiceTest {
         for (int i = 0; i < regexTestUsernames.length; ++i) {
             String email = String.format(emailFormat, i);
             User regexUser = new User("Regex", "Test", 20, email, regexTestUsernames[i], "pwd");
+            regexUser.setTotalCarbonSaved(CO2TestScores[i]);
             dbService.addUser(regexUser);
         }
     }
@@ -276,5 +282,41 @@ public class DbServiceTest {
     public void testGetAchievements() {
         List<Achievement> achievements = dbService.getAchievements();
         assertNotEquals(0, achievements.size());
+
+    private List<Double> getTopUserScores(int top) {
+        List<User> topUsers = dbService.getTopUsers(top);
+
+        List<Double> scores = topUsers.stream() // Convert to User stream
+                .map(User::getTotalCarbonSaved) // Map to totalCarbonSaved score
+                .collect(Collectors.toList()); // Store results to List
+
+        return scores;
+    }
+
+    private List<Double> getExpectedScores(int top) {
+        return Arrays.stream(CO2TestScores).boxed() // Convert CO2TestScores Array to Stream<Double>
+                .sorted(Comparator.reverseOrder()) // Sort in DESC order
+                .limit(top) // Take only 10 entries
+                .collect(Collectors.toList()); // Collect to List
+    }
+
+    @Test
+    public void testGetTop10UserScores() {
+        assertEquals(getExpectedScores(10), getTopUserScores(10));
+    }
+
+    @Test
+    public void testGetTop5UserScores() {
+        assertEquals(getExpectedScores(5), getTopUserScores(5));
+    }
+
+    @Test
+    public void testGetTopUserScore() {
+        assertEquals(getExpectedScores(1), getTopUserScores(1));
+    }
+
+    @Test
+    public void testGetNoUserTop() {
+        assertEquals(new ArrayList<Double>(), getExpectedScores(0));
     }
 }

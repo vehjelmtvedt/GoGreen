@@ -3,6 +3,7 @@ package backend.data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -74,8 +75,8 @@ public class DbService {
      * .
      * Returns true or false whether to grant access to user with specified login details
      *
-     * @param identifier    - input e-mail
-     * @param password - input password
+     * @param identifier - input e-mail
+     * @param password   - input password
      * @return true if access granted
      */
     public User grantAccess(String identifier, String password) {
@@ -142,6 +143,7 @@ public class DbService {
     /**
      * .
      * Befriends two users
+     *
      * @param accepting - username of User accepting the request.
      * @param requester - username of User who sent the request.
      */
@@ -166,7 +168,8 @@ public class DbService {
     /**
      * .
      * Adds a friend request to a user's list of friend requests
-     * @param senderUsername - The username of the friend request sender
+     *
+     * @param senderUsername   - The username of the friend request sender
      * @param receiverUsername - The username of the user receiving the request
      */
     public User addFriendRequest(String senderUsername, String receiverUsername) {
@@ -182,9 +185,12 @@ public class DbService {
             return null;
         }
     }
-    /**.
+
+    /**
+     * .
      * Rejects a friend request of a specific user
-     * @param rejectedUser - the user rejecting the friend request
+     *
+     * @param rejectedUser  - the user rejecting the friend request
      * @param rejectingUser - the user whose friend request should be rejected
      */
 
@@ -210,7 +216,7 @@ public class DbService {
      * @param username - part of username to match
      * @return A list of strings containing all matching usernames
      */
-    List<String> getMatchingUsers(String username) {
+    public List<String> getMatchingUsers(String username) {
         String usernamePattern = "/$%s/$";
         String regexPattern = String.format(username, usernamePattern);
 
@@ -227,17 +233,14 @@ public class DbService {
     /*
      * Reserved for leaderboard queries
      */
-    /*    List<String> getTopUsers(int top) {
-            return mongoTemplate.find(
-                    new Query()
-                            .with(new Sort(Sort.Direction.DESC, "username"))
-                            // sort in descending order by username
-                            .limit(top), // return required number of users
-                    User.class) // result as User Object
-                    .stream() // Convert to Stream
-                    .map(User::getUsername) // Map User to Username
-                    .collect(Collectors.toList()); // Return result as List
-        }*/
+    public List<User> getTopUsers(int top) {
+        return mongoTemplate.find(
+                new Query()
+                        .with(new Sort(Sort.Direction.DESC, "totalCarbonSaved"))
+                        // sort in descending order by username
+                        .limit(top), // return required number of users
+                User.class); // result as User Object
+    }
 
     /**
      * .
@@ -257,8 +260,10 @@ public class DbService {
         }
     }
 
-    /**.
+    /**
+     * .
      * Returns the list of all achievements.
+     *
      * @return List of all achievements
      */
     public List<Achievement> getAchievements() {
