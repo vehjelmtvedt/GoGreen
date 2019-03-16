@@ -86,5 +86,4 @@ public class EatVegetarianMeal extends Activity {
             return 0;
         }
     }
-
 }
