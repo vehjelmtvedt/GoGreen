@@ -97,12 +97,8 @@ public abstract class Activity {
         // update logged in user for the gui
         user.addActivity(this);
         // update user in the database
-        try {
-            user = Requests.addActivityRequest(this, user.getUsername());
-        } catch (Exception e) {
-            System.out.println("Activity was not added to the database");
-            System.out.println(e.fillInStackTrace());
-        }
+
+        user = Requests.addActivityRequest(this, user.getUsername());
     }
 
 }

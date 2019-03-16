@@ -72,16 +72,16 @@ public class BuyLocallyProducedFood extends Activity {
                 return aboveAverageToAlmostAll();
             }
         } else if (locallyProducedFoodConsumption.equals("above average")) {
-                if (timesPerformedInTheSameDay(user) == 0) {
-                    return aboveAverageToAlmostAll();
-                }
+            if (timesPerformedInTheSameDay(user) == 0) {
+                return aboveAverageToAlmostAll();
+            }
         }
 
-            if (locallyProducedFoodConsumption.equals("almost all")) {
-                // TODO
-                return 0;
-        }
+        if (locallyProducedFoodConsumption.equals("almost all")) {
             // TODO
+            return 0;
+        }
+        //TODO
         return 0;
     }
 }
