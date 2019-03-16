@@ -2,8 +2,6 @@ package backend.data;
 
 import tools.CarbonCalculator;
 
-import javax.validation.constraints.AssertTrue;
-
 /**
  * Activity: eat a vegetarian meal.
  * @author Kostas Lyrakis

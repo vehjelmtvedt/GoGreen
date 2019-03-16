@@ -51,7 +51,6 @@ public class BuyLocallyProducedFood extends Activity {
 
     /**
      * Calculates the carbon saved by performing this activity.
-     *
      * @param user user currently logged in
      */
     @Override
