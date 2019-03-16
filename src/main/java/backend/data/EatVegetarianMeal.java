@@ -2,6 +2,8 @@ package backend.data;
 
 import tools.CarbonCalculator;
 
+import javax.validation.constraints.AssertTrue;
+
 /**
  * Activity: eat a vegetarian meal.
  * @author Kostas Lyrakis
@@ -52,6 +54,7 @@ public class EatVegetarianMeal extends Activity {
      * Calculates the carbon saved by performing this activity.
      * @param user user currently logged in
      */
+    @Override
     public double calculateCarbonSaved(User user) {
         String meatAndDairyConsumption = user.getMeatAndDairyConsumption();
 

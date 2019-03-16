@@ -14,4 +14,10 @@ public class BuyNonProcessedFood extends Activity {
         this.setCategory("Food");
         this.setName("Buy non-processed food");
     }
+
+    @Override
+    public double calculateCarbonSaved(User user) {
+        // TODO
+        return 0;
+    }
 }

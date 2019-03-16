@@ -54,6 +54,7 @@ public class BuyLocallyProducedFood extends Activity {
      *
      * @param user user currently logged in
      */
+    @Override
     public double calculateCarbonSaved(User user) {
         String locallyProducedFoodConsumption = user.getLocallyProducedFoodConsumption();
         int timesPerformedInTheSameDay = timesPerformedInTheSameDay(user);
