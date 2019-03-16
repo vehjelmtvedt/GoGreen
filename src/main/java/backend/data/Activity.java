@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import frontend.Requests;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -97,8 +98,11 @@ public abstract class Activity {
         // update logged in user for the gui
         user.addActivity(this);
         // update user in the database
-
-        user = Requests.addActivityRequest(this, user.getUsername());
+        try {
+            user = Requests.addActivityRequest(this, user.getUsername());
+        } catch (Exception e) {
+            System.out.println("Activity not logged to user");
+        }
     }
 
 }
