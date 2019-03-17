@@ -185,7 +185,6 @@
                         <exclude>**/frontend/SignUp*</exclude>
                         <exclude>**/frontend/StageSwitcher*</exclude>
                         <exclude>**/frontend/ProgressPage*</exclude>
-                        <exclude>**/backend/TestActivity*</exclude>
                     </excludes>
 
                     <rules>
