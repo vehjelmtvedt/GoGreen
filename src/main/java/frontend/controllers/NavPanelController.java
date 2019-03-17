@@ -29,17 +29,29 @@ public class NavPanelController {
     private Button friends;
 
 
-
+    /**.
+     * initialize page
+     */
     public void initialize() {
         //TODO: Add scene change to profile page
-        home.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getHomepage()));
-        activity.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getActivities()));
-        friends.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getFriendsPage()));
+        home.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(),
+                Main.getHomepage()));
+        activity.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(),
+                Main.getActivities()));
+        friends.setOnAction(e -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(),
+                Main.getFriendsPage()));
     }
 
 
+    /**.
+     * setup jfx drawer
+     * @param drawer drawer object
+     * @param menu menu object
+     * @throws IOException exception for loading
+     */
     public static void setup(JFXDrawer drawer, JFXHamburger menu) throws IOException {
-        VBox box = FXMLLoader.load(NavPanelController.class.getResource("/frontend/fxmlPages/navigationpane.fxml"));
+        VBox box = FXMLLoader.load(NavPanelController.class.getResource(
+                "/frontend/fxmlPages/navigationpane.fxml"));
         box.setMinHeight(drawer.getDefaultDrawerSize());
 
 
@@ -53,7 +65,7 @@ public class NavPanelController {
         menu.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
             burgerTask1.setRate(burgerTask1.getRate() * -1);
             burgerTask1.play();
-            if (drawer.isOpened()) {
+            if (drawer.isShown()) {
                 drawer.close();
                 drawer.setVisible(false);
             } else {

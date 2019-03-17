@@ -6,13 +6,11 @@ import com.jfoenix.controls.JFXHamburger;
 import frontend.Requests;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.Map;
@@ -38,12 +36,19 @@ public class FriendspageController {
     @FXML
     private JFXDrawer drawer;
 
+    /**.
+     * Initialise the .fxml page
+     * @throws IOException loading exception
+     */
     public void initialize() throws IOException {
         NavPanelController.setup(drawer, menu);
         //fillFriendsPane(); //TODO: UNCOMMENT THIS WHEN CHANGING TO HOMEPAGE IN MAIN
 
     }
 
+    /**.
+     * fill friends part
+     */
     public void fillFriendsGraph() {
         //Compare with 5 friends
         //Get C02 carbon emission for those friends
@@ -58,6 +63,9 @@ public class FriendspageController {
 
     }
 
+    /**.
+     * fillFriendsPane
+     */
     public void fillFriendsPane() {
         VBox root = new VBox();
 
@@ -65,7 +73,8 @@ public class FriendspageController {
             Pane friendPane = new Pane();
             friendPane.setMinHeight(50);
             friendPane.prefWidthProperty().bind(root.widthProperty());
-            friendPane.setBackground(new Background(new BackgroundFill(Color.web("#4245f4"), CornerRadii.EMPTY, Insets.EMPTY)));
+            friendPane.setBackground(new Background(
+                    new BackgroundFill(Color.web("#4245f4"), CornerRadii.EMPTY, Insets.EMPTY)));
             Label friendLabel = new Label(username);
             friendPane.getChildren().add(friendLabel);
             root.getChildren().add(friendPane);
