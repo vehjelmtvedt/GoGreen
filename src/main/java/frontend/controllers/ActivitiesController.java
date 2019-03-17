@@ -1,6 +1,11 @@
 package frontend.controllers;
 
-import backend.data.*;
+import backend.data.Activity;
+import backend.data.BuyLocallyProducedFood;
+import backend.data.BuyNonProcessedFood;
+import backend.data.BuyOrganicFood;
+import backend.data.EatVegetarianMeal;
+import backend.data.User;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -182,20 +187,16 @@ public class ActivitiesController implements Initializable {
         btnHistory.setStyle("-fx-background-color: transparent;");
     }
 
-    /**
-     * .
+    /**.
      * Sets the current logged in User to the one that was passed
-     *
      * @param passedUser Logged in current user
      */
     public static void setUser(User passedUser) {
         loggedUser = passedUser;
     }
 
-    /**
-     * .
+    /**.
      * Get the logged in User
-     *
      * @return logged User
      */
     public static User getUser() {

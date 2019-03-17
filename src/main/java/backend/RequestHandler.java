@@ -56,10 +56,19 @@ public class RequestHandler {
         //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
+    /**
+     * Returns user from db.
+     * @param identifier - username or email of that person
+     * @return
+     */
     @RequestMapping("/getUser")
-    public User getUser(@RequestBody String identifier) {
+    public User getUser(@RequestParam String identifier) {
+        if (dbService.getUser(identifier) == null) {
+            return dbService.getUserByUsername(identifier);
+        }
         return dbService.getUser(identifier);
     }
+
 
     @RequestMapping("/friendrequest")
     public User friendRequest(@RequestParam String sender, @RequestParam String receiver) {
@@ -134,7 +143,7 @@ public class RequestHandler {
      * @param top the top n users
      * @return a list of users in ascending order of rank
      */
-    @RequestMapping
+    @RequestMapping("/getTopUsers")
     public List<User> getTopUsers(@RequestBody LoginDetails loginDetails, @RequestParam int top) {
         if (dbService.grantAccess(loginDetails.getIdentifier(),
                 loginDetails.getPassword()) != null) {
@@ -143,6 +152,19 @@ public class RequestHandler {
         return null;
     }
 
+    /**
+     * Request to retrieve friends.
+     * @param loginDetails for auth
+     * @return a list of friends
+     */
+    @RequestMapping("/getFriends")
+    public List<User> getFriends(@RequestBody LoginDetails loginDetails) {
+        if (dbService.grantAccess(loginDetails.getIdentifier(),
+                loginDetails.getPassword()) != null) {
+            return dbService.getFriends(loginDetails.getIdentifier());
+        }
+        return null;
+    }
 }
 
 

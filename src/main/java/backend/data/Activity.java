@@ -77,6 +77,7 @@ public abstract class Activity {
         int result = 0;
         for (Activity activity : user.getActivities()) {
             if (activity != null && activity.getClass().getSimpleName()
+
                     .equals(this.getClass().getSimpleName())) {
                 String dateNow = currentMonth + currentDay + currentYear;
                 if (dateNow.equals(activity.getDate().toString().split(" ")[1]
@@ -106,5 +107,4 @@ public abstract class Activity {
             System.out.println(e.fillInStackTrace());
         }
     }
-
 }
