@@ -51,7 +51,6 @@ public class ConfirmBox {
     public static void closeProgram(Stage window, String message) {
         boolean answer = ConfirmBox.display(message);
         if (answer) {
-            System.out.println("Contents are saved!(not true)");
             window.close();
         }
     }

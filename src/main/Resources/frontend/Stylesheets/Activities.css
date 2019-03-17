@@ -1,0 +1,3 @@
+#btnFood:hover, #btnHousehold:hover, #btnTransportation:hover, #btnHistory:hover{
+    -fx-background-color: grey;
+}
