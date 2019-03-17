@@ -185,6 +185,7 @@
                         <exclude>**/frontend/SignUp*</exclude>
                         <exclude>**/frontend/StageSwitcher*</exclude>
                         <exclude>**/frontend/ProgressPage*</exclude>
+                        <<exclude>**/frontend/controllers/ActivitiesController*</exclude>
                         <exclude>**/frontend/controllers/FriendspageController*</exclude>
                         <exclude>**/frontend/controllers/HomepageController*</exclude>
                         <exclude>**/frontend/controllers/NavPanelController*</exclude>
