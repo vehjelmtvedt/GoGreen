@@ -157,7 +157,7 @@ public class FriendspageController implements Initializable {
         addFriendDrawer.setVisible(false);
 
         addFriendButton.setOnAction(e -> {
-            if (addFriendDrawer.isShown()) {
+            if (addFriendDrawer.isOpened()) {
                 addFriendDrawer.close();
                 addFriendDrawer.setVisible(false);
             } else {
