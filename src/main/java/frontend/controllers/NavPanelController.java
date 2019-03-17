@@ -65,7 +65,7 @@ public class NavPanelController implements Initializable {
         menu.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
             burgerTask1.setRate(burgerTask1.getRate() * -1);
             burgerTask1.play();
-            if (drawer.isShown()) {
+            if (drawer.isOpened()) {
                 drawer.close();
                 drawer.setVisible(false);
             } else {
