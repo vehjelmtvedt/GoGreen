@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Main extends Application {
     private static Stage primaryStage;
     private static Scene signIn;
@@ -16,8 +18,9 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage window) {
+    public void start(Stage window) throws IOException {
         //setup the primary stage
+
 
         primaryStage = window;
         General.setPrimaryStage(primaryStage, "Go Green");

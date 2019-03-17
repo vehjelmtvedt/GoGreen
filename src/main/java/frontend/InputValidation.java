@@ -3,6 +3,7 @@ package frontend;
 import backend.data.LoginDetails;
 import backend.data.User;
 import frontend.controllers.ActivitiesController;
+import frontend.controllers.FriendspageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -43,6 +44,7 @@ public class InputValidation {
                     "Welcome to GoGreen, " + loggedUser.getFirstName() + " "
                             + loggedUser.getLastName() + "!");
             ActivitiesController.setUser(loggedUser);
+            FriendspageController.setUser(loggedUser);
 
             //testing
             try {

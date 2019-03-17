@@ -230,8 +230,10 @@ public class DbService {
                 .collect(Collectors.toList()); // Return result as List
     }
 
-    /*
-     * Reserved for leaderboard queries
+    /**
+     * Returns top users.
+     * @param top to return a "top" number of users
+     * @return top n users
      */
     public List<User> getTopUsers(int top) {
         return mongoTemplate.find(
@@ -246,8 +248,12 @@ public class DbService {
      * .
      * Gets users' friends
      */
-    List<User> getFriends(String email) {
-        User user = getUser(email);
+    public List<User> getFriends(String identifier) {
+        User user = getUser(identifier);
+
+        if (user == null) {
+            user = getUserByUsername(identifier);
+        }
 
         if (user == null) {
             return new ArrayList<>(); // return empty list
