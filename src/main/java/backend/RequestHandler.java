@@ -132,6 +132,7 @@ public class RequestHandler {
             return null;
         }
         returned.addActivity(activity);
+        returned.setTotalCarbonSaved(returned.getTotalCarbonSaved() + activity.getCarbonSaved());
         dbService.addUser(returned);
         return returned;
     }
