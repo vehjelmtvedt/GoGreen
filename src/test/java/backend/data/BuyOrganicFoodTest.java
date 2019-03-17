@@ -55,19 +55,6 @@ public class BuyOrganicFoodTest {
     }
 
     @Test
-    public void testCarbonSavedByUserThatDoesNotConsumeAnyOrganicFood() {
-        User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
-        user.setOrganicFoodConsumption("none");
-        assertEquals((int) food.nonetoSome(), (int) food.calculateCarbonSaved(user));
-        user.addActivity(food);
-        assertEquals((int) food.someToMost(), (int) food.calculateCarbonSaved(user));
-        user.addActivity(food);
-        assertEquals((int) food.mostToAll(), (int) food.calculateCarbonSaved(user));
-        user.addActivity(food);
-        assertEquals(0, (int) food.calculateCarbonSaved(user));
-    }
-
-    @Test
     public  void testTimesPerformedInTheSameDay () {
         assertEquals(0, food.timesPerformedInTheSameDay(userOne));
         userOne.addActivity(food);
@@ -79,6 +66,19 @@ public class BuyOrganicFoodTest {
         }catch (Exception e){ }
         userOne.addActivity(food2);
         assertEquals(1, food.timesPerformedInTheSameDay(userOne));
+    }
+
+    @Test
+    public void testCarbonSavedByUserThatDoesNotConsumeAnyOrganicFood() {
+        User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
+        user.setOrganicFoodConsumption("none");
+        assertEquals((int) food.nonetoSome(), (int) food.calculateCarbonSaved(user));
+        user.addActivity(food);
+        assertEquals((int) food.someToMost(), (int) food.calculateCarbonSaved(user));
+        user.addActivity(food);
+        assertEquals((int) food.mostToAll(), (int) food.calculateCarbonSaved(user));
+        user.addActivity(food);
+        assertEquals(0, (int) food.calculateCarbonSaved(user));
     }
 
     @Test

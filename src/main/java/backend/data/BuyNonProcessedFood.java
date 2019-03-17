@@ -14,7 +14,7 @@ public class BuyNonProcessedFood extends Activity {
     public BuyNonProcessedFood() {
         super();
         this.setCategory("Food");
-        this.setName("Buy non-processed food");
+        this.setName("Buy Non-Processed Food");
     }
 
     /**

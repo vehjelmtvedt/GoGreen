@@ -13,7 +13,7 @@ public class BuyLocallyProducedFood extends Activity {
     public BuyLocallyProducedFood() {
         super();
         this.setCategory("Food");
-        this.setName("Buy locally produced food");
+        this.setName("Buy Locally Produced Food");
     }
 
     /**
