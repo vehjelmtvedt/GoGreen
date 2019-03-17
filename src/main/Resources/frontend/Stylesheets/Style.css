@@ -6,11 +6,11 @@
     -fx-background-color: #009933;
 }
 #mainLayoutSignIn{
-    -fx-background-image: url("/Frontend/Pics/Login5.jpg");
+    -fx-background-image: url("/frontend/Pics/Login5.jpg");
     -fx-background-size: cover;
 }
 #mainLayoutSignUp{
-    -fx-background-image: url("/Frontend/Pics/SignUp5.jpg");
+    -fx-background-image: url("/frontend/Pics/SignUp5.jpg");
     -fx-background-size: cover;
 }
 .label{
