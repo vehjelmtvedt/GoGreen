@@ -2,9 +2,6 @@ package backend.data;
 
 import tools.CarbonCalculator;
 
-import java.util.Calendar;
-import java.util.Date;
-
 /**
  * Activity: eat a vegetarian meal.
  * @author Kostas Lyrakis
@@ -20,29 +17,6 @@ public class EatVegetarianMeal extends Activity {
         this.setName("Eat Vegetarian Meal");
     }
 
-    /**
-     * calculates how many times on the same day the user has performed this activity.
-     * @param user user currently logged in
-     */
-    public int timesPerformedInTheSameDay(User user) {
-        Date currentDate = Calendar.getInstance().getTime();
-        String currentMonth = currentDate.toString().split(" ")[1];
-        String currentDay = currentDate.toString().split(" ")[2];
-        String currentYear = currentDate.toString().split(" ")[5];
-
-        int result = 0;
-        for (Activity activity : user.getActivities()) {
-            if (activity instanceof EatVegetarianMeal) {
-                String dateNow = currentMonth + currentDay + currentYear;
-                if (dateNow.equals(activity.getDate().toString().split(" ")[1]
-                        + activity.getDate().toString().split(" ")[2]
-                        + activity.getDate().toString().split(" ")[5])) {
-                    result++;
-                }
-            }
-        }
-        return result;
-    }
 
     /**
      * A user with above average meat and dairy consumption behaves like one with average.
@@ -66,7 +40,6 @@ public class EatVegetarianMeal extends Activity {
 
     /**
      * A user with below average meat and dairy consumption behaves like a vegan.
-     * @return - meat and dairy consumption emission KOSTAS FIX THIS IF WRONG
      */
     public double belowAverageToVegan() {
         return CarbonCalculator.meatAndDairyConsumptionEmissions(
@@ -79,6 +52,7 @@ public class EatVegetarianMeal extends Activity {
      * Calculates the carbon saved by performing this activity.
      * @param user user currently logged in
      */
+    @Override
     public double calculateCarbonSaved(User user) {
         String meatAndDairyConsumption = user.getMeatAndDairyConsumption();
 
@@ -113,7 +87,4 @@ public class EatVegetarianMeal extends Activity {
             return 0;
         }
     }
-
-
-
 }

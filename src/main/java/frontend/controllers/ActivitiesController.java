@@ -1,8 +1,6 @@
 package frontend.controllers;
 
-import backend.data.Activity;
-import backend.data.EatVegetarianMeal;
-import backend.data.User;
+import backend.data.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -110,19 +108,20 @@ public class ActivitiesController implements Initializable {
         if (event.getSource() == btnVegetarianMeal) {
             EatVegetarianMeal meal = new EatVegetarianMeal();
             meal.performActivity(loggedUser);
-            loggedUser.addActivity(meal);
-            ObservableList<Activity> activities = getActivities(loggedUser);
-
-            activityTable.setItems(activities);
         } else if (event.getSource() == btnLocalFood) {
-            //todo
+            BuyLocallyProducedFood food = new BuyLocallyProducedFood();
+            food.performActivity(loggedUser);
         } else if (event.getSource() == btnOrganicFood) {
+            BuyOrganicFood food = new BuyOrganicFood();
+            food.performActivity(loggedUser);
         } else {
             if (event.getSource() == btnNonProFood) {
-                //todo
+                BuyNonProcessedFood food = new BuyNonProcessedFood();
+                food.performActivity(loggedUser);
             }
         }
-
+        ObservableList<Activity> activities = getActivities(loggedUser);
+        activityTable.setItems(activities);
     }
 
     /**
