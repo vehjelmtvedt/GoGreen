@@ -21,13 +21,12 @@ public class ProfilePageLogic {
         return user.getTotalCarbonSaved();
 
     }
-
-    /** achievements
-     returns a string with achievements.
+    /** achievements returns a string with achievements.
      */
-   public static void getAchievements(User user){
+
+    public static void getAchievements(User user){
        //tbd
-   }
+    }
 
     /**
      * returns string with badge path.
