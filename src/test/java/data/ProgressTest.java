@@ -1,4 +1,4 @@
-package backend;
+package data;
 
 import data.Progress;
 import data.User;

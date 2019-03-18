@@ -1,10 +1,9 @@
 package backend;
 
-import backend.data.Achievement;
-import backend.data.Activity;
-import backend.data.DbService;
-import backend.data.LoginDetails;
-import backend.data.User;
+import data.Achievement;
+import data.Activity;
+import data.LoginDetails;
+import data.User;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,12 +56,6 @@ public class RequestHandler {
         return "success";
         //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
-
-    /**
-     * Returns user from db.
-     * @param identifier - username or email of that person
-     * @return - user of the given username or email.
-     */
 
     @RequestMapping("/friendrequest")
     public User friendRequest(@RequestParam String sender, @RequestParam String receiver) {
