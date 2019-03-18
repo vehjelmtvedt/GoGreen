@@ -3,22 +3,21 @@ package frontend;
 
 import backend.RequestHandler;
 import backend.Server;
-import backend.data.DbService;
-import backend.data.EatVegetarianMeal;
-import backend.data.LoginDetails;
-import backend.data.User;
+import backend.DbService;
+import data.EatVegetarianMeal;
+import data.LoginDetails;
+import data.User;
 import org.junit.Before;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import tools.Requests;
 
 import javax.annotation.Resource;
 

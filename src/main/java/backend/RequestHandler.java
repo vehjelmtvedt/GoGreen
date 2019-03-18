@@ -1,10 +1,9 @@
 package backend;
 
-import backend.data.Achievement;
-import backend.data.Activity;
-import backend.data.DbService;
-import backend.data.LoginDetails;
-import backend.data.User;
+import data.Achievement;
+import data.Activity;
+import data.LoginDetails;
+import data.User;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;

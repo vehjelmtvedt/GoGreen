@@ -1,9 +1,9 @@
 package frontend.controllers;
 
-import backend.data.LoginDetails;
-import backend.data.User;
-import frontend.Main;
-import frontend.StageSwitcher;
+import data.LoginDetails;
+import data.User;
+import frontend.gui.Main;
+import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 

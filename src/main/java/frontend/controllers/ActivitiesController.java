@@ -1,16 +1,16 @@
 package frontend.controllers;
 
-import backend.data.Activity;
-import backend.data.BuyLocallyProducedFood;
-import backend.data.BuyNonProcessedFood;
-import backend.data.BuyOrganicFood;
-import backend.data.EatVegetarianMeal;
-import backend.data.User;
+import data.Activity;
+import data.BuyLocallyProducedFood;
+import data.BuyNonProcessedFood;
+import data.BuyOrganicFood;
+import data.EatVegetarianMeal;
+import data.User;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import frontend.Main;
-import frontend.StageSwitcher;
+import frontend.gui.Main;
+import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

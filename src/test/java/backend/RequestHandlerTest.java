@@ -1,7 +1,10 @@
 package backend;
 
 
-import backend.data.*;
+import data.Achievement;
+import data.EatVegetarianMeal;
+import data.LoginDetails;
+import data.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
