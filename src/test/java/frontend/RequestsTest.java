@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
@@ -21,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -162,9 +164,23 @@ public class RequestsTest {
 
     @Test
     public void testGetFriendsRequest() {
-        Mockito.when(dbService.getUserByUsername(testUser3.getUsername())).thenReturn(testUser3);
-        testUser3.addFriend("dummy");
-        Mockito.when(dbService.grantAccess(testUser3.getUsername(), testUser3.getPassword())).thenReturn(testUser3);
-        assertEquals(1, Requests.getFriends(new LoginDetails("dummy3", "pwd3")).size());
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        List<User> testList = new ArrayList();
+        testList.add(testUser);
+        Mockito.when(dbService.getFriends(testUser.getUsername())).thenReturn(testList);
+        assertEquals(testList, Requests.getFriends(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword())));
+        assertEquals(1, Requests.getFriends(new LoginDetails(testUser.getUsername(), testUser.getPassword())).size());
     }
+
+    @Test
+    public void testGetMatchingUsersRequest() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        List<String> testList = new ArrayList();
+        testList.add(testUser.getUsername());
+        Mockito.when(dbService.getMatchingUsers(testUser.getUsername())).thenReturn(testList);
+        assertEquals(testList,Requests.getMatchingUsersRequest(testUser.getUsername(), new LoginDetails(testUser.getUsername(),
+                testUser.getPassword())));
+    }
+
 }
