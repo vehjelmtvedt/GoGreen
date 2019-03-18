@@ -1,9 +1,9 @@
 package backend;
 
-import data.Achievement;
 import backend.repos.AchievementRepository;
-import data.User;
 import backend.repos.UserRepository;
+import data.Achievement;
+import data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
@@ -236,6 +236,7 @@ public class DbService {
 
     /**
      * Returns top users.
+     *
      * @param top to return a "top" number of users
      * @return top n users
      */

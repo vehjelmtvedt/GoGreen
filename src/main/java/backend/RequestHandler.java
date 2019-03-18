@@ -57,12 +57,6 @@ public class RequestHandler {
         //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
-    /**
-     * Returns user from db.
-     * @param identifier - username or email of that person
-     * @return - user of the given username or email.
-     */
-
     @RequestMapping("/friendrequest")
     public User friendRequest(@RequestParam String sender, @RequestParam String receiver) {
         return dbService.addFriendRequest(sender, receiver);

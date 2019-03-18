@@ -1,7 +1,6 @@
 package frontend.gui;
 
 import data.User;
-import tools.Requests;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -14,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import tools.Requests;
 
 
 public class Questionnaire {

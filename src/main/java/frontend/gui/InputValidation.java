@@ -2,7 +2,6 @@ package frontend.gui;
 
 import data.LoginDetails;
 import data.User;
-import tools.Requests;
 import frontend.controllers.ActivitiesController;
 import frontend.controllers.FriendspageController;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import tools.Requests;
 
 import java.io.IOException;
 import java.util.regex.Matcher;

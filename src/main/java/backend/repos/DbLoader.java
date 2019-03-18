@@ -1,12 +1,12 @@
 package backend.repos;
 
-import org.springframework.beans.factory.annotation.Autowired;
+/*import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan;*/
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.PathResource;
+/*import org.springframework.core.io.PathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;
+import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;*/
 
 @Configuration
 public class DbLoader {

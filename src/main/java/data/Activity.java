@@ -2,8 +2,8 @@ package data;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import tools.Requests;
 import org.springframework.web.client.HttpClientErrorException;
+import tools.Requests;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -92,7 +92,7 @@ public abstract class Activity {
         return result;
     }
     
-        protected static Comparator<Activity> getDateComparator() {
+    protected static Comparator<Activity> getDateComparator() {
         return new Comparator<Activity>() {
             @Override
             public int compare(Activity o1, Activity o2) {

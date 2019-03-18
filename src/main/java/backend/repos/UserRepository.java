@@ -1,7 +1,7 @@
 package backend.repos;
 
 import data.User;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+//import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
