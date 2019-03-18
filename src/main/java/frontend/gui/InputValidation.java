@@ -42,7 +42,6 @@ public class InputValidation {
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
         User loggedUser = Requests.loginRequest(loginDetails);
-        System.out.println(loggedUser);
         if (loggedUser != null) {
             General.showAlert(Alert.AlertType.CONFIRMATION,
                     form.getScene().getWindow(), "Login successful",
@@ -81,9 +80,6 @@ public class InputValidation {
                 e.printStackTrace();
             }
             //testing
-
-            General.resetFields(SignIn.getFields());
-
             StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), loggedUser);
 
         } else {
@@ -104,10 +100,10 @@ public class InputValidation {
      * @param ageField      User's age field
      * @param form          Form containing input fields
      */
-    public static void signUpValidate(TextField[] nameFields,
-                                      TextField usernameField, TextField emailField,
-                                      PasswordField passField, PasswordField passReField,
-                                      TextField ageField, GridPane form) {
+    public static void signUpValidate(JFXTextField[] nameFields,
+                                      JFXTextField usernameField, JFXTextField emailField,
+                                      JFXPasswordField passField, JFXPasswordField passReField,
+                                      JFXTextField ageField, AnchorPane form) {
 
         if (!signUpValidateFields(nameFields, usernameField, form)) {
             return;
@@ -140,7 +136,7 @@ public class InputValidation {
                 Integer.parseInt(ageField.getText()), emailField.getText(),
                 usernameField.getText(), passField.getText());
 
-        General.resetFields(SignUp.getFields());
+
         StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Questionnaire.createScene(user, form));
     }
 
@@ -153,8 +149,8 @@ public class InputValidation {
         }
     }
 
-    private static boolean signUpValidateFields(TextField[] nameFields,
-                                                TextField usernameField, GridPane form) {
+    private static boolean signUpValidateFields(JFXTextField[] nameFields,
+                                                JFXTextField usernameField, AnchorPane form) {
         if (nameFields[0].getText().isEmpty()) {
             General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Form Error!", "Please enter your First Name");
@@ -173,9 +169,9 @@ public class InputValidation {
         return true;
     }
 
-    private static boolean signUpValidatePass(TextField emailField,
-                                              PasswordField passField, PasswordField passReField,
-                                              TextField ageField, GridPane form) {
+    private static boolean signUpValidatePass(JFXTextField emailField,
+                                              JFXPasswordField passField, JFXPasswordField passReField,
+                                              JFXTextField ageField, AnchorPane form) {
         if (emailField.getText().isEmpty() || !validateEmail(emailField)) {
             General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
                     "Form Error!", "Please enter a valid email");
@@ -200,7 +196,7 @@ public class InputValidation {
         return true;
     }
 
-    private static boolean validatePassword(TextField input) {
+    private static boolean validatePassword(JFXPasswordField input) {
         String pass = input.getText();
         Pattern pattern = Pattern.compile(passPattern);
         Matcher matcher = pattern.matcher(pass);
@@ -208,7 +204,7 @@ public class InputValidation {
         return matcher.matches();
     }
 
-    private static boolean validateEmail(TextField input) {
+    private static boolean validateEmail(JFXTextField input) {
         String email = input.getText();
         Pattern pattern = Pattern.compile(emailPattern);
         Matcher matcher = pattern.matcher(email);
