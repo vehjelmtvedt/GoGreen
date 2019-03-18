@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class User {
 
@@ -294,6 +296,29 @@ public class User {
         }
 
         return result;
+    }
+
+    /**.
+     * Filters activities by category
+     * @param category - category to filter by
+     * @return filtered list of activities by category
+     */
+    public List<Activity> filterActivities(String category) {
+        ArrayList<String> categories = new ArrayList<>();
+        categories.add(category);
+        return filterActivitiesByCategories(categories);
+    }
+
+    /**.
+     * Filters activities by multiple categories
+     * @param categories - list of categories (String) to filter  by
+     * @return list of activities filtered by specified categories
+     */
+    public List<Activity> filterActivitiesByCategories(List<String> categories) {
+        return activities.stream() // convert activities list to stream
+                .filter(activity -> categories.contains(activity.getCategory()))
+                // check if categories list contains the category of the activity
+                .collect(Collectors.toList()); // return result as list
     }
 
     /*
