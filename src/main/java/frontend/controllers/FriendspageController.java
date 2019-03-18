@@ -74,7 +74,6 @@ public class FriendspageController implements Initializable {
 
     private List searchresults;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -106,6 +105,7 @@ public class FriendspageController implements Initializable {
 
     /**
      * Adds the data to the first bar chart.
+     *
      * @param series1 - the series to add data to
      */
     public void populateBarChart(XYChart.Series series1) {
@@ -171,6 +171,7 @@ public class FriendspageController implements Initializable {
 
     /**
      * Returns list of usernames based on keyword.
+     *
      * @param keyword - keyword to search usernames
      * @return - list of users matching the keyword
      */
@@ -213,9 +214,10 @@ public class FriendspageController implements Initializable {
 
     /**
      * Gives style to the tree view.
-     * @param username - first column of the table
+     *
+     * @param username     - first column of the table
      * @param lastActivity - second column
-     * @param carbon - third column
+     * @param carbon       - third column
      */
     public void styleTreeView(JFXTreeTableColumn username,
                               JFXTreeTableColumn lastActivity, JFXTreeTableColumn carbon) {

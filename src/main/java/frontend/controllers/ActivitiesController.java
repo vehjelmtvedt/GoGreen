@@ -2,6 +2,8 @@ package frontend.controllers;
 
 import backend.data.Activity;
 import backend.data.BuyLocallyProducedFood;
+import backend.data.BuyNonProcessedFood;
+import backend.data.BuyOrganicFood;
 import backend.data.EatVegetarianMeal;
 import backend.data.User;
 import com.jfoenix.controls.JFXButton;
@@ -71,6 +73,12 @@ public class ActivitiesController implements Initializable {
     @FXML
     private JFXDrawer drawer;
 
+    /**
+     * .
+     * Handles user's button clicking
+     *
+     * @param event Takes the actionEvent as a parameter
+     */
     @FXML
     private void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnFood) {
@@ -94,6 +102,12 @@ public class ActivitiesController implements Initializable {
         }
     }
 
+    /**
+     * .
+     * Event handling for adding Food Activities
+     *
+     * @param event User actionEvent as a parameter
+     */
     @FXML
     private void addFoodActivity(ActionEvent event) {
         if (event.getSource() == btnVegetarianMeal) {
@@ -103,16 +117,25 @@ public class ActivitiesController implements Initializable {
             BuyLocallyProducedFood food = new BuyLocallyProducedFood();
             food.performActivity(loggedUser);
         } else if (event.getSource() == btnOrganicFood) {
-            //todo
+            BuyOrganicFood food = new BuyOrganicFood();
+            food.performActivity(loggedUser);
         } else {
             if (event.getSource() == btnNonProFood) {
-                //todo
+                BuyNonProcessedFood food = new BuyNonProcessedFood();
+                food.performActivity(loggedUser);
             }
         }
         ObservableList<Activity> activities = getActivities(loggedUser);
         activityTable.setItems(activities);
     }
 
+    /**
+     * .
+     * Setup page before loading .fxml files
+     *
+     * @param location  Standard parameters
+     * @param resources Standard parameters
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -135,11 +158,27 @@ public class ActivitiesController implements Initializable {
         }
     }
 
+    /**
+     * .
+     * Gets the User's activities in an ObservableList
+     *
+     * @param user Takes the user as a parameter
+     * @return returns the Observable list
+     */
     private ObservableList<Activity> getActivities(User user) {
         return FXCollections.observableArrayList(user.getActivities());
     }
 
 
+    /**
+     * .
+     * Resets the button "selected" color upon de-selecting
+     *
+     * @param btnFood           Button for Food category
+     * @param btnTransportation Button for Transportation category
+     * @param btnHousehold      Button for Household category
+     * @param btnHistory        Button for Activity History
+     */
     private void resetButtonColors(JFXButton btnFood, JFXButton btnTransportation,
                                    JFXButton btnHousehold, JFXButton btnHistory) {
         btnFood.setStyle("-fx-background-color: transparent;");
@@ -148,7 +187,19 @@ public class ActivitiesController implements Initializable {
         btnHistory.setStyle("-fx-background-color: transparent;");
     }
 
+    /**.
+     * Sets the current logged in User to the one that was passed
+     * @param passedUser Logged in current user
+     */
     public static void setUser(User passedUser) {
         loggedUser = passedUser;
+    }
+
+    /**.
+     * Get the logged in User
+     * @return logged User
+     */
+    public static User getUser() {
+        return loggedUser;
     }
 }

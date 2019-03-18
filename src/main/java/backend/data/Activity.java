@@ -3,6 +3,7 @@ package backend.data;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import frontend.Requests;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -15,6 +16,8 @@ import java.util.Date;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = EatVegetarianMeal.class, name = "EatVegetarianMeal"),
         @JsonSubTypes.Type(value = BuyLocallyProducedFood.class, name = "BuyLocallyProducedFood"),
+        @JsonSubTypes.Type(value = BuyNonProcessedFood.class, name = "BuyNonProcessedFood"),
+        @JsonSubTypes.Type(value = BuyOrganicFood.class, name = "BuyOrganicFood"),
     })
 public abstract class Activity {
     private Date date;
@@ -73,8 +76,8 @@ public abstract class Activity {
 
         int result = 0;
         for (Activity activity : user.getActivities()) {
-            if (activity != null
-                    && activity.getClass().getSimpleName()
+            if (activity != null && activity.getClass().getSimpleName()
+
                     .equals(this.getClass().getSimpleName())) {
                 String dateNow = currentMonth + currentDay + currentYear;
                 if (dateNow.equals(activity.getDate().toString().split(" ")[1]
@@ -99,9 +102,9 @@ public abstract class Activity {
         // update user in the database
         try {
             user = Requests.addActivityRequest(this, user.getUsername());
-        } catch (Exception e) {
-            System.out.println("Activity not logged to user");
+        } catch (HttpClientErrorException e) {
+            System.out.println("Activity was not added to the database");
+            System.out.println(e.fillInStackTrace());
         }
     }
-
 }

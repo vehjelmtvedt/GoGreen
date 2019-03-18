@@ -9,10 +9,6 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-/**
- * Implements the "eat a vegetarian meal" activity.
- * @author Kostas Lyrakis
- */
 public class EatVegetarianMealTest {
     EatVegetarianMeal meal = new EatVegetarianMeal();
     User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
@@ -26,6 +22,8 @@ public class EatVegetarianMealTest {
         assertEquals(currentMonth, meal.getDate().toString().split(" ")[1]);
         assertEquals(currentDay, meal.getDate().toString().split(" ")[2]);
         assertEquals(0, (int) meal.getCarbonSaved());
+        assertEquals("Food", meal.getCategory());
+        assertEquals("Eat Vegetarian Meal", meal.getName());
     }
 
     @Test
@@ -101,11 +99,11 @@ public class EatVegetarianMealTest {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setMeatAndDairyConsumption("above average");
         assertEquals((int) meal.aboveAverageToAverage(), (int) meal.calculateCarbonSaved(user));
-        meal.performActivity(user);
+        user.addActivity(meal);
         assertEquals((int) meal.averageToBelowAverage(), (int) meal.calculateCarbonSaved(user));
-        meal.performActivity(user);
+        user.addActivity(meal);
         assertEquals((int) meal.belowAverageToVegan(), (int) meal.calculateCarbonSaved(user));
-        meal.performActivity(user);
+        user.addActivity(meal);
         assertEquals(0, (int)meal.calculateCarbonSaved(user));
     }
 
@@ -114,9 +112,9 @@ public class EatVegetarianMealTest {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setMeatAndDairyConsumption("average");
         assertEquals((int) meal.averageToBelowAverage(), (int) meal.calculateCarbonSaved(user));
-        meal.performActivity(user);
+        user.addActivity(meal);
         assertEquals((int) meal.belowAverageToVegan(), (int) meal.calculateCarbonSaved(user));
-        meal.performActivity(user);
+        user.addActivity(meal);
         assertEquals(0, (int)meal.calculateCarbonSaved(user));
     }
 
@@ -125,7 +123,7 @@ public class EatVegetarianMealTest {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setMeatAndDairyConsumption("below average");
         assertEquals((int) meal.belowAverageToVegan(), (int) meal.calculateCarbonSaved(user));
-        meal.performActivity(user);
+        user.addActivity(meal);
         assertEquals(0, (int)meal.calculateCarbonSaved(user));
     }
 
@@ -133,15 +131,16 @@ public class EatVegetarianMealTest {
     public void testCalculateCarbonSavedFromVeganUser() {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setMeatAndDairyConsumption("vegan");
-        meal.performActivity(user);
+        user.addActivity(meal);
         assertEquals(0, (int)meal.calculateCarbonSaved(user));
     }
 
     @Test
     public  void testTimesPerformedInTheSameDay () {
         assertEquals(0, meal.timesPerformedInTheSameDay(userOne));
-        meal.performActivity(userOne);
+        userOne.addActivity(meal);
         userOne.addActivity(null);
+        userOne.addActivity(new BuyOrganicFood());
         EatVegetarianMeal meal2 = new EatVegetarianMeal();
         try {
             meal2.setDate(new SimpleDateFormat("dd/MM/yyyy").parse("12/12/1999"));
@@ -150,18 +149,18 @@ public class EatVegetarianMealTest {
         assertEquals(1, meal.timesPerformedInTheSameDay(userOne));
     }
 
-    @Test
-    public void testPerformActivity() {
-        User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
-        user.setTotalCarbonSaved(0);
-        user.setMeatAndDairyConsumption("above average");
-        meal.performActivity(user);
-        assertTrue(user.getActivities().contains(meal));
-        assertEquals((int) meal.aboveAverageToAverage(), (int) meal.getCarbonSaved());
-        meal.performActivity(user);
-        meal.performActivity(user);
-        assertEquals(3, meal.timesPerformedInTheSameDay(user));
-        assertEquals(1, (int)user.getTotalCarbonSaved());
-        assertEquals(0, (int) meal.getCarbonSaved());
-    }
+//    @Test
+//    public void testPerformActivity() {
+//        User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
+//        user.setTotalCarbonSaved(0);
+//        user.setMeatAndDairyConsumption("above average");
+//        meal.performActivity(user);
+//        assertTrue(user.getActivities().contains(meal));
+//        assertEquals((int) meal.aboveAverageToAverage(), (int) meal.getCarbonSaved());
+//        meal.performActivity(user);
+//        meal.performActivity(user);
+//        assertEquals(3, meal.timesPerformedInTheSameDay(user));
+//        assertEquals(1, (int)user.getTotalCarbonSaved());
+//        assertEquals(0, (int) meal.getCarbonSaved());
+//    }
 }

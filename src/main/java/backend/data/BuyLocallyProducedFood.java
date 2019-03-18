@@ -13,7 +13,7 @@ public class BuyLocallyProducedFood extends Activity {
     public BuyLocallyProducedFood() {
         super();
         this.setCategory("Food");
-        this.setName("Buy locally produced food");
+        this.setName("Buy Locally Produced Food");
     }
 
     /**
@@ -51,37 +51,32 @@ public class BuyLocallyProducedFood extends Activity {
 
     /**
      * Calculates the carbon saved by performing this activity.
-     *
      * @param user user currently logged in
      */
+    @Override
     public double calculateCarbonSaved(User user) {
         String locallyProducedFoodConsumption = user.getLocallyProducedFoodConsumption();
+        int timesPerformedInTheSameDay = timesPerformedInTheSameDay(user);
 
-        if (locallyProducedFoodConsumption.equals("very little")) {
-            if (timesPerformedInTheSameDay(user) == 0) {
+        if (timesPerformedInTheSameDay == 0) {
+            if (locallyProducedFoodConsumption.equals("very little")) {
                 return veryLittleToAverage();
-            } else if (timesPerformedInTheSameDay(user) == 1) {
+            } else if (locallyProducedFoodConsumption.equals("average")) {
                 return averageToAboveAverage();
-            } else if (timesPerformedInTheSameDay(user) == 2) {
+            } else if (locallyProducedFoodConsumption.equals("above average")) {
                 return aboveAverageToAlmostAll();
             }
-        } else if (locallyProducedFoodConsumption.equals("average")) {
-            if (timesPerformedInTheSameDay(user) == 0) {
+        } else if (timesPerformedInTheSameDay == 1) {
+            if (locallyProducedFoodConsumption.equals("very little")) {
                 return averageToAboveAverage();
-            } else if (timesPerformedInTheSameDay(user) == 1) {
+            } else if (locallyProducedFoodConsumption.equals("average")) {
                 return aboveAverageToAlmostAll();
             }
-        } else if (locallyProducedFoodConsumption.equals("above average")) {
-            if (timesPerformedInTheSameDay(user) == 0) {
+        } else if (timesPerformedInTheSameDay == 2) {
+            if (locallyProducedFoodConsumption.equals("very little")) {
                 return aboveAverageToAlmostAll();
             }
         }
-
-        if (locallyProducedFoodConsumption.equals("almost all")) {
-            // TODO
-            return 0;
-        }
-        //TODO
         return 0;
     }
 }

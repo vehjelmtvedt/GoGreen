@@ -28,7 +28,8 @@ public class Main extends Application {
         //create scenes necessary for scene switching
         signIn = SignIn.createScene();
         signUp = SignUp.createScene();
-        progress = ProgressPage.createScene();
+        // homepage = Homepage.createScene();
+        // progress = ProgressPage.createScene();
 
         //add button switching due to java being a synchronous programming language
         StageSwitcher.buttonSwitch(SignIn.getSignUpButton(), primaryStage, signUp);

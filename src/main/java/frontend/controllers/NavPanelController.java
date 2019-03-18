@@ -31,7 +31,6 @@ public class NavPanelController implements Initializable {
     @FXML
     private Button friends;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO: Add scene change to profile page
@@ -60,7 +59,7 @@ public class NavPanelController implements Initializable {
         drawer.setSidePane(box);
 
 
-        //Handle nav panel
+        //Handle nav panel Todo: isOpened fix
         HamburgerBasicCloseTransition burgerTask1 = new HamburgerBasicCloseTransition(menu);
         burgerTask1.setRate(-1);
         menu.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
