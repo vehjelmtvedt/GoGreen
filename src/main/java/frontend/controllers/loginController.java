@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
+import frontend.gui.InputValidation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -14,6 +15,9 @@ import java.util.ResourceBundle;
 
 
 public class loginController implements Initializable {
+
+    @FXML
+    private AnchorPane mainPane;
 
     @FXML
     private JFXButton loginButton;
@@ -26,6 +30,7 @@ public class loginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        loginButton.setOnAction(e -> InputValidation.signInValidate(usernameField,
+                passwordField, mainPane));
     }
 }

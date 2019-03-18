@@ -110,8 +110,8 @@ public class SignIn {
         grid.add(passwordField, 1, 2);
 
         fields.add(passwordField);
-        signInButton.setOnAction(e ->
-                InputValidation.signInValidate(emailField, passwordField, grid));
+//        signInButton.setOnAction(e ->
+//                InputValidation.signInValidate(emailField, passwordField, grid));
 
 
         grid.add(buttons, 1, 3, 1, 1);

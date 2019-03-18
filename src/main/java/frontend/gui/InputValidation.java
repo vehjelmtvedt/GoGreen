@@ -1,5 +1,7 @@
 package frontend.gui;
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import data.LoginDetails;
 import data.User;
 import frontend.controllers.ActivitiesController;
@@ -11,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import tools.Requests;
 
@@ -34,7 +37,7 @@ public class InputValidation {
      * @param form       form containing input fields
      */
     public static void signInValidate(TextField emailField,
-                                      PasswordField passField, GridPane form) {
+                                      PasswordField passField, AnchorPane form) {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
@@ -67,8 +70,7 @@ public class InputValidation {
                 Scene homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
                 Scene activities = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
                 Scene friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
-                Scene profilePage =
-                        new Scene(root4, General.getBounds()[0], General.getBounds()[1]);
+                Scene profilePage = new Scene(root4, General.getBounds()[0], General.getBounds()[1]);
 
                 //setup scenes
                 Main.setActivities(activities);

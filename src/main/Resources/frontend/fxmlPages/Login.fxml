@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.loginController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.loginController">
    <children>
-      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="350.0">
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="544.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="900.0" fitWidth="350.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ImageView fitHeight="900.0" fitWidth="544.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../Pics/background.png" />
                </image></ImageView>
@@ -22,54 +22,54 @@
                   <Font size="70.0" />
                </font>
             </Label>
-            <Label layoutX="17.0" layoutY="467.0" prefHeight="70.0" prefWidth="320.0" text="○ Add your activities" textFill="WHITE">
+            <Label layoutX="99.0" layoutY="464.0" prefHeight="70.0" prefWidth="320.0" text="○ Add your activities" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label layoutX="27.0" layoutY="575.0" prefHeight="68.0" prefWidth="320.0" text="○ Compare with friends" textFill="WHITE">
+            <Label layoutX="104.0" layoutY="575.0" prefHeight="68.0" prefWidth="320.0" text="○ Compare with friends" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label layoutX="39.0" layoutY="694.0" prefHeight="68.0" prefWidth="320.0" text="○ Save the world!" textFill="WHITE">
+            <Label layoutX="106.0" layoutY="691.0" prefHeight="68.0" prefWidth="320.0" text="○ Save the world!" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <ImageView fitHeight="900.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ImageView fitHeight="317.0" fitWidth="477.0" layoutX="116.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="577.0" AnchorPane.leftAnchor="116.0" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="6.0">
                <image>
                   <Image url="@../Pics/gogreen.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="fieldPane" layoutX="348.0" prefHeight="900.0" prefWidth="552.0">
+      <AnchorPane fx:id="fieldPane" layoutX="545.0" prefHeight="900.0" prefWidth="656.0">
          <children>
-            <JFXButton fx:id="loginButton" contentDisplay="CENTER" layoutX="56.0" layoutY="771.0" prefHeight="65.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-radius: 30px; -fx-border-color: #AFCF2C#AFCF2C; -fx-border-radius: 30px; -fx-border-width: 5px;" text="LOG IN" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="331.0">
+            <JFXButton fx:id="loginButton" contentDisplay="CENTER" layoutX="80.0" layoutY="363.0" prefHeight="74.0" prefWidth="200.0" ripplerFill="WHITE" style="-fx-background-radius: 30px; -fx-border-color: #AFCF2C#AFCF2C; -fx-border-radius: 30px; -fx-border-width: 5px;" text="LOG IN" AnchorPane.bottomAnchor="463.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="376.0" AnchorPane.topAnchor="363.0">
                <font>
                   <Font name="PingFang HK Regular" size="28.0" />
                </font>
             </JFXButton>
-            <Label layoutX="75.0" layoutY="49.0" text="Login /" textFill="#379b1e">
+            <Label layoutX="75.0" layoutY="49.0" text="Login /" textFill="#379b1e" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="338.5" AnchorPane.topAnchor="49.0">
                <font>
                   <Font size="43.0" />
                </font>
             </Label>
-            <Label layoutX="231.0" layoutY="49.0" text="Signup" textFill="#868282">
+            <Label layoutX="231.0" layoutY="49.0" text="Signup" textFill="#868282" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="49.0">
                <font>
                   <Font size="43.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="usernameField" layoutX="91.0" layoutY="182.0" prefHeight="44.0" prefWidth="399.0" promptText="Username / Email" style="-fx-background-image: url('http://pluspng.com/img-png/email-icon-png-email-icon-2048.png')url('http://pluspng.com/img-png/email-icon-png-email-icon-2048.png');" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="182.0" />
-            <JFXPasswordField fx:id="passwordField" layoutX="84.0" layoutY="281.0" prefHeight="36.0" prefWidth="410.0" promptText="Password" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="281.0" />
+            <JFXTextField fx:id="usernameField" focusColor="#379b1e" layoutX="91.0" layoutY="182.0" prefHeight="44.0" prefWidth="399.0" promptText="Username / Email" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="182.0" />
+            <JFXPasswordField fx:id="passwordField" focusColor="#379b1e" layoutX="84.0" layoutY="281.0" prefHeight="36.0" prefWidth="410.0" promptText="Password" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="281.0" />
             <Label layoutX="214.0" layoutY="486.0" prefHeight="39.0" prefWidth="135.0" style="-fx-background-image: url('/Users/vetle/Desktop/OOPP/template/src/main/Resources/frontend/Pics/email.png/Users/vetle/Desktop/OOPP/template/src/main/Resources/frontend/Pics/email.png');" />
-            <ImageView fitHeight="20.0" fitWidth="28.0" layoutX="451.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="28.0" layoutX="560.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Pics/email.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="28.0" fitWidth="35.0" layoutX="448.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="35.0" layoutX="561.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="68.0">
                <image>
                   <Image url="@../Pics/password.png" />
                </image>
