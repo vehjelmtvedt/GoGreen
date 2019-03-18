@@ -4,8 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class UserTest {
 
@@ -361,6 +363,33 @@ public class UserTest {
 
     @Test
     public void testSimilarActivitiesNonMatching() {
-        // TBD when more activities are available
+        Activity activity1 = new EatVegetarianMeal();
+        Activity activity2 = new EatVegetarianMeal();
+        Activity activity3 = new BuyLocallyProducedFood();
+
+        activeUser.addActivity(activity1);
+        activeUser.addActivity(activity2);
+        activeUser.addActivity(activity3);
+
+        ArrayList<Activity> expected = new ArrayList<>();
+
+        Assert.assertEquals(expected, activeUser.getSimilarActivities(activity3));
+    }
+
+    @Test
+    public void testFilterByCategory() {
+        ArrayList<Activity> activities = new ArrayList<>();
+        activities.add(new EatVegetarianMeal());
+        activities.add(new EatVegetarianMeal());
+        activities.add(new BuyLocallyProducedFood());
+        activities.add(new BuyNonProcessedFood());
+        activities.add(new EatVegetarianMeal());
+
+        for (Activity a : activities)
+            activeUser.addActivity(a);
+
+        List<Activity> filteredActivities = activeUser.filterActivities("Food");
+
+        Assert.assertEquals(activities, filteredActivities);
     }
 }

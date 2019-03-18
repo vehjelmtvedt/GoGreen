@@ -16,6 +16,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static junit.framework.TestCase.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -66,11 +69,6 @@ public class RequestHandlerTest
     public void signUpFailUsername() {
         Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
         assertEquals("Username exists",requestHandler.signupController(testUser));
-    }
-    @Test
-    public void testgetUser() {
-        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        assertEquals(testUser, requestHandler.getUser(testUser.getEmail()));
     }
 
     @Test
@@ -160,4 +158,55 @@ public class RequestHandlerTest
         assertEquals(0, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
     }
 
+    @Test
+    public void testUserSearch() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        List<String> testList = new ArrayList();
+        testList.add(testUser.getUsername());
+        Mockito.when(dbService.getMatchingUsers(testUser.getUsername())).thenReturn(testList);
+        assertEquals(testList,requestHandler.userSearch(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword()),testUser.getUsername()));
+
+    }
+
+    @Test
+    public void testUserSearchNull() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
+        assertEquals(null,requestHandler.userSearch(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword()),testUser.getUsername()));
+    }
+
+    @Test
+    public void retrieveTopUsers() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        List<User> testList = new ArrayList();
+        testList.add(testUser);
+        Mockito.when(dbService.getTopUsers(1)).thenReturn(testList);
+        assertEquals(testList,requestHandler.getTopUsers(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword()),1));
+    }
+
+    @Test
+    public void retrieveTopUsersNull() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
+        assertEquals(null,requestHandler.getTopUsers(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword()),1));
+    }
+
+    @Test
+    public void getFriends() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        List<User> testList = new ArrayList();
+        testList.add(testUser);
+        Mockito.when(dbService.getFriends(testUser.getUsername())).thenReturn(testList);
+        assertEquals(testList,requestHandler.getFriends(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword())));
+    }
+
+    @Test
+    public void getFriendsNull() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
+        assertEquals(null,requestHandler.getFriends(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword())));
+    }
 }
