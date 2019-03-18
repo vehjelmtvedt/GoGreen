@@ -3,6 +3,10 @@ package frontend;
 import backend.data.Activity;
 import backend.data.LoginDetails;
 import backend.data.User;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -159,11 +163,13 @@ public class Requests {
                 uriBuilder.toUriString(), loginDetails, List.class).getBody();
     }
 
-    public static List getFriends(LoginDetails loginDetails) {
+    public static List<User> getFriends(LoginDetails loginDetails) {
         String url = "http://localhost:8080/getFriends";
 
         RestTemplate restTemplate = new RestTemplate();
 
-        return restTemplate.postForEntity(url, loginDetails, List.class).getBody();
+        ParameterizedTypeReference<List<User>> typeRef = new ParameterizedTypeReference<List<User>>() {
+        };
+        return restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(loginDetails), typeRef).getBody();
     }
 }

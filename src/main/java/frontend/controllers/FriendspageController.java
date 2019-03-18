@@ -40,6 +40,8 @@ public class FriendspageController implements Initializable {
 
     private static User thisUser;
 
+    private static LoginDetails thisLoginDetails;
+
     @FXML
     private Label goGreen;
 
@@ -109,8 +111,8 @@ public class FriendspageController implements Initializable {
     public void populateBarChart(XYChart.Series series1) {
         series1.getData().add(new XYChart.Data(thisUser.getUsername(),
                 thisUser.getTotalCarbonSaved()));
-        for (String username : thisUser.getFriends()) {
-            User friend = Requests.getUserRequest(username);
+        List<User> friendsList = Requests.getFriends(thisLoginDetails);
+        for (User friend : friendsList) {
             series1.getData().add(new XYChart.Data(friend.getUsername(),
                     friend.getTotalCarbonSaved()));
         }
@@ -173,9 +175,7 @@ public class FriendspageController implements Initializable {
      * @return
      */
     public List getSearchResults(String keyword) {
-        //TODO: FIX PASSING ORIGINAL PASSWORD IN THE FUTURE AND NOT HASHED
-        return Requests.getMatchingUsersRequest(keyword,
-                new LoginDetails(thisUser.getUsername(), thisUser.getPassword()));
+        return Requests.getMatchingUsersRequest(keyword, thisLoginDetails);
     }
 
     /**
@@ -226,16 +226,16 @@ public class FriendspageController implements Initializable {
 
     private ObservableList<UserItem> getTableData() {
         ObservableList<UserItem> friendsList = FXCollections.observableArrayList();
-        List<User> friends = Requests.getFriends(new LoginDetails((thisUser.getUsername(), thisUser.getPassword()));
-        for (User friend : friends) {
-
+        List<User> friends = Requests.getFriends(thisLoginDetails);
+        for (Object friend : friends) {
+            User thisFriend = (User) friend;
             String activity = "This user has no activities";
-            if (friend.getActivities().size() != 0) {
-                activity = friend.getActivities().get(
-                        friend.getActivities().size() - 1).getName();
+            if (thisFriend.getActivities().size() != 0) {
+                activity = thisFriend.getActivities().get(
+                        thisFriend.getActivities().size() - 1).getName();
             }
-            String carbonSaved = Double.toString(friend.getTotalCarbonSaved());
-            friendsList.add(new UserItem(friend.getUsername(), activity, carbonSaved));
+            String carbonSaved = Double.toString(thisFriend.getTotalCarbonSaved());
+            friendsList.add(new UserItem(thisFriend.getUsername(), activity, carbonSaved));
         }
         return friendsList;
     }
@@ -258,5 +258,8 @@ public class FriendspageController implements Initializable {
     public static void setUser(User user) {
         thisUser = user;
     }
-    
+
+    public static void setLoginDetails(LoginDetails loginDetails) {
+        thisLoginDetails = loginDetails;
+    }
 }

@@ -7,10 +7,12 @@ import backend.data.DbService;
 import backend.data.EatVegetarianMeal;
 import backend.data.LoginDetails;
 import backend.data.User;
+import org.junit.Before;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,6 +20,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.*;
@@ -37,6 +41,16 @@ public class RequestsTest {
 
     private final User testUser = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
     private final User testUser2 = new User("Test2", "User2", 24, "test2@email.com","dummy2", "pwd2");
+    private User testUser3 = new User("Test3", "User3", 24, "test3@email.com","dummy3", "pwd3");
+
+    @Before
+    public void setup() {
+        dbService.addUser(testUser);
+        testUser3.addFriend(testUser.getUsername());
+        dbService.addUser(testUser2);
+        dbService.addUser(testUser3);
+    }
+
 
 
     @Test
@@ -144,5 +158,13 @@ public class RequestsTest {
     public void testAddActivityRequestInvalidUser() {
         EatVegetarianMeal activity = new EatVegetarianMeal();
         assertEquals(null, Requests.addActivityRequest(activity, "invalid"));
+    }
+
+    @Test
+    public void testGetFriendsRequest() {
+        Mockito.when(dbService.getUserByUsername(testUser3.getUsername())).thenReturn(testUser3);
+        testUser3.addFriend("dummy");
+        Mockito.when(dbService.grantAccess(testUser3.getUsername(), testUser3.getPassword())).thenReturn(testUser3);
+        assertEquals(1, Requests.getFriends(new LoginDetails("dummy3", "pwd3")).size());
     }
 }

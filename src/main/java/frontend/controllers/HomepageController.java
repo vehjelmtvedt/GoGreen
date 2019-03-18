@@ -1,5 +1,6 @@
 package frontend.controllers;
 
+import backend.data.LoginDetails;
 import backend.data.User;
 import frontend.Main;
 import frontend.StageSwitcher;
@@ -9,6 +10,8 @@ import javafx.scene.control.Button;
 public class HomepageController {
 
     private static User thisUser;
+
+    private static LoginDetails thisLoginDetails;
 
     @FXML
     Button friendsButton;
@@ -32,5 +35,9 @@ public class HomepageController {
 
     public static void setUser(User user) {
         thisUser = user;
+    }
+
+    public static void setLoginDetails(LoginDetails loginDetails) {
+        thisLoginDetails = loginDetails;
     }
 }
