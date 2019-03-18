@@ -13,6 +13,7 @@ public class Main extends Application {
     private static Scene homepage;
     private static Scene activities;
     private static Scene friendPage;
+    private static Scene profilePage;
     private static Scene progress;
     private static String cssIntro;
 
@@ -41,7 +42,7 @@ public class Main extends Application {
         signUp.getStylesheets().add(cssIntro);
 
         //setup the first scene for the primary stage
-        General.finaliseStage(primaryStage, signIn);
+        General.finaliseStage(primaryStage, profilePage);
     }
 
     public static void main(String[] args) {
@@ -76,6 +77,10 @@ public class Main extends Application {
         return friendPage;
     }
 
+    public static Scene getProfilePage() {
+        return profilePage;
+    }
+
     public static String getCssIntro() {
         return cssIntro;
     }
@@ -91,4 +96,6 @@ public class Main extends Application {
     public static void setFriendPage(Scene scene) {
         friendPage = scene;
     }
+
+    public static void setProfilePage(Scene scene) { profilePage = scene; }
 }
