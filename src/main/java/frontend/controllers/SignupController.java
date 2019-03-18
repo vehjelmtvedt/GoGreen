@@ -12,13 +12,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class signupController implements Initializable {
+public class SignupController implements Initializable {
 
     private static final ArrayList<JFXTextField> fields = new ArrayList<>();
 
