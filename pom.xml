@@ -120,6 +120,12 @@
             <version>8.0.8</version>
         </dependency>
 
+        <dependency>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx</artifactId>
+            <version>8.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -175,20 +181,22 @@
                 <configuration>
                     <excludes>
                         <!-- Exclude GUI classes -->
-                        <exclude>**/frontend/ConfirmBox*</exclude>
-                        <exclude>**/frontend/General*</exclude>
-                        <exclude>**/frontend/Homepage*</exclude>
-                        <exclude>**/frontend/Questionnaire*</exclude>
-                        <exclude>**/frontend/InputValidation*</exclude>
-                        <exclude>**/frontend/Main*</exclude>
-                        <exclude>**/frontend/SignIn*</exclude>
-                        <exclude>**/frontend/SignUp*</exclude>
-                        <exclude>**/frontend/StageSwitcher*</exclude>
-                        <exclude>**/frontend/ProgressPage*</exclude>
+                        <exclude>**/frontend/gui/ConfirmBox*</exclude>
+                        <exclude>**/frontend/gui/General*</exclude>
+                        <exclude>**/frontend/gui/Homepage*</exclude>
+                        <exclude>**/frontend/gui/Questionnaire*</exclude>
+                        <exclude>**/frontend/gui/InputValidation*</exclude>
+                        <exclude>**/frontend/gui/Main*</exclude>
+                        <exclude>**/frontend/gui/SignIn*</exclude>
+                        <exclude>**/frontend/gui/SignUp*</exclude>
+                        <exclude>**/frontend/gui/StageSwitcher*</exclude>
+                        <exclude>**/frontend/gui/ProgressPage*</exclude>
                         <exclude>**/frontend/controllers/ActivitiesController*</exclude>
                         <exclude>**/frontend/controllers/FriendspageController*</exclude>
                         <exclude>**/frontend/controllers/HomepageController*</exclude>
                         <exclude>**/frontend/controllers/NavPanelController*</exclude>
+                        <exclude>**/frontend/controllers/ProfilePageController*</exclude>
+
                     </excludes>
 
                     <rules>

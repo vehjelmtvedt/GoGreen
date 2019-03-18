@@ -1,6 +1,6 @@
 package frontend.controllers;
 
-import backend.data.User;
+import data.User;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
