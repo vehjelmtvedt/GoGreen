@@ -5,16 +5,16 @@ import backend.data.User;
 public class ProfilePageLogic {
 
     /**
-     calls the get level from progress.
+     * calls the get level from progress.
      */
     public static int getLevel(User user) {
 
         return user.getProgress().getLevel();
 
     }
-    /**
-     gets score from user.
 
+    /**
+     * gets score from user.
      */
     public static double getScore(User user) {
 
@@ -25,26 +25,12 @@ public class ProfilePageLogic {
     /** achievements
      returns a string with achievements.
      */
-//    public static String getAchievementsString(User user) {
-//
-//
-//        //method to use the Ids in the arraylist to get actual Achievements
-//
-//        String completed = "completed :";
-//
-//        for (int i = 0; i < user.getProgress().getAchievements().size(); i++) {
-//
-//            completed += user.getProgress().getAchievements().get(i).getString() + "\n";
-//
-//        }
-//
-//        return completed;
-//
-//    }
+   public static void getAchievements(User user){
+       //tbd
+   }
 
-    /** returns string with badge path.
-
-
+    /**
+     * returns string with badge path.
      */
     public static String getBadge(User user) {
 

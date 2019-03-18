@@ -2,11 +2,14 @@ package frontend.controllers;
 
 import backend.data.Achievement;
 import backend.data.User;
+import frontend.Main;
 import frontend.ProfilePageLogic;
+import frontend.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class ProfilePageController implements Initializable {
 
+    private static User thisUser;
 
     @FXML
     Label completed;
@@ -39,8 +43,23 @@ public class ProfilePageController implements Initializable {
     @FXML
     private ImageView badge;
 
-    //get user
-    private User user;
+    @FXML
+    private Button backButton;
+
+    @FXML
+    private Label userNameLabel;
+
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private Label emailLabel;
+
+    @FXML
+    private Label ageLabel;
+
+    @FXML
+    private Label lastseenLabel;
 
     /**
      * how should the page be set up.
@@ -48,12 +67,24 @@ public class ProfilePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        level.setText("Level: " + ProfilePageLogic.getLevel(user));
+        userNameLabel.setText(thisUser.getUsername());
 
-        Image badgeimg = new Image(ProfilePageLogic.getBadge(user));
+        nameLabel.setText(thisUser.getFirstName() + thisUser.getLastName());
+
+        emailLabel.setText(thisUser.getEmail());
+
+        ageLabel.setText(thisUser.getAge() + "");
+
+        lastseenLabel.setText(thisUser.getLastLoginDate().toString());
+
+        level.setText("Level: " + ProfilePageLogic.getLevel(thisUser));
+
+        Image badgeimg = new Image(ProfilePageLogic.getBadge(thisUser));
+
+        badge.setImage(badgeimg);
 
         //completed.setText(ProfilePageLogic.getAchievementsString(user));
-        completed.setText("wouefg");
+        completed.setText(thisUser.getProgress().getAchievements().toString());
 
 
         bonus.setCellValueFactory(new PropertyValueFactory<Achievement, Integer>("Bonus"));
@@ -65,6 +96,13 @@ public class ProfilePageController implements Initializable {
                 FXCollections.<Achievement>observableArrayList();
 
         all.setItems(allachievements);
+
+        backButton.setOnAction(e ->
+                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getHomepage()));
+    }
+
+    public static void setUser(User user) {
+        thisUser = user;
     }
 
 

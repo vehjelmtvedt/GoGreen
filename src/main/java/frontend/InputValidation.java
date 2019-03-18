@@ -4,6 +4,7 @@ import backend.data.LoginDetails;
 import backend.data.User;
 import frontend.controllers.ActivitiesController;
 import frontend.controllers.FriendspageController;
+import frontend.controllers.ProfilePageController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -47,6 +48,7 @@ public class InputValidation {
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);
+            ProfilePageController.setUser(loggedUser);
 
             //testing
             try {
