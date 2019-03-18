@@ -1,6 +1,6 @@
-package frontend;
+package frontend.gui;
 
-import backend.data.User;
+import data.User;
 
 public class ProfilePageLogic {
 

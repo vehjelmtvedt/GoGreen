@@ -1,10 +1,10 @@
 package frontend.controllers;
 
-import backend.data.Achievement;
-import backend.data.User;
-import frontend.Main;
-import frontend.ProfilePageLogic;
-import frontend.StageSwitcher;
+import data.Achievement;
+import data.User;
+import frontend.gui.Main;
+import frontend.gui.ProfilePageLogic;
+import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

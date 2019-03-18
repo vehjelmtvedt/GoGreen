@@ -1,10 +1,9 @@
 package frontend;
 
-import backend.data.User;
+import data.User;
+import frontend.gui.ProfilePageLogic;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ProfilePageLogicTest {
 
