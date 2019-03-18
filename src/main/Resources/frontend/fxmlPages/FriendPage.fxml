@@ -64,5 +64,6 @@
             </VBox>
          </children>
       </JFXDrawer>
+      <Button fx:id="testDialog" layoutX="454.0" layoutY="544.0" mnemonicParsing="false" text="Button" />
     </children>
 </AnchorPane>

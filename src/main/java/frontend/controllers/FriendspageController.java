@@ -2,13 +2,7 @@ package frontend.controllers;
 
 import backend.data.LoginDetails;
 import backend.data.User;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import frontend.Requests;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,7 +22,9 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -72,6 +68,11 @@ public class FriendspageController implements Initializable {
     @FXML
     private HBox dataPane;
 
+    @FXML
+    private Button testDialog;
+
+    private StackPane stackPane;
+
     private List searchresults;
 
     @Override
@@ -86,7 +87,23 @@ public class FriendspageController implements Initializable {
         drawFriendsBarChart("Today");
         drawFriendsBarChart("This week");
         drawFriendsBarChart("This year");
+
+        testDialog.setOnAction(e -> showDialog());
     }
+
+    public void showDialog() {
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text("Heading"));
+        content.setBody(new Text("heuwf"));
+        JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
+
+        JFXButton button = new JFXButton(("Okay"));
+        button.setOnAction(e -> dialog.close());
+        content.setActions(button);
+        dialog.show();
+    }
+
+
 
     /**
      * Draws the bar graph to the Friends page.
