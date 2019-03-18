@@ -226,16 +226,16 @@ public class FriendspageController implements Initializable {
 
     private ObservableList<UserItem> getTableData() {
         ObservableList<UserItem> friendsList = FXCollections.observableArrayList();
-        for (String username : thisUser.getFriends()) {
-            User tmpFriend = Requests.getUserRequest(username);
-            System.out.println(tmpFriend.toString());
+        List<User> friends = Requests.getFriends(new LoginDetails((thisUser.getUsername(), thisUser.getPassword()));
+        for (User friend : friends) {
+
             String activity = "This user has no activities";
-            if (tmpFriend.getActivities().size() != 0) {
-                activity = tmpFriend.getActivities().get(
-                        tmpFriend.getActivities().size() - 1).getName();
+            if (friend.getActivities().size() != 0) {
+                activity = friend.getActivities().get(
+                        friend.getActivities().size() - 1).getName();
             }
-            String carbonSaved = Double.toString(tmpFriend.getTotalCarbonSaved());
-            friendsList.add(new UserItem(username, activity, carbonSaved));
+            String carbonSaved = Double.toString(friend.getTotalCarbonSaved());
+            friendsList.add(new UserItem(friend.getUsername(), activity, carbonSaved));
         }
         return friendsList;
     }
@@ -258,4 +258,5 @@ public class FriendspageController implements Initializable {
     public static void setUser(User user) {
         thisUser = user;
     }
+    
 }

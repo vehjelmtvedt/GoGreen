@@ -158,4 +158,12 @@ public class Requests {
         return restTemplate.postForEntity(
                 uriBuilder.toUriString(), loginDetails, List.class).getBody();
     }
+
+    public static List getFriends(LoginDetails loginDetails) {
+        String url = "http://localhost:8080/getFriends";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        return restTemplate.postForEntity(url, loginDetails, List.class).getBody();
+    }
 }
