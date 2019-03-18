@@ -45,6 +45,7 @@ public class InputValidation {
                             + loggedUser.getLastName() + "!");
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
+            FriendspageController.setLoginDetails(loginDetails);
 
             //testing
             try {

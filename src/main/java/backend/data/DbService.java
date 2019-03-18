@@ -260,7 +260,7 @@ public class DbService {
         } else {
             // Query that returns a list of all the user's friends
             return mongoTemplate.find(
-                    new Query(Criteria.where("email") // Compare against User email
+                    new Query(Criteria.where("username") // Compare against User email
                             .in(user.getFriends())), // Email must be in users friend list
                     User.class); // Resulting Object type User
         }

@@ -59,7 +59,7 @@ public class RequestHandler {
     /**
      * Returns user from db.
      * @param identifier - username or email of that person
-     * @return
+     * @return - user of the given username or email.
      */
     @RequestMapping("/getUser")
     public User getUser(@RequestParam String identifier) {

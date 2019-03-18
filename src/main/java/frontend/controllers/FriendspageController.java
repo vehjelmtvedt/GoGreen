@@ -40,6 +40,8 @@ public class FriendspageController implements Initializable {
 
     private static User thisUser;
 
+    private static LoginDetails thisLoginDetails;
+
     @FXML
     private Label goGreen;
 
@@ -81,20 +83,22 @@ public class FriendspageController implements Initializable {
         }
         fillFriendsTreeView();
         drawFriendRequestDrawer();
-        drawFriendsBarChart();
+        drawFriendsBarChart("Today");
+        drawFriendsBarChart("This week");
+        drawFriendsBarChart("This year");
     }
 
     /**
      * Draws the bar graph to the Friends page.
      */
-    public void drawFriendsBarChart() {
+    public void drawFriendsBarChart(String title) {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String, Number> bc =
                 new BarChart<>(xAxis, yAxis);
         bc.setTitle("Carbon Saved");
         XYChart.Series series1 = new XYChart.Series();
-        series1.setName("This Week");
+        series1.setName(title);
         populateBarChart(series1);
 
         bc.getData().addAll(series1);
@@ -109,8 +113,8 @@ public class FriendspageController implements Initializable {
     public void populateBarChart(XYChart.Series series1) {
         series1.getData().add(new XYChart.Data(thisUser.getUsername(),
                 thisUser.getTotalCarbonSaved()));
-        for (String username : thisUser.getFriends()) {
-            User friend = Requests.getUserRequest(username);
+        List<User> friendsList = Requests.getFriends(thisLoginDetails);
+        for (User friend : friendsList) {
             series1.getData().add(new XYChart.Data(friend.getUsername(),
                     friend.getTotalCarbonSaved()));
         }
@@ -171,12 +175,10 @@ public class FriendspageController implements Initializable {
      * Returns list of usernames based on keyword.
      *
      * @param keyword - keyword to search usernames
-     * @return
+     * @return - list of users matching the keyword
      */
     public List getSearchResults(String keyword) {
-        //TODO: FIX PASSING ORIGINAL PASSWORD IN THE FUTURE AND NOT HASHED
-        return Requests.getMatchingUsersRequest(keyword,
-                new LoginDetails(thisUser.getUsername(), thisUser.getPassword()));
+        return Requests.getMatchingUsersRequest(keyword, thisLoginDetails);
     }
 
     /**
@@ -228,16 +230,16 @@ public class FriendspageController implements Initializable {
 
     private ObservableList<UserItem> getTableData() {
         ObservableList<UserItem> friendsList = FXCollections.observableArrayList();
-        for (String username : thisUser.getFriends()) {
-            User tmpFriend = Requests.getUserRequest(username);
-            System.out.println(tmpFriend.toString());
+        List<User> friends = Requests.getFriends(thisLoginDetails);
+        for (Object friend : friends) {
+            User thisFriend = (User) friend;
             String activity = "This user has no activities";
-            if (tmpFriend.getActivities().size() != 0) {
-                activity = tmpFriend.getActivities().get(
-                        tmpFriend.getActivities().size() - 1).getName();
+            if (thisFriend.getActivities().size() != 0) {
+                activity = thisFriend.getActivities().get(
+                        thisFriend.getActivities().size() - 1).getName();
             }
-            String carbonSaved = Double.toString(tmpFriend.getTotalCarbonSaved());
-            friendsList.add(new UserItem(username, activity, carbonSaved));
+            String carbonSaved = Double.toString(thisFriend.getTotalCarbonSaved());
+            friendsList.add(new UserItem(thisFriend.getUsername(), activity, carbonSaved));
         }
         return friendsList;
     }
@@ -259,5 +261,9 @@ public class FriendspageController implements Initializable {
 
     public static void setUser(User user) {
         thisUser = user;
+    }
+
+    public static void setLoginDetails(LoginDetails loginDetails) {
+        thisLoginDetails = loginDetails;
     }
 }

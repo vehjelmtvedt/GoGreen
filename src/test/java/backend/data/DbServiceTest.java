@@ -49,7 +49,7 @@ public class DbServiceTest {
     public void setup() {
         dbService.addUser(testUser);
 
-        testUserHasFriends.addFriend(testUser.getEmail());
+        testUserHasFriends.addFriend(testUser.getUsername());
 
         dbService.addUser(testUserHasFriends);
 
@@ -139,7 +139,7 @@ public class DbServiceTest {
     @Test
     public void testFriends() {
         // Rewrite this test to be more helpful after User equals implementation
-        assertEquals(1, dbService.getFriends(testUserHasFriends.getEmail()).size());
+        assertEquals(1, dbService.getFriends(testUserHasFriends.getUsername()).size());
     }
 
     @Test
