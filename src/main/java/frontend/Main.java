@@ -97,5 +97,7 @@ public class Main extends Application {
         friendPage = scene;
     }
 
-    public static void setProfilePage(Scene scene) { profilePage = scene; }
+    public static void setProfilePage(Scene scene) {
+        profilePage = scene;
+    }
 }
