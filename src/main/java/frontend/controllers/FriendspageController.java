@@ -172,7 +172,7 @@ public class FriendspageController implements Initializable {
     /**
      * Returns list of usernames based on keyword.
      * @param keyword - keyword to search usernames
-     * @return
+     * @return - list of users matching the keyword
      */
     public List getSearchResults(String keyword) {
         return Requests.getMatchingUsersRequest(keyword, thisLoginDetails);

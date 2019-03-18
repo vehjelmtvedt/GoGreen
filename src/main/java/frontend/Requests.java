@@ -6,7 +6,6 @@ import backend.data.User;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -163,13 +162,20 @@ public class Requests {
                 uriBuilder.toUriString(), loginDetails, List.class).getBody();
     }
 
+    /**
+     * Requets to retrieve list of friends.
+     * @param loginDetails - login details of User requesting their friends.
+     * @return - list of friends.
+     */
     public static List<User> getFriends(LoginDetails loginDetails) {
         String url = "http://localhost:8080/getFriends";
 
         RestTemplate restTemplate = new RestTemplate();
 
-        ParameterizedTypeReference<List<User>> typeRef = new ParameterizedTypeReference<List<User>>() {
+        ParameterizedTypeReference<List<User>> typeRef =
+                new ParameterizedTypeReference<List<User>>() {
         };
-        return restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(loginDetails), typeRef).getBody();
+        return restTemplate.exchange(url,
+                HttpMethod.POST, new HttpEntity<>(loginDetails), typeRef).getBody();
     }
 }
