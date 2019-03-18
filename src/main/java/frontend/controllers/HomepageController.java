@@ -21,6 +21,8 @@ public class HomepageController {
     Button exitButton;
     @FXML
     Button logoutButton;
+    @FXML
+    Button profileButton;
 
     @FXML
     private void initialize() {
@@ -30,6 +32,9 @@ public class HomepageController {
                 StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getActivities()));
         logoutButton.setOnAction(e ->
                 StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn()));
+        profileButton.setOnAction(e ->
+                StageSwitcher.sceneSwitch(Main.getPrimaryStage() , Main.getProfilePage()));
+
         exitButton.setOnAction(e -> Main.getPrimaryStage().close());
     }
 
