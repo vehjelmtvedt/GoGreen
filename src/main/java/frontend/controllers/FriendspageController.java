@@ -83,20 +83,22 @@ public class FriendspageController implements Initializable {
         }
         fillFriendsTreeView();
         drawFriendRequestDrawer();
-        drawFriendsBarChart();
+        drawFriendsBarChart("Today");
+        drawFriendsBarChart("This week");
+        drawFriendsBarChart("This year");
     }
 
     /**
      * Draws the bar graph to the Friends page.
      */
-    public void drawFriendsBarChart() {
+    public void drawFriendsBarChart(String title) {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String, Number> bc =
                 new BarChart<>(xAxis, yAxis);
         bc.setTitle("Carbon Saved");
         XYChart.Series series1 = new XYChart.Series();
-        series1.setName("This Week");
+        series1.setName(title);
         populateBarChart(series1);
 
         bc.getData().addAll(series1);

@@ -17,7 +17,7 @@
     <children>
       <AnchorPane layoutY="137.0" prefHeight="117.0" prefWidth="957.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
          <children>
-            <HBox fx:id="dataPane" prefHeight="285.0" prefWidth="963.0" />
+            <HBox fx:id="dataPane" prefHeight="285.0" prefWidth="963.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="-7.0" prefHeight="137.0" prefWidth="966.0" style="-fx-background-color: #379B1E #379B1E;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
