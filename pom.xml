@@ -189,7 +189,6 @@
                         <exclude>**/frontend/controllers/FriendspageController*</exclude>
                         <exclude>**/frontend/controllers/HomepageController*</exclude>
                         <exclude>**/frontend/controllers/NavPanelController*</exclude>
-                        <exclude>**/backend/TestActivity*</exclude>
                     </excludes>
 
                     <rules>
