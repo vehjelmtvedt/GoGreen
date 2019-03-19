@@ -1,5 +1,6 @@
 package frontend.gui;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -36,7 +37,7 @@ public class General {
      *
      * @param fields ArrayList containing all input fields of form
      */
-    public static void resetFields(ArrayList<TextField> fields) {
+    public static void resetFields(ArrayList<JFXTextField> fields) {
         for (TextField field : fields) {
             if (field != null) {
                 field.setText(null);
@@ -68,7 +69,7 @@ public class General {
      */
     public static void finaliseStage(Stage stage, Scene scene) {
         stage.setScene(scene);
-        stage.setMaximized(true);
+        //stage.setMaximized(true);
         stage.show();
     }
 

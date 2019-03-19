@@ -1,6 +1,8 @@
 package frontend.gui;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -27,10 +29,15 @@ public class Main extends Application {
         General.setPrimaryStage(primaryStage, "Go Green");
 
         //create scenes necessary for scene switching
-        signIn = SignIn.createScene();
-        signUp = SignUp.createScene();
-        // homepage = Homepage.createScene();
-        // progress = ProgressPage.createScene();
+        FXMLLoader loaderSignIn = new FXMLLoader(
+                Main.class.getResource("/frontend/fxmlPages/Login.fxml"));
+        Parent root1 = loaderSignIn.load();
+        signIn = new Scene(root1, 1500, 850);
+
+        FXMLLoader loaderSignUp = new FXMLLoader(
+                Main.class.getResource("/frontend/fxmlPages/signup.fxml"));
+        Parent root2 = loaderSignUp.load();
+        signUp = new Scene(root2, 1500, 850);
 
         //add button switching due to java being a synchronous programming language
         StageSwitcher.buttonSwitch(SignIn.getSignUpButton(), primaryStage, signUp);
@@ -38,8 +45,7 @@ public class Main extends Application {
         //add path for css files and add them to the specific scenes they belong
         String cssPathIntro = "/frontend/Stylesheets/Style.css";
         cssIntro = this.getClass().getResource(cssPathIntro).toExternalForm();
-        signIn.getStylesheets().add(cssIntro);
-        signUp.getStylesheets().add(cssIntro);
+
 
         //setup the first scene for the primary stage
         General.finaliseStage(primaryStage, signIn);

@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import tools.Requests;
 
@@ -23,7 +24,7 @@ public class Questionnaire {
      * where users provides information necessary to calculate their carbon emissions.
      * @return questionnaire scene
      */
-    public static Scene createScene(User user, GridPane form) {
+    public static Scene createScene(User user, AnchorPane form) {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(10, 10, 10, 10));

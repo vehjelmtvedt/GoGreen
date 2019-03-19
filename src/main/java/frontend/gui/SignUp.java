@@ -146,9 +146,9 @@ public class SignUp {
         nameFields[1] = lastNameField;
 
         //on clicking the sign up validate, first validate the user input.
-        signUpButton.setOnAction(e ->
-                InputValidation.signUpValidate(nameFields, usernameField,
-                        emailField, passwordField, passReField, ageField, grid));
+//        signUpButton.setOnAction(e ->
+//                InputValidation.signUpValidate(nameFields, usernameField,
+//                        emailField, passwordField, passReField, ageField, grid));
 
         //add scene switching from sign up page to sign in page
         StageSwitcher.buttonSwitch(signInButton, currStage, prevScene);
