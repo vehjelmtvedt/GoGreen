@@ -179,8 +179,7 @@ public class DbServiceTest {
 
         assertEquals(expected, result);
     }
-
-    // TBD tests
+    
     @Test
     public void testBefriendUsersNull1() {
         dbService.addUser(testUser2);
