@@ -1,64 +1,68 @@
 package frontend.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import data.LoginDetails;
-import data.User;
+import frontend.gui.Events;
 import frontend.gui.Main;
-import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.Cursor;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomepageController implements Initializable {
-
-    private static User thisUser;
-
-    private static LoginDetails thisLoginDetails;
-
-    @FXML
-    private JFXButton friendsButton;
-    @FXML
-    private JFXButton activitiesButton;
-    @FXML
-    private JFXButton profileButton;
-    @FXML
-    private JFXButton logoutButton;
-
     @FXML
     private JFXHamburger menu;
     @FXML
     private JFXDrawer drawer;
+    @FXML
+    private ImageView logoutIcon;
+    @FXML
+    private ImageView notificationIcon;
+    @FXML
+    private AnchorPane notificationPane;
+    @FXML
+    private Label markAllRead;
+
+    private static boolean notifySelected = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        markAllRead.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            markAllRead.setUnderline(true);
+            markAllRead.setCursor(Cursor.HAND);
+        });
+        markAllRead.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            markAllRead.setUnderline(false);
+            markAllRead.setCursor(Cursor.DEFAULT);
+        });
+
+        notificationPane.setVisible(false);
         try {
             NavPanelController.setup(drawer, menu);
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        friendsButton.setOnAction(e ->
-//                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getFriendsPage()));
-//        activitiesButton.setOnAction(e ->
-//                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getActivities()));
-//        logoutButton.setOnAction(e ->
-//                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn()));
-//        profileButton.setOnAction(e ->
-//                StageSwitcher.sceneSwitch(Main.getPrimaryStage() , Main.getProfilePage()));
 
-//        exitButton.setOnAction(e -> Main.getPrimaryStage().close());
-    }
-
-    public static void setUser(User user) {
-        thisUser = user;
-    }
-
-    public static void setLoginDetails(LoginDetails loginDetails) {
-        thisLoginDetails = loginDetails;
+        Events.addImageCursor(notificationIcon);
+        Events.addImageCursor(logoutIcon);
+        notificationIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            if (!notifySelected) {
+                notificationIcon.setImage(new Image("frontend/Pics/notificationIconOpen.png"));
+                notificationPane.setVisible(true);
+            } else {
+                notificationIcon.setImage(new Image("frontend/Pics/notificationIconClose.png"));
+                notificationPane.setVisible(false);
+            }
+            notifySelected = !notifySelected;
+        });
+        Events.addImageSceneSwitch(logoutIcon, Main.getSignIn());
     }
 }

@@ -1,7 +1,6 @@
 package frontend.gui;
 
 import data.User;
-import frontend.controllers.HomepageController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -12,7 +11,6 @@ public class StageSwitcher {
     }
 
     public static void loginSwitch(Stage from, Scene to, User user) {
-        HomepageController.setUser(user);
         from.setScene(to);
     }
 

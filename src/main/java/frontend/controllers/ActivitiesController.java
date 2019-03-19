@@ -9,8 +9,7 @@ import data.BuyNonProcessedFood;
 import data.BuyOrganicFood;
 import data.EatVegetarianMeal;
 import data.User;
-import frontend.gui.Main;
-import frontend.gui.StageSwitcher;
+import frontend.gui.Events;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,8 +19,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -32,8 +29,6 @@ import java.util.ResourceBundle;
 public class ActivitiesController implements Initializable {
     private static User loggedUser;
 
-    @FXML
-    public ImageView backIcon;
     @FXML
     private JFXButton btnFood;
     @FXML
@@ -75,6 +70,45 @@ public class ActivitiesController implements Initializable {
 
     /**
      * .
+     * Setup page before loading .fxml files
+     *
+     * @param location  Standard parameters
+     * @param resources Standard parameters
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Events.addButtonCursor(btnFood);
+        Events.addButtonCursor(btnHistory);
+        Events.addButtonCursor(btnHousehold);
+        Events.addButtonCursor(btnLocalFood);
+        Events.addButtonCursor(btnNonProFood);
+        Events.addButtonCursor(btnOrganicFood);
+        Events.addButtonCursor(btnTransportation);
+        Events.addButtonCursor(btnVegetarianMeal);
+        Events.addButtonCursor(btnFood);
+        Events.addMenuCursor(menu);
+
+
+        try {
+            NavPanelController.setup(drawer, menu);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
+
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("Category"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        carbonColumn.setCellValueFactory(new PropertyValueFactory<>("CarbonSaved"));
+
+        activityTable.setItems(getActivities(loggedUser));
+        if (loggedUser.getActivities().isEmpty()) {
+            activityTable.setPlaceholder(new Label("No previous activities"));
+        }
+    }
+
+    /**
+     * .
      * Handles user's button clicking
      *
      * @param event Takes the actionEvent as a parameter
@@ -83,20 +117,20 @@ public class ActivitiesController implements Initializable {
     private void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnFood) {
             resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
-            btnFood.setStyle("-fx-background-color: #c6c6c6;");
+            btnFood.setStyle("-fx-background-color: #1aed9c;");
             paneFood.toFront();
         } else if (event.getSource() == btnTransportation) {
             resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
-            btnTransportation.setStyle("-fx-background-color: #c6c6c6;");
+            btnTransportation.setStyle("-fx-background-color: #1aed9c;");
             paneTransportation.toFront();
         } else if (event.getSource() == btnHistory) {
             resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
-            btnHistory.setStyle("-fx-background-color: #c6c6c6;");
+            btnHistory.setStyle("-fx-background-color: #1aed9c;");
             paneHistory.toFront();
         } else {
             if (event.getSource() == btnHousehold) {
                 resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
-                btnHousehold.setStyle("-fx-background-color: #c6c6c6;");
+                btnHousehold.setStyle("-fx-background-color: #1aed9c;");
                 paneHousehold.toFront();
             }
         }
@@ -127,35 +161,6 @@ public class ActivitiesController implements Initializable {
         }
         ObservableList<Activity> activities = getActivities(loggedUser);
         activityTable.setItems(activities);
-    }
-
-    /**
-     * .
-     * Setup page before loading .fxml files
-     *
-     * @param location  Standard parameters
-     * @param resources Standard parameters
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        try {
-            NavPanelController.setup(drawer, menu);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
-        backIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->
-                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getHomepage()));
-
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("Category"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        carbonColumn.setCellValueFactory(new PropertyValueFactory<>("CarbonSaved"));
-
-        activityTable.setItems(getActivities(loggedUser));
-        if (loggedUser.getActivities().isEmpty()) {
-            activityTable.setPlaceholder(new Label("No previous activities"));
-        }
     }
 
     /**
