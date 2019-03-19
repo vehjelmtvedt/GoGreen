@@ -23,29 +23,23 @@ public class Main extends Application {
     @Override
     public void start(Stage window) throws IOException {
         //setup the primary stage
-
-
         primaryStage = window;
         General.setPrimaryStage(primaryStage, "Go Green");
 
-        //create scenes necessary for scene switching
+        //Load fxml pages for signIn and signUp
         FXMLLoader loaderSignIn = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/Login.fxml"));
         Parent root1 = loaderSignIn.load();
-        signIn = new Scene(root1, 1500, 850);
+        signIn = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
 
         FXMLLoader loaderSignUp = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/signup.fxml"));
         Parent root2 = loaderSignUp.load();
-        signUp = new Scene(root2, 1500, 850);
-
-        //add button switching due to java being a synchronous programming language
-        StageSwitcher.buttonSwitch(SignIn.getSignUpButton(), primaryStage, signUp);
+        signUp = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
 
         //add path for css files and add them to the specific scenes they belong
         String cssPathIntro = "/frontend/Stylesheets/Style.css";
         cssIntro = this.getClass().getResource(cssPathIntro).toExternalForm();
-
 
         //setup the first scene for the primary stage
         General.finaliseStage(primaryStage, signIn);

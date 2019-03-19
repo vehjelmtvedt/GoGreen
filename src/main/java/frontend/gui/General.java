@@ -69,7 +69,7 @@ public class General {
      */
     public static void finaliseStage(Stage stage, Scene scene) {
         stage.setScene(scene);
-        //stage.setMaximized(true);
+        stage.setMaximized(true);
         stage.show();
     }
 

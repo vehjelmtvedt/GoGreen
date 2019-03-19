@@ -51,7 +51,7 @@ public class InputValidation {
             FriendspageController.setLoginDetails(loginDetails);
             ProfilePageController.setUser(loggedUser);
 
-            //testing
+            //setup .fxml pages after successfully logging in
             try {
                 FXMLLoader loader1 = new FXMLLoader(
                         Main.class.getResource("/frontend/fxmlPages/Homepage.fxml"));
@@ -71,7 +71,7 @@ public class InputValidation {
                 Scene profilePage = new Scene(root4,
                         General.getBounds()[0], General.getBounds()[1]);
 
-                //setup scenes
+                //setup scenes in main class
                 Main.setActivities(activities);
                 Main.setHomepage(homepage);
                 Main.setFriendPage(friendPage);
@@ -79,7 +79,7 @@ public class InputValidation {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //testing
+            //Go to homepage after logging in
             StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), loggedUser);
 
         } else {
