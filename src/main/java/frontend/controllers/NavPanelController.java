@@ -74,10 +74,4 @@ public class NavPanelController implements Initializable {
             }
         });
     }
-
-
-
-
-
-
 }

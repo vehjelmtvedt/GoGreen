@@ -78,6 +78,9 @@ public class ActivitiesController implements Initializable {
     @FXML
     private ImageView notificationIcon;
 
+    @FXML
+    private AnchorPane headerPane;
+
     /**
      * .
      * Setup page before loading .fxml files
@@ -116,7 +119,7 @@ public class ActivitiesController implements Initializable {
             activityTable.setPlaceholder(new Label("No previous activities"));
         }
         try {
-            NotificationPanelController.setup(notificationIcon, logoutIcon, mainPane);
+            NotificationPanelController.addNotificationPanel(headerPane, mainPane);
         } catch (IOException e) {
             e.printStackTrace();
         }

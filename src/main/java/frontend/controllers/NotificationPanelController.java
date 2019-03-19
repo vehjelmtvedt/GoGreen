@@ -5,12 +5,14 @@ import frontend.gui.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +44,7 @@ public class NotificationPanelController implements Initializable {
         notificationPane.setVisible(false);
     }
 
-    public static void setup(ImageView notificationIcon, ImageView logoutIcon, AnchorPane parentPane) throws IOException {
+    private static void setup(ImageView notificationIcon, ImageView logoutIcon, AnchorPane parentPane) throws IOException {
         AnchorPane notificationPane = FXMLLoader.load(NavPanelController.class.getResource(
                 "/frontend/fxmlPages/NotificationPanel.fxml"));
         parentPane.getChildren().addAll(notificationPane);
@@ -63,5 +65,33 @@ public class NotificationPanelController implements Initializable {
         Events.addImageSceneSwitch(logoutIcon, Main.getSignIn());
         AnchorPane.setTopAnchor(notificationPane, 137.0);
         AnchorPane.setRightAnchor(notificationPane, 0.0);
+    }
+
+    public static void addNotificationPanel(AnchorPane headerPane, AnchorPane mainPane) throws IOException {
+        HBox iconBox = new HBox();
+        iconBox.setLayoutX(1280);
+        iconBox.setLayoutY(56);
+        iconBox.setPrefHeight(47);
+        iconBox.setPrefWidth(102);
+        AnchorPane.setRightAnchor(iconBox, 14.0);
+
+        ImageView notificationIcon = new ImageView();
+        notificationIcon.setImage(new Image("frontend/Pics/notificationIconClose.png"));
+        notificationIcon.setFitWidth(43);
+        notificationIcon.setFitHeight(44);
+        notificationIcon.setPreserveRatio(true);
+        notificationIcon.setPickOnBounds(true);
+
+        ImageView logoutIcon = new ImageView();
+        logoutIcon.setImage(new Image("frontend/Pics/logoutIcon.png"));
+        logoutIcon.setFitWidth(43);
+        logoutIcon.setFitHeight(44);
+        logoutIcon.setPreserveRatio(true);
+        logoutIcon.setPickOnBounds(true);
+
+        HBox.setMargin(notificationIcon, new Insets(0, 20, 0, 0));
+        iconBox.getChildren().addAll(notificationIcon, logoutIcon);
+        headerPane.getChildren().add(iconBox);
+        setup(notificationIcon, logoutIcon, mainPane);
     }
 }
