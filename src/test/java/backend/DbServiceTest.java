@@ -280,20 +280,18 @@ public class DbServiceTest {
         assertEquals(null, dbService.rejectFriendRequest(null, null));
     }
 
-/*    @Test
+    @Test
     public void testGetAchievements() {
         List<Achievement> achievements = dbService.getAchievements();
         assertNotEquals(0, achievements.size());
-    }*/
+    }
 
     private List<Double> getTopUserScores(int top) {
         List<User> topUsers = dbService.getTopUsers(top);
 
-        List<Double> scores = topUsers.stream() // Convert to User stream
+        return topUsers.stream() // Convert to User stream
                 .map(User::getTotalCarbonSaved) // Map to totalCarbonSaved score
-                .collect(Collectors.toList()); // Store results to List
-
-        return scores;
+                .collect(Collectors.toList());
     }
 
     private List<Double> getExpectedScores(int top) {
