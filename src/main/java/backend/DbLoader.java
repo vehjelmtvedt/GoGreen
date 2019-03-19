@@ -1,16 +1,16 @@
-package backend.repos;
+package backend;
 
-/*import org.springframework.beans.factory.annotation.Autowired;
+import backend.repos.AchievementRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;*/
 import org.springframework.context.annotation.Configuration;
-/*import org.springframework.core.io.PathResource;
+import org.springframework.core.io.PathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;*/
+import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;
 
 @Configuration
 public class DbLoader {
-/*    // Specify JSON to load here
+    // Specify JSON to load here
     private Resource achievements = new PathResource("src/main/Resources/data/achievements.json");
 
     private Resource[] resources = new Resource[] {achievements};
@@ -24,7 +24,7 @@ public class DbLoader {
      * Currently loads only achievements into the achievement repository.
      * @return Populator bean for the database
      */
-/*    @Bean
+    @Bean
     public Jackson2RepositoryPopulatorFactoryBean populateDatabase() {
         // Wipe achievement repository to overwrite with new data
         achievementRepository.deleteAll();
@@ -38,5 +38,5 @@ public class DbLoader {
 
         // Return bean (this will automatically populate the database)
         return factory;
-    }*/
+    }
 }
