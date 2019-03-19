@@ -1,31 +1,34 @@
 package frontend.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import data.LoginDetails;
 import data.User;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
-public class HomepageController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class HomepageController implements Initializable {
 
     private static User thisUser;
 
     private static LoginDetails thisLoginDetails;
 
     @FXML
-    Button friendsButton;
+    private JFXButton friendsButton;
     @FXML
-    Button activitiesButton;
+    private JFXButton activitiesButton;
     @FXML
-    Button exitButton;
+    private JFXButton profileButton;
     @FXML
-    Button logoutButton;
-    @FXML
-    Button profileButton;
+    private JFXButton logoutButton;
 
-    @FXML
-    private void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         friendsButton.setOnAction(e ->
                 StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getFriendsPage()));
         activitiesButton.setOnAction(e ->
@@ -35,7 +38,7 @@ public class HomepageController {
         profileButton.setOnAction(e ->
                 StageSwitcher.sceneSwitch(Main.getPrimaryStage() , Main.getProfilePage()));
 
-        exitButton.setOnAction(e -> Main.getPrimaryStage().close());
+//        exitButton.setOnAction(e -> Main.getPrimaryStage().close());
     }
 
     public static void setUser(User user) {

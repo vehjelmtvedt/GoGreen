@@ -30,7 +30,7 @@
                   <DropShadow />
                </effect>
                <children>
-                  <ImageView fx:id="backIcon" fitHeight="60.0" fitWidth="76.0" layoutX="13.0" layoutY="695.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="backIcon" fitHeight="60.0" fitWidth="76.0" layoutX="7.0" layoutY="644.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="156.0">
                      <image>
                         <Image url="@../Pics/backIcon.png" />
                      </image>
@@ -65,7 +65,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnHistory" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="776.0" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="408.0" text="Activity History">
+            <JFXButton fx:id="btnHistory" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="-2.0" layoutY="725.0" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="408.0" text="Activity History" AnchorPane.bottomAnchor="65.0">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                      <image>

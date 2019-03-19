@@ -30,12 +30,12 @@ public class Main extends Application {
         FXMLLoader loaderSignIn = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/Login.fxml"));
         Parent root1 = loaderSignIn.load();
-        signIn = new Scene(root1, 1500, 850);
+        signIn = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
 
         FXMLLoader loaderSignUp = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/signup.fxml"));
         Parent root2 = loaderSignUp.load();
-        signUp = new Scene(root2, 1500, 850);
+        signUp = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
 
         //add path for css files and add them to the specific scenes they belong
         String cssPathIntro = "/frontend/Stylesheets/Style.css";
