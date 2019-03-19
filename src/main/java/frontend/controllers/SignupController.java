@@ -59,7 +59,6 @@ public class SignupController implements Initializable {
 
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         JFXTextField[] nameFields = new JFXTextField[2];
