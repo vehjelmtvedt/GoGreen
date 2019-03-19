@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -67,6 +69,14 @@ public class ActivitiesController implements Initializable {
     private JFXHamburger menu;
     @FXML
     private JFXDrawer drawer;
+    @FXML
+    private AnchorPane mainPane;
+
+    @FXML
+    private ImageView logoutIcon;
+
+    @FXML
+    private ImageView notificationIcon;
 
     /**
      * .
@@ -104,6 +114,11 @@ public class ActivitiesController implements Initializable {
         activityTable.setItems(getActivities(loggedUser));
         if (loggedUser.getActivities().isEmpty()) {
             activityTable.setPlaceholder(new Label("No previous activities"));
+        }
+        try {
+            NotificationPanelController.setup(notificationIcon, logoutIcon, mainPane);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

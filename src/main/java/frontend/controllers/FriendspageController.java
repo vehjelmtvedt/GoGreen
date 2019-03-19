@@ -46,7 +46,7 @@ public class FriendspageController implements Initializable {
     private Label goGreen;
 
     @FXML
-    private AnchorPane centerPane;
+    private AnchorPane headerPane;
 
     @FXML
     private JFXTreeTableView friendsPane;
@@ -86,7 +86,9 @@ public class FriendspageController implements Initializable {
         drawFriendsBarChart("Today");
         drawFriendsBarChart("This week");
         drawFriendsBarChart("This year");
+
     }
+
 
     /**
      * Draws the bar graph to the Friends page.
