@@ -12,60 +12,14 @@
    <children>
       <AnchorPane prefHeight="137.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="683.0" layoutY="25.0" text="GoGreen" textFill="WHITE">
+            <Label alignment="BASELINE_CENTER" layoutX="582.0" layoutY="25.0" text="GoGreen" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="582.0" AnchorPane.rightAnchor="582.0" AnchorPane.topAnchor="32.0">
                <font>
                   <Font size="60.0" />
                </font>
             </Label>
+            <JFXHamburger fx:id="menu" layoutX="26.0" layoutY="59.0" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="860.0" prefWidth="260.0" style="-fx-background-color: d3e4ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane layoutX="1.0" prefHeight="860.0" prefWidth="86.0" style="-fx-background-color: green;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </AnchorPane>
-            <JFXButton fx:id="activitiesButton" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="1.0" layoutY="313.0" prefHeight="69.0" prefWidth="260.0" text="My Activities">
-               <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Pics/activityIcon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="profileButton" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="1.0" layoutY="504.0" prefHeight="69.0" prefWidth="260.0" text="My Profile">
-               <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Pics/user.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="friendsButton" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="406.0" prefHeight="70.0" prefWidth="260.0" text="My Friends">
-               <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Pics/friendsIcon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="logoutButton" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="1.0" layoutY="758.0" prefHeight="69.0" prefWidth="260.0" text="Logout" AnchorPane.bottomAnchor="32.0">
-               <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Pics/logoutIcon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-         </children>
-         <effect>
-            <DropShadow />
-         </effect>
-      </AnchorPane>
+      <JFXDrawer fx:id="drawer" layoutY="137.0" prefHeight="719.0" prefWidth="244.0" />
    </children>
 </AnchorPane>
