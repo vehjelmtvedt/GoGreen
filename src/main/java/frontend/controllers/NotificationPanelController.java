@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 
 public class NotificationPanelController implements Initializable {
 
+    private static boolean notifySelected = false;
 
     @FXML
     private AnchorPane notificationPane;
@@ -27,7 +28,7 @@ public class NotificationPanelController implements Initializable {
     @FXML
     private Label markAllRead;
 
-    private static boolean notifySelected = false;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,7 +45,8 @@ public class NotificationPanelController implements Initializable {
         notificationPane.setVisible(false);
     }
 
-    private static void setup(ImageView notificationIcon, ImageView logoutIcon, AnchorPane parentPane) throws IOException {
+    private static void setup(ImageView notificationIcon,
+                              ImageView logoutIcon, AnchorPane parentPane) throws IOException {
         AnchorPane notificationPane = FXMLLoader.load(NavPanelController.class.getResource(
                 "/frontend/fxmlPages/NotificationPanel.fxml"));
         parentPane.getChildren().addAll(notificationPane);
@@ -67,7 +69,14 @@ public class NotificationPanelController implements Initializable {
         AnchorPane.setRightAnchor(notificationPane, 0.0);
     }
 
-    public static void addNotificationPanel(AnchorPane headerPane, AnchorPane mainPane) throws IOException {
+    /**
+     * Adds notification panel to the page.
+     * @param headerPane - header bar on top
+     * @param mainPane - main pane (window)
+     * @throws IOException - if fails to load the panel
+     */
+    public static void addNotificationPanel(AnchorPane headerPane,
+                                            AnchorPane mainPane) throws IOException {
         HBox iconBox = new HBox();
         iconBox.setLayoutX(1280);
         iconBox.setLayoutY(56);
