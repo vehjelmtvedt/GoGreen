@@ -315,13 +315,21 @@ public class User {
      * @return list of activities filtered by specified categories
      */
     public List<Activity> filterActivitiesByCategories(List<String> categories) {
-        return activities.stream() // convert activities list to stream
+        List<Activity> filteredActivities = new ArrayList<Activity>();
+
+        for (Activity a : activities) {
+            if (categories.contains(a.getCategory())) {
+                filteredActivities.add(a);
+            }
+        }
+
+        return filteredActivities;
+
+        /*return activities.stream() // convert activities list to stream
                 .filter(activity -> categories.contains(activity.getCategory()))
                 // check if categories list contains the category of the activity
-                .collect(Collectors.toList()); // return result as list
+                .collect(Collectors.toList());*/ // return result as list
     }
-
-
 
     /*
      * Removes a friend from the friends list
