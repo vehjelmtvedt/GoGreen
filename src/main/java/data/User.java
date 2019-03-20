@@ -403,13 +403,7 @@ public class User {
      * @return - total CO2 saved by all the activities
      */
     private double getTotalCO2Saved(List<Activity> activityList) {
-        double sum = 0.0;
-
-        for (Activity activity : activityList) {
-            sum += activity.getCarbonSaved();
-        }
-
-        return sum;
+        return Activity.getSum(activityList);
     }
 
 

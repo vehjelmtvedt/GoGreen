@@ -391,4 +391,9 @@ public class UserTest {
 
         Assert.assertEquals(activities, filteredActivities);
     }
+
+    @Test
+    public void testTotalCO2Saved() {
+
+    }
 }
