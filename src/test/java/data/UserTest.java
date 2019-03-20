@@ -412,14 +412,14 @@ public class UserTest {
         Assert.assertEquals(sum, activeUser.getTotalCO2Saved(), 0.1);
     }
 
-    private ArrayList<Activity> getFilteredTestList(Date toDate, Date fromDate, int diff) {
+    private ArrayList<Activity> getFilteredTestList(Date toDate, Date fromDate, int diff, int entries) {
         ArrayList<Activity> result = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(toDate);
         calendar.add(Calendar.DATE, -diff);
 
-        for (int i = 0; i < 100; ++i) {
+        for (int i = 0; i < entries; ++i) {
             Activity activity = new EatVegetarianMeal();
             activity.setDate(calendar.getTime());
             activeUser.addActivity(activity);
@@ -442,7 +442,7 @@ public class UserTest {
         calendar.add(Calendar.DATE, -20);
         Date fromDate = calendar.getTime();
 
-        ArrayList<Activity> expected = getFilteredTestList(toDate, fromDate, 40);
+        ArrayList<Activity> expected = getFilteredTestList(toDate, fromDate, 40, 100);
 
         Assert.assertEquals(expected, activeUser.filterActivitiesByDate(fromDate, toDate));
     }
@@ -454,7 +454,7 @@ public class UserTest {
         calendar.add(Calendar.DATE, -20);
         Date fromDate = calendar.getTime();
 
-        ArrayList<Activity> expected = getFilteredTestList(toDate, fromDate, 200);
+        ArrayList<Activity> expected = getFilteredTestList(toDate, fromDate, 200, 100);
 
         Assert.assertEquals(expected, activeUser.filterActivitiesByDate(fromDate, toDate));
     }
@@ -465,7 +465,29 @@ public class UserTest {
         Date toDate = calendar.getTime();;
         Date fromDate = calendar.getTime();
 
-        ArrayList<Activity> expected = getFilteredTestList(toDate, fromDate, 0);
+        ArrayList<Activity> expected = getFilteredTestList(toDate, fromDate, 0, 5);
+
+        Assert.assertEquals(expected, activeUser.filterActivitiesByDate(fromDate, toDate));
+    }
+
+    @Test
+    public void testFilterByDateAllInRage() {
+        Calendar calendar = Calendar.getInstance();
+        Date toDate = calendar.getTime();
+        calendar.add(Calendar.DATE, 10);
+        Date fromDate = calendar.getTime();
+
+        ArrayList<Activity> expected = getFilteredTestList(toDate, fromDate, 7, 5);
+
+        Assert.assertEquals(expected, activeUser.filterActivitiesByDate(fromDate, toDate));
+    }
+
+    @Test
+    public void testFilterByDateNoActivities() {
+        ArrayList<Activity> expected = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        Date toDate = calendar.getTime();;
+        Date fromDate = calendar.getTime();
 
         Assert.assertEquals(expected, activeUser.filterActivitiesByDate(fromDate, toDate));
     }

@@ -373,6 +373,11 @@ public class User {
             }
         }
 
+        // Edge case where no matching activities found
+        if (fromIndex == -1) {
+            return new ArrayList<>();
+        }
+
         // Return the appropriate sublist
         return activities.subList(fromIndex, toIndex + 1);
     }
