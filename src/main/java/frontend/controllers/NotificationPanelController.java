@@ -64,7 +64,7 @@ public class NotificationPanelController implements Initializable {
             }
             notifySelected = !notifySelected;
         });
-        Events.addImageSceneSwitch(logoutIcon, Main.getSignIn());
+        Events.addLogout(logoutIcon, Main.getSignIn());
         AnchorPane.setTopAnchor(notificationPane, 137.0);
         AnchorPane.setRightAnchor(notificationPane, 0.0);
     }
