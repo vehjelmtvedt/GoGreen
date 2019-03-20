@@ -5,6 +5,14 @@ import java.util.Date;
 
 public class DateUtils {
     /**.
+     * Returns the date of today
+     * @return - Date corresponding to today's date
+     */
+    public static Date dateToday() {
+        return Calendar.getInstance().getTime();
+    }
+
+    /**.
      * Return date which is x days ago the specified date
      * @param date - Date to use as reference
      * @param dateUnit - the date unit to use (DAY, WEEK, MONTH, YEAR)
