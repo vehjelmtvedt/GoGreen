@@ -4,11 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import data.Activity;
-import data.BuyLocallyProducedFood;
-import data.BuyNonProcessedFood;
-import data.BuyOrganicFood;
-import data.EatVegetarianMeal;
 import data.User;
+import frontend.gui.Events;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -76,6 +73,14 @@ public class ActivitiesController implements Initializable {
     private ImageView notificationIcon;
     @FXML
     private AnchorPane headerPane;
+    @FXML
+    private AnchorPane paneVegetarianMeal;
+    @FXML
+    private AnchorPane paneOrganicFood;
+    @FXML
+    private AnchorPane paneLocalFood;
+    @FXML
+    private AnchorPane paneNonProFood;
 
     /**
      * .
@@ -87,6 +92,19 @@ public class ActivitiesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        //add Activity Event on clicking ( plus add in history table )
+        Events.addActivityClick(paneVegetarianMeal, 1, loggedUser, activityTable);
+        Events.addActivityClick(paneOrganicFood, 2, loggedUser, activityTable);
+        Events.addActivityClick(paneLocalFood, 3, loggedUser, activityTable);
+        Events.addActivityClick(paneNonProFood, 4, loggedUser, activityTable);
+
+        //add hover events for Food buttons
+        Events.addActivityHover(paneVegetarianMeal, btnVegetarianMeal);
+        Events.addActivityHover(paneOrganicFood, btnOrganicFood);
+        Events.addActivityHover(paneLocalFood, btnLocalFood);
+        Events.addActivityHover(paneNonProFood, btnNonProFood);
+
+        //setup notification panel and navigation panel
         try {
             NavPanelController.setup(drawer, menu);
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
@@ -110,50 +128,23 @@ public class ActivitiesController implements Initializable {
     private void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnFood) {
             resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
-            btnFood.setStyle("-fx-background-color: #1aed9c;");
+            btnFood.setStyle("-fx-background-color: #00db00;");
             paneFood.toFront();
         } else if (event.getSource() == btnTransportation) {
             resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
-            btnTransportation.setStyle("-fx-background-color: #1aed9c;");
+            btnTransportation.setStyle("-fx-background-color: #00db00;");
             paneTransportation.toFront();
         } else if (event.getSource() == btnHistory) {
             resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
-            btnHistory.setStyle("-fx-background-color: #1aed9c;");
+            btnHistory.setStyle("-fx-background-color: #00db00;");
             paneHistory.toFront();
         } else {
             if (event.getSource() == btnHousehold) {
                 resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
-                btnHousehold.setStyle("-fx-background-color: #1aed9c;");
+                btnHousehold.setStyle("-fx-background-color: #00db00;");
                 paneHousehold.toFront();
             }
         }
-    }
-
-    /**
-     * .
-     * Event handling for adding Food Activities
-     *
-     * @param event User actionEvent as a parameter
-     */
-    @FXML
-    private void addFoodActivity(ActionEvent event) {
-        if (event.getSource() == btnVegetarianMeal) {
-            EatVegetarianMeal meal = new EatVegetarianMeal();
-            meal.performActivity(loggedUser);
-        } else if (event.getSource() == btnLocalFood) {
-            BuyLocallyProducedFood food = new BuyLocallyProducedFood();
-            food.performActivity(loggedUser);
-        } else if (event.getSource() == btnOrganicFood) {
-            BuyOrganicFood food = new BuyOrganicFood();
-            food.performActivity(loggedUser);
-        } else {
-            if (event.getSource() == btnNonProFood) {
-                BuyNonProcessedFood food = new BuyNonProcessedFood();
-                food.performActivity(loggedUser);
-            }
-        }
-        ObservableList<Activity> activities = getActivities(loggedUser);
-        activityTable.setItems(activities);
     }
 
     /**
@@ -163,10 +154,9 @@ public class ActivitiesController implements Initializable {
      * @param user Takes the user as a parameter
      * @return returns the Observable list
      */
-    private ObservableList<Activity> getActivities(User user) {
+    public static ObservableList<Activity> getActivities(User user) {
         return FXCollections.observableArrayList(user.getActivities());
     }
-
 
     /**
      * .

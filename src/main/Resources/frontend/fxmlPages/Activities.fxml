@@ -88,31 +88,36 @@
                         <Font size="50.0" />
                      </font>
                   </Text>
-                  <JFXTextField alignment="CENTER" layoutX="318.0" layoutY="214.0" maxWidth="178.0" minWidth="154.0" prefHeight="45.0" prefWidth="178.0" promptText="type number of km">
+                  <JFXTextField fx:id="inputDistance" alignment="CENTER" focusColor="GREEN" layoutX="318.0" layoutY="214.0" maxWidth="178.0" minWidth="154.0" prefHeight="45.0" prefWidth="178.0" promptText="type number of km">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton layoutX="549.0" layoutY="221.0" prefHeight="37.0" prefWidth="170.0" style="-fx-background-color: green;" text="by Bike">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton layoutX="549.0" layoutY="284.0" prefHeight="37.0" prefWidth="170.0" style="-fx-background-color: green;" text="by Bus">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton layoutX="549.0" layoutY="342.0" prefHeight="37.0" prefWidth="170.0" style="-fx-background-color: green;" text="by Car">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <Label alignment="CENTER" layoutX="147.0" layoutY="222.0" prefHeight="37.0" prefWidth="154.0" text="I travelled" textAlignment="CENTER">
+                  <Label alignment="CENTER" layoutX="217.0" layoutY="218.0" prefHeight="37.0" prefWidth="86.0" text="I travelled" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Label fx:id="lblDistanceValidate" alignment="CENTER" layoutX="318.0" layoutY="274.0" prefHeight="21.0" prefWidth="178.0" text="Please enter a number " textFill="RED" />
+                  <VBox layoutX="534.0" layoutY="214.0" prefHeight="200.0" prefWidth="212.0" spacing="20.0">
+                     <children>
+                        <JFXButton fx:id="btnBike" buttonType="RAISED" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Bike">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnBus" buttonType="RAISED" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Bus">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnCar" buttonType="RAISED" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Car">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </VBox>
                </children>
             </Pane>
             <Pane fx:id="paneFood" layoutX="-17.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -121,9 +126,9 @@
                      <children>
                         <HBox alignment="CENTER" layoutX="2.0" layoutY="232.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="0.0">
                            <children>
-                              <AnchorPane prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                              <AnchorPane fx:id="paneVegetarianMeal" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
                                  <children>
-                                    <JFXButton fx:id="btnVegetarianMeal" layoutY="238.0" onAction="#addFoodActivity" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Add vegetarian meal" />
+                                    <JFXButton fx:id="btnVegetarianMeal" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Add vegetarian meal" />
                                     <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../Pics/vegMealIcon.png" />
@@ -134,40 +139,40 @@
                                     <DropShadow />
                                  </effect>
                               </AnchorPane>
-                              <AnchorPane prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                              <AnchorPane fx:id="paneOrganicFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
                                  <children>
                                     <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../Pics/organicFoodIcon.jpg" />
                                        </image>
                                     </ImageView>
-                                    <JFXButton fx:id="btnOrganicFood" layoutY="238.0" onAction="#addFoodActivity" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy organic food" />
+                                    <JFXButton fx:id="btnOrganicFood" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy organic food" />
                                  </children>
                                  <effect>
                                     <DropShadow />
                                  </effect>
                               </AnchorPane>
-                              <AnchorPane prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                              <AnchorPane fx:id="paneLocalFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
                                  <children>
                                     <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../Pics/localFoodIcon.png" />
                                        </image>
                                     </ImageView>
-                                    <JFXButton fx:id="btnLocalFood" layoutY="238.0" onAction="#addFoodActivity" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy locally produced food" />
+                                    <JFXButton fx:id="btnLocalFood" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy locally produced food" />
                                  </children>
                                  <effect>
                                     <DropShadow />
                                  </effect>
                               </AnchorPane>
-                              <AnchorPane prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                              <AnchorPane fx:id="paneNonProFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
                                  <children>
                                     <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../Pics/processedFoodIcon.png" />
                                        </image>
                                     </ImageView>
-                                    <JFXButton fx:id="btnNonProFood" buttonType="RAISED" layoutY="238.0" onAction="#addFoodActivity" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy non-processed food" />
+                                    <JFXButton fx:id="btnNonProFood" buttonType="RAISED" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy non-processed food" />
                                  </children>
                                  <effect>
                                     <DropShadow />
