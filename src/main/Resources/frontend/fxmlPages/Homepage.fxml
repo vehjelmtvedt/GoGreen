@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
    <children>
-      <AnchorPane prefHeight="137.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="headerPane" prefHeight="137.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label alignment="BASELINE_CENTER" layoutX="582.0" layoutY="25.0" text="GoGreen" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="582.0" AnchorPane.rightAnchor="582.0" AnchorPane.topAnchor="32.0">
                <font>
@@ -19,35 +16,8 @@
                </font>
             </Label>
             <JFXHamburger fx:id="menu" layoutX="26.0" layoutY="59.0" />
-            <HBox layoutX="1280.0" layoutY="56.0" prefHeight="47.0" prefWidth="102.0" AnchorPane.rightAnchor="14.0">
-               <children>
-                  <ImageView fx:id="notificationIcon" fitHeight="44.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Pics/notificationIconClose.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="logoutIcon" fitHeight="44.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Pics/logoutIcon.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
          </children>
       </AnchorPane>
       <JFXDrawer fx:id="drawer" layoutY="137.0" prefHeight="719.0" prefWidth="244.0" />
-      <AnchorPane fx:id="notificationPane" layoutX="1063.0" layoutY="137.0" prefHeight="438.0" prefWidth="331.0" style="-fx-border-color: #c6c6c6; -fx-border-radius: 5;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
-         <children>
-            <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="65.0" prefWidth="327.0" style="-fx-border-width: 2; -fx-border-style: none none solid none; -fx-border-color: #c6c6c6;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label layoutX="6.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Notifications" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="24.0" />
-                  <Label fx:id="markAllRead" layoutX="257.0" layoutY="26.0" text="Mark All as Read" textFill="#0085ff" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="24.0" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>
