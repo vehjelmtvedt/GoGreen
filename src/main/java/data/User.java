@@ -345,33 +345,36 @@ public class User {
      * @return - filtered list of activities that fall in the date range
      */
     public List<Activity> filterActivitiesByDate(Date from, Date to) {
-        ArrayList<Activity> filteredActivities = new ArrayList<>();
-
         // Start from the end of the list (since most recent activity is at the end of the list)
-        int startIndex = activities.size() - 1;
+        int toIndex = activities.size() - 1;
 
         // We start by looking at the dates from the end of the list until we find the
         // first activity that is performed in our time range (and we know that the list is sorted
         // by date)
-        while (startIndex >= 0 && activities.get(startIndex).getDate().after(to)) {
-            startIndex--;
+        while (toIndex >= 0 && activities.get(toIndex).getDate().after(to)) {
+            toIndex--;
         }
+
+        int fromIndex = toIndex;
 
         // Now that we have the index of the last valid activity, we now loop
         // until we find an activity that is not in the range of the dates
-        for (int i = startIndex; i >= 0; --i) {
-            Activity activity = activities.get(i);
+        for (; fromIndex > 0; --fromIndex) {
+            Activity activity = activities.get(fromIndex - 1);
 
             // Activity is not in our range, we may break, since all the other
             // preceding activities are also before the "from" date
             if (activity.getDate().before(from)) {
+                if (fromIndex == toIndex) { // edge case where no activities fit the range
+                    return new ArrayList<>();
+                }
+
                 break;
             }
-
-            filteredActivities.add(activity);
         }
 
-        return filteredActivities;
+        // Return the appropriate sublist
+        return activities.subList(fromIndex, toIndex + 1);
     }
 
     // ---------- CO2 METHODS ----------

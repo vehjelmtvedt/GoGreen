@@ -172,6 +172,11 @@ public abstract class Activity {
         return sum;
     }
 
+    @Override
+    public String toString() {
+        return getDate().toString();
+    }
+
     /**
      * performs the activity and updates the user object.
      * @param user user currently logged in
