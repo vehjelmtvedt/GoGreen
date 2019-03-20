@@ -9,7 +9,6 @@ import data.BuyNonProcessedFood;
 import data.BuyOrganicFood;
 import data.EatVegetarianMeal;
 import data.User;
-import frontend.gui.Events;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,13 +70,10 @@ public class ActivitiesController implements Initializable {
     private JFXDrawer drawer;
     @FXML
     private AnchorPane mainPane;
-
     @FXML
     private ImageView logoutIcon;
-
     @FXML
     private ImageView notificationIcon;
-
     @FXML
     private AnchorPane headerPane;
 
@@ -90,20 +86,10 @@ public class ActivitiesController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Events.addButtonCursor(btnFood);
-        Events.addButtonCursor(btnHistory);
-        Events.addButtonCursor(btnHousehold);
-        Events.addButtonCursor(btnLocalFood);
-        Events.addButtonCursor(btnNonProFood);
-        Events.addButtonCursor(btnOrganicFood);
-        Events.addButtonCursor(btnTransportation);
-        Events.addButtonCursor(btnVegetarianMeal);
-        Events.addButtonCursor(btnFood);
-        Events.addMenuCursor(menu);
-
 
         try {
             NavPanelController.setup(drawer, menu);
+            NotificationPanelController.addNotificationPanel(headerPane, mainPane);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,19 +104,8 @@ public class ActivitiesController implements Initializable {
         if (loggedUser.getActivities().isEmpty()) {
             activityTable.setPlaceholder(new Label("No previous activities"));
         }
-        try {
-            NotificationPanelController.addNotificationPanel(headerPane, mainPane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
-    /**
-     * .
-     * Handles user's button clicking
-     *
-     * @param event Takes the actionEvent as a parameter
-     */
     @FXML
     private void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnFood) {
@@ -210,16 +185,20 @@ public class ActivitiesController implements Initializable {
         btnHistory.setStyle("-fx-background-color: transparent;");
     }
 
-    /**.
+    /**
+     * .
      * Sets the current logged in User to the one that was passed
+     *
      * @param passedUser Logged in current user
      */
     public static void setUser(User passedUser) {
         loggedUser = passedUser;
     }
 
-    /**.
+    /**
+     * .
      * Get the logged in User
+     *
      * @return logged User
      */
     public static User getUser() {

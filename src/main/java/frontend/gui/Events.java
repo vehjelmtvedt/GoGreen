@@ -4,17 +4,28 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class Events {
-    public static void addImageSceneSwitch(ImageView image, Scene nextScene) {
-        image.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->
-                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), nextScene));
+    /**.
+     * Add logout event handling
+     * @param image image to add logout option to
+     * @param nextScene Scene after logout
+     */
+    public static void addLogout(ImageView image, Scene nextScene) {
+        image.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            image.setImage(new Image("frontend/Pics/logoutIconOpen.png"));
+            ConfirmBox.logout(Main.getPrimaryStage(), nextScene, image, "Are"
+                    + "you sure you want to logout?");
+        });
     }
 
-    /**.
+    /**
+     * .
      * Add styledCursor on ImageViews
+     *
      * @param image image to add events to
      */
     public static void addImageCursor(ImageView image) {
@@ -26,8 +37,10 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add styledCursor on Buttons
+     *
      * @param button button to add events to
      */
     public static void addButtonCursor(JFXButton button) {
@@ -39,8 +52,10 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add styledCursor on menu burger
+     *
      * @param menu menu to add events to
      */
     public static void addMenuCursor(JFXHamburger menu) {
@@ -52,8 +67,10 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add hover events to button
+     *
      * @param button button to style
      */
     public static void addButtonHover(JFXButton button) {
