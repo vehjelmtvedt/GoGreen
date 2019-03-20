@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
@@ -31,6 +33,8 @@ public class DialogController implements Initializable {
     private Label heading;
     @FXML
     private Text body;
+    @FXML
+    private ImageView icon;
 
 
     @Override
@@ -58,5 +62,10 @@ public class DialogController implements Initializable {
 
     public JFXDialog getDialog() {
         return this.dialog;
+    }
+
+    public void setIcon(String src) {
+        icon.setImage(new Image("frontend/Pics/" + src + ".png"));
+
     }
 }

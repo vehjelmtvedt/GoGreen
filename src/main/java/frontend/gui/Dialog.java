@@ -13,9 +13,9 @@ import java.io.IOException;
 public class Dialog {
 
 
-    public static void show(AnchorPane mainPane, String headerText, String bodyText, String buttonText) throws IOException {
+    public static void show(AnchorPane mainPane, String headerText, String bodyText, String buttonText, String icon) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Dialog.class.getResource("/frontend/fxmlPages/testDialog.fxml"));
+        loader.setLocation(Dialog.class.getResource("/frontend/fxmlPages/Dialog.fxml"));
         JFXDialog dialog = loader.load();
 
 
@@ -23,6 +23,7 @@ public class Dialog {
         controller.setHeading(headerText);
         controller.setBody(bodyText);
         controller.setButtonText(buttonText);
+        controller.setIcon(icon);
         StackPane pane = new StackPane();
         pane.autosize();
         controller.setDialogParent(pane);

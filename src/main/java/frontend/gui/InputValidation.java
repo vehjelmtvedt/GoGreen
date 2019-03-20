@@ -47,7 +47,7 @@ public class InputValidation {
 //                    "Welcome to GoGreen, " + loggedUser.getFirstName() + " "
 //                            + loggedUser.getLastName() + "!");
             Dialog.show(form, "Login successful", "Welcome to GoGreen, " + loggedUser.getFirstName() +
-                    " " + loggedUser.getLastName() + "!", "DISMISS");
+                    " " + loggedUser.getLastName() + "!", "DISMISS", "sucess");
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);
@@ -87,7 +87,7 @@ public class InputValidation {
         } else {
 //            General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
 //                    "Login failed", "Incorrect credentials. Try again");
-            Dialog.show(form, "Login failed", "Incorrect credentials. Try again", "DISMISS");
+            Dialog.show(form, "Login failed", "Incorrect credentials. Try again", "DISMISS", "error");
         }
     }
 
