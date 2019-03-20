@@ -72,4 +72,14 @@ public class ActivityTest {
         List<Activity> expected = activityList.stream().sorted(Activity.getClassComparator()).collect(Collectors.toList());
         Assert.assertEquals(expected, sortedList);
     }
+
+    @Test
+    public void testSumNull() {
+        Assert.assertEquals(0.0, Activity.getSum(null), 0);
+    }
+
+    @Test
+    public void testSumEmpty() {
+        Assert.assertEquals(0.0, Activity.getSum(null), 0);
+    }
 }

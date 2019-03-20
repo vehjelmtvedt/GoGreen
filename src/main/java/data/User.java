@@ -321,6 +321,8 @@ public class User {
                 .collect(Collectors.toList()); // return result as list
     }
 
+
+
     /*
      * Removes a friend from the friends list
      *
