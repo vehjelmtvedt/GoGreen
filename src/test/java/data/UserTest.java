@@ -521,4 +521,12 @@ public class UserTest {
 
         Assert.assertEquals(expected, activeUser.getTotalCO2Saved(DateUnit.MONTH), 0.1);
     }
+
+    @Test
+    public void testFilterDuplicates() {
+        addActivitiesToUser(activeUser, 0, 243, 0);
+        ArrayList<Activity> expected = getExpectedDateFilteredList(activeUser.getActivities(), today, today);
+
+        Assert.assertEquals(expected, activeUser.filterActivitiesByDate(today, today));
+    }
 }
