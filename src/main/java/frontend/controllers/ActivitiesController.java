@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -68,10 +67,6 @@ public class ActivitiesController implements Initializable {
     @FXML
     private AnchorPane mainPane;
     @FXML
-    private ImageView logoutIcon;
-    @FXML
-    private ImageView notificationIcon;
-    @FXML
     private AnchorPane headerPane;
     @FXML
     private AnchorPane paneVegetarianMeal;
@@ -91,6 +86,15 @@ public class ActivitiesController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //add hover for burger menu
+        Events.addBurgerCursor(menu);
+
+        //add hover events for Activity Category buttons
+        Events.addButtonCursor(btnFood);
+        Events.addButtonCursor(btnTransportation);
+        Events.addButtonCursor(btnHousehold);
+        Events.addButtonCursor(btnHistory);
 
         //add Activity Event on clicking ( plus add in history table )
         Events.addActivityClick(paneVegetarianMeal, 1, loggedUser, activityTable);

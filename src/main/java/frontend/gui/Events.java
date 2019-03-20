@@ -1,6 +1,9 @@
 package frontend.gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.BuyLocallyProducedFood;
 import data.BuyNonProcessedFood;
@@ -12,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -103,7 +107,7 @@ public class Events {
      *
      * @param button button to add events to
      */
-    public static void addButtonCursor(Button button) {
+    public static void addNavButtonCursor(Button button) {
         button.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
             button.setCursor(Cursor.HAND);
             button.setOpacity(1);
@@ -113,19 +117,77 @@ public class Events {
             button.setOpacity(0.75);
         });
     }
-//
-//    /**
-//     * .
-//     * Add styledCursor on menu burger
-//     *
-//     * @param menu menu to add events to
-//     */
-//    public static void addMenuCursor(JFXHamburger menu) {
-//        menu.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
-//            menu.setCursor(Cursor.HAND);
-//        });
-//        menu.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
-//            menu.setCursor(Cursor.DEFAULT);
-//        });
-//    }
+
+    /**.
+     * Add styledCursor on Buttons
+     * @param button button to add events to
+     */
+    public static void addButtonCursor(JFXButton button) {
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            button.setCursor(Cursor.HAND);
+        });
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            button.setCursor(Cursor.DEFAULT);
+        });
+    }
+
+    /**
+     * .
+     * Add styledCursor on menu burger
+     *
+     * @param menu menu to add events to
+     */
+    public static void addBurgerCursor(JFXHamburger menu) {
+        menu.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            menu.setCursor(Cursor.HAND);
+        });
+        menu.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            menu.setCursor(Cursor.DEFAULT);
+        });
+    }
+
+    /**
+     * .
+     * Add styledCursor on label
+     *
+     * @param label label to add events to
+     */
+    public static void addLabelCursor(Label label) {
+        label.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            label.setCursor(Cursor.HAND);
+        });
+        label.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            label.setCursor(Cursor.DEFAULT);
+        });
+    }
+
+    /**
+     * .
+     * Add styledCursor on field
+     *
+     * @param field field to add events to
+     */
+    public static void addInputTextCursor(JFXTextField field) {
+        field.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            field.setCursor(Cursor.TEXT);
+        });
+        field.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            field.setCursor(Cursor.DEFAULT);
+        });
+    }
+
+    /**
+     * .
+     * Add styledCursor on field
+     *
+     * @param field field to add events to
+     */
+    public static void addInputPassCursor(JFXPasswordField field) {
+        field.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            field.setCursor(Cursor.TEXT);
+        });
+        field.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            field.setCursor(Cursor.DEFAULT);
+        });
+    }
 }

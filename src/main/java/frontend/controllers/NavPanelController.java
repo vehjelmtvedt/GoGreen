@@ -35,10 +35,10 @@ public class NavPanelController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //add Event handling on hovering over buttons on the navPanel
-        Events.addButtonCursor(home);
-        Events.addButtonCursor(activity);
-        Events.addButtonCursor(friends);
-        Events.addButtonCursor(myProfile);
+        Events.addNavButtonCursor(home);
+        Events.addNavButtonCursor(activity);
+        Events.addNavButtonCursor(friends);
+        Events.addNavButtonCursor(myProfile);
 
         //TODO: Add scene change to profile page
         home.setOnAction(e -> StageSwitcher.sceneSwitch(
