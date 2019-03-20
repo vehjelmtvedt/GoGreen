@@ -7,28 +7,32 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<JFXDialog fx:id="dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.DialogController">
+<JFXDialog fx:id="dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.DialogController">
    <children>
-      <JFXDialogLayout fx:id="dialogLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="509.0" style="-fx-background-color: white;">
+      <JFXDialogLayout fx:id="dialogLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="550.0" style="-fx-background-color: white; -fx-border-color: green; -fx-border-width: 3px 1px 0px 1px;">
          <children>
-            <AnchorPane fx:id="contentPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="204.0" prefWidth="510.0" style="-fx-background-color: white;">
+            <AnchorPane fx:id="contentPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="550.0" style="-fx-border-color: green; -fx-background-color: white; -fx-border-style: hidden solid solid solid; -fx-border-width: 0px 3px 3px 3px;">
                <children>
-                  <Text fx:id="body" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry." wrappingWidth="531.2060546875" />
-                  <Label fx:id="heading" layoutX="27.0" layoutY="14.0" text="Heading" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="14.0">
-                     <font>
-                        <Font size="32.0" />
-                     </font>
-                  </Label>
-                  <JFXButton fx:id="closeButton" layoutX="461.0" layoutY="253.0" prefHeight="48.0" prefWidth="158.0" text="ACCEPT" textFill="#0033ff" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="28.0" />
-                  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="34.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Pics/sucess.png" />
-                     </image>
-                  </ImageView>
+                  <Text fx:id="body" layoutX="27.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry." wrappingWidth="531.2060546875" />
+                  <JFXButton fx:id="closeButton" layoutX="324.0" layoutY="132.0" prefHeight="48.0" prefWidth="158.0" text="ACCEPT" textFill="#0033ff" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="28.0" />
+                  <HBox layoutX="26.0" prefHeight="100.0" prefWidth="483.0" spacing="20.0">
+                     <children>
+                        <Label fx:id="heading" text="Heading">
+                           <font>
+                              <Font size="32.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Pics/sucess.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
          </children>
