@@ -98,7 +98,7 @@ public class ActivitiesController implements Initializable {
         Events.addActivityHover(paneLocalFood, btnLocalFood);
         Events.addActivityHover(paneNonProFood, btnNonProFood);
 
-        //setup notification panel and navigation panel
+        //setup notification and navigation panels
         try {
             NavPanelController.setup(drawer, menu);
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
