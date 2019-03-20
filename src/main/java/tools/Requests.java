@@ -1,6 +1,5 @@
 package tools;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import data.Achievement;
 import data.Activity;
@@ -192,16 +191,16 @@ public class Requests {
                 .fromHttpUrl("http://localhost:8080/getAllAchievements");
 
         RestTemplate restTemplate = new RestTemplate();
-        String test = restTemplate.getForObject
-                (uriBuilder.toUriString(),String.class);
+        String responseJson = restTemplate.getForObject(
+                uriBuilder.toUriString(),String.class);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             List<Achievement> items = objectMapper.readValue(
-                    test,
-                    objectMapper.getTypeFactory().constructParametricType
-                            (List.class, Achievement.class));
+                    responseJson,
+                    objectMapper.getTypeFactory().constructParametricType(
+                            List.class, Achievement.class));
             return items;
-        } catch(IOException E) {
+        } catch (IOException E) {
             System.out.println(E);
             return null;
         }
