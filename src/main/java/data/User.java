@@ -227,6 +227,20 @@ public class User {
         return userString.toString();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        User user = (User) obj;
+        return email.equals(user.email);
+    }
+
+    // ---------- FRIEND METHODS ----------
+
     /**
      * Adds a friend to friends list.
      *
@@ -255,17 +269,7 @@ public class User {
         friendRequests.remove(username);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        User user = (User) obj;
-        return email.equals(user.email);
-    }
+    // ---------- ACTIVITY METHODS ----------
 
     /**.
      * Adds a new activity to user's activities list
@@ -299,6 +303,8 @@ public class User {
 
         return result;
     }
+
+    // ---------- FILTER METHODS ----------
 
     /**.
      * Filters activities by category
@@ -334,39 +340,13 @@ public class User {
     }
 
     /**.
-     * Returns the total CO2 saved by the user
-     * @return - total CO2 saved
-     */
-    public double getTotalCO2Saved() {
-        double sum = 0.0;
-
-        for (Activity activity : activities) {
-            sum += activity.getCarbonSaved();
-        }
-
-        return sum;
-    }
-
-    /**.
-     * Returns the CO2 saved over th specified time period
-     * @param dateUnit - Time period (date unit)
-     * @return - total CO2 saved
-     */
-    public double getTotalCO2Saved(DateUnit dateUnit) {
-        Date today = DateUtils.getInstance().dateToday();
-        Date startDate = DateUtils.getInstance().getDateBefore(today, dateUnit);
-
-        return getTotalCO2Saved(startDate, today);
-    }
-
-    /**.
-     * Helper method for Total CO2 saved in time period
-     * @param from - Date to start calculation from
+     * Filters activities that have been done in the specified time range
+     * @param from - Start date
      * @param to - End date
-     * @return - total CO2 saved over time period
+     * @return - filtered list of activities that fall in the date range
      */
-    private double getTotalCO2Saved(Date from, Date to) {
-        double sum = 0.0;
+    public List<Activity> filterActivitiesByDate(Date from, Date to) {
+        ArrayList<Activity> filteredActivities = new ArrayList<>();
 
         // Start from the end of the list (since most recent activity is at the end of the list)
         int startIndex = activities.size() - 1;
@@ -385,9 +365,48 @@ public class User {
 
             // Activity is not in our range, we may break, since all the other
             // preceding activities are also before the "from" date
-            if (activity.getDate().before(from))
+            if (activity.getDate().before(from)) {
                 break;
+            }
 
+            filteredActivities.add(activity);
+        }
+
+        return filteredActivities;
+    }
+
+    // ---------- CO2 METHODS ----------
+
+    /**.
+     * Returns the total CO2 saved by the user
+     * @return - total CO2 saved
+     */
+    public double getTotalCO2Saved() {
+        return getTotalCO2Saved(activities);
+    }
+
+    /**.
+     * Returns the CO2 saved over th specified time period
+     * @param dateUnit - Time period (date unit)
+     * @return - total CO2 saved
+     */
+    public double getTotalCO2Saved(DateUnit dateUnit) {
+        Date today = DateUtils.getInstance().dateToday();
+        Date startDate = DateUtils.getInstance().getDateBefore(today, dateUnit);
+        List<Activity> filteredActivities = filterActivitiesByDate(startDate, today);
+
+        return getTotalCO2Saved(filteredActivities);
+    }
+
+    /**.
+     * Helper method to calculate the total CO2 saved by a list of activities
+     * @param activityList - List of activities
+     * @return - total CO2 saved by all the activities
+     */
+    private double getTotalCO2Saved(List<Activity> activityList) {
+        double sum = 0.0;
+
+        for (Activity activity : activityList) {
             sum += activity.getCarbonSaved();
         }
 
