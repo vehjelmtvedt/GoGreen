@@ -82,4 +82,22 @@ public class ActivityTest {
     public void testSumEmpty() {
         Assert.assertEquals(0.0, Activity.getSum(null), 0);
     }
+
+    @Test
+    public void testActivitySum() {
+        ArrayList<Activity> activities = new ArrayList<>();
+
+        double sum = 0.0;
+        for (int i = 0; i < 100; ++i) {
+            Activity activity = new EatVegetarianMeal();
+
+            double co2 = (i+1)*10;
+            activity.setCarbonSaved(co2);
+
+            activities.add(activity);
+            sum += co2;
+        }
+
+        Assert.assertEquals(sum, Activity.getSum(activities), 0.1);
+    }
 }
