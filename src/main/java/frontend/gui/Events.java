@@ -11,6 +11,7 @@ import frontend.controllers.ActivitiesController;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -96,20 +97,22 @@ public class Events {
         });
     }
 
-//    /**
-//     * .
-//     * Add styledCursor on Buttons
-//     *
-//     * @param button button to add events to
-//     */
-//    public static void addButtonCursor(JFXButton button) {
-//        button.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
-//            button.setCursor(Cursor.HAND);
-//        });
-//        button.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
-//            button.setCursor(Cursor.DEFAULT);
-//        });
-//    }
+    /**
+     * .
+     * Add styledCursor on Buttons
+     *
+     * @param button button to add events to
+     */
+    public static void addButtonCursor(Button button) {
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            button.setCursor(Cursor.HAND);
+            button.setOpacity(1);
+        });
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            button.setCursor(Cursor.DEFAULT);
+            button.setOpacity(0.75);
+        });
+    }
 //
 //    /**
 //     * .
