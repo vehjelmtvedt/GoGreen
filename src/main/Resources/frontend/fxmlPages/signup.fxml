@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -57,11 +58,17 @@
                <font>
                   <Font name="PingFang HK Regular" size="28.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label fx:id="loginForward" layoutX="75.0" layoutY="49.0" text="Login /" textFill="#868282" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="49.0">
                <font>
                   <Font size="43.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
             <Label layoutX="231.0" layoutY="49.0" text="Sign up" textFill="#379b1e" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="49.0">
                <font>
@@ -69,13 +76,34 @@
                </font>
             </Label>
             <Label layoutX="214.0" layoutY="486.0" prefHeight="39.0" prefWidth="135.0" style="-fx-background-image: url('/Users/vetle/Desktop/OOPP/template/src/main/Resources/frontend/Pics/email.png/Users/vetle/Desktop/OOPP/template/src/main/Resources/frontend/Pics/email.png');" />
-            <JFXTextField fx:id="firstNameField" focusColor="#379b1e" layoutX="78.0" layoutY="169.0" prefHeight="44.0" prefWidth="432.0" promptText="First name" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="146.0" />
-            <JFXTextField fx:id="lastNameField" focusColor="#379b1e" layoutX="72.0" layoutY="252.0" prefHeight="44.0" prefWidth="432.0" promptText="Last name" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="146.0" />
-            <JFXTextField fx:id="emailField" focusColor="#379b1e" layoutX="80.0" layoutY="335.0" prefHeight="44.0" prefWidth="432.0" promptText="Email" />
-            <JFXTextField fx:id="usernameField" focusColor="#379b1e" layoutX="90.0" layoutY="418.0" prefHeight="44.0" prefWidth="432.0" promptText="Username" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="146.0" />
-            <JFXPasswordField fx:id="passwordField" focusColor="#379b1e" layoutX="121.0" layoutY="518.0" minHeight="-Infinity" minWidth="-Infinity" promptText="Password" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="146.0" />
-            <JFXPasswordField fx:id="confirmPasswordField" focusColor="#379b1e" layoutX="81.0" layoutY="601.0" minHeight="-Infinity" minWidth="-Infinity" promptText="Confirm Password" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="146.0" />
-            <JFXTextField fx:id="ageField" focusColor="#379b1e" layoutX="75.0" layoutY="684.0" promptText="Age" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="146.0" />
+            <JFXTextField fx:id="firstNameField" focusColor="#379b1e" layoutX="78.0" layoutY="169.0" prefHeight="44.0" prefWidth="432.0" promptText="First name" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="146.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXTextField>
+            <JFXTextField fx:id="lastNameField" focusColor="#379b1e" layoutX="72.0" layoutY="252.0" prefHeight="44.0" prefWidth="432.0" promptText="Last name" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="146.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXTextField>
+            <JFXTextField fx:id="emailField" focusColor="#379b1e" layoutX="80.0" layoutY="335.0" prefHeight="44.0" prefWidth="432.0" promptText="Email">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXTextField>
+            <JFXTextField fx:id="usernameField" focusColor="#379b1e" layoutX="90.0" layoutY="418.0" prefHeight="44.0" prefWidth="432.0" promptText="Username" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="146.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXTextField>
+            <JFXPasswordField fx:id="passwordField" focusColor="#379b1e" layoutX="121.0" layoutY="518.0" minHeight="-Infinity" minWidth="-Infinity" promptText="Password" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="146.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXPasswordField>
+            <JFXPasswordField fx:id="confirmPasswordField" focusColor="#379b1e" layoutX="81.0" layoutY="601.0" minHeight="-Infinity" minWidth="-Infinity" promptText="Confirm Password" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="146.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXPasswordField>
+            <JFXTextField fx:id="ageField" focusColor="#379b1e" layoutX="75.0" layoutY="684.0" promptText="Age" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="146.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXTextField>
             <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="475.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="150.0">
                <image>
                   <Image url="@../Pics/user.png" />

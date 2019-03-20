@@ -3,7 +3,6 @@ package frontend.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import frontend.gui.Events;
 import frontend.gui.InputValidation;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
@@ -62,16 +61,6 @@ public class SignupController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //add hover events to different elements in page
-        Events.addInputTextCursor(firstNameField);
-        Events.addInputTextCursor(lastNameField);
-        Events.addInputTextCursor(emailField);
-        Events.addInputTextCursor(ageField);
-        Events.addInputPassCursor(passwordField);
-        Events.addInputPassCursor(confirmPasswordField);
-        Events.addButtonCursor(signupButton);
-        Events.addLabelCursor(loginForward);
-
         JFXTextField[] nameFields = new JFXTextField[2];
         nameFields[0] = firstNameField;
         nameFields[1] = lastNameField;

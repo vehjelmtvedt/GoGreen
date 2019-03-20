@@ -10,7 +10,6 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import data.LoginDetails;
 import data.User;
-import frontend.gui.Events;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -77,9 +76,6 @@ public class FriendspageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //add hover for burger menu
-        Events.addBurgerCursor(menu);
-
         try {
             NavPanelController.setup(drawer, menu);
         } catch (IOException e) {

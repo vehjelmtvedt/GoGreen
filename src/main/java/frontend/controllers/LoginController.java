@@ -3,7 +3,6 @@ package frontend.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import frontend.gui.Events;
 import frontend.gui.InputValidation;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
@@ -44,12 +43,6 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //add hover events for different elements
-        Events.addButtonCursor(loginButton);
-        Events.addLabelCursor(signupForward);
-        Events.addInputTextCursor(usernameField);
-        Events.addInputPassCursor(passwordField);
-
         loginButton.setOnAction(e -> {
             InputValidation.signInValidate(usernameField,
                     passwordField, mainPane);

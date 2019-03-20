@@ -86,16 +86,6 @@ public class ActivitiesController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //add hover for burger menu
-        Events.addBurgerCursor(menu);
-
-        //add hover events for Activity Category buttons
-        Events.addButtonCursor(btnFood);
-        Events.addButtonCursor(btnTransportation);
-        Events.addButtonCursor(btnHousehold);
-        Events.addButtonCursor(btnHistory);
-
         //add Activity Event on clicking ( plus add in history table )
         Events.addActivityClick(paneVegetarianMeal, 1, loggedUser, activityTable);
         Events.addActivityClick(paneOrganicFood, 2, loggedUser, activityTable);
@@ -128,8 +118,14 @@ public class ActivitiesController implements Initializable {
         }
     }
 
+    //TRANSPORTATION METHODS
+    private void addTransportActivity() {
+
+    }
+
+    //GENERAL METHODS
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void handleCategory(ActionEvent event) {
         if (event.getSource() == btnFood) {
             resetButtonColors(btnFood, btnTransportation, btnHousehold, btnHistory);
             btnFood.setStyle("-fx-background-color: #00db00;");
@@ -178,6 +174,7 @@ public class ActivitiesController implements Initializable {
         btnHousehold.setStyle("-fx-background-color: transparent;");
         btnHistory.setStyle("-fx-background-color: transparent;");
     }
+
 
     /**
      * .

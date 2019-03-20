@@ -3,7 +3,6 @@ package frontend.controllers;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
-import frontend.gui.Events;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -24,8 +23,6 @@ public class HomepageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //add hover for burger menu
-        Events.addBurgerCursor(menu);
         try {
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
             NavPanelController.setup(drawer, menu);
