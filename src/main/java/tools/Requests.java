@@ -1,5 +1,8 @@
 package tools;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import data.Achievement;
 import data.Activity;
 import data.LoginDetails;
 import data.User;
@@ -9,6 +12,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Requests {
@@ -177,5 +181,30 @@ public class Requests {
         };
         return restTemplate.exchange(url,
                 HttpMethod.POST, new HttpEntity<>(loginDetails), typeRef).getBody();
+    }
+
+    /**
+     * Request to get all achievements.
+     * @return a list of achievements
+     */
+    public static List<Achievement> getAllAchievements() {
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder
+                .fromHttpUrl("http://localhost:8080/getAllAchievements");
+
+        RestTemplate restTemplate = new RestTemplate();
+        String test = restTemplate.getForObject
+                (uriBuilder.toUriString(),String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            List<Achievement> items = objectMapper.readValue(
+                    test,
+                    objectMapper.getTypeFactory().constructParametricType
+                            (List.class, Achievement.class));
+            return items;
+        } catch(IOException E) {
+            System.out.println(E);
+            return null;
+        }
+
     }
 }
