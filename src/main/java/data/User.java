@@ -1,6 +1,8 @@
 package data;
 
 import org.springframework.data.annotation.Id;
+import tools.DateUnit;
+import tools.DateUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -331,6 +333,66 @@ public class User {
                 .collect(Collectors.toList());*/ // return result as list
     }
 
+    /**.
+     * Returns the total CO2 saved by the user
+     * @return - total CO2 saved
+     */
+    public double getTotalCO2Saved() {
+        double sum = 0.0;
+
+        for (Activity activity : activities) {
+            sum += activity.getCarbonSaved();
+        }
+
+        return sum;
+    }
+
+    /**.
+     * Returns the CO2 saved over th specified time period
+     * @param dateUnit - Time period (date unit)
+     * @return - total CO2 saved
+     */
+    public double getTotalCO2Saved(DateUnit dateUnit) {
+        Date today = DateUtils.getInstance().dateToday();
+        Date startDate = DateUtils.getInstance().getDateBefore(today, dateUnit);
+
+        return getTotalCO2Saved(startDate, today);
+    }
+
+    /**.
+     * Helper method for Total CO2 saved in time period
+     * @param from - Date to start calculation from
+     * @param to - End date
+     * @return - total CO2 saved over time period
+     */
+    private double getTotalCO2Saved(Date from, Date to) {
+        double sum = 0.0;
+
+        // Start from the end of the list (since most recent activity is at the end of the list)
+        int startIndex = activities.size() - 1;
+
+        // We start by looking at the dates from the end of the list until we find the
+        // first activity that is performed in our time range (and we know that the list is sorted
+        // by date)
+        while (startIndex >= 0 && activities.get(startIndex).getDate().after(to)) {
+            startIndex--;
+        }
+
+        // Now that we have the index of the last valid activity, we now loop
+        // until we find an activity that is not in the range of the dates
+        for (int i = startIndex; i >= 0; --i) {
+            Activity activity = activities.get(i);
+
+            // Activity is not in our range, we may break, since all the other
+            // preceding activities are also before the "from" date
+            if (activity.getDate().before(from))
+                break;
+
+            sum += activity.getCarbonSaved();
+        }
+
+        return sum;
+    }
 
 
     /*
