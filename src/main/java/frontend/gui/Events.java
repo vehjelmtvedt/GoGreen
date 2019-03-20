@@ -11,6 +11,7 @@ import frontend.controllers.ActivitiesController;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -47,6 +48,15 @@ public class Events {
         });
         pane.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
             button.setStyle("-fx-background-color: green;");
+        });
+    }
+
+    public static void addNavButtonHover(Button button) {
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+            button.setOpacity(1);
+        });
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            button.setOpacity(0.75);
         });
     }
 
