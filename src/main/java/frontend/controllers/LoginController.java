@@ -1,7 +1,8 @@
 package frontend.controllers;
 
-import com.jfoenix.controls.*;
-import frontend.gui.Dialog;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import frontend.gui.InputValidation;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;

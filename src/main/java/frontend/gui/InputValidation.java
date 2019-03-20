@@ -10,7 +10,6 @@ import frontend.controllers.ProfilePageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -42,12 +41,9 @@ public class InputValidation {
 
         User loggedUser = Requests.loginRequest(loginDetails);
         if (loggedUser != null) {
-//            General.showAlert(Alert.AlertType.CONFIRMATION,
-//                    form.getScene().getWindow(), "Login successful",
-//                    "Welcome to GoGreen, " + loggedUser.getFirstName() + " "
-//                            + loggedUser.getLastName() + "!");
-            Dialog.show(form, "Login successful", "Welcome to GoGreen, " + loggedUser.getFirstName() +
-                    " " + loggedUser.getLastName() + "!", "DISMISS", "sucess");
+            Dialog.show(form, "Login successful", "Welcome to GoGreen, "
+                    + loggedUser.getFirstName()
+                    + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess");
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);
@@ -85,9 +81,9 @@ public class InputValidation {
             StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), loggedUser);
 
         } else {
-//            General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-//                    "Login failed", "Incorrect credentials. Try again");
-            Dialog.show(form, "Login failed", "Incorrect credentials. Try again", "DISMISS", "error");
+
+            Dialog.show(form, "Login failed",
+                    "Incorrect credentials. Try again", "DISMISS", "error");
         }
     }
 
@@ -121,7 +117,8 @@ public class InputValidation {
         String email = emailField.getText();
 
         if (Requests.validateUserRequest(username)) {
-            Dialog.show(form, "Username Error!", "A user already exists with this username. Use another username",
+            Dialog.show(form, "Username Error!",
+                    "A user already exists with this username. Use another username",
                     "DISMISS", "error");
             return;
         }
@@ -152,7 +149,8 @@ public class InputValidation {
     }
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
-                                                JFXTextField usernameField, AnchorPane form) throws IOException {
+                                                JFXTextField usernameField,
+                                                AnchorPane form) throws IOException {
         if (nameFields[0].getText().isEmpty()) {
             Dialog.show(form, "Form Error!", "Please enter your First Name",
                     "DISMISS", "error");
@@ -172,7 +170,8 @@ public class InputValidation {
     private static boolean signUpValidatePass(JFXTextField emailField,
                                               JFXPasswordField passField,
                                               JFXPasswordField passReField,
-                                              JFXTextField ageField, AnchorPane form) throws IOException {
+                                              JFXTextField ageField,
+                                              AnchorPane form) throws IOException {
         if (emailField.getText().isEmpty() || !validateEmail(emailField)) {
             Dialog.show(form, "Form Error!", "Please enter a valid email", "DISMISS", "error");
             return false;
