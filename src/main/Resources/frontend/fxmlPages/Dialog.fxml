@@ -4,8 +4,6 @@
 <?import com.jfoenix.controls.JFXDialog?>
 <?import com.jfoenix.controls.JFXDialogLayout?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -13,22 +11,17 @@
 
 <JFXDialog fx:id="dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.DialogController">
    <children>
-      <JFXDialogLayout fx:id="dialogLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="509.0" style="-fx-background-color: white;">
+      <JFXDialogLayout fx:id="dialogLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;">
          <children>
-            <AnchorPane fx:id="contentPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="204.0" prefWidth="510.0" style="-fx-background-color: white;">
+            <AnchorPane fx:id="contentPane" prefHeight="380.0" prefWidth="600.0" style="-fx-background-color: white;">
                <children>
-                  <Text fx:id="body" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry." wrappingWidth="531.2060546875" />
                   <Label fx:id="heading" layoutX="27.0" layoutY="14.0" text="Heading" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
                   <JFXButton fx:id="closeButton" layoutX="461.0" layoutY="253.0" prefHeight="48.0" prefWidth="158.0" text="ACCEPT" textFill="#0033ff" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="28.0" />
-                  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="34.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Pics/sucess.png" />
-                     </image>
-                  </ImageView>
+                  <Text fx:id="body" layoutX="27.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry." wrappingWidth="531.2060546875" AnchorPane.bottomAnchor="210.947265625" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="41.7939453125" AnchorPane.topAnchor="89.431640625" />
                </children>
             </AnchorPane>
          </children>

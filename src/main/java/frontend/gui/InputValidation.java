@@ -36,16 +36,18 @@ public class InputValidation {
      * @param form       form containing input fields
      */
     public static void signInValidate(TextField emailField,
-                                      PasswordField passField, AnchorPane form) {
+                                      PasswordField passField, AnchorPane form) throws IOException {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
         User loggedUser = Requests.loginRequest(loginDetails);
         if (loggedUser != null) {
-            General.showAlert(Alert.AlertType.CONFIRMATION,
-                    form.getScene().getWindow(), "Login successful",
-                    "Welcome to GoGreen, " + loggedUser.getFirstName() + " "
-                            + loggedUser.getLastName() + "!");
+//            General.showAlert(Alert.AlertType.CONFIRMATION,
+//                    form.getScene().getWindow(), "Login successful",
+//                    "Welcome to GoGreen, " + loggedUser.getFirstName() + " "
+//                            + loggedUser.getLastName() + "!");
+            Dialog.show(form, "Login successful", "Welcome to GoGreen, " + loggedUser.getFirstName() +
+                    " " + loggedUser.getLastName() + "!", "DISMISS");
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);
@@ -83,8 +85,9 @@ public class InputValidation {
             StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), loggedUser);
 
         } else {
-            General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
-                    "Login failed", "Incorrect credentials. Try again");
+//            General.showAlert(Alert.AlertType.ERROR, form.getScene().getWindow(),
+//                    "Login failed", "Incorrect credentials. Try again");
+            Dialog.show(form, "Login failed", "Incorrect credentials. Try again", "DISMISS");
         }
     }
 

@@ -1,18 +1,16 @@
 package frontend.controllers;
 
 import com.jfoenix.controls.*;
+import frontend.gui.Dialog;
 import frontend.gui.InputValidation;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,19 +43,15 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loginButton.setOnAction(e -> {
-            InputValidation.signInValidate(usernameField,
-                    passwordField, mainPane);
+            try {
+                InputValidation.signInValidate(usernameField,
+                        passwordField, mainPane);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
             usernameField.setText(null);
             passwordField.setText(null);
         });
-
-        DialogController controller = new DialogController();
-        try {
-            controller.addDialog(mainPane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
