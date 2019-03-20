@@ -44,7 +44,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //add hover events for different elements
+        //add hover events for different elements of the page
         Events.addButtonCursor(loginButton);
         Events.addLabelCursor(signupForward);
         Events.addInputTextCursor(usernameField);
