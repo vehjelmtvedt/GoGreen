@@ -1,51 +1,33 @@
 package frontend.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import data.LoginDetails;
-import data.User;
-import frontend.gui.Main;
-import frontend.gui.StageSwitcher;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomepageController implements Initializable {
-
-    private static User thisUser;
-
-    private static LoginDetails thisLoginDetails;
-
     @FXML
-    private JFXButton friendsButton;
+    private JFXHamburger menu;
     @FXML
-    private JFXButton activitiesButton;
+    private JFXDrawer drawer;
     @FXML
-    private JFXButton profileButton;
+    private AnchorPane mainPane;
     @FXML
-    private JFXButton logoutButton;
+    private AnchorPane headerPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        friendsButton.setOnAction(e ->
-                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getFriendsPage()));
-        activitiesButton.setOnAction(e ->
-                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getActivities()));
-        logoutButton.setOnAction(e ->
-                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn()));
-        profileButton.setOnAction(e ->
-                StageSwitcher.sceneSwitch(Main.getPrimaryStage() , Main.getProfilePage()));
-
-//        exitButton.setOnAction(e -> Main.getPrimaryStage().close());
-    }
-
-    public static void setUser(User user) {
-        thisUser = user;
-    }
-
-    public static void setLoginDetails(LoginDetails loginDetails) {
-        thisLoginDetails = loginDetails;
+        try {
+            NotificationPanelController.addNotificationPanel(headerPane, mainPane);
+            NavPanelController.setup(drawer, menu);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

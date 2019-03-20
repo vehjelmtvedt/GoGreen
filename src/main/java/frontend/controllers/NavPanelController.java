@@ -59,7 +59,7 @@ public class NavPanelController implements Initializable {
         drawer.setSidePane(box);
 
 
-        //Handle nav panel Todo: isOpened fix
+        //Handle nav panel
         HamburgerBasicCloseTransition burgerTask1 = new HamburgerBasicCloseTransition(menu);
         burgerTask1.setRate(-1);
         menu.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
@@ -74,10 +74,4 @@ public class NavPanelController implements Initializable {
             }
         });
     }
-
-
-
-
-
-
 }

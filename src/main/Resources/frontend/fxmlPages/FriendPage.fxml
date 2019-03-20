@@ -20,7 +20,7 @@
             <HBox fx:id="dataPane" prefHeight="285.0" prefWidth="963.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-7.0" prefHeight="137.0" prefWidth="966.0" style="-fx-background-color: #379B1E #379B1E;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="headerPane" layoutX="-7.0" prefHeight="137.0" prefWidth="966.0" style="-fx-background-color: #379B1E #379B1E;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label fx:id="goGreen" alignment="BASELINE_CENTER" layoutX="357.0" layoutY="32.0" text="GoGreen" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="357.0" AnchorPane.rightAnchor="344.0" AnchorPane.topAnchor="32.0">
                <font>
