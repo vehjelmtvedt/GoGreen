@@ -24,7 +24,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1400.0" style="-fx-background-color: #fff;" stylesheets="@../Stylesheets/Activities.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ActivitiesController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1400.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ActivitiesController">
    <children>
       <AnchorPane fx:id="headerPane" prefHeight="137.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -179,7 +179,7 @@
                      <children>
                         <HBox alignment="CENTER" layoutX="120.0" layoutY="260.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="0.0">
                            <children>
-                              <AnchorPane fx:id="paneVegetarianMeal1" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                              <AnchorPane fx:id="paneBike" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
                                  <children>
                                     <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -196,7 +196,7 @@
                                     <DropShadow />
                                  </effect>
                               </AnchorPane>
-                              <AnchorPane fx:id="paneOrganicFood1" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                              <AnchorPane fx:id="paneBus" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
                                  <children>
                                     <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -213,7 +213,7 @@
                                     <DropShadow />
                                  </effect>
                               </AnchorPane>
-                              <AnchorPane fx:id="paneLocalFood1" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                              <AnchorPane fx:id="paneCar" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
                                  <children>
                                     <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -248,12 +248,12 @@
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="inputDistance" alignment="CENTER_RIGHT" focusColor="GREEN" layoutX="358.0" layoutY="212.0" maxWidth="194.0" minWidth="154.0" prefHeight="45.0" prefWidth="194.0" promptText="number of km">
+                        <JFXTextField fx:id="inputDistance" alignment="CENTER_RIGHT" focusColor="GREEN" layoutX="367.0" layoutY="208.0" maxWidth="212.0" minWidth="130.0" prefHeight="45.0" prefWidth="212.0" promptText="number of km">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </JFXTextField>
-                        <Label fx:id="lblDistanceValidate" alignment="CENTER" layoutX="594.0" layoutY="208.0" prefHeight="45.0" prefWidth="212.0" text="Please enter a number " textFill="RED">
+                        <Label fx:id="lblDistanceValidate" alignment="CENTER" layoutX="594.0" layoutY="208.0" prefHeight="45.0" prefWidth="212.0" text="Please enter a number " textFill="RED" visible="false">
                            <font>
                               <Font size="20.0" />
                            </font>

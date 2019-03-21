@@ -1,6 +1,7 @@
 package frontend.gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.BuyLocallyProducedFood;
 import data.BuyNonProcessedFood;
@@ -12,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -69,7 +71,7 @@ public class Events {
      * @param loggedUser    user to update
      * @param activityTable table to set history to
      */
-    public static void addActivityClick(AnchorPane pane, int type,
+    public static void addFoodActivity(AnchorPane pane, int type,
                                         User loggedUser, TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
@@ -81,14 +83,37 @@ public class Events {
             } else if (type == 3) {
                 BuyOrganicFood food = new BuyOrganicFood();
                 food.performActivity(loggedUser);
+            } else if (type == 4) {
+                BuyNonProcessedFood food = new BuyNonProcessedFood();
+                food.performActivity(loggedUser);
             } else {
-                if (type == 4) {
-                    BuyNonProcessedFood food = new BuyNonProcessedFood();
-                    food.performActivity(loggedUser);
+                if (type == 5) {
+                    // TODO: 20/03/2019
                 }
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
+        });
+    }
+
+    public static void addTransportActivity(AnchorPane pane, JFXTextField input, Label verify,
+                                            int type, User loggedUser,
+                                            TableView<Activity> activityTable) {
+        pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            int distance = -1;
+            try {
+                if(input != null) distance = Integer.parseInt(input.getText());
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+
+            if (distance == -1) {
+                verify.setVisible(true);
+            } else {
+                verify.setVisible(false);
+                input.setText(null);
+                input.setPromptText("number of km");
+            }
         });
     }
 
