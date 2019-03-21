@@ -1,13 +1,10 @@
 package data;
 
 import org.springframework.data.annotation.Id;
-import tools.DateUnit;
-import tools.DateUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class User {
 
@@ -270,30 +267,24 @@ public class User {
 
     // ---------- ACTIVITY METHODS ----------
 
-    /**
-     * .
+    /**.
      * Adds a new activity to user's activities list
-     *
      * @param activity - Activity to add
      */
     public void addActivity(Activity activity) {
         this.activities.add(activity);
     }
 
-    /**
-     * .
+    /**.
      * Removes an activity from user's activities list
-     *
      * @param activity - Activity to remove
      */
     public void removeActivity(Activity activity) {
         this.activities.remove(activity);
     }
 
-    /**
-     * .
+    /**.
      * Returns a list of activities that are of the same type of the specified activity.
-     *
      * @param activity - Activity to compare to
      * @return List of activities of same type
      */
