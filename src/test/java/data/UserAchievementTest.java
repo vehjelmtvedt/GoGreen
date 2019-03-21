@@ -26,15 +26,9 @@ public class UserAchievementTest {
 
     }
 
-    @Test
-    public void toStringtest() {
-
-        Assert.assertNotNull(test.toString());
-
-    }
 
     @Test
-    public void constructortest(){
+    public void constructor(){
         UserAchievement test1 = new UserAchievement(0 , false , test.getDate());
 
         Assert.assertNotNull(test1);
