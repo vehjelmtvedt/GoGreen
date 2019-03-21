@@ -2,11 +2,18 @@ package data;
 
 import data.*;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import tools.DateUnit;
+import tools.DateUtils;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserTest {
 
@@ -373,22 +380,5 @@ public class UserTest {
         ArrayList<Activity> expected = new ArrayList<>();
 
         Assert.assertEquals(expected, activeUser.getSimilarActivities(activity3));
-    }
-
-    @Test
-    public void testFilterByCategory() {
-        ArrayList<Activity> activities = new ArrayList<>();
-        activities.add(new EatVegetarianMeal());
-        activities.add(new EatVegetarianMeal());
-        activities.add(new BuyLocallyProducedFood());
-        activities.add(new BuyNonProcessedFood());
-        activities.add(new EatVegetarianMeal());
-
-        for (Activity a : activities)
-            activeUser.addActivity(a);
-
-        List<Activity> filteredActivities = activeUser.filterActivities("Food");
-
-        Assert.assertEquals(activities, filteredActivities);
     }
 }
