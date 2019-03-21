@@ -4,6 +4,7 @@ package tools;
 import backend.RequestHandler;
 import backend.Server;
 import backend.DbService;
+import data.Achievement;
 import data.EatVegetarianMeal;
 import data.LoginDetails;
 import data.User;
@@ -182,4 +183,11 @@ public class RequestsTest {
                 testUser.getPassword())));
     }
 
+    @Test
+    public void testGetAllAchievements() {
+        List<Achievement> testList = new ArrayList();
+        testList.add(new Achievement());
+        Mockito.when(dbService.getAchievements()).thenReturn(testList);
+        assertEquals(testList.get(0).getId(),Requests.getAllAchievements().get(0).getId());
+    }
 }
