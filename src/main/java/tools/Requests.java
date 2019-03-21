@@ -1,6 +1,5 @@
 package tools;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import data.Achievement;
 import data.Activity;
 import data.LoginDetails;
@@ -11,11 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Requests {
 
@@ -195,8 +190,7 @@ public class Requests {
         RestTemplate restTemplate = new RestTemplate();
 
         ParameterizedTypeReference<List<Achievement>> typeRef =
-                new ParameterizedTypeReference<List<Achievement>>() {
-                };
+                new ParameterizedTypeReference<List<Achievement>>() {};
         return restTemplate.exchange(url,HttpMethod.GET,
                 new HttpEntity<>(""),typeRef).getBody();
 
