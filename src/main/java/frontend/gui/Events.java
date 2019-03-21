@@ -78,10 +78,10 @@ public class Events {
             if (type == 1) {
                 EatVegetarianMeal meal = new EatVegetarianMeal();
                 meal.performActivity(loggedUser);
-            } else if (type == 2) {
+            } else if (type == 3) {
                 BuyLocallyProducedFood food = new BuyLocallyProducedFood();
                 food.performActivity(loggedUser);
-            } else if (type == 3) {
+            } else if (type == 2) {
                 BuyOrganicFood food = new BuyOrganicFood();
                 food.performActivity(loggedUser);
             } else if (type == 4) {
@@ -156,3 +156,4 @@ public class Events {
         });
     }
 }
+
