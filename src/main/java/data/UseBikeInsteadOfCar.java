@@ -6,16 +6,13 @@ import java.util.ArrayList;
  * Activity: Travel by bike instead of travelling by car.
  * @author Kostas Lyrakis
  */
-public class UseBikeInsteadOfCar extends Activity{
+public class UseBikeInsteadOfCar extends TransportationActivity{
     private int kilometres;
     /**
      * Constructor.
      */
     public UseBikeInsteadOfCar() {
-        super();
-        this.setCategory("Transportation");
         this.setName("Use Bike Instead of Car");
-        this.kilometres = 0;
     }
 
     public void setKilometres(int kilometres) {
@@ -37,6 +34,8 @@ public class UseBikeInsteadOfCar extends Activity{
     public double calculateCarbonSaved(User user) {
         // TODO
         // calculate total carbon saved today
+        // calculate daily carbon emmisions
+        // calculate cargon saved by this activity
         return this.kilometres;
     }
 }
