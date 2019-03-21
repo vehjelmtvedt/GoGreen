@@ -140,15 +140,6 @@ public class InputValidation {
         StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Questionnaire.createScene(user, form));
     }
 
-    private static boolean validateAge(TextField input) {
-        try {
-            int age = Integer.parseInt(input.getText());
-            return age >= 0;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
                                                 JFXTextField usernameField, AnchorPane form) {
         if (nameFields[0].getText().isEmpty()) {
@@ -211,5 +202,14 @@ public class InputValidation {
         Matcher matcher = pattern.matcher(email);
 
         return matcher.matches();
+    }
+
+    private static boolean validateAge(TextField input) {
+        try {
+            int age = Integer.parseInt(input.getText());
+            return age >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

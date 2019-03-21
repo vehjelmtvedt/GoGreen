@@ -3,6 +3,7 @@ package frontend.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.User;
 import frontend.gui.Events;
@@ -76,6 +77,22 @@ public class ActivitiesController implements Initializable {
     private AnchorPane paneLocalFood;
     @FXML
     private AnchorPane paneNonProFood;
+    @FXML
+    private AnchorPane paneBike;
+    @FXML
+    private AnchorPane paneBus;
+    @FXML
+    private AnchorPane paneCar;
+    @FXML
+    private JFXTextField inputDistance;
+    @FXML
+    private Label lblDistanceValidate;
+    @FXML
+    private JFXButton btnBike;
+    @FXML
+    private JFXButton btnBus;
+    @FXML
+    private JFXButton btnCar;
 
     /**
      * .
@@ -87,18 +104,27 @@ public class ActivitiesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //add Activity Event on clicking ( plus add in history table )
-        Events.addActivityClick(paneVegetarianMeal, 1, loggedUser, activityTable);
-        Events.addActivityClick(paneOrganicFood, 2, loggedUser, activityTable);
-        Events.addActivityClick(paneLocalFood, 3, loggedUser, activityTable);
-        Events.addActivityClick(paneNonProFood, 4, loggedUser, activityTable);
+        Events.addFoodActivity(paneVegetarianMeal, 1, loggedUser, activityTable);
+        Events.addFoodActivity(paneOrganicFood, 2, loggedUser, activityTable);
+        Events.addFoodActivity(paneLocalFood, 3, loggedUser, activityTable);
+        Events.addFoodActivity(paneNonProFood, 4, loggedUser, activityTable);
+        Events.addTransportActivity(paneBike, inputDistance,
+                lblDistanceValidate, 5, loggedUser, activityTable);
+        Events.addTransportActivity(paneBus, inputDistance,
+                lblDistanceValidate, 5, loggedUser, activityTable);
+        Events.addTransportActivity(paneCar, inputDistance,
+                lblDistanceValidate, 5, loggedUser, activityTable);
 
-        //add hover events for Food buttons
+        //add hover events for button activities
         Events.addActivityHover(paneVegetarianMeal, btnVegetarianMeal);
         Events.addActivityHover(paneOrganicFood, btnOrganicFood);
         Events.addActivityHover(paneLocalFood, btnLocalFood);
         Events.addActivityHover(paneNonProFood, btnNonProFood);
+        Events.addActivityHover(paneBike, btnBike);
+        Events.addActivityHover(paneBus, btnBus);
+        Events.addActivityHover(paneCar, btnCar);
 
-        //setup notification panel and navigation panel
+        //setup notification and navigation panels
         try {
             NavPanelController.setup(drawer, menu);
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
@@ -116,11 +142,6 @@ public class ActivitiesController implements Initializable {
         if (loggedUser.getActivities().isEmpty()) {
             activityTable.setPlaceholder(new Label("No previous activities"));
         }
-    }
-
-    //TRANSPORTATION METHODS
-    private void addTransportActivity() {
-
     }
 
     //GENERAL METHODS
