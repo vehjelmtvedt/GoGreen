@@ -398,8 +398,8 @@ public class User {
      * @return - total CO2 saved
      */
     public double getTotalCO2Saved(DateUnit dateUnit) {
-        Date today = DateUtils.getInstance().dateToday();
-        Date startDate = DateUtils.getInstance().getDateBefore(today, dateUnit);
+        Date today = DateUtils.dateToday();
+        Date startDate = DateUtils.getDateBefore(today, dateUnit);
 
         return getTotalCO2Saved(startDate, today);
     }
@@ -410,7 +410,7 @@ public class User {
      * @return - total CO2 saved from specified date until today
      */
     public double getTotalCO2Saved(Date fromDate) {
-        Date today = DateUtils.getInstance().dateToday();
+        Date today = DateUtils.dateToday();
 
         return getTotalCO2Saved(fromDate, today);
     }

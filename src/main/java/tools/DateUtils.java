@@ -4,29 +4,18 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtils {
-    // Singleton pattern (only one DateUtils may exist)
-    private static final DateUtils instance = new DateUtils();
-
     /**.
      * Constructs a DateUtils instance
      */
-    private DateUtils() {
+    public DateUtils() {
 
-    }
-
-    /**.
-     * Returns the DateUtils singleton instance
-     * @return - DateUtils object
-     */
-    public static DateUtils getInstance() {
-        return instance;
     }
 
     /**.
      * Returns the date of today
      * @return - Date corresponding to today's date
      */
-    public Date dateToday() {
+    public static Date dateToday() {
         return Calendar.getInstance().getTime();
     }
 
@@ -36,7 +25,7 @@ public class DateUtils {
      * @param dateUnit - the date unit to use (DAY, WEEK, MONTH, YEAR)
      * @return - the new date with the current date and the difference applied
      */
-    public Date getDateBefore(Date date, DateUnit dateUnit) {
+    public static Date getDateBefore(Date date, DateUnit dateUnit) {
         // Get the time difference
         int diff = dateUnit.getNumDays();
 
@@ -56,7 +45,7 @@ public class DateUtils {
      * Helper method to set date's hour, minute, second to 0
      * @param calendar - calendar instance to modify
      */
-    private void setDateToMidnight(Calendar calendar) {
+    private static void setDateToMidnight(Calendar calendar) {
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);

@@ -10,14 +10,9 @@ import static org.junit.Assert.*;
 
 public class DateUtilsTest {
     @Test
-    public void testDateUtilsInstance() {
-        Assert.assertNotNull(DateUtils.getInstance());
-    }
-
-    @Test
     public void testDateToday() {
         long today = Calendar.getInstance().getTime().getTime();
-        long today2 = DateUtils.getInstance().dateToday().getTime();
+        long today2 = DateUtils.dateToday().getTime();
 
         // Allow minor difference of 100ms
         Assert.assertEquals(today, today2, 100);
@@ -26,7 +21,7 @@ public class DateUtilsTest {
     @Test
     public void testDateBefore() {
         // Current date
-        Date today = DateUtils.getInstance().dateToday();
+        Date today = DateUtils.dateToday();
 
         // Set calendar 1 week back from today
         Calendar calendar = Calendar.getInstance();
@@ -39,7 +34,7 @@ public class DateUtilsTest {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
 
-        Date result = DateUtils.getInstance().getDateBefore(today, DateUnit.WEEK);
+        Date result = DateUtils.getDateBefore(today, DateUnit.WEEK);
 
         Assert.assertEquals(calendar.getTime(), result);
     }
