@@ -523,6 +523,18 @@ public class UserTest {
     }
 
     @Test
+    public void testGetTotalCO2SavedOverPeriod() {
+        Date fromDate = getDateRewind(DateUnit.MONTH.getNumDays()*3);
+
+        addActivitiesToUser(activeUser, 145, 600, 1);
+        ArrayList<Activity> activityList = getExpectedDateFilteredList(activeUser.getActivities(), fromDate, today);
+
+        double expected = filteredByDateSum(activityList);
+
+        Assert.assertEquals(expected, activeUser.getTotalCO2Saved(fromDate), 0.1);
+    }
+
+    @Test
     public void testFilterDuplicates() {
         addActivitiesToUser(activeUser, 0, 243, 0);
         ArrayList<Activity> expected = getExpectedDateFilteredList(activeUser.getActivities(), today, today);
