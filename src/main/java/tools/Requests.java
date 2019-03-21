@@ -12,7 +12,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Requests {
 
@@ -187,23 +190,15 @@ public class Requests {
      * @return a list of achievements
      */
     public static List<Achievement> getAllAchievements() {
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder
-                .fromHttpUrl("http://localhost:8080/getAllAchievements");
+        String url = "http://localhost:8080/getAllAchievements";
 
         RestTemplate restTemplate = new RestTemplate();
-        String responseJson = restTemplate.getForObject(
-                uriBuilder.toUriString(),String.class);
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            List<Achievement> items = objectMapper.readValue(
-                    responseJson,
-                    objectMapper.getTypeFactory().constructParametricType(
-                            List.class, Achievement.class));
-            return items;
-        } catch (IOException E) {
-            System.out.println(E);
-            return null;
-        }
+
+        ParameterizedTypeReference<List<Achievement>> typeRef =
+                new ParameterizedTypeReference<List<Achievement>>() {
+                };
+        return restTemplate.exchange(url,HttpMethod.GET,
+                new HttpEntity<>(""),typeRef).getBody();
 
     }
 }
