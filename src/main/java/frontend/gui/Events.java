@@ -2,12 +2,7 @@ package frontend.gui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import data.Activity;
-import data.BuyLocallyProducedFood;
-import data.BuyNonProcessedFood;
-import data.BuyOrganicFood;
-import data.EatVegetarianMeal;
-import data.User;
+import data.*;
 import frontend.controllers.ActivitiesController;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
@@ -128,13 +123,21 @@ public class Events {
 
             if (distance == -1) {
                 verify.setVisible(true);
+                return;
             } else {
                 verify.setVisible(false);
                 input.setText(null);
                 input.setPromptText("number of km");
             }
 
+            if (type == 1) {
+                UseBikeInsteadOfCar travel = new UseBikeInsteadOfCar();
+                travel.setKilometres(distance);
+                travel.performActivity(loggedUser);
+            }
 
+            ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
+            activityTable.setItems(activities);
         });
     }
 
