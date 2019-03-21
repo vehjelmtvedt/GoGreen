@@ -393,14 +393,36 @@ public class User {
     }
 
     /**.
-     * Returns the CO2 saved over th specified time period
+     * Returns the CO2 saved until today and from today - dateUnit
      * @param dateUnit - Time period (date unit)
      * @return - total CO2 saved
      */
     public double getTotalCO2Saved(DateUnit dateUnit) {
         Date today = DateUtils.getInstance().dateToday();
         Date startDate = DateUtils.getInstance().getDateBefore(today, dateUnit);
-        List<Activity> filteredActivities = filterActivitiesByDate(startDate, today);
+
+        return getTotalCO2Saved(startDate, today);
+    }
+
+    /**.
+     * Returns the total CO2 saved up until today from a specified date
+     * @param fromDate - start date
+     * @return - total CO2 saved from specified date until today
+     */
+    public double getTotalCO2Saved(Date fromDate) {
+        Date today = DateUtils.getInstance().dateToday();
+
+        return getTotalCO2Saved(fromDate, today);
+    }
+
+    /**.
+     * Returns the CO2 saved over the specified time period
+     * @param fromDate - start date
+     * @param toDate - end date
+     * @return - total CO2 saved
+     */
+    public double getTotalCO2Saved(Date fromDate, Date toDate) {
+        List<Activity> filteredActivities = filterActivitiesByDate(fromDate, toDate);
 
         return getTotalCO2Saved(filteredActivities);
     }
