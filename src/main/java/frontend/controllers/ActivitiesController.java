@@ -82,7 +82,7 @@ public class ActivitiesController implements Initializable {
     @FXML
     private AnchorPane paneBus;
     @FXML
-    private AnchorPane paneCar;
+    private AnchorPane paneTrain;
     @FXML
     private JFXTextField inputDistance;
     @FXML
@@ -92,7 +92,7 @@ public class ActivitiesController implements Initializable {
     @FXML
     private JFXButton btnBus;
     @FXML
-    private JFXButton btnCar;
+    private JFXButton btnTrain;
 
     /**
      * .
@@ -112,7 +112,7 @@ public class ActivitiesController implements Initializable {
                 lblDistanceValidate, 5, loggedUser, activityTable);
         Events.addTransportActivity(paneBus, inputDistance,
                 lblDistanceValidate, 5, loggedUser, activityTable);
-        Events.addTransportActivity(paneCar, inputDistance,
+        Events.addTransportActivity(paneTrain, inputDistance,
                 lblDistanceValidate, 5, loggedUser, activityTable);
 
         //add hover events for button activities
@@ -122,7 +122,7 @@ public class ActivitiesController implements Initializable {
         Events.addActivityHover(paneNonProFood, btnNonProFood);
         Events.addActivityHover(paneBike, btnBike);
         Events.addActivityHover(paneBus, btnBus);
-        Events.addActivityHover(paneCar, btnCar);
+        Events.addActivityHover(paneTrain, btnTrain);
 
         //setup notification and navigation panels
         try {

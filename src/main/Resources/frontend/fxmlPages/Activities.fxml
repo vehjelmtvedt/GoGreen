@@ -213,14 +213,14 @@
                                     <DropShadow />
                                  </effect>
                               </AnchorPane>
-                              <AnchorPane fx:id="paneCar" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                              <AnchorPane fx:id="paneTrain" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
                                  <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Pics/carIcon.png" />
+                                          <Image url="@../Pics/trainIcon.png" />
                                        </image>
                                     </ImageView>
-                                    <JFXButton fx:id="btnCar" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Car">
+                                    <JFXButton fx:id="btnTrain" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Train">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -253,7 +253,7 @@
                               <Font size="18.0" />
                            </font>
                         </JFXTextField>
-                        <Label fx:id="lblDistanceValidate" alignment="CENTER" layoutX="594.0" layoutY="208.0" prefHeight="45.0" prefWidth="212.0" text="Please enter a number " textFill="RED" visible="false">
+                        <Label fx:id="lblDistanceValidate" alignment="CENTER" layoutX="604.0" layoutY="208.0" prefHeight="45.0" prefWidth="212.0" text="Invalid input. Try again" textFill="RED" visible="false">
                            <font>
                               <Font size="20.0" />
                            </font>
