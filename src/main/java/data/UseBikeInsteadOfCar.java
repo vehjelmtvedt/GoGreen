@@ -7,35 +7,22 @@ import java.util.ArrayList;
  * @author Kostas Lyrakis
  */
 public class UseBikeInsteadOfCar extends TransportationActivity{
-    private int kilometres;
     /**
      * Constructor.
      */
     public UseBikeInsteadOfCar() {
+        super();
         this.setName("Use Bike Instead of Car");
     }
 
-    public void setKilometres(int kilometres) {
-        this.kilometres = kilometres;
-    }
 
-    public int getKilometres() {
-        return kilometres;
-    }
-
-    public ArrayList<UseBikeInsteadOfCar> getSimilarActivitiesOnTheSameDay(User user) {
-        // TODO
-        ArrayList<UseBikeInsteadOfCar> result = new ArrayList<UseBikeInsteadOfCar>();
-
-        return result;
-    }
 
     @Override
     public double calculateCarbonSaved(User user) {
         // TODO
         // calculate total carbon saved today
-        // calculate daily carbon emmisions
-        // calculate cargon saved by this activity
-        return this.kilometres;
+        // calculate daily carbon emissions
+        // calculate carbon saved by this activity
+        return this.getKilometres();
     }
 }

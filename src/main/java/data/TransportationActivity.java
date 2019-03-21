@@ -12,4 +12,12 @@ public abstract class TransportationActivity extends Activity{
         this.kilometres = 0;
 
     }
+
+    public void setKilometres(int kilometres) {
+        this.kilometres = kilometres;
+    }
+
+    public int getKilometres() {
+        return kilometres;
+    }
 }
