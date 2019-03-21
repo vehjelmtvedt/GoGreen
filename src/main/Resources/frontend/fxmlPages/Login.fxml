@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -10,10 +17,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.LoginController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.LoginController">
    <children>
-      <StackPane fx:id="dialogPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="400.0" />
-      <AnchorPane fx:id="graphics" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="graphics" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="542.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="background" fitHeight="900.0" fitWidth="544.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
@@ -39,32 +45,44 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <ImageView fitHeight="317.0" fitWidth="477.0" layoutX="116.0" layoutY="6.0" pickOnBounds="true" AnchorPane.bottomAnchor="577.0" AnchorPane.leftAnchor="116.0" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="6.0">
+            <ImageView fitHeight="288.0" fitWidth="412.0" layoutX="116.0" layoutY="52.0" pickOnBounds="true" AnchorPane.bottomAnchor="577.0" AnchorPane.leftAnchor="116.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="35.0">
                <image>
                   <Image url="@../Pics/gogreen.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="fieldPane" layoutX="545.0" prefHeight="900.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="fieldPane" layoutX="667.0" layoutY="108.0" prefHeight="793.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="108.0">
          <children>
             <JFXButton fx:id="loginButton" contentDisplay="CENTER" layoutX="80.0" layoutY="363.0" prefHeight="74.0" prefWidth="200.0" ripplerFill="WHITE" style="-fx-background-radius: 30px; -fx-border-color: #AFCF2C#AFCF2C; -fx-border-radius: 30px; -fx-border-width: 5px;" text="LOG IN" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="376.0" AnchorPane.topAnchor="363.0">
                <font>
                   <Font name="PingFang HK Regular" size="28.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label alignment="BASELINE_CENTER" layoutX="80.0" layoutY="49.0" text="Login /" textFill="#379b1e" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="49.0">
                <font>
                   <Font size="43.0" />
                </font>
             </Label>
-            <Label fx:id="signupForward" alignment="BASELINE_CENTER" layoutX="224.0" layoutY="49.0" text="Signup" textFill="#868282" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="49.0">
+            <Label fx:id="signupForward" alignment="BASELINE_CENTER" layoutX="224.0" layoutY="49.0" text="Sign up" textFill="#868282" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="49.0">
                <font>
                   <Font size="43.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
-            <JFXTextField fx:id="usernameField" alignment="BOTTOM_LEFT" focusColor="#379b1e" layoutX="91.0" layoutY="182.0" prefHeight="44.0" prefWidth="399.0" promptText="Username / Email" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="182.0" />
-            <JFXPasswordField fx:id="passwordField" focusColor="#379b1e" layoutX="84.0" layoutY="281.0" prefHeight="36.0" prefWidth="410.0" promptText="Password" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="281.0" />
+            <JFXTextField fx:id="usernameField" alignment="BOTTOM_LEFT" focusColor="#379b1e" layoutX="91.0" layoutY="182.0" prefHeight="44.0" prefWidth="399.0" promptText="Username / Email" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="182.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXTextField>
+            <JFXPasswordField fx:id="passwordField" focusColor="#379b1e" layoutX="84.0" layoutY="281.0" prefHeight="36.0" prefWidth="410.0" promptText="Password" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="281.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXPasswordField>
             <ImageView fitHeight="20.0" fitWidth="28.0" layoutX="560.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Pics/email.png" />
