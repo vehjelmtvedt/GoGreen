@@ -1,6 +1,9 @@
 package data;
 
+import tools.Requests;
+
 import java.util.Date;
+import java.util.List;
 
 public class UserAchievement {
 
@@ -12,9 +15,9 @@ public class UserAchievement {
      * link completed achievement to user
      * the user should have an array list of achievements .
      *
-     * @param id reference to the achievement
+     * @param id        reference to the achievement
      * @param completed flag
-     * @param date date on completion
+     * @param date      date on completion
      */
 
     public UserAchievement(int id, boolean completed, Date date) {
@@ -47,7 +50,21 @@ public class UserAchievement {
         this.date = date;
     }
 
+
+    /**
+     * this returns a String with Achievement name and completion date.
+     * @return
+     */
     public String toString() {
-        return "place holder text here";
+
+        List<Achievement> list = Requests.getAllAchievements();
+
+        String achievement = list.get(this.id).getName()
+                + ", Earned: " + list.get(this.id).getBonus()
+                + ", Completed on :" + this.getDate().toString() + ".";
+
+        return achievement;
+
     }
+
 }

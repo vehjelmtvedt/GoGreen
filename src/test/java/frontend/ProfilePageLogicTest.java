@@ -38,4 +38,5 @@ public class ProfilePageLogicTest {
         Assert.assertTrue(test.equals(ProfilePageLogic.getBadge(user)));
 
     }
+
 }

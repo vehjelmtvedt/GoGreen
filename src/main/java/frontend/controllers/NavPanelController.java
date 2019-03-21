@@ -31,6 +31,8 @@ public class NavPanelController implements Initializable {
     @FXML
     private Button friends;
 
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO: Add scene change to profile page
@@ -40,6 +42,8 @@ public class NavPanelController implements Initializable {
                 Main.getPrimaryStage(), Main.getActivities()));
         friends.setOnAction(e -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getFriendsPage()));
+        myProfile.setOnAction(e -> StageSwitcher.sceneSwitch(
+                Main.getPrimaryStage() , Main.getProfilePage()));
     }
 
 
