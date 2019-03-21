@@ -37,4 +37,23 @@ public class AchievementTest {
         Assert.assertEquals(num , test.getBonus());
 
     }
+
+    @Test
+    public void testEquals() {
+        Achievement test1 = new Achievement();
+        test1.setBonus(100);
+        test1.setId(2);
+        test1.setName("test1");
+        Assert.assertEquals(test,test1);
+    }
+
+    @Test
+    public void testEqualsItself() {
+        Assert.assertEquals(test,test);
+    }
+
+    @Test
+    public void testNotEquals() {
+        Assert.assertNotEquals(test,new String());
+    }
 }
