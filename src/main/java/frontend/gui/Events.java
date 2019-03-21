@@ -53,6 +53,12 @@ public class Events {
         });
     }
 
+    /**
+     * .
+     * Add hover event for navigation panel buttons
+     *
+     * @param button button to add hover to inside nav bar
+     */
     public static void addNavButtonHover(Button button) {
         button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
             button.setOpacity(1);
@@ -72,7 +78,7 @@ public class Events {
      * @param activityTable table to set history to
      */
     public static void addFoodActivity(AnchorPane pane, int type,
-                                        User loggedUser, TableView<Activity> activityTable) {
+                                       User loggedUser, TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
                 EatVegetarianMeal meal = new EatVegetarianMeal();
@@ -96,13 +102,26 @@ public class Events {
         });
     }
 
+    /**
+     * .
+     * Add activities to the user upon clicking
+     *
+     * @param pane          pane to click
+     * @param input         textfield with input
+     * @param verify        input label for user verification
+     * @param type          type of activity
+     * @param loggedUser    user to modify
+     * @param activityTable activity history table
+     */
     public static void addTransportActivity(AnchorPane pane, JFXTextField input, Label verify,
                                             int type, User loggedUser,
                                             TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             int distance = -1;
             try {
-                if(input != null) distance = Integer.parseInt(input.getText());
+                if (input != null) {
+                    distance = Integer.parseInt(input.getText());
+                }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }

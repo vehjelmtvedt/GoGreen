@@ -7,7 +7,6 @@ import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.User;
 import frontend.gui.Events;
-import frontend.gui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -109,9 +108,12 @@ public class ActivitiesController implements Initializable {
         Events.addFoodActivity(paneOrganicFood, 2, loggedUser, activityTable);
         Events.addFoodActivity(paneLocalFood, 3, loggedUser, activityTable);
         Events.addFoodActivity(paneNonProFood, 4, loggedUser, activityTable);
-        Events.addTransportActivity(paneBike, inputDistance, lblDistanceValidate, 5, loggedUser, activityTable);
-        Events.addTransportActivity(paneBus, inputDistance, lblDistanceValidate, 5, loggedUser, activityTable);
-        Events.addTransportActivity(paneCar, inputDistance, lblDistanceValidate, 5, loggedUser, activityTable);
+        Events.addTransportActivity(paneBike, inputDistance,
+                lblDistanceValidate, 5, loggedUser, activityTable);
+        Events.addTransportActivity(paneBus, inputDistance,
+                lblDistanceValidate, 5, loggedUser, activityTable);
+        Events.addTransportActivity(paneCar, inputDistance,
+                lblDistanceValidate, 5, loggedUser, activityTable);
 
         //add hover events for button activities
         Events.addActivityHover(paneVegetarianMeal, btnVegetarianMeal);
