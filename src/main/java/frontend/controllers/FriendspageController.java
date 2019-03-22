@@ -123,7 +123,7 @@ public class FriendspageController implements Initializable {
 
     private void colorBars(String color, BarChart chart) {
         Node node = chart.lookup(".data0.chart-bar");
-        node.setStyle("-fx-bar-fill: " +  color + ";");
+        node.setStyle("-fx-bar-fill: #379B1E;");
         node = chart.lookup(".data1.chart-bar");
         node.setStyle("-fx-bar-fill: " +  color + ";");
         node = chart.lookup(".data2.chart-bar");
@@ -140,7 +140,7 @@ public class FriendspageController implements Initializable {
     public void populateBarChart(XYChart.Series series1, DateUnit unit) {
         int counter = 0;
         ActivityQueries thisQuery = new ActivityQueries(thisUser.getActivities());
-        series1.getData().add(new XYChart.Data(thisUser.getUsername(),
+        series1.getData().add(new XYChart.Data("You",
                 thisQuery.getTotalCO2Saved(unit)));
         List<User> friendsList = Requests.getFriends(thisLoginDetails);
         for (User friend : friendsList) {
