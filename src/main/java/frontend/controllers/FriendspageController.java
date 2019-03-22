@@ -28,10 +28,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import tools.ActivityQueries;
+import tools.DateUnit;
 import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -72,6 +75,15 @@ public class FriendspageController implements Initializable {
     @FXML
     private HBox dataPane;
 
+    @FXML
+    private BarChart todayChart;
+
+    @FXML
+    private BarChart weeklyChart;
+
+    @FXML
+    private BarChart monthlyChart;
+
     private List searchresults;
 
     @Override
@@ -83,27 +95,34 @@ public class FriendspageController implements Initializable {
         }
         fillFriendsTreeView();
         drawFriendRequestDrawer();
-        drawFriendsBarChart("Today");
-        drawFriendsBarChart("This week");
-        drawFriendsBarChart("This year");
+        testFillCHart();
+//        drawFriendsBarChart("Today", DateUnit.DAY);
+//        drawFriendsBarChart("This week", DateUnit.WEEK);
+//        drawFriendsBarChart("This Month", DateUnit.MONTH);
+    }
 
+    public void testFillCHart() {
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("Today");
+        populateBarChart(series1, DateUnit.DAY);
+        todayChart.getData().addAll(series1);
     }
 
 
     /**
      * Draws the bar graph to the Friends page.
      */
-    public void drawFriendsBarChart(String title) {
+    public void drawFriendsBarChart(String title, DateUnit time) {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String, Number> bc =
                 new BarChart<>(xAxis, yAxis);
-        bc.setTitle("Carbon Saved");
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(title);
-        populateBarChart(series1);
+        populateBarChart(series1, time);
 
         bc.getData().addAll(series1);
+        bc.setStyle("-fx-bar-fill: blue;");
         dataPane.getChildren().addAll(bc);
     }
 
@@ -112,13 +131,16 @@ public class FriendspageController implements Initializable {
      *
      * @param series1 - the series to add data to
      */
-    public void populateBarChart(XYChart.Series series1) {
+    public void populateBarChart(XYChart.Series series1, DateUnit unit) {
+        ActivityQueries thisQuery = new ActivityQueries(thisUser.getActivities());
         series1.getData().add(new XYChart.Data(thisUser.getUsername(),
-                thisUser.getTotalCarbonSaved()));
+                thisQuery.getTotalCO2Saved(unit)));
         List<User> friendsList = Requests.getFriends(thisLoginDetails);
         for (User friend : friendsList) {
-            series1.getData().add(new XYChart.Data(friend.getUsername(),
-                    friend.getTotalCarbonSaved()));
+            ActivityQueries query = new ActivityQueries(friend.getActivities());
+            series1.getData().addAll(new XYChart.Data(friend.getUsername(),
+                    query.getTotalCO2Saved(unit)));
+
         }
     }
 
