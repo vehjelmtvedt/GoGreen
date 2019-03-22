@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 public class Events {
 
@@ -119,18 +120,20 @@ public class Events {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             int distance = -1;
             try {
-                if (input != null) {
+                if (input.getText() != null) {
                     distance = Integer.parseInt(input.getText());
                 }
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                System.out.println("Invalid input");
             }
 
             if (distance == -1) {
                 verify.setVisible(true);
+                input.setUnFocusColor(Color.rgb(255, 0, 0));
             } else {
                 verify.setVisible(false);
                 input.setText(null);
+                input.setUnFocusColor(Color.rgb(77, 77, 77));
                 input.setPromptText("number of km");
             }
         });
