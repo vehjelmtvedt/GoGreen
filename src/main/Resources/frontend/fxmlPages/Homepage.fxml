@@ -29,7 +29,6 @@
                </cursor></JFXHamburger>
          </children>
       </AnchorPane>
-      <JFXDrawer fx:id="drawer" layoutY="137.0" prefHeight="719.0" prefWidth="244.0" />
       <AnchorPane fx:id="paneMainHome" layoutX="-1.0" layoutY="165.0" prefHeight="695.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
          <children>
             <AnchorPane layoutX="181.0" prefHeight="361.0" prefWidth="1040.0" style="-fx-background-color: yellow;" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="0.0">
@@ -47,5 +46,6 @@
             </AnchorPane>
          </children>
       </AnchorPane>
+      <JFXDrawer fx:id="drawer" layoutY="137.0" prefHeight="719.0" prefWidth="244.0" />
    </children>
 </AnchorPane>
