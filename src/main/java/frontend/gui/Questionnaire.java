@@ -6,7 +6,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -15,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import tools.Requests;
+
+import java.io.IOException;
 
 
 public class Questionnaire {
@@ -159,9 +160,13 @@ public class Questionnaire {
             String response = Requests.signupRequest(user);
             if (response != null) {
                 if (response.equals("success")) {
-                    General.showAlert(Alert.AlertType.CONFIRMATION, form.getScene().getWindow(),
-                            "Registration Successful!",
-                            "Enter your new credentials!");
+                    try {
+                        Dialog.show(form, "Registration Successful!", "Enter your new credentials!",
+                                "ACCEPT", "sucess");
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
                     StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn());
                 }
             }

@@ -1,5 +1,6 @@
 package tools;
 
+import data.Achievement;
 import data.Activity;
 import data.LoginDetails;
 import data.User;
@@ -177,5 +178,21 @@ public class Requests {
         };
         return restTemplate.exchange(url,
                 HttpMethod.POST, new HttpEntity<>(loginDetails), typeRef).getBody();
+    }
+
+    /**
+     * Request to get all achievements.
+     * @return a list of achievements
+     */
+    public static List<Achievement> getAllAchievements() {
+        String url = "http://localhost:8080/getAllAchievements";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        ParameterizedTypeReference<List<Achievement>> typeRef =
+                new ParameterizedTypeReference<List<Achievement>>() {};
+        return restTemplate.exchange(url,HttpMethod.GET,
+                new HttpEntity<>(""),typeRef).getBody();
+
     }
 }

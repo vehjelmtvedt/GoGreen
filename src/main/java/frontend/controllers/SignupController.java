@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -66,8 +67,14 @@ public class SignupController implements Initializable {
         nameFields[1] = lastNameField;
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
-        signupButton.setOnAction(e -> InputValidation.signUpValidate(nameFields, usernameField,
-                emailField, passwordField, confirmPasswordField, ageField, mainPane));
+        signupButton.setOnAction(e -> {
+            try {
+                InputValidation.signUpValidate(nameFields, usernameField,
+                        emailField, passwordField, confirmPasswordField, ageField, mainPane);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
         loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getSignIn()
         ));

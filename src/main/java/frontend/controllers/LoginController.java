@@ -13,12 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
 public class LoginController implements Initializable {
-
 
     @FXML
     private AnchorPane mainPane;
@@ -44,11 +44,16 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loginButton.setOnAction(e -> {
-            InputValidation.signInValidate(usernameField,
-                    passwordField, mainPane);
+            try {
+                InputValidation.signInValidate(usernameField,
+                        passwordField, mainPane);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
             usernameField.setText(null);
             passwordField.setText(null);
         });
+
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
         signupForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.sceneSwitch(
