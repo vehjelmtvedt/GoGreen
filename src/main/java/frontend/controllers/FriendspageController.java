@@ -19,14 +19,11 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -36,7 +33,6 @@ import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -46,7 +42,7 @@ public class FriendspageController implements Initializable {
     private static User thisUser;
 
     private static LoginDetails thisLoginDetails;
-    
+
     @FXML
     private JFXTreeTableView friendsPane;
 
@@ -109,6 +105,13 @@ public class FriendspageController implements Initializable {
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
     }
 
+    /**
+     * Fills the chart on the page with data.
+     * @param title - Title of the graph
+     * @param color - color of the bars on the graph
+     * @param unit - DateUnit enum, day, week or month
+     * @param chart - the chart to edit
+     */
     public void fillChart(String title, String color, DateUnit unit, BarChart chart) {
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(title);
@@ -119,16 +122,14 @@ public class FriendspageController implements Initializable {
     }
 
     private void colorBars(String color, BarChart chart) {
-        Node n = chart.lookup(".data0.chart-bar");
-        n.setStyle("-fx-bar-fill: " +  color + ";");
-        n = chart.lookup(".data1.chart-bar");
-        n.setStyle("-fx-bar-fill: " +  color + ";");
-        n = chart.lookup(".data2.chart-bar");
-        n.setStyle("-fx-bar-fill: " +  color + ";");
-        n = chart.lookup(".data3.chart-bar");
-        n.setStyle("-fx-bar-fill: " +  color + ";");
-//        n = chart.lookup(".data4.chart-bar");
-//        n.setStyle("-fx-bar-fill: " +  color + ";");
+        Node node = chart.lookup(".data0.chart-bar");
+        node.setStyle("-fx-bar-fill: " +  color + ";");
+        node = chart.lookup(".data1.chart-bar");
+        node.setStyle("-fx-bar-fill: " +  color + ";");
+        node = chart.lookup(".data2.chart-bar");
+        node.setStyle("-fx-bar-fill: " +  color + ";");
+        node = chart.lookup(".data3.chart-bar");
+        node.setStyle("-fx-bar-fill: " +  color + ";");
     }
 
     /**
