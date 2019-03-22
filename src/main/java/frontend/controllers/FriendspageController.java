@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -27,6 +28,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import tools.ActivityQueries;
 import tools.DateUnit;
@@ -44,13 +46,7 @@ public class FriendspageController implements Initializable {
     private static User thisUser;
 
     private static LoginDetails thisLoginDetails;
-
-    @FXML
-    private Label goGreen;
-
-    @FXML
-    private AnchorPane headerPane;
-
+    
     @FXML
     private JFXTreeTableView friendsPane;
 
@@ -73,9 +69,6 @@ public class FriendspageController implements Initializable {
     private VBox results;
 
     @FXML
-    private HBox dataPane;
-
-    @FXML
     private BarChart todayChart;
 
     @FXML
@@ -83,6 +76,18 @@ public class FriendspageController implements Initializable {
 
     @FXML
     private BarChart monthlyChart;
+
+    @FXML
+    private StackPane todayPane;
+
+    @FXML
+    private StackPane weekPane;
+
+    @FXML
+    private StackPane monthPane;
+
+    @FXML
+    private HBox headingBox;
 
     private List searchresults;
 
@@ -95,35 +100,35 @@ public class FriendspageController implements Initializable {
         }
         fillFriendsTreeView();
         drawFriendRequestDrawer();
-        testFillCHart();
-//        drawFriendsBarChart("Today", DateUnit.DAY);
-//        drawFriendsBarChart("This week", DateUnit.WEEK);
-//        drawFriendsBarChart("This Month", DateUnit.MONTH);
+        fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
+        fillChart("This Week", "#cd7b4c", DateUnit.WEEK, weeklyChart);
+        fillChart("This Month", "#b74747", DateUnit.MONTH, monthlyChart);
+
+        todayPane.prefWidthProperty().bind(headingBox.widthProperty());
+        weekPane.prefWidthProperty().bind(headingBox.widthProperty());
+        monthPane.prefWidthProperty().bind(headingBox.widthProperty());
     }
 
-    public void testFillCHart() {
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("Today");
-        populateBarChart(series1, DateUnit.DAY);
-        todayChart.getData().addAll(series1);
-    }
-
-
-    /**
-     * Draws the bar graph to the Friends page.
-     */
-    public void drawFriendsBarChart(String title, DateUnit time) {
-        final CategoryAxis xAxis = new CategoryAxis();
-        final NumberAxis yAxis = new NumberAxis();
-        final BarChart<String, Number> bc =
-                new BarChart<>(xAxis, yAxis);
+    public void fillChart(String title, String color, DateUnit unit, BarChart chart) {
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(title);
-        populateBarChart(series1, time);
+        populateBarChart(series1, unit);
+        chart.getData().addAll(series1);
+        colorBars(color, chart);
+        chart.setLegendVisible(false);
+    }
 
-        bc.getData().addAll(series1);
-        bc.setStyle("-fx-bar-fill: blue;");
-        dataPane.getChildren().addAll(bc);
+    private void colorBars(String color, BarChart chart) {
+        Node n = chart.lookup(".data0.chart-bar");
+        n.setStyle("-fx-bar-fill: " +  color + ";");
+        n = chart.lookup(".data1.chart-bar");
+        n.setStyle("-fx-bar-fill: " +  color + ";");
+        n = chart.lookup(".data2.chart-bar");
+        n.setStyle("-fx-bar-fill: " +  color + ";");
+        n = chart.lookup(".data3.chart-bar");
+        n.setStyle("-fx-bar-fill: " +  color + ";");
+//        n = chart.lookup(".data4.chart-bar");
+//        n.setStyle("-fx-bar-fill: " +  color + ";");
     }
 
     /**
@@ -132,14 +137,19 @@ public class FriendspageController implements Initializable {
      * @param series1 - the series to add data to
      */
     public void populateBarChart(XYChart.Series series1, DateUnit unit) {
+        int counter = 0;
         ActivityQueries thisQuery = new ActivityQueries(thisUser.getActivities());
         series1.getData().add(new XYChart.Data(thisUser.getUsername(),
                 thisQuery.getTotalCO2Saved(unit)));
         List<User> friendsList = Requests.getFriends(thisLoginDetails);
         for (User friend : friendsList) {
+            if (counter >= 5) {
+                return;
+            }
             ActivityQueries query = new ActivityQueries(friend.getActivities());
             series1.getData().addAll(new XYChart.Data(friend.getUsername(),
                     query.getTotalCO2Saved(unit)));
+            counter++;
 
         }
     }
