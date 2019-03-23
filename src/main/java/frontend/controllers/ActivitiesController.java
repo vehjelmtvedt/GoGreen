@@ -1,9 +1,6 @@
 package frontend.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import data.Activity;
 import data.User;
 import frontend.gui.Events;
@@ -21,11 +18,14 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ActivitiesController implements Initializable {
     private static User loggedUser;
+    private static List<JFXCheckBox> filterList = new ArrayList<>();
 
     @FXML
     private JFXButton btnFood;
@@ -93,6 +93,24 @@ public class ActivitiesController implements Initializable {
     private JFXButton btnBus;
     @FXML
     private JFXButton btnTrain;
+    @FXML
+    private JFXCheckBox checkFood;
+    @FXML
+    private JFXCheckBox checkTransportation;
+    @FXML
+    private JFXCheckBox checkHousehold;
+    @FXML
+    private JFXCheckBox checkToday;
+    @FXML
+    private JFXCheckBox checkWeek;
+    @FXML
+    private JFXCheckBox checkMonth;
+    @FXML
+    private JFXCheckBox checkAll;
+    @FXML
+    private Label lblClearFilters;
+    @FXML
+    private Label lblApply;
 
     /**
      * .
@@ -142,6 +160,21 @@ public class ActivitiesController implements Initializable {
         if (loggedUser.getActivities().isEmpty()) {
             activityTable.setPlaceholder(new Label("No previous activities"));
         }
+
+        //create filter list
+        filterList.add(checkFood);
+        filterList.add(checkTransportation);
+        filterList.add(checkHousehold);
+        filterList.add(checkToday);
+        filterList.add(checkWeek);
+        filterList.add(checkMonth);
+        filterList.add(checkAll);
+
+        //Add events for the filter tab in activity history
+        Events.showAllFilters(checkAll, filterList);
+        Events.addHoverOnFilter(lblClearFilters);
+        Events.addHoverOnFilter(lblApply);
+        Events.clearFilters(lblClearFilters, filterList);
     }
 
     //GENERAL METHODS

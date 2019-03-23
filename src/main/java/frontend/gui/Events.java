@@ -1,6 +1,7 @@
 package frontend.gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.BuyLocallyProducedFood;
@@ -20,6 +21,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+
+import java.util.List;
 
 public class Events {
 
@@ -151,6 +154,55 @@ public class Events {
             image.setImage(new Image("frontend/Pics/logoutIconOpen.png"));
             ConfirmBox.logout(Main.getPrimaryStage(), nextScene, image, "Are"
                     + "you sure you want to logout?");
+        });
+    }
+
+    /**.
+     * Add hover event on labels for filtering
+     * @param label - the label to be edited
+     */
+    public static void addHoverOnFilter(Label label) {
+        label.addEventHandler(MouseEvent.MOUSE_ENTERED , event -> {
+            label.setUnderline(true);
+            label.setOpacity(1);
+        });
+        label.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            label.setUnderline(false);
+            label.setOpacity(0.75);
+        });
+    }
+
+    /**.
+     * Upon clicking show all checkbox disable/enable the others
+     * @param checkBox - checkBox to click
+     * @param filterList - the list containing all filters
+     */
+    public static void showAllFilters(JFXCheckBox checkBox, List<JFXCheckBox> filterList) {
+        checkBox.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (!checkBox.isSelected()) {
+                for (JFXCheckBox filter : filterList) {
+                    filter.setDisable(false);
+                }
+            } else {
+                for (JFXCheckBox filter : filterList) {
+                    filter.setDisable(true);
+                }
+            }
+            checkBox.setDisable(false);
+        });
+    }
+
+    /**.
+     * Clear all filters upon clicking the label
+     * @param clear - label to be clicked
+     * @param filterList - list containing filters
+     */
+    public static void clearFilters(Label clear, List<JFXCheckBox> filterList) {
+        clear.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            for (JFXCheckBox filter : filterList) {
+                filter.setDisable(false);
+                filter.setSelected(false);
+            }
         });
     }
 }
