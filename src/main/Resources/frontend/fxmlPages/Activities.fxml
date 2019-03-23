@@ -298,22 +298,6 @@
                                        </cursor></JFXCheckBox>
                                  </children>
                               </VBox>
-                              <VBox layoutX="189.0" layoutY="112.0" prefHeight="88.0" prefWidth="100.0" spacing="10.0">
-                                 <children>
-                                    <JFXCheckBox fx:id="checkToday" checkedColor="GREEN" text="Today">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor></JFXCheckBox>
-                                    <JFXCheckBox fx:id="checkWeek" checkedColor="GREEN" text="This week">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor></JFXCheckBox>
-                                    <JFXCheckBox fx:id="checkMonth" checkedColor="GREEN" text="This Month">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor></JFXCheckBox>
-                                 </children>
-                              </VBox>
                               <Line endX="100.0" layoutX="158.0" layoutY="256.0" startX="-100.0" />
                               <Line endX="100.0" layoutX="158.0" layoutY="48.0" startX="-100.0" AnchorPane.leftAnchor="57.5" AnchorPane.rightAnchor="56.5" />
                               <Label fx:id="lblClearFilters" alignment="CENTER" layoutX="43.0" layoutY="257.0" opacity="0.75" prefHeight="32.0" prefWidth="135.0" text="Clear all filters" textFill="RED" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="43.0">
@@ -347,6 +331,25 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </JFXCheckBox>
+                              <VBox layoutX="177.0" layoutY="112.0" prefHeight="88.0" prefWidth="100.0" spacing="10.0">
+                                 <children>
+                                    <JFXRadioButton fx:id="radioToday" text="Today">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXRadioButton>
+                                    <JFXRadioButton fx:id="radioWeek" text="This Week">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXRadioButton>
+                                    <JFXRadioButton fx:id="radioMonth" text="This Month">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXRadioButton>
+                                 </children>
+                              </VBox>
                            </children>
                         </AnchorPane>
                      </children>

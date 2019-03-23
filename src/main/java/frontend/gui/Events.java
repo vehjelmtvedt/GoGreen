@@ -2,6 +2,7 @@ package frontend.gui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.BuyLocallyProducedFood;
@@ -173,18 +174,26 @@ public class Events {
     }
 
     /**.
-     * Upon clicking show all checkbox disable/enable the others
-     * @param checkBox - checkBox to click
-     * @param filterList - the list containing all filters
+     * Display all activities
+     * @param checkBox - checkbox to add event to
+     * @param checkList - list containing category filtering
+     * @param radioList - list containing date filtering
      */
-    public static void showAllFilters(JFXCheckBox checkBox, List<JFXCheckBox> filterList) {
+    public static void showAllFilters(JFXCheckBox checkBox, List<JFXCheckBox> checkList,
+                                      List<JFXRadioButton> radioList) {
         checkBox.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (!checkBox.isSelected()) {
-                for (JFXCheckBox filter : filterList) {
+                for (JFXCheckBox filter : checkList) {
+                    filter.setDisable(false);
+                }
+                for (JFXRadioButton filter : radioList) {
                     filter.setDisable(false);
                 }
             } else {
-                for (JFXCheckBox filter : filterList) {
+                for (JFXCheckBox filter : checkList) {
+                    filter.setDisable(true);
+                }
+                for (JFXRadioButton filter : radioList) {
                     filter.setDisable(true);
                 }
             }
@@ -193,16 +202,38 @@ public class Events {
     }
 
     /**.
-     * Clear all filters upon clicking the label
-     * @param clear - label to be clicked
-     * @param filterList - list containing filters
+     * Clear all activity history filters
+     * @param clear - label to add event to
+     * @param checkList - list containing category filtering
+     * @param radioList - list containing date filtering
      */
-    public static void clearFilters(Label clear, List<JFXCheckBox> filterList) {
+    public static void clearFilters(Label clear, List<JFXCheckBox> checkList,
+                                    List<JFXRadioButton> radioList) {
         clear.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            for (JFXCheckBox filter : filterList) {
+            for (JFXCheckBox filter : checkList) {
+                filter.setDisable(false);
+                filter.setSelected(false);
+            }
+            for (JFXRadioButton filter : radioList) {
                 filter.setDisable(false);
                 filter.setSelected(false);
             }
         });
+    }
+
+    /**.
+     * Add Radio toggling on radio buttons
+     * @param radioList - radio list to apply event to
+     */
+    public static void addRadioToggle(List<JFXRadioButton> radioList) {
+        for (JFXRadioButton filter : radioList) {
+            filter.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                for (JFXRadioButton other : radioList) {
+                    if (!other.equals(filter)) {
+                        other.setSelected(false);
+                    }
+                }
+            });
+        }
     }
 }

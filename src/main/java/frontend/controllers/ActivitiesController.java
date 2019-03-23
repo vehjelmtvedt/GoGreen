@@ -26,6 +26,8 @@ import java.util.ResourceBundle;
 public class ActivitiesController implements Initializable {
     private static User loggedUser;
     private static List<JFXCheckBox> filterList = new ArrayList<>();
+    private static List<JFXCheckBox> checkList = new ArrayList<>();
+    private static List<JFXRadioButton> radioList = new ArrayList<>();
 
     @FXML
     private JFXButton btnFood;
@@ -100,17 +102,17 @@ public class ActivitiesController implements Initializable {
     @FXML
     private JFXCheckBox checkHousehold;
     @FXML
-    private JFXCheckBox checkToday;
-    @FXML
-    private JFXCheckBox checkWeek;
-    @FXML
-    private JFXCheckBox checkMonth;
-    @FXML
     private JFXCheckBox checkAll;
     @FXML
     private Label lblClearFilters;
     @FXML
     private Label lblApply;
+    @FXML
+    private JFXRadioButton radioToday;
+    @FXML
+    private JFXRadioButton radioWeek;
+    @FXML
+    private JFXRadioButton radioMonth;
 
     /**
      * .
@@ -161,20 +163,23 @@ public class ActivitiesController implements Initializable {
             activityTable.setPlaceholder(new Label("No previous activities"));
         }
 
-        //create filter list
-        filterList.add(checkFood);
-        filterList.add(checkTransportation);
-        filterList.add(checkHousehold);
-        filterList.add(checkToday);
-        filterList.add(checkWeek);
-        filterList.add(checkMonth);
-        filterList.add(checkAll);
+        //create check list
+        checkList.add(checkFood);
+        checkList.add(checkTransportation);
+        checkList.add(checkHousehold);
+        checkList.add(checkAll);
+
+        //create radio list
+        radioList.add(radioToday);
+        radioList.add(radioWeek);
+        radioList.add(radioMonth);
 
         //Add events for the filter tab in activity history
-        Events.showAllFilters(checkAll, filterList);
+        Events.addRadioToggle(radioList);
+        Events.showAllFilters(checkAll, checkList, radioList);
         Events.addHoverOnFilter(lblClearFilters);
         Events.addHoverOnFilter(lblApply);
-        Events.clearFilters(lblClearFilters, filterList);
+        Events.clearFilters(lblClearFilters, checkList, radioList);
     }
 
     //GENERAL METHODS
