@@ -11,6 +11,7 @@ import data.BuyOrganicFood;
 import data.EatVegetarianMeal;
 import data.User;
 import frontend.controllers.ActivitiesController;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -22,7 +23,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import tools.ActivityQueries;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Events {
@@ -232,5 +235,38 @@ public class Events {
                 }
             });
         }
+    }
+
+    /**.
+     * Apply the selected filters to the activity history table
+     * @param label - label to add event handle to
+     * @param checkAll - the "show all" check box
+     * @param checkList - list containing category checkboxes
+     * @param radioList - list containing time radio buttons
+     * @param loggedUser - the logged in user
+     * @param activityTable - the table to reset with filters
+     */
+    public static void applyFilters(Label label, JFXCheckBox checkAll,
+                                    List<JFXCheckBox> checkList,
+                                    List<JFXRadioButton> radioList, User loggedUser,
+                                    TableView<Activity> activityTable) {
+        label.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ArrayList<Activity> activities = loggedUser.getActivities();
+            ActivityQueries activityQueries = new ActivityQueries(activities);
+            ObservableList<Activity> filteredActivities;
+            List<String> categoryFilters = new ArrayList<>();
+            if (checkAll.isSelected()) {
+                filteredActivities = FXCollections.observableArrayList(activities);
+            } else {
+                for (JFXCheckBox filter : checkList) {
+                    if (filter.isSelected()) {
+                        categoryFilters.add(filter.getText());
+                    }
+                }
+                filteredActivities = FXCollections.observableArrayList(
+                        activityQueries.filterActivitiesByCategories(categoryFilters));
+            }
+            activityTable.setItems(filteredActivities);
+        });
     }
 }
