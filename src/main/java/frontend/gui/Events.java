@@ -142,7 +142,9 @@ public class Events {
                 travel.setKilometres(distance);
                 travel.performActivity(loggedUser);
             } else if (type == 2) {
-                // TODO
+                UseBusInsteadOfCar travel = new UseBusInsteadOfCar();
+                travel.setKilometres(distance);
+                travel.performActivity(loggedUser);
             } else if (type == 3) {
                 // TODO
             }

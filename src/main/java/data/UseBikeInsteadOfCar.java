@@ -20,12 +20,12 @@ public class UseBikeInsteadOfCar extends TransportationActivity {
     @Override
     public double calculateCarbonSaved(User user) {
         // calculate total carbon saved today
-        ArrayList<Activity> activitiesPerformedOnTheSameDay =
-                getActivitiesOfTheSameTypePerformedInTheSameDay(user);
-        double totalCarbonSavedToday = 0;
-        for (Activity activity : activitiesPerformedOnTheSameDay) {
-            totalCarbonSavedToday += activity.getCarbonSaved();
-        }
+//        ArrayList<Activity> activitiesPerformedOnTheSameDay =
+//                getActivitiesOfTheSameTypePerformedInTheSameDay(user);
+        double totalCarbonSavedToday = this.calculateCarbonSavedTodayByTransportationActivities(user);
+//        for (Activity activity : activitiesPerformedOnTheSameDay) {
+//            totalCarbonSavedToday += activity.getCarbonSaved();
+//        }
 
         // calculate daily carbon emissions
         double dailyCarbonEmissions = calculateDailyCarbonEmissions(user);
