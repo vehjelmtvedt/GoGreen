@@ -3,10 +3,8 @@ package tools;
 import data.Activity;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.DoubleStream;
 
 public class ActivityQueries {
     private List<Activity> activities;
@@ -133,7 +131,7 @@ public class ActivityQueries {
      * Returns the activities that match the given CO2 range
      * @param fromCo2 - from CO2 (inclusive)
      * @param toCo2 - to CO2 (inclusive)
-     * @return
+     * @return - filtered list of activities matching the CO2 range
      */
     public List<Activity> filterActivitiesByCO2Saved(double fromCo2, double toCo2) {
         List<Activity> filteredActivities = new ArrayList<>();
