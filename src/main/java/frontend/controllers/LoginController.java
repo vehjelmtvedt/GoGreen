@@ -12,6 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +44,9 @@ public class LoginController implements Initializable {
     @FXML
     private Label signupForward;
 
+    @FXML
+    private Label goGreen;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loginButton.setOnAction(e -> {
@@ -58,6 +64,9 @@ public class LoginController implements Initializable {
         background.fitHeightProperty().bind(graphics.heightProperty());
         signupForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getSignUp()));
+    }
+
+    public static void setFonts() {
 
     }
 }
