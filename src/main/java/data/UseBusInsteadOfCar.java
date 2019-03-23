@@ -4,7 +4,7 @@ import tools.CarbonCalculator;
 
 import java.util.ArrayList;
 
-public class UseBusInsteadOfCar extends TransportationActivity{
+public class UseBusInsteadOfCar extends TransportationActivity {
     /**
      * Constructor.
      */
@@ -30,11 +30,14 @@ public class UseBusInsteadOfCar extends TransportationActivity{
 
         // calculate maximum CO2 this activity can save
         if (user.getCarType().equals("small")) {
-            maxC02SavedByThisActivity = CarbonCalculator.smallCarEmissions(this.getKilometres()) - CarbonCalculator.busEmissions(this.getKilometres());
+            maxC02SavedByThisActivity = CarbonCalculator.smallCarEmissions(
+                    this.getKilometres()) - CarbonCalculator.busEmissions(this.getKilometres());
         } else if (user.getCarType().equals("medium")) {
-            maxC02SavedByThisActivity = CarbonCalculator.mediumCarEmissions(this.getKilometres() - CarbonCalculator.busEmissions(this.getKilometres()));
+            maxC02SavedByThisActivity = CarbonCalculator.mediumCarEmissions(
+                    this.getKilometres() - CarbonCalculator.busEmissions(this.getKilometres()));
         } else if (user.getCarType().equals("large")) {
-            maxC02SavedByThisActivity = CarbonCalculator.largeCarEmissions(this.getKilometres() - CarbonCalculator.busEmissions(this.getKilometres()));
+            maxC02SavedByThisActivity = CarbonCalculator.largeCarEmissions(
+                    this.getKilometres() - CarbonCalculator.busEmissions(this.getKilometres()));
         } else {
             maxC02SavedByThisActivity = 0;
         }
