@@ -48,19 +48,5 @@ public class UserAchievement {
         this.date = date;
     }
 
-    public boolean equals(Object other) {
-
-        if (other instanceof UserAchievement) {
-
-            UserAchievement that = (UserAchievement) other;
-
-            if(that.id == this.id){
-                return true;
-            }
-        }
-         return false;
-
-    }
-
 
 }

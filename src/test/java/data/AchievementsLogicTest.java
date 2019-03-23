@@ -1,22 +1,16 @@
 package data;
 
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-
-import static data.AchievementsLogic.checkActivity;
-import static org.junit.Assert.*;
 
 public class AchievementsLogicTest {
 
     Activity activity = new EatVegetarianMeal();
     Activity activity1 = new BuyLocallyProducedFood();
     Activity activity2 = new BuyNonProcessedFood();
-    Activity activity3 = new BuyLocallyProducedFood();
     Activity activity4 = new BuyOrganicFood();
 
 
@@ -59,13 +53,6 @@ public class AchievementsLogicTest {
         Assert.assertEquals(16 , user.getProgress().getAchievements().get(0).getId());
     }
 
-    @Test
-    public void checkActivity3() {
-        AchievementsLogic.checkActivity(user , activity3);
-
-        Assert.assertNotNull(user.getProgress().getAchievements().get(0));
-        Assert.assertEquals(15 , user.getProgress().getAchievements().get(0).getId());
-    }
 
     @Test
     public void checkActivity4() {
@@ -95,7 +82,7 @@ public class AchievementsLogicTest {
         user.getActivities().add(activity);
         user.getActivities().add(activity1);
         user.getActivities().add(activity2);
-        user.getActivities().add(activity3);
+        user.getActivities().add(activity4);
         user.getActivities().add(activity4);
         user.getActivities().add(activity4);
 
@@ -118,6 +105,22 @@ public class AchievementsLogicTest {
         Assert.assertNotNull(user.getProgress().getAchievements().get(0));
 
         Assert.assertEquals(8 , user.getProgress().getAchievements().get(0).getId());
+    }
+
+    @Test
+    public void checkall() {
+
+        AchievementsLogic.checkActivity(user , activity);
+        AchievementsLogic.checkActivity(user , activity1);
+        AchievementsLogic.checkActivity(user , activity2);
+
+        AchievementsLogic.checkActivity(user , activity4);
+        AchievementsLogic.checkActivity(user , activity1);
+
+        Assert.assertEquals(4 , user.getProgress().getAchievements().size());
+
+
+
     }
 
 

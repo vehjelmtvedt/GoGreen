@@ -108,20 +108,26 @@ public class AchievementsLogic {
 
     }
 
-    public static void addAchievemnt(User user , int id , Date date){
+    /**
+     * prevents duplicate achievements from being added.
+     * @param user current user
+     * @param id achievement to check
+     * @param date date to add
+     */
+    public static void addAchievemnt(User user , int id , Date date) {
 
         boolean alreadythere = false;
 
-        for (UserAchievement userAchievement : user.getProgress().getAchievements() ) {
+        for (UserAchievement userAchievement : user.getProgress().getAchievements()) {
 
-            if(userAchievement.getId() == id){
+            if (userAchievement.getId() == id) {
 
                 alreadythere = true;
                 break;
             }
 
         }
-        if (!alreadythere){
+        if (!alreadythere) {
 
             user.getProgress().getAchievements().add(
                     new UserAchievement(id, true, date));
