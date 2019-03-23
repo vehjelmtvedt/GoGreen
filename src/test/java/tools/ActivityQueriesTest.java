@@ -191,10 +191,30 @@ public class ActivityQueriesTest {
     }
 
     @Test
-    public void testFilterDuplicates() {
+    public void testFilterByDateDuplicates() {
         addActivitiesToUser(activeUser, 0, 243, 0);
         ArrayList<Activity> expected = getExpectedDateFilteredList(activeUser.getActivities(), today, today);
 
         Assert.assertEquals(expected, activityQuery.filterActivitiesByDate(today, today));
+    }
+
+    @Test
+    public void testFilterByCO2Greater() {
+
+    }
+
+    @Test
+    public void testFilterByCO2Lesser() {
+
+    }
+
+    @Test
+    public void testFilterByCO2AllEqual() {
+
+    }
+
+    @Test
+    public void testFilterByType() {
+
     }
 }

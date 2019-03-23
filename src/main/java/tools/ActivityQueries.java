@@ -3,8 +3,10 @@ package tools;
 import data.Activity;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.DoubleStream;
 
 public class ActivityQueries {
     private List<Activity> activities;
@@ -104,6 +106,44 @@ public class ActivityQueries {
 
         // Return the appropriate sublist
         return activities.subList(fromIndex, toIndex + 1);
+    }
+
+    /**
+     * .
+     * Returns the activities that match the given CO2 criteria
+     *
+     * @param co2     - CO2 value to filter by
+     * @param greater - should value be greater than CO2 or lower?
+     * @return - filtered list of activities that match the CO2 criteria
+     */
+    public List<Activity> filterActivitiesByCO2Saved(double co2, boolean greater) {
+        List<Activity> filteredActivities = new ArrayList<>();
+
+        for (Activity a : activities) {
+            if ((greater && a.getCarbonSaved() >= co2)
+                    || (!greater && a.getCarbonSaved() <= co2)) {
+                filteredActivities.add(a);
+            }
+        }
+
+        return filteredActivities;
+    }
+
+    /**.
+     * Returns the activities that match a given type
+     * @param type - Type of activities to look for
+     * @return - filtered list of activities of the given type
+     */
+    public List<Activity> filterActivitiesByType(Class<Activity> type) {
+        ArrayList<Activity> filteredActivities = new ArrayList<>();
+
+        for (Activity activity : activities) {
+            if (activity.getClass() == type) {
+                filteredActivities.add(activity);
+            }
+        }
+
+        return filteredActivities;
     }
 
     // ---------- CO2 METHODS ----------
