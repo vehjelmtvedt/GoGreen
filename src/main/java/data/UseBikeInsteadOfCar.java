@@ -32,24 +32,22 @@ public class UseBikeInsteadOfCar extends TransportationActivity {
 
         double maxC02SavedByThisActivity;
 
+        // calculate maximum CO2 this activity can save
         if (user.getCarType().equals("small")) {
-            //
             maxC02SavedByThisActivity = CarbonCalculator.smallCarEmissions(this.getKilometres());
         } else if (user.getCarType().equals("medium")) {
-            // TODO
             maxC02SavedByThisActivity = CarbonCalculator.mediumCarEmissions(this.getKilometres());
         } else if (user.getCarType().equals("large")) {
-            // TODO
             maxC02SavedByThisActivity = CarbonCalculator.largeCarEmissions(this.getKilometres());
         } else {
             maxC02SavedByThisActivity = 0;
         }
 
+        // calculate CO2 saved
         if (dailyCarbonEmissions > maxC02SavedByThisActivity + totalCarbonSavedToday) {
             return  maxC02SavedByThisActivity;
         } else {
             return dailyCarbonEmissions - totalCarbonSavedToday;
         }
     }
-
 }

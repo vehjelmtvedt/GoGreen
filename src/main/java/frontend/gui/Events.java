@@ -129,6 +129,7 @@ public class Events {
             if (distance == -1) {
                 verify.setVisible(true);
                 input.setUnFocusColor(Color.rgb(255, 0, 0));
+                return;
             } else {
                 verify.setVisible(false);
                 input.setText(null);
@@ -140,6 +141,10 @@ public class Events {
                 UseBikeInsteadOfCar travel = new UseBikeInsteadOfCar();
                 travel.setKilometres(distance);
                 travel.performActivity(loggedUser);
+            } else if (type == 2) {
+                // TODO
+            } else if (type == 3) {
+                // TODO
             }
 
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
