@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -42,6 +43,9 @@ public class Main extends Application {
 
         //setup the first scene for the primary stage
         General.finaliseStage(primaryStage, signIn);
+
+        //Try adding font to signin page
+
     }
 
     public static void main(String[] args) {
@@ -99,4 +103,21 @@ public class Main extends Application {
     public static void setProfilePage(Scene scene) {
         profilePage = scene;
     }
+
+    public static Font getRobotoThin(double size) {
+        return Font.loadFont(Main.class.getResource(
+                "/fonts/Roboto-Thin.ttf").toExternalForm(), size);
+    }
+
+    public static Font getRobotoBold(double size) {
+        return Font.loadFont(Main.class.getResource(
+                "/fonts/Roboto-Bold.ttf").toExternalForm(), size);
+    }
+
+    public static Font getReenieBeanie(double size) {
+        return Font.loadFont(Main.class.getResource(
+                "/fonts/ReenieBeanie.ttf").toExternalForm(), size);
+    }
+
+
 }
