@@ -147,7 +147,6 @@ public class FriendspageController implements Initializable {
         List<User> friendsList = Requests.getFriends(thisLoginDetails);
         for (User friend : friendsList) {
             if (counter >= 5) {
-                System.out.println("Added 5 friends to chart");
                 return;
             }
             ActivityQueries query = new ActivityQueries(friend.getActivities());
