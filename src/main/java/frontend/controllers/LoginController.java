@@ -47,6 +47,21 @@ public class LoginController implements Initializable {
     @FXML
     private Label goGreen;
 
+    @FXML
+    private Label line1;
+
+    @FXML
+    private Label line2;
+
+    @FXML
+    private Label line3;
+
+    @FXML
+    private Label login;
+
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loginButton.setOnAction(e -> {
@@ -64,9 +79,17 @@ public class LoginController implements Initializable {
         background.fitHeightProperty().bind(graphics.heightProperty());
         signupForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getSignUp()));
+        setFonts();
     }
 
-    public static void setFonts() {
+    public void setFonts() {
+        goGreen.setFont(Main.getReenieBeanie(100));
+        line1.setFont(Main.getReenieBeanie(40));
+        line2.setFont(Main.getReenieBeanie(40));
+        line3.setFont(Main.getReenieBeanie(50));
+        login.setFont(Main.getRobotoThin(45));
+        signupForward.setFont(Main.getRobotoThin(45));
+        loginButton.setFont(Main.getRobotoThin(28));
 
     }
 }
