@@ -96,30 +96,30 @@ public class FriendspageController implements Initializable {
         }
         fillFriendsTreeView();
         drawFriendRequestDrawer();
-        fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
-        fillChart("This Week", "#cd7b4c", DateUnit.WEEK, weeklyChart);
-        fillChart("This Month", "#b74747", DateUnit.MONTH, monthlyChart);
+//        fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
+//        fillChart("This Week", "#cd7b4c", DateUnit.WEEK, weeklyChart);
+//        fillChart("This Month", "#b74747", DateUnit.MONTH, monthlyChart);
 
         todayPane.prefWidthProperty().bind(headingBox.widthProperty());
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
     }
 
-    /**
-     * Fills the chart on the page with data.
-     * @param title - Title of the graph
-     * @param color - color of the bars on the graph
-     * @param unit - DateUnit enum, day, week or month
-     * @param chart - the chart to edit
-     */
-    public void fillChart(String title, String color, DateUnit unit, BarChart chart) {
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName(title);
-        populateBarChart(series1, unit);
-        chart.getData().addAll(series1);
-        colorBars(color, chart);
-        chart.setLegendVisible(false);
-    }
+//    /**
+//     * Fills the chart on the page with data.
+//     * @param title - Title of the graph
+//     * @param color - color of the bars on the graph
+//     * @param unit - DateUnit enum, day, week or month
+//     * @param chart - the chart to edit
+//     */
+//    public void fillChart(String title, String color, DateUnit unit, BarChart chart) {
+//        XYChart.Series series1 = new XYChart.Series();
+//        series1.setName(title);
+//        populateBarChart(series1, unit);
+//        chart.getData().addAll(series1);
+//        colorBars(color, chart);
+//        chart.setLegendVisible(false);
+//    }
 
     private void colorBars(String color, BarChart chart) {
         Node node = chart.lookup(".data0.chart-bar");
