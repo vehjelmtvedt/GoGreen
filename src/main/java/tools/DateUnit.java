@@ -1,6 +1,7 @@
 package tools;
 
 public enum DateUnit {
+    TODAY(0),
     DAY(1),
     WEEK(7),
     MONTH(30),

@@ -7,6 +7,13 @@ import static org.junit.Assert.*;
 
 public class DateUnitTest {
     @Test
+    public void testTodayUnit() {
+        DateUnit today = DateUnit.TODAY;
+
+        Assert.assertEquals(0, today.getNumDays());
+    }
+
+    @Test
     public void testDayUnit() {
         DateUnit day = DateUnit.DAY;
 
