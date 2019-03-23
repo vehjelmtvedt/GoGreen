@@ -28,11 +28,14 @@ public class UseBikeInsteadOfCar extends TransportationActivity{
         double dailyCarbonEmissions = calculateDailyCarbonEmissions(user);
 
         if (user.getCarType().equals("small")) {
-
+            // TODO
+            return 0;
         } else if (user.getCarType().equals("medium")) {
-
+            // TODO
+            return 0;
         } else if (user.getCarType().equals("large")) {
-
+            // TODO
+            return 0;
         } else {
             return 0;
         }

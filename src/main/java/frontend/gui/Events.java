@@ -83,12 +83,6 @@ public class Events {
             if (type == 1) {
                 EatVegetarianMeal meal = new EatVegetarianMeal();
                 meal.performActivity(loggedUser);
-<<<<<<< HEAD
-            } else if (type == 3) {
-                BuyLocallyProducedFood food = new BuyLocallyProducedFood();
-                food.performActivity(loggedUser);
-=======
->>>>>>> 5a0c72beff5069f891cf3fec9925d326ed94134a
             } else if (type == 2) {
                 BuyOrganicFood food = new BuyOrganicFood();
                 food.performActivity(loggedUser);
