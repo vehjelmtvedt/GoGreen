@@ -130,15 +130,44 @@ public class ActivityQueries {
     }
 
     /**.
+     * Returns the activities that match the given CO2 range
+     * @param fromCo2 - from CO2 (inclusive)
+     * @param toCo2 - to CO2 (inclusive)
+     * @return
+     */
+    public List<Activity> filterActivitiesByCO2Saved(double fromCo2, double toCo2) {
+        List<Activity> filteredActivities = new ArrayList<>();
+
+        for (Activity a : activities) {
+            if (a.getCarbonSaved() >= fromCo2 && a.getCarbonSaved() <= toCo2) {
+                filteredActivities.add(a);
+            }
+        }
+
+        return filteredActivities;
+    }
+
+    /**.
      * Returns the activities that match a given type
      * @param type - Type of activities to look for
      * @return - filtered list of activities of the given type
      */
-    public List<Activity> filterActivitiesByType(Class<Activity> type) {
+    public List<Activity> filterActivitiesByType(Class type) {
+        ArrayList<Class> categories = new ArrayList<>();
+        categories.add(type);
+        return filterActivitiesByType(categories);
+    }
+
+    /**.
+     * Returns the activities that match the given types
+     * @param types - Lsit of types of activities to look for
+     * @return - filtered list of activities of the given types
+     */
+    public List<Activity> filterActivitiesByType(ArrayList<Class> types) {
         ArrayList<Activity> filteredActivities = new ArrayList<>();
 
         for (Activity activity : activities) {
-            if (activity.getClass() == type) {
+            if (types.contains(activity.getClass())) {
                 filteredActivities.add(activity);
             }
         }

@@ -89,12 +89,29 @@ public class ActivityQueriesTest {
         }
     }
 
+    private void addActivitiesToUserByCO2(User user, double CO2, int entries, int CO2diff) {
+        for (int i = 0; i < entries; ++i) {
+            Activity activity = new EatVegetarianMeal();
+            activity.setCarbonSaved(CO2);
+            user.addActivity(activity);
+            CO2 += CO2diff;
+        }
+    }
+
     private ArrayList<Activity> getExpectedDateFilteredList(List<Activity> activityList, Date fromDate, Date toDate) {
         return activityList.stream()
                 .filter((activity -> activity.getDate().equals(fromDate)
                         || activity.getDate().equals(toDate)
                         || (activity.getDate().before(toDate)
                         && activity.getDate().after(fromDate))))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private ArrayList<Activity> getExpectedCO2FilteredList(List<Activity> activityList, double fromCO2,
+                                                                  double toCO2) {
+        return activityList.stream()
+                .filter((activity -> activity.getCarbonSaved() >= fromCO2
+                        && activity.getCarbonSaved() <= toCO2))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
@@ -200,21 +217,62 @@ public class ActivityQueriesTest {
 
     @Test
     public void testFilterByCO2Greater() {
+        addActivitiesToUserByCO2(activeUser, 500, 100, 10);
+        ArrayList<Activity> expected = getExpectedCO2FilteredList(activeUser.getActivities(), 500, 1500);
 
+        Assert.assertEquals(expected, activityQuery.filterActivitiesByCO2Saved(500, true));
     }
 
     @Test
     public void testFilterByCO2Lesser() {
+        addActivitiesToUserByCO2(activeUser, 50, 100, 10);
+        ArrayList<Activity> expected = getExpectedCO2FilteredList(activeUser.getActivities(), 50, 100);
 
+        Assert.assertEquals(expected, activityQuery.filterActivitiesByCO2Saved(100, false));
     }
 
     @Test
     public void testFilterByCO2AllEqual() {
+        addActivitiesToUserByCO2(activeUser, 50, 1000, 0);
 
+        Assert.assertEquals(1000, activityQuery.filterActivitiesByCO2Saved(50, false).size());
+    }
+
+    @Test
+    public void testFilterByCO2Range() {
+        addActivitiesToUserByCO2(activeUser, 10, 500, 5);
+        ArrayList<Activity> expected = getExpectedCO2FilteredList(activeUser.getActivities(), 25, 75);
+
+        Assert.assertEquals(expected, activityQuery.filterActivitiesByCO2Saved(25, 75));
     }
 
     @Test
     public void testFilterByType() {
+        for (int i = 0; i < 10; ++i) {
+            activeUser.addActivity(new EatVegetarianMeal());
+            activeUser.addActivity(new BuyNonProcessedFood());
+            activeUser.addActivity(new BuyOrganicFood());
+        }
 
+        activeUser.addActivity(new BuyOrganicFood());
+
+        Assert.assertEquals(11, activityQuery.filterActivitiesByType(BuyOrganicFood.class).size());
+    }
+
+    @Test
+    public void testFilterByTypes() {
+        for (int i = 0; i < 10; ++i) {
+            activeUser.addActivity(new EatVegetarianMeal());
+            activeUser.addActivity(new BuyNonProcessedFood());
+            activeUser.addActivity(new BuyOrganicFood());
+        }
+
+        activeUser.addActivity(new BuyOrganicFood());
+
+        ArrayList<Class> types = new ArrayList<>();
+        types.add(EatVegetarianMeal.class);
+        types.add(BuyNonProcessedFood.class);
+
+        Assert.assertEquals(20, activityQuery.filterActivitiesByType(types).size());
     }
 }
