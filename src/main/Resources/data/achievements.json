@@ -8,7 +8,7 @@
   {
     "_class": "data.Achievement",
     "id": 1,
-    "name": "Being consistent for more than two days",
+    "name": "Adding more than five Activites",
     "bonus": 5
   },
   {
@@ -38,7 +38,7 @@
   {
     "_class": "data.Achievement",
     "id": 6,
-    "name": "Eating vegetarian food for the first time",
+    "name": "Eating vegetarian food",
     "bonus": 5
   },
   {
@@ -100,6 +100,11 @@
     "id": 16,
     "name": "Buy Non Processed Food",
     "bonus": 5
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 17,
+    "name": "Buy organic Food",
+    "bonus": 5
   }
-
 ]

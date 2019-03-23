@@ -3,9 +3,12 @@ package data;
 import tools.Requests;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AchievementsLogic {
+
+    private static List<Achievement> list = Requests.getAllAchievements();
 
     /**
      * checks activity if it completes an achievement.
@@ -15,38 +18,8 @@ public class AchievementsLogic {
      */
     public static void checkActivity(User user, Activity activity) {
 
-        List<Achievement> list = Requests.getAllAchievements();
-
-        //Saved your first CO2 id 0
-        if (user.getTotalCarbonSaved() > 0) {
-
-            user.getProgress().getAchievements().add(
-                    new UserAchievement(0, true, user.getActivities().get(0).getDate()));
-
-            user.setTotalCarbonSaved(user.getTotalCarbonSaved() + list.get(1).getBonus());
-        }
-
-        //Being consistent for more than two days id 1
-        for (int i = 0; i < user.getActivities().size() - 1; i++) {
 
 
-            if (user.getActivities().get(i).getDate().getDay()
-                    == user.getActivities().get(i + 1).getDate().getDay()) {
-
-                // do nothing if its on the same day
-
-            }
-            if (user.getActivities().get(i).getDate().getDay()
-                    == user.getActivities().get(i + 1).getDate().getDay() + 1) {
-
-                user.getProgress().getAchievements().add(
-                        new UserAchievement(1, true, user.getActivities().get(1 + i).getDate()));
-
-                break;
-
-            }
-
-        }
 
         //Using a bicycle id 2
 
@@ -59,34 +32,33 @@ public class AchievementsLogic {
         //Eating vegetarian food for the first time id 6
         if (activity instanceof EatVegetarianMeal) {
 
-            user.getProgress().getAchievements().add(
-                    new UserAchievement(6, true, user.getActivities().get(1).getDate()));
+            addAchievemnt(user , 6 , activity.getDate());
 
         }
         //Eating fish once id 7
-
-        //Adding your first friend id 8
-        // the date is the date of the time this was checked
-        if (user.getFriends().size() > 0) {
-            user.getProgress().getAchievements().add(
-                    new UserAchievement(8, true, user.getActivities().get(1).getDate()));
-        }
-
         //Getting solar Power 12
         //Using an electric Car 13
         //Being Vegan 14
 
         //Buy Local Food15
         if (activity instanceof BuyLocallyProducedFood) {
-            user.getProgress().getAchievements().add(
-                    new UserAchievement(15, true, user.getActivities().get(1).getDate()));
+
+            addAchievemnt(user , 15 , activity.getDate());
+
 
         }
-        //Buy Non Processed Food 16
 
+        //Buy Non Processed Food 16
         if (activity instanceof BuyNonProcessedFood) {
-            user.getProgress().getAchievements().add(
-                    new UserAchievement(16, true, user.getActivities().get(1).getDate()));
+
+            addAchievemnt(user , 16 , activity.getDate());
+
+
+        }
+        //buy organic food 17
+        if (activity instanceof BuyOrganicFood) {
+
+            addAchievemnt(user , 17 , activity.getDate());
 
         }
 
@@ -99,21 +71,62 @@ public class AchievementsLogic {
      */
     public static void checkOther(User user) {
 
+        //Saved your first CO2 id 0
+        if (user.getTotalCarbonSaved() > 0  && user.getActivities().size() > 0) {
+
+            addAchievemnt(user , 0 , user.getActivities().get(0).getDate());
+
+
+
+        }
+
+        //Being consistent for more than two days id 1
+        if (user.getActivities().size() > 5) {
+
+            addAchievemnt(user , 1 , user.getActivities().get(4).getDate());
+
+        }
+
+
         //Adding your first friend id 8
         // the date is the date of the time this was checked
         if (user.getFriends().size() > 0) {
-            user.getProgress().getAchievements().add(
-                    new UserAchievement(8, true, Calendar.getInstance().getTime()));
+
+            addAchievemnt(user , 8 , Calendar.getInstance().getTime());
         }
 
         //Adding more than 10 friends id 9
         if (user.getFriends().size() > 10) {
-            user.getProgress().getAchievements().add(
-                    new UserAchievement(9, true, Calendar.getInstance().getTime()));
+
+            addAchievemnt(user , 9 , Calendar.getInstance().getTime());
+
         }
 
         //Being on the top of the board for a day id 10
         //Being on the top of the board for a week id 11
+
+
+    }
+
+    public static void addAchievemnt(User user , int id , Date date){
+
+        boolean alreadythere = false;
+
+        for (UserAchievement userAchievement : user.getProgress().getAchievements() ) {
+
+            if(userAchievement.getId() == id){
+
+                alreadythere = true;
+                break;
+            }
+
+        }
+        if (!alreadythere){
+
+            user.getProgress().getAchievements().add(
+                    new UserAchievement(id, true, date));
+
+        }
 
 
     }
