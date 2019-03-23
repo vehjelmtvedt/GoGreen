@@ -12,9 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 import java.net.URL;
@@ -82,6 +79,9 @@ public class LoginController implements Initializable {
         setFonts();
     }
 
+    /**
+     * Adds fonts to all labels.
+     */
     public void setFonts() {
         goGreen.setFont(Main.getReenieBeanie(100));
         line1.setFont(Main.getReenieBeanie(40));
