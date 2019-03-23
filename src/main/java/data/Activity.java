@@ -73,12 +73,16 @@ public abstract class Activity {
      * @param user user currently logged in
      */
     public int timesPerformedInTheSameDay(User user) {
+        return getActivitiesOfTheSameTypePerformedInTheSameDay(user).size();
+    }
+
+    public  ArrayList<Activity> getActivitiesOfTheSameTypePerformedInTheSameDay(User user) {
+        ArrayList<Activity> result = new ArrayList<Activity>();
         Date currentDate = Calendar.getInstance().getTime();
         String currentMonth = currentDate.toString().split(" ")[1];
         String currentDay = currentDate.toString().split(" ")[2];
         String currentYear = currentDate.toString().split(" ")[5];
 
-        int result = 0;
         for (Activity activity : user.getActivities()) {
             if (activity != null && activity.getClass().getSimpleName()
                     .equals(this.getClass().getSimpleName())) {
@@ -86,10 +90,11 @@ public abstract class Activity {
                 if (dateNow.equals(activity.getDate().toString().split(" ")[1]
                         + activity.getDate().toString().split(" ")[2]
                         + activity.getDate().toString().split(" ")[5])) {
-                    result++;
+                    result.add(activity);
                 }
             }
         }
+
         return result;
     }
     

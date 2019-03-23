@@ -15,14 +15,26 @@ public class UseBikeInsteadOfCar extends TransportationActivity{
         this.setName("Use Bike Instead of Car");
     }
 
-
-
     @Override
     public double calculateCarbonSaved(User user) {
-        // TODO
         // calculate total carbon saved today
+        ArrayList<Activity> activitiesPerformedOnTheSameDay = getActivitiesOfTheSameTypePerformedInTheSameDay(user);
+        double totalCarbonSavedToday = 0;
+        for(Activity activity: activitiesPerformedOnTheSameDay) {
+            totalCarbonSavedToday += activity.getCarbonSaved();
+        }
+
         // calculate daily carbon emissions
-        // calculate carbon saved by this activity
-        return this.getKilometres();
+        double dailyCarbonEmissions = calculateDailyCarbonEmissions(user);
+
+        if (user.getCarType().equals("small")) {
+
+        } else if (user.getCarType().equals("medium")) {
+
+        } else if (user.getCarType().equals("large")) {
+
+        } else {
+            return 0;
+        }
     }
 }
