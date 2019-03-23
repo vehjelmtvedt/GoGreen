@@ -24,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import tools.ActivityQueries;
+import tools.DateUnit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -251,7 +252,7 @@ public class Events {
                                     List<JFXRadioButton> radioList, User loggedUser,
                                     TableView<Activity> activityTable) {
         label.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            ArrayList<Activity> activities = loggedUser.getActivities();
+            List<Activity> activities = loggedUser.getActivities();
             ActivityQueries activityQueries = new ActivityQueries(activities);
             ObservableList<Activity> filteredActivities;
             List<String> categoryFilters = new ArrayList<>();
@@ -263,8 +264,23 @@ public class Events {
                         categoryFilters.add(filter.getText());
                     }
                 }
-                filteredActivities = FXCollections.observableArrayList(
-                        activityQueries.filterActivitiesByCategories(categoryFilters));
+                activities = activityQueries.filterActivitiesByCategories(categoryFilters);
+                activityQueries.setActivities(activities);
+
+                for (JFXRadioButton filter : radioList) {
+                    if (filter.isSelected()) {
+                        if (filter.getText().contains("Today")) {
+                            activities = activityQueries.filterActivitiesByDate(DateUnit.TODAY);
+                        } else if (filter.getText().contains("7")) {
+                            activities = activityQueries.filterActivitiesByDate(DateUnit.WEEK);
+                        } else {
+                            if (filter.getText().contains("30")) {
+                                activities = activityQueries.filterActivitiesByDate(DateUnit.MONTH);
+                            }
+                        }
+                    }
+                }
+                filteredActivities = FXCollections.observableArrayList(activities);
             }
             activityTable.setItems(filteredActivities);
         });
