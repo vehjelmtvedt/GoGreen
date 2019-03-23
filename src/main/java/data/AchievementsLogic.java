@@ -8,12 +8,12 @@ import java.util.List;
 public class AchievementsLogic {
 
     /**
-     *checks activity if it completes an achievement.
+     * checks activity if it completes an achievement.
      *
-     * @param user current user
+     * @param user     current user
      * @param activity current activity
      */
-    public static void checkActivity(User user , Activity activity) {
+    public static void checkActivity(User user, Activity activity) {
 
         List<Achievement> list = Requests.getAllAchievements();
 
@@ -21,13 +21,13 @@ public class AchievementsLogic {
         if (user.getTotalCarbonSaved() > 0) {
 
             user.getProgress().getAchievements().add(
-                    new UserAchievement(0 , true , user.getActivities().get(0).getDate()));
+                    new UserAchievement(0, true, user.getActivities().get(0).getDate()));
 
             user.setTotalCarbonSaved(user.getTotalCarbonSaved() + list.get(1).getBonus());
         }
 
         //Being consistent for more than two days id 1
-        for (int i  = 0 ; i < user.getActivities().size() - 1 ; i++ ) {
+        for (int i = 0; i < user.getActivities().size() - 1; i++) {
 
 
             if (user.getActivities().get(i).getDate().getDay()
@@ -40,7 +40,7 @@ public class AchievementsLogic {
                     == user.getActivities().get(i + 1).getDate().getDay() + 1) {
 
                 user.getProgress().getAchievements().add(
-                        new UserAchievement(1 , true , user.getActivities().get(1 + i).getDate()));
+                        new UserAchievement(1, true, user.getActivities().get(1 + i).getDate()));
 
                 break;
 
@@ -60,7 +60,7 @@ public class AchievementsLogic {
         if (activity instanceof EatVegetarianMeal) {
 
             user.getProgress().getAchievements().add(
-                    new UserAchievement(6, true , user.getActivities().get(1).getDate()));
+                    new UserAchievement(6, true, user.getActivities().get(1).getDate()));
 
         }
         //Eating fish once id 7
@@ -69,15 +69,33 @@ public class AchievementsLogic {
         // the date is the date of the time this was checked
         if (user.getFriends().size() > 0) {
             user.getProgress().getAchievements().add(
-                    new UserAchievement(8, true , user.getActivities().get(1).getDate()));
+                    new UserAchievement(8, true, user.getActivities().get(1).getDate()));
+        }
+
+        //Getting solar Power 12
+        //Using an electric Car 13
+        //Being Vegan 14
+
+        //Buy Local Food15
+        if (activity instanceof BuyLocallyProducedFood) {
+            user.getProgress().getAchievements().add(
+                    new UserAchievement(15, true, user.getActivities().get(1).getDate()));
+
+        }
+        //Buy Non Processed Food 16
+
+        if (activity instanceof BuyNonProcessedFood) {
+            user.getProgress().getAchievements().add(
+                    new UserAchievement(16, true, user.getActivities().get(1).getDate()));
+
         }
 
     }
 
     /**
      * checks for other things that complete achievements.
-     * @param user current user
      *
+     * @param user current user
      */
     public static void checkOther(User user) {
 
@@ -85,16 +103,17 @@ public class AchievementsLogic {
         // the date is the date of the time this was checked
         if (user.getFriends().size() > 0) {
             user.getProgress().getAchievements().add(
-                    new UserAchievement(8, true , Calendar.getInstance().getTime()));
+                    new UserAchievement(8, true, Calendar.getInstance().getTime()));
         }
 
         //Adding more than 10 friends id 9
         if (user.getFriends().size() > 10) {
             user.getProgress().getAchievements().add(
-                    new UserAchievement(9, true , Calendar.getInstance().getTime()));
+                    new UserAchievement(9, true, Calendar.getInstance().getTime()));
         }
 
         //Being on the top of the board for a day id 10
+        //Being on the top of the board for a week id 11
 
 
     }
