@@ -153,6 +153,25 @@ public abstract class Activity {
         return sortHelper(activityList, getClassComparator());
     }
 
+    /**.
+     * Returns the sum of activity carbon saved
+     * @param activityList - activites list
+     * @return sum of CO2 by all activities in the list
+     */
+    public static double getSum(List<Activity> activityList) {
+        if (activityList == null) {
+            return 0;
+        }
+
+        double sum = 0.0;
+
+        for (Activity a : activityList) {
+            sum += a.getCarbonSaved();
+        }
+
+        return sum;
+    }
+
     /**
      * performs the activity and updates the user object.
      * @param user user currently logged in

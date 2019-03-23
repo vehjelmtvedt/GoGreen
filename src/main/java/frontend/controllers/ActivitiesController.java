@@ -1,8 +1,6 @@
 package frontend.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.*;
 import data.Activity;
 import data.User;
 import frontend.gui.Events;
@@ -20,11 +18,16 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ActivitiesController implements Initializable {
     private static User loggedUser;
+    private static List<JFXCheckBox> filterList = new ArrayList<>();
+    private static List<JFXCheckBox> checkList = new ArrayList<>();
+    private static List<JFXRadioButton> radioList = new ArrayList<>();
 
     @FXML
     private JFXButton btnFood;
@@ -76,6 +79,40 @@ public class ActivitiesController implements Initializable {
     private AnchorPane paneLocalFood;
     @FXML
     private AnchorPane paneNonProFood;
+    @FXML
+    private AnchorPane paneBike;
+    @FXML
+    private AnchorPane paneBus;
+    @FXML
+    private AnchorPane paneTrain;
+    @FXML
+    private JFXTextField inputDistance;
+    @FXML
+    private Label lblDistanceValidate;
+    @FXML
+    private JFXButton btnBike;
+    @FXML
+    private JFXButton btnBus;
+    @FXML
+    private JFXButton btnTrain;
+    @FXML
+    private JFXCheckBox checkFood;
+    @FXML
+    private JFXCheckBox checkTransportation;
+    @FXML
+    private JFXCheckBox checkHousehold;
+    @FXML
+    private JFXCheckBox checkAll;
+    @FXML
+    private Label lblClearFilters;
+    @FXML
+    private Label lblApply;
+    @FXML
+    private JFXRadioButton radioToday;
+    @FXML
+    private JFXRadioButton radioWeek;
+    @FXML
+    private JFXRadioButton radioMonth;
 
     /**
      * .
@@ -87,18 +124,27 @@ public class ActivitiesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //add Activity Event on clicking ( plus add in history table )
-        Events.addActivityClick(paneVegetarianMeal, 1, loggedUser, activityTable);
-        Events.addActivityClick(paneOrganicFood, 2, loggedUser, activityTable);
-        Events.addActivityClick(paneLocalFood, 3, loggedUser, activityTable);
-        Events.addActivityClick(paneNonProFood, 4, loggedUser, activityTable);
+        Events.addFoodActivity(paneVegetarianMeal, 1, loggedUser, activityTable);
+        Events.addFoodActivity(paneOrganicFood, 2, loggedUser, activityTable);
+        Events.addFoodActivity(paneLocalFood, 3, loggedUser, activityTable);
+        Events.addFoodActivity(paneNonProFood, 4, loggedUser, activityTable);
+        Events.addTransportActivity(paneBike, inputDistance,
+                lblDistanceValidate, 5, loggedUser, activityTable);
+        Events.addTransportActivity(paneBus, inputDistance,
+                lblDistanceValidate, 5, loggedUser, activityTable);
+        Events.addTransportActivity(paneTrain, inputDistance,
+                lblDistanceValidate, 5, loggedUser, activityTable);
 
-        //add hover events for Food buttons
+        //add hover events for button activities
         Events.addActivityHover(paneVegetarianMeal, btnVegetarianMeal);
         Events.addActivityHover(paneOrganicFood, btnOrganicFood);
         Events.addActivityHover(paneLocalFood, btnLocalFood);
         Events.addActivityHover(paneNonProFood, btnNonProFood);
+        Events.addActivityHover(paneBike, btnBike);
+        Events.addActivityHover(paneBus, btnBus);
+        Events.addActivityHover(paneTrain, btnTrain);
 
-        //setup notification panel and navigation panel
+        //setup notification and navigation panels
         try {
             NavPanelController.setup(drawer, menu);
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
@@ -116,11 +162,24 @@ public class ActivitiesController implements Initializable {
         if (loggedUser.getActivities().isEmpty()) {
             activityTable.setPlaceholder(new Label("No previous activities"));
         }
-    }
 
-    //TRANSPORTATION METHODS
-    private void addTransportActivity() {
+        //create check list
+        checkList.add(checkFood);
+        checkList.add(checkTransportation);
+        checkList.add(checkHousehold);
+        checkList.add(checkAll);
 
+        //create radio list
+        radioList.add(radioToday);
+        radioList.add(radioWeek);
+        radioList.add(radioMonth);
+
+        //Add events for the filter tab in activity history
+        Events.addRadioToggle(radioList);
+        Events.showAllFilters(checkAll, checkList, radioList);
+        Events.addHoverOnFilter(lblClearFilters);
+        Events.addHoverOnFilter(lblApply);
+        Events.clearFilters(lblClearFilters, checkList, radioList);
     }
 
     //GENERAL METHODS
