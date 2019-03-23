@@ -1,6 +1,7 @@
 package frontend;
 
 import data.User;
+import data.UserAchievement;
 import frontend.gui.ProfilePageLogic;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class ProfilePageLogicTest {
     public void getLevel() {
 
 
-        Assert.assertEquals(1 , ProfilePageLogic.getLevel(user));
+        Assert.assertEquals(1, ProfilePageLogic.getLevel(user));
 
     }
 
@@ -21,7 +22,7 @@ public class ProfilePageLogicTest {
     public void getScore() {
 
         double test = 0.0;
-        Assert.assertEquals(test , ProfilePageLogic.getScore(user) , 0);
+        Assert.assertEquals(test, ProfilePageLogic.getScore(user), 0);
     }
 
     @Test
@@ -36,6 +37,24 @@ public class ProfilePageLogicTest {
         String test = "badges/1.png";
 
         Assert.assertTrue(test.equals(ProfilePageLogic.getBadge(user)));
+
+    }
+
+    @Test
+    public void getNameString(UserAchievement userAchievement) {
+        //TODO
+    }
+
+    @Test
+
+    public void getBonusString(UserAchievement userAchievement) {
+        //TODO
+
+    }
+
+    @Test
+    public void getDateString(UserAchievement userAchievement) {
+        //TODO
 
     }
 

@@ -6,22 +6,18 @@ import data.UserAchievement;
 import frontend.gui.Main;
 import frontend.gui.ProfilePageLogic;
 import frontend.gui.StageSwitcher;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -31,16 +27,10 @@ public class ProfilePageController implements Initializable {
     private static User thisUser;
 
     @FXML
-    VBox completed;
+    private VBox completed;
 
     @FXML
-    private TableView<Achievement> all;
-
-    @FXML
-    private TableColumn<Achievement, String> achievementNameTableColumn;
-
-    @FXML
-    private TableColumn<Achievement, Integer> bonus;
+    private VBox all;
 
     @FXML
     private Label level;
@@ -66,21 +56,31 @@ public class ProfilePageController implements Initializable {
     @FXML
     private Label lastseenLabel;
 
+    @FXML
+    private HBox topHbox;
+
+    @FXML
+    private ImageView badge1;
+
+    @FXML
+    private ImageView badge2;
+
+
     /**
      * how should the page be set up.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        userNameLabel.setText(thisUser.getUsername());
+        userNameLabel.setText("UserName: " + thisUser.getUsername());
 
-        nameLabel.setText(thisUser.getFirstName() + thisUser.getLastName());
+        nameLabel.setText("Name: " + thisUser.getFirstName() + thisUser.getLastName());
 
-        emailLabel.setText(thisUser.getEmail());
+        emailLabel.setText("eMail: " + thisUser.getEmail());
 
-        ageLabel.setText(thisUser.getAge() + "");
+        ageLabel.setText("Age: " + thisUser.getAge() + "");
 
-        lastseenLabel.setText(thisUser.getLastLoginDate().toString());
+        lastseenLabel.setText("Last LogIn Date: " + thisUser.getLastLoginDate().toString());
 
         level.setText("Level: " + ProfilePageLogic.getLevel(thisUser));
 
@@ -88,30 +88,82 @@ public class ProfilePageController implements Initializable {
 
         badge.setImage(badgeimg);
 
-        // add the completed achievements
-        ArrayList<UserAchievement> userAchievements = thisUser.getProgress().getAchievements();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < userAchievements.size() ; i++) {
 
-            stringBuilder.append(i + 1 + ") " + userAchievements.get(i).toString() + "\n") ;
+        // for every completed achievement module  is created
+        // and added to a VBox small pics might be added later
+        for (int i = 0 ; i < thisUser.getProgress().getAchievements().size() ; i++) {
 
+            HBox hbox = new HBox();
+
+            hbox.setSpacing(10.0);
+
+            Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
+                    thisUser.getProgress().getAchievements().get(i)));
+            name.setFill(Color.GREEN);
+
+            Text bonus = new Text(",Got: " + ProfilePageLogic.getBonusString(
+                    thisUser.getProgress().getAchievements().get(i)) + " Points");
+            Text date = new Text(",Completed On: " + ProfilePageLogic.getDateString(
+                    thisUser.getProgress().getAchievements().get(i)) + ".");
+
+            hbox.getChildren().addAll(name , bonus , date);
+
+            completed.getChildren().add(hbox);
 
         }
-        completed.getChildren().add(new Text(stringBuilder.toString()));
+
+        for (Achievement a : ProfilePageLogic.getList()) {
+
+            HBox hbox = new HBox();
+
+            hbox.setSpacing(10.0);
+
+            if (!isComplete(a)) {
+                Text name = new Text("- " + a.getName());
+                Text points = new Text(",Complete to Get: " + a.getBonus() + " points.");
 
 
-        bonus.setCellValueFactory(new PropertyValueFactory<Achievement, Integer>("Bonus"));
-        achievementNameTableColumn.setCellValueFactory(
-                new PropertyValueFactory<Achievement, String>("Name"));
+                hbox.getChildren().addAll(name, points);
 
+                all.getChildren().add(hbox);
+            }
 
-        ObservableList<Achievement> allachievements =
-                FXCollections.<Achievement>observableArrayList();
+        }
 
-        all.setItems(allachievements);
+        if (isComplete(ProfilePageLogic.getList().get(12))) {
+
+            Image image =  new Image("badges/solar.png");
+
+            badge1.setImage(image);
+
+        }
+
+        if (isComplete(ProfilePageLogic.getList().get(14))) {
+
+            Image image =  new Image("badges/vegan.png");
+
+            badge2.setImage(image);
+
+        }
 
         backButton.setOnAction(e ->
-                StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getHomepage()));
+                StageSwitcher.sceneSwitch(Main.getPrimaryStage() , Main.getHomepage()));
+
+    }
+
+    /**
+     * checks if an achievement is already completed.
+     * @param achievement to check
+     * @return
+     */
+    public static boolean isComplete(Achievement achievement) {
+        for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
+            if (achievement.getId() == userAchievement.getId()) {
+                return true;
+            }
+
+        }
+        return false;
     }
 
     /**
@@ -127,6 +179,10 @@ public class ProfilePageController implements Initializable {
                 1 , true , new Date(11 , 11, 11)));
         thisUser.getProgress().getAchievements().add(new UserAchievement(
                 2 , true , new Date(12 , 11, 11)));
+        thisUser.getProgress().getAchievements().add(new UserAchievement(
+                12 , true , new Date(12 , 11, 11)));
+        thisUser.getProgress().getAchievements().add(new UserAchievement(
+                14 , true , new Date(12 , 11, 11)));
 
         thisUser.getProgress().setPoints(1000.0);
     }

@@ -1,9 +1,7 @@
 package data;
 
-import tools.Requests;
-
 import java.util.Date;
-import java.util.List;
+
 
 public class UserAchievement {
 
@@ -51,20 +49,5 @@ public class UserAchievement {
     }
 
 
-    /**
-     * this returns a String with Achievement name and completion date.
-     * @return
-     */
-    public String toString() {
-
-        List<Achievement> list = Requests.getAllAchievements();
-
-        String achievement = list.get(this.id).getName()
-                + ", Earned: " + list.get(this.id).getBonus()
-                + ", Completed on :" + this.getDate().toString() + ".";
-
-        return achievement;
-
-    }
 
 }

@@ -82,5 +82,11 @@
     "id": 13,
     "name": "Using an electric Car",
     "bonus": 5
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 14,
+    "name": "Being Vegan",
+    "bonus": 5
   }
 ]
