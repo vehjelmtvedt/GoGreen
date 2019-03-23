@@ -96,9 +96,9 @@ public class FriendspageController implements Initializable {
         }
         fillFriendsTreeView();
         drawFriendRequestDrawer();
-        fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
-        fillChart("This Week", "#cd7b4c", DateUnit.WEEK, weeklyChart);
-        fillChart("This Month", "#b74747", DateUnit.MONTH, monthlyChart);
+//        fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
+//        fillChart("This Week", "#cd7b4c", DateUnit.WEEK, weeklyChart);
+//        fillChart("This Month", "#b74747", DateUnit.MONTH, monthlyChart);
 
         todayPane.prefWidthProperty().bind(headingBox.widthProperty());
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
