@@ -124,12 +124,13 @@ public class FriendspageController implements Initializable {
     private void colorBars(String color, BarChart chart) {
         Node node = chart.lookup(".data0.chart-bar");
         node.setStyle("-fx-bar-fill: #379B1E;");
-        node = chart.lookup(".data1.chart-bar");
-        node.setStyle("-fx-bar-fill: " +  color + ";");
-        node = chart.lookup(".data2.chart-bar");
-        node.setStyle("-fx-bar-fill: " +  color + ";");
-        node = chart.lookup(".data3.chart-bar");
-        node.setStyle("-fx-bar-fill: " +  color + ";");
+        for (int i = 1; i != 6; i++) {
+            node = chart.lookup(".data" + i + ".chart-bar");
+            if (node == null) {
+                return;
+            }
+            node.setStyle("-fx-bar-fill: " +  color + ";");
+        }
     }
 
     /**
