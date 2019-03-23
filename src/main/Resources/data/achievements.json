@@ -8,19 +8,19 @@
   {
     "_class": "data.Achievement",
     "id": 1,
-    "name": "Being consistent for more than three days",
+    "name": "Being consistent for more than two days",
     "bonus": 5
   },
   {
     "_class": "data.Achievement",
     "id": 2,
-    "name": "Taking a bike instead of a car",
+    "name": "Usea bicycle",
     "bonus": 5
   },
   {
     "_class": "data.Achievement",
     "id": 3,
-    "name": "Using a bike often",
+    "name": "Use a bicycle often",
     "bonus": 5
   },
   {
@@ -88,5 +88,18 @@
     "id": 14,
     "name": "Being Vegan",
     "bonus": 5
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 15,
+    "name": "Buy Local Food",
+    "bonus": 5
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 16,
+    "name": "Buy Non Processed Food",
+    "bonus": 5
   }
+
 ]
