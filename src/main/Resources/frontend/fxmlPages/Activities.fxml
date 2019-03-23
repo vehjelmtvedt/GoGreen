@@ -60,100 +60,6 @@
                   </JFXButton>
                </children>
             </Pane>
-            <Pane fx:id="paneFood" layoutX="-17.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <AnchorPane layoutX="61.0" layoutY="42.0" prefHeight="566.0" prefWidth="926.0">
-                     <children>
-                        <HBox alignment="CENTER" layoutX="2.0" layoutY="232.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="0.0">
-                           <children>
-                              <AnchorPane fx:id="paneVegetarianMeal" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <JFXButton fx:id="btnVegetarianMeal" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Add vegetarian meal" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/vegMealIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </AnchorPane>
-                              <AnchorPane fx:id="paneOrganicFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/organicFoodIcon.jpg" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnOrganicFood" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy organic food" />
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </AnchorPane>
-                              <AnchorPane fx:id="paneLocalFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/localFoodIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnLocalFood" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy locally produced food" />
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </AnchorPane>
-                              <AnchorPane fx:id="paneNonProFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/processedFoodIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnNonProFood" buttonType="RAISED" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy non-processed food" />
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </AnchorPane>
-                           </children>
-                        </HBox>
-                        <Text layoutX="154.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Why should you #GoGreen?" AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="153.4453125" AnchorPane.topAnchor="0.044921875">
-                           <font>
-                              <Font size="50.0" />
-                           </font>
-                           <effect>
-                              <Glow />
-                           </effect>
-                        </Text>
-                        <Text layoutX="124.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adopting our #GoGreen lifestyle can be the perfect way to stay healthy and happy." wrappingWidth="679.12841796875">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="132.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vegetarian foods are vital not just for our healthy living but for the environment too." wrappingWidth="679.12841796875">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </Pane>
             <Pane fx:id="paneTransportation" layoutX="-7.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="14.0" layoutY="22.0" prefHeight="566.0" prefWidth="926.0">
@@ -352,6 +258,100 @@
                               </VBox>
                            </children>
                         </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </Pane>
+            <Pane fx:id="paneFood" layoutX="-17.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane layoutX="61.0" layoutY="42.0" prefHeight="566.0" prefWidth="926.0">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="2.0" layoutY="232.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="0.0">
+                           <children>
+                              <AnchorPane fx:id="paneVegetarianMeal" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <JFXButton fx:id="btnVegetarianMeal" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Add vegetarian meal" />
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/vegMealIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                              <AnchorPane fx:id="paneOrganicFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/organicFoodIcon.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnOrganicFood" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy organic food" />
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                              <AnchorPane fx:id="paneLocalFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/localFoodIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnLocalFood" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy locally produced food" />
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                              <AnchorPane fx:id="paneNonProFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/processedFoodIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnNonProFood" buttonType="RAISED" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy non-processed food" />
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <Text layoutX="154.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Why should you #GoGreen?" AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="153.4453125" AnchorPane.topAnchor="0.044921875">
+                           <font>
+                              <Font size="50.0" />
+                           </font>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </Text>
+                        <Text layoutX="124.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adopting our #GoGreen lifestyle can be the perfect way to stay healthy and happy." wrappingWidth="679.12841796875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="132.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vegetarian foods are vital not just for our healthy living but for the environment too." wrappingWidth="679.12841796875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
                </children>

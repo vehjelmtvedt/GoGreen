@@ -75,7 +75,7 @@ public class Events {
 
     /**
      * .
-     * Add activities to the user upon clicking
+     * Add food activities to the user upon clicking
      *
      * @param pane          pane to be clicked
      * @param type          type of activity
@@ -89,17 +89,15 @@ public class Events {
                 EatVegetarianMeal meal = new EatVegetarianMeal();
                 meal.performActivity(loggedUser);
             } else if (type == 2) {
-                BuyLocallyProducedFood food = new BuyLocallyProducedFood();
-                food.performActivity(loggedUser);
-            } else if (type == 3) {
                 BuyOrganicFood food = new BuyOrganicFood();
                 food.performActivity(loggedUser);
-            } else if (type == 4) {
-                BuyNonProcessedFood food = new BuyNonProcessedFood();
+            } else if (type == 3) {
+                BuyLocallyProducedFood food = new BuyLocallyProducedFood();
                 food.performActivity(loggedUser);
             } else {
-                if (type == 5) {
-                    // TODO: 20/03/2019
+                if (type == 4) {
+                    BuyNonProcessedFood food = new BuyNonProcessedFood();
+                    food.performActivity(loggedUser);
                 }
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
@@ -109,7 +107,7 @@ public class Events {
 
     /**
      * .
-     * Add activities to the user upon clicking
+     * Add transport activities to the user upon clicking
      *
      * @param pane          pane to click
      * @param input         textfield with input
