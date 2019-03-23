@@ -124,12 +124,14 @@ public class FriendspageController implements Initializable {
     private void colorBars(String color, BarChart chart) {
         Node node = chart.lookup(".data0.chart-bar");
         node.setStyle("-fx-bar-fill: #379B1E;");
-        node = chart.lookup(".data1.chart-bar");
-        node.setStyle("-fx-bar-fill: " +  color + ";");
-        node = chart.lookup(".data2.chart-bar");
-        node.setStyle("-fx-bar-fill: " +  color + ";");
-        node = chart.lookup(".data3.chart-bar");
-        node.setStyle("-fx-bar-fill: " +  color + ";");
+        for (int i = 1; i != 6; i++) {
+            try {
+                node = chart.lookup(".data" + i + ".chart-bar");
+                node.setStyle("-fx-bar-fill: " +  color + ";");
+            } catch (NullPointerException e) {
+                return;
+            }
+        }
     }
 
     /**
@@ -145,6 +147,7 @@ public class FriendspageController implements Initializable {
         List<User> friendsList = Requests.getFriends(thisLoginDetails);
         for (User friend : friendsList) {
             if (counter >= 5) {
+                System.out.println("Added 5 friends to chart");
                 return;
             }
             ActivityQueries query = new ActivityQueries(friend.getActivities());
