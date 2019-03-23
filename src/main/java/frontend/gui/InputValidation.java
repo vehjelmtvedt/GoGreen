@@ -6,6 +6,7 @@ import data.LoginDetails;
 import data.User;
 import frontend.controllers.ActivitiesController;
 import frontend.controllers.FriendspageController;
+import frontend.controllers.HomepageController;
 import frontend.controllers.ProfilePageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,6 +45,7 @@ public class InputValidation {
             Dialog.show(form, "Login successful", "Welcome to GoGreen, "
                     + loggedUser.getFirstName()
                     + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess");
+            HomepageController.setUser(loggedUser);
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);

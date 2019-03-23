@@ -1,6 +1,8 @@
 package frontend.gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import data.*;
 import frontend.controllers.ActivitiesController;
@@ -14,6 +16,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+
+import java.util.List;
 
 public class Events {
 
@@ -65,7 +70,7 @@ public class Events {
 
     /**
      * .
-     * Add activities to the user upon clicking
+     * Add food activities to the user upon clicking
      *
      * @param pane          pane to be clicked
      * @param type          type of activity
@@ -78,18 +83,22 @@ public class Events {
             if (type == 1) {
                 EatVegetarianMeal meal = new EatVegetarianMeal();
                 meal.performActivity(loggedUser);
+<<<<<<< HEAD
             } else if (type == 3) {
                 BuyLocallyProducedFood food = new BuyLocallyProducedFood();
                 food.performActivity(loggedUser);
+=======
+>>>>>>> 5a0c72beff5069f891cf3fec9925d326ed94134a
             } else if (type == 2) {
                 BuyOrganicFood food = new BuyOrganicFood();
                 food.performActivity(loggedUser);
-            } else if (type == 4) {
-                BuyNonProcessedFood food = new BuyNonProcessedFood();
+            } else if (type == 3) {
+                BuyLocallyProducedFood food = new BuyLocallyProducedFood();
                 food.performActivity(loggedUser);
             } else {
-                if (type == 5) {
-                    // TODO: 20/03/2019
+                if (type == 4) {
+                    BuyNonProcessedFood food = new BuyNonProcessedFood();
+                    food.performActivity(loggedUser);
                 }
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
@@ -99,7 +108,7 @@ public class Events {
 
     /**
      * .
-     * Add activities to the user upon clicking
+     * Add transport activities to the user upon clicking
      *
      * @param pane          pane to click
      * @param input         textfield with input
@@ -114,19 +123,20 @@ public class Events {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             int distance = -1;
             try {
-                if (input != null) {
+                if (input.getText() != null) {
                     distance = Integer.parseInt(input.getText());
                 }
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                System.out.println("Invalid input");
             }
 
             if (distance == -1) {
                 verify.setVisible(true);
-                return;
+                input.setUnFocusColor(Color.rgb(255, 0, 0));
             } else {
                 verify.setVisible(false);
                 input.setText(null);
+                input.setUnFocusColor(Color.rgb(77, 77, 77));
                 input.setPromptText("number of km");
             }
 
@@ -154,6 +164,84 @@ public class Events {
             ConfirmBox.logout(Main.getPrimaryStage(), nextScene, image, "Are"
                     + "you sure you want to logout?");
         });
+    }
+
+    /**
+     * .
+     * Add hover event on labels for filtering
+     *
+     * @param label - the label to be edited
+     */
+    public static void addHoverOnFilter(Label label) {
+        label.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+            label.setUnderline(true);
+            label.setOpacity(1);
+        });
+        label.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            label.setUnderline(false);
+            label.setOpacity(0.75);
+        });
+    }
+
+    /**
+     * .
+     * Display all activities
+     *
+     * @param checkBox  - checkbox to add event to
+     * @param checkList - list containing category filtering
+     * @param radioList - list containing date filtering
+     */
+    public static void showAllFilters(JFXCheckBox checkBox, List<JFXCheckBox> checkList,
+                                      List<JFXRadioButton> radioList) {
+        checkBox.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            for (JFXCheckBox filter : checkList) {
+                filter.setDisable(checkBox.isSelected());
+            }
+            for (JFXRadioButton filter : radioList) {
+                filter.setDisable(  checkBox.isSelected());
+            }
+            checkBox.setDisable(false);
+        });
+    }
+
+    /**
+     * .
+     * Clear all activity history filters
+     *
+     * @param clear     - label to add event to
+     * @param checkList - list containing category filtering
+     * @param radioList - list containing date filtering
+     */
+    public static void clearFilters(Label clear, List<JFXCheckBox> checkList,
+                                    List<JFXRadioButton> radioList) {
+        clear.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            for (JFXCheckBox filter : checkList) {
+                filter.setDisable(false);
+                filter.setSelected(false);
+            }
+            for (JFXRadioButton filter : radioList) {
+                filter.setDisable(false);
+                filter.setSelected(false);
+            }
+        });
+    }
+
+    /**
+     * .
+     * Add Radio toggling on radio buttons
+     *
+     * @param radioList - radio list to apply event to
+     */
+    public static void addRadioToggle(List<JFXRadioButton> radioList) {
+        for (JFXRadioButton filter : radioList) {
+            filter.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                for (JFXRadioButton other : radioList) {
+                    if (!other.equals(filter)) {
+                        other.setSelected(false);
+                    }
+                }
+            });
+        }
     }
 }
 
