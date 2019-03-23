@@ -125,12 +125,11 @@ public class FriendspageController implements Initializable {
         Node node = chart.lookup(".data0.chart-bar");
         node.setStyle("-fx-bar-fill: #379B1E;");
         for (int i = 1; i != 6; i++) {
-                node = chart.lookup(".data" + i + ".chart-bar");
-                if (node == null) {
-                    return;
-                }
-                node.setStyle("-fx-bar-fill: " +  color + ";");
-
+            node = chart.lookup(".data" + i + ".chart-bar");
+            if (node == null) {
+                return;
+            }
+            node.setStyle("-fx-bar-fill: " +  color + ";");
         }
     }
 
