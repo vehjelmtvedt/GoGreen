@@ -156,12 +156,14 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add hover event on labels for filtering
+     *
      * @param label - the label to be edited
      */
     public static void addHoverOnFilter(Label label) {
-        label.addEventHandler(MouseEvent.MOUSE_ENTERED , event -> {
+        label.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
             label.setUnderline(true);
             label.setOpacity(1);
         });
@@ -171,37 +173,32 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Display all activities
-     * @param checkBox - checkbox to add event to
+     *
+     * @param checkBox  - checkbox to add event to
      * @param checkList - list containing category filtering
      * @param radioList - list containing date filtering
      */
     public static void showAllFilters(JFXCheckBox checkBox, List<JFXCheckBox> checkList,
                                       List<JFXRadioButton> radioList) {
         checkBox.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if (!checkBox.isSelected()) {
-                for (JFXCheckBox filter : checkList) {
-                    filter.setDisable(false);
-                }
-                for (JFXRadioButton filter : radioList) {
-                    filter.setDisable(false);
-                }
-            } else {
-                for (JFXCheckBox filter : checkList) {
-                    filter.setDisable(true);
-                }
-                for (JFXRadioButton filter : radioList) {
-                    filter.setDisable(true);
-                }
+            for (JFXCheckBox filter : checkList) {
+                filter.setDisable(checkBox.isSelected());
+            }
+            for (JFXRadioButton filter : radioList) {
+                filter.setDisable(  checkBox.isSelected());
             }
             checkBox.setDisable(false);
         });
     }
 
-    /**.
+    /**
+     * .
      * Clear all activity history filters
-     * @param clear - label to add event to
+     *
+     * @param clear     - label to add event to
      * @param checkList - list containing category filtering
      * @param radioList - list containing date filtering
      */
@@ -219,8 +216,10 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add Radio toggling on radio buttons
+     *
      * @param radioList - radio list to apply event to
      */
     public static void addRadioToggle(List<JFXRadioButton> radioList) {
