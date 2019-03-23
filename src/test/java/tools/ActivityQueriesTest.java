@@ -249,6 +249,20 @@ public class ActivityQueriesTest {
     }
 
     @Test
+    public void testFilterByCO2EmptyLesser() {
+        addActivitiesToUserByCO2(activeUser, 70, 100, 5);
+
+        Assert.assertEquals(new ArrayList<Activity>(), activityQuery.filterActivitiesByCO2Saved(50, false));
+    }
+
+    @Test
+    public void testFilterByCO2EmptyGreater() {
+        addActivitiesToUserByCO2(activeUser, 10, 100, 5);
+
+        Assert.assertEquals(new ArrayList<Activity>(), activityQuery.filterActivitiesByCO2Saved(1500, true));
+    }
+
+    @Test
     public void testFilterByCO2Range() {
         addActivitiesToUserByCO2(activeUser, 10, 500, 5);
         ArrayList<Activity> expected = getExpectedCO2FilteredList(activeUser.getActivities(), 25, 75);
