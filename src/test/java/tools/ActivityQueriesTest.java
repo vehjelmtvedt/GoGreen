@@ -165,6 +165,16 @@ public class ActivityQueriesTest {
     }
 
     @Test
+    public void testFilterByDateDateUnit() {
+        Date fromDate = getDateRewind(DateUnit.YEAR.getNumDays());
+
+        addActivitiesToUser(activeUser, 365, 100, 1);
+        ArrayList<Activity> expected = getExpectedDateFilteredList(activeUser.getActivities(), fromDate, today);
+
+        Assert.assertEquals(expected, activityQuery.filterActivitiesByDate(DateUnit.YEAR));
+    }
+
+    @Test
     public void testFilterByDateNoActivities() {
         ArrayList<Activity> expected = new ArrayList<>();
 

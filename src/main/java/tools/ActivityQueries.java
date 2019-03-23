@@ -60,6 +60,18 @@ public class ActivityQueries {
                 .collect(Collectors.toList());*/ // return result as list
     }
 
+    /**.
+     * Filters activities that have been done the specified time unit ago
+     * @param dateUnit - Specified time unit (today, 1 day, 7 days, 30 days, 365 days)
+     * @return - filtered List of activities done within the specified time period
+     */
+    public List<Activity> filterActivitiesByDate(DateUnit dateUnit) {
+        Date today = DateUtils.dateToday();
+        Date startDate = DateUtils.getDateBefore(today, dateUnit);
+
+        return filterActivitiesByDate(startDate, today);
+    }
+
     /**
      * .
      * Filters activities that have been done in the specified time range
