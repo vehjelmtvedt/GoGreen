@@ -3,6 +3,7 @@ package frontend.controllers;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
+import frontend.gui.Events;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
@@ -33,7 +34,12 @@ public class NavPanelController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO: Add scene change to profile page
+        //add button hover event
+        Events.addNavButtonHover(home);
+        Events.addNavButtonHover(activity);
+        Events.addNavButtonHover(friends);
+        Events.addNavButtonHover(myProfile);
+
         home.setOnAction(e -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getHomepage()));
         activity.setOnAction(e -> StageSwitcher.sceneSwitch(

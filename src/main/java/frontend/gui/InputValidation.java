@@ -6,6 +6,7 @@ import data.LoginDetails;
 import data.User;
 import frontend.controllers.ActivitiesController;
 import frontend.controllers.FriendspageController;
+import frontend.controllers.HomepageController;
 import frontend.controllers.ProfilePageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,6 +45,7 @@ public class InputValidation {
             Dialog.show(form, "Login successful", "Welcome to GoGreen, "
                     + loggedUser.getFirstName()
                     + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess");
+            HomepageController.setUser(loggedUser);
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);
@@ -139,15 +141,6 @@ public class InputValidation {
         StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Questionnaire.createScene(user, form));
     }
 
-    private static boolean validateAge(TextField input) {
-        try {
-            int age = Integer.parseInt(input.getText());
-            return age >= 0;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
                                                 JFXTextField usernameField,
                                                 AnchorPane form) throws IOException {
@@ -206,5 +199,14 @@ public class InputValidation {
         Matcher matcher = pattern.matcher(email);
 
         return matcher.matches();
+    }
+
+    private static boolean validateAge(TextField input) {
+        try {
+            int age = Integer.parseInt(input.getText());
+            return age >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

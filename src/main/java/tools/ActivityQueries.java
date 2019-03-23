@@ -23,8 +23,10 @@ public class ActivityQueries {
 
     // ---------- FILTER METHODS ----------
 
-    /**.
+    /**
+     * .
      * Filters activities by category
+     *
      * @param category - category to filter by
      * @return filtered list of activities by category
      */
@@ -34,8 +36,10 @@ public class ActivityQueries {
         return filterActivitiesByCategories(categories);
     }
 
-    /**.
+    /**
+     * .
      * Filters activities by multiple categories
+     *
      * @param categories - list of categories (String) to filter  by
      * @return list of activities filtered by specified categories
      */
@@ -56,10 +60,12 @@ public class ActivityQueries {
                 .collect(Collectors.toList());*/ // return result as list
     }
 
-    /**.
+    /**
+     * .
      * Filters activities that have been done in the specified time range
+     *
      * @param from - Start date
-     * @param to - End date
+     * @param to   - End date
      * @return - filtered list of activities that fall in the date range
      */
     public List<Activity> filterActivitiesByDate(Date from, Date to) {
@@ -102,16 +108,20 @@ public class ActivityQueries {
 
     // ---------- CO2 METHODS ----------
 
-    /**.
+    /**
+     * .
      * Returns the total CO2 saved by the user
+     *
      * @return - total CO2 saved
      */
     public double getTotalCO2Saved() {
         return getTotalCO2Saved(activities);
     }
 
-    /**.
+    /**
+     * .
      * Returns the CO2 saved until today and from today - dateUnit
+     *
      * @param dateUnit - Time period (date unit)
      * @return - total CO2 saved
      */
@@ -122,8 +132,10 @@ public class ActivityQueries {
         return getTotalCO2Saved(startDate, today);
     }
 
-    /**.
+    /**
+     * .
      * Returns the total CO2 saved up until today from a specified date
+     *
      * @param fromDate - start date
      * @return - total CO2 saved from specified date until today
      */
@@ -133,10 +145,12 @@ public class ActivityQueries {
         return getTotalCO2Saved(fromDate, today);
     }
 
-    /**.
+    /**
+     * .
      * Returns the CO2 saved over the specified time period
+     *
      * @param fromDate - start date
-     * @param toDate - end date
+     * @param toDate   - end date
      * @return - total CO2 saved
      */
     public double getTotalCO2Saved(Date fromDate, Date toDate) {
@@ -145,12 +159,64 @@ public class ActivityQueries {
         return getTotalCO2Saved(filteredActivities);
     }
 
-    /**.
+    /**
+     * .
      * Helper method to calculate the total CO2 saved by a list of activities
+     *
      * @param activityList - List of activities
      * @return - total CO2 saved by all the activities
      */
     private double getTotalCO2Saved(List<Activity> activityList) {
         return Activity.getSum(activityList);
     }
+
+    //    /**
+    //     * .
+    //     * get the number of activities performed by the user in each
+    //     * category of activities i.e. Food, Transportation, Household
+    //     *
+    //     * @return - Array of int corresponding to each category
+    //     */
+    //    public ArrayList<int[]> getNrOfActivitiesByCat() {
+    //        int[] countCat = new int[3];
+    //        int[] countFood = new int[4];
+    //        int[] countTransportation = new int[3];
+    //        int[] countHousehold = new int[2];
+    //        String activityName;
+    //        for (Activity activity : this.activities) {
+    //            if (activity.getCategory().equals("Food")) {
+    //                countCat[0]++;
+    //                activityName = activity.getName();
+    //                switch (activityName) {
+    //                    case "Eat Vegetarian Meal" :
+    //                        countFood[0]++;
+    //                        break;
+    //                    case "Buy Organic Food" :
+    //                        countFood[1]++;
+    //                        break;
+    //                    case "Buy Locally Produced Food" :
+    //                        countFood[2]++;
+    //                        break;
+    //                    case "Buy Non-Processed Food" :
+    //                        countFood[3]++;
+    //                        break;
+    //                    default :
+    //                        break;
+    //                }
+    //            } else if (activity.getCategory().equals("Transportation")) {
+    //                countCat[1]++;
+    //
+    //            } else {
+    //                countCat[2]++;
+    //            }
+    //        }
+    //        ArrayList<int[]> counted = new ArrayList<>();
+    //        counted.add(countCat);
+    //        counted.add(countFood);
+    //        System.out.println(countFood[0] + countFood[1] + countFood[2] + countFood[3]);
+    //        counted.add(countTransportation);
+    //        counted.add(countHousehold);
+    //
+    //        return counted;
+    //    }
 }

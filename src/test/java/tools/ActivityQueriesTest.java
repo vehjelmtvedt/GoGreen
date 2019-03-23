@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 
 public class ActivityQueriesTest {
     User activeUser = new User("Active", "User", 20, "active_user@email.com", "active_user", "pwd123");
+
     ActivityQueries activityQuery = new ActivityQueries(activeUser.getActivities());
     Date today = Calendar.getInstance().getTime();
 
