@@ -48,6 +48,5 @@ public class UseBusInsteadOfCar extends TransportationActivity{
         } else {
             return dailyCarbonEmissions - totalCarbonSavedToday;
         }
-
     }
 }
