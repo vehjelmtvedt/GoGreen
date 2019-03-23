@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -107,15 +105,18 @@ public class Main extends Application {
     }
 
     public static Font getRobotoThin(double size) {
-        return Font.loadFont(Main.class.getResource("/fonts/Roboto-Thin.ttf").toExternalForm(), size);
+        return Font.loadFont(Main.class.getResource(
+                "/fonts/Roboto-Thin.ttf").toExternalForm(), size);
     }
 
     public static Font getRobotoBold(double size) {
-        return Font.loadFont(Main.class.getResource("/fonts/Roboto-Bold.ttf").toExternalForm(), size);
+        return Font.loadFont(Main.class.getResource(
+                "/fonts/Roboto-Bold.ttf").toExternalForm(), size);
     }
 
     public static Font getReenieBeanie(double size) {
-        return Font.loadFont(Main.class.getResource("/fonts/ReenieBeanie.ttf").toExternalForm(), size);
+        return Font.loadFont(Main.class.getResource(
+                "/fonts/ReenieBeanie.ttf").toExternalForm(), size);
     }
 
 
