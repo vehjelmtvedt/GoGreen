@@ -29,7 +29,9 @@ public class UseBikeInsteadOfCar extends TransportationActivity {
 
         // calculate daily carbon emissions
         double dailyCarbonEmissions = calculateDailyCarbonEmissions(user);
+
         double maxC02SavedByThisActivity;
+
         if (user.getCarType().equals("small")) {
             //
             maxC02SavedByThisActivity = CarbonCalculator.smallCarEmissions(this.getKilometres());
@@ -48,7 +50,6 @@ public class UseBikeInsteadOfCar extends TransportationActivity {
         } else {
             return dailyCarbonEmissions - totalCarbonSavedToday;
         }
-
     }
 
 }
