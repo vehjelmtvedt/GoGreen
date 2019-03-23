@@ -1,6 +1,7 @@
 package backend;
 
 import backend.repos.AchievementRepository;
+import data.Achievement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,8 @@ import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFacto
 @Configuration
 public class DbLoader {
     // Specify JSON to load here
-    private Resource achievements = new ClassPathResource("data/achievements.json");
+    private Resource achievements = new ClassPathResource("data/achievements.json",
+            Achievement.class.getClassLoader());
 
     private Resource[] resources = new Resource[] {achievements};
 
