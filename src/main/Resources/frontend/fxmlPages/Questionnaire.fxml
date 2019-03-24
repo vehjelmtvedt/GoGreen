@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -12,11 +18,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.QuestionnaireController">
+<AnchorPane prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.QuestionnaireController">
    <children>
-      <AnchorPane prefHeight="900.0" prefWidth="542.0" snapToPixel="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="graphics" prefHeight="900.0" prefWidth="542.0" snapToPixel="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="900.0" fitWidth="542.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ImageView fx:id="background" fitHeight="900.0" fitWidth="542.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../Pics/background.png" />
                </image>
@@ -93,7 +99,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label text="How much meat/dairy do you eat?" GridPane.rowIndex="5">
+                  <Label text="How much meat and dairy do you eat?" GridPane.rowIndex="5">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -118,7 +124,7 @@
                   <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <JFXComboBox fx:id="CarSizes" prefHeight="27.0" prefWidth="204.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <JFXComboBox fx:id="MeatAndDairiyOptions" prefHeight="27.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <JFXComboBox fx:id="MeatAndDairyOptions" prefHeight="27.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                   <JFXComboBox fx:id="LocallyProducedFoodOptions" prefHeight="27.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <JFXComboBox fx:id="OrganicOptions" prefHeight="27.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                   <JFXComboBox fx:id="ProcessedOptions" prefHeight="27.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />

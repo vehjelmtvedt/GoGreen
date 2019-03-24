@@ -1,5 +1,6 @@
 package frontend.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
@@ -14,6 +15,12 @@ import java.util.Observable;
 import java.util.ResourceBundle;
 
 public class QuestionnaireController implements Initializable {
+
+    @FXML
+    private ImageView background;
+
+    @FXML
+    private AnchorPane graphics;
 
     @FXML
     private JFXTextField textHousehold;
@@ -31,7 +38,7 @@ public class QuestionnaireController implements Initializable {
     private JFXComboBox CarSizes;
 
     @FXML
-    private JFXComboBox MeatAndDairiyOptions;
+    private JFXComboBox MeatAndDairyOptions;
 
     @FXML
     private JFXComboBox LocallyProducedFoodOptions;
@@ -42,9 +49,12 @@ public class QuestionnaireController implements Initializable {
     @FXML
     private JFXComboBox ProcessedOptions;
 
+    @FXML
+    private JFXButton SubmitButton;
+
     ObservableList<String> carsizes = FXCollections.observableArrayList("I don't own a car","Small", "Medium", "Large");
 
-    ObservableList<String> meatanddairiyoptions = FXCollections.observableArrayList("Above average", "Average", "Below average", "Vegan");
+    ObservableList<String> meatanddairyoptions = FXCollections.observableArrayList("Above average", "Average", "Below average", "Vegan");
 
     ObservableList<String> locallyproducedfoodoptions = FXCollections.observableArrayList("Very little", "Average", "Above average", "Almost all");
 
@@ -55,11 +65,14 @@ public class QuestionnaireController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        background.fitWidthProperty().bind(graphics.widthProperty());
+        background.fitHeightProperty().bind(graphics.heightProperty());
+
         CarSizes.setValue("I don't own a car");
         CarSizes.setItems(carsizes);
 
-        MeatAndDairiyOptions.setValue("Above average");
-        MeatAndDairiyOptions.setItems(meatanddairiyoptions);
+        MeatAndDairyOptions.setValue("Above average");
+        MeatAndDairyOptions.setItems(meatanddairyoptions);
 
         LocallyProducedFoodOptions.setValue("Very little");
         LocallyProducedFoodOptions.setItems(locallyproducedfoodoptions);
