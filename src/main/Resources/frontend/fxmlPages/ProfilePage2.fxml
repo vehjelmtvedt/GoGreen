@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="1080.0" maxWidth="1920.0" minHeight="400.0" minWidth="600.0" prefHeight="583.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ProfilePageController">
+   <top>
+      <ToolBar fx:id="toolbar" prefHeight="17.0" prefWidth="317.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button fx:id="backButton" mnemonicParsing="false" text="Back" />
+            <Label alignment="CENTER" text="Go Green">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="200.0" />
+               </padding>
+            </Label>
+        </items>
+      </ToolBar>
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="nameLabel" text="Name" />
+            <Label fx:id="emailLabel" layoutX="10.0" layoutY="10.0" text="Email" />
+            <Label fx:id="score" layoutX="10.0" layoutY="27.0" text="Score" />
+            <Label fx:id="ageLabel" layoutX="10.0" layoutY="44.0" text="Age" />
+            <Label fx:id="lastseenLabel" layoutX="10.0" layoutY="61.0" text="Last Login" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <center>
+      <AnchorPane prefHeight="157.0" prefWidth="782.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="level" layoutX="1.0" layoutY="17.0" text="Level" />
+            <ImageView fx:id="badge" fitHeight="150.0" fitWidth="200.0" layoutX="39.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+   </center>
+   <bottom>
+      <ScrollPane prefHeight="395.0" prefWidth="892.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="395.0" prefWidth="892.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="200.0">
+                    <tabs>
+                      <Tab text="Completed">
+                        <content>
+                          <AnchorPane fx:id="anchorPanecom" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox fx:id="com" prefHeight="200.0" prefWidth="892.0" />
+                                 </children></AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="InComplete">
+                        <content>
+                          <AnchorPane fx:id="anchorPaneIn" minHeight="0.0" minWidth="0.0" prefHeight="199.0" prefWidth="838.0">
+                                 <children>
+                                    <VBox fx:id="incom" prefHeight="200.0" prefWidth="892.0" />
+                                 </children></AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </bottom>
+</BorderPane>

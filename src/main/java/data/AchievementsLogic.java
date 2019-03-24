@@ -8,7 +8,6 @@ import java.util.List;
 
 public class AchievementsLogic {
 
-    private static List<Achievement> list = Requests.getAllAchievements();
 
     /**
      * checks activity if it completes an achievement.
@@ -17,8 +16,6 @@ public class AchievementsLogic {
      * @param activity current activity
      */
     public static void checkActivity(User user, Activity activity) {
-
-
 
 
         //Using a bicycle id 2
@@ -129,14 +126,24 @@ public class AchievementsLogic {
             }
 
         }
+
+        List<Achievement> list = Requests.getAllAchievements();
+
         if (!alreadythere) {
 
-            user.getProgress().getAchievements().add(
-                    new UserAchievement(id, true, date));
+            UserAchievement userAchievement = new UserAchievement(id, true, date);
 
-            user.setTotalCarbonSaved(user.getTotalCarbonSaved() + list.get(id).getBonus());
+            user.getProgress().getAchievements().add(userAchievement);
+
+
+
+            System.out.println("=============" + list.size());
+
+            //user.setTotalCarbonSaved(user.getTotalCarbonSaved() + list.get(id).getBonus());
 
         }
+
+
 
 
     }

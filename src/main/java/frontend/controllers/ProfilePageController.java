@@ -8,12 +8,10 @@ import frontend.gui.ProfilePageLogic;
 import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -28,17 +26,12 @@ public class ProfilePageController implements Initializable {
 
     private static User thisUser;
 
-    @FXML
-    Tab completedtab;
 
     @FXML
-    TabPane tabPane;
+    AnchorPane anchorPanecom;
 
     @FXML
-    private VBox completed;
-
-    @FXML
-    private VBox all;
+    AnchorPane anchorPaneIn;
 
     @FXML
     private Label level;
@@ -67,6 +60,15 @@ public class ProfilePageController implements Initializable {
     @FXML
     private Label score;
 
+    @FXML
+    VBox com;
+
+    @FXML
+    VBox incom;
+
+    @FXML
+    ToolBar toolBar;
+
 
     /**
      * how should the page be set up.
@@ -76,7 +78,7 @@ public class ProfilePageController implements Initializable {
 
         score.setText("TotalCarbonSaved: " + thisUser.getTotalCarbonSaved());
 
-        userNameLabel.setText("UserName: " + thisUser.getUsername());
+        // userNameLabel.setText("UserName: " + thisUser.getUsername());
 
         nameLabel.setText("Name: " + thisUser.getFirstName() + thisUser.getLastName());
 
@@ -106,7 +108,7 @@ public class ProfilePageController implements Initializable {
 
             ImageView achievementimage = new ImageView();
 
-            Image path = new Image("achievementsimages/"  +
+            Image path = new Image("achievementsimages/" +
                     thisUser.getProgress().getAchievements().get(i).getId() + ".png");
 
             achievementimage.setFitHeight(32);
@@ -114,9 +116,6 @@ public class ProfilePageController implements Initializable {
             achievementimage.setFitWidth(32);
 
             achievementimage.setImage(path);
-
-
-
 
 
             Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
@@ -128,17 +127,17 @@ public class ProfilePageController implements Initializable {
             Text date = new Text(",Completed On: " + ProfilePageLogic.getDateString(
                     thisUser.getProgress().getAchievements().get(i)) + ".");
 
-            hbox.getChildren().addAll(achievementimage , name, bonus, date);
+            hbox.getChildren().addAll(achievementimage, name, bonus, date);
 
-            completed.getChildren().add(hbox);
+            com.getChildren().add(hbox);
 
         }
 
         if (count == 0) {
 
             Label noachiements = new Label("No completed achievements yet");
-            completed.getChildren().add(noachiements);
-            completed.setMinWidth(300.0);
+            anchorPanecom.getChildren().add(noachiements);
+            anchorPanecom.setMinWidth(300.0);
             //completedtab.disableProperty();
 
         }
@@ -151,15 +150,28 @@ public class ProfilePageController implements Initializable {
 
             if (!isComplete(a)) {
 
+                ImageView achievementimage1 = new ImageView();
+
+                String image ="achievementsimages/" +
+                        a.getId() + ".png";
 
 
-                Text name = new Text( a.getName());
+                Image path1 = new Image("achievementsimages/8.png");
+
+                achievementimage1.setFitHeight(32);
+
+                achievementimage1.setFitWidth(32);
+
+                achievementimage1.setImage(path1);
+
+
+                Text name = new Text(a.getName());
                 Text points = new Text(",Complete to Get: " + a.getBonus() + " points.");
 
 
-                hbox.getChildren().addAll(name, points);
+                hbox.getChildren().addAll(achievementimage1 , name, points);
 
-                all.getChildren().add(hbox);
+                incom.getChildren().add(hbox);
             }
 
         }
@@ -167,6 +179,7 @@ public class ProfilePageController implements Initializable {
 
         backButton.setOnAction(e ->
                 StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getHomepage()));
+
 
     }
 
@@ -194,7 +207,6 @@ public class ProfilePageController implements Initializable {
     public static void setUser(User user) {
         thisUser = user;
         //for testing
-
 
 
         thisUser.getProgress().getAchievements().add(new UserAchievement(
