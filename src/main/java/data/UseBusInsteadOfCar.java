@@ -42,10 +42,6 @@ public class UseBusInsteadOfCar extends TransportationActivity {
             return 0;
         }
 
-//        if (maxC02SavedByThisActivity < 0) {
-//            return  0;
-//        }
-
         if (this.getKilometres() > user.getDailyCarKilometres()) {
             return 0;
         }

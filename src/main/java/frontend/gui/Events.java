@@ -119,7 +119,7 @@ public class Events {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             int distance = -1;
             try {
-                if (input.getText() != null) {
+                if (input.getText() != "") {
                     distance = Integer.parseInt(input.getText());
                 }
             } catch (NumberFormatException e) {
@@ -132,7 +132,7 @@ public class Events {
                 return;
             } else {
                 verify.setVisible(false);
-                input.setText(null);
+                input.setText("");
                 input.setUnFocusColor(Color.rgb(77, 77, 77));
                 input.setPromptText("number of km");
             }
@@ -146,7 +146,9 @@ public class Events {
                 travel.setKilometres(distance);
                 travel.performActivity(loggedUser);
             } else if (type == 3) {
-                // TODO
+                UseTrainInsteadOfCar travel = new UseTrainInsteadOfCar();
+                travel.setKilometres(distance);
+                travel.performActivity(loggedUser);
             }
 
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
