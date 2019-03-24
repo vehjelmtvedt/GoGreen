@@ -61,7 +61,7 @@ public class Main extends Application {
         return signUp;
     }
 
-    public static Scene getQuestionaire(){ return Questionnaire; }
+    public static Scene getQuestionnaire(){ return Questionnaire; }
 
     public static Scene getProgress() {
         return progress;
@@ -103,6 +103,6 @@ public class Main extends Application {
         profilePage = scene;
     }
 
-    public static void setQuestionaire(Scene scene){ Questionnaire = scene; }
+    public static void setQuestionnaire(Scene scene){ Questionnaire = scene; }
 
 }
