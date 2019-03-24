@@ -26,7 +26,7 @@ public class Dialog {
                             String bodyText, String buttonText, String icon) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Dialog.class.getResource("/frontend/fxmlPages/Dialog.fxml"));
-
+        JFXDialog dialog = loader.load();
 
         DialogController controller = loader.getController();
         controller.setHeading(headerText);
@@ -42,7 +42,7 @@ public class Dialog {
         AnchorPane.setBottomAnchor(pane, mainPane.getHeight());
         AnchorPane.setLeftAnchor(pane, mainPane.getWidth());
         mainPane.getChildren().addAll(pane);
-        JFXDialog dialog = loader.load();
+
         dialog.show();
     }
 }
