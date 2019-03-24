@@ -34,6 +34,8 @@ public class AchievementsLogic {
 
             addAchievemnt(user , 6 , activity.getDate());
 
+
+
         }
         //Eating fish once id 7
         //Getting solar Power 12
@@ -131,6 +133,8 @@ public class AchievementsLogic {
 
             user.getProgress().getAchievements().add(
                     new UserAchievement(id, true, date));
+
+            user.setTotalCarbonSaved(user.getTotalCarbonSaved() + list.get(id).getBonus());
 
         }
 
