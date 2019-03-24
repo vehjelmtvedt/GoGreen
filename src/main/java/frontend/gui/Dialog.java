@@ -25,9 +25,8 @@ public class Dialog {
                             String headerText,
                             String bodyText, String buttonText, String icon) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        JFXDialog dialog = loader.load();
         loader.setLocation(Dialog.class.getResource("/frontend/fxmlPages/Dialog.fxml"));
-
+        JFXDialog dialog = loader.load();
 
 
 
