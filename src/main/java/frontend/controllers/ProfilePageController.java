@@ -22,6 +22,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 
+
+
 public class ProfilePageController implements Initializable {
 
     private static User thisUser;
@@ -85,10 +87,13 @@ public class ProfilePageController implements Initializable {
 
         badge.setImage(badgeimg);
 
+        int count = 0;
 
         // for every completed achievement module  is created
         // and added to a VBox small pics might be added later
         for (int i = 0 ; i < thisUser.getProgress().getAchievements().size() ; i++) {
+
+            count++;
 
             HBox hbox = new HBox();
 
@@ -106,6 +111,13 @@ public class ProfilePageController implements Initializable {
             hbox.getChildren().addAll(name , bonus , date);
 
             completed.getChildren().add(hbox);
+
+        }
+
+        if (count == 0) {
+
+            Label noachiements = new Label("there are no completed achievements yet");
+            completed.getChildren().add(noachiements);
 
         }
 
