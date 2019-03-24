@@ -3,13 +3,19 @@ package frontend.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import data.User;
+import frontend.gui.Dialog;
+import frontend.gui.Main;
+import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import tools.Requests;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
 import java.util.ResourceBundle;
@@ -52,6 +58,10 @@ public class QuestionnaireController implements Initializable {
     @FXML
     private JFXButton SubmitButton;
 
+    private AnchorPane form;
+
+    private User user;
+
     ObservableList<String> carsizes = FXCollections.observableArrayList("I don't own a car","Small", "Medium", "Large");
 
     ObservableList<String> meatanddairyoptions = FXCollections.observableArrayList("Above average", "Average", "Below average", "Vegan");
@@ -82,6 +92,42 @@ public class QuestionnaireController implements Initializable {
 
         ProcessedOptions.setValue("Above average");
         ProcessedOptions.setItems(processedoptions);
+
+        SubmitButton.setOnAction(e -> {
+            int householdMembers = Integer.parseInt(textHousehold.getText());
+            int dailyElectricityConsumption =
+                    Integer.parseInt(textElectricity.getText()) / 365 / householdMembers;
+            double dailyHeatingOilConsumption =
+                    Integer.parseInt(textOil.getText()) / 365.0 / householdMembers;
+            String carType = CarSizes.getValue().toString();
+            int dailyCarKilometres = Integer.parseInt(textCarUsage.getText()) / 365;
+            String meatAndDairyConsumption = MeatAndDairyOptions.getValue().toString();
+            String locallyProducedFoodConsumption = LocallyProducedFoodOptions.getValue().toString();
+            String organicFoodConsumption = OrganicOptions.getValue().toString();
+            String processedFoodConsumption = ProcessedOptions.getValue().toString();
+            user.setElectricityDailyConsumption(dailyElectricityConsumption);
+            user.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
+            user.setCarType(carType);
+            user.setDailyCarKilometres(dailyCarKilometres);
+            user.setMeatAndDairyConsumption(meatAndDairyConsumption);
+            user.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
+            user.setOrganicFoodConsumption(organicFoodConsumption);
+            user.setProcessedFoodConsumption(processedFoodConsumption);
+
+            String response = Requests.signupRequest(user);
+            if (response != null) {
+                if (response.equals("success")) {
+                    try {
+                        Dialog.show(form, "Registration Successful!", "Enter your new credentials!",
+                                "ACCEPT", "sucess");
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn());
+                }
+            }
+        });
 
     }
 
