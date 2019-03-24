@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -26,6 +28,12 @@ import java.util.ResourceBundle;
 public class ProfilePageController implements Initializable {
 
     private static User thisUser;
+
+    @FXML
+    Tab completedtab;
+
+    @FXML
+    TabPane tabPane;
 
     @FXML
     private VBox completed;
@@ -78,7 +86,7 @@ public class ProfilePageController implements Initializable {
 
         ageLabel.setText("Age: " + thisUser.getAge() + "");
 
-        lastseenLabel.setText("Last LogIn Date: " + thisUser.getLastLoginDate().toString());
+        lastseenLabel.setText("Last LogIn: " + thisUser.getLastLoginDate().toString());
 
         level.setText("Level: " + ProfilePageLogic.getLevel(thisUser));
 
@@ -115,8 +123,10 @@ public class ProfilePageController implements Initializable {
 
         if (count == 0) {
 
-            Label noachiements = new Label("there are no completed achievements yet");
+            Label noachiements = new Label("No completed achievements yet");
             completed.getChildren().add(noachiements);
+            completed.setMinWidth(300.0);
+            //completedtab.disableProperty();
 
         }
 

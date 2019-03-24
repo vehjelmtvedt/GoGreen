@@ -109,7 +109,7 @@ public class AchievementsLogic {
     }
 
     /**
-     * this method checks every achievement if its already in the List, if not add it
+     * this method checks every achievement if its already in the List, if not add it.
      * @param user current user
      * @param id achievement to check
      * @param date date to add
