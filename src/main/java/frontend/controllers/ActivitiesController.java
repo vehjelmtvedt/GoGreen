@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.User;
 import frontend.gui.Events;
+import frontend.gui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -112,6 +113,8 @@ public class ActivitiesController implements Initializable {
     @FXML
     private Label lblApply;
     @FXML
+    private Label goGreen;
+    @FXML
     private JFXRadioButton radioToday;
     @FXML
     private JFXRadioButton radioWeek;
@@ -127,6 +130,12 @@ public class ActivitiesController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //addFonts
+        try {
+            goGreen.setFont(Main.getReenieBeanie(100));
+        } catch (IOException e) {
+            System.out.println("Fonts not found");
+        }
         //add Activity Event on clicking ( plus add in history table )
         Events.addFoodActivity(paneVegetarianMeal, 1, loggedUser, activityTable);
         Events.addFoodActivity(paneOrganicFood, 2, loggedUser, activityTable);
