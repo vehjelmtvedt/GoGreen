@@ -39,6 +39,11 @@ public class Main extends Application {
         Parent rootSignUp = loaderSignUp.load();
         signUp = new Scene(rootSignUp, General.getBounds()[0], General.getBounds()[1]);
 
+        FXMLLoader loaderQuestionnaire = new FXMLLoader(
+                Main.class.getResource("/frontend/fxmlPages/Questionnaire.fxml"));
+        Parent rootQuestionnaire = loaderQuestionnaire.load();
+        Questionnaire = new Scene(rootQuestionnaire, General.getBounds()[0], General.getBounds()[1]);
+
         //add path for css files and add them to the specific scenes they belong
         String cssPathIntro = "/frontend/Stylesheets/Style.css";
         cssIntro = this.getClass().getResource(cssPathIntro).toExternalForm();
@@ -63,7 +68,7 @@ public class Main extends Application {
         return signUp;
     }
 
-    public static Scene getQuestionaire(){ return Questionnaire; }
+    public static Scene getQuestionnaire(){ return Questionnaire; }
 
     public static Scene getProgress() {
         return progress;
@@ -105,7 +110,7 @@ public class Main extends Application {
         profilePage = scene;
     }
 
-    public static void setQuestionaire(Scene scene){ Questionnaire = scene; }
+    public static void setQuestionnaire(Scene scene){ Questionnaire = scene; }
 
 
     public static Font getRobotoThin(double size) throws IOException {
