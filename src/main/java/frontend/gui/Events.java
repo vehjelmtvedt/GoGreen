@@ -4,7 +4,15 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
-import data.*;
+import data.Activity;
+import data.BuyLocallyProducedFood;
+import data.BuyNonProcessedFood;
+import data.BuyOrganicFood;
+import data.EatVegetarianMeal;
+import data.UseBikeInsteadOfCar;
+import data.UseBusInsteadOfCar;
+import data.UseTrainInsteadOfCar;
+import data.User;
 import frontend.controllers.ActivitiesController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -123,7 +131,7 @@ public class Events {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             int distance = -1;
             try {
-                if (input.getText() != "") {
+                if (! input.getText().equals("")) {
                     distance = Integer.parseInt(input.getText());
                 }
             } catch (NumberFormatException e) {
