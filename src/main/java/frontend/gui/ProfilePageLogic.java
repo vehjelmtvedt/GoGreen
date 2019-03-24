@@ -35,13 +35,6 @@ public class ProfilePageLogic {
 
     }
 
-    /**
-     * achievements returns a string with achievements.
-     */
-
-    public static void getAchievements(User user) {
-        //tbd
-    }
 
     /**
      * returns string with badge path.
