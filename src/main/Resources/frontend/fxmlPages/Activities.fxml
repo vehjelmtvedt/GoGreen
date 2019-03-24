@@ -29,7 +29,7 @@
    <children>
       <AnchorPane fx:id="headerPane" prefHeight="137.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="BASELINE_CENTER" layoutX="582.0" layoutY="25.0" text="GoGreen" textFill="WHITE" AnchorPane.leftAnchor="582.0" AnchorPane.rightAnchor="582.0" AnchorPane.topAnchor="32.0">
+            <Label fx:id="goGreen" alignment="BASELINE_CENTER" layoutX="582.0" layoutY="25.0" text="GoGreen" textFill="WHITE" AnchorPane.leftAnchor="582.0" AnchorPane.rightAnchor="582.0" AnchorPane.topAnchor="32.0">
                <font>
                   <Font size="60.0" />
                </font>
@@ -419,7 +419,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="292.0" layoutY="138.0" prefHeight="722.0" prefWidth="301.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="292.0" layoutY="138.0" prefHeight="722.0" prefWidth="301.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="138.0" />
          </children>
          <effect>
             <DropShadow />
