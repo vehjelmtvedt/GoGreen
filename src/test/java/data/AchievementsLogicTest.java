@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import sun.misc.ASCIICaseInsensitiveComparator;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -140,6 +141,24 @@ public class AchievementsLogicTest {
         AchievementsLogic.checkActivity(user , activity1);
 
         Assert.assertEquals(4 , user.getProgress().getAchievements().size());
+
+
+
+    }
+
+    @Test
+    public void checkOther3(){
+        user.addFriend("test");
+
+        for (int i = 0 ; i < 11 ; i++){
+
+            user.addFriend("test" + 1);
+
+        }
+
+        AchievementsLogic.checkOther(user);
+
+        Assert.assertEquals(9 , user.getProgress().getAchievements().get(1).getId());
 
 
 

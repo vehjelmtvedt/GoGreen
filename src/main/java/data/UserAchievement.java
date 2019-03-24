@@ -32,14 +32,6 @@ public class UserAchievement {
         this.id = id;
     }
 
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
     public Date getDate() {
         return date;
     }

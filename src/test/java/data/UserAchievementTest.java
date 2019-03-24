@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class UserAchievementTest {
 
-    UserAchievement test = new UserAchievement(0 , true , new Date(1 , 1, 1));
+    private UserAchievement test = new UserAchievement(0 , true , new Date(1 , 1, 1));
 
 
     @Test
@@ -32,5 +32,27 @@ public class UserAchievementTest {
         UserAchievement test1 = new UserAchievement(0 , false , test.getDate());
 
         Assert.assertNotNull(test1);
+    }
+
+    @Test
+    public void setId() {
+
+        UserAchievement test1 = new UserAchievement(0 , false , test.getDate());
+
+        test1.setId(1);
+
+        Assert.assertEquals(1 , test1.getId());
+    }
+
+
+    @Test
+    public void setDate() {
+
+        Date testdate = new Date(1 , 1 ,1 );
+
+        test.setDate(testdate);
+
+        Assert.assertTrue(testdate.equals(test.getDate()));
+
     }
 }
