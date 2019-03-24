@@ -14,6 +14,7 @@ public class Main extends Application {
     private static Stage primaryStage;
     private static Scene signIn;
     private static Scene signUp;
+    private static Scene Questionnaire;
     private static Scene homepage;
     private static Scene activities;
     private static Scene friendPage;
@@ -62,6 +63,8 @@ public class Main extends Application {
         return signUp;
     }
 
+    public static Scene getQuestionaire(){ return Questionnaire; }
+
     public static Scene getProgress() {
         return progress;
     }
@@ -101,6 +104,9 @@ public class Main extends Application {
     public static void setProfilePage(Scene scene) {
         profilePage = scene;
     }
+
+    public static void setQuestionaire(Scene scene){ Questionnaire = scene; }
+
 
     public static Font getRobotoThin(double size) throws IOException {
         return Font.loadFont(new ClassPathResource("/fonts/Roboto-thin.ttf")
