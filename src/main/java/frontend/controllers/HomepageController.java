@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
 import data.User;
+import frontend.gui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -38,9 +39,18 @@ public class HomepageController implements Initializable {
     private PieChart chartHousehold;
     @FXML
     private Label lblWelcome;
+    @FXML
+    private Label goGreen;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //addFonts
+        try {
+            goGreen.setFont(Main.getReenieBeanie(100));
+        } catch (IOException e) {
+            System.out.println("Fonts not found");
+        }
+
         lblWelcome.setText("Welcome, " + loggedUser.getFirstName() + " "
                 + loggedUser.getLastName() + "! Here is your dashboard!");
         chartCategory.setData(fillPieChart(loggedUser));
