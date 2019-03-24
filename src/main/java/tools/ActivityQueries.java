@@ -60,6 +60,18 @@ public class ActivityQueries {
                 .collect(Collectors.toList());*/ // return result as list
     }
 
+    /**.
+     * Filters activities that have been done the specified time unit ago
+     * @param dateUnit - Specified time unit (today, 1 day, 7 days, 30 days, 365 days)
+     * @return - filtered List of activities done within the specified time period
+     */
+    public List<Activity> filterActivitiesByDate(DateUnit dateUnit) {
+        Date today = DateUtils.dateToday();
+        Date startDate = DateUtils.getDateBefore(today, dateUnit);
+
+        return filterActivitiesByDate(startDate, today);
+    }
+
     /**
      * .
      * Filters activities that have been done in the specified time range
@@ -104,6 +116,73 @@ public class ActivityQueries {
 
         // Return the appropriate sublist
         return activities.subList(fromIndex, toIndex + 1);
+    }
+
+    /**
+     * .
+     * Returns the activities that match the given CO2 criteria
+     *
+     * @param co2     - CO2 value to filter by
+     * @param greater - should value be greater than CO2 or lower?
+     * @return - filtered list of activities that match the CO2 criteria
+     */
+    public List<Activity> filterActivitiesByCO2Saved(double co2, boolean greater) {
+        List<Activity> filteredActivities = new ArrayList<>();
+
+        for (Activity a : activities) {
+            if ((greater && a.getCarbonSaved() >= co2)
+                    || (!greater && a.getCarbonSaved() <= co2)) {
+                filteredActivities.add(a);
+            }
+        }
+
+        return filteredActivities;
+    }
+
+    /**.
+     * Returns the activities that match the given CO2 range
+     * @param fromCo2 - from CO2 (inclusive)
+     * @param toCo2 - to CO2 (inclusive)
+     * @return - filtered list of activities matching the CO2 range
+     */
+    public List<Activity> filterActivitiesByCO2Saved(double fromCo2, double toCo2) {
+        List<Activity> filteredActivities = new ArrayList<>();
+
+        for (Activity a : activities) {
+            if (a.getCarbonSaved() >= fromCo2 && a.getCarbonSaved() <= toCo2) {
+                filteredActivities.add(a);
+            }
+        }
+
+        return filteredActivities;
+    }
+
+    /**.
+     * Returns the activities that match a given type
+     * @param type - Type of activities to look for
+     * @return - filtered list of activities of the given type
+     */
+    public List<Activity> filterActivitiesByType(Class type) {
+        ArrayList<Class> categories = new ArrayList<>();
+        categories.add(type);
+        return filterActivitiesByType(categories);
+    }
+
+    /**.
+     * Returns the activities that match the given types
+     * @param types - Lsit of types of activities to look for
+     * @return - filtered list of activities of the given types
+     */
+    public List<Activity> filterActivitiesByType(ArrayList<Class> types) {
+        ArrayList<Activity> filteredActivities = new ArrayList<>();
+
+        for (Activity activity : activities) {
+            if (types.contains(activity.getClass())) {
+                filteredActivities.add(activity);
+            }
+        }
+
+        return filteredActivities;
     }
 
     // ---------- CO2 METHODS ----------

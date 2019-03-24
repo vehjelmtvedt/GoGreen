@@ -4,7 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 
@@ -99,4 +101,21 @@ public class Main extends Application {
     public static void setProfilePage(Scene scene) {
         profilePage = scene;
     }
+
+    public static Font getRobotoThin(double size) throws IOException {
+        return Font.loadFont(new ClassPathResource("/fonts/Roboto-thin.ttf")
+                .getInputStream(), size);
+    }
+
+    public static Font getRobotoBold(double size) throws IOException {
+        return Font.loadFont(new ClassPathResource("/fonts/Roboto-Bold.ttf")
+                .getInputStream(), size);
+    }
+
+    public static Font getReenieBeanie(double size) throws IOException {
+        return Font.loadFont(new ClassPathResource("/fonts/ReenieBeanie.ttf")
+                .getInputStream(), size);
+    }
+
+
 }
