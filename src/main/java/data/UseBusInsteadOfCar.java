@@ -43,10 +43,10 @@ public class UseBusInsteadOfCar extends TransportationActivity {
         return maxC02SavedByThisActivity;
 
         // calculate CO2 saved
-//        if (dailyCarbonEmissions > maxC02SavedByThisActivity + totalCarbonSavedToday) {
-//            return  maxC02SavedByThisActivity;
-//        } else {
-//            return dailyCarbonEmissions - totalCarbonSavedToday;
-//        }
+        //        if (dailyCarbonEmissions > maxC02SavedByThisActivity + totalCarbonSavedToday) {
+        //            return  maxC02SavedByThisActivity;
+        //        } else {
+        //            return dailyCarbonEmissions - totalCarbonSavedToday;
+        //        }
     }
 }

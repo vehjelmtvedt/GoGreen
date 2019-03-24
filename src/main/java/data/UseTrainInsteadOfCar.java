@@ -6,7 +6,7 @@ public class UseTrainInsteadOfCar extends TransportationActivity {
     /**
      * Constructor.
      */
-    public UseTrainInsteadOfCar () {
+    public UseTrainInsteadOfCar() {
         super();
         this.setName("Use Train Instead of Car");
     }
