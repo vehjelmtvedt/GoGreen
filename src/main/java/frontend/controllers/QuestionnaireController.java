@@ -22,6 +22,8 @@ import java.util.ResourceBundle;
 
 public class QuestionnaireController implements Initializable {
 
+    private static User thisUser;
+
     @FXML
     private ImageView background;
 
@@ -105,30 +107,27 @@ public class QuestionnaireController implements Initializable {
             String locallyProducedFoodConsumption = LocallyProducedFoodOptions.getValue().toString();
             String organicFoodConsumption = OrganicOptions.getValue().toString();
             String processedFoodConsumption = ProcessedOptions.getValue().toString();
-            user.setElectricityDailyConsumption(dailyElectricityConsumption);
-            user.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
-            user.setCarType(carType);
-            user.setDailyCarKilometres(dailyCarKilometres);
-            user.setMeatAndDairyConsumption(meatAndDairyConsumption);
-            user.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
-            user.setOrganicFoodConsumption(organicFoodConsumption);
-            user.setProcessedFoodConsumption(processedFoodConsumption);
+            thisUser.setElectricityDailyConsumption(dailyElectricityConsumption);
+            thisUser.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
+            thisUser.setCarType(carType);
+            thisUser.setDailyCarKilometres(dailyCarKilometres);
+            thisUser.setMeatAndDairyConsumption(meatAndDairyConsumption);
+            thisUser.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
+            thisUser.setOrganicFoodConsumption(organicFoodConsumption);
+            thisUser.setProcessedFoodConsumption(processedFoodConsumption);
 
-            String response = Requests.signupRequest(user);
+            String response = Requests.signupRequest(thisUser);
             if (response != null) {
                 if (response.equals("success")) {
-                    try {
-                        Dialog.show(form, "Registration Successful!", "Enter your new credentials!",
-                                "ACCEPT", "sucess");
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-
                     StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn());
                 }
             }
         });
 
+    }
+
+    public static void setUser(User user) {
+        thisUser = user;
     }
 
 }
