@@ -1,9 +1,15 @@
 package frontend.controllers;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.User;
 import frontend.gui.Events;
+import frontend.gui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +31,6 @@ import java.util.ResourceBundle;
 
 public class ActivitiesController implements Initializable {
     private static User loggedUser;
-    private static List<JFXCheckBox> filterList = new ArrayList<>();
     private static List<JFXCheckBox> checkList = new ArrayList<>();
     private static List<JFXRadioButton> radioList = new ArrayList<>();
 
@@ -108,6 +113,8 @@ public class ActivitiesController implements Initializable {
     @FXML
     private Label lblApply;
     @FXML
+    private Label goGreen;
+    @FXML
     private JFXRadioButton radioToday;
     @FXML
     private JFXRadioButton radioWeek;
@@ -123,6 +130,12 @@ public class ActivitiesController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //addFonts
+        try {
+            goGreen.setFont(Main.getReenieBeanie(100));
+        } catch (IOException e) {
+            System.out.println("Fonts not found");
+        }
         //add Activity Event on clicking ( plus add in history table )
         Events.addFoodActivity(paneVegetarianMeal, 1, loggedUser, activityTable);
         Events.addFoodActivity(paneOrganicFood, 2, loggedUser, activityTable);
@@ -180,6 +193,7 @@ public class ActivitiesController implements Initializable {
         Events.addHoverOnFilter(lblClearFilters);
         Events.addHoverOnFilter(lblApply);
         Events.clearFilters(lblClearFilters, checkList, radioList);
+        Events.applyFilters(lblApply, checkAll, checkList, radioList, loggedUser, activityTable);
     }
 
     //GENERAL METHODS

@@ -16,6 +16,7 @@ public class UseBusInsteadOfCarTest {
         assertEquals("Use Bus Instead of Car", travel1.getName());
 
     }
+
     @Test
     public void testCarbonSavedByUserWithSmallCar() {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
