@@ -30,7 +30,6 @@ import java.util.ResourceBundle;
 
 public class ActivitiesController implements Initializable {
     private static User loggedUser;
-    private static List<JFXCheckBox> filterList = new ArrayList<>();
     private static List<JFXCheckBox> checkList = new ArrayList<>();
     private static List<JFXRadioButton> radioList = new ArrayList<>();
 
@@ -185,6 +184,7 @@ public class ActivitiesController implements Initializable {
         Events.addHoverOnFilter(lblClearFilters);
         Events.addHoverOnFilter(lblApply);
         Events.clearFilters(lblClearFilters, checkList, radioList);
+        Events.applyFilters(lblApply, checkAll, checkList, radioList, loggedUser, activityTable);
     }
 
     //GENERAL METHODS
