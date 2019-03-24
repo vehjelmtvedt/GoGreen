@@ -13,14 +13,8 @@ public class UseBusInsteadOfCar extends TransportationActivity {
 
     @Override
     public double calculateCarbonSaved(User user) {
-        // calculate total carbon saved today
-        double totalCarbonSavedToday = this.calculateCarbonSavedTodayByTransportationActivities(user);
-
         // calculate total kilometres travelled today
         double totalKilometresTraveledToday = this.calculateTotalKilometresTravelledToday(user);
-
-        // calculate daily carbon emissions
-        double dailyCarbonEmissions = this.calculateDailyCarEmissions(user);
 
         // calculate maximum CO2 this activity can save
         double maxC02SavedByThisActivity;
