@@ -1,6 +1,6 @@
 package frontend.controllers;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXCheckBox;
 import data.Activity;
 import data.User;
 import frontend.gui.Events;
