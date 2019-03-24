@@ -18,7 +18,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -183,17 +182,16 @@ public class ProfilePageController implements Initializable {
         thisUser = user;
 
         //for testing
-
-        thisUser.getProgress().getAchievements().add(new UserAchievement(
-                1 , true , new Date(11 , 11, 11)));
-        thisUser.getProgress().getAchievements().add(new UserAchievement(
-                2 , true , new Date(12 , 11, 11)));
-        thisUser.getProgress().getAchievements().add(new UserAchievement(
-                12 , true , new Date(12 , 11, 11)));
-        thisUser.getProgress().getAchievements().add(new UserAchievement(
-                14 , true , new Date(12 , 11, 11)));
-
-        thisUser.getProgress().setPoints(1000.0);
+        //        thisUser.getProgress().getAchievements().add(new UserAchievement(
+        //                1 , true , new Date(11 , 11, 11)));
+        //        thisUser.getProgress().getAchievements().add(new UserAchievement(
+        //                2 , true , new Date(12 , 11, 11)));
+        //        thisUser.getProgress().getAchievements().add(new UserAchievement(
+        //                12 , true , new Date(12 , 11, 11)));
+        //        thisUser.getProgress().getAchievements().add(new UserAchievement(
+        //                14 , true , new Date(12 , 11, 11)));
+        //
+        //        thisUser.getProgress().setPoints(1000.0);
     }
 
 
