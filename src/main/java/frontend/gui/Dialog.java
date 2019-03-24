@@ -25,6 +25,7 @@ public class Dialog {
                             String headerText,
                             String bodyText, String buttonText, String icon) throws IOException {
         FXMLLoader loader = new FXMLLoader();
+        JFXDialog dialog = loader.load();
         loader.setLocation(Dialog.class.getResource("/frontend/fxmlPages/Dialog.fxml"));
 
 
@@ -45,7 +46,6 @@ public class Dialog {
         AnchorPane.setBottomAnchor(pane, mainPane.getHeight());
         AnchorPane.setLeftAnchor(pane, mainPane.getWidth());
         mainPane.getChildren().addAll(pane);
-        JFXDialog dialog = loader.load();
         dialog.show();
     }
 }
