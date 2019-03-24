@@ -8,7 +8,10 @@ import frontend.gui.ProfilePageLogic;
 import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -61,13 +64,13 @@ public class ProfilePageController implements Initializable {
     private Label score;
 
     @FXML
-    VBox com;
+    private VBox com;
 
     @FXML
-    VBox incom;
+    private VBox incom;
 
     @FXML
-    ToolBar toolBar;
+    private ToolBar toolBar;
 
 
     /**
@@ -108,8 +111,8 @@ public class ProfilePageController implements Initializable {
 
             ImageView achievementimage = new ImageView();
 
-            Image path = new Image("achievementsimages/" +
-                    thisUser.getProgress().getAchievements().get(i).getId() + ".png");
+            Image path = new Image("achievementsimages/" + thisUser.getProgress()
+                    .getAchievements().get(i).getId() + ".png");
 
             achievementimage.setFitHeight(32);
 
@@ -152,8 +155,7 @@ public class ProfilePageController implements Initializable {
 
                 ImageView achievementimage1 = new ImageView();
 
-                String image ="achievementsimages/" +
-                        a.getId() + ".png";
+                String image = "achievementsimages/"  + a.getId() + ".png";
 
 
                 Image path1 = new Image("achievementsimages/8.png");
