@@ -56,7 +56,7 @@ public class ProfilePageLogic {
     /**
      * this returns a String with Achievement name and completion date.
      *
-     * @return
+     * @return String with Achievement name and completion date
      */
     public static String toString(UserAchievement userAchievement) {
 
@@ -71,7 +71,7 @@ public class ProfilePageLogic {
     /**
      * this returns a String with Achievement name.
      *
-     * @return
+     * @return name
      */
     public static String getNameString(UserAchievement userAchievement) {
 
@@ -82,7 +82,7 @@ public class ProfilePageLogic {
     /**
      * this returns a String with Achievement bonus.
      *
-     * @return
+     * @return bonus
      */
     public static int getBonusString(UserAchievement userAchievement) {
 
@@ -92,7 +92,7 @@ public class ProfilePageLogic {
     /**
      * this returns a String with Achievement completion date.
      *
-     * @return
+     * @return date
      */
     public static String getDateString(UserAchievement userAchievement) {
 

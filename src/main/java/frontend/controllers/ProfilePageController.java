@@ -57,9 +57,6 @@ public class ProfilePageController implements Initializable {
     private Label lastseenLabel;
 
     @FXML
-    private HBox topHbox;
-
-    @FXML
     private ImageView badge1;
 
     @FXML
@@ -154,7 +151,7 @@ public class ProfilePageController implements Initializable {
     /**
      * checks if an achievement is already completed.
      * @param achievement to check
-     * @return
+     * @return boolean flag
      */
     public static boolean isComplete(Achievement achievement) {
         for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
