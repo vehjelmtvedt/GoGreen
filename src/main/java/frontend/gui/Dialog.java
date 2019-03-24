@@ -26,7 +26,7 @@ public class Dialog {
                             String bodyText, String buttonText, String icon) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Dialog.class.getResource("/frontend/fxmlPages/Dialog.fxml"));
-        
+
 
         DialogController controller = loader.getController();
         controller.setHeading(headerText);
