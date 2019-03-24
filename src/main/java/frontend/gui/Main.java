@@ -37,6 +37,11 @@ public class Main extends Application {
         Parent rootSignUp = loaderSignUp.load();
         signUp = new Scene(rootSignUp, General.getBounds()[0], General.getBounds()[1]);
 
+        FXMLLoader loaderQuestionnaire = new FXMLLoader(
+                Main.class.getResource("/frontend/fxmlPages/Questionnaire.fxml"));
+        Parent rootQuestionnaire = loaderQuestionnaire.load();
+        Questionnaire = new Scene(rootQuestionnaire, General.getBounds()[0], General.getBounds()[1]);
+
         //add path for css files and add them to the specific scenes they belong
         String cssPathIntro = "/frontend/Stylesheets/Style.css";
         cssIntro = this.getClass().getResource(cssPathIntro).toExternalForm();

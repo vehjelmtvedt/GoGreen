@@ -61,25 +61,20 @@ public class InputValidation {
                         Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
                 FXMLLoader loader4 = new FXMLLoader(
                         Main.class.getResource("/frontend/fxmlPages/ProfilePage.fxml"));
-                FXMLLoader loader5 = new FXMLLoader(
-                        Main.class.getResource("/frontend/fxmlPages/Questionnaire.fxml"));
                 Parent root1 = loader1.load();
                 Parent root2 = loader2.load();
                 Parent root3 = loader3.load();
                 Parent root4 = loader4.load();
-                Parent root5 = loader5.load();
                 Scene homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
                 Scene activities = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
                 Scene friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
                 Scene profilePage = new Scene(root4, General.getBounds()[0], General.getBounds()[1]);
-                Scene Questionnaire = new Scene(root5, General.getBounds()[0], General.getBounds()[1]);
 
                 //setup scenes in main class
                 Main.setActivities(activities);
                 Main.setHomepage(homepage);
                 Main.setFriendPage(friendPage);
                 Main.setProfilePage(profilePage);
-                Main.setQuestionnaire(Questionnaire);
             } catch (IOException e) {
                 e.printStackTrace();
             }
