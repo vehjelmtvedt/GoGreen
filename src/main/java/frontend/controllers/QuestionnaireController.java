@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import data.User;
-import frontend.gui.Dialog;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
@@ -15,9 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import tools.Requests;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 public class QuestionnaireController implements Initializable {
@@ -43,36 +40,26 @@ public class QuestionnaireController implements Initializable {
     private JFXTextField textCarUsage;
 
     @FXML
-    private JFXComboBox CarSizes;
+    private JFXComboBox carSizes;
 
     @FXML
-    private JFXComboBox MeatAndDairyOptions;
+    private JFXComboBox meatAndDairyOptions;
 
     @FXML
-    private JFXComboBox LocallyProducedFoodOptions;
+    private JFXComboBox locallyProducedFoodOptions;
 
     @FXML
-    private JFXComboBox OrganicOptions;
+    private JFXComboBox organicOptions;
 
     @FXML
-    private JFXComboBox ProcessedOptions;
+    private JFXComboBox processedOptions;
 
     @FXML
-    private JFXButton SubmitButton;
+    private JFXButton submitButton;
 
     private AnchorPane form;
 
     private User user;
-
-    ObservableList<String> carsizes = FXCollections.observableArrayList("I don't own a car","Small", "Medium", "Large");
-
-    ObservableList<String> meatanddairyoptions = FXCollections.observableArrayList("Above average", "Average", "Below average", "Vegan");
-
-    ObservableList<String> locallyproducedfoodoptions = FXCollections.observableArrayList("Very little", "Average", "Above average", "Almost all");
-
-    ObservableList<String> organicoptions = FXCollections.observableArrayList("None", "Some", "Most", "All");
-
-    ObservableList<String> processedoptions = FXCollections.observableArrayList("Above average", "Average", "Below average", "Very little");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -80,33 +67,54 @@ public class QuestionnaireController implements Initializable {
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
 
-        CarSizes.setValue("I don't own a car");
-        CarSizes.setItems(carsizes);
+        ObservableList<String> carsizes = FXCollections.observableArrayList(
+                "I don't own a car","Small", "Medium", "Large"
+        );
 
-        MeatAndDairyOptions.setValue("Above average");
-        MeatAndDairyOptions.setItems(meatanddairyoptions);
+        carSizes.setValue("I don't own a car");
+        carSizes.setItems(carsizes);
 
-        LocallyProducedFoodOptions.setValue("Very little");
-        LocallyProducedFoodOptions.setItems(locallyproducedfoodoptions);
+        ObservableList<String> meatanddairyoptions = FXCollections.observableArrayList(
+                "Above average", "Average", "Below average", "Vegan"
+        );
 
-        OrganicOptions.setValue("None");
-        OrganicOptions.setItems(organicoptions);
+        meatAndDairyOptions.setValue("Above average");
+        meatAndDairyOptions.setItems(meatanddairyoptions);
 
-        ProcessedOptions.setValue("Above average");
-        ProcessedOptions.setItems(processedoptions);
+        ObservableList<String> locallyproducedfoodoptions = FXCollections.observableArrayList(
+                "Very little", "Average", "Above average", "Almost all"
+        );
 
-        SubmitButton.setOnAction(e -> {
+        locallyProducedFoodOptions.setValue("Very little");
+        locallyProducedFoodOptions.setItems(locallyproducedfoodoptions);
+
+        ObservableList<String> organicoptions = FXCollections.observableArrayList(
+                "None", "Some", "Most", "All"
+        );
+
+        organicOptions.setValue("None");
+        organicOptions.setItems(organicoptions);
+
+        ObservableList<String> processedoptions = FXCollections.observableArrayList(
+                "Above average", "Average", "Below average", "Very little"
+        );
+
+        processedOptions.setValue("Above average");
+        processedOptions.setItems(processedoptions);
+
+        submitButton.setOnAction(e -> {
             int householdMembers = Integer.parseInt(textHousehold.getText());
             int dailyElectricityConsumption =
                     Integer.parseInt(textElectricity.getText()) / 365 / householdMembers;
             double dailyHeatingOilConsumption =
                     Integer.parseInt(textOil.getText()) / 365.0 / householdMembers;
-            String carType = CarSizes.getValue().toString();
+            String carType = carSizes.getValue().toString();
             int dailyCarKilometres = Integer.parseInt(textCarUsage.getText()) / 365;
-            String meatAndDairyConsumption = MeatAndDairyOptions.getValue().toString();
-            String locallyProducedFoodConsumption = LocallyProducedFoodOptions.getValue().toString();
-            String organicFoodConsumption = OrganicOptions.getValue().toString();
-            String processedFoodConsumption = ProcessedOptions.getValue().toString();
+            String meatAndDairyConsumption = meatAndDairyOptions.getValue().toString();
+            String locallyProducedFoodConsumption =
+                    locallyProducedFoodOptions.getValue().toString();
+            String organicFoodConsumption = organicOptions.getValue().toString();
+            String processedFoodConsumption = processedOptions.getValue().toString();
             thisUser.setElectricityDailyConsumption(dailyElectricityConsumption);
             thisUser.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
             thisUser.setCarType(carType);

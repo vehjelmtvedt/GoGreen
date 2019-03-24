@@ -4,7 +4,11 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import data.LoginDetails;
 import data.User;
-import frontend.controllers.*;
+import frontend.controllers.ActivitiesController;
+import frontend.controllers.FriendspageController;
+import frontend.controllers.HomepageController;
+import frontend.controllers.ProfilePageController;
+import frontend.controllers.QuestionnaireController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -65,7 +69,9 @@ public class InputValidation {
                 Scene homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
                 Scene activities = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
                 Scene friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
-                Scene profilePage = new Scene(root4, General.getBounds()[0], General.getBounds()[1]);
+                Scene profilePage = new Scene(
+                        root4, General.getBounds()[0], General.getBounds()[1]
+                );
 
                 //setup scenes in main class
                 Main.setActivities(activities);

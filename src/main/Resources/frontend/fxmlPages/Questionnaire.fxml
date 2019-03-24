@@ -116,12 +116,12 @@
                   <JFXTextField fx:id="textElectricity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <JFXTextField fx:id="textOil" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <JFXTextField fx:id="textCarUsage" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <JFXComboBox fx:id="CarSizes" prefHeight="27.0" prefWidth="204.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <JFXComboBox fx:id="MeatAndDairyOptions" prefHeight="27.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <JFXComboBox fx:id="LocallyProducedFoodOptions" prefHeight="27.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <JFXComboBox fx:id="OrganicOptions" prefHeight="27.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <JFXComboBox fx:id="ProcessedOptions" prefHeight="27.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                  <JFXButton fx:id="SubmitButton" prefHeight="27.0" prefWidth="199.0" text="SUBMIT" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                  <JFXComboBox fx:id="carSizes" prefHeight="27.0" prefWidth="204.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <JFXComboBox fx:id="meatAndDairyOptions" prefHeight="27.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <JFXComboBox fx:id="locallyProducedFoodOptions" prefHeight="27.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <JFXComboBox fx:id="organicOptions" prefHeight="27.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <JFXComboBox fx:id="processedOptions" prefHeight="27.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <JFXButton fx:id="submitButton" prefHeight="27.0" prefWidth="199.0" text="SUBMIT" GridPane.columnIndex="1" GridPane.rowIndex="9">
                      <font>
                         <Font size="24.0" />
                      </font>
