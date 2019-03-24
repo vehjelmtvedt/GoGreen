@@ -190,4 +190,13 @@ public class RequestsTest {
         Mockito.when(dbService.getAchievements()).thenReturn(testList);
         assertEquals(testList.get(0).getId(),Requests.getAllAchievements().get(0).getId());
     }
+
+    @Test
+    public void testGetTopUsers() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(), testUser.getPassword())).thenReturn(testUser);
+        List<User> testList = new ArrayList<>();
+        testList.add(testUser);
+        Mockito.when(dbService.getTopUsers(1)).thenReturn(testList);
+        assertEquals(testList,Requests.getTopUsers(new LoginDetails(testUser.getUsername(),testUser.getPassword()),1));
+    }
 }
