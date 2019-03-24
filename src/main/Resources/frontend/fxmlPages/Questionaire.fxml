@@ -110,10 +110,10 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField promptText="e.g. 1" GridPane.columnIndex="1" />
+                  <TextField promptText="e.g. 75000" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField promptText="e.g. 17000" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField promptText="e.g 1000" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
