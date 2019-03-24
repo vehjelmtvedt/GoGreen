@@ -68,8 +68,7 @@ public class InputValidation {
                 Scene homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
                 Scene activities = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
                 Scene friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
-                Scene profilePage = new Scene(root4,
-                        General.getBounds()[0], General.getBounds()[1]);
+                Scene profilePage = new Scene(root4, General.getBounds()[0], General.getBounds()[1]);
 
                 //setup scenes in main class
                 Main.setActivities(activities);
@@ -138,7 +137,7 @@ public class InputValidation {
                 usernameField.getText(), passField.getText());
 
 
-        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Questionnaire.createScene(user, form));
+        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
     }
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
