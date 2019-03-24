@@ -7,52 +7,38 @@ import java.text.SimpleDateFormat;
 
 import static org.junit.Assert.assertEquals;
 
-public class UseBikeInsteadOfCarTest {
-    UseBikeInsteadOfCar travel1 = new UseBikeInsteadOfCar();
+public class UseBusInsteadOfCarTest {
+    UseBusInsteadOfCar travel1 = new UseBusInsteadOfCar();
+
     @Test
     public void testConstructor() {
         assertEquals("Transportation", travel1.getCategory());
-        assertEquals("Use Bike Instead of Car", travel1.getName());
-        travel1.setKilometres(2);
-        assertEquals(2, travel1.getKilometres());
-    }
+        assertEquals("Use Bus Instead of Car", travel1.getName());
 
-    @Test
-    public void testCalculateDailyCarbonEmissions() {
-        User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
-        user.setCarType("small");
-        user.setDailyCarKilometres(20);
-        assertEquals((int) CarbonCalculator.smallCarEmissions(20), (int) travel1.calculateDailyCarEmissions(user));
-        user.setCarType("medium");
-        assertEquals((int) CarbonCalculator.mediumCarEmissions(20), (int) travel1.calculateDailyCarEmissions(user));
-        user.setCarType("large");
-        assertEquals((int) CarbonCalculator.largeCarEmissions(20), (int) travel1.calculateDailyCarEmissions(user));
-        user.setCarType("I don't own a car");
-        assertEquals(0, (int) travel1.calculateDailyCarEmissions(user));
     }
-
     @Test
     public void testCarbonSavedByUserWithSmallCar() {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setCarType("small");
-        user.setDailyCarKilometres(20);
-        UseBikeInsteadOfCar travel = new UseBikeInsteadOfCar();
-        travel.setKilometres(15);
+        user.setDailyCarKilometres(50);
+        UseBusInsteadOfCar travel = new UseBusInsteadOfCar();
+        travel.setKilometres(50);
         travel.setCarbonSaved(travel.calculateCarbonSaved(user));
-        assertEquals((int) CarbonCalculator.smallCarEmissions(15), (int) travel.calculateCarbonSaved(user));
+        assertEquals((int) (CarbonCalculator.smallCarEmissions(50) - CarbonCalculator.busEmissions(50)), (int) travel.getCarbonSaved());
         user.addActivity(travel);
-        UseBikeInsteadOfCar travel2 = new UseBikeInsteadOfCar();
+        UseBusInsteadOfCar travel2 = new UseBusInsteadOfCar();
         travel2.setKilometres(5);
         travel2.setCarbonSaved(travel2.calculateCarbonSaved(user));
-        assertEquals((int) CarbonCalculator.smallCarEmissions(5), (int) travel2.calculateCarbonSaved(user));
+        assertEquals((int) (CarbonCalculator.smallCarEmissions(5) - CarbonCalculator.busEmissions(5)), (int) travel2.calculateCarbonSaved(user));
         user.addActivity(travel2);
         user.addActivity(null);
         user.addActivity(new EatVegetarianMeal());
-        UseBikeInsteadOfCar travel3 = new UseBikeInsteadOfCar();
+        UseBusInsteadOfCar travel3 = new UseBusInsteadOfCar();
         try {
             travel3.setDate(new SimpleDateFormat("dd/MM/yyyy").parse("12/12/1999"));
         }catch (Exception e){ }
         user.addActivity(travel3);
+
         assertEquals(0, (int) travel.calculateCarbonSaved(user));
     }
 
@@ -60,11 +46,11 @@ public class UseBikeInsteadOfCarTest {
     public void testCarbonSavedByUserWithMediumCar() {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setCarType("medium");
-        user.setDailyCarKilometres(20);
-        UseBikeInsteadOfCar travel = new UseBikeInsteadOfCar();
-        travel.setKilometres(20);
+        user.setDailyCarKilometres(100);
+        UseBusInsteadOfCar travel = new UseBusInsteadOfCar();
+        travel.setKilometres(100);
         travel.setCarbonSaved(travel.calculateCarbonSaved(user));
-        assertEquals((int) CarbonCalculator.mediumCarEmissions(20), (int) travel.calculateCarbonSaved(user));
+        assertEquals((int) (CarbonCalculator.mediumCarEmissions(100) - CarbonCalculator.busEmissions(100)), (int) travel.getCarbonSaved());
         user.addActivity(travel);
         assertEquals(0, (int) travel.calculateCarbonSaved(user));
     }
@@ -74,13 +60,17 @@ public class UseBikeInsteadOfCarTest {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setCarType("large");
         user.setDailyCarKilometres(20);
-        UseBikeInsteadOfCar travel = new UseBikeInsteadOfCar();
+        UseBusInsteadOfCar travel = new UseBusInsteadOfCar();
         travel.setKilometres(20);
         travel.setCarbonSaved(travel.calculateCarbonSaved(user));
-        assertEquals((int) CarbonCalculator.largeCarEmissions(20), (int) travel.calculateCarbonSaved(user));
+        assertEquals((int) (CarbonCalculator.largeCarEmissions(20) - CarbonCalculator.busEmissions(20)), (int) travel.calculateCarbonSaved(user));
         user.addActivity(travel);
+        UseBusInsteadOfCar travel2 = new UseBusInsteadOfCar();
+        travel2.setKilometres(50);
+        travel2.setCarbonSaved(travel2.calculateCarbonSaved(user));
+        assertEquals(0, (int) travel2.calculateCarbonSaved(user));
+        user.addActivity(travel2);
         assertEquals(0, (int) travel.calculateCarbonSaved(user));
-
     }
 
     @Test
@@ -100,11 +90,21 @@ public class UseBikeInsteadOfCarTest {
         user.addActivity(travel1);
         user.addActivity(null);
         user.addActivity(new EatVegetarianMeal());
-        UseBikeInsteadOfCar travel2 = new UseBikeInsteadOfCar();
+        UseBusInsteadOfCar travel2 = new UseBusInsteadOfCar();
         try {
             travel2.setDate(new SimpleDateFormat("dd/MM/yyyy").parse("12/12/1999"));
         }catch (Exception e){ }
         user.addActivity(travel2);
         assertEquals(1, travel1.timesPerformedInTheSameDay(user));
+    }
+
+    @Test
+    public void testActivityWithMoreKilometresThanUsersDailyKilometres() {
+        User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
+        user.setCarType("large");
+        user.setDailyCarKilometres(20);
+        UseBusInsteadOfCar travel = new UseBusInsteadOfCar();
+        travel.setKilometres(30);
+        assertEquals(0, (int) travel.calculateCarbonSaved(user));
     }
 }

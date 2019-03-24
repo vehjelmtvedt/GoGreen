@@ -2,8 +2,6 @@ package data;
 
 import tools.CarbonCalculator;
 
-import java.util.ArrayList;
-
 /**
  * Activity: Travel by bike instead of travelling by car.
  * @author Kostas Lyrakis
@@ -20,19 +18,17 @@ public class UseBikeInsteadOfCar extends TransportationActivity {
     @Override
     public double calculateCarbonSaved(User user) {
         // calculate total carbon saved today
-//        ArrayList<Activity> activitiesPerformedOnTheSameDay =
-//                getActivitiesOfTheSameTypePerformedInTheSameDay(user);
         double totalCarbonSavedToday = this.calculateCarbonSavedTodayByTransportationActivities(user);
-//        for (Activity activity : activitiesPerformedOnTheSameDay) {
-//            totalCarbonSavedToday += activity.getCarbonSaved();
-//        }
 
         // calculate daily carbon emissions
-        double dailyCarbonEmissions = calculateDailyCarbonEmissions(user);
+        double dailyCarEmissions = calculateDailyCarEmissions(user);
 
-        double maxC02SavedByThisActivity;
+        // calculate total kilometres travelled today
+        double totalKilometresTraveledToday = this.calculateTotalKilometresTravelledToday(user);
+
 
         // calculate maximum CO2 this activity can save
+        double maxC02SavedByThisActivity;
         if (user.getCarType().equals("small")) {
             maxC02SavedByThisActivity = CarbonCalculator.smallCarEmissions(this.getKilometres());
         } else if (user.getCarType().equals("medium")) {
@@ -43,11 +39,16 @@ public class UseBikeInsteadOfCar extends TransportationActivity {
             maxC02SavedByThisActivity = 0;
         }
 
+        // The user can save carbon only for the daily kilometres he/she travels by car
+        if (totalKilometresTraveledToday >= user.getDailyCarKilometres()) {
+            return 0;
+        }
+
         // calculate CO2 saved
-        if (dailyCarbonEmissions > maxC02SavedByThisActivity + totalCarbonSavedToday) {
+        if (dailyCarEmissions > maxC02SavedByThisActivity + totalCarbonSavedToday) {
             return  maxC02SavedByThisActivity;
         } else {
-            return dailyCarbonEmissions - totalCarbonSavedToday;
+            return dailyCarEmissions - totalCarbonSavedToday;
         }
     }
 }

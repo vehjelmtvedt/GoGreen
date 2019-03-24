@@ -31,7 +31,7 @@ public abstract class TransportationActivity extends Activity {
         return kilometres;
     }
 
-    public double calculateDailyCarbonEmissions(User user) {
+    public double calculateDailyCarEmissions(User user) {
 
         if (user.getCarType().equals("small")) {
             return CarbonCalculator.smallCarEmissions(user.getDailyCarKilometres());
@@ -66,6 +66,33 @@ public abstract class TransportationActivity extends Activity {
 
         for(TransportationActivity activity: transportationActivities) {
             result += activity.getCarbonSaved();
+        }
+
+        return result;
+    }
+
+    public int calculateTotalKilometresTravelledToday(User user) {
+        Date currentDate = Calendar.getInstance().getTime();
+        String currentMonth = currentDate.toString().split(" ")[1];
+        String currentDay = currentDate.toString().split(" ")[2];
+        String currentYear = currentDate.toString().split(" ")[5];
+        ArrayList<TransportationActivity> transportationActivities = new ArrayList<TransportationActivity>();
+
+        int result = 0;
+
+        for (Activity activity : user.getActivities()) {
+            if (activity != null && activity instanceof TransportationActivity) {
+                String dateNow = currentMonth + currentDay + currentYear;
+                if (dateNow.equals(activity.getDate().toString().split(" ")[1]
+                        + activity.getDate().toString().split(" ")[2]
+                        + activity.getDate().toString().split(" ")[5])) {
+                    transportationActivities.add((TransportationActivity) activity);
+                }
+            }
+        }
+
+        for(TransportationActivity activity: transportationActivities) {
+            result += activity.getKilometres();
         }
 
         return result;
