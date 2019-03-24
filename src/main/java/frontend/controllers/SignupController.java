@@ -97,13 +97,17 @@ public class SignupController implements Initializable {
         loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getSignIn()
         ));
-        setFonts();
+        try {
+            setFonts();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Adds fonts to all labels.
      */
-    public void setFonts() {
+    public void setFonts() throws IOException {
         goGreen.setFont(Main.getReenieBeanie(100));
         line1.setFont(Main.getReenieBeanie(40));
         line2.setFont(Main.getReenieBeanie(40));

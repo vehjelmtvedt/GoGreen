@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 
@@ -43,9 +44,6 @@ public class Main extends Application {
 
         //setup the first scene for the primary stage
         General.finaliseStage(primaryStage, signIn);
-
-        //Try adding font to signin page
-
     }
 
     public static void main(String[] args) {
@@ -104,19 +102,19 @@ public class Main extends Application {
         profilePage = scene;
     }
 
-    public static Font getRobotoThin(double size) {
-        return Font.loadFont(Main.class.getResource(
-                "/fonts/Roboto-Thin.ttf").toExternalForm(), size);
+    public static Font getRobotoThin(double size) throws IOException {
+        return Font.loadFont(new ClassPathResource("/fonts/Roboto-thin.ttf")
+                .getInputStream(), size);
     }
 
-    public static Font getRobotoBold(double size) {
-        return Font.loadFont(Main.class.getResource(
-                "/fonts/Roboto-Bold.ttf").toExternalForm(), size);
+    public static Font getRobotoBold(double size) throws IOException {
+        return Font.loadFont(new ClassPathResource("/fonts/Roboto-Bold.ttf")
+                .getInputStream(), size);
     }
 
-    public static Font getReenieBeanie(double size) {
-        return Font.loadFont(Main.class.getResource(
-                "/fonts/ReenieBeanie.ttf").toExternalForm(), size);
+    public static Font getReenieBeanie(double size) throws IOException {
+        return Font.loadFont(new ClassPathResource("/fonts/ReenieBeanie.ttf")
+                .getInputStream(), size);
     }
 
 
