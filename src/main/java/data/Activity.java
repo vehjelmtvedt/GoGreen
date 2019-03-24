@@ -78,6 +78,11 @@ public abstract class Activity {
         return getActivitiesOfTheSameTypePerformedInTheSameDay(user).size();
     }
 
+    /**
+     * Creates an arraylist that contains the activities of the same type performed on the same day.
+     * @param user currently logged in user
+     * @return ArrayList
+     */
     public  ArrayList<Activity> getActivitiesOfTheSameTypePerformedInTheSameDay(User user) {
         ArrayList<Activity> result = new ArrayList<Activity>();
         Date currentDate = Calendar.getInstance().getTime();
