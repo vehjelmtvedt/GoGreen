@@ -1,12 +1,34 @@
 package data;
 
-
+import backend.DbService;
+import backend.RequestHandler;
+import backend.Server;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.annotation.Resource;
 import java.util.Date;
 
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Server.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_CLASS)
+
 public class AchievementsLogicTest {
+
+    @MockBean
+    private DbService dbService;
+
+    @InjectMocks
+    @Resource
+    RequestHandler requestHandler;
 
     Activity activity = new EatVegetarianMeal();
     Activity activity1 = new BuyLocallyProducedFood();
@@ -20,8 +42,8 @@ public class AchievementsLogicTest {
 
     @Before
     public void setup(){
-        activity.setDate(new Date(11 , 11 , 10));
-        activity1.setDate(new Date(11 , 11 , 11));
+        dbService.addUser(user);
+
     }
 
     @Test
