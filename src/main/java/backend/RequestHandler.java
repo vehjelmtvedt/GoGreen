@@ -1,9 +1,10 @@
 package backend;
 
-import backend.data.Activity;
-import backend.data.DbService;
-import backend.data.LoginDetails;
-import backend.data.User;
+import data.Achievement;
+import data.Activity;
+import data.LoginDetails;
+import data.User;
+
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,20 +57,6 @@ public class RequestHandler {
         //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
-    /**
-     * Returns user from db.
-     * @param identifier - username or email of that person
-     * @return - user of the given username or email.
-     */
-    @RequestMapping("/getUser")
-    public User getUser(@RequestParam String identifier) {
-        if (dbService.getUser(identifier) == null) {
-            return dbService.getUserByUsername(identifier);
-        }
-        return dbService.getUser(identifier);
-    }
-
-
     @RequestMapping("/friendrequest")
     public User friendRequest(@RequestParam String sender, @RequestParam String receiver) {
         return dbService.addFriendRequest(sender, receiver);
@@ -84,6 +71,19 @@ public class RequestHandler {
     public User rejectFriendRequest(@RequestParam String sender, @RequestParam String rejecting) {
         return dbService.rejectFriendRequest(sender, rejecting);
 
+    }
+
+    /**
+     * To get user. (To be deprecated)
+     * @param identifier email or username of the user
+     * @return A user object.
+     */
+    @RequestMapping("/getUser")
+    public User getUser(@RequestParam String identifier) {
+        if (dbService.getUser(identifier) == null) {
+            return dbService.getUserByUsername(identifier);
+        }
+        return dbService.getUser(identifier);
     }
 
     /**
@@ -164,6 +164,11 @@ public class RequestHandler {
             return dbService.getFriends(loginDetails.getIdentifier());
         }
         return null;
+    }
+
+    @RequestMapping("/getAllAchievements")
+    public List<Achievement> getAllAchievements() {
+        return dbService.getAchievements();
     }
 }
 

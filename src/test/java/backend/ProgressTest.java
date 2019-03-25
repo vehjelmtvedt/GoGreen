@@ -1,8 +1,8 @@
 package backend;
 
-import backend.data.Progress;
-import backend.data.User;
-import backend.data.UserAchievement;
+import data.Progress;
+import data.User;
+import data.UserAchievement;
 import org.junit.Assert;
 import org.junit.Test;
 

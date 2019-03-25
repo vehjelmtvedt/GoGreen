@@ -1,10 +1,10 @@
 package backend;
 
 
-import backend.data.DbService;
-import backend.data.EatVegetarianMeal;
-import backend.data.LoginDetails;
-import backend.data.User;
+import data.Achievement;
+import data.EatVegetarianMeal;
+import data.LoginDetails;
+import data.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -208,5 +208,13 @@ public class RequestHandlerTest
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
         assertEquals(null,requestHandler.getFriends(new LoginDetails(testUser.getUsername(),
                 testUser.getPassword())));
+    }
+
+    @Test
+    public void getAllAchievements() {
+        List<Achievement> testList = new ArrayList();
+        testList.add(new Achievement());
+        Mockito.when(dbService.getAchievements()).thenReturn(testList);
+        assertEquals(testList, requestHandler.getAllAchievements());
     }
 }
