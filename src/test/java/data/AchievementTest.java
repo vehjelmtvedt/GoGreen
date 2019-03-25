@@ -56,4 +56,23 @@ public class AchievementTest {
     public void testNotEquals() {
         Assert.assertNotEquals(test,new String());
     }
+
+    @Test
+    public void equals() {
+
+        Achievement test1 = new Achievement(1, "test" , 10);
+
+        Assert.assertFalse(test1.equals(test));
+
+    }
+
+    @Test
+    public void equals1() {
+
+        Achievement test2 = new Achievement(2 , "test1" , 100);
+
+        Assert.assertTrue(test2.equals(test));
+
+    }
+
 }
