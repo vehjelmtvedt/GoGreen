@@ -9,8 +9,13 @@ import data.BuyLocallyProducedFood;
 import data.BuyNonProcessedFood;
 import data.BuyOrganicFood;
 import data.EatVegetarianMeal;
+import data.UseBikeInsteadOfCar;
+import data.UseBusInsteadOfCar;
+import data.UseTrainInsteadOfCar;
 import data.User;
 import frontend.controllers.ActivitiesController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
@@ -126,7 +131,7 @@ public class Events {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             int distance = -1;
             try {
-                if (input.getText() != null) {
+                if (! input.getText().equals("")) {
                     distance = Integer.parseInt(input.getText());
                 }
             } catch (NumberFormatException e) {
@@ -136,11 +141,39 @@ public class Events {
             if (distance == -1) {
                 verify.setVisible(true);
                 input.setUnFocusColor(Color.rgb(255, 0, 0));
+                return;
             } else {
                 verify.setVisible(false);
-                input.setText(null);
+                input.setText("");
                 input.setUnFocusColor(Color.rgb(77, 77, 77));
                 input.setPromptText("number of km");
+            }
+
+            if (type == 1) {
+                UseBikeInsteadOfCar travel = new UseBikeInsteadOfCar();
+                travel.setKilometres(distance);
+                travel.performActivity(loggedUser);
+            } else if (type == 2) {
+                UseBusInsteadOfCar travel = new UseBusInsteadOfCar();
+                travel.setKilometres(distance);
+                travel.performActivity(loggedUser);
+            } else if (type == 3) {
+                UseTrainInsteadOfCar travel = new UseTrainInsteadOfCar();
+                travel.setKilometres(distance);
+                travel.performActivity(loggedUser);
+            }
+
+            ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
+            activityTable.setItems(activities);
+        });
+        input.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                if (!newValue.matches("^[0-9]{0,4}$")) {
+                    input.setText(oldValue);
+                }
             }
         });
     }
@@ -286,3 +319,4 @@ public class Events {
         });
     }
 }
+
