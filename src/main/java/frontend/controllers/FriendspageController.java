@@ -1,5 +1,7 @@
 package frontend.controllers;
 
+import backend.data.LoginDetails;
+import backend.data.User;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -8,8 +10,7 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import data.LoginDetails;
-import data.User;
+import frontend.Requests;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -17,19 +18,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import tools.ActivityQueries;
-import tools.DateUnit;
-import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +41,12 @@ public class FriendspageController implements Initializable {
     private static User thisUser;
 
     private static LoginDetails thisLoginDetails;
+
+    @FXML
+    private Label goGreen;
+
+    @FXML
+    private AnchorPane centerPane;
 
     @FXML
     private JFXTreeTableView friendsPane;
@@ -65,25 +70,7 @@ public class FriendspageController implements Initializable {
     private VBox results;
 
     @FXML
-    private BarChart todayChart;
-
-    @FXML
-    private BarChart weeklyChart;
-
-    @FXML
-    private BarChart monthlyChart;
-
-    @FXML
-    private StackPane todayPane;
-
-    @FXML
-    private StackPane weekPane;
-
-    @FXML
-    private StackPane monthPane;
-
-    @FXML
-    private HBox headingBox;
+    private HBox dataPane;
 
     private List searchresults;
 
@@ -96,41 +83,26 @@ public class FriendspageController implements Initializable {
         }
         fillFriendsTreeView();
         drawFriendRequestDrawer();
-        fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
-        fillChart("This Week", "#cd7b4c", DateUnit.WEEK, weeklyChart);
-        fillChart("This Month", "#b74747", DateUnit.MONTH, monthlyChart);
-
-        todayPane.prefWidthProperty().bind(headingBox.widthProperty());
-        weekPane.prefWidthProperty().bind(headingBox.widthProperty());
-        monthPane.prefWidthProperty().bind(headingBox.widthProperty());
+        drawFriendsBarChart("Today");
+        drawFriendsBarChart("This week");
+        drawFriendsBarChart("This year");
     }
 
     /**
-     * Fills the chart on the page with data.
-     * @param title - Title of the graph
-     * @param color - color of the bars on the graph
-     * @param unit - DateUnit enum, day, week or month
-     * @param chart - the chart to edit
+     * Draws the bar graph to the Friends page.
      */
-    public void fillChart(String title, String color, DateUnit unit, BarChart chart) {
+    public void drawFriendsBarChart(String title) {
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        final BarChart<String, Number> bc =
+                new BarChart<>(xAxis, yAxis);
+        bc.setTitle("Carbon Saved");
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(title);
-        populateBarChart(series1, unit);
-        chart.getData().addAll(series1);
-        colorBars(color, chart);
-        chart.setLegendVisible(false);
-    }
+        populateBarChart(series1);
 
-    private void colorBars(String color, BarChart chart) {
-        Node node = chart.lookup(".data0.chart-bar");
-        node.setStyle("-fx-bar-fill: #379B1E;");
-        for (int i = 1; i != 6; i++) {
-            node = chart.lookup(".data" + i + ".chart-bar");
-            if (node == null) {
-                return;
-            }
-            node.setStyle("-fx-bar-fill: " +  color + ";");
-        }
+        bc.getData().addAll(series1);
+        dataPane.getChildren().addAll(bc);
     }
 
     /**
@@ -138,21 +110,13 @@ public class FriendspageController implements Initializable {
      *
      * @param series1 - the series to add data to
      */
-    public void populateBarChart(XYChart.Series series1, DateUnit unit) {
-        int counter = 0;
-        ActivityQueries thisQuery = new ActivityQueries(thisUser.getActivities());
-        series1.getData().add(new XYChart.Data("You",
-                thisQuery.getTotalCO2Saved(unit)));
+    public void populateBarChart(XYChart.Series series1) {
+        series1.getData().add(new XYChart.Data(thisUser.getUsername(),
+                thisUser.getTotalCarbonSaved()));
         List<User> friendsList = Requests.getFriends(thisLoginDetails);
         for (User friend : friendsList) {
-            if (counter >= 5) {
-                return;
-            }
-            ActivityQueries query = new ActivityQueries(friend.getActivities());
-            series1.getData().addAll(new XYChart.Data(friend.getUsername(),
-                    query.getTotalCO2Saved(unit)));
-            counter++;
-
+            series1.getData().add(new XYChart.Data(friend.getUsername(),
+                    friend.getTotalCarbonSaved()));
         }
     }
 
