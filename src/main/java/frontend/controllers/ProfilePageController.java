@@ -155,7 +155,7 @@ public class ProfilePageController implements Initializable {
 
                 ImageView achievementimage1 = new ImageView();
 
-                String image = "achievementsimages/"  + a.getId() + ".png";
+                String image = "achievementsimages/" + a.getId() + ".png";
 
 
                 Image path1 = new Image("achievementsimages/8.png");
@@ -171,7 +171,7 @@ public class ProfilePageController implements Initializable {
                 Text points = new Text(",Complete to Get: " + a.getBonus() + " points.");
 
 
-                hbox.getChildren().addAll(achievementimage1 , name, points);
+                hbox.getChildren().addAll(achievementimage1, name, points);
 
                 incom.getChildren().add(hbox);
             }
@@ -209,18 +209,7 @@ public class ProfilePageController implements Initializable {
     public static void setUser(User user) {
         thisUser = user;
         //for testing
-
-
-        thisUser.getProgress().getAchievements().add(new UserAchievement(
-                1, true, new Date(11, 11, 11)));
-        thisUser.getProgress().getAchievements().add(new UserAchievement(
-                2, true, new Date(12, 11, 11)));
-        thisUser.getProgress().getAchievements().add(new UserAchievement(
-                12, true, new Date(12, 11, 11)));
-        thisUser.getProgress().getAchievements().add(new UserAchievement(
-                14, true, new Date(12, 11, 11)));
-
-        thisUser.getProgress().setPoints(1000.0);
+        
     }
 
 
