@@ -77,6 +77,16 @@ public class QuestionnaireController implements Initializable {
             return null;
         };
 
+        //Numeric restrain to Text Feilds For Values 1-9
+
+        UnaryOperator<TextFormatter.Change> integerFilteralt = change -> {
+            String input = change.getText();
+            if (input.matches("")) {
+                return change;
+            }
+            return null;
+        };
+
         textHousehold.setTextFormatter(new TextFormatter<String>(integerFilter));
         textCarUsage.setTextFormatter(new TextFormatter<String>(integerFilter));
         textElectricity.setTextFormatter(new TextFormatter<String>(integerFilter));

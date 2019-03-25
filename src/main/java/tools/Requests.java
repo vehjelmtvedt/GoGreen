@@ -99,9 +99,8 @@ public class Requests {
      * @return - returns true if user is validated, false if not.
      */
     public static boolean validateUserRequest(String identifier) {
-        return restTemplate.postForEntity(
-                url + "/validateUser", identifier, String.class
-        ).getBody().equals("OK");
+        return restTemplate.postForEntity(url + "/validateUser",
+                 identifier, String.class).getBody().equals("OK");
     }
 
     /**
