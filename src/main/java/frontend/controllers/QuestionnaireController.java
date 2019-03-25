@@ -14,8 +14,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import tools.Requests;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -77,6 +79,12 @@ public class QuestionnaireController implements Initializable {
         });
     }
 
+    public void textFieldValidate(JFXTextField textField) {
+        if (textField.getText().isEmpty()) {
+            textField.setUnFocusColor(Color.RED);
+        }
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -206,7 +214,9 @@ public class QuestionnaireController implements Initializable {
                     }
                 }
             } else {
-                System.out.println("Form not complete");
+                textFieldValidate(textOil);
+                textFieldValidate(textElectricity);
+                textFieldValidate(textCarUsage);
                 try {
                     Dialog.show(
                             mainPane, "Questionnaire Incomplete",
