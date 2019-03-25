@@ -10,12 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import tools.Requests;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
 
 public class QuestionnaireController implements Initializable {
 
@@ -63,6 +65,16 @@ public class QuestionnaireController implements Initializable {
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
 
+        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
+            String input = change.getText();
+            if (input.matches("[0-9]*")) {
+                return change;
+            }
+            return null;
+        };
+
+        textHousehold.setTextFormatter(new TextFormatter<String>(integerFilter));
+        
         ObservableList<String> carsizes = FXCollections.observableArrayList(
                 "I don't own a car","small", "medium", "large"
         );

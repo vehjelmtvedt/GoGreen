@@ -48,12 +48,12 @@
              </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="542.0" layoutY="1.0" prefHeight="899.0" prefWidth="856.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="542.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="542.0" layoutY="1.0" prefHeight="900.0" prefWidth="856.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="542.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane layoutX="20.0" layoutY="16.0" prefHeight="882.0" prefWidth="832.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="16.0">
+            <GridPane layoutX="20.0" layoutY="16.0" prefHeight="880.0" prefWidth="832.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="16.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="657.3333740234375" minWidth="10.0" prefWidth="644.6666259765625" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="379.66668701171875" minWidth="10.0" prefWidth="187.3333740234375" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="745.0" minWidth="10.0" prefWidth="688.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="379.66668701171875" minWidth="10.0" prefWidth="144.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints maxHeight="97.0" vgrow="SOMETIMES" />
@@ -113,7 +113,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="textElectricity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="textElectricity" prefHeight="27.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <JFXTextField fx:id="textOil" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <JFXTextField fx:id="textCarUsage" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <JFXComboBox fx:id="carSizes" prefHeight="27.0" prefWidth="204.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
