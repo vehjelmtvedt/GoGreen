@@ -61,6 +61,19 @@ public class QuestionnaireController implements Initializable {
     @FXML
     private JFXButton submitButton;
 
+    public void comboBoxSetup(JFXComboBox comboBox, ObservableList itemList) {
+        comboBox.setItems(itemList);
+        comboBox.setValue(itemList.get(0));
+    }
+
+    public void changeListener(JFXTextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^[0-9]{0,7}$")) {
+                textField.setText(oldValue);
+            }
+        });
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -89,36 +102,10 @@ public class QuestionnaireController implements Initializable {
             return null;
         };
 
-        textCarUsage.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                if (!newValue.matches("^[0-9]{0,7}$")) {
-                    textCarUsage.setText(oldValue);
-                }
-            }
-        });
-        textElectricity.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                if (!newValue.matches("^[0-9]{0,7}$")) {
-                    textElectricity.setText(oldValue);
-                }
-            }
-        });
-        textOil.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                if (!newValue.matches("^[0-9]{0,7}$")) {
-                    textOil.setText(oldValue);
-                }
-            }
-        });
+        changeListener(textCarUsage);
+        changeListener(textElectricity);
+        changeListener(textOil);
+
 
         //Initializing the Combo Boxes With the Specified Values
 
@@ -126,43 +113,37 @@ public class QuestionnaireController implements Initializable {
                 1,2,3,4,5,6,7,8,9
         );
 
-        houseHoldNo.setItems(householdmembers);
-        houseHoldNo.setValue(1);
+        comboBoxSetup(houseHoldNo, householdmembers);
 
         ObservableList<String> carsizes = FXCollections.observableArrayList(
                 "I don't own a car","small", "medium", "large"
         );
 
-        carSizes.setItems(carsizes);
-        carSizes.setValue("I don't own a car");
+        comboBoxSetup(carSizes, carsizes);
 
         ObservableList<String> meatanddairyoptions = FXCollections.observableArrayList(
                 "above average", "average", "below average", "vegan"
         );
 
-        meatAndDairyOptions.setItems(meatanddairyoptions);
-        meatAndDairyOptions.setValue("above average");
+        comboBoxSetup(meatAndDairyOptions, meatanddairyoptions);
 
         ObservableList<String> locallyproducedfoodoptions = FXCollections.observableArrayList(
                 "very little", "average", "above average", "almost all"
         );
 
-        locallyProducedFoodOptions.setItems(locallyproducedfoodoptions);
-        locallyProducedFoodOptions.setValue("very little");
+        comboBoxSetup(locallyProducedFoodOptions, locallyproducedfoodoptions);
 
         ObservableList<String> organicoptions = FXCollections.observableArrayList(
                 "none", "some", "most", "all"
         );
 
-        organicOptions.setItems(organicoptions);
-        organicOptions.setValue("none");
+        comboBoxSetup(organicOptions, organicoptions);
 
         ObservableList<String> processedoptions = FXCollections.observableArrayList(
                 "above average", "average", "below average", "very little"
         );
 
-        processedOptions.setItems(processedoptions);
-        processedOptions.setValue("above average");
+        comboBoxSetup(processedOptions,processedoptions);
 
         textCarUsage.setText("0");
         textCarUsage.setEditable(false);
@@ -179,35 +160,41 @@ public class QuestionnaireController implements Initializable {
         // Submit Button Logic to send information to the user object
 
         submitButton.setOnAction(e -> {
-            int householdMembers = Integer.parseInt(houseHoldNo.getValue().toString());
-            int dailyElectricityConsumption =
-                    Integer.parseInt(textElectricity.getText()) / 365 / householdMembers;
-            double dailyHeatingOilConsumption =
-                    Integer.parseInt(textOil.getText()) / 365.0 / householdMembers;
-            String carType = carSizes.getValue().toString();
-            int dailyCarKilometres = Integer.parseInt(textCarUsage.getText()) / 365;
-            String meatAndDairyConsumption = meatAndDairyOptions.getValue().toString();
-            String locallyProducedFoodConsumption =
-                    locallyProducedFoodOptions.getValue().toString();
-            String organicFoodConsumption = organicOptions.getValue().toString();
-            String processedFoodConsumption = processedOptions.getValue().toString();
+            if (!((textElectricity.getText().isEmpty() && textOil.getText().isEmpty())
+                    && textCarUsage.getText().isEmpty())) {
 
-            thisUser.setElectricityDailyConsumption(dailyElectricityConsumption);
-            thisUser.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
-            thisUser.setCarType(carType);
-            thisUser.setDailyCarKilometres(dailyCarKilometres);
-            thisUser.setMeatAndDairyConsumption(meatAndDairyConsumption);
-            thisUser.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
-            thisUser.setOrganicFoodConsumption(organicFoodConsumption);
-            thisUser.setProcessedFoodConsumption(processedFoodConsumption);
+                int householdMembers = Integer.parseInt(houseHoldNo.getValue().toString());
+                int dailyElectricityConsumption =
+                        Integer.parseInt(textElectricity.getText()) / 365 / householdMembers;
+                double dailyHeatingOilConsumption =
+                        Integer.parseInt(textOil.getText()) / 365.0 / householdMembers;
+                String carType = carSizes.getValue().toString();
+                int dailyCarKilometres = Integer.parseInt(textCarUsage.getText()) / 365;
+                String meatAndDairyConsumption = meatAndDairyOptions.getValue().toString();
+                String locallyProducedFoodConsumption =
+                        locallyProducedFoodOptions.getValue().toString();
+                String organicFoodConsumption = organicOptions.getValue().toString();
+                String processedFoodConsumption = processedOptions.getValue().toString();
 
-            // Send the user Back to Login after Questionnaire is complete
+                thisUser.setElectricityDailyConsumption(dailyElectricityConsumption);
+                thisUser.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
+                thisUser.setCarType(carType);
+                thisUser.setDailyCarKilometres(dailyCarKilometres);
+                thisUser.setMeatAndDairyConsumption(meatAndDairyConsumption);
+                thisUser.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
+                thisUser.setOrganicFoodConsumption(organicFoodConsumption);
+                thisUser.setProcessedFoodConsumption(processedFoodConsumption);
 
-            String response = Requests.signupRequest(thisUser);
-            if (response != null) {
-                if (response.equals("success")) {
-                    StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn());
+                // Send the user Back to Login after Questionnaire is complete
+
+                String response = Requests.signupRequest(thisUser);
+                if (response != null) {
+                    if (response.equals("success")) {
+                        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn());
+                    }
                 }
+            } else {
+                System.out.println("Form not complete");
             }
         });
 
