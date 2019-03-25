@@ -58,6 +58,25 @@ public class SignupController implements Initializable {
     @FXML
     private ImageView background;
 
+    @FXML
+    private Label line1;
+
+    @FXML
+    private Label line2;
+
+    @FXML
+    private Label line3;
+
+    @FXML
+    private Label signup;
+
+    @FXML
+    private Label goGreen;
+
+
+
+
+
 
 
     @Override
@@ -78,6 +97,24 @@ public class SignupController implements Initializable {
         loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getSignIn()
         ));
+        try {
+            setFonts();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Adds fonts to all labels.
+     */
+    public void setFonts() throws IOException {
+        goGreen.setFont(Main.getReenieBeanie(100));
+        line1.setFont(Main.getReenieBeanie(40));
+        line2.setFont(Main.getReenieBeanie(40));
+        line3.setFont(Main.getReenieBeanie(50));
+        signup.setFont(Main.getRobotoThin(45));
+        loginForward.setFont(Main.getRobotoThin(45));
+        signupButton.setFont(Main.getRobotoThin(28));
     }
 
     public static ArrayList<JFXTextField> getFields() {

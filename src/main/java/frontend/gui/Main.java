@@ -4,7 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 
@@ -19,7 +21,6 @@ public class Main extends Application {
     private static Scene progress;
     private static String cssIntro;
 
-
     @Override
     public void start(Stage window) throws IOException {
         //setup the primary stage
@@ -29,13 +30,13 @@ public class Main extends Application {
         //Load fxml pages for signIn and signUp
         FXMLLoader loaderSignIn = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/Login.fxml"));
-        Parent root1 = loaderSignIn.load();
-        signIn = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
+        Parent rootSignIn = loaderSignIn.load();
+        signIn = new Scene(rootSignIn, General.getBounds()[0], General.getBounds()[1]);
 
         FXMLLoader loaderSignUp = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/signup.fxml"));
-        Parent root2 = loaderSignUp.load();
-        signUp = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
+        Parent rootSignUp = loaderSignUp.load();
+        signUp = new Scene(rootSignUp, General.getBounds()[0], General.getBounds()[1]);
 
         //add path for css files and add them to the specific scenes they belong
         String cssPathIntro = "/frontend/Stylesheets/Style.css";
@@ -100,4 +101,21 @@ public class Main extends Application {
     public static void setProfilePage(Scene scene) {
         profilePage = scene;
     }
+
+    public static Font getRobotoThin(double size) throws IOException {
+        return Font.loadFont(new ClassPathResource("/fonts/Roboto-thin.ttf")
+                .getInputStream(), size);
+    }
+
+    public static Font getRobotoBold(double size) throws IOException {
+        return Font.loadFont(new ClassPathResource("/fonts/Roboto-Bold.ttf")
+                .getInputStream(), size);
+    }
+
+    public static Font getReenieBeanie(double size) throws IOException {
+        return Font.loadFont(new ClassPathResource("/fonts/ReenieBeanie.ttf")
+                .getInputStream(), size);
+    }
+
+
 }

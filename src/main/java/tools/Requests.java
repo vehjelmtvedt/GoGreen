@@ -14,15 +14,16 @@ import java.util.List;
 
 public class Requests {
 
+    private static RestTemplate restTemplate = new RestTemplate();
+    private static String url = "http://localhost:8080/";
+
     /**
      * Sends signup request to the server.
      * @param user - user signing up
      * @return response from the server.
      */
     public static String signupRequest(User user) {
-        String url = "http://localhost:8080/signup";
-        RestTemplate rest = new RestTemplate();
-        return rest.postForEntity(url,user,String.class).getBody();
+        return restTemplate.postForEntity(url + "/signup",user,String.class).getBody();
     }
 
     /**
@@ -31,9 +32,7 @@ public class Requests {
      * @return response from server
      */
     public static User loginRequest(LoginDetails loginDetails) {
-        String url = "http://localhost:8080/login";
-        RestTemplate rest = new RestTemplate();
-        return rest.postForEntity(url, loginDetails, User.class).getBody();
+        return restTemplate.postForEntity(url + "/login", loginDetails, User.class).getBody();
     }
 
     /**
@@ -42,14 +41,9 @@ public class Requests {
      * @return - the User of the identifier (if any)
      */
     public static User getUserRequest(String identifier) {
-        String url = "http://localhost:8080/getUser";
-
-        RestTemplate restTemplate = new RestTemplate();
-
         //adding the query params to the URL
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/getUser")
                 .queryParam("identifier", identifier);
-
 
         return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
     }
@@ -61,13 +55,8 @@ public class Requests {
      * @return - returns the User who sent the request
      */
     public static User sendFriendRequest(String sender, String receiver) {
-
-        String url = "http://localhost:8080/friendrequest";
-
-        RestTemplate restTemplate = new RestTemplate();
-
         //adding the query params to the URL
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/friendrequest")
                 .queryParam("sender", sender)
                 .queryParam("receiver", receiver);
 
@@ -81,13 +70,8 @@ public class Requests {
      * @return - User accepting the friend request
      */
     public static User acceptFriendRequest(String sender, String accepting) {
-
-        String url = "http://localhost:8080/acceptfriend";
-
-        RestTemplate restTemplate = new RestTemplate();
-
         //adding the query params to the URL
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/acceptfriend")
                 .queryParam("sender", sender)
                 .queryParam("accepting", accepting);
 
@@ -101,13 +85,8 @@ public class Requests {
      * @return - User rejecting the friend request
      */
     public static User rejectFriendRequest(String sender, String rejecting) {
-
-        String url = "http://localhost:8080/rejectfriend";
-
-        RestTemplate restTemplate = new RestTemplate();
-
         //adding the query params to the URL
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/rejectfriend")
                 .queryParam("sender", sender)
                 .queryParam("rejecting", rejecting);
 
@@ -120,9 +99,8 @@ public class Requests {
      * @return - returns true if user is validated, false if not.
      */
     public static boolean validateUserRequest(String identifier) {
-        String url = "http://localhost:8080/validateUser";
-        RestTemplate rest = new RestTemplate();
-        return rest.postForEntity(url, identifier, String.class).getBody().equals("OK");
+        return restTemplate.postForEntity(url + "/validateUser"
+                , identifier, String.class).getBody().equals("OK");
     }
 
     /**
@@ -132,13 +110,8 @@ public class Requests {
      * @return - User the activity was added to.
      */
     public static User addActivityRequest(Activity activity, String username) {
-
-        String url = "http://localhost:8080/addActivity";
-
-        RestTemplate restTemplate = new RestTemplate();
-
         //adding the query params to the URL
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/addActivity")
                 .queryParam("identifier", username);
 
         return restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class).getBody();
@@ -151,12 +124,8 @@ public class Requests {
      * @return - a list of users matching the keyword
      */
     public static List getMatchingUsersRequest(String keyword, LoginDetails loginDetails) {
-        String url = "http://localhost:8080/searchUsers";
-
-        RestTemplate restTemplate = new RestTemplate();
-
         //adding the query params to the URL
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/searchUsers")
                 .queryParam("keyword", keyword);
 
         return restTemplate.postForEntity(
@@ -169,14 +138,10 @@ public class Requests {
      * @return - list of friends.
      */
     public static List<User> getFriends(LoginDetails loginDetails) {
-        String url = "http://localhost:8080/getFriends";
-
-        RestTemplate restTemplate = new RestTemplate();
-
         ParameterizedTypeReference<List<User>> typeRef =
                 new ParameterizedTypeReference<List<User>>() {
         };
-        return restTemplate.exchange(url,
+        return restTemplate.exchange(url + "/getFriends",
                 HttpMethod.POST, new HttpEntity<>(loginDetails), typeRef).getBody();
     }
 
@@ -185,14 +150,26 @@ public class Requests {
      * @return a list of achievements
      */
     public static List<Achievement> getAllAchievements() {
-        String url = "http://localhost:8080/getAllAchievements";
-
-        RestTemplate restTemplate = new RestTemplate();
-
         ParameterizedTypeReference<List<Achievement>> typeRef =
                 new ParameterizedTypeReference<List<Achievement>>() {};
-        return restTemplate.exchange(url,HttpMethod.GET,
+        return restTemplate.exchange(url + "/getAllAchievements",HttpMethod.GET,
                 new HttpEntity<>(""),typeRef).getBody();
 
+    }
+
+    /**
+     * Request to get the Top Users.
+     * @param loginDetails username and password for auth
+     * @param top a limit on the number of users to return
+     * @return
+     */
+    public static List<User> getTopUsers(LoginDetails loginDetails, int top) {
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/getTopUsers")
+                .queryParam("top", top);
+
+        ParameterizedTypeReference<List<User>> typeRef =
+                new ParameterizedTypeReference<List<User>>() {};
+        return restTemplate.exchange(uriBuilder.toUriString(),HttpMethod.POST,
+                new HttpEntity<LoginDetails>(loginDetails),typeRef).getBody();
     }
 }
