@@ -139,7 +139,7 @@ public class AchievementsLogic {
 
             //System.out.println("=============" + list.size());
 
-            user.setTotalCarbonSaved(user.getTotalCarbonSaved() + list.get(id).getBonus());
+            //user.setTotalCarbonSaved(user.getTotalCarbonSaved() + list.get(id).getBonus());
 
         }
 
