@@ -27,8 +27,8 @@ public class Dialog {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Dialog.class.getResource("/frontend/fxmlPages/Dialog.fxml"));
 
-        JFXDialog dialog = loader.load();
-        
+        final JFXDialog dialog = loader.load();
+
         DialogController controller = loader.getController();
         controller.setHeading(headerText);
         controller.setBody(bodyText);

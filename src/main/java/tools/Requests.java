@@ -100,7 +100,7 @@ public class Requests {
      */
     public static boolean validateUserRequest(String identifier) {
         return restTemplate.postForEntity(url + "/validateUser",
-                identifier, String.class).getBody().equals("OK");
+                 identifier, String.class).getBody().equals("OK");
     }
 
     /**
