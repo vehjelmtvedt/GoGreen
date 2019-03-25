@@ -209,7 +209,7 @@ public class ProfilePageController implements Initializable {
     public static void setUser(User user) {
         thisUser = user;
         //for testing
-        
+
     }
 
 

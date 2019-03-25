@@ -2,7 +2,7 @@ package data;
 
 import org.springframework.data.annotation.Id;
 
-public class Achievement {
+public class Achievement {  
     @Id
     private int id;
 
