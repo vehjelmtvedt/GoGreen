@@ -2,10 +2,13 @@ package frontend;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.util.ArrayList;
 
@@ -67,5 +70,24 @@ public class General {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
+    }
+
+    /**.
+     * Show alert on submit
+     * @param alertType type of alert
+     * @param title title of the alert window
+     * @param message message on the alert window
+     */
+    public static void showAlert(Alert.AlertType alertType,
+                                  Window window, String title, String message) {
+        Alert alert = new Alert(alertType);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(Main.getCssIntro());
+        dialogPane.setId("alertDialog");
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.initOwner(window);
+        alert.show();
     }
 }

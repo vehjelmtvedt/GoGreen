@@ -8,7 +8,7 @@ package tools;
  * @author Kostas Lyrakis
  *
  */
-final class CarbonCalculator {
+public final class CarbonCalculator {
 
     private CarbonCalculator() {
         super();
@@ -69,7 +69,7 @@ final class CarbonCalculator {
      * @param litres , the amount of litres of heating oil consumed.
      * @return carbon emissions in kg
      */
-    public static double heatingOilEmissions(double litres) {
+    public static double heatingOilEmissions(int litres) {
         return litres * 2.96;
     }
 
@@ -159,5 +159,6 @@ final class CarbonCalculator {
     public static int processedFoodEmissions(ProcessedFoodConsumption processedFoodConsumption) {
         return processedFoodConsumption.carbonEmissions;
     }
+
 }
 

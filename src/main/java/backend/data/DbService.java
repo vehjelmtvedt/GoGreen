@@ -3,6 +3,7 @@ package backend.data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,6 +25,9 @@ public class DbService {
 
     @Autowired
     private UserRepository users;
+
+    @Autowired
+    private AchievementRepository achievements;
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -70,8 +75,8 @@ public class DbService {
      * .
      * Returns true or false whether to grant access to user with specified login details
      *
-     * @param identifier    - input e-mail
-     * @param password - input password
+     * @param identifier - input e-mail
+     * @param password   - input password
      * @return true if access granted
      */
     public User grantAccess(String identifier, String password) {
@@ -88,6 +93,8 @@ public class DbService {
         System.out.println(user);
 
         if (passwordEncoder().matches(password, user.getPassword())) {
+            // Update last login date to current (server) time
+            user.setLastLoginDate(Calendar.getInstance().getTime());
             return user;
         }
 
@@ -136,34 +143,36 @@ public class DbService {
     /**
      * .
      * Befriends two users
+     *
      * @param accepting - username of User accepting the request.
      * @param requester - username of User who sent the request.
      */
-    public String acceptFriendRequest(String requester, String accepting) {
+    public User acceptFriendRequest(String requester, String accepting) {
         User requestingUser = getUserByUsername(requester);
-        User receivingUser = getUserByUsername(accepting);
+        User acceptingUser = getUserByUsername(accepting);
 
         // Make sure both users exist
-        if (requestingUser != null && receivingUser != null) {
-            requestingUser.addFriend(receivingUser.getUsername());
-            receivingUser.addFriend(requestingUser.getUsername());
-            receivingUser.deleteFriendRequest(requester);
+        if (requestingUser != null && acceptingUser != null) {
+            requestingUser.addFriend(acceptingUser.getUsername());
+            acceptingUser.addFriend(requestingUser.getUsername());
+            acceptingUser.deleteFriendRequest(requester);
             // Update changes in database
             users.save(requestingUser);
-            users.save(receivingUser);
-            return "OK";
+            users.save(acceptingUser);
+            return acceptingUser;
         } else {
-            return "Invalid username";
+            return null;
         }
     }
 
     /**
      * .
      * Adds a friend request to a user's list of friend requests
-     * @param senderUsername - The username of the friend request sender
+     *
+     * @param senderUsername   - The username of the friend request sender
      * @param receiverUsername - The username of the user receiving the request
      */
-    public String addFriendRequest(String senderUsername, String receiverUsername) {
+    public User addFriendRequest(String senderUsername, String receiverUsername) {
         User sender = getUserByUsername(senderUsername);
         User receiver = getUserByUsername(receiverUsername);
 
@@ -171,19 +180,21 @@ public class DbService {
             receiver.newFriendRequest(sender.getUsername());
             // Update only the User that received the friend request
             users.save(receiver);
-            users.save(sender);
-            return "OK";
+            return receiver;
         } else {
-            return "Invalid username";
+            return null;
         }
     }
-    /**.
+
+    /**
+     * .
      * Rejects a friend request of a specific user
-     * @param rejectedUser - the user rejecting the friend request
+     *
+     * @param rejectedUser  - the user rejecting the friend request
      * @param rejectingUser - the user whose friend request should be rejected
      */
 
-    public String rejectFriendRequest(String rejectedUser, String rejectingUser) {
+    public User rejectFriendRequest(String rejectedUser, String rejectingUser) {
         User rejected = getUserByUsername(rejectedUser);
         User rejecting = getUserByUsername(rejectingUser);
 
@@ -192,9 +203,9 @@ public class DbService {
             rejecting.deleteFriendRequest(rejectedUser);
             // Update only the User that rejected the friend request
             users.save(rejecting);
-            return "OK";
+            return rejecting;
         } else {
-            return "Invalid username";
+            return null;
         }
     }
 
@@ -205,7 +216,7 @@ public class DbService {
      * @param username - part of username to match
      * @return A list of strings containing all matching usernames
      */
-    List<String> getMatchingUsers(String username) {
+    public List<String> getMatchingUsers(String username) {
         String usernamePattern = "/$%s/$";
         String regexPattern = String.format(username, usernamePattern);
 
@@ -219,36 +230,49 @@ public class DbService {
                 .collect(Collectors.toList()); // Return result as List
     }
 
-    /*
-     * Reserved for leaderboard queries
+    /**
+     * Returns top users.
+     * @param top to return a "top" number of users
+     * @return top n users
      */
-    /*    List<String> getTopUsers(int top) {
-            return mongoTemplate.find(
-                    new Query()
-                            .with(new Sort(Sort.Direction.DESC, "username"))
-                            // sort in descending order by username
-                            .limit(top), // return required number of users
-                    User.class) // result as User Object
-                    .stream() // Convert to Stream
-                    .map(User::getUsername) // Map User to Username
-                    .collect(Collectors.toList()); // Return result as List
-        }*/
+    public List<User> getTopUsers(int top) {
+        return mongoTemplate.find(
+                new Query()
+                        .with(new Sort(Sort.Direction.DESC, "totalCarbonSaved"))
+                        // sort in descending order by username
+                        .limit(top), // return required number of users
+                User.class); // result as User Object
+    }
 
     /**
      * .
      * Gets users' friends
      */
-    List<User> getFriends(String email) {
-        User user = getUser(email);
+    public List<User> getFriends(String identifier) {
+        User user = getUser(identifier);
+
+        if (user == null) {
+            user = getUserByUsername(identifier);
+        }
 
         if (user == null) {
             return new ArrayList<>(); // return empty list
         } else {
             // Query that returns a list of all the user's friends
             return mongoTemplate.find(
-                    new Query(Criteria.where("email") // Compare against User email
+                    new Query(Criteria.where("username") // Compare against User email
                             .in(user.getFriends())), // Email must be in users friend list
                     User.class); // Resulting Object type User
         }
+    }
+
+    /**
+     * .
+     * Returns the list of all achievements.
+     *
+     * @return List of all achievements
+     */
+    public List<Achievement> getAchievements() {
+        return achievements.findAll();
     }
 }

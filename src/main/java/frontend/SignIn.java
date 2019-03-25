@@ -113,6 +113,7 @@ public class SignIn {
         signInButton.setOnAction(e ->
                 InputValidation.signInValidate(emailField, passwordField, grid));
 
+
         grid.add(buttons, 1, 3, 1, 1);
         GridPane.setHalignment(buttons, HPos.CENTER);
         GridPane.setMargin(buttons, new Insets(20, 0, 20, 0));
