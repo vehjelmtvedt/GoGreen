@@ -21,6 +21,9 @@ import java.util.List;
         @JsonSubTypes.Type(value = BuyLocallyProducedFood.class, name = "BuyLocallyProducedFood"),
         @JsonSubTypes.Type(value = BuyNonProcessedFood.class, name = "BuyNonProcessedFood"),
         @JsonSubTypes.Type(value = BuyOrganicFood.class, name = "BuyOrganicFood"),
+        @JsonSubTypes.Type(value = UseBikeInsteadOfCar.class, name = "UseBikeInsteadOfCar"),
+        @JsonSubTypes.Type(value = UseBusInsteadOfCar.class, name = "UseBusInsteadOfCar"),
+        @JsonSubTypes.Type(value = UseTrainInsteadOfCar.class, name = "UseTrainInsteadOfCar")
     })
 public abstract class Activity {
     private Date date;
@@ -72,12 +75,21 @@ public abstract class Activity {
      * @param user user currently logged in
      */
     public int timesPerformedInTheSameDay(User user) {
+        return getActivitiesOfTheSameTypePerformedInTheSameDay(user).size();
+    }
+
+    /**
+     * Creates an arraylist that contains the activities of the same type performed on the same day.
+     * @param user currently logged in user
+     * @return ArrayList
+     */
+    public  ArrayList<Activity> getActivitiesOfTheSameTypePerformedInTheSameDay(User user) {
+        ArrayList<Activity> result = new ArrayList<Activity>();
         Date currentDate = Calendar.getInstance().getTime();
         String currentMonth = currentDate.toString().split(" ")[1];
         String currentDay = currentDate.toString().split(" ")[2];
         String currentYear = currentDate.toString().split(" ")[5];
 
-        int result = 0;
         for (Activity activity : user.getActivities()) {
             if (activity != null && activity.getClass().getSimpleName()
                     .equals(this.getClass().getSimpleName())) {
@@ -85,10 +97,11 @@ public abstract class Activity {
                 if (dateNow.equals(activity.getDate().toString().split(" ")[1]
                         + activity.getDate().toString().split(" ")[2]
                         + activity.getDate().toString().split(" ")[5])) {
-                    result++;
+                    result.add(activity);
                 }
             }
         }
+
         return result;
     }
     
