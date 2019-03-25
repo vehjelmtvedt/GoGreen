@@ -8,6 +8,7 @@ import frontend.controllers.ActivitiesController;
 import frontend.controllers.FriendspageController;
 import frontend.controllers.HomepageController;
 import frontend.controllers.ProfilePageController;
+import frontend.controllers.QuestionnaireController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -68,8 +69,9 @@ public class InputValidation {
                 Scene homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
                 Scene activities = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
                 Scene friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
-                Scene profilePage = new Scene(root4,
-                        General.getBounds()[0], General.getBounds()[1]);
+                Scene profilePage = new Scene(
+                        root4, General.getBounds()[0], General.getBounds()[1]
+                );
 
                 //setup scenes in main class
                 Main.setActivities(activities);
@@ -137,8 +139,8 @@ public class InputValidation {
                 Integer.parseInt(ageField.getText()), emailField.getText(),
                 usernameField.getText(), passField.getText());
 
-
-        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Questionnaire.createScene(user, form));
+        QuestionnaireController.setUser(user);
+        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
     }
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
