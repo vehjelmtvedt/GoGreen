@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="1080.0" maxWidth="1920.0" minHeight="400.0" minWidth="600.0" prefHeight="583.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ProfilePageController">
+<BorderPane maxHeight="1080.0" maxWidth="1920.0" minHeight="400.0" minWidth="600.0" prefHeight="583.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ProfilePageController">
    <top>
       <ToolBar fx:id="toolbar" prefHeight="17.0" prefWidth="317.0" BorderPane.alignment="CENTER">
         <items>
@@ -61,16 +61,26 @@
                         <content>
                           <AnchorPane fx:id="anchorPanecom" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <VBox fx:id="com" prefHeight="200.0" prefWidth="892.0" />
-                                 </children></AnchorPane>
+                                    <ScrollPane>
+                                       <content>
+                                          <VBox fx:id="com" prefHeight="200.0" prefWidth="892.0" />
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
                         </content>
                       </Tab>
                       <Tab text="InComplete">
                         <content>
                           <AnchorPane fx:id="anchorPaneIn" minHeight="0.0" minWidth="0.0" prefHeight="199.0" prefWidth="838.0">
                                  <children>
-                                    <VBox fx:id="incom" prefHeight="200.0" prefWidth="892.0" />
-                                 </children></AnchorPane>
+                                    <ScrollPane>
+                                       <content>
+                                          <VBox fx:id="incom" prefHeight="200.0" prefWidth="892.0" />
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
                         </content>
                       </Tab>
                     </tabs>
