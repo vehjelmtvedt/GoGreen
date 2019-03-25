@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.User;
 import frontend.gui.Events;
+import frontend.gui.General;
 import frontend.gui.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -107,8 +108,6 @@ public class ActivitiesController implements Initializable {
     @FXML
     private JFXCheckBox checkHousehold;
     @FXML
-    private JFXCheckBox checkAll;
-    @FXML
     private Label lblClearFilters;
     @FXML
     private Label lblApply;
@@ -184,7 +183,6 @@ public class ActivitiesController implements Initializable {
         checkList.add(checkFood);
         checkList.add(checkTransportation);
         checkList.add(checkHousehold);
-        checkList.add(checkAll);
 
         //create radio list
         radioList.add(radioToday);
@@ -192,13 +190,16 @@ public class ActivitiesController implements Initializable {
         radioList.add(radioMonth);
 
         //Add events for the filter tab in activity history
+        General.addTextListener(minCarbon);
+        General.addTextListener(maxCarbon);
         Events.addRadioToggle(radioList);
-        Events.showAllFilters(checkAll, checkList, radioList);
         Events.addHoverOnFilter(lblClearFilters);
         Events.addHoverOnFilter(lblApply);
         Events.clearFilters(lblClearFilters, checkList, radioList,
                 minCarbon, maxCarbon, loggedUser, activityTable);
-        Events.applyFilters(lblApply, checkAll, checkList, radioList, loggedUser, activityTable);
+        Events.applyFilters(lblApply,checkList, radioList,
+                minCarbon, maxCarbon, loggedUser, activityTable);
+
     }
 
     //GENERAL METHODS
