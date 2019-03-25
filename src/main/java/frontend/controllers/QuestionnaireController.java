@@ -62,19 +62,29 @@ public class QuestionnaireController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        // Helps to Keep the image scaling in check
+
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
 
+        //Numeric restrain to Text Feilds For any positive integer value
+
         UnaryOperator<TextFormatter.Change> integerFilter = change -> {
             String input = change.getText();
-            if (input.matches("[0-9]*")) {
+            if (input.matches("^[0-9]{0,7}$")) {
                 return change;
             }
             return null;
         };
 
         textHousehold.setTextFormatter(new TextFormatter<String>(integerFilter));
-        
+        textCarUsage.setTextFormatter(new TextFormatter<String>(integerFilter));
+        textElectricity.setTextFormatter(new TextFormatter<String>(integerFilter));
+        textOil.setTextFormatter(new TextFormatter<String>(integerFilter));
+
+
+        //Initializing the Combo Boxes With the Specified Values
+
         ObservableList<String> carsizes = FXCollections.observableArrayList(
                 "I don't own a car","small", "medium", "large"
         );
@@ -105,6 +115,8 @@ public class QuestionnaireController implements Initializable {
 
         processedOptions.setItems(processedoptions);
 
+        // Submit Button Logic to send information to the user object
+
         submitButton.setOnAction(e -> {
             int householdMembers = Integer.parseInt(textHousehold.getText());
             int dailyElectricityConsumption =
@@ -128,16 +140,19 @@ public class QuestionnaireController implements Initializable {
             thisUser.setOrganicFoodConsumption(organicFoodConsumption);
             thisUser.setProcessedFoodConsumption(processedFoodConsumption);
 
-            System.out.println("household members: " + householdMembers);
-            System.out.println("daily electricity consumption: " + dailyElectricityConsumption);
-            System.out.println("daily oil consumption: " + dailyHeatingOilConsumption);
-            System.out.printf("You have a %s car\n", carType);
-            System.out.println("Kilometres per day: " + dailyCarKilometres);
-            System.out.println("Meat and Dairy consumption: " + meatAndDairyConsumption);
-            System.out.println("Locally produced food consumption: " + locallyProducedFoodConsumption);
-            System.out.println("Organic Food Consumption: " + organicFoodConsumption);
-            System.out.println("Processed Food Consmption: " + processedFoodConsumption);
-            System.out.println("");
+           // For Debugging Purposes
+           // System.out.println("household members: " + householdMembers);
+           // System.out.println("daily electricity consumption: " + dailyElectricityConsumption);
+           // System.out.println("daily oil consumption: " + dailyHeatingOilConsumption);
+           // System.out.printf("You have a %s car\n", carType);
+           // System.out.println("Kilometres per day: " + dailyCarKilometres);
+           // System.out.println("Meat and Dairy consumption: " + meatAndDairyConsumption);
+           // System.out.println("Locally produced food consumption: " + locallyProducedFoodConsumption);
+           // System.out.println("Organic Food Consumption: " + organicFoodConsumption);
+           // System.out.println("Processed Food Consmption: " + processedFoodConsumption);
+           // System.out.println("");
+
+            // Send the user Back to Login after Questionnaire is complete
 
             String response = Requests.signupRequest(thisUser);
             if (response != null) {
@@ -148,6 +163,8 @@ public class QuestionnaireController implements Initializable {
         });
 
     }
+
+    // Updates the Existing user with the questionnaire information
 
     public static void setUser(User user) {
         thisUser = user;
