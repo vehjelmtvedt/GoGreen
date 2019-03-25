@@ -131,7 +131,7 @@ public class Events {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             int distance = -1;
             try {
-                if (! input.getText().equals("")) {
+                if (!input.getText().equals("")) {
                     distance = Integer.parseInt(input.getText());
                 }
             } catch (NumberFormatException e) {
@@ -225,7 +225,7 @@ public class Events {
                 filter.setDisable(checkBox.isSelected());
             }
             for (JFXRadioButton filter : radioList) {
-                filter.setDisable(  checkBox.isSelected());
+                filter.setDisable(checkBox.isSelected());
             }
             checkBox.setDisable(false);
         });
@@ -279,50 +279,62 @@ public class Events {
         }
     }
 
-    /**.
+    /**
+     * .
      * Apply the selected filters to the activity history table
-     * @param label - label to add event handle to
-     * @param checkAll - the "show all" check box
-     * @param checkList - list containing category checkboxes
-     * @param radioList - list containing time radio buttons
-     * @param loggedUser - the logged in user
+     *
+     * @param label         - label to add event handle to
+     * @param checkList     - list containing category checkboxes
+     * @param radioList     - list containing time radio buttons
+     * @param loggedUser    - the logged in user
      * @param activityTable - the table to reset with filters
      */
-    public static void applyFilters(Label label, JFXCheckBox checkAll,
-                                    List<JFXCheckBox> checkList,
-                                    List<JFXRadioButton> radioList, User loggedUser,
+    public static void applyFilters(Label label, List<JFXCheckBox> checkList,
+                                    List<JFXRadioButton> radioList, JFXTextField min,
+                                    JFXTextField max, User loggedUser,
                                     TableView<Activity> activityTable) {
         label.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             List<Activity> activities = loggedUser.getActivities();
             ActivityQueries activityQueries = new ActivityQueries(activities);
             ObservableList<Activity> filteredActivities;
             List<String> categoryFilters = new ArrayList<>();
-            if (checkAll.isSelected()) {
-                filteredActivities = FXCollections.observableArrayList(activities);
-            } else {
-                for (JFXCheckBox filter : checkList) {
-                    if (filter.isSelected()) {
-                        categoryFilters.add(filter.getText());
-                    }
+            for (JFXCheckBox filter : checkList) {
+                if (filter.isSelected()) {
+                    categoryFilters.add(filter.getText());
                 }
-                activities = activityQueries.filterActivitiesByCategories(categoryFilters);
-                activityQueries.setActivities(activities);
+            }
+            activities = activityQueries.filterActivitiesByCategories(categoryFilters);
+            activityQueries.setActivities(activities);
 
-                for (JFXRadioButton filter : radioList) {
-                    if (filter.isSelected()) {
-                        if (filter.getText().contains("Today")) {
-                            activities = activityQueries.filterActivitiesByDate(DateUnit.TODAY);
-                        } else if (filter.getText().contains("7")) {
-                            activities = activityQueries.filterActivitiesByDate(DateUnit.WEEK);
-                        } else {
-                            if (filter.getText().contains("30")) {
-                                activities = activityQueries.filterActivitiesByDate(DateUnit.MONTH);
-                            }
+            for (JFXRadioButton filter : radioList) {
+                if (filter.isSelected()) {
+                    if (filter.getText().contains("Today")) {
+                        activities = activityQueries.filterActivitiesByDate(DateUnit.TODAY);
+                    } else if (filter.getText().contains("7")) {
+                        activities = activityQueries.filterActivitiesByDate(DateUnit.WEEK);
+                    } else {
+                        if (filter.getText().contains("30")) {
+                            activities = activityQueries.filterActivitiesByDate(DateUnit.MONTH);
                         }
                     }
                 }
-                filteredActivities = FXCollections.observableArrayList(activities);
             }
+
+            if (!min.getText().equals("") && !max.getText().equals("")) {
+                double minValue = Integer.parseInt(min.getText());
+                double maxValue = Integer.parseInt(max.getText());
+                if (minValue > maxValue) {
+                    max.setUnFocusColor(Color.rgb(255, 0, 0));
+                    max.setFocusColor(Color.rgb(255, 0, 0));
+                } else {
+                    activities = activityQueries.filterActivitiesByCO2Saved(minValue, maxValue);
+                    max.setUnFocusColor(Color.rgb(77, 77, 77));
+                    max.setFocusColor(Color.rgb(0, 128, 0));
+                }
+            }
+
+            filteredActivities = FXCollections.observableArrayList(activities);
+
             activityTable.setItems(filteredActivities);
         });
     }

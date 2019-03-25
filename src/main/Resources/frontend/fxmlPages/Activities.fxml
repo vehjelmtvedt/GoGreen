@@ -376,7 +376,7 @@
                               </VBox>
                               <HBox layoutX="62.0" layoutY="303.0" prefHeight="37.0" prefWidth="200.0" spacing="10.0">
                                  <children>
-                                    <JFXTextField fx:id="minCarbon" focusColor="GREEN" maxWidth="109.0" minWidth="93.0" prefHeight="37.0" prefWidth="93.0" />
+                                    <JFXTextField fx:id="minCarbon" focusColor="GREEN" maxWidth="113.0" minWidth="93.0" prefHeight="37.0" prefWidth="113.0" />
                                     <JFXTextField fx:id="maxCarbon" focusColor="GREEN" maxWidth="109.0" minWidth="93.0" prefHeight="37.0" prefWidth="93.0" />
                                  </children>
                               </HBox>
@@ -397,11 +397,6 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <JFXCheckBox fx:id="checkAll" checkedColor="GREEN" layoutX="837.0" layoutY="595.0" text="Show all">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXCheckBox>
                      </children>
                   </AnchorPane>
                </children>
