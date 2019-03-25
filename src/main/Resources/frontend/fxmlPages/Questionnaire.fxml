@@ -126,7 +126,7 @@
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <JFXTextField fx:id="textHousehold" GridPane.columnIndex="1" />
+                  <JFXComboBox fx:id="houseHoldNo" prefHeight="27.0" prefWidth="146.0" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </children>

@@ -32,7 +32,7 @@ public class QuestionnaireController implements Initializable {
     private AnchorPane graphics;
 
     @FXML
-    private JFXTextField textHousehold;
+    private JFXComboBox houseHoldNo;
 
     @FXML
     private JFXTextField textElectricity;
@@ -89,16 +89,6 @@ public class QuestionnaireController implements Initializable {
             return null;
         };
 
-        textHousehold.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                if (!newValue.matches("^[0-9]?$")) {
-                    textHousehold.setText(oldValue);
-                }
-            }
-        });
         textCarUsage.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(
@@ -132,35 +122,50 @@ public class QuestionnaireController implements Initializable {
 
         //Initializing the Combo Boxes With the Specified Values
 
+        ObservableList<Integer> householdmembers = FXCollections.observableArrayList(
+                1,2,3,4,5,6,7,8,9
+        );
+
+        houseHoldNo.setItems(householdmembers);
+        houseHoldNo.setValue(1);
+
         ObservableList<String> carsizes = FXCollections.observableArrayList(
                 "I don't own a car","small", "medium", "large"
         );
 
         carSizes.setItems(carsizes);
+        carSizes.setValue("I don't own a car");
 
         ObservableList<String> meatanddairyoptions = FXCollections.observableArrayList(
                 "above average", "average", "below average", "vegan"
         );
 
         meatAndDairyOptions.setItems(meatanddairyoptions);
+        meatAndDairyOptions.setValue("above average");
 
         ObservableList<String> locallyproducedfoodoptions = FXCollections.observableArrayList(
                 "very little", "average", "above average", "almost all"
         );
 
         locallyProducedFoodOptions.setItems(locallyproducedfoodoptions);
+        locallyProducedFoodOptions.setValue("very little");
 
         ObservableList<String> organicoptions = FXCollections.observableArrayList(
                 "none", "some", "most", "all"
         );
 
         organicOptions.setItems(organicoptions);
+        organicOptions.setValue("none");
 
         ObservableList<String> processedoptions = FXCollections.observableArrayList(
                 "above average", "average", "below average", "very little"
         );
 
         processedOptions.setItems(processedoptions);
+        processedOptions.setValue("above average");
+
+        textCarUsage.setText("0");
+        textCarUsage.setEditable(false);
 
         carSizes.setOnAction(e -> {
             if (carSizes.getValue().toString().equals("I don't own a car")) {
@@ -174,7 +179,7 @@ public class QuestionnaireController implements Initializable {
         // Submit Button Logic to send information to the user object
 
         submitButton.setOnAction(e -> {
-            int householdMembers = Integer.parseInt(textHousehold.getText());
+            int householdMembers = Integer.parseInt(houseHoldNo.getValue().toString());
             int dailyElectricityConsumption =
                     Integer.parseInt(textElectricity.getText()) / 365 / householdMembers;
             double dailyHeatingOilConsumption =
@@ -195,20 +200,6 @@ public class QuestionnaireController implements Initializable {
             thisUser.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
             thisUser.setOrganicFoodConsumption(organicFoodConsumption);
             thisUser.setProcessedFoodConsumption(processedFoodConsumption);
-
-            // For Debugging Purposes
-            // System.out.println("household members: " + householdMembers);
-            // System.out.println("daily electricity consumption: " + dailyElectricityConsumption);
-            // System.out.println("daily oil consumption: " + dailyHeatingOilConsumption);
-            // System.out.printf("You have a %s car\n", carType);
-            // System.out.println("Kilometres per day: " + dailyCarKilometres);
-            // System.out.println("Meat and Dairy consumption: " + meatAndDairyConsumption);
-            // System.out.println(
-            // "Locally produced food consumption: " + locallyProducedFoodConsumption
-            // );
-            // System.out.println("Organic Food Consumption: " + organicFoodConsumption);
-            // System.out.println("Processed Food Consmption: " + processedFoodConsumption);
-            // System.out.println("");
 
             // Send the user Back to Login after Questionnaire is complete
 
