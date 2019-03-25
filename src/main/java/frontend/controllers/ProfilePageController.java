@@ -21,7 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 
