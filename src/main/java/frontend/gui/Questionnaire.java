@@ -148,6 +148,7 @@ public class Questionnaire {
             String locallyProducedFoodConsumption = locallyProducedFoodOptions.getValue();
             String organicFoodConsumption = organicOptions.getValue();
             String processedFoodConsumption = processedOptions.getValue();
+
             user.setElectricityDailyConsumption(dailyElectricityConsumption);
             user.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
             user.setCarType(carType);
