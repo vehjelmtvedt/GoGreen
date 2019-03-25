@@ -3,18 +3,21 @@ package frontend.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import frontend.gui.InputValidation;
-import frontend.gui.Main;
-import frontend.gui.StageSwitcher;
+import frontend.gui.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,6 +62,9 @@ public class LoginController implements Initializable {
     @FXML
     private Label login;
 
+    @FXML
+    private Label forgotPass;
+
 
 
 
@@ -87,6 +93,28 @@ public class LoginController implements Initializable {
         mainPane.setOnKeyPressed(ke -> {
             if (ke.getCode().equals(KeyCode.ENTER)) { loginButton.fire(); }
         });
+
+        Events.addHoverOnFilter(forgotPass);
+        forgotPass.setCursor(Cursor.HAND);
+        forgotPass.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->
+        {
+            try {
+                forgotpass();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+    }
+
+    private void forgotpass() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader forgotPassLoader = new FXMLLoader(
+                Main.class.getResource("/frontend/fxmlPages/forgotpass.fxml"));
+        Parent forgotpass = forgotPassLoader.load();c
+        Scene scene = new Scene(forgotpass,
+                (General.getBounds()[0] / 2), (General.getBounds()[1] / 2));
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
