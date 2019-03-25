@@ -192,6 +192,16 @@ public class QuestionnaireController implements Initializable {
                 String response = Requests.signupRequest(thisUser);
                 if (response != null) {
                     if (response.equals("success")) {
+                        try {
+                            Dialog.show(
+                                    mainPane, "Questionnaire Complete",
+                                    "Questionnaire Completed Successfully\n\n" +
+                                            "You will be redirected to the SignIn Page.",
+                                    "DISMISS", "sucess"
+                            );
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                         StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn());
                     }
                 }
