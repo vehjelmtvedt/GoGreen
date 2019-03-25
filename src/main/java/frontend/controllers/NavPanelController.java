@@ -32,6 +32,8 @@ public class NavPanelController implements Initializable {
     @FXML
     private Button friends;
 
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //add button hover event
@@ -46,6 +48,8 @@ public class NavPanelController implements Initializable {
                 Main.getPrimaryStage(), Main.getActivities()));
         friends.setOnAction(e -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getFriendsPage()));
+        myProfile.setOnAction(e -> StageSwitcher.sceneSwitch(
+                Main.getPrimaryStage() , Main.getProfilePage()));
     }
 
 

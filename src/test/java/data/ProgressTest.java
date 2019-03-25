@@ -53,4 +53,13 @@ public class ProgressTest {
         Assert.assertEquals(8, user.getProgress().getLevel());
 
     }
+
+    @Test
+    public void getLevel81() {
+
+        user.getProgress().setPoints(500000);
+
+        Assert.assertEquals(8, user.getProgress().getLevel());
+
+    }
 }

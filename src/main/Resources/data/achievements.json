@@ -3,84 +3,108 @@
     "_class": "data.Achievement",
     "id": 0,
     "name": "Saved your first CO2",
-    "bonus": 5
+    "bonus": 50
   },
   {
     "_class": "data.Achievement",
     "id": 1,
-    "name": "Being consistent for more than three days",
-    "bonus": 5
+    "name": "Adding more than five Activites",
+    "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 2,
-    "name": "Taking a bike instead of a car",
-    "bonus": 5
+    "name": "Use bicycle",
+    "bonus": 50
   },
   {
     "_class": "data.Achievement",
     "id": 3,
-    "name": "Using a bike often",
-    "bonus": 5
+    "name": "Use a bicycle often",
+    "bonus": 150
   },
   {
     "_class": "data.Achievement",
     "id": 4,
     "name": "Using public transport once",
-    "bonus": 5
+    "bonus": 50
   },
   {
     "_class": "data.Achievement",
     "id": 5,
     "name": "Using public transport often",
-    "bonus": 5
+    "bonus": 150
   },
   {
     "_class": "data.Achievement",
     "id": 6,
-    "name": "Eating vegetarian food for the first time",
-    "bonus": 5
+    "name": "Eating vegetarian food",
+    "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 7,
-    "name": "Eating fish once",
-    "bonus": 5
+    "name": "",
+    "bonus": 0
   },
   {
     "_class": "data.Achievement",
     "id": 8,
     "name": "Adding your first friend",
-    "bonus": 5
+    "bonus": 50
   },
   {
     "_class": "data.Achievement",
     "id": 9,
     "name": "Adding more than 10 friends",
-    "bonus": 5
+    "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 10,
     "name": "Being on the top of the board for a day",
-    "bonus": 5
+    "bonus": 200
   },
   {
     "_class": "data.Achievement",
     "id": 11,
     "name": "Being on the top of the board for a week ",
-    "bonus": 5
+    "bonus": 1000
   },
   {
     "_class": "data.Achievement",
     "id": 12,
     "name": "Getting solar Power",
-    "bonus": 5
+    "bonus": 500
   },
   {
     "_class": "data.Achievement",
     "id": 13,
     "name": "Using an electric Car",
-    "bonus": 5
+    "bonus": 500
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 14,
+    "name": "Being Vegan",
+    "bonus": 500
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 15,
+    "name": "Buy Local Food",
+    "bonus": 100
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 16,
+    "name": "Buy Non Processed Food",
+    "bonus": 100
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 17,
+    "name": "Buy organic Food",
+    "bonus": 100
   }
 ]

@@ -33,7 +33,6 @@ public class User {
     private String processedFoodConsumption;
     private double totalCarbonSaved;
 
-    //new stuff
     private Progress progress = new Progress();
 
 
