@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXTextField;
 import data.User;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -67,7 +69,7 @@ public class QuestionnaireController implements Initializable {
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
 
-        //Numeric restrain to Text Feilds For any positive integer value
+        //Numeric restrain to Text Fields For any positive integer value
 
         UnaryOperator<TextFormatter.Change> integerFilter = change -> {
             String input = change.getText();
@@ -77,7 +79,7 @@ public class QuestionnaireController implements Initializable {
             return null;
         };
 
-        //Numeric restrain to Text Feilds For Values 1-9
+        //Numeric restrain to Text Fields For Values 1-9
 
         UnaryOperator<TextFormatter.Change> integerFilteralt = change -> {
             String input = change.getText();
@@ -87,10 +89,46 @@ public class QuestionnaireController implements Initializable {
             return null;
         };
 
-        textHousehold.setTextFormatter(new TextFormatter<String>(integerFilter));
-        textCarUsage.setTextFormatter(new TextFormatter<String>(integerFilter));
-        textElectricity.setTextFormatter(new TextFormatter<String>(integerFilter));
-        textOil.setTextFormatter(new TextFormatter<String>(integerFilter));
+        textHousehold.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                if (!newValue.matches("^[0-9]?$")) {
+                    textHousehold.setText(oldValue);
+                }
+            }
+        });
+        textCarUsage.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                if (!newValue.matches("^[0-9]{0,7}$")) {
+                    textCarUsage.setText(oldValue);
+                }
+            }
+        });
+        textElectricity.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                if (!newValue.matches("^[0-9]{0,7}$")) {
+                    textElectricity.setText(oldValue);
+                }
+            }
+        });
+        textOil.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                if (!newValue.matches("^[0-9]{0,7}$")) {
+                    textOil.setText(oldValue);
+                }
+            }
+        });
 
         //Initializing the Combo Boxes With the Specified Values
 
