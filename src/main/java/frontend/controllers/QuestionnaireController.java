@@ -82,7 +82,6 @@ public class QuestionnaireController implements Initializable {
         textElectricity.setTextFormatter(new TextFormatter<String>(integerFilter));
         textOil.setTextFormatter(new TextFormatter<String>(integerFilter));
 
-
         //Initializing the Combo Boxes With the Specified Values
 
         ObservableList<String> carsizes = FXCollections.observableArrayList(
@@ -115,6 +114,15 @@ public class QuestionnaireController implements Initializable {
 
         processedOptions.setItems(processedoptions);
 
+        carSizes.setOnAction(e -> {
+            if (carSizes.getValue().toString().equals("I don't own a car")) {
+                textCarUsage.setText("0");
+                textCarUsage.setEditable(false);
+            } else {
+                textCarUsage.setEditable(true);
+            }
+        });
+
         // Submit Button Logic to send information to the user object
 
         submitButton.setOnAction(e -> {
@@ -140,17 +148,19 @@ public class QuestionnaireController implements Initializable {
             thisUser.setOrganicFoodConsumption(organicFoodConsumption);
             thisUser.setProcessedFoodConsumption(processedFoodConsumption);
 
-           // For Debugging Purposes
-           // System.out.println("household members: " + householdMembers);
-           // System.out.println("daily electricity consumption: " + dailyElectricityConsumption);
-           // System.out.println("daily oil consumption: " + dailyHeatingOilConsumption);
-           // System.out.printf("You have a %s car\n", carType);
-           // System.out.println("Kilometres per day: " + dailyCarKilometres);
-           // System.out.println("Meat and Dairy consumption: " + meatAndDairyConsumption);
-           // System.out.println("Locally produced food consumption: " + locallyProducedFoodConsumption);
-           // System.out.println("Organic Food Consumption: " + organicFoodConsumption);
-           // System.out.println("Processed Food Consmption: " + processedFoodConsumption);
-           // System.out.println("");
+            // For Debugging Purposes
+            // System.out.println("household members: " + householdMembers);
+            // System.out.println("daily electricity consumption: " + dailyElectricityConsumption);
+            // System.out.println("daily oil consumption: " + dailyHeatingOilConsumption);
+            // System.out.printf("You have a %s car\n", carType);
+            // System.out.println("Kilometres per day: " + dailyCarKilometres);
+            // System.out.println("Meat and Dairy consumption: " + meatAndDairyConsumption);
+            // System.out.println(
+            // "Locally produced food consumption: " + locallyProducedFoodConsumption
+            // );
+            // System.out.println("Organic Food Consumption: " + organicFoodConsumption);
+            // System.out.println("Processed Food Consmption: " + processedFoodConsumption);
+            // System.out.println("");
 
             // Send the user Back to Login after Questionnaire is complete
 
