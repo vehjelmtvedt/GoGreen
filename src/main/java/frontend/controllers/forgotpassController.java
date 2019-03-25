@@ -4,9 +4,15 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import frontend.gui.Dialog;
+import frontend.gui.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Paint;
 
 import java.io.IOException;
@@ -27,6 +33,15 @@ public class forgotpassController implements Initializable {
     @FXML
     private JFXPasswordField newPassword;
 
+    @FXML
+    private Label forgotLabel;
+
+    @FXML
+    private Label questionLabel;
+
+    @FXML
+    private Label newPassLabel;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,7 +60,7 @@ public class forgotpassController implements Initializable {
             if (newPassword.getText().isEmpty()) {
                 try {
                     Dialog.show(mainPane, "No input",
-                            "You have not answered the security question",
+                            "You have not entered a new password",
                             "OK", "error");
                     newPassword.setUnFocusColor(Paint.valueOf("rgb(240, 80, 107)"));
                 } catch (IOException e1) {
@@ -57,6 +72,17 @@ public class forgotpassController implements Initializable {
             //if it is, change the password and notify the user
 
         });
+        try {
+            setFonts();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    public void setFonts() throws IOException {
+        forgotLabel.setFont(Main.getRobotoThin(39.0));
+        questionLabel.setFont(Main.getRobotoThin(17.0));
+        newPassLabel.setFont(Main.getRobotoThin(17.0));
     }
 }

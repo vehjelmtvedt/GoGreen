@@ -110,7 +110,7 @@ public class LoginController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader forgotPassLoader = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/forgotpass.fxml"));
-        Parent forgotpass = forgotPassLoader.load();c
+        Parent forgotpass = forgotPassLoader.load();
         Scene scene = new Scene(forgotpass,
                 (General.getBounds()[0] / 2), (General.getBounds()[1] / 2));
         stage.setScene(scene);
