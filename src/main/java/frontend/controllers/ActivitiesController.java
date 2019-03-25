@@ -120,6 +120,10 @@ public class ActivitiesController implements Initializable {
     private JFXRadioButton radioWeek;
     @FXML
     private JFXRadioButton radioMonth;
+    @FXML
+    private JFXTextField minCarbon;
+    @FXML
+    private JFXTextField maxCarbon;
 
     /**
      * .
@@ -192,7 +196,8 @@ public class ActivitiesController implements Initializable {
         Events.showAllFilters(checkAll, checkList, radioList);
         Events.addHoverOnFilter(lblClearFilters);
         Events.addHoverOnFilter(lblApply);
-        Events.clearFilters(lblClearFilters, checkList, radioList);
+        Events.clearFilters(lblClearFilters, checkList, radioList,
+                minCarbon, maxCarbon, loggedUser, activityTable);
         Events.applyFilters(lblApply, checkAll, checkList, radioList, loggedUser, activityTable);
     }
 

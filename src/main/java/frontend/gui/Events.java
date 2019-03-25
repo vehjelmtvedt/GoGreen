@@ -240,7 +240,10 @@ public class Events {
      * @param radioList - list containing date filtering
      */
     public static void clearFilters(Label clear, List<JFXCheckBox> checkList,
-                                    List<JFXRadioButton> radioList) {
+                                    List<JFXRadioButton> radioList,
+                                    JFXTextField min, JFXTextField max,
+                                    User loggedUser,
+                                    TableView<Activity> activityTable) {
         clear.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             for (JFXCheckBox filter : checkList) {
                 filter.setDisable(false);
@@ -250,6 +253,11 @@ public class Events {
                 filter.setDisable(false);
                 filter.setSelected(false);
             }
+            min.setText("");
+            max.setText("");
+
+            ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
+            activityTable.setItems(activities);
         });
     }
 
