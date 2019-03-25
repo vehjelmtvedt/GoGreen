@@ -4,10 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import data.User;
+import frontend.gui.Dialog;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import tools.Requests;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
@@ -30,6 +30,9 @@ public class QuestionnaireController implements Initializable {
 
     @FXML
     private AnchorPane graphics;
+
+    @FXML
+    private AnchorPane mainPane;
 
     @FXML
     private JFXComboBox houseHoldNo;
@@ -160,8 +163,7 @@ public class QuestionnaireController implements Initializable {
         // Submit Button Logic to send information to the user object
 
         submitButton.setOnAction(e -> {
-            if (!((textElectricity.getText().isEmpty() && textOil.getText().isEmpty())
-                    && textCarUsage.getText().isEmpty())) {
+            if (!(textElectricity.getText().isEmpty() && textOil.getText().isEmpty())) {
 
                 int householdMembers = Integer.parseInt(houseHoldNo.getValue().toString());
                 int dailyElectricityConsumption =
@@ -195,6 +197,14 @@ public class QuestionnaireController implements Initializable {
                 }
             } else {
                 System.out.println("Form not complete");
+                try {
+                    Dialog.show(
+                            mainPane, "Questionnaire Incomplete",
+                            "Please Complete the Questionnaire", "DISMISS", "error"
+                    );
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
