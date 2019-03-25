@@ -4,14 +4,14 @@ import backend.repos.AchievementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.PathResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;
 
 @Configuration
 public class DbLoader {
     // Specify JSON to load here
-    private Resource achievements = new PathResource("src/main/Resources/data/achievements.json");
+    private Resource achievements = new ClassPathResource("data/achievements.json");
 
     private Resource[] resources = new Resource[] {achievements};
 
