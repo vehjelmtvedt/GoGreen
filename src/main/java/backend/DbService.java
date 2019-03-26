@@ -12,9 +12,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.AccumulatorOperators;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -318,6 +315,10 @@ public class DbService {
         return achievements.findAll();
     }
 
+    /**.
+     * Returns the total amount of CO2 saved by all the users
+     * @return - Total amount of CO2 saved
+     */
     public double getTotalCO2Saved() {
         // Querying is too slow (keeping for reference)
         /*// Create aggregation query

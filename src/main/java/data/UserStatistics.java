@@ -2,8 +2,6 @@ package data;
 
 import org.springframework.data.annotation.Id;
 
-import java.util.Date;
-
 public class UserStatistics {
     @Id
     private String timePeriod;
@@ -11,6 +9,12 @@ public class UserStatistics {
     private int totalUsers;
     private double totalCO2Saved;
 
+    /**.
+     * Creates a new UserStatistics object with the specified data
+     * @param timePeriod - Time period String to consider ("all" for all time)
+     * @param totalUsers - Total Users
+     * @param totalCO2Saved - Total CO2 Saved
+     */
     public UserStatistics(String timePeriod, int totalUsers, double totalCO2Saved) {
         this.timePeriod = timePeriod;
         this.totalUsers = totalUsers;
@@ -49,6 +53,10 @@ public class UserStatistics {
         totalUsers++;
     }
 
+    /**.
+     * Handles User removal statistic updating
+     * @param user - User that has been removed
+     */
     public void deleteUser(User user) {
         for (Activity a : user.getActivities()) {
             totalCO2Saved -= a.getCarbonSaved();
@@ -57,6 +65,10 @@ public class UserStatistics {
         totalUsers--;
     }
 
+    /**.
+     * Returns the average CO2 saved by all Users
+     * @return - Average CO2 saved by all Users
+     */
     public double getAverageCO2Saved() {
         // Prevent DivByZero errors
         if (totalUsers == 0) {
