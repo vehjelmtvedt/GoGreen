@@ -319,4 +319,12 @@ public class DbServiceTest {
     public void testGetNoUserTop() {
         assertEquals(new ArrayList<Double>(), getExpectedScores(0));
     }
+
+    @Test
+    public void testTotalCO2Saved() {
+        double expected = 0.0;
+
+        double d = dbService.getTotalCO2Saved();
+        System.out.println(d);
+    }
 }

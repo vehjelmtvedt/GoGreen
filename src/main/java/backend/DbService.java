@@ -3,12 +3,16 @@ package backend;
 import backend.repos.AchievementRepository;
 import backend.repos.UserRepository;
 import data.Achievement;
+import data.Activity;
 import data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.AccumulatorOperators;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -213,6 +217,28 @@ public class DbService {
         }
     }
 
+    /**.
+     * Adds specified Activity to specified User, if the User exists.
+     * @param username - Username of the User to add the Activity to
+     * @param activity - Activity to add to User
+     * @return - Updated User
+     */
+    public User addActivityToUser(String username, Activity activity) {
+        User returned = getUserByUsername(username);
+
+        if (returned == null || activity == null) {
+            return null;
+        }
+
+        returned.addActivity(activity);
+
+        Activity recentActivity = returned.getActivities().get(returned.getActivities().size() - 1);
+
+        returned.setTotalCarbonSaved(returned.getTotalCarbonSaved() + activity.getCarbonSaved());
+        addUser(returned);
+        return returned;
+    }
+
     /**
      * .
      * Finds all usernames matching specified string
@@ -279,5 +305,25 @@ public class DbService {
      */
     public List<Achievement> getAchievements() {
         return achievements.findAll();
+    }
+
+    public double getTotalCO2Saved() {
+        // Create aggregation query
+        Aggregation userAggregation = Aggregation.newAggregation(
+                Aggregation.group()
+                .sum("totalCarbonSaved")
+                .as("totalCarbonSaved"));
+
+        // Aggregate result to single User
+        User sumUser = mongoTemplate.aggregate(userAggregation, User.class, User.class)
+                .getUniqueMappedResult();
+
+        // No Users found
+        if (sumUser == null) {
+            return 0.0;
+        }
+
+        // Return sum result
+        return sumUser.getTotalCarbonSaved();
     }
 }
