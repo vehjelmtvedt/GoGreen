@@ -345,6 +345,10 @@ public class DbService {
         return getTotalStatistics().getTotalUsers();
     }
 
+    public double getAverageCO2Saved() {
+        return getTotalStatistics().getAverageCO2Saved();
+    }
+
     private UserStatistics getTotalStatistics() {
         return mongoTemplate.findById("all", UserStatistics.class);
     }

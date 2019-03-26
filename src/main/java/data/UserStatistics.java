@@ -56,4 +56,13 @@ public class UserStatistics {
 
         totalUsers--;
     }
+
+    public double getAverageCO2Saved() {
+        // Prevent DivByZero errors
+        if (totalUsers == 0) {
+            return 0;
+        }
+
+        return totalCO2Saved / totalUsers;
+    }
 }

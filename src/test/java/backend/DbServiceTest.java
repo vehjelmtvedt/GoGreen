@@ -48,9 +48,6 @@ public class DbServiceTest {
     private static double[] CO2TestScores = {2500.0, 300.0, 543.0, 900.0, 125.0, 9990.0, 12532.0, 1255.0, 4532.0, 1000000.0,
         4321.0, 500.0, 1000000.0, 55555.0, 90043.0};
 
-    public User testUser4 = new User("active", "user", 25, "active_user221@email.com",
-            "active_user221", "123");
-
     @Before
     public void setup() {
         dbService.addUser(testUser);
@@ -61,7 +58,6 @@ public class DbServiceTest {
 
         dbService.addUser(testUser2);
         dbService.addUser(testUser3);
-        dbService.addUser(testUser4);
     }
 
     @Before
@@ -323,34 +319,5 @@ public class DbServiceTest {
     @Test
     public void testGetNoUserTop() {
         assertEquals(new ArrayList<Double>(), getExpectedScores(0));
-    }
-
-    @Test
-    public void testTotalCO2Saved() {
-        double expected = 0.0;
-
-        for (int i = 0; i < 10; ++i) {
-            EatVegetarianMeal activity = new EatVegetarianMeal();
-            double co2 = (i+1)*i*10;
-
-            expected += co2;
-            activity.setCarbonSaved(co2);
-
-            dbService.addActivityToUser(testUser4.getUsername(), activity);
-        }
-
-        double result = dbService.getTotalCO2Saved();
-
-        Assert.assertEquals(expected, result, 0.01);
-    }
-
-    @Test
-    public void testTotalUsers() {
-        int expected = dbService.getAllUsers().size();
-        int result = dbService.getTotalUsers();
-
-        System.out.println(result);
-
-        Assert.assertEquals(expected, result);
     }
 }
