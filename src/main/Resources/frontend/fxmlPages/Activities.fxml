@@ -38,28 +38,6 @@
       </AnchorPane>
       <AnchorPane layoutX="301.0" layoutY="137.0" prefHeight="722.0" prefWidth="1098.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="301.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="137.0">
          <children>
-            <Pane fx:id="paneHousehold" layoutX="-3.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Text layoutX="304.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Household" wrappingWidth="244.341796875">
-                     <effect>
-                        <Glow />
-                     </effect>
-                     <font>
-                        <Font size="50.0" />
-                     </font>
-                  </Text>
-                  <JFXButton layoutX="203.0" layoutY="288.0" prefHeight="45.0" prefWidth="154.0" style="-fx-background-color: green;" text="Button 1">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton layoutX="491.0" layoutY="288.0" prefHeight="45.0" prefWidth="154.0" style="-fx-background-color: green;" text="Button 2">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </Pane>
             <Pane fx:id="paneTransportation" layoutX="-7.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="14.0" layoutY="22.0" prefHeight="566.0" prefWidth="926.0">
@@ -243,6 +221,58 @@
                   </AnchorPane>
                </children>
             </Pane>
+            <Pane fx:id="paneHousehold" layoutX="-3.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane layoutX="14.0" layoutY="65.0" prefHeight="566.0" prefWidth="926.0">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="239.0" layoutY="189.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+                           <children>
+                              <AnchorPane fx:id="paneSolarPanels" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <JFXButton fx:id="btnSolarPanels" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Add solar panels" />
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/solarIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/organicFoodIcon.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="No activity" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <Text layoutX="341.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Household" wrappingWidth="244.341796875">
+                           <effect>
+                              <Glow />
+                           </effect>
+                           <font>
+                              <Font size="50.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </Pane>
             <Pane fx:id="paneHistory" layoutX="-7.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane prefHeight="722.0" prefWidth="1098.0">
@@ -266,11 +296,11 @@
                               <DropShadow />
                            </effect>
                         </TableView>
-                        <AnchorPane layoutX="759.0" layoutY="212.0" prefHeight="298.0" prefWidth="315.0">
+                        <AnchorPane layoutX="741.0" layoutY="162.0" prefHeight="395.0" prefWidth="315.0">
                            <children>
                               <HBox layoutX="58.0" layoutY="6.0" prefHeight="31.0" prefWidth="200.0" AnchorPane.topAnchor="6.0">
                                  <children>
-                                    <Label alignment="CENTER" prefHeight="32.0" prefWidth="118.0" text="    Filter">
+                                    <Label alignment="CENTER" prefHeight="32.0" prefWidth="118.0" text="    Filters">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -298,7 +328,6 @@
                                        </cursor></JFXCheckBox>
                                  </children>
                               </VBox>
-                              <Line endX="100.0" layoutX="158.0" layoutY="256.0" startX="-100.0" />
                               <Line endX="100.0" layoutX="158.0" layoutY="48.0" startX="-100.0" AnchorPane.leftAnchor="57.5" AnchorPane.rightAnchor="56.5" />
                               <Label fx:id="lblClearFilters" alignment="CENTER" layoutX="43.0" layoutY="257.0" opacity="0.75" prefHeight="32.0" prefWidth="135.0" text="Clear all filters" textFill="RED" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="43.0">
                                  <font>
@@ -318,19 +347,14 @@
                               </Label>
                               <Label layoutX="58.0" layoutY="66.0" text="Category">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
                               <Label layoutX="207.0" layoutY="66.0" text="Date">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <JFXCheckBox fx:id="checkAll" checkedColor="GREEN" layoutX="104.0" layoutY="222.0" text="Show all">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXCheckBox>
                               <VBox layoutX="165.0" layoutY="112.0" prefHeight="88.0" prefWidth="100.0" spacing="10.0">
                                  <children>
                                     <JFXRadioButton fx:id="radioToday" text="Today">
@@ -350,6 +374,27 @@
                                     </JFXRadioButton>
                                  </children>
                               </VBox>
+                              <HBox layoutX="62.0" layoutY="303.0" prefHeight="37.0" prefWidth="200.0" spacing="10.0">
+                                 <children>
+                                    <JFXTextField fx:id="minCarbon" focusColor="GREEN" maxWidth="113.0" minWidth="93.0" prefHeight="37.0" prefWidth="113.0" />
+                                    <JFXTextField fx:id="maxCarbon" focusColor="GREEN" maxWidth="109.0" minWidth="93.0" prefHeight="37.0" prefWidth="93.0" />
+                                 </children>
+                              </HBox>
+                              <Label layoutX="99.0" layoutY="217.0" text="CO2 Saved(kg)">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="83.0" layoutY="276.0" text="Min :">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="192.0" layoutY="276.0" text="Max : ">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </children>
@@ -399,7 +444,7 @@
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Pics/solarIcon.png" />
+                        <Image url="@../Pics/householdIcon.png" />
                      </image>
                   </ImageView>
                </graphic>
