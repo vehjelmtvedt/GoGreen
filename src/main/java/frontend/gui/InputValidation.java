@@ -162,7 +162,8 @@ public class InputValidation {
             return false;
         }
         if (secAnswerField.getText().isEmpty()) {
-            Dialog.show(form, "Form Error!", "Please complete the security question", "DISMISS", "error");
+            Dialog.show(form, "Form Error!",
+                    "Please complete the security question", "DISMISS", "error");
             return false;
         }
         return true;

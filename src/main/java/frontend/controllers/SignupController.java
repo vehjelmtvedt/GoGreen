@@ -93,7 +93,8 @@ public class SignupController implements Initializable {
         signupButton.setOnAction(e -> {
             try {
                 InputValidation.signUpValidate(nameFields, usernameField,
-                        emailField, passwordField, confirmPasswordField, secAnswer, ageField, mainPane);
+                        emailField, passwordField,
+                        confirmPasswordField, secAnswer, ageField, mainPane);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -107,19 +108,25 @@ public class SignupController implements Initializable {
             e.printStackTrace();
         }
         mainPane.setOnKeyPressed(ke -> {
-            if (ke.getCode().equals(KeyCode.ENTER)) { signupButton.fire(); }
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                signupButton.fire();
+            }
         });
 
         fillSecurityQuestions();
     }
 
+    /**
+     * Fills the combobox with sample security questions.
+     */
     public void fillSecurityQuestions() {
         ObservableList<String> questions = FXCollections.observableArrayList(
                 "What was your childhood nickname?",
                         "In what city did you meet your spouse/significant other?",
                         "What is the name of your favorite childhood friend?",
                         "What street did you live on in third grade?",
-                        "What is your oldest sibling’s birthday month and year? (e.g., January 1900)",
+                        "What is your oldest sibling’s birthday month and year? "
+                                + "(e.g., January 1900)",
                         "What is the middle name of your youngest child?",
                         "What is your oldest sibling's middle name?",
                         "What school did you attend for sixth grade?"

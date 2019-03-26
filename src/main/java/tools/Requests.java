@@ -161,7 +161,7 @@ public class Requests {
      * Request to get the Top Users.
      * @param loginDetails username and password for auth
      * @param top a limit on the number of users to return
-     * @return
+     * @return - a list of the top users.
      */
     public static List<User> getTopUsers(LoginDetails loginDetails, int top) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/getTopUsers")
