@@ -29,22 +29,25 @@ public class DbServiceStatsTest {
 
     @Before
     public void setup() {
-        for (int i = 0; i < 10; ++i) {
-            User user = new User("active", "user", 20, "active_user" + i + "@email.com",
-                    "active_user" + i, "123");
 
-            dbService.addUser(user);
+        if (users.size() == 0) {
+            for (int i = 0; i < 10; ++i) {
+                User user = new User("active", "user", 20, "active_user" + i + "@email.com",
+                        "active_user" + i, "123");
 
-            for (int j = 0; j < 25; ++j) {
-                Activity activity = new EatVegetarianMeal();
+                dbService.addUser(user);
 
-                double co2 = (i+1)*i*10;
-                activity.setCarbonSaved(co2);
+                for (int j = 0; j < 25; ++j) {
+                    Activity activity = new EatVegetarianMeal();
 
-                user = dbService.addActivityToUser(user.getUsername(), activity);
+                    double co2 = (i+1)*i*10;
+                    activity.setCarbonSaved(co2);
+
+                    user = dbService.addActivityToUser(user.getUsername(), activity);
+                }
+
+                users.add(user);
             }
-
-            users.add(user);
         }
     }
 
