@@ -106,11 +106,17 @@ public class User {
         return this.password;
     }
 
-    public int getLoginStreak() { return this.loginStreak; }
+    public int getLoginStreak() {
+        return this.loginStreak;
+    }
 
-    public void incLoginStreak() { this.loginStreak++; }
+    public void incLoginStreak() {
+        this.loginStreak++;
+    }
 
-    public void resetLoginStreak() { this.loginStreak = 0; }
+    public void resetLoginStreak() {
+        this.loginStreak = 0;
+    }
 
     public void setPassword(String password) {
         this.password = password;
