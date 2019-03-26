@@ -343,4 +343,14 @@ public class DbServiceTest {
 
         Assert.assertEquals(expected, result, 0.01);
     }
+
+    @Test
+    public void testTotalUsers() {
+        int expected = dbService.getAllUsers().size();
+        int result = dbService.getTotalUsers();
+
+        System.out.println(result);
+
+        Assert.assertEquals(expected, result);
+    }
 }

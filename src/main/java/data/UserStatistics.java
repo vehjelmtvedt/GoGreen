@@ -44,4 +44,16 @@ public class UserStatistics {
     public void addTotalCo2Saved(double co2) {
         this.totalCO2Saved += co2;
     }
+
+    public void incrementTotalUsers() {
+        totalUsers++;
+    }
+
+    public void deleteUser(User user) {
+        for (Activity a : user.getActivities()) {
+            totalCO2Saved -= a.getCarbonSaved();
+        }
+
+        totalUsers--;
+    }
 }

@@ -75,6 +75,7 @@ public class DbService {
         // New User, encrypt password
         if (getUser(user.getEmail()) == null) {
             user.setPassword(encodePassword(user.getPassword()));
+            updateTotalUsersStatistics();
         }
 
         users.save(user);
@@ -121,7 +122,12 @@ public class DbService {
      * @param email - e-mail of the User to delete
      */
     void deleteUser(String email) {
-        users.deleteById(email);
+        Optional<User> user = users.findById(email);
+
+        if (user.isPresent()) {
+            removeUserUpdateStatistics(user.get());
+            users.deleteById(email);
+        }
     }
 
     /**
@@ -244,15 +250,6 @@ public class DbService {
         return returned;
     }
 
-    private void updateTotalCo2SavedStatistics(User user) {
-        Activity recentActivity = user.getActivities().get(user.getActivities().size() - 1);
-
-        UserStatistics allStatistics = mongoTemplate.findById("all", UserStatistics.class);
-
-        allStatistics.addTotalCo2Saved(recentActivity.getCarbonSaved());
-        userStatistics.save(allStatistics);
-    }
-
     /**
      * .
      * Finds all usernames matching specified string
@@ -341,8 +338,37 @@ public class DbService {
         // Return sum result
         return sumUser.getTotalCarbonSaved();*/
 
-        Optional<UserStatistics> allStatistics = userStatistics.findById("all");
+        return getTotalStatistics().getTotalCO2Saved();
+    }
 
-        return allStatistics.map(UserStatistics::getTotalCO2Saved).orElse(0.0);
+    public int getTotalUsers() {
+        return getTotalStatistics().getTotalUsers();
+    }
+
+    private UserStatistics getTotalStatistics() {
+        return mongoTemplate.findById("all", UserStatistics.class);
+    }
+
+    private void updateTotalCo2SavedStatistics(User user) {
+        Activity recentActivity = user.getActivities().get(user.getActivities().size() - 1);
+
+        UserStatistics allStatistics = getTotalStatistics();
+        allStatistics.addTotalCo2Saved(recentActivity.getCarbonSaved());
+
+        userStatistics.save(allStatistics);
+    }
+
+    private void updateTotalUsersStatistics() {
+        UserStatistics allStatistics = getTotalStatistics();
+        allStatistics.incrementTotalUsers();
+
+        userStatistics.save(allStatistics);
+    }
+
+    private void removeUserUpdateStatistics(User user) {
+        UserStatistics allStatistics = getTotalStatistics();
+        allStatistics.deleteUser(user);
+
+        userStatistics.save(allStatistics);
     }
 }
