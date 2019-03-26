@@ -1,11 +1,14 @@
 package frontend.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import frontend.gui.InputValidation;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -74,11 +77,11 @@ public class SignupController implements Initializable {
     @FXML
     private Label goGreen;
 
+    @FXML
+    private JFXComboBox secQuestion;
 
-
-
-
-
+    @FXML
+    private JFXTextField secAnswer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,7 +93,7 @@ public class SignupController implements Initializable {
         signupButton.setOnAction(e -> {
             try {
                 InputValidation.signUpValidate(nameFields, usernameField,
-                        emailField, passwordField, confirmPasswordField, ageField, mainPane);
+                        emailField, passwordField, confirmPasswordField, secAnswer, ageField, mainPane);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -106,6 +109,22 @@ public class SignupController implements Initializable {
         mainPane.setOnKeyPressed(ke -> {
             if (ke.getCode().equals(KeyCode.ENTER)) { signupButton.fire(); }
         });
+
+        fillSecurityQuestions();
+    }
+
+    public void fillSecurityQuestions() {
+        ObservableList<String> questions = FXCollections.observableArrayList(
+                "What was your childhood nickname?",
+                        "In what city did you meet your spouse/significant other?",
+                        "What is the name of your favorite childhood friend?",
+                        "What street did you live on in third grade?",
+                        "What is your oldest sibling’s birthday month and year? (e.g., January 1900)",
+                        "What is the middle name of your youngest child?",
+                        "What is your oldest sibling's middle name?",
+                        "What school did you attend for sixth grade?"
+        );
+        secQuestion.setItems(questions);
     }
 
     /**

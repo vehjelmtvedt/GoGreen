@@ -106,9 +106,10 @@ public class InputValidation {
     public static void signUpValidate(JFXTextField[] nameFields,
                                       JFXTextField usernameField, JFXTextField emailField,
                                       JFXPasswordField passField, JFXPasswordField passReField,
+                                      JFXTextField secAnswer,
                                       JFXTextField ageField, AnchorPane form) throws IOException {
 
-        if (!signUpValidateFields(nameFields, usernameField, form)) {
+        if (!signUpValidateFields(nameFields, usernameField, secAnswer, form)) {
             return;
         }
         if (!signUpValidatePass(emailField, passField, passReField, ageField, form)) {
@@ -138,13 +139,14 @@ public class InputValidation {
                 nameFields[1].getText(),
                 Integer.parseInt(ageField.getText()), emailField.getText(),
                 usernameField.getText(), passField.getText());
-
+        user.setSecQuestionAnswer(secAnswer.getText());
         QuestionnaireController.setUser(user);
         StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
     }
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
                                                 JFXTextField usernameField,
+                                                JFXTextField secAnswerField,
                                                 AnchorPane form) throws IOException {
         if (nameFields[0].getText().isEmpty()) {
             Dialog.show(form, "Form Error!", "Please enter your First Name",
@@ -157,6 +159,10 @@ public class InputValidation {
         }
         if (usernameField.getText().isEmpty()) {
             Dialog.show(form, "Form Error!", "Please enter a username", "DISMISS", "error");
+            return false;
+        }
+        if (secAnswerField.getText().isEmpty()) {
+            Dialog.show(form, "Form Error!", "Please complete the security question", "DISMISS", "error");
             return false;
         }
         return true;
