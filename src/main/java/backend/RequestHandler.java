@@ -74,19 +74,6 @@ public class RequestHandler {
     }
 
     /**
-     * To get user. (To be deprecated)
-     * @param identifier email or username of the user
-     * @return A user object.
-     */
-    @RequestMapping("/getUser")
-    public User getUser(@RequestParam String identifier) {
-        if (dbService.getUser(identifier) == null) {
-            return dbService.getUserByUsername(identifier);
-        }
-        return dbService.getUser(identifier);
-    }
-
-    /**
      * Checks if the user is a valid user.
      * @param identifier username or email
      * @return - OK if valid user, NONE otherwise

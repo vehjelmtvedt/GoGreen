@@ -90,18 +90,19 @@ public class DbService {
             user = getUserByUsername(identifier);
         }
 
-        if (user == null) {
+        if (user == null || user.getLoginStreak() == 3) {
             return null;
         }
 
-        System.out.println(user);
 
         if (passwordEncoder().matches(password, user.getPassword())) {
             // Update last login date to current (server) time
             user.setLastLoginDate(Calendar.getInstance().getTime());
+            user.resetLoginStreak();
             return user;
         }
 
+        user.incLoginStreak();
         return null;
     }
 
