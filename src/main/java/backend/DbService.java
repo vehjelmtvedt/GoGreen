@@ -41,6 +41,8 @@ public class DbService {
         return new BCryptPasswordEncoder();
     }
 
+    private static final int maxLoginStreak = 3;
+
     public static void main(String[] args) {
         SpringApplication.run(DbService.class, args);
     }
@@ -90,7 +92,7 @@ public class DbService {
             user = getUserByUsername(identifier);
         }
 
-        if (user == null || user.getLoginStreak() == 3) {
+        if (user == null || user.getLoginStreak() == maxLoginStreak) {
             return null;
         }
 
