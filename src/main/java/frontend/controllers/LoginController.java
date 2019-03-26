@@ -18,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -108,6 +109,7 @@ public class LoginController implements Initializable {
 
     private void forgotpass() throws IOException {
         Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
         FXMLLoader forgotPassLoader = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/forgotpass.fxml"));
         Parent forgotpass = forgotPassLoader.load();

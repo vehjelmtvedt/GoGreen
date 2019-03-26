@@ -14,6 +14,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +42,9 @@ public class forgotpassController implements Initializable {
 
     @FXML
     private Label newPassLabel;
+
+    @FXML
+    private JFXButton dismiss;
 
 
     @Override
@@ -77,7 +81,12 @@ public class forgotpassController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        dismiss.setOnAction(e -> closeWindow());
+    }
 
+    public void closeWindow() {
+        Stage stage = (Stage) dismiss.getScene().getWindow();
+        stage.close();
     }
 
     public void setFonts() throws IOException {
