@@ -260,7 +260,7 @@ public class Events {
             min.setUnFocusColor(Color.rgb(77, 77, 77));
             min.setFocusColor(Color.rgb(0, 128, 0));
             min.setText("");
-            
+
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
         });
@@ -332,6 +332,7 @@ public class Events {
                     max.setFocusColor(Color.rgb(255, 0, 0));
                     min.setUnFocusColor(Color.rgb(255, 0, 0));
                     min.setFocusColor(Color.rgb(255, 0, 0));
+                    return;
                 } else {
                     activities = activityQueries.filterActivitiesByCO2Saved(minValue, maxValue);
                     max.setUnFocusColor(Color.rgb(77, 77, 77));
