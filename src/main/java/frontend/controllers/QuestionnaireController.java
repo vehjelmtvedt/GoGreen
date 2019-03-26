@@ -11,17 +11,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import tools.Requests;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.function.UnaryOperator;
 
 public class QuestionnaireController implements Initializable {
 
@@ -66,12 +63,18 @@ public class QuestionnaireController implements Initializable {
     @FXML
     private JFXButton submitButton;
 
-    public void comboBoxSetup(JFXComboBox comboBox, ObservableList itemList) {
+    /**
+     * Method used to setup the Combo Boxes with the appropriate item sets.
+     */
+    public static void comboBoxSetup(JFXComboBox comboBox, ObservableList itemList) {
         comboBox.setItems(itemList);
         comboBox.setValue(itemList.get(0));
     }
 
-    public void changeListener(JFXTextField textField) {
+    /**
+     * Method Used to restrict text field inputs to a desired numeric style.
+     */
+    public static void changeListener(JFXTextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("^[0-9]{0,7}$")) {
                 textField.setText(oldValue);
@@ -79,12 +82,15 @@ public class QuestionnaireController implements Initializable {
         });
     }
 
-    public void textFieldValidate(JFXTextField textField) {
+    /**
+     * Method used to Check is a text field is filled in or not and accordingly highlight it.
+     */
+    public static void textFieldValidate(JFXTextField textField) {
         if (textField.getText().isEmpty()) {
             textField.setUnFocusColor(Color.RED);
         }
     }
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -92,26 +98,6 @@ public class QuestionnaireController implements Initializable {
 
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
-
-        //Numeric restrain to Text Fields For any positive integer value
-
-        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
-            String input = change.getText();
-            if (input.matches("^[0-9]{0,7}$")) {
-                return change;
-            }
-            return null;
-        };
-
-        //Numeric restrain to Text Fields For Values 1-9
-
-        UnaryOperator<TextFormatter.Change> integerFilteralt = change -> {
-            String input = change.getText();
-            if (input.matches("")) {
-                return change;
-            }
-            return null;
-        };
 
         changeListener(textCarUsage);
         changeListener(textElectricity);
@@ -171,7 +157,8 @@ public class QuestionnaireController implements Initializable {
         // Submit Button Logic to send information to the user object
 
         submitButton.setOnAction(e -> {
-            if (!(textElectricity.getText().isEmpty() && textOil.getText().isEmpty())) {
+            if ( !(textElectricity.getText().isEmpty() && textOil.getText().isEmpty())
+                    && !(textCarUsage.getText().isEmpty()) ) {
 
                 int householdMembers = Integer.parseInt(houseHoldNo.getValue().toString());
                 int dailyElectricityConsumption =
@@ -203,8 +190,8 @@ public class QuestionnaireController implements Initializable {
                         try {
                             Dialog.show(
                                     mainPane, "Questionnaire Complete",
-                                    "Questionnaire Completed Successfully\n\n" +
-                                            "You will be redirected to the SignIn Page.",
+                                    "Questionnaire Completed Successfully\n\n"
+                                            + "You will be redirected to the SignIn Page.",
                                     "DISMISS", "sucess"
                             );
                         } catch (IOException e1) {
