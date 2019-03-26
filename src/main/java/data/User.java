@@ -17,6 +17,8 @@ public class User {
     private int age;
     private String password;
 
+    private int loginStreak;
+
     private ArrayList<String> friends;
     private ArrayList<String> friendRequests;
     private Date lastLoginDate;
@@ -53,6 +55,7 @@ public class User {
         this.email = email;
         this.username = username;
         this.password = password;
+        this.loginStreak = 0;
         this.friends = new ArrayList<>();
         this.friendRequests = new ArrayList<>();
         this.electricityDailyConsumption = 0;
@@ -101,6 +104,18 @@ public class User {
 
     public String getPassword() {
         return this.password;
+    }
+
+    public int getLoginStreak() {
+        return this.loginStreak;
+    }
+
+    public void incLoginStreak() {
+        this.loginStreak++;
+    }
+
+    public void resetLoginStreak() {
+        this.loginStreak = 0;
     }
 
     public void setPassword(String password) {

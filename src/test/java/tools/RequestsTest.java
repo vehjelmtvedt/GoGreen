@@ -86,17 +86,6 @@ public class RequestsTest {
     }
 
     @Test
-    public void testgetUser() {
-        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        assertEquals(testUser, Requests.getUserRequest(testUser.getEmail()));
-    }
-
-    @Test
-    public void testgetUserfail() {
-        assertEquals(null, Requests.getUserRequest(testUser.getEmail()));
-    }
-
-    @Test
     public void testSendFriendRequestValid() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);

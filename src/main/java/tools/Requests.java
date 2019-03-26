@@ -36,19 +36,6 @@ public class Requests {
     }
 
     /**
-     * Get User identified by username or email from server.
-     * @param identifier - username or email
-     * @return - the User of the identifier (if any)
-     */
-    public static User getUserRequest(String identifier) {
-        //adding the query params to the URL
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/getUser")
-                .queryParam("identifier", identifier);
-
-        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
-    }
-
-    /**
      * Sends a friend request from one user to another.
      * @param sender - user sending the friend request
      * @param receiver - user receiving the friend request
@@ -161,7 +148,7 @@ public class Requests {
      * Request to get the Top Users.
      * @param loginDetails username and password for auth
      * @param top a limit on the number of users to return
-     * @return
+     * @return returns a list of top "top" users
      */
     public static List<User> getTopUsers(LoginDetails loginDetails, int top) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/getTopUsers")

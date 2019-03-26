@@ -41,6 +41,8 @@ public class DbService {
         return new BCryptPasswordEncoder();
     }
 
+    private static final int maxLoginStreak = 3;
+
     public static void main(String[] args) {
         SpringApplication.run(DbService.class, args);
     }
@@ -90,18 +92,19 @@ public class DbService {
             user = getUserByUsername(identifier);
         }
 
-        if (user == null) {
+        if (user == null || user.getLoginStreak() == maxLoginStreak) {
             return null;
         }
 
-        System.out.println(user);
 
         if (passwordEncoder().matches(password, user.getPassword())) {
             // Update last login date to current (server) time
             user.setLastLoginDate(Calendar.getInstance().getTime());
+            user.resetLoginStreak();
             return user;
         }
 
+        user.incLoginStreak();
         return null;
     }
 
