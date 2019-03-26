@@ -253,9 +253,14 @@ public class Events {
                 filter.setDisable(false);
                 filter.setSelected(false);
             }
-            min.setText("");
+            max.setUnFocusColor(Color.rgb(77, 77, 77));
+            max.setFocusColor(Color.rgb(0, 128, 0));
             max.setText("");
 
+            min.setUnFocusColor(Color.rgb(77, 77, 77));
+            min.setFocusColor(Color.rgb(0, 128, 0));
+            min.setText("");
+            
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
         });
@@ -296,7 +301,6 @@ public class Events {
         label.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             List<Activity> activities = loggedUser.getActivities();
             ActivityQueries activityQueries = new ActivityQueries(activities);
-            ObservableList<Activity> filteredActivities;
             List<String> categoryFilters = new ArrayList<>();
             for (JFXCheckBox filter : checkList) {
                 if (filter.isSelected()) {
@@ -326,15 +330,18 @@ public class Events {
                 if (minValue > maxValue) {
                     max.setUnFocusColor(Color.rgb(255, 0, 0));
                     max.setFocusColor(Color.rgb(255, 0, 0));
+                    min.setUnFocusColor(Color.rgb(255, 0, 0));
+                    min.setFocusColor(Color.rgb(255, 0, 0));
                 } else {
                     activities = activityQueries.filterActivitiesByCO2Saved(minValue, maxValue);
                     max.setUnFocusColor(Color.rgb(77, 77, 77));
                     max.setFocusColor(Color.rgb(0, 128, 0));
+                    min.setUnFocusColor(Color.rgb(77, 77, 77));
+                    min.setFocusColor(Color.rgb(0, 128, 0));
                 }
             }
-
-            filteredActivities = FXCollections.observableArrayList(activities);
-
+            ObservableList<Activity> filteredActivities =
+                    FXCollections.observableArrayList(activities);
             activityTable.setItems(filteredActivities);
         });
     }
