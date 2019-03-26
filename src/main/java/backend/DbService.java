@@ -249,12 +249,6 @@ public class DbService {
 
         UserStatistics allStatistics = mongoTemplate.findById("all", UserStatistics.class);
 
-        // Something is wrong if NullPointerException is not present (DbLoader fail)
-        if (allStatistics == null) {
-            throw new NullPointerException();
-        }
-
-        System.out.println(recentActivity.getCarbonSaved());
         allStatistics.addTotalCo2Saved(recentActivity.getCarbonSaved());
         userStatistics.save(allStatistics);
     }
