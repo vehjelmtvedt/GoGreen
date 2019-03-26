@@ -11,9 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
-import tools.ActivityQueries;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,6 +40,19 @@ public class HomepageController implements Initializable {
     private Label lblWelcome;
     @FXML
     private Label goGreen;
+    @FXML
+    private Label lblUsername;
+    @FXML
+    private Label lblLevel;
+    @FXML
+    private Label lblYourSavings;
+    @FXML
+    private Label lblAverageSavings;
+    @FXML
+    private Label lblLevelCompletion;
+    @FXML
+    private ProgressBar progressLevel;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,8 +63,18 @@ public class HomepageController implements Initializable {
             System.out.println("Fonts not found");
         }
 
+        //setting up dashboard
         lblWelcome.setText("Welcome, " + loggedUser.getFirstName() + " "
                 + loggedUser.getLastName() + "! Here is your dashboard!");
+
+        //profile information
+        int level = loggedUser.getProgress().getLevel();
+        lblUsername.setText(loggedUser.getUsername());
+        lblLevel.setText("Level : " + level);
+        lblLevelCompletion.setText("X% completed out of level " + (Integer)(level + 1));
+        lblYourSavings.setText(loggedUser.getTotalCarbonSaved() + " kg");
+
+        //charts
         chartCategory.setData(fillPieChart(loggedUser));
         chartFood.setData(fillPieChart(loggedUser));
         chartTransportation.setData(fillPieChart(loggedUser));
@@ -66,28 +88,11 @@ public class HomepageController implements Initializable {
     }
 
     private static ObservableList<PieChart.Data> fillPieChart(User user) {
-        ActivityQueries queries = new ActivityQueries(user.getActivities());
-        //        ArrayList<int[]> countCat = queries.getNrOfActivitiesByCat();
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                                     new PieChart.Data("Food", 1),
                                     new PieChart.Data("Transportation", 2),
                                     new PieChart.Data("Household", 3)
         );
-
-        //        if (type == 1) {
-        //            pieChartData = FXCollections.observableArrayList(
-        //                    new PieChart.Data("Food", countCat.get(0)[0]),
-        //                    new PieChart.Data("Transportation", countCat.get(0)[1]),
-        //                    new PieChart.Data("Household", countCat.get(0)[2])
-        //            );
-        //        } else {
-        //            pieChartData = FXCollections.observableArrayList(
-        //                    new PieChart.Data("Eat Vegetarian Meal", countCat.get(1)[0]),
-        //                    new PieChart.Data("Buy Organic Food", countCat.get(1)[0]),
-        //                    new PieChart.Data("Buy Locally Produced Food", countCat.get(1)[0]),
-        //                    new PieChart.Data("Buy Non-Processed Food", countCat.get(1)[0])
-        //            );
-        //        }
         return pieChartData;
     }
 

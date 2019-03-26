@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.web.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
@@ -32,9 +35,9 @@
       </AnchorPane>
       <AnchorPane fx:id="paneMainHome" layoutX="-1.0" layoutY="165.0" prefHeight="695.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
          <children>
-            <AnchorPane layoutY="57.0" prefHeight="294.0" prefWidth="1400.0" style="-fx-background-color: yellow;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0">
+            <AnchorPane layoutY="57.0" prefHeight="524.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0">
                <children>
-                  <HBox prefHeight="248.0" prefWidth="716.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox layoutY="414.0" prefHeight="200.0" prefWidth="1400.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
                         <PieChart fx:id="chartCategory" />
                         <PieChart fx:id="chartFood" />
@@ -42,9 +45,44 @@
                         <PieChart fx:id="chartHousehold" />
                      </children>
                   </HBox>
+                  <AnchorPane prefHeight="414.0" prefWidth="1400.0" style="-fx-background-color: #eee;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="121.0" prefHeight="414.0" prefWidth="253.0" style="-fx-background-color: #eff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox layoutX="69.0" prefHeight="158.0" prefWidth="116.0" spacing="10.0" AnchorPane.topAnchor="10.0">
+                                 <children>
+                                    <ImageView fx:id="profilePic" fitHeight="127.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <image>
+                                          <Image url="@../Pics/user.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="lblUsername" alignment="CENTER" prefHeight="21.0" prefWidth="116.0" text="UserName" />
+                                    <Label fx:id="lblLevel" alignment="CENTER" prefHeight="16.0" prefWidth="116.0" text="Level" />
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="32.0" layoutY="200.0" prefHeight="73.0" prefWidth="194.0" spacing="5.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="30.0">
+                                 <children>
+                                    <ProgressBar fx:id="progressLevel" prefHeight="23.0" prefWidth="231.0" progress="0.0" />
+                                    <Label fx:id="lblLevelCompletion" prefHeight="21.0" prefWidth="265.0" text="X % completed out of Y level" />
+                                 </children>
+                              </VBox>
+                              <Label layoutX="33.0" layoutY="279.0" text="Your total CO2 saved so far :" />
+                              <Label layoutX="41.0" layoutY="336.0" text="Average total CO2 saved :" />
+                              <Label fx:id="lblYourSavings" alignment="CENTER" layoutX="-2.0" layoutY="306.0" prefHeight="21.0" prefWidth="253.0" text="A kg" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Label fx:id="lblAverageSavings" layoutX="109.0" layoutY="365.0" text="B kg" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="115.0" />
+                           </children>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
-            <Label fx:id="lblWelcome" alignment="CENTER" layoutX="637.0" layoutY="14.0" prefHeight="30.0" prefWidth="126.0" text="Label" AnchorPane.leftAnchor="637.0" AnchorPane.rightAnchor="637.0">
+            <Label fx:id="lblWelcome" alignment="CENTER" layoutX="404.0" layoutY="14.0" prefHeight="30.0" prefWidth="592.0" text="Welcome to #GoGreen! Here is a preview of your dashboard!" AnchorPane.leftAnchor="404.0" AnchorPane.rightAnchor="404.0">
                <font>
                   <Font size="20.0" />
                </font>
