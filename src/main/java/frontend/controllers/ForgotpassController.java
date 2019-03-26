@@ -7,12 +7,8 @@ import frontend.gui.Dialog;
 import frontend.gui.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
@@ -20,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class forgotpassController implements Initializable {
+public class ForgotpassController implements Initializable {
 
     @FXML
     private AnchorPane mainPane;
@@ -89,6 +85,10 @@ public class forgotpassController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Set fonts for every label in scene.
+     * @throws IOException - if fails to load the fonts.
+     */
     public void setFonts() throws IOException {
         forgotLabel.setFont(Main.getRobotoThin(39.0));
         questionLabel.setFont(Main.getRobotoThin(17.0));
