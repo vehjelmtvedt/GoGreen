@@ -2,9 +2,11 @@ package backend;
 
 import backend.repos.AchievementRepository;
 import backend.repos.UserRepository;
+import backend.repos.UserStatisticsRepository;
 import data.Achievement;
 import data.Activity;
 import data.User;
+import data.UserStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +38,9 @@ public class DbService {
 
     @Autowired
     private AchievementRepository achievements;
+
+    @Autowired
+    private UserStatisticsRepository userStatistics;
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -217,8 +222,10 @@ public class DbService {
         }
     }
 
-    /**.
+    /**
+     * .
      * Adds specified Activity to specified User, if the User exists.
+     *
      * @param username - Username of the User to add the Activity to
      * @param activity - Activity to add to User
      * @return - Updated User
@@ -231,12 +238,25 @@ public class DbService {
         }
 
         returned.addActivity(activity);
-
-        Activity recentActivity = returned.getActivities().get(returned.getActivities().size() - 1);
-
         returned.setTotalCarbonSaved(returned.getTotalCarbonSaved() + activity.getCarbonSaved());
         addUser(returned);
+        updateTotalCo2SavedStatistics(returned);
         return returned;
+    }
+
+    private void updateTotalCo2SavedStatistics(User user) {
+        Activity recentActivity = user.getActivities().get(user.getActivities().size() - 1);
+
+        UserStatistics allStatistics = mongoTemplate.findById("all", UserStatistics.class);
+
+        // Something is wrong if NullPointerException is not present (DbLoader fail)
+        if (allStatistics == null) {
+            throw new NullPointerException();
+        }
+
+        System.out.println(recentActivity.getCarbonSaved());
+        allStatistics.addTotalCo2Saved(recentActivity.getCarbonSaved());
+        userStatistics.save(allStatistics);
     }
 
     /**
@@ -308,11 +328,12 @@ public class DbService {
     }
 
     public double getTotalCO2Saved() {
-        // Create aggregation query
+        // Querying is too slow (keeping for reference)
+        /*// Create aggregation query
         Aggregation userAggregation = Aggregation.newAggregation(
                 Aggregation.group()
-                .sum("totalCarbonSaved")
-                .as("totalCarbonSaved"));
+                        .sum("totalCarbonSaved")
+                        .as("totalCarbonSaved"));
 
         // Aggregate result to single User
         User sumUser = mongoTemplate.aggregate(userAggregation, User.class, User.class)
@@ -324,6 +345,10 @@ public class DbService {
         }
 
         // Return sum result
-        return sumUser.getTotalCarbonSaved();
+        return sumUser.getTotalCarbonSaved();*/
+
+        Optional<UserStatistics> allStatistics = userStatistics.findById("all");
+
+        return allStatistics.map(UserStatistics::getTotalCO2Saved).orElse(0.0);
     }
 }

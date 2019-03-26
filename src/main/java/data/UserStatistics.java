@@ -1,12 +1,28 @@
 package data;
 
+import org.springframework.data.annotation.Id;
+
+import java.util.Date;
+
 public class UserStatistics {
+    @Id
+    private String timePeriod;
+
     private int totalUsers;
     private double totalCO2Saved;
 
-    public UserStatistics(int totalUsers, double totalCO2Saved) {
+    public UserStatistics(String timePeriod, int totalUsers, double totalCO2Saved) {
+        this.timePeriod = timePeriod;
         this.totalUsers = totalUsers;
         this.totalCO2Saved = totalCO2Saved;
+    }
+
+    public String getTimePeriod() {
+        return timePeriod;
+    }
+
+    public void setTimePeriod(String timePeriod) {
+        this.timePeriod = timePeriod;
     }
 
     public int getTotalUsers() {
@@ -23,5 +39,9 @@ public class UserStatistics {
 
     public void setTotalCO2Saved(double totalCO2Saved) {
         this.totalCO2Saved = totalCO2Saved;
+    }
+
+    public void addTotalCo2Saved(double co2) {
+        this.totalCO2Saved += co2;
     }
 }
