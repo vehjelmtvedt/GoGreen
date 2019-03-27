@@ -28,7 +28,8 @@ public class LowerHomeTemperature extends Activity {
 
     @Override
     public double calculateCarbonSaved(User user) {
-        return 0;
+        return CarbonCalculator.heatingOilEmissions(
+                user.getHeatingOilDailyConsumption()) * degrees * 1.8 / 100;
     }
 
 }
