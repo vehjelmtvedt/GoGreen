@@ -135,12 +135,8 @@ public class AchievementsLogic {
 
             user.getProgress().getAchievements().add(userAchievement);
 
-
-
-            //System.out.println("=============" + list.size());
-
-            //user.setTotalCarbonSaved(user.getTotalCarbonSaved() + list.get(id).getBonus());
-
+            // adds point depending on the achievements
+            user.getProgress().setPoints(user.getProgress().getPoints() + list.get(id).getBonus());
         }
 
 
