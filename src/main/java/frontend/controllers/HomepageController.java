@@ -1,21 +1,17 @@
 package frontend.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
 import data.User;
 import frontend.gui.Main;
-import frontend.gui.NotificationPopup;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import tools.ActivityQueries;
 
 import java.io.IOException;
@@ -67,10 +63,6 @@ public class HomepageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        NotificationPopup.addAllDrawers(mainPane);
-        lblWelcome.setOnMouseClicked(e -> {
-            NotificationPopup.newNotification();
-        });
     }
 
     private static ObservableList<PieChart.Data> fillPieChart(User user) {
