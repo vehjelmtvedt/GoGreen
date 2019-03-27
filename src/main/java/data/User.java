@@ -37,6 +37,8 @@ public class User {
 
     private Progress progress = new Progress();
 
+    private String avatar;
+
 
     /**
      * Constructor of User object.
@@ -281,24 +283,30 @@ public class User {
 
     // ---------- ACTIVITY METHODS ----------
 
-    /**.
+    /**
+     * .
      * Adds a new activity to user's activities list
+     *
      * @param activity - Activity to add
      */
     public void addActivity(Activity activity) {
         this.activities.add(activity);
     }
 
-    /**.
+    /**
+     * .
      * Removes an activity from user's activities list
+     *
      * @param activity - Activity to remove
      */
     public void removeActivity(Activity activity) {
         this.activities.remove(activity);
     }
 
-    /**.
+    /**
+     * .
      * Returns a list of activities that are of the same type of the specified activity.
+     *
      * @param activity - Activity to compare to
      * @return List of activities of same type
      */
@@ -325,4 +333,13 @@ public class User {
     //    public boolean removeFriend(String email) {
     //        return friends.remove(email);
     //    }
+
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 }
