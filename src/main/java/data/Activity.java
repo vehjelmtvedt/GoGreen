@@ -205,9 +205,9 @@ public abstract class Activity {
         Activity activity = (Activity) object;
 
         return Double.compare(activity.carbonSaved, carbonSaved) == 0
-                && Objects.equals(date, activity.date)
-                && Objects.equals(name, activity.name)
-                && Objects.equals(category, activity.category);
+                && Objects.equals(date, activity.date);
+                //&& Objects.equals(name, activity.name)
+                //&& Objects.equals(category, activity.category);
     }
 
     @Override
