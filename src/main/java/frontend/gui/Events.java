@@ -178,6 +178,29 @@ public class Events {
         });
     }
 
+    /**.
+     * Add household activities to the user upon clicking
+     * @param pane          - pane to be clicked
+     * @param type          - type of activity
+     * @param loggedUser    - user to update
+     * @param activityTable - table to set history to
+     */
+    public static void addHouseholdActivity(AnchorPane pane, int type,
+                                            User loggedUser, TableView<Activity> activityTable) {
+        pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (type == 1) {
+                //todo: Add solar panels
+            } else {
+                if (type == 2) {
+                    //todo: Lower home temperature
+                }
+            }
+
+            ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
+            activityTable.setItems(activities);
+        });
+    }
+
     /**
      * .
      * Add logout event handling
@@ -260,7 +283,7 @@ public class Events {
             min.setUnFocusColor(Color.rgb(77, 77, 77));
             min.setFocusColor(Color.rgb(0, 128, 0));
             min.setText("");
-            
+
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
         });
@@ -332,6 +355,7 @@ public class Events {
                     max.setFocusColor(Color.rgb(255, 0, 0));
                     min.setUnFocusColor(Color.rgb(255, 0, 0));
                     min.setFocusColor(Color.rgb(255, 0, 0));
+                    return;
                 } else {
                     activities = activityQueries.filterActivitiesByCO2Saved(minValue, maxValue);
                     max.setUnFocusColor(Color.rgb(77, 77, 77));
