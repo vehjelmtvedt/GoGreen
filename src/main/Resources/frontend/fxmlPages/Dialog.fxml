@@ -1,41 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDialog?>
-<?import com.jfoenix.controls.JFXDialogLayout?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<JFXDialog fx:id="dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.DialogController">
+
+<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: green; -fx-border-width: 3px;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.DialogController">
    <children>
-      <JFXDialogLayout fx:id="dialogLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="550.0" style="-fx-background-color: white; -fx-border-color: green; -fx-border-width: 3px 1px 0px 1px;">
-         <children>
-            <AnchorPane fx:id="contentPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="550.0" style="-fx-border-color: green; -fx-background-color: white; -fx-border-style: hidden solid solid solid; -fx-border-width: 0px 3px 3px 3px;">
-               <children>
-                  <Text fx:id="body" layoutX="27.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry." wrappingWidth="531.2060546875" />
-                  <JFXButton fx:id="closeButton" layoutX="324.0" layoutY="132.0" prefHeight="48.0" prefWidth="158.0" text="ACCEPT" textFill="#0033ff" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="28.0" />
-                  <HBox layoutX="26.0" prefHeight="100.0" prefWidth="483.0" spacing="20.0">
-                     <children>
-                        <Label fx:id="heading" text="Heading">
-                           <font>
-                              <Font size="32.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="icon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Pics/sucess.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </HBox>
-               </children>
-            </AnchorPane>
-         </children>
-      </JFXDialogLayout>
+      <Label fx:id="heading" layoutX="57.0" layoutY="58.0" prefHeight="53.0" prefWidth="511.0" text="BIG HEADING" AnchorPane.leftAnchor="54.0" AnchorPane.topAnchor="55.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Text fx:id="body" layoutX="57.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here is the body text" wrappingWidth="505.0000011920929">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Text>
+      <JFXButton fx:id="button" layoutX="412.0" layoutY="302.0" prefHeight="62.0" prefWidth="158.0" text="CONFRIM" AnchorPane.bottomAnchor="36.0" AnchorPane.rightAnchor="30.0" />
+      <ImageView fx:id="icon" fitHeight="87.0" fitWidth="92.0" layoutX="300.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="213.0" AnchorPane.topAnchor="41.0">
+         <image>
+            <Image url="@../Pics/sucess.png" />
+         </image>
+      </ImageView>
    </children>
-</JFXDialog>
+</AnchorPane>

@@ -43,9 +43,9 @@ public class InputValidation {
 
         User loggedUser = Requests.loginRequest(loginDetails);
         if (loggedUser != null) {
-            Dialog.show(form, "Login successful", "Welcome to GoGreen, "
+            Dialog.show("Login successful", "Welcome to GoGreen, "
                     + loggedUser.getFirstName()
-                    + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess");
+                    + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess", false);
             HomepageController.setUser(loggedUser);
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
@@ -86,8 +86,8 @@ public class InputValidation {
 
         } else {
 
-            Dialog.show(form, "Login failed",
-                    "Incorrect credentials. Try again", "DISMISS", "error");
+            Dialog.show("Login failed",
+                    "Incorrect credentials. Try again", "DISMISS", "error", false);
         }
     }
 
@@ -122,16 +122,16 @@ public class InputValidation {
         String email = emailField.getText();
 
         if (Requests.validateUserRequest(username)) {
-            Dialog.show(form, "Username Error!",
+            Dialog.show("Username Error!",
                     "A user already exists with this username. Use another username",
-                    "DISMISS", "error");
+                    "DISMISS", "error", false);
             return;
         }
 
         if (Requests.validateUserRequest(email)) {
-            Dialog.show(form, "Email Error!", "A user already exists with this email."
+            Dialog.show("Email Error!", "A user already exists with this email."
                             + "Use another email",
-                    "DISMISS", "error");
+                    "DISMISS", "error", false);
             return;
         }
 
@@ -149,21 +149,21 @@ public class InputValidation {
                                                 JFXTextField secAnswerField,
                                                 AnchorPane form) throws IOException {
         if (nameFields[0].getText().isEmpty()) {
-            Dialog.show(form, "Form Error!", "Please enter your First Name",
-                    "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter your First Name",
+                    "DISMISS", "error", false);
             return false;
         }
         if (nameFields[1].getText().isEmpty()) {
-            Dialog.show(form, "Form Error!", "Please enter your Last Name", "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter your Last Name", "DISMISS", "error", false);
             return false;
         }
         if (usernameField.getText().isEmpty()) {
-            Dialog.show(form, "Form Error!", "Please enter a username", "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter a username", "DISMISS", "error", false);
             return false;
         }
         if (secAnswerField.getText().isEmpty()) {
-            Dialog.show(form, "Form Error!",
-                    "Please complete the security question", "DISMISS", "error");
+            Dialog.show("Form Error!",
+                    "Please complete the security question", "DISMISS", "error", false);
             return false;
         }
         return true;
@@ -175,20 +175,20 @@ public class InputValidation {
                                               JFXTextField ageField,
                                               AnchorPane form) throws IOException {
         if (emailField.getText().isEmpty() || !validateEmail(emailField)) {
-            Dialog.show(form, "Form Error!", "Please enter a valid email", "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter a valid email", "DISMISS", "error", false);
             return false;
         }
 
         if (passField.getText().isEmpty() || !validatePassword(passField)) {
-            Dialog.show(form, "Form Error!", "Please enter a valid password", "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter a valid password", "DISMISS", "error", false);
             return false;
         }
         if (passReField.getText().isEmpty() || !passReField.getText().equals(passField.getText())) {
-            Dialog.show(form, "Form Error!", "Passwords do not match", "DISMISS", "error");
+            Dialog.show("Form Error!", "Passwords do not match", "DISMISS", "error", false);
             return false;
         }
         if (ageField.getText().isEmpty() || !validateAge(ageField)) {
-            Dialog.show(form, "Form Error!", "Please enter a valid age", "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter a valid age", "DISMISS", "error", false);
             return false;
         }
         return true;

@@ -49,9 +49,9 @@ public class ForgotpassController implements Initializable {
         confirm.setOnAction(e -> {
             if (securityQuestion.getText().isEmpty()) {
                 try {
-                    Dialog.show(mainPane, "No input",
+                    Dialog.show("No input",
                             "You have not answered the security question",
-                            "OK", "error");
+                            "OK", "error", false);
                     securityQuestion.setUnFocusColor(Paint.valueOf("rgb(240, 80, 107)"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -59,9 +59,9 @@ public class ForgotpassController implements Initializable {
             }
             if (newPassword.getText().isEmpty()) {
                 try {
-                    Dialog.show(mainPane, "No input",
+                    Dialog.show("No input",
                             "You have not entered a new password",
-                            "OK", "error");
+                            "OK", "error", false);
                     newPassword.setUnFocusColor(Paint.valueOf("rgb(240, 80, 107)"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -82,6 +82,7 @@ public class ForgotpassController implements Initializable {
 
     public void closeWindow() {
         Stage stage = (Stage) dismiss.getScene().getWindow();
+        stage.setOpacity(0.7);
         stage.close();
     }
 
