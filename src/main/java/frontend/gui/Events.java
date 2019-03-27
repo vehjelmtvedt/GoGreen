@@ -82,6 +82,19 @@ public class Events {
         });
     }
 
+    /**.
+     * Add hover event for JFX buttons
+     * @param button - button to add hover event to
+     */
+    public static void addJfxButtonHover(JFXButton button) {
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+            button.setOpacity(1);
+        });
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            button.setOpacity(0.75);
+        });
+    }
+
     /**
      * .
      * Add food activities to the user upon clicking
@@ -368,6 +381,31 @@ public class Events {
                     FXCollections.observableArrayList(activities);
             activityTable.setItems(filteredActivities);
         });
+    }
+
+    /**.
+     * Add leaderboards events to the the leaderboards buttons
+     * @param leaderboards - list containing buttons for all types of leaderboards
+     */
+    public static void addLeaderboards(List<JFXButton> leaderboards) {
+        for (JFXButton button : leaderboards) {
+            button.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                button.setStyle("-fx-background-color: #00db00;");
+                for (JFXButton otherButton : leaderboards) {
+                    if (!otherButton.equals(button)) {
+                        otherButton.setStyle("-fx-background-color: transparent;");
+                    }
+                }
+            });
+
+            button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                button.setUnderline(true);
+            });
+
+            button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                button.setUnderline(false);
+            });
+        }
     }
 }
 
