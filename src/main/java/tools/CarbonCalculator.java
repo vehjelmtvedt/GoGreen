@@ -69,7 +69,7 @@ public final class CarbonCalculator {
      * @param litres , the amount of litres of heating oil consumed.
      * @return carbon emissions in kg
      */
-    public static double heatingOilEmissions(int litres) {
+    public static double heatingOilEmissions(double litres) {
         return litres * 2.96;
     }
 

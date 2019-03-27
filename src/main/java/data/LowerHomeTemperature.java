@@ -1,5 +1,7 @@
 package data;
 
+import tools.CarbonCalculator;
+
 /**
  * Activity: Lower home temperature.
  * @author Kostas Lyrakis
