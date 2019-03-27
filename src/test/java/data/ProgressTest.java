@@ -38,9 +38,32 @@ public class ProgressTest {
     }
 
     @Test
-    public void getLevel6() {
+    public void getLevel11() {
+
+        user.getProgress().setPoints(0);
+        Assert.assertEquals(1, user.getProgress().getLevel());
+    }
+
+    @Test
+    public void getLevel12() {
+
+        user.getProgress().setPoints(100);
+        Assert.assertEquals(1, user.getProgress().getLevel());
+    }
+
+    @Test
+    public void getLevel5() {
 
         user.getProgress().addPoints(40300);
+
+        Assert.assertEquals(5, user.getProgress().getLevel());
+
+    }
+
+    @Test
+    public void getLevel6() {
+
+        user.getProgress().addPoints(69320.0);
 
         Assert.assertEquals(6, user.getProgress().getLevel());
 
@@ -79,9 +102,9 @@ public class ProgressTest {
 
         user.getProgress().setPoints(700);
 
-        Assert.assertEquals(2, user.getProgress().getLevel());
+        Assert.assertEquals(1, user.getProgress().getLevel());
 
-        Assert.assertEquals(1309, user.getProgress().pointsNeeded(), 1);
+        Assert.assertEquals(39, user.getProgress().pointsNeeded(), 1);
 
 
     }

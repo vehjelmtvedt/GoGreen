@@ -57,7 +57,7 @@ public class Progress {
      */
     public int getLevel() {
 
-        if (this.points <= 200) {
+        if (this.points <= Math.exp(1) * 100) {
             return 1;
         }
 
@@ -65,7 +65,7 @@ public class Progress {
 
         double level = Math.log(res / 100);
 
-        int result = (int) Math.round(level);
+        int result = (int) Math.floor(level);
 
         if (result > 8) {
             return 8;
@@ -92,8 +92,13 @@ public class Progress {
 
             return need;
 
-        } else return 0;
+        } else {
+            return 0;
 
+        }
     }
 
+
 }
+
+
