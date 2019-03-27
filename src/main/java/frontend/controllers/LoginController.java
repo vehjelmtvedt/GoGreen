@@ -6,13 +6,11 @@ import com.jfoenix.controls.JFXTextField;
 import frontend.gui.InputValidation;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -85,7 +83,9 @@ public class LoginController implements Initializable {
             e.printStackTrace();
         }
         mainPane.setOnKeyPressed(ke -> {
-            if (ke.getCode().equals(KeyCode.ENTER)) { loginButton.fire(); }
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                loginButton.fire();
+            }
         });
     }
 

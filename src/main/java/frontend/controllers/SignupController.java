@@ -104,7 +104,9 @@ public class SignupController implements Initializable {
             e.printStackTrace();
         }
         mainPane.setOnKeyPressed(ke -> {
-            if (ke.getCode().equals(KeyCode.ENTER)) { signupButton.fire(); }
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                signupButton.fire();
+            }
         });
     }
 
