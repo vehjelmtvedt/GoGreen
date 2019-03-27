@@ -78,6 +78,22 @@ public class UserTest {
     }
 
     @Test
+    public void getLoginStreak() { Assert.assertEquals(0,userOne.getLoginStreak());}
+
+    @Test
+    public void setLoginStreak() {
+        userOne.incLoginStreak();
+        Assert.assertEquals(1,userOne.getLoginStreak());
+    }
+
+    @Test
+    public void resetLoginStreak() {
+        userOne.incLoginStreak();
+        userOne.resetLoginStreak();
+        Assert.assertEquals(0,userOne.getLoginStreak());
+    }
+
+    @Test
     public void setPasswordSuccess() {
         userOne.setPassword("pwd123");
         Assert.assertEquals("pwd123", userOne.getPassword());
