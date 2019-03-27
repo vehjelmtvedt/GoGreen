@@ -127,7 +127,7 @@ public class AchievementsLogic {
 
         }
 
-        List<Achievement> list = Requests.getAllAchievements();
+        //List<Achievement> list = Requests.getAllAchievements();
 
         if (!alreadythere) {
 
@@ -136,7 +136,10 @@ public class AchievementsLogic {
             user.getProgress().getAchievements().add(userAchievement);
 
             // adds point depending on the achievements
-            user.getProgress().setPoints(user.getProgress().getPoints() + list.get(id).getBonus());
+            //user.getProgress().setPoints(user.getProgress().getPoints() + list.get(id).getBonus());
+
+            //for now its hard codded
+            user.getProgress().setPoints(user.getProgress().getPoints() + 100);
         }
 
 
