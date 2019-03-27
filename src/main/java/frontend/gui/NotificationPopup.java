@@ -83,14 +83,23 @@ public class NotificationPopup {
     }
 
     public void setUpDrawers(JFXDrawer drawer, int drawerNumber, AnchorPane mainPane) {
-        StackPane content = new StackPane();
+        AnchorPane content = new AnchorPane();
         Label heading = new Label("Heading");
         Label body = new Label("text of the body");
         ImageView image = new ImageView(new Image("frontend/Pics/sucess.png"));
         image.setFitHeight(40);
         image.setFitWidth(40);
-
         content.getChildren().addAll(heading, body, image);
+
+        AnchorPane.setTopAnchor(heading, 10.0);
+        AnchorPane.setLeftAnchor(heading, 10.0);
+        AnchorPane.setTopAnchor(image, 40.0);
+        AnchorPane.setLeftAnchor(image, 10.0);
+        AnchorPane.setTopAnchor(body, 50.0);
+        AnchorPane.setLeftAnchor(body, 70.0);
+
+
+
         drawer.setSidePane(content);
         drawer.setDefaultDrawerSize(270);
         drawer.setMinHeight(130);
