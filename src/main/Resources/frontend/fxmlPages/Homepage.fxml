@@ -45,38 +45,63 @@
                         <PieChart fx:id="chartHousehold" />
                      </children>
                   </HBox>
-                  <AnchorPane prefHeight="414.0" prefWidth="1400.0" style="-fx-background-color: #eee;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutX="228.0" layoutY="73.0" prefHeight="187.0" prefWidth="971.0" style="-fx-background-color: #eee;" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="73.0">
                      <children>
-                        <AnchorPane layoutX="121.0" prefHeight="414.0" prefWidth="253.0" style="-fx-background-color: #eff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Circle fill="DODGERBLUE" layoutX="100.0" layoutY="100.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                        <AnchorPane layoutX="233.0" prefHeight="200.0" prefWidth="382.0">
                            <children>
-                              <VBox layoutX="69.0" prefHeight="158.0" prefWidth="116.0" spacing="10.0" AnchorPane.topAnchor="10.0">
+                              <HBox layoutY="100.0" prefHeight="100.0" prefWidth="690.0" AnchorPane.bottomAnchor="0.0">
                                  <children>
-                                    <ImageView fx:id="profilePic" fitHeight="127.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
-                                       <effect>
-                                          <DropShadow />
-                                       </effect>
-                                       <image>
-                                          <Image url="@../Pics/user.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label fx:id="lblUsername" alignment="CENTER" prefHeight="21.0" prefWidth="116.0" text="UserName" />
-                                    <Label fx:id="lblLevel" alignment="CENTER" prefHeight="16.0" prefWidth="116.0" text="Level" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                                       <children>
+                                          <Label text="LEVEL" />
+                                          <Label text="1" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="30.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                                       <children>
+                                          <Label text="FRIENDS" />
+                                          <Label text="13" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="30.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox prefHeight="100.0" prefWidth="132.0" spacing="15.0">
+                                       <children>
+                                          <Label text="TOTAL ACTIVITIES" />
+                                          <Label text="24" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="30.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox prefHeight="100.0" prefWidth="132.0" spacing="15.0">
+                                       <children>
+                                          <Label text="PROGRESS" />
+                                          <Label text="100 XP NEEDED" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="30.0" />
+                                       </padding>
+                                    </VBox>
+                                    <JFXButton alignment="CENTER" buttonType="RAISED" style="-fx-background-color: teal;" text="View full profile">
+                                       <HBox.margin>
+                                          <Insets left="100.0" top="30.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
                                  </children>
-                              </VBox>
-                              <VBox layoutX="32.0" layoutY="200.0" prefHeight="73.0" prefWidth="194.0" spacing="5.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="30.0">
+                              </HBox>
+                              <HBox layoutY="53.0" prefHeight="47.0" prefWidth="690.0" spacing="20.0" AnchorPane.topAnchor="53.0">
                                  <children>
-                                    <ProgressBar fx:id="progressLevel" prefHeight="23.0" prefWidth="231.0" progress="0.0" />
-                                    <Label fx:id="lblLevelCompletion" prefHeight="21.0" prefWidth="265.0" text="X % completed out of Y level" />
+                                    <Label text="your@email.com" />
+                                    <Label text="You have saved 8.1212 kg of CO2 so far" />
                                  </children>
-                              </VBox>
-                              <Label layoutX="33.0" layoutY="279.0" text="Your total CO2 saved so far :" />
-                              <Label layoutX="41.0" layoutY="336.0" text="Average total CO2 saved :" />
-                              <Label fx:id="lblYourSavings" alignment="CENTER" layoutX="-2.0" layoutY="306.0" prefHeight="21.0" prefWidth="253.0" text="A kg" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <Label fx:id="lblAverageSavings" layoutX="109.0" layoutY="365.0" text="B kg" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="115.0" />
+                              </HBox>
                            </children>
-                           <effect>
-                              <DropShadow />
-                           </effect>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
@@ -90,5 +115,36 @@
          </children>
       </AnchorPane>
       <JFXDrawer fx:id="drawer" layoutY="137.0" prefHeight="719.0" prefWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="138.0" />
+      <AnchorPane layoutX="1187.0" layoutY="-437.0" prefHeight="414.0" prefWidth="253.0" style="-fx-background-color: #eff;" visible="false" AnchorPane.topAnchor="-437.0">
+         <children>
+            <VBox layoutX="69.0" prefHeight="158.0" prefWidth="116.0" spacing="10.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <ImageView fx:id="profilePic" fitHeight="127.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <image>
+                        <Image url="@../Pics/user.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblUsername" alignment="CENTER" prefHeight="21.0" prefWidth="116.0" text="UserName" />
+                  <Label fx:id="lblLevel" alignment="CENTER" prefHeight="16.0" prefWidth="116.0" text="Level" />
+               </children>
+            </VBox>
+            <VBox layoutX="32.0" layoutY="200.0" prefHeight="73.0" prefWidth="194.0" spacing="5.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="30.0">
+               <children>
+                  <ProgressBar fx:id="progressLevel" prefHeight="23.0" prefWidth="231.0" progress="0.0" />
+                  <Label fx:id="lblLevelCompletion" prefHeight="21.0" prefWidth="265.0" text="X % completed out of Y level" />
+               </children>
+            </VBox>
+            <Label layoutX="33.0" layoutY="279.0" text="Your total CO2 saved so far :" />
+            <Label layoutX="41.0" layoutY="336.0" text="Average total CO2 saved :" />
+            <Label fx:id="lblYourSavings" alignment="CENTER" layoutX="-2.0" layoutY="306.0" prefHeight="21.0" prefWidth="253.0" text="A kg" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Label fx:id="lblAverageSavings" layoutX="109.0" layoutY="365.0" text="B kg" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="115.0" />
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
    </children>
 </AnchorPane>
