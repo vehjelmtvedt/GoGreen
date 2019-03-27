@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.Cursor?>
@@ -43,6 +44,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <JFXButton fx:id="buttontest" layoutX="671.0" layoutY="512.0" AnchorPane.bottomAnchor="184.0" AnchorPane.leftAnchor="671.0" AnchorPane.rightAnchor="670.0" AnchorPane.topAnchor="512.0" />
          </children>
       </AnchorPane>
       <JFXDrawer fx:id="drawer" layoutY="137.0" prefHeight="719.0" prefWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="138.0" />
