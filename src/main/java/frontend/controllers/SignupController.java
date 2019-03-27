@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -102,6 +103,11 @@ public class SignupController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        mainPane.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                signupButton.fire();
+            }
+        });
     }
 
     /**
