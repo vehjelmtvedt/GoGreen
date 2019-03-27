@@ -77,13 +77,11 @@ public class ForgotpassController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dismiss.setOnAction(e -> closeWindow());
-    }
-
-    public void closeWindow() {
-        Stage stage = (Stage) dismiss.getScene().getWindow();
-        stage.setOpacity(0.7);
-        stage.close();
+        dismiss.setOnAction(e -> {
+            Stage stage = (Stage) dismiss.getScene().getWindow();
+            stage.setOpacity(0.7);
+            stage.close();
+        });
     }
 
     /**

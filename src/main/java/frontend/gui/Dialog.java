@@ -23,24 +23,25 @@ public class Dialog {
      * @throws IOException - if fails to load dialog
      */
 
-    public static void show(String headerText, String bodyText, String buttonText, String icon, boolean blocking) throws IOException {
+    public static void show(String headerText, String bodyText,
+                            String buttonText, String icon, boolean blocking) throws IOException {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
         if (blocking) {
             stage.initModality(Modality.APPLICATION_MODAL);
         }
-        FXMLLoader DialogLoader = new FXMLLoader(
+        FXMLLoader dialogloader = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/Dialog.fxml"));
-        Parent Dialog = DialogLoader.load();
+        Parent dialog = dialogloader.load();
 
-        DialogController controller = DialogLoader.getController();
+        DialogController controller = dialogloader.getController();
 
         controller.setHeading(headerText);
         controller.setBody(bodyText);
         controller.setButtonText(buttonText);
         controller.setIcon(icon);
 
-        Scene scene = new Scene(Dialog,
+        Scene scene = new Scene(dialog,
                 General.getBounds()[0] / 2, General.getBounds()[1] / 2);
         stage.setScene(scene);
         stage.show();
