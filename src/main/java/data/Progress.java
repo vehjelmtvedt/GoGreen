@@ -82,13 +82,18 @@ public class Progress {
     public double pointsNeeded() {
 
 
-        double points = this.getPoints();
+        if (this.getLevel() < 8) {
 
-        int level = this.getLevel() + 1;
+            double points = this.getPoints();
 
-        double need = Math.round(Math.exp(level) * 100 - points);
+            int level = this.getLevel() + 1;
 
-        return need;
+            double need = Math.round(Math.exp(level) * 100 - points);
+
+            return need;
+
+        } else return 0;
+
     }
 
 }

@@ -3,6 +3,7 @@ package data;
 import data.Progress;
 import data.User;
 import data.UserAchievement;
+import javafx.fxml.FXML;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,7 +40,7 @@ public class ProgressTest {
     @Test
     public void getLevel6() {
 
-        user.getProgress().addPoints(1000);
+        user.getProgress().addPoints(40300);
 
         Assert.assertEquals(6, user.getProgress().getLevel());
 
@@ -48,7 +49,7 @@ public class ProgressTest {
     @Test
     public void getLevel8() {
 
-        user.getProgress().setPoints(5000);
+        user.getProgress().setPoints(298100);
 
         Assert.assertEquals(8, user.getProgress().getLevel());
 
@@ -61,5 +62,37 @@ public class ProgressTest {
 
         Assert.assertEquals(8, user.getProgress().getLevel());
 
+    }
+
+    @Test
+    public void pointsNeededtest() {
+
+        user.getProgress().setPoints(0);
+
+        Assert.assertEquals(739, user.getProgress().pointsNeeded(), 1);
+
+
+    }
+
+    @Test
+    public void pointsNeededtest1() {
+
+        user.getProgress().setPoints(700);
+
+        Assert.assertEquals(2, user.getProgress().getLevel());
+
+        Assert.assertEquals(1309, user.getProgress().pointsNeeded(), 1);
+
+
+    }
+
+    @Test
+    public void pointsNeededtest2() {
+
+        user.getProgress().setPoints(561000000);
+
+        Assert.assertEquals(8, user.getProgress().getLevel());
+
+        Assert.assertEquals(0, user.getProgress().pointsNeeded(), 1);
     }
 }
