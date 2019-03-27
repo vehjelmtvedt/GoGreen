@@ -352,8 +352,11 @@ public class UserTest {
     @Test
     public void testSimilarActivities() {
         Activity activity1 = new EatVegetarianMeal();
+        activity1.setCarbonSaved(5);
         Activity activity2 = new EatVegetarianMeal();
+        activity2.setCarbonSaved(10);
         Activity activity3 = new EatVegetarianMeal();
+        activity3.setCarbonSaved(15);
 
         activeUser.addActivity(activity1);
         activeUser.addActivity(activity2);
