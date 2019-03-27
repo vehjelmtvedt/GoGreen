@@ -261,6 +261,10 @@ public class DbService {
         User user = getUser(identifier);
 
         if (user == null) {
+            user = getUserByUsername(identifier);
+        }
+
+        if (user == null) {
             return new ArrayList<>(); // return empty list
         } else {
             // Query that returns a list of all the user's friends
@@ -279,6 +283,10 @@ public class DbService {
      */
     public List<User> getTopFriends(String identifier, int top) {
         User user = getUser(identifier);
+
+        if (user == null) {
+            user = getUserByUsername(identifier);
+        }
 
         if (user == null) {
             return new ArrayList<>(); // return empty list

@@ -64,6 +64,9 @@ public class DbServiceTest {
         String emailFormat = "regexTest%d@email.com";
 
         for (int i = 0; i < regexTestUsernames.length; ++i) {
+//            if (i != regexTestUsernames.length - 1)
+
+
             String email = String.format(emailFormat, i);
             User regexUser = new User("Regex", "Test", 20, email, regexTestUsernames[i], "pwd");
             regexUser.setTotalCarbonSaved(CO2TestScores[i]);
