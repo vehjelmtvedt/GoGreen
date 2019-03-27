@@ -21,7 +21,11 @@
             <Font size="37.0" />
          </font>
       </Text>
-      <JFXButton fx:id="button" layoutX="412.0" layoutY="302.0" prefHeight="62.0" prefWidth="158.0" text="CONFRIM" AnchorPane.bottomAnchor="36.0" AnchorPane.rightAnchor="30.0" />
+      <JFXButton fx:id="button" layoutX="412.0" layoutY="302.0" prefHeight="62.0" prefWidth="158.0" style="-fx-background-color: blue;" text="CONFRIM" textFill="WHITE" AnchorPane.bottomAnchor="36.0" AnchorPane.rightAnchor="30.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
       <ImageView fx:id="icon" fitHeight="87.0" fitWidth="92.0" layoutX="300.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="213.0" AnchorPane.topAnchor="41.0">
          <image>
             <Image url="@../Pics/sucess.png" />

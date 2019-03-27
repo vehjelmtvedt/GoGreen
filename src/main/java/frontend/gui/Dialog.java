@@ -45,5 +45,6 @@ public class Dialog {
                 General.getBounds()[0] / 2, General.getBounds()[1] / 2);
         stage.setScene(scene);
         stage.show();
+        stage.toFront();
     }
 }

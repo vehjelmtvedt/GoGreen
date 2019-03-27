@@ -43,9 +43,7 @@ public class InputValidation {
 
         User loggedUser = Requests.loginRequest(loginDetails);
         if (loggedUser != null) {
-            Dialog.show("Login successful", "Welcome to GoGreen, "
-                    + loggedUser.getFirstName()
-                    + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess", false);
+
             HomepageController.setUser(loggedUser);
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
@@ -83,7 +81,9 @@ public class InputValidation {
             }
             //Go to homepage after logging in
             StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), loggedUser);
-
+            Dialog.show("Login successful", "Welcome to GoGreen, "
+                    + loggedUser.getFirstName()
+                    + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess", false);
         } else {
 
             Dialog.show("Login failed",
