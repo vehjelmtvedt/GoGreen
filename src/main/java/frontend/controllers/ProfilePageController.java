@@ -1,5 +1,6 @@
 package frontend.controllers;
 
+import com.jfoenix.controls.JFXHamburger;
 import data.Achievement;
 import data.User;
 import data.UserAchievement;
@@ -28,6 +29,8 @@ public class ProfilePageController implements Initializable {
 
     private static User thisUser;
 
+    @FXML
+    JFXHamburger menu;
 
     @FXML
     AnchorPane anchorPanecom;
