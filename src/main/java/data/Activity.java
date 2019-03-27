@@ -210,11 +210,6 @@ public abstract class Activity {
                 //&& Objects.equals(category, activity.category);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(date, carbonSaved, name, category);
-    }
-
     /**
      * performs the activity and updates the user object.
      *
