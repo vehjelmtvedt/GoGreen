@@ -69,9 +69,32 @@ public class UserStatisticsTest {
     }
 
     @Test
+    public void deleteUserWithActivities() {
+        UserStatistics userStatistics = new UserStatistics("all", 10, 250);
+        User testUser = new User("test", "user", 25, "testuser@email.com", "testuser", "pwd");
+
+        for (int i = 0; i < 10; ++i) {
+            Activity activity = new EatVegetarianMeal();
+            activity.setCarbonSaved(1);
+            testUser.addActivity(activity);
+        }
+
+        userStatistics.deleteUser(testUser);
+        Assert.assertEquals(240, userStatistics.getTotalCO2Saved(), 0.1);
+    }
+
+    @Test
     public void getAverageCO2Saved() {
         UserStatistics userStatistics = new UserStatistics("all", 10, 25);
         double expected = 25.0 / 10.0;
         Assert.assertEquals(expected, userStatistics.getAverageCO2Saved(), 0.1);
+    }
+
+    @Test
+    public void getAverageCO2SavedZero() {
+        UserStatistics userStatistics = new UserStatistics("all", 0, 0);
+        double expected = 0;
+
+        Assert.assertEquals(expected, userStatistics.getAverageCO2Saved(), 0);
     }
 }
