@@ -167,10 +167,10 @@ public class Requests {
      * @param newPass changed password
      * @return - true if successfully changed password, false otherwise
      */
-    public static Boolean forgotPass(String email, int questionID, String answer, String newPass) {
+    public static Boolean forgotPass(String email, int questionid, String answer, String newPass) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/forgotPass")
                 .queryParam("email",email).queryParam("answer",answer)
-                        .queryParam("questionID",questionID).queryParam("newPass",newPass);
+                        .queryParam("questionid",questionid).queryParam("newPass",newPass);
 
         return restTemplate.getForEntity(uriBuilder.toUriString(),Boolean.class).getBody();
     }

@@ -43,7 +43,7 @@ public class ForgotpassController implements Initializable {
                 return;
             }
 
-            boolean accepted = Requests.forgotPass(emailField.getText(), getSecurityQuestionID(),
+            boolean accepted = Requests.forgotPass(emailField.getText(), getSecurityQuestionid(),
                     secAnswer.getText(), newPassword.getText());
 
             if (accepted) {
@@ -131,7 +131,7 @@ public class ForgotpassController implements Initializable {
      *
      * @return - ID of the question
      */
-    public int getSecurityQuestionID() {
+    public int getSecurityQuestionid() {
         if (secQuestion.getValue() == null) {
             return -1;
         }
