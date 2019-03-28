@@ -107,7 +107,7 @@ public class InputValidation {
                                       JFXTextField usernameField, JFXTextField emailField,
                                       JFXPasswordField passField, JFXPasswordField passReField,
                                       JFXTextField ageField,
-                                      int secQuestionID,
+                                      int secQuestionId,
                                       JFXTextField secAnswer, AnchorPane form) throws IOException {
 
         if (!signUpValidateFields(nameFields, usernameField, secAnswer, form)) {
@@ -136,7 +136,7 @@ public class InputValidation {
             return;
         }
 
-        if (secQuestionID == -1) {
+        if (secQuestionId == -1) {
             Dialog.show("Security Question Error", "You did not specify your security question",
                     "DISMISS", "error", false);
             return;
@@ -147,7 +147,7 @@ public class InputValidation {
                 Integer.parseInt(ageField.getText()), emailField.getText(),
                 usernameField.getText(), passField.getText());
         user.setSecurityQuesionAnswer(secAnswer.getText());
-        user.setSecurityQuestionID(secQuestionID);
+        user.setSecurityQuestionId(secQuestionId);
 
         QuestionnaireController.setUser(user);
         StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());

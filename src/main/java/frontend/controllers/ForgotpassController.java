@@ -129,7 +129,7 @@ public class ForgotpassController implements Initializable {
     /**
      * Gets ID of the security question.
      *
-     * @return
+     * @return - ID of the question
      */
     public int getSecurityQuestionID() {
         if (secQuestion.getValue() == null) {

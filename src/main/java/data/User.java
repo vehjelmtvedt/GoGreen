@@ -37,8 +37,8 @@ public class User {
 
     private Progress progress = new Progress();
 
-    private int securityQuestionID;
-    private String securityQuesionAnswer;
+    private int securityQuestionId;
+    private String securityQuestionAnswer;
 
 
     /**
@@ -125,20 +125,20 @@ public class User {
         this.password = password;
     }
 
-    public void setSecurityQuestionID(int id) {
-        this.securityQuestionID = id;
+    public void setSecurityQuestionId(int id) {
+        this.securityQuestionId = id;
     }
 
-    public int getSecurityQuestionID() {
-        return this.securityQuestionID;
+    public int getSecurityQuestionId() {
+        return this.securityQuestionId;
     }
 
     public void setSecurityQuesionAnswer(String answer) {
-        this.securityQuesionAnswer = answer;
+        this.securityQuestionAnswer = answer;
     }
 
     public String getSecurityQuesionAnswer() {
-        return this.securityQuesionAnswer;
+        return this.securityQuestionAnswer;
     }
 
     public ArrayList<String> getFriends() {
