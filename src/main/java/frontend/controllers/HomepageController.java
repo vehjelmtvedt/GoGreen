@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXTreeView;
 import data.User;
 import frontend.gui.Events;
 import frontend.gui.Main;
+import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -109,6 +110,8 @@ public class HomepageController implements Initializable {
         lblFriends.setText(Integer.toString(loggedUser.getFriends().size()));
         lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
                 + " kg of CO2 so far");
+        btnProfile.setOnAction(event -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(),
+                Main.getProfilePage()));
 
         //charts on the right
         chartMyActivities.setData(fillPieChart(loggedUser));

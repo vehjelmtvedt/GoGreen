@@ -82,7 +82,7 @@
                                     </VBox>
                                     <JFXButton fx:id="btnProfile" alignment="CENTER" buttonType="RAISED" opacity="0.75" prefHeight="44.0" prefWidth="123.0" style="-fx-background-color: GREEN;" text="View full profile">
                                        <HBox.margin>
-                                          <Insets left="80.0" top="30.0" />
+                                          <Insets left="80.0" top="35.0" />
                                        </HBox.margin>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
