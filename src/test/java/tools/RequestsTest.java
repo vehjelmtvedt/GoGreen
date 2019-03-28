@@ -193,6 +193,6 @@ public class RequestsTest {
     public void testforgotPass() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(), testUser.getPassword())).thenReturn(null);
         Boolean bool = false;
-        assertEquals(null,Requests.forgotPass(testUser.getEmail(),"A","B"));
+        assertEquals(null,Requests.forgotPass(testUser.getEmail(),1,"A","B"));
     }
 }
