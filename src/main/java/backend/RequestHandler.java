@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import javax.annotation.Resource;
+
 
 
 
@@ -156,6 +158,34 @@ public class RequestHandler {
     @RequestMapping("/getAllAchievements")
     public List<Achievement> getAllAchievements() {
         return dbService.getAchievements();
+    }
+
+    /**
+     * Request to edit profile.
+     * @param loginDetails for auth
+     * @param fieldName the name of the field being changed
+     * @param newValue the new value of the field
+     * @return
+     */
+    @RequestMapping("/editProfile")
+    public User editProfile(@RequestBody LoginDetails loginDetails, @RequestParam String fieldName,
+                            @RequestParam Object newValue) {
+        User user = dbService.grantAccess(loginDetails.getIdentifier(),loginDetails.getPassword());
+        if (user == null) {
+            return null;
+        }
+
+        try {
+            Field field = user.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(user, newValue);
+            field.setAccessible(false);
+        } catch (IllegalAccessException | NoSuchFieldException E1) {
+            return null;
+        }
+
+        dbService.addUser(user) ;
+        return user;
     }
 }
 

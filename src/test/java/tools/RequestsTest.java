@@ -188,4 +188,11 @@ public class RequestsTest {
         Mockito.when(dbService.getTopUsers(1)).thenReturn(testList);
         assertEquals(testList,Requests.getTopUsers(new LoginDetails(testUser.getUsername(),testUser.getPassword()),1));
     }
+
+    @Test
+    public void testEditProfile() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        assertEquals("test5",Requests.editProfile(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword()),"firstName","test5").getFirstName());
+    }
 }

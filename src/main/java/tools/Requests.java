@@ -159,4 +159,17 @@ public class Requests {
         return restTemplate.exchange(uriBuilder.toUriString(),HttpMethod.POST,
                 new HttpEntity<LoginDetails>(loginDetails),typeRef).getBody();
     }
+
+    /**
+     * Request to edit profile
+     * @param loginDetails for auth
+     * @param fieldName name of the field being changed
+     * @param newValue new value for the field
+     * @return
+     */
+    public static User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/editProfile")
+                .queryParam("fieldName",fieldName).queryParam("newValue", newValue);
+        return restTemplate.postForEntity(uriBuilder.toUriString(),loginDetails,User.class).getBody();
+    }
 }
