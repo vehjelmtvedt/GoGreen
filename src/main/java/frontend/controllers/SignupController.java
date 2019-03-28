@@ -95,7 +95,7 @@ public class SignupController implements Initializable {
         signupButton.setOnAction(e -> {
             try {
                 InputValidation.signUpValidate(nameFields, usernameField,
-                        emailField, passwordField, confirmPasswordField, ageField, getSecurityQuestionID(secQuestion), secAnswer, mainPane);
+                        emailField, passwordField, confirmPasswordField, ageField, getSecurityQuestionID(), secAnswer, mainPane);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -116,9 +116,12 @@ public class SignupController implements Initializable {
         fillSecurityQuestions(secQuestion);
     }
 
-    public int getSecurityQuestionID(JFXComboBox SQ) {
-        for (int i = 0; i < 8; i++) {
-            if (SQ.getValue().toString().equals(secQuestions.get(i))) {
+    public int getSecurityQuestionID() {
+        if (secQuestion.getValue() == null) {
+            return -1;
+        }
+        for (int i = 0; i < 7; i++) {
+            if (secQuestion.getValue().toString().equals(secQuestions.get(i))) {
                 return i;
             }
         }
