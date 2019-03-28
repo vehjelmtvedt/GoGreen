@@ -189,10 +189,10 @@ public class QuestionnaireController implements Initializable {
                     if (response.equals("success")) {
                         try {
                             Dialog.show(
-                                    mainPane, "Questionnaire Complete",
+                                    "Questionnaire Complete",
                                     "Questionnaire Completed Successfully\n\n"
                                             + "You will be redirected to the SignIn Page.",
-                                    "DISMISS", "sucess"
+                                    "DISMISS", "sucess", false
                             );
                         } catch (IOException e1) {
                             e1.printStackTrace();
@@ -205,10 +205,9 @@ public class QuestionnaireController implements Initializable {
                 textFieldValidate(textElectricity);
                 textFieldValidate(textCarUsage);
                 try {
-                    Dialog.show(
-                            mainPane, "Questionnaire Incomplete",
-                            "Please Complete the Questionnaire", "DISMISS", "error"
-                    );
+                    Dialog.show("Questionnaire Incomplete",
+                            "Please Complete the Questionnaire", "DISMISS", "error",
+                            false);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
