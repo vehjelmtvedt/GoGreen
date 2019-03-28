@@ -159,4 +159,19 @@ public class Requests {
         return restTemplate.exchange(uriBuilder.toUriString(),HttpMethod.POST,
                 new HttpEntity<LoginDetails>(loginDetails),typeRef).getBody();
     }
+
+    /**
+     * Request to rest password
+     * @param email email of user.
+     * @param answer answer of the security question
+     * @param newPass changed password
+     * @return
+     */
+    public static Boolean forgotPass(String email, String answer, String newPass) {
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/forgotPass")
+                .queryParam("email",email).queryParam("answer",answer)
+                .queryParam("newPass",newPass);
+
+        return restTemplate.getForEntity(uriBuilder.toUriString(),Boolean.class).getBody();
+    }
 }
