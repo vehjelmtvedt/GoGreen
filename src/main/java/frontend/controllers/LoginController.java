@@ -85,10 +85,6 @@ public class LoginController implements Initializable {
             }
         });
 
-//        mainPane.setOnMouseClicked(e -> {
-//            forgotPassWindow.close();
-//        });
-
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
         signupForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.sceneSwitch(
@@ -113,7 +109,7 @@ public class LoginController implements Initializable {
         Scene forgotPasswordScene = new Scene(forgotPass, General.getBounds()[0] / 2, General.getBounds()[1] / 1.5);
         forgotPassWindow.setScene(forgotPasswordScene);
         forgotPassWindow.show();
-        System.out.println("WE HERE");
+        forgotPass.toFront();
     }
 
     /**
