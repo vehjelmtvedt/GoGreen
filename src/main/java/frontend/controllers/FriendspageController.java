@@ -109,15 +109,6 @@ public class FriendspageController implements Initializable {
         todayPane.prefWidthProperty().bind(headingBox.widthProperty());
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
-
-        friendsPane.setOnMouseClicked(e ->{
-            try {
-                popup.newNotification(main, "Achievement",
-                        "Login 5 days in a row", "sucess");
-            } catch (IOException ev) {
-                ev.printStackTrace();
-            }
-        });
     }
 
     /**

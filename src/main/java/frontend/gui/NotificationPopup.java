@@ -79,13 +79,6 @@ public class NotificationPopup {
         beat.play();
     }
 
-//    public void init() {
-//        drawer1 = new JFXDrawer();
-//        drawer2 = new JFXDrawer();
-//        drawer3 = new JFXDrawer();
-//        drawer4 = new JFXDrawer();
-//    }
-
     public JFXDrawer addDrawer(JFXDrawer drawer, int drawerNumber, AnchorPane mainPane,
                              String headerText, String bodyText, String icon) throws IOException {
         AnchorPane content = new AnchorPane();
@@ -100,9 +93,9 @@ public class NotificationPopup {
 
         AnchorPane.setTopAnchor(heading, 10.0);
         AnchorPane.setLeftAnchor(heading, 10.0);
-        AnchorPane.setTopAnchor(image, 40.0);
+        AnchorPane.setTopAnchor(image, 55.0);
         AnchorPane.setLeftAnchor(image, 10.0);
-        AnchorPane.setTopAnchor(body, 50.0);
+        AnchorPane.setTopAnchor(body, 65.0);
         AnchorPane.setLeftAnchor(body, 70.0);
 
 
