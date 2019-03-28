@@ -10,7 +10,6 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import data.LoginDetails;
 import data.User;
-import frontend.gui.NotificationPopup;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -97,7 +96,6 @@ public class FriendspageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        NotificationPopup popup = new NotificationPopup();
         try {
             NavPanelController.setup(drawer, menu);
         } catch (IOException e) {
@@ -112,15 +110,6 @@ public class FriendspageController implements Initializable {
         todayPane.prefWidthProperty().bind(headingBox.widthProperty());
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
-
-        todayChart.setOnMouseClicked(e -> {
-            try {
-                popup.newNotification(main, headerPane, "Heading", "Text of the body",
-                        "sucess");
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        });
     }
 
     /**

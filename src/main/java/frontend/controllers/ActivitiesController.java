@@ -199,6 +199,7 @@ public class ActivitiesController implements Initializable {
                 minCarbon, maxCarbon, loggedUser, activityTable);
         Events.applyFilters(lblApply,checkList, radioList,
                 minCarbon, maxCarbon, loggedUser, activityTable);
+
     }
 
     //GENERAL METHODS
