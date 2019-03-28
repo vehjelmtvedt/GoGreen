@@ -5,7 +5,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.web.client.HttpClientErrorException;
 import tools.Requests;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * This class is used as a superclass for the specific activities a user performs.
