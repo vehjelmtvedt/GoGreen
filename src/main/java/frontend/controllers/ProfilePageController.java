@@ -2,14 +2,22 @@ package frontend.controllers;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXProgressBar;
+import com.jfoenix.controls.JFXSpinner;
 import data.User;
 import frontend.gui.ProfilePageLogic;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,6 +64,12 @@ public class ProfilePageController implements Initializable {
     @FXML
     private Label   level;
 
+    @FXML
+    private JFXProgressBar levelProgress;
+
+    @FXML
+    private JFXProgressBar carbonSavedProgress;
+
 //    @FXML
 //    private VBox com;
 //
@@ -72,19 +86,19 @@ public class ProfilePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-//        userName.setText("UserName: " + thisUser.getUsername());
+        userName.setText("Username: " + thisUser.getUsername());
+        name.setText("Name: " + thisUser.getFirstName() + " " + thisUser.getLastName());
+        email.setText("eMail: " + thisUser.getEmail());
+        age.setText("Age: " + thisUser.getAge() + "");
+        lastseen.setText("Last LogIn: " + thisUser.getLastLoginDate().toString());
+        level.setText("Level: " + (thisUser.getProgress().getLevel()));
+        score.setText("Total\nCarbon\nSaved: " + thisUser.getTotalCarbonSaved());
+        profilePicture.setImage(new Image("frontend/Pics/user.png"));
 
-//        name.setText("Name: " + thisUser.getFirstName() + " " + thisUser.getLastName());
+        ObservableValue<Number> level = ObservableValue<Number>(5);
 
-//        email.setText("eMail: " + thisUser.getEmail());
-//
-//        age.setText("Age: " + thisUser.getAge() + "");
-//
-//        lastseen.setText("Last LogIn: " + thisUser.getLastLoginDate().toString());
-//
-//        level.setText("Level: " + ProfilePageLogic.getLevel(thisUser));
-//
-//        score.setText("TotalCarbonSaved: " + thisUser.getTotalCarbonSaved());
+
+        levelProgress.progressProperty().bind(thisUser.getProgress().getLevel());
 
         try {
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);

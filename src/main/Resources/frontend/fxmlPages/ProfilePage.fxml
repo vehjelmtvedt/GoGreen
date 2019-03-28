@@ -2,7 +2,7 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
-<?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXProgressBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="mainPane" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ProfilePageController">
    <children>
-      <AnchorPane fx:id="headerPane" layoutX="3.0" layoutY="35.0" prefHeight="100.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="headerPane" layoutX="3.0" layoutY="35.0" prefHeight="100.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.bottomAnchor="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <JFXHamburger fx:id="menu" layoutX="30.0" layoutY="18.0" prefHeight="32.0" prefWidth="46.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
             <Label layoutX="607.0" layoutY="21.0" prefHeight="60.0" prefWidth="196.0" text="PROFILE">
@@ -20,37 +20,37 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="97.0" prefHeight="703.0" prefWidth="1400.0">
+      <AnchorPane layoutY="97.0" prefHeight="703.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <children>
             <AnchorPane layoutX="11.0" layoutY="16.0" prefHeight="324.0" prefWidth="559.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="16.0">
                <children>
-                  <ImageView fx:id="profile" fitHeight="176.0" fitWidth="160.0" layoutX="27.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="61.0" />
+                  <ImageView fx:id="profilePicture" fitHeight="176.0" fitWidth="160.0" layoutX="27.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="61.0" />
                   <Label layoutX="177.0" layoutY="1.0" prefHeight="29.0" prefWidth="215.0" text="Profile Information" AnchorPane.leftAnchor="176.0" AnchorPane.rightAnchor="168.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="nameLabel" layoutX="222.0" layoutY="62.0" minWidth="140.0" prefHeight="23.0" prefWidth="277.0" text="Name_Placeholder" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="60.0">
+                  <Label fx:id="name" layoutX="222.0" layoutY="62.0" minWidth="140.0" prefHeight="23.0" prefWidth="277.0" text="Name_Placeholder" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="60.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="userNameLabel" layoutX="222.0" layoutY="92.0" minWidth="184.0" prefHeight="23.0" prefWidth="295.0" text="UserName_Placeholder" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="100.0">
+                  <Label fx:id="userName" layoutX="222.0" layoutY="92.0" minWidth="184.0" prefHeight="23.0" prefWidth="295.0" text="UserName_Placeholder" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="100.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="emailLabel" layoutX="222.0" layoutY="122.0" minWidth="160.0" prefHeight="23.0" prefWidth="308.0" text="Email_Placeholder" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="140.0">
+                  <Label fx:id="email" layoutX="222.0" layoutY="122.0" minWidth="160.0" prefHeight="23.0" prefWidth="308.0" text="Email_Placeholder" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="140.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="ageLabel" layoutX="222.0" layoutY="152.0" minWidth="146.0" prefHeight="23.0" prefWidth="146.0" text="Age_Placeholder" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="180.0">
+                  <Label fx:id="age" layoutX="222.0" layoutY="152.0" minWidth="146.0" prefHeight="23.0" prefWidth="146.0" text="Age_Placeholder" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="180.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lastseenLabel" layoutX="222.0" layoutY="182.0" minWidth="194.0" prefHeight="23.0" prefWidth="194.0" text="Last Seen_Placeholder" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="220.0">
+                  <Label fx:id="lastseen" layoutX="222.0" layoutY="222.0" minWidth="194.0" prefHeight="23.0" prefWidth="334.0" text="Last Seen_Placeholder" AnchorPane.leftAnchor="221.0" AnchorPane.topAnchor="221.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -64,18 +64,16 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="level" layoutX="24.0" layoutY="81.0" text="Level">
+                  <Label fx:id="level" layoutX="1.0" layoutY="81.0" prefHeight="40.0" prefWidth="117.0" text="Level_Plaaceholder">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="score" layoutX="26.0" layoutY="190.0" minWidth="44.0" prefHeight="23.0" prefWidth="63.0" text="Score">
+                  <Label fx:id="score" layoutX="-2.0" layoutY="156.0" minWidth="44.0" prefHeight="78.0" prefWidth="124.0" text="Carbon Saved Placeholder">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXSpinner layoutX="109.0" layoutY="73.0" />
-                  <JFXSpinner layoutX="107.0" layoutY="176.0" />
                   <AnchorPane layoutX="185.0" layoutY="46.0" prefHeight="252.0" prefWidth="502.0" style="-fx-border-color: black;">
                      <children>
                         <Label layoutX="191.0" prefHeight="29.0" prefWidth="107.0" text="My Badges">
@@ -83,8 +81,11 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
+                        <AnchorPane layoutX="10.0" layoutY="38.0" prefHeight="200.0" prefWidth="483.0" />
                      </children>
                   </AnchorPane>
+                  <JFXProgressBar fx:id="levelProgress" layoutX="121.0" layoutY="86.0" prefHeight="13.0" prefWidth="54.0" />
+                  <JFXProgressBar fx:id="carbonSavedProgress" layoutX="125.0" layoutY="189.0" prefHeight="13.0" prefWidth="54.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="15.0" layoutY="354.0" prefHeight="324.0" prefWidth="1372.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="365.0">
