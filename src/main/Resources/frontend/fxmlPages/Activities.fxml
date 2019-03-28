@@ -243,14 +243,14 @@
                                     <DropShadow />
                                  </effect>
                               </AnchorPane>
-                              <AnchorPane prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                              <AnchorPane fx:id="paneEnergy" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
                                  <children>
                                     <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Pics/organicFoodIcon.jpg" />
+                                          <Image url="@../Pics/energyIcon.png" />
                                        </image>
                                     </ImageView>
-                                    <JFXButton layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="No activity" />
+                                    <JFXButton fx:id="btnEnergy" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Reduce energy consumption" />
                                  </children>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
