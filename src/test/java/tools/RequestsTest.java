@@ -188,4 +188,11 @@ public class RequestsTest {
         Mockito.when(dbService.getTopUsers(1)).thenReturn(testList);
         assertEquals(testList,Requests.getTopUsers(new LoginDetails(testUser.getUsername(),testUser.getPassword()),1));
     }
+
+    @Test
+    public void testforgotPass() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(), testUser.getPassword())).thenReturn(null);
+        Boolean bool = false;
+        assertEquals(null,Requests.forgotPass(testUser.getEmail(),"A","B"));
+    }
 }
