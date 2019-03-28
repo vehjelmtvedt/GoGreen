@@ -23,7 +23,18 @@ public class NotificationPopup {
     boolean d4Closed = true;
 
 
-    public void newNotification(AnchorPane mainPane, AnchorPane headerPane, String headerText, String bodyText, String icon) throws IOException {
+    /**
+     * Opens a notification to the side of your page.
+     * @param mainPane - pane surrounding your entire content (root)
+     * @param headerPane - the goGreen header (used to position the popup)
+     * @param headerText - text of the heading on the popup
+     * @param bodyText - text of the body on the popup
+     * @param icon - can use any icon in frontend/pics here (if it is png)
+     * @throws IOException - if it fails to load fonts
+     */
+    public void newNotification(AnchorPane mainPane, AnchorPane headerPane,
+                                String headerText, String bodyText,
+                                String icon) throws IOException {
         if (d1Closed) {
             JFXDrawer drawer = addDrawer(new JFXDrawer(), 0, mainPane, headerPane, headerText,
                     bodyText, icon);
@@ -56,6 +67,7 @@ public class NotificationPopup {
                                 break;
                         case 3: d4Closed = false;
                                 break;
+                        default: break;
                     }
                 }),
                 new KeyFrame(Duration.seconds(5.0), event -> {
@@ -69,6 +81,7 @@ public class NotificationPopup {
                             break;
                         case 3: d4Closed = true;
                             break;
+                        default: break;
                     }
                 })
         );
@@ -76,16 +89,29 @@ public class NotificationPopup {
         beat.play();
     }
 
+    /**
+     * Adds a drawer to contain the popup.
+     * @param drawer - the drawer to use
+     * @param drawerNumber - to adjust the positioning
+     * @param mainPane - root of your page
+     * @param headerPane - goGreen header
+     * @param headerText - text of the header
+     * @param bodyText - text of the body
+     * @param icon - which icon to use
+     * @return - the drawer (popup)
+     * @throws IOException - if fails to load the font
+     */
     public JFXDrawer addDrawer(JFXDrawer drawer, int drawerNumber, AnchorPane mainPane,
-                             AnchorPane headerPane, String headerText, String bodyText, String icon) throws IOException {
-        AnchorPane content = new AnchorPane();
+                             AnchorPane headerPane, String headerText,
+                               String bodyText, String icon) throws IOException {
         Label heading = new Label(headerText);
         heading.setFont(Main.getRobotoBold(24));
         Label body = new Label(bodyText);
-        heading.setFont(Main.getRobotoThin(19));
+        body.setFont(Main.getRobotoThin(19));
         ImageView image = new ImageView(new Image("frontend/Pics/" + icon + ".png"));
         image.setFitHeight(40);
         image.setFitWidth(40);
+        AnchorPane content = new AnchorPane();
         content.getChildren().addAll(heading, body, image);
 
         AnchorPane.setTopAnchor(heading, 10.0);
@@ -103,7 +129,8 @@ public class NotificationPopup {
         drawer.setDirection(JFXDrawer.DrawerDirection.RIGHT);
         mainPane.getChildren().addAll(drawer);
         AnchorPane.setRightAnchor(drawer, 0.0);
-        AnchorPane.setTopAnchor(drawer, headerPane.getHeight() + (drawerNumber * (drawer.getMinHeight() + 10)));
+        AnchorPane.setTopAnchor(drawer, headerPane.getHeight()
+                + (drawerNumber * (drawer.getMinHeight() + 10)));
         return drawer;
     }
 }

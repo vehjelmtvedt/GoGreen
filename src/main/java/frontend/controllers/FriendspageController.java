@@ -112,6 +112,15 @@ public class FriendspageController implements Initializable {
         todayPane.prefWidthProperty().bind(headingBox.widthProperty());
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
+
+        todayChart.setOnMouseClicked(e -> {
+            try {
+                popup.newNotification(main, headerPane, "Heading", "Text of the body",
+                        "sucess");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
     }
 
     /**

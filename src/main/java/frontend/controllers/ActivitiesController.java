@@ -11,7 +11,6 @@ import data.User;
 import frontend.gui.Events;
 import frontend.gui.General;
 import frontend.gui.Main;
-import frontend.gui.NotificationPopup;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
