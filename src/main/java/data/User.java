@@ -133,11 +133,11 @@ public class User {
         return this.securityQuestionId;
     }
 
-    public void setSecurityQuesionAnswer(String answer) {
+    public void setSecurityQuestionAnswer(String answer) {
         this.securityQuestionAnswer = answer;
     }
 
-    public String getSecurityQuesionAnswer() {
+    public String getSecurityQuestionAnswer() {
         return this.securityQuestionAnswer;
     }
 

@@ -221,8 +221,8 @@ public class RequestHandlerTest
     @Test
     public void forgotPass() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        testUser.setSecurityQuesionAnswer("A");
-        testUser.setSecurityQuestionID(1);
+        testUser.setSecurityQuestionAnswer("A");
+        testUser.setSecurityQuestionId(1);
         Boolean bool = true;
         assertEquals(requestHandler.forgotPass(testUser.getEmail(),"A",1,"ASD"),bool);
     }
@@ -236,8 +236,8 @@ public class RequestHandlerTest
     @Test
     public void forgotPassWrongAnswer() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        testUser.setSecurityQuesionAnswer("A");
-        testUser.setSecurityQuestionID(1);
+        testUser.setSecurityQuestionAnswer("A");
+        testUser.setSecurityQuestionId(1);
         Boolean bool = false;
         assertEquals(requestHandler.forgotPass(testUser.getEmail(),"B",1,"ASD"),bool);
     }

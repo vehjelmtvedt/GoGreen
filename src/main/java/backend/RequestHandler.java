@@ -167,13 +167,14 @@ public class RequestHandler {
      */
     @RequestMapping("/forgotPass")
     public Boolean forgotPass(@RequestParam String email, @RequestParam String answer,
-                           @RequestParam int questionId ,@RequestParam String newPass) {
+                           @RequestParam int questionID ,@RequestParam String newPass) {
         User user = dbService.getUser(email);
         if (user == null) {
             return null;
         }
-        if (user.getSecurityQuesionAnswer().equals(answer)
-                && user.getSecurityQuestionID() == questionId) {
+        System.out.println(user.toString());
+        if (user.getSecurityQuestionAnswer().equals(answer)
+                && user.getSecurityQuestionId() == questionID) {
             user.setPassword(newPass);
             dbService.addUser(user);
             return true;

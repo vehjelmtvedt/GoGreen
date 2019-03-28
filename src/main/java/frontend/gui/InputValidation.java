@@ -146,7 +146,7 @@ public class InputValidation {
                 nameFields[1].getText(),
                 Integer.parseInt(ageField.getText()), emailField.getText(),
                 usernameField.getText(), passField.getText());
-        user.setSecurityQuesionAnswer(secAnswer.getText());
+        user.setSecurityQuestionAnswer(secAnswer.getText());
         user.setSecurityQuestionId(secQuestionId);
 
         QuestionnaireController.setUser(user);
