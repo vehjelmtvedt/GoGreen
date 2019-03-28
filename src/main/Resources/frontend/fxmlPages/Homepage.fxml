@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
    <children>
       <AnchorPane fx:id="headerPane" prefHeight="137.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -37,7 +37,7 @@
          <children>
             <AnchorPane layoutY="44.0" prefHeight="524.0" prefWidth="1400.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
                <children>
-                  <AnchorPane layoutX="229.0" layoutY="26.0" prefHeight="200.0" prefWidth="1048.0" AnchorPane.leftAnchor="229.0" AnchorPane.rightAnchor="123.0" AnchorPane.topAnchor="26.0">
+                  <AnchorPane layoutX="321.0" layoutY="34.0" prefHeight="200.0" prefWidth="1048.0" AnchorPane.leftAnchor="321.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="34.0">
                      <children>
                         <Circle fx:id="circleProfile" fill="GREEN" layoutX="100.0" layoutY="100.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                         <AnchorPane layoutX="233.0" prefHeight="200.0" prefWidth="683.0" AnchorPane.leftAnchor="233.0" AnchorPane.rightAnchor="0.0">
@@ -105,7 +105,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="229.0" layoutY="264.0" prefHeight="365.0" prefWidth="1120.0">
+                  <AnchorPane layoutX="321.0" layoutY="270.0" prefHeight="503.0" prefWidth="1124.0" AnchorPane.leftAnchor="321.0" AnchorPane.rightAnchor="105.0">
                      <children>
                         <HBox layoutX="208.0" prefHeight="47.0" prefWidth="815.0" spacing="33.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -136,11 +136,12 @@
                               </JFXButton>
                            </children>
                         </HBox>
-                        <JFXTreeTableView fx:id="tableMyStats" layoutX="200.0" layoutY="75.0" prefHeight="290.0" prefWidth="815.0" />
-                        <JFXTreeTableView fx:id="tableTop5" layoutX="200.0" layoutY="75.0" prefHeight="290.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView fx:id="tableTop10" layoutX="200.0" layoutY="75.0" prefHeight="290.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="290.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="290.0" prefWidth="815.0" visible="false" />
+                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" />
+                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
+                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
+                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
+                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
+                        <Label layoutX="382.0" layoutY="456.0" text="- Ranking is determined according to the total amount of CO2 saved - " AnchorPane.leftAnchor="382.0" AnchorPane.rightAnchor="274.0" />
                      </children>
                   </AnchorPane>
                </children>
@@ -152,6 +153,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <JFXDrawer fx:id="drawer" layoutY="137.0" prefHeight="719.0" prefWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="138.0" />
+      <JFXDrawer fx:id="drawer" layoutY="137.0" prefHeight="863.0" prefWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="137.0" />
    </children>
 </AnchorPane>

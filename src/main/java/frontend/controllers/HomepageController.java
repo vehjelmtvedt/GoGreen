@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
+import com.jfoenix.controls.JFXTreeView;
 import data.User;
 import frontend.gui.Events;
 import frontend.gui.Main;
@@ -13,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 public class HomepageController implements Initializable {
     private static User loggedUser;
     private List<JFXButton> leaderboards = new ArrayList<>();
+    private List<JFXTreeView> listTables = new ArrayList<>();
 
     @FXML
     private JFXHamburger menu;
@@ -51,8 +52,6 @@ public class HomepageController implements Initializable {
     @FXML
     private JFXButton btnProfile;
     @FXML
-    private ProgressBar progressLevel;
-    @FXML
     private JFXButton btnMyStats;
     @FXML
     private JFXButton btnTop5;
@@ -62,6 +61,16 @@ public class HomepageController implements Initializable {
     private JFXButton btnTop25;
     @FXML
     private JFXButton btnTop50;
+    @FXML
+    private JFXTreeView tableMyStats;
+    @FXML
+    private JFXTreeView tableTop5;
+    @FXML
+    private JFXTreeView tableTop10;
+    @FXML
+    private JFXTreeView tableTop25;
+    @FXML
+    private JFXTreeView tableTop50;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -71,6 +80,13 @@ public class HomepageController implements Initializable {
         leaderboards.add(btnTop10);
         leaderboards.add(btnTop25);
         leaderboards.add(btnTop50);
+
+        //add tables to tables list
+        listTables.add(tableMyStats);
+        listTables.add(tableTop5);
+        listTables.add(tableTop10);
+        listTables.add(tableTop25);
+        listTables.add(tableTop50);
 
         Events.addLeaderboards(leaderboards);
 
@@ -109,6 +125,30 @@ public class HomepageController implements Initializable {
         );
         return pieChartData;
     }
+
+    //    @FXML
+    //    private void handleLeaderboards(ActionEvent event) {
+    //        JFXTreeView current = new JFXTreeView();
+    //        if (event.getSource() == btnMyStats) {
+    //            tableMyStats.setVisible(true);
+    //            current = tableMyStats;
+    //        } else if (event.getSource() == btnTop5) {
+    //            current = tableTop5;
+    //        } else if (event.getSource() == btnTop10) {
+    //            current = tableTop10;
+    //        } else if (event.getSource() == btnTop25) {
+    //            current = tableTop25;
+    //        } else {
+    //            if (event.getSource() == btnTop50) {
+    //                current = tableTop50;
+    //            }
+    //        }
+    //        for (JFXTreeView table : this.listTables) {
+    //            if (!table.equals(current)) {
+    //                table.setVisible(false);
+    //            }
+    //        }
+    //    }
 
     /**
      * .
