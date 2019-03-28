@@ -37,6 +37,9 @@ public class User {
 
     private Progress progress = new Progress();
 
+    private int securityQuestionID;
+    private String securityQuesionAnswer;
+
 
     /**
      * Constructor of User object.
@@ -120,6 +123,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setSecurityQuestionID(int ID) {
+        this.securityQuestionID = ID;
+    }
+
+    public int getSecurityQuestionID() {
+        return this.securityQuestionID;
+    }
+
+    public void setSecurityQuesionAnswer(String answer) {
+        this.securityQuesionAnswer = answer;
+    }
+
+    public String getSecurityQuesionAnswer() {
+        return this.securityQuesionAnswer;
     }
 
     public ArrayList<String> getFriends() {
