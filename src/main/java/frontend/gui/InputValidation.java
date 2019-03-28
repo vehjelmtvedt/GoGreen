@@ -43,7 +43,9 @@ public class InputValidation {
 
         User loggedUser = Requests.loginRequest(loginDetails);
         if (loggedUser != null) {
-
+            Dialog.show("Login successful", "Welcome to GoGreen, "
+                    + loggedUser.getFirstName()
+                    + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess", false);
             HomepageController.setUser(loggedUser);
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
@@ -81,9 +83,7 @@ public class InputValidation {
             }
             //Go to homepage after logging in
             StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), loggedUser);
-            Dialog.show("Login successful", "Welcome to GoGreen, "
-                    + loggedUser.getFirstName()
-                    + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess", false);
+
         } else {
 
             Dialog.show("Login failed",
@@ -106,10 +106,9 @@ public class InputValidation {
     public static void signUpValidate(JFXTextField[] nameFields,
                                       JFXTextField usernameField, JFXTextField emailField,
                                       JFXPasswordField passField, JFXPasswordField passReField,
-                                      JFXTextField secAnswer,
                                       JFXTextField ageField, AnchorPane form) throws IOException {
 
-        if (!signUpValidateFields(nameFields, usernameField, secAnswer, form)) {
+        if (!signUpValidateFields(nameFields, usernameField, form)) {
             return;
         }
         if (!signUpValidatePass(emailField, passField, passReField, ageField, form)) {
@@ -139,14 +138,13 @@ public class InputValidation {
                 nameFields[1].getText(),
                 Integer.parseInt(ageField.getText()), emailField.getText(),
                 usernameField.getText(), passField.getText());
-        user.setSecQuestionAnswer(secAnswer.getText());
+
         QuestionnaireController.setUser(user);
         StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
     }
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
                                                 JFXTextField usernameField,
-                                                JFXTextField secAnswerField,
                                                 AnchorPane form) throws IOException {
         if (nameFields[0].getText().isEmpty()) {
             Dialog.show("Form Error!", "Please enter your First Name",
@@ -159,11 +157,6 @@ public class InputValidation {
         }
         if (usernameField.getText().isEmpty()) {
             Dialog.show("Form Error!", "Please enter a username", "DISMISS", "error", false);
-            return false;
-        }
-        if (secAnswerField.getText().isEmpty()) {
-            Dialog.show("Form Error!",
-                    "Please complete the security question", "DISMISS", "error", false);
             return false;
         }
         return true;
