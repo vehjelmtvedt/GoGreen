@@ -2,8 +2,11 @@ package backend;
 
 import backend.repos.AchievementRepository;
 import backend.repos.UserRepository;
+import backend.repos.UserStatisticsRepository;
 import data.Achievement;
+import data.Activity;
 import data.User;
+import data.UserStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
@@ -32,6 +35,9 @@ public class DbService {
 
     @Autowired
     private AchievementRepository achievements;
+
+    @Autowired
+    private UserStatisticsRepository userStatistics;
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -68,6 +74,7 @@ public class DbService {
         // New User, encrypt password
         if (getUser(user.getEmail()) == null) {
             user.setPassword(encodePassword(user.getPassword()));
+            updateTotalUsersStatistics();
         }
 
         users.save(user);
@@ -115,7 +122,12 @@ public class DbService {
      * @param email - e-mail of the User to delete
      */
     void deleteUser(String email) {
-        users.deleteById(email);
+        Optional<User> user = users.findById(email);
+
+        if (user.isPresent()) {
+            removeUserUpdateStatistics(user.get());
+            users.deleteById(email);
+        }
     }
 
     /**
@@ -218,6 +230,28 @@ public class DbService {
 
     /**
      * .
+     * Adds specified Activity to specified User, if the User exists.
+     *
+     * @param username - Username of the User to add the Activity to
+     * @param activity - Activity to add to User
+     * @return - Updated User
+     */
+    public User addActivityToUser(String username, Activity activity) {
+        User returned = getUserByUsername(username);
+
+        if (returned == null || activity == null) {
+            return null;
+        }
+
+        returned.addActivity(activity);
+        returned.setTotalCarbonSaved(returned.getTotalCarbonSaved() + activity.getCarbonSaved());
+        addUser(returned);
+        updateTotalCo2SavedStatistics(returned);
+        return returned;
+    }
+
+    /**
+     * .
      * Finds all usernames matching specified string
      *
      * @param username - part of username to match
@@ -282,5 +316,67 @@ public class DbService {
      */
     public List<Achievement> getAchievements() {
         return achievements.findAll();
+    }
+
+    /**.
+     * Returns the total amount of CO2 saved by all the users
+     * @return - Total amount of CO2 saved
+     */
+    public double getTotalCO2Saved() {
+        // Querying is too slow (keeping for reference)
+        /*// Create aggregation query
+        Aggregation userAggregation = Aggregation.newAggregation(
+                Aggregation.group()
+                        .sum("totalCarbonSaved")
+                        .as("totalCarbonSaved"));
+
+        // Aggregate result to single User
+        User sumUser = mongoTemplate.aggregate(userAggregation, User.class, User.class)
+                .getUniqueMappedResult();
+
+        // No Users found
+        if (sumUser == null) {
+            return 0.0;
+        }
+
+        // Return sum result
+        return sumUser.getTotalCarbonSaved();*/
+
+        return getTotalStatistics().getTotalCO2Saved();
+    }
+
+    public int getTotalUsers() {
+        return getTotalStatistics().getTotalUsers();
+    }
+
+    public double getAverageCO2Saved() {
+        return getTotalStatistics().getAverageCO2Saved();
+    }
+
+    private UserStatistics getTotalStatistics() {
+        return mongoTemplate.findById("all", UserStatistics.class);
+    }
+
+    private void updateTotalCo2SavedStatistics(User user) {
+        Activity recentActivity = user.getActivities().get(user.getActivities().size() - 1);
+
+        UserStatistics allStatistics = getTotalStatistics();
+        allStatistics.addTotalCo2Saved(recentActivity.getCarbonSaved());
+
+        userStatistics.save(allStatistics);
+    }
+
+    private void updateTotalUsersStatistics() {
+        UserStatistics allStatistics = getTotalStatistics();
+        allStatistics.incrementTotalUsers();
+
+        userStatistics.save(allStatistics);
+    }
+
+    private void removeUserUpdateStatistics(User user) {
+        UserStatistics allStatistics = getTotalStatistics();
+        allStatistics.deleteUser(user);
+
+        userStatistics.save(allStatistics);
     }
 }

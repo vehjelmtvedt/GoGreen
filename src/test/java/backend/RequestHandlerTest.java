@@ -139,10 +139,9 @@ public class RequestHandlerTest
 
     @Test
     public void testAddActivity() {
-        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
         EatVegetarianMeal act = new EatVegetarianMeal();
+        Mockito.when(dbService.addActivityToUser(testUser.getUsername(), act)).thenReturn(testUser);
         assertEquals(testUser, requestHandler.addActivity(act, testUser.getUsername()));
-        assertEquals(1, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
     }
 
     @Test

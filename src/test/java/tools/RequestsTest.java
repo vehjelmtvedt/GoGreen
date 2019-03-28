@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -139,10 +140,11 @@ public class RequestsTest {
 
     @Test
     public void testAddActivityRequest() {
-        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
         EatVegetarianMeal activity = new EatVegetarianMeal();
+
+        Mockito.when(dbService.addActivityToUser(testUser.getUsername(), activity)).thenReturn(testUser);
+
         assertEquals(testUser, Requests.addActivityRequest(activity, testUser.getUsername()));
-        assertEquals(1, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
     }
 
     @Test
