@@ -18,25 +18,6 @@ public class ProfilePageLogic {
     }
 
     /**
-     * calls the get level from progress.
-     */
-    public static int getLevel(User user) {
-
-        return user.getProgress().getLevel();
-
-    }
-
-    /**
-     * gets score from user.
-     */
-    public static double getScore(User user) {
-
-        return user.getTotalCarbonSaved();
-
-    }
-
-
-    /**
      * returns string with badge path.
      */
     public static String getBadge(User user) {
@@ -60,41 +41,5 @@ public class ProfilePageLogic {
         return achievement;
 
     }
-
-    /**
-     * this returns a String with Achievement name.
-     *
-     * @return name
-     */
-    public static String getNameString(UserAchievement userAchievement) {
-
-        return list.get(userAchievement.getId()).getName();
-
-    }
-
-    /**
-     * this returns a String with Achievement bonus.
-     *
-     * @return bonus
-     */
-    public static int getBonusString(UserAchievement userAchievement) {
-
-        return list.get(userAchievement.getId()).getBonus();
-    }
-
-    /**
-     * this returns a String with Achievement completion date.
-     *
-     * @return date
-     */
-    public static String getDateString(UserAchievement userAchievement) {
-
-
-        return userAchievement.getDate().toString();
-
-    }
-
-
-
 
 }
