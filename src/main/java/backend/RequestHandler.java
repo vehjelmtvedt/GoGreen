@@ -163,6 +163,21 @@ public class RequestHandler {
     public List<Achievement> getAllAchievements() {
         return dbService.getAchievements();
     }
+
+    @RequestMapping("/getTotalUsers")
+    public int getTotalUsers() {
+        return dbService.getTotalUsers();
+    }
+
+    @RequestMapping("/getTotalCO2Saved")
+    public double getTotalCO2Saved() {
+        return dbService.getTotalCO2Saved();
+    }
+
+    @RequestMapping("/getAverageCO2Saved")
+    public double getAverageCO2Saved() {
+        return dbService.getAverageCO2Saved();
+    }
 }
 
 
