@@ -80,8 +80,7 @@ public class RequestHandler {
      */
     @RequestMapping("/validateUser")
     public String validateUser(@RequestBody String identifier) {
-        if  (dbService.getUserByEmail(identifier) != null
-                || dbService.getUserByUsername(identifier) != null) {
+        if  (dbService.getUser(identifier) != null) {
             return "OK";
         } else {
             return "NONE";
