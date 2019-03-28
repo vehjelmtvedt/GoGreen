@@ -134,8 +134,8 @@
                   <Image url="@../Pics/age.png" />
                </image>
             </ImageView>
-            <JFXComboBox layoutX="92.0" layoutY="536.0" prefHeight="50.0" prefWidth="503.0" promptText="Security Question" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="79.0" />
-            <JFXTextField layoutX="129.0" layoutY="646.0" prefHeight="50.0" prefWidth="503.0" promptText="Answer" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="79.0" />
+            <JFXComboBox fx:id="secQuestion" layoutX="92.0" layoutY="536.0" prefHeight="50.0" prefWidth="503.0" promptText="Security Question" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="79.0" />
+            <JFXTextField fx:id="secAnswer" layoutX="129.0" layoutY="646.0" prefHeight="50.0" prefWidth="503.0" promptText="Answer" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="79.0" />
          </children>
       </AnchorPane>
    </children>

@@ -106,9 +106,9 @@ public class InputValidation {
     public static void signUpValidate(JFXTextField[] nameFields,
                                       JFXTextField usernameField, JFXTextField emailField,
                                       JFXPasswordField passField, JFXPasswordField passReField,
-                                      JFXTextField ageField, AnchorPane form) throws IOException {
+                                      JFXTextField ageField, int secQuestionID, JFXTextField secAnswer, AnchorPane form) throws IOException {
 
-        if (!signUpValidateFields(nameFields, usernameField, form)) {
+        if (!signUpValidateFields(nameFields, usernameField, secAnswer, form)) {
             return;
         }
         if (!signUpValidatePass(emailField, passField, passReField, ageField, form)) {
@@ -134,10 +134,18 @@ public class InputValidation {
             return;
         }
 
+        if (secQuestionID == -1) {
+            Dialog.show("Security Question Error", "You did not specify your security question",
+                    "DISMISS", "error", false);
+            return;
+        }
+
         User user = new User(nameFields[0].getText(),
                 nameFields[1].getText(),
                 Integer.parseInt(ageField.getText()), emailField.getText(),
                 usernameField.getText(), passField.getText());
+        user.setSecurityQuesionAnswer(secAnswer.getText());
+        user.setSecurityQuestionID(secQuestionID);
 
         QuestionnaireController.setUser(user);
         StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
@@ -145,6 +153,7 @@ public class InputValidation {
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
                                                 JFXTextField usernameField,
+                                                JFXTextField secAnswer,
                                                 AnchorPane form) throws IOException {
         if (nameFields[0].getText().isEmpty()) {
             Dialog.show("Form Error!", "Please enter your First Name",
@@ -157,6 +166,10 @@ public class InputValidation {
         }
         if (usernameField.getText().isEmpty()) {
             Dialog.show("Form Error!", "Please enter a username", "DISMISS", "error", false);
+            return false;
+        }
+        if (secAnswer.getText().isEmpty()) {
+            Dialog.show("Form Error!", "Please enter an answer", "DISMISS", "error", false);
             return false;
         }
         return true;
