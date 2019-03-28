@@ -39,41 +39,7 @@ public class ForgotpassController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         fillSecurityQuestions();
         resetButton.setOnAction(e -> {
-            if (secAnswer.getText().isEmpty()) {
-                try {
-                    Dialog.show("Form Error!", "Please enter an answer",
-                            "DISMISS", "error", false);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                return;
-            }
-            if (secQuestion.getValue() == null) {
-                try {
-                    Dialog.show("Form Error!", "Please select a security question",
-                            "DISMISS", "error", false);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                return;
-            }
-            if (newPassword.getText().isEmpty()) {
-                try {
-                    Dialog.show("Form Error!", "Please enter a new password",
-                            "DISMISS", "error", false);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                return;
-            }
-
-            if (emailField.getText().isEmpty()) {
-                try {
-                    Dialog.show("Form Error!", "Please enter your email",
-                            "DISMISS", "error", false);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+            if (validateEmpty()) {
                 return;
             }
 
@@ -104,6 +70,47 @@ public class ForgotpassController implements Initializable {
 
     }
 
+    private boolean validateEmpty() {
+        if (secAnswer.getText().isEmpty()) {
+            try {
+                Dialog.show("Form Error!", "Please enter an answer",
+                        "DISMISS", "error", false);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return true;
+        }
+        if (secQuestion.getValue() == null) {
+            try {
+                Dialog.show("Form Error!", "Please select a security question",
+                        "DISMISS", "error", false);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return true;
+        }
+        if (newPassword.getText().isEmpty()) {
+            try {
+                Dialog.show("Form Error!", "Please enter a new password",
+                        "DISMISS", "error", false);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return true;
+        }
+
+        if (emailField.getText().isEmpty()) {
+            try {
+                Dialog.show("Form Error!", "Please enter your email",
+                        "DISMISS", "error", false);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return true;
+        }
+        return false;
+    }
+
     private void fillSecurityQuestions() {
         secQuestions = FXCollections.observableArrayList(
                 "What was your childhood nickname?",
@@ -121,6 +128,7 @@ public class ForgotpassController implements Initializable {
 
     /**
      * Gets ID of the security question.
+     *
      * @return
      */
     public int getSecurityQuestionID() {
