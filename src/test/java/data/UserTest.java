@@ -397,11 +397,4 @@ public class UserTest {
 
         Assert.assertEquals(expected, activeUser.getSimilarActivities(activity3));
     }
-
-    @Test
-    public void testSetSecQuestionAnswer() {
-        Assert.assertEquals("", userOne.getSecQuestionAnswer());
-        userOne.setSecQuestionAnswer("dummy");
-        Assert.assertEquals("dummy", userOne.getSecQuestionAnswer());
-    }
-}   
+}
