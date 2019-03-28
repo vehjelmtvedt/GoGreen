@@ -67,6 +67,7 @@ public class DbServiceTest {
             String email = String.format(emailFormat, i);
             User regexUser = new User("Regex", "Test", 20, email, regexTestUsernames[i], "pwd");
             regexUser.setTotalCarbonSaved(CO2TestScores[i]);
+            regexTestUsers.add(regexUser);
             dbService.addUser(regexUser);
         }
     }
@@ -285,9 +286,7 @@ public class DbServiceTest {
         assertNotEquals(0, achievements.size());
     }
 
-    private List<Double> getTopUserScores(int top) {
-        List<User> topUsers = dbService.getTopUsers(top);
-
+    private List<Double> getTopUserScores(List<User> topUsers) {
         return topUsers.stream() // Convert to User stream
                 .map(User::getTotalCarbonSaved) // Map to totalCarbonSaved score
                 .collect(Collectors.toList());
@@ -302,21 +301,56 @@ public class DbServiceTest {
 
     @Test
     public void testGetTop10UserScores() {
-        assertEquals(getExpectedScores(10), getTopUserScores(10));
+        assertEquals(getExpectedScores(10), getTopUserScores(dbService.getTopUsers(10)));
     }
 
     @Test
     public void testGetTop5UserScores() {
-        assertEquals(getExpectedScores(5), getTopUserScores(5));
+        assertEquals(getExpectedScores(5), getTopUserScores(dbService.getTopUsers(5)));
     }
 
     @Test
     public void testGetTopUserScore() {
-        assertEquals(getExpectedScores(1), getTopUserScores(1));
+        assertEquals(getExpectedScores(1), getTopUserScores(dbService.getTopUsers(1)));
     }
 
     @Test
     public void testGetNoUserTop() {
         assertEquals(new ArrayList<Double>(), getExpectedScores(0));
+    }
+
+    @Test
+    public void testGetTopFriendsEmpty() {
+        List<User> friends = dbService.getTopFriends(testUser.getUsername(), 5);
+
+        Assert.assertEquals(0, friends.size());
+    }
+
+    @Test
+    public void testGetTopFriends() {
+        // Add all RegexTestUsers (expect 1st) as friends to 1st User
+        for (int i = 1; i < regexTestUsers.size(); ++i) {
+            regexTestUsers.get(0).addFriend(regexTestUsers.get(i).getUsername());
+        }
+
+        // Update user in database
+        dbService.addUser(regexTestUsers.get(0));
+
+        // Get top friends of User
+        List<User> friends = dbService.getTopFriends(regexTestUsers.get(0).getUsername(), 5);
+        // Get total CO2 saved of friends
+        List<Double> result = getTopUserScores(friends);
+        // Get expected scores (note that since the first user has a relatively low CO2 saved,
+        // the user will not be included here)
+        List<Double> expected = getExpectedScores(5);
+
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void testGetTopFriendsNoUser() {
+        List<User> friends = dbService.getTopFriends(testUserNonExistent.getUsername(), 5);
+
+        Assert.assertEquals(new ArrayList<User>(), friends);
     }
 }

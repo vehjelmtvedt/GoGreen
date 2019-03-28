@@ -66,7 +66,7 @@ public class DbService {
      */
     public void addUser(User user) {
         // New User, encrypt password
-        if (getUser(user.getEmail()) == null) {
+        if (getUserByEmail(user.getEmail()) == null) {
             user.setPassword(encodePassword(user.getPassword()));
         }
 
@@ -87,10 +87,6 @@ public class DbService {
      */
     public User grantAccess(String identifier, String password) {
         User user = getUser(identifier);
-        System.out.println(user);
-        if (user == null) {
-            user = getUserByUsername(identifier);
-        }
 
         if (user == null || user.getLoginStreak() == maxLoginStreak) {
             return null;
@@ -125,7 +121,7 @@ public class DbService {
      * @param identifier - e-mail/username of the user
      * @return User object (password encoded!), or null if not present
      */
-    public User getUser(String identifier) {
+    public User getUserByEmail(String identifier) {
         // User may not be present in the database
         Optional<User> user = users.findById(identifier);
 
@@ -145,6 +141,21 @@ public class DbService {
         Optional<User> user = users.findByUsername(username);
         // Returns user if found, else returns null
         return user.orElse(null);
+    }
+
+    /**.
+     * Gets user from the database (by identifier [email/password])
+     * @param identifier - identifier (can be e-mail or username
+     * @return - User object (password encoded!), or null if not present
+     */
+    public User getUser(String identifier) {
+        User user = getUserByEmail(identifier);
+
+        if (user == null) {
+            user = getUserByUsername(identifier);
+        }
+
+        return user;
     }
 
     /**
@@ -261,10 +272,6 @@ public class DbService {
         User user = getUser(identifier);
 
         if (user == null) {
-            user = getUserByUsername(identifier);
-        }
-
-        if (user == null) {
             return new ArrayList<>(); // return empty list
         } else {
             // Query that returns a list of all the user's friends
@@ -283,10 +290,6 @@ public class DbService {
      */
     public List<User> getTopFriends(String identifier, int top) {
         User user = getUser(identifier);
-
-        if (user == null) {
-            user = getUserByUsername(identifier);
-        }
 
         if (user == null) {
             return new ArrayList<>(); // return empty list
