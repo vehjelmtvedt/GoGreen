@@ -61,7 +61,7 @@ public class InputValidation {
                 FXMLLoader loader3 = new FXMLLoader(
                         Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
                 FXMLLoader loader4 = new FXMLLoader(
-                        Main.class.getResource("/frontend/fxmlPages/ProfilePage2.fxml"));
+                        Main.class.getResource("/frontend/fxmlPages/ProfilePage.fxml"));
                 Parent root1 = loader1.load();
                 Parent root2 = loader2.load();
                 Parent root3 = loader3.load();

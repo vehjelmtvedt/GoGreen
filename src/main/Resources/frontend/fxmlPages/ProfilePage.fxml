@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXSpinner?>
 <?import javafx.scene.control.Label?>
@@ -7,10 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.fxmlPages.ProfilePage">
+<AnchorPane fx:id="mainPane" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ProfilePageController">
    <children>
-      <AnchorPane layoutX="3.0" layoutY="35.0" prefHeight="100.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="headerPane" layoutX="3.0" layoutY="35.0" prefHeight="100.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <JFXHamburger fx:id="menu" layoutX="30.0" layoutY="18.0" prefHeight="32.0" prefWidth="46.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
             <Label layoutX="607.0" layoutY="21.0" prefHeight="60.0" prefWidth="196.0" text="PROFILE">
@@ -22,7 +22,7 @@
       </AnchorPane>
       <AnchorPane layoutY="97.0" prefHeight="703.0" prefWidth="1400.0">
          <children>
-            <AnchorPane layoutX="11.0" layoutY="16.0" prefHeight="324.0" prefWidth="559.0" style="-fx-border-color: black;">
+            <AnchorPane layoutX="11.0" layoutY="16.0" prefHeight="324.0" prefWidth="559.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="16.0">
                <children>
                   <ImageView fx:id="profile" fitHeight="176.0" fitWidth="160.0" layoutX="27.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="61.0" />
                   <Label layoutX="177.0" layoutY="1.0" prefHeight="29.0" prefWidth="215.0" text="Profile Information" AnchorPane.leftAnchor="176.0" AnchorPane.rightAnchor="168.0" AnchorPane.topAnchor="0.0">
@@ -57,7 +57,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="672.0" layoutY="15.0" prefHeight="319.0" prefWidth="708.0" style="-fx-border-color: black;">
+            <AnchorPane layoutX="672.0" layoutY="15.0" prefHeight="319.0" prefWidth="708.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="363.0" AnchorPane.leftAnchor="650.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="16.0">
                <children>
                   <Label layoutX="279.0" layoutY="4.0" text="My Progress">
                      <font>
@@ -87,7 +87,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="15.0" layoutY="354.0" prefHeight="324.0" prefWidth="1372.0">
+            <AnchorPane layoutX="15.0" layoutY="354.0" prefHeight="324.0" prefWidth="1372.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="365.0">
                <children>
                   <AnchorPane layoutY="1.0" prefHeight="324.0" prefWidth="675.0" style="-fx-border-color: black;">
                      <children>
@@ -109,6 +109,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
+            <JFXDrawer fx:id="drawer" prefHeight="700.0" prefWidth="250.0" />
          </children>
       </AnchorPane>
    </children>
