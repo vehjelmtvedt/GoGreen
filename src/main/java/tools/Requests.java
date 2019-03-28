@@ -161,7 +161,7 @@ public class Requests {
     }
 
     /**
-     * Request to rest password
+     * Request to rest password.
      * @param email email of user.
      * @param answer answer of the security question
      * @param newPass changed password

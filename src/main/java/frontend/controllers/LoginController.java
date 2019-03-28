@@ -3,7 +3,11 @@ package frontend.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import frontend.gui.*;
+import frontend.gui.Events;
+import frontend.gui.General;
+import frontend.gui.InputValidation;
+import frontend.gui.Main;
+import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -106,7 +110,8 @@ public class LoginController implements Initializable {
         FXMLLoader loadForgotPass = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/ForgotPassword.fxml"));
         Parent forgotPass = loadForgotPass.load();
-        Scene forgotPasswordScene = new Scene(forgotPass, General.getBounds()[0] / 2, General.getBounds()[1] / 1.3);
+        Scene forgotPasswordScene = new Scene(
+                forgotPass, General.getBounds()[0] / 2, General.getBounds()[1] / 1.3);
         forgotPassWindow.setScene(forgotPasswordScene);
         forgotPassWindow.show();
         forgotPass.toFront();

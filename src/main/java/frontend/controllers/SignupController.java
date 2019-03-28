@@ -83,7 +83,7 @@ public class SignupController implements Initializable {
     @FXML
     private JFXTextField secAnswer;
 
-    ObservableList<String> secQuestions;
+    private ObservableList<String> secQuestions;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -95,7 +95,9 @@ public class SignupController implements Initializable {
         signupButton.setOnAction(e -> {
             try {
                 InputValidation.signUpValidate(nameFields, usernameField,
-                        emailField, passwordField, confirmPasswordField, ageField, getSecurityQuestionID(), secAnswer, mainPane);
+                        emailField, passwordField,
+                        confirmPasswordField, ageField,
+                        getSecurityQuestionID(), secAnswer, mainPane);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -116,6 +118,10 @@ public class SignupController implements Initializable {
         fillSecurityQuestions(secQuestion);
     }
 
+    /**
+     * Gets the security question ID.
+     * @return - the ID of the question
+     */
     public int getSecurityQuestionID() {
         if (secQuestion.getValue() == null) {
             return -1;
@@ -134,7 +140,8 @@ public class SignupController implements Initializable {
                         "In what city did you meet your spouse/significant other?",
                         "What is the name of your favorite childhood friend?",
                         "What street did you live on in third grade?",
-                        "What is your oldest sibling’s birthday month and year? (e.g., January 1900)",
+                        "What is your oldest sibling’s birthday month and year?"
+                                + " (e.g., January 1900)",
                         "What is the middle name of your youngest child?",
                         "What is your oldest sibling's middle name?",
                         "What school did you attend for sixth grade?"

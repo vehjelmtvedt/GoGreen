@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import data.User;
 import frontend.gui.Dialog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,9 +33,7 @@ public class ForgotpassController implements Initializable {
     @FXML
     private JFXButton resetButton;
 
-    ObservableList<String> secQuestions;
-
-
+    private ObservableList<String> secQuestions;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -122,6 +119,10 @@ public class ForgotpassController implements Initializable {
 
     }
 
+    /**
+     * Gets ID of the security question.
+     * @return
+     */
     public int getSecurityQuestionID() {
         if (secQuestion.getValue() == null) {
             return -1;

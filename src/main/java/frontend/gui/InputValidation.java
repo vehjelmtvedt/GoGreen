@@ -106,7 +106,9 @@ public class InputValidation {
     public static void signUpValidate(JFXTextField[] nameFields,
                                       JFXTextField usernameField, JFXTextField emailField,
                                       JFXPasswordField passField, JFXPasswordField passReField,
-                                      JFXTextField ageField, int secQuestionID, JFXTextField secAnswer, AnchorPane form) throws IOException {
+                                      JFXTextField ageField,
+                                      int secQuestionID,
+                                      JFXTextField secAnswer, AnchorPane form) throws IOException {
 
         if (!signUpValidateFields(nameFields, usernameField, secAnswer, form)) {
             return;

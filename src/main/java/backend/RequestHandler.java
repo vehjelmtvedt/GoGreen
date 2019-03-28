@@ -172,7 +172,8 @@ public class RequestHandler {
         if (user == null) {
             return null;
         }
-        if (user.getSecurityQuesionAnswer().equals(answer) && user.getSecurityQuestionID() == questionID) {
+        if (user.getSecurityQuesionAnswer().equals(answer)
+                && user.getSecurityQuestionID() == questionID) {
             user.setPassword(newPass);
             dbService.addUser(user);
             return true;

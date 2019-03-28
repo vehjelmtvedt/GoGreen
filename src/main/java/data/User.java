@@ -125,8 +125,8 @@ public class User {
         this.password = password;
     }
 
-    public void setSecurityQuestionID(int ID) {
-        this.securityQuestionID = ID;
+    public void setSecurityQuestionID(int id) {
+        this.securityQuestionID = id;
     }
 
     public int getSecurityQuestionID() {
