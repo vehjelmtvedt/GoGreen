@@ -11,6 +11,7 @@ import data.User;
 import frontend.gui.Events;
 import frontend.gui.General;
 import frontend.gui.Main;
+import frontend.gui.NotificationPopup;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -199,7 +200,6 @@ public class ActivitiesController implements Initializable {
                 minCarbon, maxCarbon, loggedUser, activityTable);
         Events.applyFilters(lblApply,checkList, radioList,
                 minCarbon, maxCarbon, loggedUser, activityTable);
-
     }
 
     //GENERAL METHODS

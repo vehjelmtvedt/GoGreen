@@ -90,6 +90,9 @@ public class FriendspageController implements Initializable {
     @FXML
     private AnchorPane main;
 
+    @FXML
+    private AnchorPane headerPane;
+
     private List searchresults;
 
     @Override

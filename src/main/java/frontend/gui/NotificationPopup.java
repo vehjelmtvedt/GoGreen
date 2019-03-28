@@ -23,26 +23,23 @@ public class NotificationPopup {
     boolean d4Closed = true;
 
 
-    public void newNotification(AnchorPane mainPane, String headerText, String bodyText, String icon) throws IOException {
+    public void newNotification(AnchorPane mainPane, AnchorPane headerPane, String headerText, String bodyText, String icon) throws IOException {
         if (d1Closed) {
-            JFXDrawer drawer = addDrawer(new JFXDrawer(), 0, mainPane, headerText,
+            JFXDrawer drawer = addDrawer(new JFXDrawer(), 0, mainPane, headerPane, headerText,
                     bodyText, icon);
             animateUsingTimeline(drawer, 0);
         } else if (d2Closed) {
-            System.out.println("IM HERE");
-            JFXDrawer drawer = addDrawer(new JFXDrawer(), 1, mainPane, headerText,
+            JFXDrawer drawer = addDrawer(new JFXDrawer(), 1, mainPane, headerPane, headerText,
                     bodyText, icon);
             animateUsingTimeline(drawer, 1);
         } else if (d3Closed) {
-            JFXDrawer drawer = addDrawer(new JFXDrawer(), 2, mainPane, headerText,
+            JFXDrawer drawer = addDrawer(new JFXDrawer(), 2, mainPane, headerPane, headerText,
                     bodyText, icon);
             animateUsingTimeline(drawer, 2);
         } else if (d4Closed) {
-            JFXDrawer drawer = addDrawer(new JFXDrawer(), 3, mainPane, headerText,
+            JFXDrawer drawer = addDrawer(new JFXDrawer(), 3, mainPane, headerPane, headerText,
                     bodyText, icon);
             animateUsingTimeline(drawer, 3);
-        } else {
-            System.out.println("ALL DRAWERS CLOSED");
         }
     }
 
@@ -80,7 +77,7 @@ public class NotificationPopup {
     }
 
     public JFXDrawer addDrawer(JFXDrawer drawer, int drawerNumber, AnchorPane mainPane,
-                             String headerText, String bodyText, String icon) throws IOException {
+                             AnchorPane headerPane, String headerText, String bodyText, String icon) throws IOException {
         AnchorPane content = new AnchorPane();
         Label heading = new Label(headerText);
         heading.setFont(Main.getRobotoBold(24));
@@ -106,7 +103,7 @@ public class NotificationPopup {
         drawer.setDirection(JFXDrawer.DrawerDirection.RIGHT);
         mainPane.getChildren().addAll(drawer);
         AnchorPane.setRightAnchor(drawer, 0.0);
-        AnchorPane.setTopAnchor(drawer, 143 + (drawerNumber * (drawer.getMinHeight() + 10)));
+        AnchorPane.setTopAnchor(drawer, headerPane.getHeight() + (drawerNumber * (drawer.getMinHeight() + 10)));
         return drawer;
     }
 }
