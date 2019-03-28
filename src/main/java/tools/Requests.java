@@ -194,6 +194,6 @@ public class Requests {
      * @return average CO2 saved
      */
     public static double getAverageCO2Saved() {
-        return restTemplate.getForEntity(url+ "/getAverageCO2Saved",double.class).getBody();
+        return restTemplate.getForEntity(url + "/getAverageCO2Saved",double.class).getBody();
     }
 }
