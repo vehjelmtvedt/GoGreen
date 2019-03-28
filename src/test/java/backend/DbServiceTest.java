@@ -324,4 +324,9 @@ public class DbServiceTest {
     public void testEditProfile() {
         assertEquals(dbService.editProfile(testUser,"age",15).getAge(),15);
     }
+
+    @Test
+    public void testEditProfileWrongField() {
+        assertEquals(null,dbService.editProfile(testUser,"asd",10));
+    }
 }
