@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import tools.ActivityQueries;
 
 import java.io.IOException;
 import java.net.URL;
@@ -71,6 +72,8 @@ public class HomepageController implements Initializable {
     private JFXTreeView tableTop25;
     @FXML
     private JFXTreeView tableTop50;
+    @FXML
+    private PieChart chartMyActivities;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -107,6 +110,9 @@ public class HomepageController implements Initializable {
         lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
                 + " kg of CO2 so far");
 
+        //charts on the right
+        chartMyActivities.setData(fillPieChart(loggedUser));
+
         Events.addJfxButtonHover(btnProfile);
 
         try {
@@ -118,10 +124,22 @@ public class HomepageController implements Initializable {
     }
 
     private static ObservableList<PieChart.Data> fillPieChart(User user) {
+        ActivityQueries queries = new ActivityQueries(user.getActivities());
+        List<String> categories = new ArrayList<>();
+        categories.add("Food");
+        categories.add("Transportation");
+        categories.add("Household");
+
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                                    new PieChart.Data("Food", 1),
-                                    new PieChart.Data("Transportation", 2),
-                                    new PieChart.Data("Household", 3)
+                                    new PieChart.Data("Food",
+                                            queries.filterActivitiesByCategories(
+                                            categories.subList(0,1)).size()),
+                                    new PieChart.Data("Transportation",
+                                            queries.filterActivitiesByCategories(
+                                                    categories.subList(1,2)).size()),
+                                    new PieChart.Data("Household",
+                                            queries.filterActivitiesByCategories(
+                                                    categories.subList(2,3)).size())
         );
         return pieChartData;
     }

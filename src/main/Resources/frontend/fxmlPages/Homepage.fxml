@@ -37,7 +37,7 @@
          <children>
             <AnchorPane layoutY="44.0" prefHeight="524.0" prefWidth="1400.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
                <children>
-                  <AnchorPane layoutX="321.0" layoutY="34.0" prefHeight="200.0" prefWidth="1048.0" AnchorPane.leftAnchor="321.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="34.0">
+                  <AnchorPane layoutX="89.0" layoutY="40.0" prefHeight="200.0" prefWidth="1124.0" AnchorPane.leftAnchor="89.0" AnchorPane.rightAnchor="337.0" AnchorPane.topAnchor="40.0">
                      <children>
                         <Circle fx:id="circleProfile" fill="GREEN" layoutX="100.0" layoutY="100.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                         <AnchorPane layoutX="233.0" prefHeight="200.0" prefWidth="683.0" AnchorPane.leftAnchor="233.0" AnchorPane.rightAnchor="0.0">
@@ -90,10 +90,11 @@
                                     </JFXButton>
                                  </children>
                               </HBox>
-                              <HBox layoutY="53.0" prefHeight="47.0" prefWidth="730.0" spacing="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+                              <HBox layoutY="53.0" prefHeight="47.0" prefWidth="730.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                                  <children>
                                     <Label fx:id="lblEmail" text="your@email.com" />
                                     <Label fx:id="lblYourCarbon" text="You have saved 8.1212 kg of CO2 so far" />
+                                    <Label fx:id="lblYourCarbon1" text="Average person saved 9.12121212 kg of CO2" />
                                  </children>
                               </HBox>
                               <Label fx:id="lblName" layoutY="14.0" text="YOUR NAME" textFill="GREEN">
@@ -105,7 +106,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="321.0" layoutY="270.0" prefHeight="503.0" prefWidth="1124.0" AnchorPane.leftAnchor="321.0" AnchorPane.rightAnchor="105.0">
+                  <AnchorPane layoutX="107.0" layoutY="259.0" prefHeight="503.0" prefWidth="1124.0" AnchorPane.leftAnchor="107.0" AnchorPane.rightAnchor="319.0">
                      <children>
                         <HBox layoutX="208.0" prefHeight="47.0" prefWidth="815.0" spacing="33.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -142,6 +143,23 @@
                         <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
                         <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
                         <Label layoutX="382.0" layoutY="456.0" text="- Ranking is determined according to the total amount of CO2 saved - " AnchorPane.leftAnchor="382.0" AnchorPane.rightAnchor="274.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="1227.0" layoutY="40.0" prefHeight="687.0" prefWidth="273.0">
+                     <children>
+                        <VBox layoutX="59.0" layoutY="-2.0" prefHeight="687.0" prefWidth="273.0" spacing="30.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <PieChart fx:id="chartMyActivities" prefHeight="266.0" prefWidth="250.0" />
+                              <AreaChart prefHeight="218.0" prefWidth="273.0">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </AreaChart>
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
                </children>
