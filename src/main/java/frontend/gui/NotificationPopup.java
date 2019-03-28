@@ -7,34 +7,42 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 
 public class NotificationPopup {
 
-    private JFXDrawer drawer1;
     boolean d1Closed = true;
 
-    private JFXDrawer drawer2;
     boolean d2Closed = true;
 
-    private JFXDrawer drawer3;
     boolean d3Closed = true;
 
-    private JFXDrawer drawer4;
     boolean d4Closed = true;
 
 
-    public void newNotification() {
+    public void newNotification(AnchorPane mainPane, String headerText, String bodyText, String icon) throws IOException {
         if (d1Closed) {
-            animateUsingTimeline(drawer1, 1);
+            JFXDrawer drawer = addDrawer(new JFXDrawer(), 0, mainPane, headerText,
+                    bodyText, icon);
+            animateUsingTimeline(drawer, 0);
         } else if (d2Closed) {
-            animateUsingTimeline(drawer2, 2);
+            System.out.println("IM HERE");
+            JFXDrawer drawer = addDrawer(new JFXDrawer(), 1, mainPane, headerText,
+                    bodyText, icon);
+            animateUsingTimeline(drawer, 1);
         } else if (d3Closed) {
-            animateUsingTimeline(drawer3, 3);
+            JFXDrawer drawer = addDrawer(new JFXDrawer(), 2, mainPane, headerText,
+                    bodyText, icon);
+            animateUsingTimeline(drawer, 2);
         } else if (d4Closed) {
-            animateUsingTimeline(drawer4, 4);
+            JFXDrawer drawer = addDrawer(new JFXDrawer(), 3, mainPane, headerText,
+                    bodyText, icon);
+            animateUsingTimeline(drawer, 3);
+        } else {
+            System.out.println("ALL DRAWERS CLOSED");
         }
     }
 
@@ -43,26 +51,26 @@ public class NotificationPopup {
                 new KeyFrame(Duration.ZERO, event -> {
                     drawer.open();
                     switch (drawerNumber) {
-                        case 1: d1Closed = false;
+                        case 0: d1Closed = false;
                                 break;
-                        case 2: d2Closed = false;
+                        case 1: d2Closed = false;
                                 break;
-                        case 3: d3Closed = false;
+                        case 2: d3Closed = false;
                                 break;
-                        case 4: d4Closed = false;
+                        case 3: d4Closed = false;
                                 break;
                     }
                 }),
-                new KeyFrame(Duration.seconds(3.0), event -> {
+                new KeyFrame(Duration.seconds(5.0), event -> {
                     drawer.close();
                     switch (drawerNumber) {
-                        case 1: d1Closed = true;
+                        case 0: d1Closed = true;
                             break;
-                        case 2: d2Closed = true;
+                        case 1: d2Closed = true;
                             break;
-                        case 3: d3Closed = true;
+                        case 2: d3Closed = true;
                             break;
-                        case 4: d4Closed = true;
+                        case 3: d4Closed = true;
                             break;
                     }
                 })
@@ -71,22 +79,21 @@ public class NotificationPopup {
         beat.play();
     }
 
-    public void addAllDrawers(AnchorPane mainPane) {
-        drawer1 = new JFXDrawer();
-        drawer2 = new JFXDrawer();
-        drawer3 = new JFXDrawer();
-        drawer4 = new JFXDrawer();
-        setUpDrawers(drawer1, 0,  mainPane);
-        setUpDrawers(drawer2, 1, mainPane);
-        setUpDrawers(drawer3, 2, mainPane);
-        setUpDrawers(drawer4, 3, mainPane);
-    }
+//    public void init() {
+//        drawer1 = new JFXDrawer();
+//        drawer2 = new JFXDrawer();
+//        drawer3 = new JFXDrawer();
+//        drawer4 = new JFXDrawer();
+//    }
 
-    public void setUpDrawers(JFXDrawer drawer, int drawerNumber, AnchorPane mainPane) {
+    public JFXDrawer addDrawer(JFXDrawer drawer, int drawerNumber, AnchorPane mainPane,
+                             String headerText, String bodyText, String icon) throws IOException {
         AnchorPane content = new AnchorPane();
-        Label heading = new Label("Heading");
-        Label body = new Label("text of the body");
-        ImageView image = new ImageView(new Image("frontend/Pics/sucess.png"));
+        Label heading = new Label(headerText);
+        heading.setFont(Main.getRobotoBold(24));
+        Label body = new Label(bodyText);
+        heading.setFont(Main.getRobotoThin(19));
+        ImageView image = new ImageView(new Image("frontend/Pics/" + icon + ".png"));
         image.setFitHeight(40);
         image.setFitWidth(40);
         content.getChildren().addAll(heading, body, image);
@@ -107,5 +114,6 @@ public class NotificationPopup {
         mainPane.getChildren().addAll(drawer);
         AnchorPane.setRightAnchor(drawer, 0.0);
         AnchorPane.setTopAnchor(drawer, 143 + (drawerNumber * (drawer.getMinHeight() + 10)));
+        return drawer;
     }
 }

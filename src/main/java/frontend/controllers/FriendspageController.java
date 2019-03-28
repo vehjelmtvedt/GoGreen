@@ -95,7 +95,6 @@ public class FriendspageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         NotificationPopup popup = new NotificationPopup();
-        popup.addAllDrawers(main);
         try {
             NavPanelController.setup(drawer, menu);
         } catch (IOException e) {
@@ -112,7 +111,12 @@ public class FriendspageController implements Initializable {
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
 
         friendsPane.setOnMouseClicked(e ->{
-            popup.newNotification();
+            try {
+                popup.newNotification(main, "Achievement",
+                        "Login 5 days in a row", "sucess");
+            } catch (IOException ev) {
+                ev.printStackTrace();
+            }
         });
     }
 
