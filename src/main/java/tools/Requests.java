@@ -161,7 +161,7 @@ public class Requests {
     }
 
     /**
-     * Request to edit profile
+     * Request to edit profile.
      * @param loginDetails for auth
      * @param fieldName name of the field being changed
      * @param newValue new value for the field
@@ -170,6 +170,7 @@ public class Requests {
     public static User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/editProfile")
                 .queryParam("fieldName",fieldName).queryParam("newValue", newValue);
-        return restTemplate.postForEntity(uriBuilder.toUriString(),loginDetails,User.class).getBody();
+        return restTemplate.postForEntity(uriBuilder.toUriString(),
+                loginDetails,User.class).getBody();
     }
 }
