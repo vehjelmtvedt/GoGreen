@@ -10,6 +10,7 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import data.LoginDetails;
 import data.User;
+import frontend.gui.NotificationPopup;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -24,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -84,6 +86,12 @@ public class FriendspageController implements Initializable {
 
     @FXML
     private HBox headingBox;
+
+    @FXML
+    private AnchorPane main;
+
+    @FXML
+    private AnchorPane headerPane;
 
     private List searchresults;
 
