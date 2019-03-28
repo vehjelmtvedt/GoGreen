@@ -4,12 +4,16 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import data.User;
+import frontend.gui.Dialog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import tools.Requests;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,6 +29,9 @@ public class ForgotpassController implements Initializable {
     private JFXPasswordField newPassword;
 
     @FXML
+    private JFXTextField emailField;
+
+    @FXML
     private JFXButton resetButton;
 
     ObservableList<String> secQuestions;
@@ -35,9 +42,66 @@ public class ForgotpassController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         fillSecurityQuestions();
         resetButton.setOnAction(e -> {
-            //Send request to request password change here
-            Stage thisStage = (Stage) resetButton.getScene().getWindow();
-            thisStage.close();
+            if (secAnswer.getText().isEmpty()) {
+                try {
+                    Dialog.show("Form Error!", "Please enter an answer",
+                            "DISMISS", "error", false);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                return;
+            }
+            if (secQuestion.getValue() == null) {
+                try {
+                    Dialog.show("Form Error!", "Please select a security question",
+                            "DISMISS", "error", false);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                return;
+            }
+            if (newPassword.getText().isEmpty()) {
+                try {
+                    Dialog.show("Form Error!", "Please enter a new password",
+                            "DISMISS", "error", false);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                return;
+            }
+
+            if (emailField.getText().isEmpty()) {
+                try {
+                    Dialog.show("Form Error!", "Please enter your email",
+                            "DISMISS", "error", false);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                return;
+            }
+
+            boolean accepted = Requests.forgotPass(emailField.getText(), secAnswer.getText(), newPassword.getText());
+
+            if (accepted) {
+                Stage thisStage = (Stage) resetButton.getScene().getWindow();
+                thisStage.close();
+                try {
+                    Dialog.show("Password Changed!", "We were able to change your password.",
+                            "DISMISS", "sucess", false);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                return;
+            } else {
+                try {
+                    Dialog.show("Oops...", "Something went wrong. Try again later",
+                            "DISMISS", "error", false);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+
+
         });
 
     }

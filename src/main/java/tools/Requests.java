@@ -169,7 +169,8 @@ public class Requests {
      */
     public static Boolean forgotPass(String email, String answer, String newPass) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/forgotPass")
-                .queryParam("email",email).queryParam("answer",answer)
+                .queryParam("email",email)
+                .queryParam("answer",answer)
                 .queryParam("newPass",newPass);
 
         return restTemplate.getForEntity(uriBuilder.toUriString(),Boolean.class).getBody();
