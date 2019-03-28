@@ -16,7 +16,6 @@ public class User {
     private String lastName;
     private int age;
     private String password;
-    private String secQuestionAnswer;
 
     private int loginStreak;
 
@@ -70,7 +69,6 @@ public class User {
         this.totalCarbonSaved = 0;
         this.lastLoginDate = Calendar.getInstance().getTime();
         this.activities = new ArrayList<>();
-        this.secQuestionAnswer = "";
     }
 
     public User() {
@@ -122,14 +120,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setSecQuestionAnswer(String answer) {
-        this.secQuestionAnswer = answer;
-    }
-
-    public String getSecQuestionAnswer() {
-        return this.secQuestionAnswer;
     }
 
     public ArrayList<String> getFriends() {

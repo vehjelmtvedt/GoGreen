@@ -162,8 +162,8 @@ public class Questionnaire {
             if (response != null) {
                 if (response.equals("success")) {
                     try {
-                        Dialog.show("Registration Successful!", "Enter your new credentials!",
-                                "ACCEPT", "sucess", false);
+                        Dialog.show(form, "Registration Successful!", "Enter your new credentials!",
+                                "ACCEPT", "sucess");
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
