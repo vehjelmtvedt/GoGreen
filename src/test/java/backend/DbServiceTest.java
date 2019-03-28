@@ -319,4 +319,9 @@ public class DbServiceTest {
     public void testGetNoUserTop() {
         assertEquals(new ArrayList<Double>(), getExpectedScores(0));
     }
+
+    @Test
+    public void testEditProfile() {
+        assertEquals(dbService.editProfile(testUser,"age",15).getAge(),15);
+    }
 }

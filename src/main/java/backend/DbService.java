@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -283,5 +284,25 @@ public class DbService {
      */
     public List<Achievement> getAchievements() {
         return achievements.findAll();
+    }
+
+    /**
+     * Edits and updates user.
+     * @param user the user to update
+     * @param fieldName name of the field to update
+     * @param newValue new value of the field
+     * @return the updated User
+     */
+    public User editProfile(User user,String fieldName, Object newValue) {
+        try {
+            Field field = user.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(user, newValue);
+            field.setAccessible(false);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            return null;
+        }
+        addUser(user);
+        return user;
     }
 }

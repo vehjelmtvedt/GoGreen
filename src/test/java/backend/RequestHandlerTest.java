@@ -221,7 +221,8 @@ public class RequestHandlerTest
     @Test
     public void editProfile() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
-        assertEquals("Test5",requestHandler.editProfile(new LoginDetails(testUser.getUsername()
+        Mockito.when(dbService.editProfile(testUser,"firstName","Test")).thenReturn(testUser);
+        assertEquals("Test",requestHandler.editProfile(new LoginDetails(testUser.getUsername()
                 ,testUser.getPassword()),"firstName","Test5").getFirstName());
     }
 
@@ -232,10 +233,4 @@ public class RequestHandlerTest
                 ,testUser.getPassword()),"firstName","Test5"));
     }
 
-    @Test
-    public void editProfileWrongFieldName() {
-        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
-        assertEquals(null,requestHandler.editProfile(new LoginDetails(testUser.getUsername()
-                ,testUser.getPassword()),"Name","Test5"));
-    }
 }

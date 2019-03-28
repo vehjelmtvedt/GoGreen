@@ -165,7 +165,7 @@ public class Requests {
      * @param loginDetails for auth
      * @param fieldName name of the field being changed
      * @param newValue new value for the field
-     * @return
+     * @return returns the updated user
      */
     public static User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/editProfile")
