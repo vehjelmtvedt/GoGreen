@@ -223,7 +223,7 @@ public class RequestHandlerTest
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
         Mockito.when(dbService.editProfile(testUser,"firstName","Test")).thenReturn(testUser);
         assertEquals("Test",requestHandler.editProfile(new LoginDetails(testUser.getUsername()
-                ,testUser.getPassword()),"firstName","Test5").getFirstName());
+                ,testUser.getPassword()),"firstName","Test").getFirstName());
     }
 
     @Test

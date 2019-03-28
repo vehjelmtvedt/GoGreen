@@ -170,6 +170,7 @@ public class RequestHandler {
     public User editProfile(@RequestBody LoginDetails loginDetails, @RequestParam String fieldName,
                             @RequestParam Object newValue) {
         User user = dbService.grantAccess(loginDetails.getIdentifier(),loginDetails.getPassword());
+        System.out.println(user);
         if (user == null) {
             return null;
         }
