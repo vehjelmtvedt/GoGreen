@@ -6,6 +6,9 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import data.*;
 import frontend.controllers.ActivitiesController;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,10 +24,7 @@ import javafx.scene.paint.Color;
 import tools.ActivityQueries;
 import tools.DateUnit;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class Events {
 
@@ -195,23 +195,34 @@ public class Events {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
                 //todo: Add solar panels
-                TextInputDialog dialog = new TextInputDialog("0");
-                dialog.setTitle("Install Solar Panels");
-                dialog.setHeaderText("Amount of kwh that your solar panel installation produces per year: ");
-                dialog.setContentText("kwh:");
-                dialog.getEditor().textProperty().addListener(new ChangeListener<String>() {
-                    @Override
-                    public void changed(
-                            ObservableValue<? extends String> observable,
-                            String oldValue, String newValue) {
-                        if (!newValue.matches("^[0-9]{0,7}$")) {
-                            dialog.getEditor().setText(oldValue);
+                InstallSolarPanels panels = new InstallSolarPanels();
+                if (loggedUser.getSimilarActivities(panels).size() > 0) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("Oops");
+                    alert.setContentText("Days: " + ChronoUnit.DAYS.between(loggedUser.getSimilarActivities(panels).get(0).getDate().toInstant(), Calendar.getInstance().getTime().toInstant()));
+                    alert.showAndWait();
+                } else {
+                    TextInputDialog dialog = new TextInputDialog("0");
+                    dialog.setTitle("Install Solar Panels");
+                    dialog.setHeaderText("Amount of kwh that your solar panel installation produces per year: ");
+                    dialog.setContentText("kwh:");
+                    dialog.getEditor().textProperty().addListener(new ChangeListener<String>() {
+                        @Override
+                        public void changed(
+                                ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+                            if (!newValue.matches("^[0-9]{0,7}$")) {
+                                dialog.getEditor().setText(oldValue);
+                            }
                         }
+                    });
+                    Optional<String> result = dialog.showAndWait();
+                    if (result.isPresent()){
+                        System.out.println("kwh: " + result.get());
+                        panels.setKwhSavedPerYear(Integer.parseInt(result.get()));
+                        panels.performActivity(loggedUser);
                     }
-                });
-                Optional<String> result = dialog.showAndWait();
-                if (result.isPresent()){
-                    System.out.println("kwh: " + result.get());
                 }
             } else {
                 if (type == 2) {
