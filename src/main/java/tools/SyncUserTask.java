@@ -28,9 +28,8 @@ public class SyncUserTask implements Callable<UserPendingData> {
     /**.
      * Executes the task and returns pending User objects (achievements & friend requests)
      * @return - Pending User Data
-     * @throws Exception - Exception
      */
-    public UserPendingData call() throws Exception {
+    public UserPendingData call() {
         // Initialize pending data object
         UserPendingData userPendingData = new UserPendingData();
 
