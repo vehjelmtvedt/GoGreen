@@ -198,9 +198,9 @@ public class Events {
                 InstallSolarPanels panels = new InstallSolarPanels();
                 if (loggedUser.getSimilarActivities(panels).size() > 0) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning");
-                    alert.setHeaderText("Oops");
-                    alert.setContentText("Days: " + ChronoUnit.DAYS.between(loggedUser.getSimilarActivities(panels).get(0).getDate().toInstant(), Calendar.getInstance().getTime().toInstant()));
+                    alert.setTitle("GoGreen");
+                    alert.setHeaderText("You hav already installed solar panels!");
+                    alert.setContentText("Total CO2 saved by your solar panels: " + ChronoUnit.DAYS.between(loggedUser.getSimilarActivities(panels).get(0).getDate().toInstant(), Calendar.getInstance().getTime().toInstant()) * loggedUser.getSimilarActivities(panels).get(0).getCarbonSaved());
                     alert.showAndWait();
                 } else {
                     TextInputDialog dialog = new TextInputDialog("0");
