@@ -5,6 +5,8 @@ import data.EatVegetarianMeal;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import tools.DateUnit;
+import tools.DateUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -99,5 +101,57 @@ public class ActivityTest {
         }
 
         Assert.assertEquals(sum, Activity.getSum(activities), 0.1);
+    }
+
+    @Test
+    public void testEqualsSameObject() {
+        EatVegetarianMeal activity = new EatVegetarianMeal();
+
+        Assert.assertEquals(activity, activity);
+    }
+
+    @Test
+    public void testEqualsNull() {
+        EatVegetarianMeal activity = new EatVegetarianMeal();
+
+        Assert.assertNotEquals(activity, null);
+    }
+
+    @Test
+    public void testEqualsDifferentClass() {
+        EatVegetarianMeal activity = new EatVegetarianMeal();
+        BuyLocallyProducedFood activity2 = new BuyLocallyProducedFood();
+
+        Assert.assertNotEquals(activity, activity2);
+    }
+
+    @Test
+    public void testEqualsSame() {
+        Date date = DateUtils.dateToday();
+        EatVegetarianMeal activity = new EatVegetarianMeal();
+        activity.setDate(date);
+        EatVegetarianMeal activity2 = new EatVegetarianMeal();
+        activity2.setDate(date);
+
+        Assert.assertEquals(activity, activity2);
+    }
+
+    @Test
+    public void testEqualsDifferentDate() {
+        EatVegetarianMeal activity = new EatVegetarianMeal();
+        activity.setDate(DateUtils.getDateBefore(Calendar.getInstance().getTime(), DateUnit.MONTH));
+        EatVegetarianMeal activity2 = new EatVegetarianMeal();
+
+        Assert.assertNotEquals(activity, activity2);
+    }
+
+    @Test
+    public void testEqualsDifferentCo2() {
+        EatVegetarianMeal activity = new EatVegetarianMeal();
+        activity.setCarbonSaved(15);
+        EatVegetarianMeal activity2 = new EatVegetarianMeal();
+        activity2.setCarbonSaved(10);
+
+        Assert.assertNotEquals(activity, activity2);
     }
 }

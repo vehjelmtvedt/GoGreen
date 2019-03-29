@@ -37,6 +37,9 @@ public class User {
 
     private Progress progress = new Progress();
 
+    private int securityQuestionId;
+    private String securityQuestionAnswer;
+
 
     /**
      * Constructor of User object.
@@ -120,6 +123,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setSecurityQuestionId(int id) {
+        this.securityQuestionId = id;
+    }
+
+    public int getSecurityQuestionId() {
+        return this.securityQuestionId;
+    }
+
+    public void setSecurityQuestionAnswer(String answer) {
+        this.securityQuestionAnswer = answer;
+    }
+
+    public String getSecurityQuestionAnswer() {
+        return this.securityQuestionAnswer;
     }
 
     public ArrayList<String> getFriends() {
@@ -258,6 +277,9 @@ public class User {
      */
     public void addFriend(String friend) {
         friends.add(friend);
+
+        //checks if an achievement is completed by adding a friend
+        AchievementsLogic.checkOther(this);
     }
 
     /**
@@ -314,6 +336,15 @@ public class User {
         return result;
     }
 
+    /**
+     * addes to the points the amount of co2 save.*
+     * every one co2 unite is worth 1 point
+     * @param carbonsaved co2 saved
+     */
+    public void addCO2Points( double carbonsaved) {
+        this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
+
+    }
 
     /*
      * Removes a friend from the friends list
@@ -325,4 +356,6 @@ public class User {
     //    public boolean removeFriend(String email) {
     //        return friends.remove(email);
     //    }
+
+
 }
