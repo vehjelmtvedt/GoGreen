@@ -43,8 +43,8 @@ public class ForgotpassController implements Initializable {
                 return;
             }
 
-            boolean accepted = Requests.instance.forgotPass(emailField.getText(), getSecurityQuestionid(),
-                    secAnswer.getText(), newPassword.getText());
+            boolean accepted = Requests.instance.forgotPass(emailField.getText(),
+                    getSecurityQuestionid(), secAnswer.getText(), newPassword.getText());
 
             if (accepted) {
                 Stage thisStage = (Stage) resetButton.getScene().getWindow();
