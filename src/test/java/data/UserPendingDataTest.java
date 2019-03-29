@@ -6,8 +6,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import static org.junit.Assert.*;
-
 public class UserPendingDataTest {
     @Test
     public void testGetAchievements() {

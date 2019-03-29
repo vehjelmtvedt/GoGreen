@@ -13,8 +13,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import static org.junit.Assert.*;
-
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Requests.class)
 public class SyncUserTaskTest {
@@ -63,7 +61,7 @@ public class SyncUserTaskTest {
 
     @Test
     public void callEqual() {
-        PowerMockito.mockStatic(Requests.class);
+        PowerMockito.mockStatic(tools.Requests.class);
         BDDMockito.given(Requests.loginRequest(loginDetails)).willReturn(user);
 
         SyncUserTask userTask = new SyncUserTask(loginDetails, user);
@@ -83,7 +81,7 @@ public class SyncUserTaskTest {
 
     @Test
     public void callDifferent() {
-        PowerMockito.mockStatic(Requests.class);
+        PowerMockito.mockStatic(tools.Requests.class);
         BDDMockito.given(Requests.loginRequest(loginDetails)).willReturn(modifiedUser);
 
         SyncUserTask userTask = new SyncUserTask(loginDetails, user);
