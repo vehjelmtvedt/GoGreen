@@ -2,8 +2,11 @@ package backend;
 
 import backend.repos.AchievementRepository;
 import backend.repos.UserRepository;
+import backend.repos.UserStatisticsRepository;
 import data.Achievement;
+import data.Activity;
 import data.User;
+import data.UserStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -26,12 +30,16 @@ import java.util.stream.Collectors;
 @Service("DbService")
 @Transactional
 public class DbService {
+    private static final int maxLoginStreak = 3;
 
     @Autowired
     private UserRepository users;
 
     @Autowired
     private AchievementRepository achievements;
+
+    @Autowired
+    private UserStatisticsRepository userStatistics;
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -41,7 +49,6 @@ public class DbService {
         return new BCryptPasswordEncoder();
     }
 
-    private static final int maxLoginStreak = 3;
 
     public static void main(String[] args) {
         SpringApplication.run(DbService.class, args);
@@ -66,8 +73,9 @@ public class DbService {
      */
     public void addUser(User user) {
         // New User, encrypt password
-        if (getUser(user.getEmail()) == null) {
+        if (getUserByEmail(user.getEmail()) == null) {
             user.setPassword(encodePassword(user.getPassword()));
+            updateTotalUsersStatistics();
         }
 
         users.save(user);
@@ -87,10 +95,6 @@ public class DbService {
      */
     public User grantAccess(String identifier, String password) {
         User user = getUser(identifier);
-        System.out.println(user);
-        if (user == null) {
-            user = getUserByUsername(identifier);
-        }
 
         if (user == null || user.getLoginStreak() == maxLoginStreak) {
             return null;
@@ -115,7 +119,12 @@ public class DbService {
      * @param email - e-mail of the User to delete
      */
     void deleteUser(String email) {
-        users.deleteById(email);
+        Optional<User> user = users.findById(email);
+
+        if (user.isPresent()) {
+            removeUserUpdateStatistics(user.get());
+            users.deleteById(email);
+        }
     }
 
     /**
@@ -125,7 +134,7 @@ public class DbService {
      * @param identifier - e-mail/username of the user
      * @return User object (password encoded!), or null if not present
      */
-    public User getUser(String identifier) {
+    public User getUserByEmail(String identifier) {
         // User may not be present in the database
         Optional<User> user = users.findById(identifier);
 
@@ -145,6 +154,21 @@ public class DbService {
         Optional<User> user = users.findByUsername(username);
         // Returns user if found, else returns null
         return user.orElse(null);
+    }
+
+    /**.
+     * Gets user from the database (by identifier [email/password])
+     * @param identifier - identifier (can be e-mail or username
+     * @return - User object (password encoded!), or null if not present
+     */
+    public User getUser(String identifier) {
+        User user = getUserByEmail(identifier);
+
+        if (user == null) {
+            user = getUserByUsername(identifier);
+        }
+
+        return user;
     }
 
     /**
@@ -218,6 +242,28 @@ public class DbService {
 
     /**
      * .
+     * Adds specified Activity to specified User, if the User exists.
+     *
+     * @param username - Username of the User to add the Activity to
+     * @param activity - Activity to add to User
+     * @return - Updated User
+     */
+    public User addActivityToUser(String username, Activity activity) {
+        User returned = getUserByUsername(username);
+
+        if (returned == null || activity == null) {
+            return null;
+        }
+
+        returned.addActivity(activity);
+        returned.setTotalCarbonSaved(returned.getTotalCarbonSaved() + activity.getCarbonSaved());
+        addUser(returned);
+        updateTotalCo2SavedStatistics(returned);
+        return returned;
+    }
+
+    /**
+     * .
      * Finds all usernames matching specified string
      *
      * @param username - part of username to match
@@ -247,21 +293,18 @@ public class DbService {
         return mongoTemplate.find(
                 new Query()
                         .with(new Sort(Sort.Direction.DESC, "totalCarbonSaved"))
-                        // sort in descending order by username
+                        // sort in descending order by carbon saved
                         .limit(top), // return required number of users
                 User.class); // result as User Object
     }
 
-    /**
-     * .
-     * Gets users' friends
+    /**.
+     * Gets User's friends
+     * @param identifier - identifier (e-mail/username) of User
+     * @return - List of User's friends
      */
     public List<User> getFriends(String identifier) {
         User user = getUser(identifier);
-
-        if (user == null) {
-            user = getUserByUsername(identifier);
-        }
 
         if (user == null) {
             return new ArrayList<>(); // return empty list
@@ -269,7 +312,30 @@ public class DbService {
             // Query that returns a list of all the user's friends
             return mongoTemplate.find(
                     new Query(Criteria.where("username") // Compare against User email
-                            .in(user.getFriends())), // Email must be in users friend list
+                            .in(user.getFriends())), // Username must be in users friend list
+                    User.class); // Resulting Object type User
+        }
+    }
+
+    /**.
+     * Gets User's top friends
+     * @param identifier - identifier (e-mail/username) of User
+     * @param top - Number of top friends to return
+     * @return - top n friends of user
+     */
+    public List<User> getTopFriends(String identifier, int top) {
+        User user = getUser(identifier);
+
+        if (user == null) {
+            return new ArrayList<>(); // return empty list
+        } else {
+            // Query that returns a list of all the user's top n friends
+            return mongoTemplate.find(
+                    new Query(Criteria.where("username") // Compare against User email
+                            .in(user.getFriends())) // Username must be in users friend list
+                            .with(new Sort(Sort.Direction.DESC, "totalCarbonSaved"))
+                            // sort in descending order by carbon saved
+                            .limit(top), // return required number of users,
                     User.class); // Resulting Object type User
         }
     }
@@ -282,5 +348,87 @@ public class DbService {
      */
     public List<Achievement> getAchievements() {
         return achievements.findAll();
+    }
+
+    /**
+     * Edits and updates user.
+     * @param user the user to update
+     * @param fieldName name of the field to update
+     * @param newValue new value of the field
+     * @return the updated User
+     */
+    public User editProfile(User user,String fieldName, Object newValue) {
+        try {
+            Field field = user.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(user, newValue);
+            field.setAccessible(false);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            return null;
+        }
+        addUser(user);
+        return user;
+    }
+    
+    /**.
+     * Returns the total amount of CO2 saved by all the users
+     * @return - Total amount of CO2 saved
+     */
+    public double getTotalCO2Saved() {
+        // Querying is too slow (keeping for reference)
+        /*// Create aggregation query
+        Aggregation userAggregation = Aggregation.newAggregation(
+                Aggregation.group()
+                        .sum("totalCarbonSaved")
+                        .as("totalCarbonSaved"));
+
+        // Aggregate result to single User
+        User sumUser = mongoTemplate.aggregate(userAggregation, User.class, User.class)
+                .getUniqueMappedResult();
+
+        // No Users found
+        if (sumUser == null) {
+            return 0.0;
+        }
+
+        // Return sum result
+        return sumUser.getTotalCarbonSaved();*/
+
+        return getTotalStatistics().getTotalCO2Saved();
+    }
+
+    public int getTotalUsers() {
+        return getTotalStatistics().getTotalUsers();
+    }
+
+    public double getAverageCO2Saved() {
+        return getTotalStatistics().getAverageCO2Saved();
+    }
+
+    private UserStatistics getTotalStatistics() {
+        return mongoTemplate.findById("all", UserStatistics.class);
+    }
+
+    private void updateTotalCo2SavedStatistics(User user) {
+        Activity recentActivity = user.getActivities().get(user.getActivities().size() - 1);
+
+        UserStatistics allStatistics = getTotalStatistics();
+        allStatistics.addTotalCo2Saved(recentActivity.getCarbonSaved());
+
+        userStatistics.save(allStatistics);
+    }
+
+    private void updateTotalUsersStatistics() {
+        UserStatistics allStatistics = getTotalStatistics();
+        allStatistics.incrementTotalUsers();
+
+        userStatistics.save(allStatistics);
+    }
+
+    private void removeUserUpdateStatistics(User user) {
+        UserStatistics allStatistics = getTotalStatistics();
+        allStatistics.deleteUser(user);
+
+        userStatistics.save(allStatistics);
     }
 }
