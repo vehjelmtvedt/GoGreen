@@ -321,6 +321,16 @@ public class DbServiceTest {
     }
 
     @Test
+    public void testEditProfile() {
+        assertEquals(dbService.editProfile(testUser,"age",15).getAge(),15);
+    }
+
+    @Test
+    public void testEditProfileWrongField() {
+        assertEquals(null,dbService.editProfile(testUser,"asd",10));
+    }
+    
+    @Test
     public void testGetTopFriendsEmpty() {
         List<User> friends = dbService.getTopFriends(testUser.getUsername(), 5);
 
@@ -351,7 +361,6 @@ public class DbServiceTest {
     @Test
     public void testGetTopFriendsNoUser() {
         List<User> friends = dbService.getTopFriends(testUserNonExistent.getUsername(), 5);
-
         Assert.assertEquals(new ArrayList<User>(), friends);
     }
 }

@@ -217,6 +217,21 @@ public class RequestHandlerTest
     }
 
     @Test
+    public void editProfile() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        Mockito.when(dbService.editProfile(testUser,"firstName","Test")).thenReturn(testUser);
+        assertEquals("Test",requestHandler.editProfile(new LoginDetails(testUser.getUsername()
+                ,testUser.getPassword()),"firstName","Test").getFirstName());
+    }
+
+    @Test
+    public void editProfileAuthFail() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
+        assertEquals(null,requestHandler.editProfile(new LoginDetails(testUser.getUsername()
+                ,testUser.getPassword()),"firstName","Test5"));
+    }
+    
+    @Test
     public void forgotPass() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         testUser.setSecurityQuestionAnswer("A");

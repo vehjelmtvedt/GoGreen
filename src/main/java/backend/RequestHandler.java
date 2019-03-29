@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 
 
 
+
 @RestController
 public class RequestHandler {
     @Resource(name = "DbService")
@@ -150,6 +151,25 @@ public class RequestHandler {
         return dbService.getAchievements();
     }
 
+    /**
+     * Request to edit profile.
+     * @param loginDetails for auth
+     * @param fieldName the name of the field being changed
+     * @param newValue the new value of the field
+     * @return the updated user
+     */
+    @RequestMapping("/editProfile")
+    public User editProfile(@RequestBody LoginDetails loginDetails, @RequestParam String fieldName,
+                            @RequestParam Object newValue) {
+        User user = dbService.grantAccess(loginDetails.getIdentifier(),loginDetails.getPassword());
+        System.out.println(user);
+        if (user == null) {
+            return null;
+        }
+
+        return dbService.editProfile(user,fieldName,newValue);
+    }
+    
     /**
      * request to reset password.
      * @param email email of the user

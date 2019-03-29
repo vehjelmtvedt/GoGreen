@@ -192,6 +192,14 @@ public class RequestsTest {
     }
 
     @Test
+    public void testEditProfile() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        Mockito.when(dbService.editProfile(testUser,"firstName","test")).thenReturn(testUser);
+        assertEquals("Test",Requests.editProfile(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword()),"firstName","test").getFirstName());
+    }
+    
+    @Test
     public void testforgotPass() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(), testUser.getPassword())).thenReturn(null);
         Boolean bool = false;
