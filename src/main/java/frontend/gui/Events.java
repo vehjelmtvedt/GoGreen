@@ -4,15 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
-import data.Activity;
-import data.BuyLocallyProducedFood;
-import data.BuyNonProcessedFood;
-import data.BuyOrganicFood;
-import data.EatVegetarianMeal;
-import data.UseBikeInsteadOfCar;
-import data.UseBusInsteadOfCar;
-import data.UseTrainInsteadOfCar;
-import data.User;
+import data.*;
 import frontend.controllers.ActivitiesController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,6 +22,7 @@ import tools.ActivityQueries;
 import tools.DateUnit;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -223,7 +216,27 @@ public class Events {
             } else {
                 if (type == 2) {
                     //todo: Lower home temperature
-                        
+                    LowerHomeTemperature temp = new LowerHomeTemperature();
+                    if (temp.timesPerformedInTheSameDay(loggedUser) > 0) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText("Oops");
+                        alert.setContentText("It looks like you already did this today, you can try again tomorrow!");
+                        alert.showAndWait();
+                    } else {
+                        List<String> choices = Arrays.asList( "1", "2", "3", "4", "5");
+                        ChoiceDialog<String> dialog = new ChoiceDialog<>("1", choices);
+                        dialog.setTitle("Lower Home Temperature");
+                        dialog.setHeaderText("How many degrees did you turn your thermostat down?");
+                        dialog.setContentText("Degrees:");
+                        Optional<String> result = dialog.showAndWait();
+                        if (result.isPresent()){
+                            System.out.println("Degrees: " + result.get());
+                            temp.setDegrees(Integer.parseInt(result.get()));
+                            temp.performActivity(loggedUser);
+                        }
+
+                    }
                 }
             }
 
