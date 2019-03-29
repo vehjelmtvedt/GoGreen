@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 
 
 
+
 @RestController
 public class RequestHandler {
     @Resource(name = "DbService")
@@ -48,7 +49,7 @@ public class RequestHandler {
             return "Username exists";
         }
 
-        if (dbService.getUser(user.getEmail()) != null) {
+        if (dbService.getUserByEmail(user.getEmail()) != null) {
             return "Email exists";
         }
 
@@ -80,8 +81,7 @@ public class RequestHandler {
      */
     @RequestMapping("/validateUser")
     public String validateUser(@RequestBody String identifier) {
-        if  (dbService.getUser(identifier) != null
-                || dbService.getUserByUsername(identifier) != null) {
+        if  (dbService.getUser(identifier) != null) {
             return "OK";
         } else {
             return "NONE";
@@ -114,14 +114,7 @@ public class RequestHandler {
             produces = "application/json; charset=utf-8",
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public User addActivity(@RequestBody Activity activity, @RequestParam String identifier) {
-        User returned = dbService.getUserByUsername(identifier);
-        if (returned == null || activity == null) {
-            return null;
-        }
-        returned.addActivity(activity);
-        returned.setTotalCarbonSaved(returned.getTotalCarbonSaved() + activity.getCarbonSaved());
-        dbService.addUser(returned);
-        return returned;
+        return dbService.addActivityToUser(identifier, activity);
     }
 
     /**
@@ -156,6 +149,50 @@ public class RequestHandler {
     @RequestMapping("/getAllAchievements")
     public List<Achievement> getAllAchievements() {
         return dbService.getAchievements();
+    }
+
+    /**
+     * Request to edit profile.
+     * @param loginDetails for auth
+     * @param fieldName the name of the field being changed
+     * @param newValue the new value of the field
+     * @return the updated user
+     */
+    @RequestMapping("/editProfile")
+    public User editProfile(@RequestBody LoginDetails loginDetails, @RequestParam String fieldName,
+                            @RequestParam Object newValue) {
+        User user = dbService.grantAccess(loginDetails.getIdentifier(),loginDetails.getPassword());
+        System.out.println(user);
+        if (user == null) {
+            return null;
+        }
+
+        return dbService.editProfile(user,fieldName,newValue);
+    }
+    
+    /**
+     * request to reset password.
+     * @param email email of the user
+     * @param answer answer to security question
+     * @param newPass new password
+     * @return true if success, false if not
+     */
+    @RequestMapping("/forgotPass")
+    public Boolean forgotPass(@RequestParam String email, @RequestParam String answer,
+                           @RequestParam int questionid ,@RequestParam String newPass) {
+        User user = dbService.getUser(email);
+        if (user == null) {
+            return null;
+        }
+        System.out.println(user.toString());
+        if (user.getSecurityQuestionAnswer().equals(answer)
+                && user.getSecurityQuestionId() == questionid) {
+            user.setPassword(newPass);
+            dbService.addUser(user);
+            return true;
+        }
+
+        return false;
     }
 }
 
