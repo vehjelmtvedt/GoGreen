@@ -51,7 +51,7 @@ public abstract class Activity {
     }
 
     public void setCarbonSaved(double carbonSaved) {
-        this.carbonSaved = carbonSaved;
+        this.carbonSaved = ((int)(carbonSaved * 1000)) / 1000.0;
     }
 
     public String getName() {
