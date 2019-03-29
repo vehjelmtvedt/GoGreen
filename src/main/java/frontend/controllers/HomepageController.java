@@ -128,49 +128,17 @@ public class HomepageController implements Initializable {
 
     private static ObservableList<PieChart.Data> fillPieChart(User user) {
         ActivityQueries queries = new ActivityQueries(user.getActivities());
-        List<String> categories = new ArrayList<>();
-        categories.add("Food");
-        categories.add("Transportation");
-        categories.add("Household");
 
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+        return FXCollections.observableArrayList(
                                     new PieChart.Data("Food",
-                                            queries.filterActivitiesByCategories(
-                                            categories.subList(0,1)).size()),
+                                            queries.filterActivities("Food").size()),
                                     new PieChart.Data("Transportation",
-                                            queries.filterActivitiesByCategories(
-                                                    categories.subList(1,2)).size()),
+                                            queries.filterActivities("Transportation").size()),
                                     new PieChart.Data("Household",
-                                            queries.filterActivitiesByCategories(
-                                                    categories.subList(2,3)).size())
+                                            queries.filterActivities("Household").size())
         );
-        return pieChartData;
     }
-
-    //    @FXML
-    //    private void handleLeaderboards(ActionEvent event) {
-    //        JFXTreeView current = new JFXTreeView();
-    //        if (event.getSource() == btnMyStats) {
-    //            tableMyStats.setVisible(true);
-    //            current = tableMyStats;
-    //        } else if (event.getSource() == btnTop5) {
-    //            current = tableTop5;
-    //        } else if (event.getSource() == btnTop10) {
-    //            current = tableTop10;
-    //        } else if (event.getSource() == btnTop25) {
-    //            current = tableTop25;
-    //        } else {
-    //            if (event.getSource() == btnTop50) {
-    //                current = tableTop50;
-    //            }
-    //        }
-    //        for (JFXTreeView table : this.listTables) {
-    //            if (!table.equals(current)) {
-    //                table.setVisible(false);
-    //            }
-    //        }
-    //    }
-
+    
     /**
      * .
      * Sets the current logged in User to the one that was passed
