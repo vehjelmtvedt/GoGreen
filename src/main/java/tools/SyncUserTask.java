@@ -44,6 +44,10 @@ public class SyncUserTask implements Callable<UserPendingData> {
         return userPendingData;
     }
 
+    public User getUser() {
+        return this.user;
+    }
+
     /**.
      * Updates the User object
      * @param user - new User object

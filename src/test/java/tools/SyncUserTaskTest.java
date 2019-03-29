@@ -94,4 +94,19 @@ public class SyncUserTaskTest {
         Assert.assertEquals(3, user.getProgress().getAchievements().size());
         Assert.assertEquals(2, user.getFriendRequests().size());
     }
+
+    @Test
+    public void getUserTest() {
+        SyncUserTask userTask = new SyncUserTask(requests, loginDetails, user);
+
+        Assert.assertEquals(user, userTask.getUser());
+    }
+
+    @Test
+    public void testUpdateUser() {
+        SyncUserTask userTask = new SyncUserTask(requests, loginDetails, modifiedUser);
+        userTask.updateUser(user);
+
+        Assert.assertEquals(user, userTask.getUser());
+    }
 }
