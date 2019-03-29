@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Requests.class)
+@PrepareForTest(tools.Requests.class)
 public class SyncUserTaskTest {
 
     private User user = new User("Test", "User", 25,
