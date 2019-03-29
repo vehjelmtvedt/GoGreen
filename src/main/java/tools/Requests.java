@@ -15,7 +15,7 @@ import java.util.List;
 public class Requests {
 
     private static RestTemplate restTemplate = new RestTemplate();
-    private static String url = "http://localhost:8080/";
+    private static String url = "http://localhost:8080";
 
     /**
      * Sends signup request to the server.
@@ -172,5 +172,20 @@ public class Requests {
                 .queryParam("fieldName",fieldName).queryParam("newValue", newValue);
         return restTemplate.postForEntity(uriBuilder.toUriString(),
                 loginDetails,User.class).getBody();
+    }  
+    
+    /**
+     * Request to rest password.
+     * @param email email of user.
+     * @param answer answer of the security question
+     * @param newPass changed password
+     * @return - true if successfully changed password, false otherwise
+     */
+    public static Boolean forgotPass(String email, int questionid, String answer, String newPass) {
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/forgotPass")
+                .queryParam("email",email).queryParam("answer",answer)
+                        .queryParam("questionid",questionid).queryParam("newPass",newPass);
+
+        return restTemplate.getForEntity(uriBuilder.toUriString(),Boolean.class).getBody();
     }
 }

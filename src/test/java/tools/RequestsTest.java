@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -139,10 +140,11 @@ public class RequestsTest {
 
     @Test
     public void testAddActivityRequest() {
-        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
         EatVegetarianMeal activity = new EatVegetarianMeal();
+
+        Mockito.when(dbService.addActivityToUser(testUser.getUsername(), activity)).thenReturn(testUser);
+
         assertEquals(testUser, Requests.addActivityRequest(activity, testUser.getUsername()));
-        assertEquals(1, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
     }
 
     @Test
@@ -195,5 +197,12 @@ public class RequestsTest {
         Mockito.when(dbService.editProfile(testUser,"firstName","test")).thenReturn(testUser);
         assertEquals("Test",Requests.editProfile(new LoginDetails(testUser.getUsername(),
                 testUser.getPassword()),"firstName","test").getFirstName());
+    }
+    
+    @Test
+    public void testforgotPass() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(), testUser.getPassword())).thenReturn(null);
+        Boolean bool = false;
+        assertEquals(null,Requests.forgotPass(testUser.getEmail(),1,"A","B"));
     }
 }

@@ -115,14 +115,7 @@ public class RequestHandler {
             produces = "application/json; charset=utf-8",
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public User addActivity(@RequestBody Activity activity, @RequestParam String identifier) {
-        User returned = dbService.getUserByUsername(identifier);
-        if (returned == null || activity == null) {
-            return null;
-        }
-        returned.addActivity(activity);
-        returned.setTotalCarbonSaved(returned.getTotalCarbonSaved() + activity.getCarbonSaved());
-        dbService.addUser(returned);
-        return returned;
+        return dbService.addActivityToUser(identifier, activity);
     }
 
     /**
@@ -176,6 +169,31 @@ public class RequestHandler {
         }
 
         return dbService.editProfile(user,fieldName,newValue);
+    }
+    
+    /**
+     * request to reset password.
+     * @param email email of the user
+     * @param answer answer to security question
+     * @param newPass new password
+     * @return true if success, false if not
+     */
+    @RequestMapping("/forgotPass")
+    public Boolean forgotPass(@RequestParam String email, @RequestParam String answer,
+                           @RequestParam int questionid ,@RequestParam String newPass) {
+        User user = dbService.getUser(email);
+        if (user == null) {
+            return null;
+        }
+        System.out.println(user.toString());
+        if (user.getSecurityQuestionAnswer().equals(answer)
+                && user.getSecurityQuestionId() == questionid) {
+            user.setPassword(newPass);
+            dbService.addUser(user);
+            return true;
+        }
+
+        return false;
     }
 }
 

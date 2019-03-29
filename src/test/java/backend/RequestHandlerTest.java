@@ -139,10 +139,9 @@ public class RequestHandlerTest
 
     @Test
     public void testAddActivity() {
-        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
         EatVegetarianMeal act = new EatVegetarianMeal();
+        Mockito.when(dbService.addActivityToUser(testUser.getUsername(), act)).thenReturn(testUser);
         assertEquals(testUser, requestHandler.addActivity(act, testUser.getUsername()));
-        assertEquals(1, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
     }
 
     @Test
@@ -232,5 +231,28 @@ public class RequestHandlerTest
         assertEquals(null,requestHandler.editProfile(new LoginDetails(testUser.getUsername()
                 ,testUser.getPassword()),"firstName","Test5"));
     }
+    
+    @Test
+    public void forgotPass() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        testUser.setSecurityQuestionAnswer("A");
+        testUser.setSecurityQuestionId(1);
+        Boolean bool = true;
+        assertEquals(requestHandler.forgotPass(testUser.getEmail(),"A",1,"ASD"),bool);
+    }
 
+    @Test
+    public void forgotPassNull() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(null);
+        assertEquals(null,requestHandler.forgotPass(testUser.getEmail(),"A",1,"A"));
+    }
+
+    @Test
+    public void forgotPassWrongAnswer() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        testUser.setSecurityQuestionAnswer("A");
+        testUser.setSecurityQuestionId(1);
+        Boolean bool = false;
+        assertEquals(requestHandler.forgotPass(testUser.getEmail(),"B",1,"ASD"),bool);
+    }
 }

@@ -1,6 +1,7 @@
 package backend;
 
 import data.Achievement;
+import data.EatVegetarianMeal;
 import data.User;
 import org.junit.Assert;
 import org.junit.Before;
