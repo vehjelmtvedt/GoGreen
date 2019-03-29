@@ -323,7 +323,7 @@ public class User {
      * @param carbonsaved co2 saved
      */
     public void addCO2Points( double carbonsaved) {
-        this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved);
+        this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
 
     }
 
