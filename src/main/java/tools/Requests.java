@@ -15,7 +15,7 @@ import java.util.List;
 public class Requests {
 
     private static RestTemplate restTemplate = new RestTemplate();
-    private static String url = "http://localhost:8080/";
+    private static String url = "http://localhost:8080";
 
     /**
      * Sends signup request to the server.
@@ -161,26 +161,17 @@ public class Requests {
     }
 
     /**
-     * get total Users.
-     * @return number of total users
+     * Request to rest password.
+     * @param email email of user.
+     * @param answer answer of the security question
+     * @param newPass changed password
+     * @return - true if successfully changed password, false otherwise
      */
-    public static int getTotalUsers() {
-        return restTemplate.getForEntity(url + "/getTotalUsers", int.class).getBody();
-    }
+    public static Boolean forgotPass(String email, int questionid, String answer, String newPass) {
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/forgotPass")
+                .queryParam("email",email).queryParam("answer",answer)
+                        .queryParam("questionid",questionid).queryParam("newPass",newPass);
 
-    /**
-     * get total CO2 saved.
-     * @return total amount of CO2 saved
-     */
-    public static double getTotalCO2Saved() {
-        return restTemplate.getForEntity(url + "/getTotalCO2Saved",double.class).getBody();
-    }
-
-    /**
-     * get average CO2 saved.
-     * @return average CO2 saved
-     */
-    public static double getAverageCO2Saved() {
-        return restTemplate.getForEntity(url + "/getAverageCO2Saved",double.class).getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(),Boolean.class).getBody();
     }
 }

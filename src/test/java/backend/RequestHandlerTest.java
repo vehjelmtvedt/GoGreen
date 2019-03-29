@@ -218,20 +218,26 @@ public class RequestHandlerTest
     }
 
     @Test
-    public void getTotalCO2Saved() {
-        Mockito.when(dbService.getTotalCO2Saved()).thenReturn(100.5);
-        assertEquals(requestHandler.getTotalCO2Saved(),100.5);
+    public void forgotPass() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        testUser.setSecurityQuestionAnswer("A");
+        testUser.setSecurityQuestionId(1);
+        Boolean bool = true;
+        assertEquals(requestHandler.forgotPass(testUser.getEmail(),"A",1,"ASD"),bool);
     }
 
     @Test
-    public void getTotalUsers() {
-        Mockito.when(dbService.getTotalUsers()).thenReturn(10);
-        assertEquals(requestHandler.getTotalUsers(),10);
+    public void forgotPassNull() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(null);
+        assertEquals(null,requestHandler.forgotPass(testUser.getEmail(),"A",1,"A"));
     }
 
     @Test
-    public void getAverageCO2Saved() {
-        Mockito.when(dbService.getAverageCO2Saved()).thenReturn(25.2);
-        assertEquals(requestHandler.getAverageCO2Saved(),25.2);
+    public void forgotPassWrongAnswer() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        testUser.setSecurityQuestionAnswer("A");
+        testUser.setSecurityQuestionId(1);
+        Boolean bool = false;
+        assertEquals(requestHandler.forgotPass(testUser.getEmail(),"B",1,"ASD"),bool);
     }
 }

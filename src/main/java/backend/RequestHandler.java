@@ -151,19 +151,29 @@ public class RequestHandler {
         return dbService.getAchievements();
     }
 
-    @RequestMapping("/getTotalUsers")
-    public int getTotalUsers() {
-        return dbService.getTotalUsers();
-    }
+    /**
+     * request to reset password.
+     * @param email email of the user
+     * @param answer answer to security question
+     * @param newPass new password
+     * @return true if success, false if not
+     */
+    @RequestMapping("/forgotPass")
+    public Boolean forgotPass(@RequestParam String email, @RequestParam String answer,
+                           @RequestParam int questionid ,@RequestParam String newPass) {
+        User user = dbService.getUser(email);
+        if (user == null) {
+            return null;
+        }
+        System.out.println(user.toString());
+        if (user.getSecurityQuestionAnswer().equals(answer)
+                && user.getSecurityQuestionId() == questionid) {
+            user.setPassword(newPass);
+            dbService.addUser(user);
+            return true;
+        }
 
-    @RequestMapping("/getTotalCO2Saved")
-    public double getTotalCO2Saved() {
-        return dbService.getTotalCO2Saved();
-    }
-
-    @RequestMapping("/getAverageCO2Saved")
-    public double getAverageCO2Saved() {
-        return dbService.getAverageCO2Saved();
+        return false;
     }
 }
 
