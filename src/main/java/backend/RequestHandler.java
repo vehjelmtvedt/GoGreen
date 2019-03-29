@@ -114,14 +114,7 @@ public class RequestHandler {
             produces = "application/json; charset=utf-8",
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public User addActivity(@RequestBody Activity activity, @RequestParam String identifier) {
-        User returned = dbService.getUserByUsername(identifier);
-        if (returned == null || activity == null) {
-            return null;
-        }
-        returned.addActivity(activity);
-        returned.setTotalCarbonSaved(returned.getTotalCarbonSaved() + activity.getCarbonSaved());
-        dbService.addUser(returned);
-        return returned;
+        return dbService.addActivityToUser(identifier, activity);
     }
 
     /**
