@@ -51,6 +51,7 @@ public abstract class Activity {
     }
 
     public void setCarbonSaved(double carbonSaved) {
+        // keep only 3 decimal places
         this.carbonSaved = ((int)(carbonSaved * 1000)) / 1000.0;
     }
 
