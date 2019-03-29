@@ -20,9 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -33,6 +31,7 @@ import tools.DateUnit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Events {
 
@@ -203,9 +202,28 @@ public class Events {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
                 //todo: Add solar panels
+                TextInputDialog dialog = new TextInputDialog("0");
+                dialog.setTitle("Install Solar Panels");
+                dialog.setHeaderText("Amount of kwh that your solar panel installation produces per year: ");
+                dialog.setContentText("kwh:");
+                dialog.getEditor().textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(
+                            ObservableValue<? extends String> observable,
+                            String oldValue, String newValue) {
+                        if (!newValue.matches("^[0-9]{0,7}$")) {
+                            dialog.getEditor().setText(oldValue);
+                        }
+                    }
+                });
+                Optional<String> result = dialog.showAndWait();
+                if (result.isPresent()){
+                    System.out.println("kwh: " + result.get());
+                }
             } else {
                 if (type == 2) {
                     //todo: Lower home temperature
+                        
                 }
             }
 
