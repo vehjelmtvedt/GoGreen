@@ -150,7 +150,7 @@ public class FriendspageController implements Initializable {
         ActivityQueries thisQuery = new ActivityQueries(thisUser.getActivities());
         series1.getData().add(new XYChart.Data("You",
                 thisQuery.getTotalCO2Saved(unit)));
-        List<User> friendsList = Requests.getFriends(thisLoginDetails);
+        List<User> friendsList = Requests.instance.getFriends(thisLoginDetails);
         for (User friend : friendsList) {
             if (counter >= 5) {
                 return;
@@ -191,7 +191,7 @@ public class FriendspageController implements Initializable {
                         HBox.setMargin(addButton, new Insets(10, 10, 0, 90));
                         HBox.setMargin(tmpLabel, new Insets(15, 0, 0, 30));
                         addButton.setMaxWidth(40);
-                        addButton.setOnAction(e -> Requests.sendFriendRequest(
+                        addButton.setOnAction(e -> Requests.instance.sendFriendRequest(
                                 thisUser.getUsername(), tmpLabel.getText()));
                         hbox.getChildren().addAll(tmpLabel, addButton);
                         results.getChildren().add(hbox);
@@ -221,7 +221,7 @@ public class FriendspageController implements Initializable {
      * @return - list of users matching the keyword
      */
     public List getSearchResults(String keyword) {
-        return Requests.getMatchingUsersRequest(keyword, thisLoginDetails);
+        return Requests.instance.getMatchingUsersRequest(keyword, thisLoginDetails);
     }
 
     /**
@@ -273,7 +273,7 @@ public class FriendspageController implements Initializable {
 
     private ObservableList<UserItem> getTableData() {
         ObservableList<UserItem> friendsList = FXCollections.observableArrayList();
-        List<User> friends = Requests.getFriends(thisLoginDetails);
+        List<User> friends = Requests.instance.getFriends(thisLoginDetails);
         for (Object friend : friends) {
             User thisFriend = (User) friend;
             String activity = "This user has no activities";

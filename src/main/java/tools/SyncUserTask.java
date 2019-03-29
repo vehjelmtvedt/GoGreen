@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.concurrent.Callable;
 
 public class SyncUserTask implements Callable<UserPendingData> {
+    private Requests requests;
     private LoginDetails loginDetails;
     private User user;
 
@@ -18,7 +19,8 @@ public class SyncUserTask implements Callable<UserPendingData> {
      * @param loginDetails - Login Details of the User
      * @param user - Client User object for the User
      */
-    public SyncUserTask(LoginDetails loginDetails, User user) {
+    public SyncUserTask(Requests requests, LoginDetails loginDetails, User user) {
+        this.requests = requests;
         this.loginDetails = loginDetails;
         this.user = user;
     }
@@ -33,7 +35,7 @@ public class SyncUserTask implements Callable<UserPendingData> {
         UserPendingData userPendingData = new UserPendingData();
 
         // Get most recent User object
-        User newUser = Requests.loginRequest(loginDetails);
+        User newUser = requests.loginRequest(loginDetails);
 
         // Update achievements & friend requests
         updateUserAchievements(newUser, userPendingData);

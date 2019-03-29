@@ -227,7 +227,7 @@ public abstract class Activity {
         user.addActivity(this);
         // update user in the database
         try {
-            user = Requests.addActivityRequest(this, user.getUsername());
+            user = Requests.instance.addActivityRequest(this, user.getUsername());
         } catch (HttpClientErrorException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());

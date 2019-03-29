@@ -184,7 +184,7 @@ public class QuestionnaireController implements Initializable {
 
                 // Send the user Back to Login after Questionnaire is complete
 
-                String response = Requests.signupRequest(thisUser);
+                String response = Requests.instance.signupRequest(thisUser);
                 if (response != null) {
                     if (response.equals("success")) {
                         try {

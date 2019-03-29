@@ -4,11 +4,14 @@ import data.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SyncUserTaskTest {
+    Requests requests;
+
     private User user = new User("Test", "User", 25,
             "test-user@email.com","testuser","pwd123");
 
@@ -19,6 +22,8 @@ public class SyncUserTaskTest {
 
     @Before
     public void setup() {
+        requests = Mockito.mock(Requests.class);
+
         ArrayList<UserAchievement> achievements1 = new ArrayList<>();
         ArrayList<UserAchievement> achievements2 = new ArrayList<>();
 
@@ -51,38 +56,42 @@ public class SyncUserTaskTest {
         modifiedUser.setFriendRequests(requests2);
     }
 
-//    @Test
-//    public void callEqual() {
-//        SyncUserTask userTask = new SyncUserTask(loginDetails, user);
-//
-//        UserPendingData result = null;
-//
-//        try {
-//            result = userTask.call();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        // No equals method or UserAchievement, therefore two asserts here
-//        Assert.assertEquals(0, result.getAchievements().size());
-//        Assert.assertEquals(0, result.getFriendRequests().size());
-//    }
-//
-//    @Test
-//    public void callDifferent() {
-//        SyncUserTask userTask = new SyncUserTask(loginDetails, user);
-//
-//        UserPendingData result = null;
-//
-//        try {
-//            result = userTask.call();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        Assert.assertEquals(1, result.getAchievements().size());
-//        Assert.assertEquals(1, result.getFriendRequests().size());
-//        Assert.assertEquals(3, user.getProgress().getAchievements().size());
-//        Assert.assertEquals(2, user.getFriendRequests().size());
-//    }
+    @Test
+    public void callEqual() {
+        SyncUserTask userTask = new SyncUserTask(requests, loginDetails, user);
+
+        Mockito.when(requests.loginRequest(loginDetails)).thenReturn(user);
+
+        UserPendingData result = null;
+
+        try {
+            result = userTask.call();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // No equals method or UserAchievement, therefore two asserts here
+        Assert.assertEquals(0, result.getAchievements().size());
+        Assert.assertEquals(0, result.getFriendRequests().size());
+    }
+
+    @Test
+    public void callDifferent() {
+        Mockito.when(requests.loginRequest(loginDetails)).thenReturn(modifiedUser);
+
+        SyncUserTask userTask = new SyncUserTask(requests, loginDetails, user);
+
+        UserPendingData result = null;
+
+        try {
+            result = userTask.call();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertEquals(1, result.getAchievements().size());
+        Assert.assertEquals(1, result.getFriendRequests().size());
+        Assert.assertEquals(3, user.getProgress().getAchievements().size());
+        Assert.assertEquals(2, user.getFriendRequests().size());
+    }
 }
