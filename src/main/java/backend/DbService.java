@@ -32,8 +32,6 @@ import java.util.stream.Collectors;
 public class DbService {
     private static final int maxLoginStreak = 3;
 
-    private static final int maxLoginStreak = 3;
-
     @Autowired
     private UserRepository users;
 
@@ -51,10 +49,7 @@ public class DbService {
         return new BCryptPasswordEncoder();
     }
 
-<<<<<<< src/main/java/backend/DbService.java
 
-=======
->>>>>>> src/main/java/backend/DbService.java
     public static void main(String[] args) {
         SpringApplication.run(DbService.class, args);
     }
