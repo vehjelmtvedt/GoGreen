@@ -105,8 +105,7 @@ public class FriendspageController implements Initializable {
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
         try {
-            JFXDrawer drawer = NavPanel.addNavPanel(main, headerPane, menu);
-            StageSwitcher.friendsDrawer = drawer;
+            StageSwitcher.friendsDrawer = NavPanel.addNavPanel(main, headerPane, menu);
         } catch (IOException e) {
             e.printStackTrace();
         }

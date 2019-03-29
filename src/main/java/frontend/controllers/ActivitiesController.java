@@ -164,8 +164,7 @@ public class ActivitiesController implements Initializable {
 
         //setup notification and navigation panels
         try {
-            JFXDrawer drawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
-            StageSwitcher.activityDrawer = drawer;
+            StageSwitcher.activityDrawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
         } catch (IOException e) {
             e.printStackTrace();

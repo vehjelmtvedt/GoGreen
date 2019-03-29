@@ -59,8 +59,7 @@ public class HomepageController implements Initializable {
         chartHousehold.setData(fillPieChart(loggedUser));
         try {
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
-            JFXDrawer drawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
-            StageSwitcher.homeDrawer = drawer;
+            StageSwitcher.homeDrawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
         } catch (IOException e) {
             e.printStackTrace();
         }
