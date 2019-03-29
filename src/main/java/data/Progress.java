@@ -77,7 +77,7 @@ public class Progress {
     /**
      * calculate how many points needed for next level.
      *
-     * @return
+     * @return points needed
      */
     public double pointsNeeded() {
 
