@@ -16,7 +16,6 @@ import java.util.Calendar;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(tools.Requests.class)
 public class SyncUserTaskTest {
-
     private User user = new User("Test", "User", 25,
             "test-user@email.com","testuser","pwd123");
 
@@ -27,6 +26,7 @@ public class SyncUserTaskTest {
 
     @Before
     public void setup() {
+        PowerMockito.mockStatic(Requests.class);
         ArrayList<UserAchievement> achievements1 = new ArrayList<>();
         ArrayList<UserAchievement> achievements2 = new ArrayList<>();
 
@@ -61,7 +61,6 @@ public class SyncUserTaskTest {
 
     @Test
     public void callEqual() {
-        PowerMockito.mockStatic(tools.Requests.class);
         BDDMockito.given(Requests.loginRequest(loginDetails)).willReturn(user);
 
         SyncUserTask userTask = new SyncUserTask(loginDetails, user);
@@ -81,7 +80,6 @@ public class SyncUserTaskTest {
 
     @Test
     public void callDifferent() {
-        PowerMockito.mockStatic(tools.Requests.class);
         BDDMockito.given(Requests.loginRequest(loginDetails)).willReturn(modifiedUser);
 
         SyncUserTask userTask = new SyncUserTask(loginDetails, user);
