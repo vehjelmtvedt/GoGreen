@@ -28,7 +28,7 @@ run-tests:
   stage: test
   script:
     - echo "Testing project with maven"
-    - mvn clean $MAVEN_CLI_OPTS test
+    - mvn $MAVEN_CLI_OPTS test
   artifacts:
     reports:
       junit:
@@ -40,7 +40,7 @@ coverage:
   stage: test
   script:
     - echo "Running install with maven"
-    - mvn install
+    - mvn $MAVEN_CLI_OPTS install
     - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%[^%]*%' | sed -e 's/Total/Jacoco-Test-Coverage:/g'
   artifacts:
     paths:
