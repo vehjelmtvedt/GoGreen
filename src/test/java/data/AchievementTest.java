@@ -75,4 +75,13 @@ public class AchievementTest {
 
     }
 
+    @Test
+    public void equals2() {
+
+        String test2 = "not an achievement";
+
+        Assert.assertFalse(test2.equals(test));
+
+    }
+
 }

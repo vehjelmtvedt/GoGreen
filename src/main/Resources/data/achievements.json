@@ -80,8 +80,8 @@
   {
     "_class": "data.Achievement",
     "id": 13,
-    "name": "Using an electric Car",
-    "bonus": 500
+    "name": "Have a small Car",
+    "bonus": 200
   },
   {
     "_class": "data.Achievement",
@@ -106,5 +106,12 @@
     "id": 17,
     "name": "Buy organic Food",
     "bonus": 100
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 17,
+    "name": "Buy organic Food",
+    "bonus": 100
   }
+
 ]

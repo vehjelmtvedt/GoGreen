@@ -8,15 +8,13 @@ import java.util.List;
 
 public class AchievementsLogic {
 
-
     /**
-     * checks activity if it completes an achievement.
+     * checks transport related activity if it completes an achievement.
      *
      * @param user     current user
      * @param activity current activity
      */
-    public static void checkActivity(User user, Activity activity) {
-
+    public static void  checktranspostActivity(User user, Activity activity) {
 
         //Using a bicycle id 2
         if (activity instanceof UseBikeInsteadOfCar) {
@@ -46,22 +44,37 @@ public class AchievementsLogic {
 
         }
 
-        //Eating vegetarian food for the first time id 6
-        if (activity instanceof EatVegetarianMeal) {
-
-            addAchievemnt(user, 6, activity.getDate());
-
-        }
         //Use the Bus once 7 // an or statement should be added for the user who do not have a car
         if (activity instanceof UseBusInsteadOfCar) {
 
             addAchievemnt(user, 7, activity.getDate());
         }
 
+    }
+
+
+    /**
+     * checks food related activity if it completes an achievement.
+     *
+     * @param user     current user
+     * @param activity current activity
+     */
+    public static void checkfoodActivity(User user, Activity activity) {
+
+
+        //Eating vegetarian food for the first time id 6
+        if (activity instanceof EatVegetarianMeal) {
+
+            addAchievemnt(user, 6, activity.getDate());
+
+        }
+
+
 
         //Getting solar Power 12
-        //Using an electric Car 13
-        //Being Vegan 14
+        //todo
+
+
 
         //Buy Local Food15
         if (activity instanceof BuyLocallyProducedFood) {
@@ -99,7 +112,7 @@ public class AchievementsLogic {
 
         }
 
-        //Being consistent for more than two days id 1
+        //Adding more than five Activites id 1
         if (user.getActivities().size() > 5) {
 
             addAchievemnt(user, 1, user.getActivities().get(4).getDate());
@@ -125,7 +138,18 @@ public class AchievementsLogic {
         //Being on the top of the board for a week id 11
         //todo
 
+        //Have a small Car 13
+        if (user.getCarType().equals("small")) {
+            addAchievemnt(user, 13, Calendar.getInstance().getTime());
+        }
+
+        //Being Vegan 14
+        if (user.getMeatAndDairyConsumption().equals("vegan")) {
+            addAchievemnt(user, 14, Calendar.getInstance().getTime());
+        }
+
     }
+
 
     /**
      * this method checks every achievement if its already in the List, if not add it.
