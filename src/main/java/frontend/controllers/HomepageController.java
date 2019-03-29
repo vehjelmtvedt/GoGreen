@@ -1,6 +1,5 @@
 package frontend.controllers;
 
-import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
 import data.User;
