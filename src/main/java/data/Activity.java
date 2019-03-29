@@ -23,7 +23,9 @@ import java.util.List;
         @JsonSubTypes.Type(value = BuyOrganicFood.class, name = "BuyOrganicFood"),
         @JsonSubTypes.Type(value = UseBikeInsteadOfCar.class, name = "UseBikeInsteadOfCar"),
         @JsonSubTypes.Type(value = UseBusInsteadOfCar.class, name = "UseBusInsteadOfCar"),
-        @JsonSubTypes.Type(value = UseTrainInsteadOfCar.class, name = "UseTrainInsteadOfCar")
+        @JsonSubTypes.Type(value = UseTrainInsteadOfCar.class, name = "UseTrainInsteadOfCar"),
+        @JsonSubTypes.Type(value = InstallSolarPanels.class, name = "InstallSolarPanels"),
+        @JsonSubTypes.Type(value = LowerHomeTemperature.class, name = "LowerHomeTemperature"),
     })
 public abstract class Activity {
     private Date date;
