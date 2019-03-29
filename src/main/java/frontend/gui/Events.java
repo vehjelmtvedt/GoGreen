@@ -320,6 +320,61 @@ public class Events {
         }
     }
 
+    private static List<Activity> applyCategoryFilters(List<Activity> activities,
+                                             List<JFXCheckBox> checkList) {
+        ActivityQueries activityQueries = new ActivityQueries(activities);
+        List<String> categoryFilters = new ArrayList<>();
+        for (JFXCheckBox filter : checkList) {
+            if (filter.isSelected()) {
+                categoryFilters.add(filter.getText());
+            }
+        }
+        return activityQueries.filterActivitiesByCategories(categoryFilters);
+    }
+
+    private static List<Activity> applyTimeFilters(List<Activity> activities,
+                                         List<JFXRadioButton> radioList) {
+        ActivityQueries activityQueries = new ActivityQueries(activities);
+        for (JFXRadioButton filter : radioList) {
+            if (filter.isSelected()) {
+                if (filter.getText().contains("Today")) {
+                    activities = activityQueries.filterActivitiesByDate(DateUnit.TODAY);
+                } else if (filter.getText().contains("7")) {
+                    activities = activityQueries.filterActivitiesByDate(DateUnit.WEEK);
+                } else {
+                    if (filter.getText().contains("30")) {
+                        activities = activityQueries.filterActivitiesByDate(DateUnit.MONTH);
+                    }
+                }
+            }
+        }
+
+        return activities;
+    }
+
+    private static List<Activity> applyCarbonFilters(List<Activity> activities,
+                                           JFXTextField min, JFXTextField max) {
+        ActivityQueries activityQueries = new ActivityQueries(activities);
+
+        if (!min.getText().equals("") && !max.getText().equals("")) {
+            double minValue = Integer.parseInt(min.getText());
+            double maxValue = Integer.parseInt(max.getText());
+            if (minValue > maxValue) {
+                max.setUnFocusColor(Color.rgb(255, 0, 0));
+                max.setFocusColor(Color.rgb(255, 0, 0));
+                min.setUnFocusColor(Color.rgb(255, 0, 0));
+                min.setFocusColor(Color.rgb(255, 0, 0));
+            } else {
+                max.setUnFocusColor(Color.rgb(77, 77, 77));
+                max.setFocusColor(Color.rgb(0, 128, 0));
+                min.setUnFocusColor(Color.rgb(77, 77, 77));
+                min.setFocusColor(Color.rgb(0, 128, 0));
+                return activityQueries.filterActivitiesByCO2Saved(minValue, maxValue);
+            }
+        }
+        return activities;
+    }
+
     /**
      * .
      * Apply the selected filters to the activity history table
@@ -336,47 +391,8 @@ public class Events {
                                     TableView<Activity> activityTable) {
         label.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             List<Activity> activities = loggedUser.getActivities();
-            ActivityQueries activityQueries = new ActivityQueries(activities);
-            List<String> categoryFilters = new ArrayList<>();
-            for (JFXCheckBox filter : checkList) {
-                if (filter.isSelected()) {
-                    categoryFilters.add(filter.getText());
-                }
-            }
-            activities = activityQueries.filterActivitiesByCategories(categoryFilters);
-            activityQueries.setActivities(activities);
-
-            for (JFXRadioButton filter : radioList) {
-                if (filter.isSelected()) {
-                    if (filter.getText().contains("Today")) {
-                        activities = activityQueries.filterActivitiesByDate(DateUnit.TODAY);
-                    } else if (filter.getText().contains("7")) {
-                        activities = activityQueries.filterActivitiesByDate(DateUnit.WEEK);
-                    } else {
-                        if (filter.getText().contains("30")) {
-                            activities = activityQueries.filterActivitiesByDate(DateUnit.MONTH);
-                        }
-                    }
-                }
-            }
-
-            if (!min.getText().equals("") && !max.getText().equals("")) {
-                double minValue = Integer.parseInt(min.getText());
-                double maxValue = Integer.parseInt(max.getText());
-                if (minValue > maxValue) {
-                    max.setUnFocusColor(Color.rgb(255, 0, 0));
-                    max.setFocusColor(Color.rgb(255, 0, 0));
-                    min.setUnFocusColor(Color.rgb(255, 0, 0));
-                    min.setFocusColor(Color.rgb(255, 0, 0));
-                    return;
-                } else {
-                    activities = activityQueries.filterActivitiesByCO2Saved(minValue, maxValue);
-                    max.setUnFocusColor(Color.rgb(77, 77, 77));
-                    max.setFocusColor(Color.rgb(0, 128, 0));
-                    min.setUnFocusColor(Color.rgb(77, 77, 77));
-                    min.setFocusColor(Color.rgb(0, 128, 0));
-                }
-            }
+            activities = applyCarbonFilters(applyTimeFilters(
+                    applyCategoryFilters(activities, checkList), radioList), min, max);
             ObservableList<Activity> filteredActivities =
                     FXCollections.observableArrayList(activities);
             activityTable.setItems(filteredActivities);

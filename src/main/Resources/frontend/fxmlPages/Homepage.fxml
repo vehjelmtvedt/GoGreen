@@ -145,11 +145,36 @@
                         <Label layoutX="382.0" layoutY="456.0" text="- Ranking is determined according to the total amount of CO2 saved - " AnchorPane.leftAnchor="382.0" AnchorPane.rightAnchor="274.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="1227.0" layoutY="40.0" prefHeight="687.0" prefWidth="273.0">
+                  <AnchorPane layoutX="1231.0" layoutY="75.0" prefHeight="687.0" prefWidth="273.0">
                      <children>
-                        <VBox layoutX="59.0" layoutY="-2.0" prefHeight="687.0" prefWidth="273.0" spacing="30.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox layoutY="14.0" prefHeight="687.0" prefWidth="273.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
                            <children>
-                              <PieChart fx:id="chartMyActivities" prefHeight="266.0" prefWidth="250.0" />
+                              <Label alignment="CENTER" text="ACTIVITY % IN EACH CATEGORY" textFill="GREEN" underline="true">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="20.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <PieChart fx:id="chartMyActivities" prefHeight="266.0" prefWidth="250.0">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin></PieChart>
+                              <Label alignment="CENTER" text="CO2 SAVED IN THE LAST 7 DAYS" textFill="GREEN" underline="true">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="20.0" top="40.0" />
+                                 </VBox.margin>
+                              </Label>
                               <AreaChart prefHeight="218.0" prefWidth="273.0">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />
@@ -157,6 +182,9 @@
                                 <yAxis>
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
                               </AreaChart>
                            </children>
                         </VBox>
