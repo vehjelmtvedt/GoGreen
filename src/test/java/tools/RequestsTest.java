@@ -69,8 +69,8 @@ public class RequestsTest {
 
     @Test
     public void testSignupRequestEmailExists() {
-        Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(null);
-        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(null);
+        Mockito.when(dbService.getUserByEmail(testUser.getEmail())).thenReturn(testUser);
         assertEquals("Email exists", Requests.signupRequest(testUser));
     }
 
@@ -129,7 +129,7 @@ public class RequestsTest {
 
     @Test
     public void testValidateUserRequestUsername() {
-        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(testUser);
         assertTrue(Requests.validateUserRequest(testUser.getUsername()));
     }
 

@@ -48,7 +48,7 @@ public class RequestHandler {
             return "Username exists";
         }
 
-        if (dbService.getUser(user.getEmail()) != null) {
+        if (dbService.getUserByEmail(user.getEmail()) != null) {
             return "Email exists";
         }
 
@@ -80,8 +80,7 @@ public class RequestHandler {
      */
     @RequestMapping("/validateUser")
     public String validateUser(@RequestBody String identifier) {
-        if  (dbService.getUser(identifier) != null
-                || dbService.getUserByUsername(identifier) != null) {
+        if  (dbService.getUser(identifier) != null) {
             return "OK";
         } else {
             return "NONE";
