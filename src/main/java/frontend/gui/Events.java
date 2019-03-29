@@ -4,18 +4,30 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
-import data.*;
+import data.Activity;
+import data.BuyLocallyProducedFood;
+import data.BuyNonProcessedFood;
+import data.BuyOrganicFood;
+import data.EatVegetarianMeal;
+import data.InstallSolarPanels;
+import data.LowerHomeTemperature;
+import data.UseBikeInsteadOfCar;
+import data.UseBusInsteadOfCar;
+import data.UseTrainInsteadOfCar;
+import data.User;
 import frontend.controllers.ActivitiesController;
-
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,7 +36,12 @@ import javafx.scene.paint.Color;
 import tools.ActivityQueries;
 import tools.DateUnit;
 
-import java.util.*;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
 
 public class Events {
 
@@ -199,13 +216,20 @@ public class Events {
                 if (loggedUser.getSimilarActivities(panels).size() > 0) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("GoGreen");
-                    alert.setHeaderText("You hav already installed solar panels!");
-                    alert.setContentText("Total CO2 saved by your solar panels: " + ChronoUnit.DAYS.between(loggedUser.getSimilarActivities(panels).get(0).getDate().toInstant(), Calendar.getInstance().getTime().toInstant()) * loggedUser.getSimilarActivities(panels).get(0).getCarbonSaved());
+                    alert.setHeaderText("You have already installed solar panels!");
+                    alert.setContentText("Total CO2 saved by your solar panels: "
+                            + ChronoUnit.DAYS.between(loggedUser
+                                            .getSimilarActivities(panels)
+                                            .get(0).getDate().toInstant(),
+                                    Calendar.getInstance().getTime().toInstant())
+                                    * loggedUser
+                            .getSimilarActivities(panels).get(0).getCarbonSaved());
                     alert.showAndWait();
                 } else {
                     TextInputDialog dialog = new TextInputDialog("0");
                     dialog.setTitle("Install Solar Panels");
-                    dialog.setHeaderText("Amount of kwh that your solar panel installation produces per year: ");
+                    dialog.setHeaderText(
+                            "Amount of kwh that your solar panel installation produces per year: ");
                     dialog.setContentText("kwh:");
                     dialog.getEditor().textProperty().addListener(new ChangeListener<String>() {
                         @Override
@@ -218,7 +242,7 @@ public class Events {
                         }
                     });
                     Optional<String> result = dialog.showAndWait();
-                    if (result.isPresent()){
+                    if (result.isPresent()) {
                         System.out.println("kwh: " + result.get());
                         panels.setKwhSavedPerYear(Integer.parseInt(result.get()));
                         panels.performActivity(loggedUser);
@@ -232,7 +256,9 @@ public class Events {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Warning");
                         alert.setHeaderText("Oops");
-                        alert.setContentText("It looks like you already did this today, you can try again tomorrow!");
+                        alert.setContentText(
+                                "It looks like you already did this today,"
+                                        + " you can try again tomorrow!");
                         alert.showAndWait();
                     } else {
                         List<String> choices = Arrays.asList( "1", "2", "3", "4", "5");
@@ -241,7 +267,7 @@ public class Events {
                         dialog.setHeaderText("How many degrees did you turn your thermostat down?");
                         dialog.setContentText("Degrees:");
                         Optional<String> result = dialog.showAndWait();
-                        if (result.isPresent()){
+                        if (result.isPresent()) {
                             System.out.println("Degrees: " + result.get());
                             temp.setDegrees(Integer.parseInt(result.get()));
                             temp.performActivity(loggedUser);
