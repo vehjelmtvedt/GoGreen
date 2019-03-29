@@ -13,7 +13,16 @@ import java.io.IOException;
 
 public class NavPanel {
 
-    public static JFXDrawer addNavPanel(AnchorPane main, AnchorPane header, JFXHamburger menu) throws IOException {
+    /**
+     * Adds a nav panel to the page.
+     * @param main - root pane
+     * @param header - header pane
+     * @param menu - hamburger icon
+     * @return - the drawer added to the page
+     * @throws IOException - if fails to load the content of the drawer
+     */
+    public static JFXDrawer addNavPanel(AnchorPane main,
+                                        AnchorPane header, JFXHamburger menu) throws IOException {
         JFXDrawer drawer = new JFXDrawer();
         AnchorPane.setLeftAnchor(drawer, 0.0);
         AnchorPane.setBottomAnchor(drawer, 0.0);

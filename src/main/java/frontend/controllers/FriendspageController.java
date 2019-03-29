@@ -119,6 +119,7 @@ public class FriendspageController implements Initializable {
      * @param unit - DateUnit enum, day, week or month
      * @param chart - the chart to edit
      */
+
     public void fillChart(String title, String color, DateUnit unit, BarChart chart) {
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(title);
