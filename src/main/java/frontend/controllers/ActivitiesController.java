@@ -8,9 +8,7 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.User;
-import frontend.gui.Events;
-import frontend.gui.General;
-import frontend.gui.Main;
+import frontend.gui.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -162,7 +160,8 @@ public class ActivitiesController implements Initializable {
 
         //setup notification and navigation panels
         try {
-            NavPanelController.setup(drawer, menu);
+            JFXDrawer drawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
+            StageSwitcher.activityDrawer = drawer;
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
         } catch (IOException e) {
             e.printStackTrace();

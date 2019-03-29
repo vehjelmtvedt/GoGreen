@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXHamburger;
 
 import data.User;
 import frontend.gui.Main;
+import frontend.gui.NavPanel;
+import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,8 +25,6 @@ public class HomepageController implements Initializable {
 
     @FXML
     private JFXHamburger menu;
-    @FXML
-    private JFXDrawer drawer;
     @FXML
     private AnchorPane mainPane;
     @FXML
@@ -59,7 +59,8 @@ public class HomepageController implements Initializable {
         chartHousehold.setData(fillPieChart(loggedUser));
         try {
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
-            NavPanelController.setup(drawer, menu);
+            JFXDrawer drawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
+            StageSwitcher.homeDrawer = drawer;
         } catch (IOException e) {
             e.printStackTrace();
         }
