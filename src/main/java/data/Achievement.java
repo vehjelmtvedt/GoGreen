@@ -2,7 +2,7 @@ package data;
 
 import org.springframework.data.annotation.Id;
 
-public class Achievement {  
+public class Achievement {
     @Id
     private int id;
 
@@ -16,7 +16,7 @@ public class Achievement {
     /**
      * contains the data for the Achievement.
      *
-     * @param id id
+     * @param id    id
      * @param name  name
      * @param bonus extra points
      */
@@ -50,20 +50,5 @@ public class Achievement {
         this.bonus = bonus;
     }
 
-    /**
-     * equals method.
-     * @param object to check with
-     * @return true or false
-     */
-    public boolean equals(Object object) {
-        if (object == this) {
-            return true;
-        } else if (object instanceof Achievement) {
-            Achievement achievement = (Achievement)object;
-            return achievement.id == this.id && achievement.bonus
-                    == this.bonus && achievement.name.equals(this.name);
-        }
-        return false;
-    }
 
 }
