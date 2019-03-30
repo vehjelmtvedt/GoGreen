@@ -11,6 +11,8 @@ import data.User;
 import frontend.gui.Events;
 import frontend.gui.General;
 import frontend.gui.Main;
+import frontend.gui.NavPanel;
+import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -162,7 +164,7 @@ public class ActivitiesController implements Initializable {
 
         //setup notification and navigation panels
         try {
-            NavPanelController.setup(drawer, menu);
+            StageSwitcher.activityDrawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
         } catch (IOException e) {
             e.printStackTrace();
