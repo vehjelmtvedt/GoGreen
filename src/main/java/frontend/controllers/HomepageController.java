@@ -2,9 +2,11 @@ package frontend.controllers;
 
 import com.jfoenix.controls.JFXHamburger;
 
+import data.LoginDetails;
 import data.User;
 import frontend.gui.Main;
 import frontend.gui.NavPanel;
+import frontend.gui.NotificationPopup;
 import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +16,9 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import tools.ActivityQueries;
+import tools.Requests;
+import tools.SyncUserTask;
+import tools.UserThread;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +46,9 @@ public class HomepageController implements Initializable {
     @FXML
     private Label goGreen;
 
+    private static AnchorPane mainCopy;
+    private static AnchorPane headerCopy;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //addFonts
@@ -62,6 +70,21 @@ public class HomepageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        LoginDetails loginDetails = new LoginDetails(loggedUser.getUsername(), "Tiger1466");
+        User user = Requests.instance.loginRequest(loginDetails);
+        SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, user);
+        UserThread userThread = new UserThread(syncUserTask);
+        userThread.start();
+
+        mainCopy = mainPane;
+        headerCopy = headerPane;
+    }
+
+    public static void popup() throws IOException {
+        NotificationPopup popup = new NotificationPopup();
+        String[] text = {"Text", "Body", "sucess"};
+        popup.newNotification(mainCopy, headerCopy, text);
     }
 
     private static ObservableList<PieChart.Data> fillPieChart(User user) {

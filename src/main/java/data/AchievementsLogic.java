@@ -1,8 +1,10 @@
 package data;
 
+import tools.Requests;
+
 import java.util.Calendar;
 import java.util.Date;
-
+import java.util.List;
 
 public class AchievementsLogic {
 
@@ -125,7 +127,7 @@ public class AchievementsLogic {
 
         }
 
-        //List<Achievement> list = Requests.getAllAchievements();
+        List<Achievement> list = Requests.instance.getAllAchievements();
 
         if (!alreadythere) {
 
@@ -133,12 +135,12 @@ public class AchievementsLogic {
 
             user.getProgress().getAchievements().add(userAchievement);
 
-            // adds point depending on the achievements
-            //user.getProgress().setPoints(user.getProgress().getPoints() +
-            // list.get(id).getBonus());
 
-            //for now its hard codded
-            user.getProgress().setPoints(user.getProgress().getPoints() + 100);
+
+            //System.out.println("=============" + list.size());
+
+            //user.setTotalCarbonSaved(user.getTotalCarbonSaved() + list.get(id).getBonus());
+
         }
 
 

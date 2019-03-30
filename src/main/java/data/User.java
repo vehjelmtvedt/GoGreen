@@ -153,6 +153,10 @@ public class User {
         return this.friendRequests;
     }
 
+    public void setFriendRequests(ArrayList<String> friendRequests) {
+        this.friendRequests = friendRequests;
+    }
+
     public void setElectricityDailyConsumption(int electricityDailyConsumption) {
         this.electricityDailyConsumption = electricityDailyConsumption;
     }

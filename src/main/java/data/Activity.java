@@ -26,7 +26,7 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = UseBikeInsteadOfCar.class, name = "UseBikeInsteadOfCar"),
         @JsonSubTypes.Type(value = UseBusInsteadOfCar.class, name = "UseBusInsteadOfCar"),
         @JsonSubTypes.Type(value = UseTrainInsteadOfCar.class, name = "UseTrainInsteadOfCar")
-    })
+})
 public abstract class Activity {
     private Date date;
     private double carbonSaved;
@@ -227,15 +227,7 @@ public abstract class Activity {
         user.addActivity(this);
         // update user in the database
         try {
-            user = Requests.addActivityRequest(this, user.getUsername());
-
-            // check if an achievement is completed by this activity
-            AchievementsLogic.checkActivity(user , this);
-
-            // adds points to the user
-            user.addCO2Points(this.getCarbonSaved());
-
-
+            user = Requests.instance.addActivityRequest(this, user.getUsername());
         } catch (HttpClientErrorException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());
