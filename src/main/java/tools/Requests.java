@@ -168,8 +168,10 @@ public class Requests {
      * @return returns the updated user
      */
     public static User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
+        System.out.println(newValue.getClass().getName());
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/editProfile")
-                .queryParam("fieldName",fieldName).queryParam("newValue", newValue);
+                .queryParam("fieldName",fieldName).queryParam("newValue", newValue)
+                .queryParam("typeName",newValue.getClass().getSimpleName());
         return restTemplate.postForEntity(uriBuilder.toUriString(),
                 loginDetails,User.class).getBody();
     }  

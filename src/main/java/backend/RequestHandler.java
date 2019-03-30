@@ -5,6 +5,7 @@ import data.Activity;
 import data.LoginDetails;
 import data.User;
 
+import org.springframework.data.mongodb.core.aggregation.ConvertOperators;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -160,7 +161,14 @@ public class RequestHandler {
      */
     @RequestMapping("/editProfile")
     public User editProfile(@RequestBody LoginDetails loginDetails, @RequestParam String fieldName,
-                            @RequestParam Object newValue) {
+                            @RequestParam Object newValue,@RequestParam String typeName) {
+
+        if (typeName.equals("Integer")) {
+            newValue = Integer.parseInt((String)newValue);
+        } else if (typeName.equals("Double")) {
+            newValue = Double.parseDouble((String)newValue);
+        }
+
         User user = dbService.grantAccess(loginDetails.getIdentifier(),loginDetails.getPassword());
         System.out.println(user);
         if (user == null) {
