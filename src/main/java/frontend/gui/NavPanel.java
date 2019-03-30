@@ -29,11 +29,11 @@ public class NavPanel {
         AnchorPane.setTopAnchor(drawer, header.getPrefHeight());
         drawer.setPrefHeight(main.getHeight() - header.getHeight());
         drawer.setDefaultDrawerSize(270);
-
         VBox box = FXMLLoader.load(NavPanelController.class.getResource(
                 "/frontend/fxmlPages/navigationpane.fxml"));
         drawer.setSidePane(box);
         box.prefHeightProperty().bind(drawer.prefHeightProperty());
+        drawer.setVisible(false);
         main.getChildren().addAll(drawer);
 
         HamburgerBasicCloseTransition burgerTask1 = new HamburgerBasicCloseTransition(menu);
@@ -43,8 +43,10 @@ public class NavPanel {
             burgerTask1.play();
             if (drawer.isOpened()) {
                 drawer.close();
+                drawer.setVisible(false);
             } else {
                 drawer.open();
+                drawer.setVisible(true);
             }
         });
         return drawer;

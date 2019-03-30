@@ -82,6 +82,19 @@ public class Events {
         });
     }
 
+    /**.
+     * Add hover event for JFX buttons
+     * @param button - button to add hover event to
+     */
+    public static void addJfxButtonHover(JFXButton button) {
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+            button.setOpacity(1);
+        });
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            button.setOpacity(0.75);
+        });
+    }
+
     /**
      * .
      * Add food activities to the user upon clicking
@@ -178,6 +191,29 @@ public class Events {
         });
     }
 
+    /**.
+     * Add household activities to the user upon clicking
+     * @param pane          - pane to be clicked
+     * @param type          - type of activity
+     * @param loggedUser    - user to update
+     * @param activityTable - table to set history to
+     */
+    public static void addHouseholdActivity(AnchorPane pane, int type,
+                                            User loggedUser, TableView<Activity> activityTable) {
+        pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (type == 1) {
+                //todo: Add solar panels
+            } else {
+                if (type == 2) {
+                    //todo: Lower home temperature
+                }
+            }
+
+            ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
+            activityTable.setItems(activities);
+        });
+    }
+
     /**
      * .
      * Add logout event handling
@@ -260,7 +296,7 @@ public class Events {
             min.setUnFocusColor(Color.rgb(77, 77, 77));
             min.setFocusColor(Color.rgb(0, 128, 0));
             min.setText("");
-            
+
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
         });
@@ -284,6 +320,61 @@ public class Events {
         }
     }
 
+    private static List<Activity> applyCategoryFilters(List<Activity> activities,
+                                             List<JFXCheckBox> checkList) {
+        ActivityQueries activityQueries = new ActivityQueries(activities);
+        List<String> categoryFilters = new ArrayList<>();
+        for (JFXCheckBox filter : checkList) {
+            if (filter.isSelected()) {
+                categoryFilters.add(filter.getText());
+            }
+        }
+        return activityQueries.filterActivitiesByCategories(categoryFilters);
+    }
+
+    private static List<Activity> applyTimeFilters(List<Activity> activities,
+                                         List<JFXRadioButton> radioList) {
+        ActivityQueries activityQueries = new ActivityQueries(activities);
+        for (JFXRadioButton filter : radioList) {
+            if (filter.isSelected()) {
+                if (filter.getText().contains("Today")) {
+                    activities = activityQueries.filterActivitiesByDate(DateUnit.TODAY);
+                } else if (filter.getText().contains("7")) {
+                    activities = activityQueries.filterActivitiesByDate(DateUnit.WEEK);
+                } else {
+                    if (filter.getText().contains("30")) {
+                        activities = activityQueries.filterActivitiesByDate(DateUnit.MONTH);
+                    }
+                }
+            }
+        }
+
+        return activities;
+    }
+
+    private static List<Activity> applyCarbonFilters(List<Activity> activities,
+                                           JFXTextField min, JFXTextField max) {
+        ActivityQueries activityQueries = new ActivityQueries(activities);
+
+        if (!min.getText().equals("") && !max.getText().equals("")) {
+            double minValue = Integer.parseInt(min.getText());
+            double maxValue = Integer.parseInt(max.getText());
+            if (minValue > maxValue) {
+                max.setUnFocusColor(Color.rgb(255, 0, 0));
+                max.setFocusColor(Color.rgb(255, 0, 0));
+                min.setUnFocusColor(Color.rgb(255, 0, 0));
+                min.setFocusColor(Color.rgb(255, 0, 0));
+            } else {
+                max.setUnFocusColor(Color.rgb(77, 77, 77));
+                max.setFocusColor(Color.rgb(0, 128, 0));
+                min.setUnFocusColor(Color.rgb(77, 77, 77));
+                min.setFocusColor(Color.rgb(0, 128, 0));
+                return activityQueries.filterActivitiesByCO2Saved(minValue, maxValue);
+            }
+        }
+        return activities;
+    }
+
     /**
      * .
      * Apply the selected filters to the activity history table
@@ -300,50 +391,37 @@ public class Events {
                                     TableView<Activity> activityTable) {
         label.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             List<Activity> activities = loggedUser.getActivities();
-            ActivityQueries activityQueries = new ActivityQueries(activities);
-            List<String> categoryFilters = new ArrayList<>();
-            for (JFXCheckBox filter : checkList) {
-                if (filter.isSelected()) {
-                    categoryFilters.add(filter.getText());
-                }
-            }
-            activities = activityQueries.filterActivitiesByCategories(categoryFilters);
-            activityQueries.setActivities(activities);
-
-            for (JFXRadioButton filter : radioList) {
-                if (filter.isSelected()) {
-                    if (filter.getText().contains("Today")) {
-                        activities = activityQueries.filterActivitiesByDate(DateUnit.TODAY);
-                    } else if (filter.getText().contains("7")) {
-                        activities = activityQueries.filterActivitiesByDate(DateUnit.WEEK);
-                    } else {
-                        if (filter.getText().contains("30")) {
-                            activities = activityQueries.filterActivitiesByDate(DateUnit.MONTH);
-                        }
-                    }
-                }
-            }
-
-            if (!min.getText().equals("") && !max.getText().equals("")) {
-                double minValue = Integer.parseInt(min.getText());
-                double maxValue = Integer.parseInt(max.getText());
-                if (minValue > maxValue) {
-                    max.setUnFocusColor(Color.rgb(255, 0, 0));
-                    max.setFocusColor(Color.rgb(255, 0, 0));
-                    min.setUnFocusColor(Color.rgb(255, 0, 0));
-                    min.setFocusColor(Color.rgb(255, 0, 0));
-                } else {
-                    activities = activityQueries.filterActivitiesByCO2Saved(minValue, maxValue);
-                    max.setUnFocusColor(Color.rgb(77, 77, 77));
-                    max.setFocusColor(Color.rgb(0, 128, 0));
-                    min.setUnFocusColor(Color.rgb(77, 77, 77));
-                    min.setFocusColor(Color.rgb(0, 128, 0));
-                }
-            }
+            activities = applyCarbonFilters(applyTimeFilters(
+                    applyCategoryFilters(activities, checkList), radioList), min, max);
             ObservableList<Activity> filteredActivities =
                     FXCollections.observableArrayList(activities);
             activityTable.setItems(filteredActivities);
         });
+    }
+
+    /**.
+     * Add leaderboards events to the the leaderboards buttons
+     * @param leaderboards - list containing buttons for all types of leaderboards
+     */
+    public static void addLeaderboards(List<JFXButton> leaderboards) {
+        for (JFXButton button : leaderboards) {
+            button.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                button.setStyle("-fx-background-color: #00db00;");
+                for (JFXButton otherButton : leaderboards) {
+                    if (!otherButton.equals(button)) {
+                        otherButton.setStyle("-fx-background-color: transparent;");
+                    }
+                }
+            });
+
+            button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                button.setUnderline(true);
+            });
+
+            button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+                button.setUnderline(false);
+            });
+        }
     }
 }
 
