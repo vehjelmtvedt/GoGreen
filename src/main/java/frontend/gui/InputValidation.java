@@ -57,11 +57,14 @@ public class InputValidation {
 //                        Calendar.getInstance().getTime().toInstant())
 //                        * loggedUser.getSimilarActivities(new InstallSolarPanels())
 //                        .get(0).getCarbonSaved();
-//                System.out.println("New value: " + loggedUser.getTotalCarbonSaved() + extraCo2Saved);
-//                Requests.editProfile(new LoginDetails(emailField.getText(), passField.getText()),
+//                double newValue = loggedUser.getTotalCarbonSaved() + extraCo2Saved;
+//                System.out.println("login details: " + loginDetails.toString());
+//                System.out.println("fieldName: " + "totalCarbonSaved");
+//                System.out.println("newValue: " + loggedUser.getTotalCarbonSaved() + extraCo2Saved);
+//                Requests.editProfile(loginDetails,
 //                        "totalCarbonSaved",
-//                        loggedUser.getTotalCarbonSaved() + extraCo2Saved);
-//                System.out.println("Actual value: " + loggedUser.getTotalCarbonSaved());
+//                        (double)newValue);
+//                System.out.println("Actual value: " + newValue);
 //            }
 //        }
 

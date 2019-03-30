@@ -36,6 +36,9 @@ public class InstallSolarPanels extends Activity {
      */
     @Override
     public double calculateCarbonSaved(User user) {
+        // TODO
+        // update the function so that the amount saved by the solar panels does not exceed the amount
+        // of the user's daily consumption in electricity
         return CarbonCalculator.electricityEmissions(this.getKwhSavedPerYear()) / 365.0;
     }
 }

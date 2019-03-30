@@ -329,7 +329,7 @@ public class User {
 
         for (Activity userActivity : activities) {
             if (userActivity.getClass() == activity.getClass() && !userActivity.equals(activity)) {
-                result.add(activity);
+                result.add(userActivity);
             }
         }
 

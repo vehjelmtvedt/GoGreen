@@ -41,7 +41,7 @@ public abstract class Activity {
     }
 
     public Date getDate() {
-        return date;
+        return this.date;
     }
 
     public void setDate(Date date) {
@@ -214,8 +214,6 @@ public abstract class Activity {
 
         return Double.compare(activity.carbonSaved, carbonSaved) == 0
                 && Objects.equals(date, activity.date);
-                //&& Objects.equals(name, activity.name)
-                //&& Objects.equals(category, activity.category);
     }
 
     /**
