@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import sun.jvmstat.monitor.event.HostEvent;
 import tools.ActivityQueries;
 import tools.Requests;
 import tools.SyncUserTask;
@@ -47,7 +48,7 @@ public class HomepageController implements Initializable {
     private Label goGreen;
 
     private static AnchorPane mainCopy;
-    private static AnchorPane headerCopy;
+    public static AnchorPane headerCopy;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,6 +80,13 @@ public class HomepageController implements Initializable {
 
         mainCopy = mainPane;
         headerCopy = headerPane;
+        headerCopy.setOnMouseClicked(e -> {
+            try {
+                popup();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
     }
 
     public static void popup() throws IOException {

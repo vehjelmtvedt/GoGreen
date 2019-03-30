@@ -15,6 +15,20 @@ public class UserThread extends Service {
 
     public UserThread(SyncUserTask syncUserTask) {
         this.syncUserTask = syncUserTask;
+        // succeeded?
+        this.setOnSucceeded(s -> {
+            System.out.println("SUCCEEDED");
+        });
+
+        // failed
+        this.setOnFailed(f -> {
+            System.out.println("FAILED");
+        });
+
+        // cancelled?
+        this.setOnCancelled(c -> {
+            System.out.println("CANCELLED");
+        });
     }
 
     @Override
@@ -32,12 +46,7 @@ public class UserThread extends Service {
                         if (userPendingData.getFriendRequests().size() != 0) {
                             //Alert the controllers and make them add a popup and notification
                             //in the notification panel
-                            try {
-                                HomepageController.popup();
-                            } catch (IOException e) {
-                                System.out.println("FAILED");
-                            }
-                            System.out.println("NEW FRIEND REQUEST");
+                            return userPendingData.getFriendRequests();
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
