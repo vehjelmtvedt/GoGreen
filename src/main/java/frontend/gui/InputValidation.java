@@ -2,6 +2,7 @@ package frontend.gui;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import data.InstallSolarPanels;
 import data.LoginDetails;
 import data.User;
 import frontend.controllers.ActivitiesController;
@@ -18,6 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import tools.Requests;
 
 import java.io.IOException;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,6 +45,26 @@ public class InputValidation {
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
         User loggedUser = Requests.loginRequest(loginDetails);
+
+        // update user's CO2 saved from InstallSolarPanels activity
+        // doesn't work for now
+//        if (loggedUser != null) {
+//            if (loggedUser.getSimilarActivities(new InstallSolarPanels()).size() > 0) {
+//                System.out.println("User's total carbon saved is updated...");
+//                System.out.println("Old value: " + loggedUser.getTotalCarbonSaved());
+//                double extraCo2Saved = ChronoUnit.DAYS.between(
+//                        loggedUser.getLastLoginDate().toInstant(),
+//                        Calendar.getInstance().getTime().toInstant())
+//                        * loggedUser.getSimilarActivities(new InstallSolarPanels())
+//                        .get(0).getCarbonSaved();
+//                System.out.println("New value: " + loggedUser.getTotalCarbonSaved() + extraCo2Saved);
+//                Requests.editProfile(new LoginDetails(emailField.getText(), passField.getText()),
+//                        "totalCarbonSaved",
+//                        loggedUser.getTotalCarbonSaved() + extraCo2Saved);
+//                System.out.println("Actual value: " + loggedUser.getTotalCarbonSaved());
+//            }
+//        }
+
         if (loggedUser != null) {
             Dialog.show("Login successful", "Welcome to GoGreen, "
                     + loggedUser.getFirstName()

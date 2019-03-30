@@ -1,13 +1,14 @@
 package frontend.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 
 import com.jfoenix.controls.JFXTreeView;
 import data.User;
 import frontend.gui.Events;
 import frontend.gui.Main;
+import frontend.gui.NavPanel;
+import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,8 +31,6 @@ public class HomepageController implements Initializable {
 
     @FXML
     private JFXHamburger menu;
-    @FXML
-    private JFXDrawer drawer;
     @FXML
     private AnchorPane mainPane;
     @FXML
@@ -109,6 +108,8 @@ public class HomepageController implements Initializable {
         lblFriends.setText(Integer.toString(loggedUser.getFriends().size()));
         lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
                 + " kg of CO2 so far");
+        btnProfile.setOnAction(event -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(),
+                Main.getProfilePage()));
 
         //charts on the right
         chartMyActivities.setData(fillPieChart(loggedUser));
@@ -117,7 +118,7 @@ public class HomepageController implements Initializable {
 
         try {
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
-            NavPanelController.setup(drawer, menu);
+            StageSwitcher.homeDrawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,49 +126,17 @@ public class HomepageController implements Initializable {
 
     private static ObservableList<PieChart.Data> fillPieChart(User user) {
         ActivityQueries queries = new ActivityQueries(user.getActivities());
-        List<String> categories = new ArrayList<>();
-        categories.add("Food");
-        categories.add("Transportation");
-        categories.add("Household");
 
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+        return FXCollections.observableArrayList(
                                     new PieChart.Data("Food",
-                                            queries.filterActivitiesByCategories(
-                                            categories.subList(0,1)).size()),
+                                            queries.filterActivities("Food").size()),
                                     new PieChart.Data("Transportation",
-                                            queries.filterActivitiesByCategories(
-                                                    categories.subList(1,2)).size()),
+                                            queries.filterActivities("Transportation").size()),
                                     new PieChart.Data("Household",
-                                            queries.filterActivitiesByCategories(
-                                                    categories.subList(2,3)).size())
+                                            queries.filterActivities("Household").size())
         );
-        return pieChartData;
     }
-
-    //    @FXML
-    //    private void handleLeaderboards(ActionEvent event) {
-    //        JFXTreeView current = new JFXTreeView();
-    //        if (event.getSource() == btnMyStats) {
-    //            tableMyStats.setVisible(true);
-    //            current = tableMyStats;
-    //        } else if (event.getSource() == btnTop5) {
-    //            current = tableTop5;
-    //        } else if (event.getSource() == btnTop10) {
-    //            current = tableTop10;
-    //        } else if (event.getSource() == btnTop25) {
-    //            current = tableTop25;
-    //        } else {
-    //            if (event.getSource() == btnTop50) {
-    //                current = tableTop50;
-    //            }
-    //        }
-    //        for (JFXTreeView table : this.listTables) {
-    //            if (!table.equals(current)) {
-    //                table.setVisible(false);
-    //            }
-    //        }
-    //    }
-
+    
     /**
      * .
      * Sets the current logged in User to the one that was passed

@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.web.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
 <?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXHamburger?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
    <children>
@@ -82,7 +73,7 @@
                                     </VBox>
                                     <JFXButton fx:id="btnProfile" alignment="CENTER" buttonType="RAISED" opacity="0.75" prefHeight="44.0" prefWidth="123.0" style="-fx-background-color: GREEN;" text="View full profile">
                                        <HBox.margin>
-                                          <Insets left="80.0" top="30.0" />
+                                          <Insets left="80.0" top="35.0" />
                                        </HBox.margin>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
@@ -145,11 +136,36 @@
                         <Label layoutX="382.0" layoutY="456.0" text="- Ranking is determined according to the total amount of CO2 saved - " AnchorPane.leftAnchor="382.0" AnchorPane.rightAnchor="274.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="1227.0" layoutY="40.0" prefHeight="687.0" prefWidth="273.0">
+                  <AnchorPane layoutX="1231.0" layoutY="75.0" prefHeight="687.0" prefWidth="273.0">
                      <children>
-                        <VBox layoutX="59.0" layoutY="-2.0" prefHeight="687.0" prefWidth="273.0" spacing="30.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox layoutY="14.0" prefHeight="687.0" prefWidth="273.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
                            <children>
-                              <PieChart fx:id="chartMyActivities" prefHeight="266.0" prefWidth="250.0" />
+                              <Label alignment="CENTER" text="ACTIVITY % IN EACH CATEGORY" textFill="GREEN" underline="true">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="20.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <PieChart fx:id="chartMyActivities" prefHeight="266.0" prefWidth="250.0">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin></PieChart>
+                              <Label alignment="CENTER" text="CO2 SAVED IN THE LAST 7 DAYS" textFill="GREEN" underline="true">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="20.0" top="40.0" />
+                                 </VBox.margin>
+                              </Label>
                               <AreaChart prefHeight="218.0" prefWidth="273.0">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />
@@ -157,6 +173,9 @@
                                 <yAxis>
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
                               </AreaChart>
                            </children>
                         </VBox>
@@ -171,6 +190,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <JFXDrawer fx:id="drawer" layoutY="137.0" prefHeight="863.0" prefWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="137.0" />
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" layoutY="137.0" prefHeight="719.0" prefWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="138.0" />
    </children>
 </AnchorPane>
