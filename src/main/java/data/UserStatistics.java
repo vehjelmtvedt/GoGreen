@@ -81,16 +81,16 @@ public class UserStatistics {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object object) {
+        if (this == object) {
             return true;
         }
 
-        if (o == null || getClass() != o.getClass()) {
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
 
-        UserStatistics that = (UserStatistics) o;
+        UserStatistics that = (UserStatistics) object;
 
         return totalUsers == that.totalUsers
                 && Double.compare(that.totalCO2Saved, totalCO2Saved) == 0
