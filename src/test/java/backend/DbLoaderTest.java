@@ -34,33 +34,10 @@ public class DbLoaderTest {
     UserStatisticsRepository userStatistics;
 
     UserStatistics userStatisticsObj = new UserStatistics("all", 0, 0);
+    private Optional<UserStatistics> userStatisticsOptional = Optional.of(userStatisticsObj);
 
-    @Test
-    public void testStatisticsPresent() {
-        Optional<UserStatistics> userStatisticsOptional = Optional.of(userStatisticsObj);
-        Mockito.when(userStatistics.findById("all")).thenReturn(userStatisticsOptional);
-
-        // This method should not be called, so we make sure that if it is called,
-        // UserStatistics is nullified
-        Mockito.when(userStatistics.insert(userStatisticsObj)).then(
-                new Answer<Object>() {
-                    @Override
-                    public Object answer(InvocationOnMock invocationOnMock) {
-                        userStatisticsObj = null;
-                        return null;
-                    }
-                }
-        );
-
-        dbLoader.populateDatabase();
-
-        Assert.assertNotNull(userStatisticsObj);
-    }
-
-    @Test
-    public void testStatisticsNotPresent() {
-        Optional<UserStatistics> userStatisticsOptional = Optional.of(userStatisticsObj);
-
+    @Before
+    public void setup() {
         // Upon calling insert, update mock
         Mockito.when(userStatistics.insert(userStatisticsObj)).then(
                 new Answer<Object>() {
@@ -72,6 +49,24 @@ public class DbLoaderTest {
                     }
                 }
         );
+    }
+
+    @Test
+    public void testStatisticsPresent() {
+        UserStatistics userStatisticsAlt = new UserStatistics("all", 1, 1);
+        Optional<UserStatistics> userStatisticsAltOptional = Optional.of(userStatisticsAlt);
+        Mockito.when(userStatistics.findById("all")).thenReturn(userStatisticsAltOptional);
+
+        dbLoader.populateDatabase();
+
+        // If insert is called, then userStatistics.findById("all") is changed.
+        // This ensures that it has not been changed
+        Assert.assertNotEquals(userStatisticsOptional, userStatistics.findById("all"));
+    }
+
+    @Test
+    public void testStatisticsNotPresent() {
+        Optional<UserStatistics> userStatisticsOptional = Optional.of(userStatisticsObj);
 
         dbLoader.populateDatabase();
 
