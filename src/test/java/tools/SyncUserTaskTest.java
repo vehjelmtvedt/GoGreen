@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SyncUserTaskTest {
-    Requests requests;
+    private Requests requests = Mockito.mock(Requests.class);
 
     private User user = new User("Test", "User", 25,
             "test-user@email.com","testuser","pwd123");
@@ -21,9 +21,7 @@ public class SyncUserTaskTest {
     private LoginDetails loginDetails = new LoginDetails("testuser", "pwd123");
 
     @Before
-    public void setup() {
-        requests = Mockito.mock(Requests.class);
-
+    public void setupAchievements() {
         ArrayList<UserAchievement> achievements1 = new ArrayList<>();
         ArrayList<UserAchievement> achievements2 = new ArrayList<>();
 
@@ -37,6 +35,12 @@ public class SyncUserTaskTest {
         achievements2.add(ach2);
         achievements2.add(ach3);
 
+        user.getProgress().setAchievements(achievements1);
+        modifiedUser.getProgress().setAchievements(achievements2);
+    }
+
+    @Before
+    public void setupFriendRequests() {
         ArrayList<String> requests1 = new ArrayList<>();
         ArrayList<String> requests2 = new ArrayList<>();
 
@@ -49,11 +53,29 @@ public class SyncUserTaskTest {
         requests2.add(req1);
         requests2.add(req2);
 
-        user.getProgress().setAchievements(achievements1);
         user.setFriendRequests(requests1);
-
-        modifiedUser.getProgress().setAchievements(achievements2);
         modifiedUser.setFriendRequests(requests2);
+    }
+
+    @Before
+    public void setupFriends() {
+        ArrayList<String> friends1 = new ArrayList<>();
+        ArrayList<String> friends2 = new ArrayList<>();
+
+        String friend1 = "user_a";
+        String friend2 = "user_b";
+        String friend3 = "user_c";
+        String friend4 = "user_d";
+
+        friends1.add(friend1);
+        friends1.add(friend3);
+        friends2.add(friend1);
+        friends2.add(friend2);
+        friends2.add(friend3);
+        friends2.add(friend4);
+
+        user.setFriends(friends1);
+        modifiedUser.setFriends(friends2);
     }
 
     @Test
@@ -93,6 +115,8 @@ public class SyncUserTaskTest {
         Assert.assertEquals(1, result.getFriendRequests().size());
         Assert.assertEquals(3, user.getProgress().getAchievements().size());
         Assert.assertEquals(2, user.getFriendRequests().size());
+        Assert.assertEquals(2, result.getFriends().size());
+        Assert.assertEquals(4, user.getFriends().size());
     }
 
     @Test
