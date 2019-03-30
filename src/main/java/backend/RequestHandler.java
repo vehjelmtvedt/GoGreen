@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 
 
 
+
 @RestController
 public class RequestHandler {
     @Resource(name = "DbService")
@@ -48,7 +49,7 @@ public class RequestHandler {
             return "Username exists";
         }
 
-        if (dbService.getUser(user.getEmail()) != null) {
+        if (dbService.getUserByEmail(user.getEmail()) != null) {
             return "Email exists";
         }
 
@@ -80,8 +81,7 @@ public class RequestHandler {
      */
     @RequestMapping("/validateUser")
     public String validateUser(@RequestBody String identifier) {
-        if  (dbService.getUser(identifier) != null
-                || dbService.getUserByUsername(identifier) != null) {
+        if  (dbService.getUser(identifier) != null) {
             return "OK";
         } else {
             return "NONE";
@@ -151,6 +151,25 @@ public class RequestHandler {
         return dbService.getAchievements();
     }
 
+    /**
+     * Request to edit profile.
+     * @param loginDetails for auth
+     * @param fieldName the name of the field being changed
+     * @param newValue the new value of the field
+     * @return the updated user
+     */
+    @RequestMapping("/editProfile")
+    public User editProfile(@RequestBody LoginDetails loginDetails, @RequestParam String fieldName,
+                            @RequestParam Object newValue) {
+        User user = dbService.grantAccess(loginDetails.getIdentifier(),loginDetails.getPassword());
+        System.out.println(user);
+        if (user == null) {
+            return null;
+        }
+
+        return dbService.editProfile(user,fieldName,newValue);
+    }
+    
     /**
      * request to reset password.
      * @param email email of the user

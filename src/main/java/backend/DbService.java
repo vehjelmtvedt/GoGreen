@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -48,6 +49,7 @@ public class DbService {
         return new BCryptPasswordEncoder();
     }
 
+
     public static void main(String[] args) {
         SpringApplication.run(DbService.class, args);
     }
@@ -71,7 +73,7 @@ public class DbService {
      */
     public void addUser(User user) {
         // New User, encrypt password
-        if (getUser(user.getEmail()) == null) {
+        if (getUserByEmail(user.getEmail()) == null) {
             user.setPassword(encodePassword(user.getPassword()));
             updateTotalUsersStatistics();
         }
@@ -93,10 +95,6 @@ public class DbService {
      */
     public User grantAccess(String identifier, String password) {
         User user = getUser(identifier);
-        System.out.println(user);
-        if (user == null) {
-            user = getUserByUsername(identifier);
-        }
 
         if (user == null || user.getLoginStreak() == maxLoginStreak) {
             return null;
@@ -136,7 +134,7 @@ public class DbService {
      * @param identifier - e-mail/username of the user
      * @return User object (password encoded!), or null if not present
      */
-    public User getUser(String identifier) {
+    public User getUserByEmail(String identifier) {
         // User may not be present in the database
         Optional<User> user = users.findById(identifier);
 
@@ -156,6 +154,21 @@ public class DbService {
         Optional<User> user = users.findByUsername(username);
         // Returns user if found, else returns null
         return user.orElse(null);
+    }
+
+    /**.
+     * Gets user from the database (by identifier [email/password])
+     * @param identifier - identifier (can be e-mail or username
+     * @return - User object (password encoded!), or null if not present
+     */
+    public User getUser(String identifier) {
+        User user = getUserByEmail(identifier);
+
+        if (user == null) {
+            user = getUserByUsername(identifier);
+        }
+
+        return user;
     }
 
     /**
@@ -280,21 +293,18 @@ public class DbService {
         return mongoTemplate.find(
                 new Query()
                         .with(new Sort(Sort.Direction.DESC, "totalCarbonSaved"))
-                        // sort in descending order by username
+                        // sort in descending order by carbon saved
                         .limit(top), // return required number of users
                 User.class); // result as User Object
     }
 
-    /**
-     * .
-     * Gets users' friends
+    /**.
+     * Gets User's friends
+     * @param identifier - identifier (e-mail/username) of User
+     * @return - List of User's friends
      */
     public List<User> getFriends(String identifier) {
         User user = getUser(identifier);
-
-        if (user == null) {
-            user = getUserByUsername(identifier);
-        }
 
         if (user == null) {
             return new ArrayList<>(); // return empty list
@@ -302,7 +312,30 @@ public class DbService {
             // Query that returns a list of all the user's friends
             return mongoTemplate.find(
                     new Query(Criteria.where("username") // Compare against User email
-                            .in(user.getFriends())), // Email must be in users friend list
+                            .in(user.getFriends())), // Username must be in users friend list
+                    User.class); // Resulting Object type User
+        }
+    }
+
+    /**.
+     * Gets User's top friends
+     * @param identifier - identifier (e-mail/username) of User
+     * @param top - Number of top friends to return
+     * @return - top n friends of user
+     */
+    public List<User> getTopFriends(String identifier, int top) {
+        User user = getUser(identifier);
+
+        if (user == null) {
+            return new ArrayList<>(); // return empty list
+        } else {
+            // Query that returns a list of all the user's top n friends
+            return mongoTemplate.find(
+                    new Query(Criteria.where("username") // Compare against User email
+                            .in(user.getFriends())) // Username must be in users friend list
+                            .with(new Sort(Sort.Direction.DESC, "totalCarbonSaved"))
+                            // sort in descending order by carbon saved
+                            .limit(top), // return required number of users,
                     User.class); // Resulting Object type User
         }
     }
@@ -317,6 +350,26 @@ public class DbService {
         return achievements.findAll();
     }
 
+    /**
+     * Edits and updates user.
+     * @param user the user to update
+     * @param fieldName name of the field to update
+     * @param newValue new value of the field
+     * @return the updated User
+     */
+    public User editProfile(User user,String fieldName, Object newValue) {
+        try {
+            Field field = user.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(user, newValue);
+            field.setAccessible(false);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            return null;
+        }
+        addUser(user);
+        return user;
+    }
+    
     /**.
      * Returns the total amount of CO2 saved by all the users
      * @return - Total amount of CO2 saved

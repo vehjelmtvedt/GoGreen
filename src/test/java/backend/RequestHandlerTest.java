@@ -40,8 +40,7 @@ public class RequestHandlerTest
     @Test
     public void testSignupExists()
     {
-        Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(null);
-        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        Mockito.when(dbService.getUserByEmail(testUser.getEmail())).thenReturn(testUser);
         assertEquals("Email exists", requestHandler.signupController(testUser));
     }
 
@@ -128,7 +127,7 @@ public class RequestHandlerTest
 
     @Test
     public void testValidateUsername() {
-        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(testUser);
         assertEquals("OK", requestHandler.validateUser(testUser.getUsername()));
     }
 
@@ -217,6 +216,21 @@ public class RequestHandlerTest
         assertEquals(testList, requestHandler.getAllAchievements());
     }
 
+    @Test
+    public void editProfile() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        Mockito.when(dbService.editProfile(testUser,"firstName","Test")).thenReturn(testUser);
+        assertEquals("Test",requestHandler.editProfile(new LoginDetails(testUser.getUsername()
+                ,testUser.getPassword()),"firstName","Test").getFirstName());
+    }
+
+    @Test
+    public void editProfileAuthFail() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
+        assertEquals(null,requestHandler.editProfile(new LoginDetails(testUser.getUsername()
+                ,testUser.getPassword()),"firstName","Test5"));
+    }
+    
     @Test
     public void forgotPass() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);

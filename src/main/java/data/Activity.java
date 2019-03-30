@@ -228,6 +228,14 @@ public abstract class Activity {
         // update user in the database
         try {
             user = Requests.addActivityRequest(this, user.getUsername());
+
+            // check if an achievement is completed by this activity
+            AchievementsLogic.checkActivity(user , this);
+
+            // adds points to the user
+            user.addCO2Points(this.getCarbonSaved());
+
+
         } catch (HttpClientErrorException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());
