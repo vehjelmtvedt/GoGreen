@@ -80,7 +80,6 @@ public class NotificationPopup {
         AnchorPane.setLeftAnchor(body, 70.0);
 
 
-
         drawer.setSidePane(content);
         drawer.setDefaultDrawerSize(270);
         drawer.setMinHeight(130);
