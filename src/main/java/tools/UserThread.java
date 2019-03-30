@@ -3,7 +3,6 @@ package tools;
 import data.LoginDetails;
 import data.User;
 import data.UserPendingData;
-import tools.SyncUserTask;
 
 public class UserThread extends Thread {
     private static final int sleepTime = 5000;

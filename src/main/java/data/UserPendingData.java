@@ -7,6 +7,9 @@ public class UserPendingData {
     private ArrayList<String> friendRequests;
     private ArrayList<String> friends;
 
+    /**.
+     * Constructs new UserPendingData object with initially empty pending request lists
+     */
     public UserPendingData() {
         achievements = new ArrayList<>();
         friendRequests = new ArrayList<>();
