@@ -217,7 +217,7 @@ public class User {
     }
 
     public void setTotalCarbonSaved(double totalCarbonSaved) {
-        this.totalCarbonSaved = totalCarbonSaved;
+        this.totalCarbonSaved = ((int)(totalCarbonSaved * 1000)) / 1000.0;
     }
 
     public double getTotalCarbonSaved() {
