@@ -85,7 +85,7 @@
                                  <children>
                                     <Label fx:id="lblEmail" text="your@email.com" />
                                     <Label fx:id="lblYourCarbon" text="You have saved 8.1212 kg of CO2 so far" />
-                                    <Label fx:id="lblYourCarbon1" text="Average person saved 9.12121212 kg of CO2" />
+                                    <Label fx:id="lblAverageCarbon" text="Average person saved 9.12121212 kg of CO2" />
                                  </children>
                               </HBox>
                               <Label fx:id="lblName" layoutY="14.0" text="YOUR NAME" textFill="GREEN">
