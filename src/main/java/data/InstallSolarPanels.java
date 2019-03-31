@@ -47,4 +47,7 @@ public class InstallSolarPanels extends Activity {
         }
         return CarbonCalculator.electricityEmissions(this.getKwhSavedPerYear()) / 365.0;
     }
+
+    // TODO
+    // override the performActivity method to update the user field hasInstalledSolarPanels
 }
