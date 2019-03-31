@@ -2,7 +2,6 @@ package frontend.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -73,8 +72,6 @@ public class ActivitiesController implements Initializable {
     private TableColumn<Activity, Double> carbonColumn;
     @FXML
     private JFXHamburger menu;
-    @FXML
-    private JFXDrawer drawer;
     @FXML
     private AnchorPane mainPane;
     @FXML

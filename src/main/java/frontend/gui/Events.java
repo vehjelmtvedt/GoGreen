@@ -213,7 +213,6 @@ public class Events {
             if (type == 1) {
                 //todo: Add solar panels
                 InstallSolarPanels panels = new InstallSolarPanels();
-                EatVegetarianMeal meal = new EatVegetarianMeal();
                 if (loggedUser.getSimilarActivities(panels).size() > 0) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("GoGreen");
@@ -273,7 +272,6 @@ public class Events {
                             temp.setDegrees(Integer.parseInt(result.get()));
                             temp.performActivity(loggedUser);
                         }
-
                     }
                 }
             }
