@@ -4,12 +4,18 @@ import data.Achievement;
 import data.Activity;
 import data.LoginDetails;
 import data.User;
+import frontend.gui.General;
+import frontend.gui.Main;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Requests {
@@ -101,6 +107,18 @@ public class Requests {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/addActivity")
                 .queryParam("identifier", username);
 
+        //demo3 - start
+        try {
+            FXMLLoader loader1 = new FXMLLoader(
+                    Main.class.getResource("/frontend/fxmlPages/Homepage.fxml"));
+            Parent root1 = loader1.load();
+            Scene homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
+            Main.setHomepage(homepage);
+        } catch (IOException exception) {
+            System.out.println("bad code");
+        }
+        //demo 3 - end
+        
         return restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class).getBody();
     }
 
