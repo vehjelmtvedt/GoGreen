@@ -17,6 +17,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import tools.ActivityQueries;
+import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,6 +50,8 @@ public class HomepageController implements Initializable {
     private Label lblActivities;
     @FXML
     private Label lblFriends;
+    @FXML
+    private Label lblAverageCarbon;
     @FXML
     private JFXButton btnProfile;
     @FXML
@@ -107,6 +110,9 @@ public class HomepageController implements Initializable {
         lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
         lblFriends.setText(Integer.toString(loggedUser.getFriends().size()));
         lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
+                + " kg of CO2 so far");
+        lblAverageCarbon.setText("Average person saved "
+                + ((int)(Requests.getAverageCO2Saved() * 1000)) / 1000.0
                 + " kg of CO2 so far");
         btnProfile.setOnAction(event -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(),
                 Main.getProfilePage()));
