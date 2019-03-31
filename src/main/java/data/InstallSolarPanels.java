@@ -4,6 +4,7 @@ import tools.CarbonCalculator;
 
 /**
  * Activity: Install solar panels.
+ *
  * @author Kostas Lyrakis
  */
 public class InstallSolarPanels extends Activity {
@@ -31,6 +32,7 @@ public class InstallSolarPanels extends Activity {
      * Therefore this method calculates a user's daily savings assuming that
      * after the activity is performed, the user will rely on solar panels to cover
      * a percentage of his/her energy needs forever.
+     *
      * @param user currently logged in user
      * @return user's daily CO2 savings.
      */
@@ -40,7 +42,7 @@ public class InstallSolarPanels extends Activity {
         // update the function so that the amount
         // saved by the solar panels does not exceed the amount
         // of the user's daily consumption in electricity
-        if (this.kwhSavedPerYear / 365.0 > user.getElectricityDailyConsumption()){
+        if (this.kwhSavedPerYear / 365.0 > user.getElectricityDailyConsumption()) {
             this.kwhSavedPerYear = (int) (user.getElectricityDailyConsumption() * 365);
         }
         return CarbonCalculator.electricityEmissions(this.getKwhSavedPerYear()) / 365.0;

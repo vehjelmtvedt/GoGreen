@@ -213,6 +213,7 @@ public class Events {
             if (type == 1) {
                 //todo: Add solar panels
                 InstallSolarPanels panels = new InstallSolarPanels();
+                loggedUser.setHasInstalledSolarPanels(true);
                 if (loggedUser.getSimilarActivities(panels).size() > 0) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("GoGreen");

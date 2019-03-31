@@ -121,6 +121,8 @@ public class ActivitiesController implements Initializable {
     @FXML
     private Label goGreen;
     @FXML
+    private Label lblPanelsInstalled;
+    @FXML
     private JFXRadioButton radioToday;
     @FXML
     private JFXRadioButton radioWeek;
@@ -208,9 +210,8 @@ public class ActivitiesController implements Initializable {
         Events.addHoverOnFilter(lblApply);
         Events.clearFilters(lblClearFilters, checkList, radioList,
                 minCarbon, maxCarbon, loggedUser, activityTable);
-        Events.applyFilters(lblApply,checkList, radioList,
+        Events.applyFilters(lblApply, checkList, radioList,
                 minCarbon, maxCarbon, loggedUser, activityTable);
-
     }
 
     //GENERAL METHODS

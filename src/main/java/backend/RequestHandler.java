@@ -5,7 +5,6 @@ import data.Activity;
 import data.LoginDetails;
 import data.User;
 
-import org.springframework.data.mongodb.core.aggregation.ConvertOperators;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
