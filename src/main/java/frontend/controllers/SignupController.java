@@ -102,7 +102,7 @@ public class SignupController implements Initializable {
                 e1.printStackTrace();
             }
         });
-        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.sceneSwitch(
+        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.signInUpSwitch(
                 Main.getPrimaryStage(), Main.getSignIn()
         ));
         try {

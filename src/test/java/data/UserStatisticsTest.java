@@ -97,4 +97,58 @@ public class UserStatisticsTest {
 
         Assert.assertEquals(expected, userStatistics.getAverageCO2Saved(), 0);
     }
+
+    @Test
+    public void testEqualSame() {
+        UserStatistics userStatistics = new UserStatistics("", 0,0);
+
+        Assert.assertEquals(userStatistics, userStatistics);
+    }
+
+    @Test
+    public void testNotEqualDifferentClass() {
+        UserStatistics userStatistics = new UserStatistics("", 0, 0);
+        EatVegetarianMeal meal = new EatVegetarianMeal();
+
+        Assert.assertNotEquals(userStatistics, meal);
+    }
+
+    @Test
+    public void testNotEqualsNull() {
+        UserStatistics userStatistics = new UserStatistics("", 0, 0);
+
+        Assert.assertNotEquals(userStatistics, null);
+    }
+
+    @Test
+    public void testNotEqualUserStatsCO2Saved() {
+        UserStatistics userStatistics1 = new UserStatistics("", 0, 5);
+        UserStatistics userStatistics2 = new UserStatistics("", 0, 4);
+
+        Assert.assertNotEquals(userStatistics1, userStatistics2);
+    }
+
+    @Test
+    public void testNotEqualsUserStatsUsers() {
+        UserStatistics userStatistics1 = new UserStatistics("", 5, 4);
+        UserStatistics userStatistics2 = new UserStatistics("", 4, 4);
+
+        Assert.assertNotEquals(userStatistics1, userStatistics2);
+    }
+
+    @Test
+    public void testNotEqualsUserStatsPeriod() {
+        UserStatistics userStatistics1 = new UserStatistics("a", 4, 4);
+        UserStatistics userStatistics2 = new UserStatistics("b", 4, 4);
+
+        Assert.assertNotEquals(userStatistics1, userStatistics2);
+    }
+
+    @Test
+    public void testEqualUserStats() {
+        UserStatistics userStatistics1 = new UserStatistics("all", 5, 5);
+        UserStatistics userStatistics2 = new UserStatistics("all",5, 5);
+
+        Assert.assertEquals(userStatistics1, userStatistics2);
+    }
 }

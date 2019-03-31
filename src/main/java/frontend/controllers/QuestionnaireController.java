@@ -197,7 +197,7 @@ public class QuestionnaireController implements Initializable {
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
-                        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn());
+                        StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignIn());
                     }
                 }
             } else {

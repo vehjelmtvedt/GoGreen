@@ -170,7 +170,8 @@ public class Requests {
      */
     public User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/editProfile")
-                .queryParam("fieldName",fieldName).queryParam("newValue", newValue);
+                .queryParam("fieldName",fieldName).queryParam("newValue", newValue)
+                .queryParam("typeName",newValue.getClass().getSimpleName());
         return restTemplate.postForEntity(uriBuilder.toUriString(),
                 loginDetails,User.class).getBody();
     }  
