@@ -193,12 +193,17 @@ public class FriendspageController implements Initializable {
                         addButton.setMaxWidth(40);
                         // Temporary change for Demo 3
                         addButton.setOnAction(e -> {
-                            Requests.sendFriendRequest(thisUser.getUsername(), tmpLabel.getText());
-                            Requests.acceptFriendRequest(thisUser.getUsername(), tmpLabel.getText());
-                            fillFriendsTreeView();
-                            fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
-                            fillChart("This Week", "#cd7b4c", DateUnit.WEEK, weeklyChart);
-                            fillChart("This Month", "#b74747", DateUnit.MONTH, monthlyChart);
+                            String addUser = tmpLabel.getText();
+                            if (!thisUser.getFriendRequests().contains(addUser)
+                                && !thisUser.getFriends().contains(addUser)) {
+                                Requests.sendFriendRequest(thisUser.getUsername(), addUser);
+                                Requests.acceptFriendRequest(thisUser.getUsername(), addUser);
+                                thisUser = Requests.loginRequest(thisLoginDetails);
+                                fillFriendsTreeView();
+                                fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
+                                fillChart("This Week", "#cd7b4c", DateUnit.WEEK, weeklyChart);
+                                fillChart("This Month", "#b74747", DateUnit.MONTH, monthlyChart);
+                            }
                         });
                         // addButton.setOnAction(e -> Requests.sendFriendRequest(
                         // thisUser.getUsername(), tmpLabel.getText()));
