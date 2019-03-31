@@ -5,7 +5,6 @@ import data.Activity;
 import data.LoginDetails;
 import data.User;
 
-import org.springframework.data.mongodb.core.aggregation.ConvertOperators;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -202,6 +201,22 @@ public class RequestHandler {
 
         return false;
     }
+
+    @RequestMapping("/getTotalUsers")
+    public int getTotalUsers() {
+        return dbService.getTotalUsers();
+    }
+
+    @RequestMapping("/getTotalCO2Saved")
+    public double getTotalCO2Saved() {
+        return dbService.getTotalCO2Saved();
+    }
+
+    @RequestMapping("/getAverageCO2Saved")
+    public double getAverageCO2Saved() {
+        return dbService.getAverageCO2Saved();
+    }
+
 }
 
 

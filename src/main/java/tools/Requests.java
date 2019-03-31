@@ -190,4 +190,30 @@ public class Requests {
 
         return restTemplate.getForEntity(uriBuilder.toUriString(),Boolean.class).getBody();
     }
+
+    /**
+     * get total Users.
+     * @return number of total users
+     */
+    public static int getTotalUsers() {
+        return restTemplate.getForEntity(url + "/getTotalUsers", int.class).getBody();
+    }
+
+    /**
+     * get total CO2 saved.
+     * @return total amount of CO2 saved
+     */
+    public static double getTotalCO2Saved() {
+        return restTemplate.getForEntity(url + "/getTotalCO2Saved",double.class).getBody();
+    }
+
+    /**
+     * get average CO2 saved.
+     * @return average CO2 saved
+     */
+    public static double getAverageCO2Saved() {
+        return restTemplate.getForEntity(url + "/getAverageCO2Saved",double.class).getBody();
+    }
+
+
 }
