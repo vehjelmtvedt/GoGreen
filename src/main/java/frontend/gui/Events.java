@@ -9,6 +9,8 @@ import data.BuyLocallyProducedFood;
 import data.BuyNonProcessedFood;
 import data.BuyOrganicFood;
 import data.EatVegetarianMeal;
+import data.InstallSolarPanels;
+import data.LowerHomeTemperature;
 import data.UseBikeInsteadOfCar;
 import data.UseBusInsteadOfCar;
 import data.UseTrainInsteadOfCar;
@@ -20,9 +22,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -31,8 +36,12 @@ import javafx.scene.paint.Color;
 import tools.ActivityQueries;
 import tools.DateUnit;
 
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 public class Events {
 
@@ -198,14 +207,74 @@ public class Events {
      * @param loggedUser    - user to update
      * @param activityTable - table to set history to
      */
-    public static void addHouseholdActivity(AnchorPane pane, int type,
-                                            User loggedUser, TableView<Activity> activityTable) {
+    public static void addHouseholdActivity(AnchorPane pane, Label installedPanels,
+                                            Label loweredTemp, int type, User loggedUser,
+                                            TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
-                //todo: Add solar panels
+                InstallSolarPanels panels = new InstallSolarPanels();
+                if (loggedUser.getSimilarActivities(panels).size() > 0) {
+                    InstallSolarPanels installed = (InstallSolarPanels) loggedUser
+                            .getSimilarActivities(new InstallSolarPanels()).get(0);
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("GoGreen");
+                    alert.setHeaderText("You have already installed solar panels!");
+                    alert.setContentText("Total CO2 saved by your solar panels: "
+                            + ChronoUnit.DAYS.between(loggedUser
+                                            .getSimilarActivities(panels)
+                                            .get(0).getDate().toInstant(),
+                                    Calendar.getInstance().getTime().toInstant())
+                                    * installed.getDailyCarbonSaved());
+                    alert.showAndWait();
+                } else {
+                    TextInputDialog dialog = new TextInputDialog("0");
+                    dialog.setTitle("Install Solar Panels");
+                    dialog.setHeaderText(
+                            "Amount of kwh that your solar panel installation produces per year: ");
+                    dialog.setContentText("kwh:");
+                    dialog.getEditor().textProperty().addListener(new ChangeListener<String>() {
+                        @Override
+                        public void changed(
+                                ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+                            if (!newValue.matches("^[0-9]{0,7}$")) {
+                                dialog.getEditor().setText(oldValue);
+                            }
+                        }
+                    });
+                    Optional<String> result = dialog.showAndWait();
+                    if (result.isPresent()) {
+                        System.out.println("kwh: " + result.get());
+                        panels.setKwhSavedPerYear(Integer.parseInt(result.get()));
+                        panels.performActivity(loggedUser);
+                        installedPanels.setVisible(true);
+                    }
+                }
             } else {
                 if (type == 2) {
-                    //todo: Lower home temperature
+                    LowerHomeTemperature temp = new LowerHomeTemperature();
+                    if (temp.timesPerformedInTheSameDay(loggedUser) > 0) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText("Oops");
+                        alert.setContentText(
+                                "It looks like you already did this today,"
+                                        + " you can try again tomorrow!");
+                        alert.showAndWait();
+                    } else {
+                        List<String> choices = Arrays.asList( "1", "2", "3", "4", "5");
+                        ChoiceDialog<String> dialog = new ChoiceDialog<>("1", choices);
+                        dialog.setTitle("Lower Home Temperature");
+                        dialog.setHeaderText("How many degrees did you turn your thermostat down?");
+                        dialog.setContentText("Degrees:");
+                        Optional<String> result = dialog.showAndWait();
+                        if (result.isPresent()) {
+                            System.out.println("Degrees: " + result.get());
+                            temp.setDegrees(Integer.parseInt(result.get()));
+                            temp.performActivity(loggedUser);
+                            loweredTemp.setVisible(true);
+                        }
+                    }
                 }
             }
 

@@ -236,7 +236,6 @@ public class FriendspageController implements Initializable {
                 addFriendDrawer.close();
                 addFriendDrawer.setVisible(false);
                 addFriendDrawer.toBack();
-
             } else {
                 addFriendDrawer.open();
                 addFriendDrawer.setVisible(true);
