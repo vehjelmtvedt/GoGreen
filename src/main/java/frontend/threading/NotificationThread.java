@@ -1,16 +1,12 @@
 package frontend.threading;
 
-
 import data.UserPendingData;
 import frontend.controllers.HomepageController;
 import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.util.Duration;
 import tools.SyncUserTask;
 
-import java.beans.EventHandler;
 import java.io.IOException;
 
 public class NotificationThread extends ScheduledService<UserPendingData> {
@@ -18,6 +14,10 @@ public class NotificationThread extends ScheduledService<UserPendingData> {
 
     private SyncUserTask syncUserTask;
 
+    /**.
+     * Creates a new NotificationThread for the specified User
+     * @param syncUserTask - SyncUserTask containing User data
+     */
     public NotificationThread(SyncUserTask syncUserTask) {
         this.syncUserTask = syncUserTask;
         this.setPeriod(Duration.seconds(sleepTimeSeconds));
@@ -47,7 +47,7 @@ public class NotificationThread extends ScheduledService<UserPendingData> {
     }
 
     @Override
-    public Task createTask() {
+    public Task<UserPendingData> createTask() {
         return new Task<UserPendingData>() {
             @Override
             protected UserPendingData call() throws Exception {
