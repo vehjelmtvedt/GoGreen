@@ -106,18 +106,6 @@ public class Requests {
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/addActivity")
                 .queryParam("identifier", username);
-
-        //demo3 - start
-        try {
-            FXMLLoader loader1 = new FXMLLoader(
-                    Main.class.getResource("/frontend/fxmlPages/Homepage.fxml"));
-            Parent root1 = loader1.load();
-            Scene homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
-            Main.setHomepage(homepage);
-        } catch (IOException exception) {
-            System.out.println("bad code");
-        }
-        //demo 3 - end
         
         return restTemplate.postForEntity(uriBuilder.toUriString(), activity, User.class).getBody();
     }

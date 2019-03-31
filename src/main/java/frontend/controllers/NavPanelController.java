@@ -39,8 +39,21 @@ public class NavPanelController implements Initializable {
         Events.addNavButtonHover(activity);
         Events.addNavButtonHover(friends);
         Events.addNavButtonHover(myProfile);
-        home.setOnAction(e -> StageSwitcher.sceneSwitch(
-                Main.getPrimaryStage(), Main.getHomepage()));
+        home.setOnAction(e -> {
+            //demo3 - start
+            try {
+                FXMLLoader loader1 = new FXMLLoader(
+                        Main.class.getResource("/frontend/fxmlPages/Homepage.fxml"));
+                Parent root1 = loader1.load();
+                Scene homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
+                Main.setHomepage(homepage);
+            } catch (IOException exception) {
+                System.out.println("bad code");
+            }
+            //demo 3 - end
+            StageSwitcher.sceneSwitch(
+                    Main.getPrimaryStage(), Main.getHomepage());
+        });
         activity.setOnAction(e -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getActivities()));
         friends.setOnAction(e -> {
