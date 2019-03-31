@@ -5,7 +5,6 @@ import data.Activity;
 import data.LoginDetails;
 import data.User;
 
-import org.springframework.data.mongodb.core.aggregation.ConvertOperators;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,17 +59,20 @@ public class RequestHandler {
     }
 
     @RequestMapping("/friendrequest")
-    public boolean friendRequest(@RequestParam String sender, @RequestParam String receiver) {
+    public boolean friendRequest(@RequestParam String sender,
+                                 @RequestParam String receiver) {
         return dbService.addFriendRequest(sender, receiver);
     }
 
     @RequestMapping("/acceptfriend")
-    public boolean acceptFriendRequest(@RequestParam String sender, @RequestParam String accepting) {
+    public boolean acceptFriendRequest(@RequestParam String sender,
+                                       @RequestParam String accepting) {
         return dbService.acceptFriendRequest(sender, accepting);
     }
 
     @RequestMapping("/rejectfriend")
-    public boolean rejectFriendRequest(@RequestParam String sender, @RequestParam String rejecting) {
+    public boolean rejectFriendRequest(@RequestParam String sender,
+                                       @RequestParam String rejecting) {
         return dbService.rejectFriendRequest(sender, rejecting);
 
     }
