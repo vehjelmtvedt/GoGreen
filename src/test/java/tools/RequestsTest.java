@@ -205,4 +205,24 @@ public class RequestsTest {
         Boolean bool = false;
         assertEquals(null,Requests.forgotPass(testUser.getEmail(),1,"A","B"));
     }
+
+    @Test
+    public void getTotalUsers() {
+        Mockito.when(dbService.getTotalUsers()).thenReturn(10);
+        assertEquals(10,Requests.getTotalUsers());
+    }
+
+    @Test
+    public void getAverageCO2Saved() {
+        Mockito.when(dbService.getAverageCO2Saved()).thenReturn(10.5);
+        assertEquals(10.5,Requests.getAverageCO2Saved());
+    }
+
+    @Test
+    public void getTotalCO2Saved() {
+        Mockito.when(dbService.getTotalCO2Saved()).thenReturn(100.5);
+        assertEquals(100.5,Requests.getTotalCO2Saved());
+    }
+
+
 }
