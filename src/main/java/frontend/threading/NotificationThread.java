@@ -27,6 +27,12 @@ public class NotificationThread extends ScheduledService<UserPendingData> {
             System.out.println("SUCCEEDED");
             System.out.println(this.getValue().getFriendRequests());
             System.out.println(this.getValue().getAchievements());
+
+            try {
+                HomepageController.popup();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         // failed
