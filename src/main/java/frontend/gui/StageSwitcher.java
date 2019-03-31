@@ -24,7 +24,7 @@ public class StageSwitcher {
 
     /**.
      * Changes scene of any stage (usually primary).
-     * It's used in the login/sign up/ questionnaire pages
+     * It's used in the login/sign up/ questionnaire pages.
      * @param from - the current stage
      * @param to - the scene to change to
      */
