@@ -206,14 +206,16 @@ public class FriendspageController implements Initializable {
                                 thisUser = Requests.loginRequest(thisLoginDetails);
 
                                 FXMLLoader loader3 = new FXMLLoader(
-                                        Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
+                                        Main.class.getResource(
+                                                "/frontend/fxmlPages/FriendPage.fxml"));
                                 Parent root3 = null;
                                 try {
                                     root3 = loader3.load();
                                 } catch (IOException e1) {
                                     e1.printStackTrace();
                                 }
-                                Scene friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
+                                Scene friendPage = new Scene(root3,
+                                        General.getBounds()[0], General.getBounds()[1]);
                                 Main.setFriendPage(friendPage);
                                 StageSwitcher.sceneSwitch(
                                         Main.getPrimaryStage(), Main.getFriendsPage());

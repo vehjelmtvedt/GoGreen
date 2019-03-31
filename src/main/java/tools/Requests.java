@@ -4,18 +4,13 @@ import data.Achievement;
 import data.Activity;
 import data.LoginDetails;
 import data.User;
-import frontend.gui.General;
-import frontend.gui.Main;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 import java.util.List;
 
 public class Requests {
