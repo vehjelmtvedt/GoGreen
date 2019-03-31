@@ -2,6 +2,8 @@ package data;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.Objects;
+
 public class UserStatistics {
     @Id
     private String timePeriod;
@@ -76,5 +78,22 @@ public class UserStatistics {
         }
 
         return totalCO2Saved / totalUsers;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+
+        UserStatistics that = (UserStatistics) object;
+
+        return totalUsers == that.totalUsers
+                && Double.compare(that.totalCO2Saved, totalCO2Saved) == 0
+                && Objects.equals(timePeriod, that.timePeriod);
     }
 }

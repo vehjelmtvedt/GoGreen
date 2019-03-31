@@ -4,10 +4,7 @@ import data.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -54,6 +51,31 @@ public class ActivityQueriesTest {
         List<Activity> filteredActivities = activityQuery.filterActivities("Food");
 
         Assert.assertEquals(activities, filteredActivities);
+    }
+
+    @Test
+    public void testFilterByCategories() {
+        Activity a1 = new EatVegetarianMeal();
+        Activity a2 = new EatVegetarianMeal();
+        Activity a3 = new BuyOrganicFood();
+        Activity a4 = new UseTrainInsteadOfCar();
+        Activity a5 = new UseBikeInsteadOfCar();
+        Activity a6 = new BuyNonProcessedFood();
+
+        activeUser.addActivity(a1);
+        activeUser.addActivity(a2);
+        activeUser.addActivity(a3);
+        activeUser.addActivity(a4);
+        activeUser.addActivity(a5);
+        activeUser.addActivity(a6);
+
+        ArrayList<Activity> expected = new ArrayList<>();
+        expected.add(a4);
+        expected.add(a5);
+
+        List<Activity> filteredActivities = activityQuery.filterActivities(a4.getCategory());
+
+        Assert.assertEquals(expected, filteredActivities);
     }
 
     @Test
