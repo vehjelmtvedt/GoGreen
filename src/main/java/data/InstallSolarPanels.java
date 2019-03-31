@@ -1,6 +1,5 @@
 package data;
 
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import tools.CarbonCalculator;
 import tools.Requests;
