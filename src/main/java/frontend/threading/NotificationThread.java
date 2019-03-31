@@ -1,4 +1,4 @@
-package tools;
+package frontend.threading;
 
 
 import data.UserPendingData;
@@ -8,16 +8,17 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.util.Duration;
+import tools.SyncUserTask;
 
 import java.beans.EventHandler;
 import java.io.IOException;
 
-public class UserThread extends ScheduledService {
+public class NotificationThread extends ScheduledService {
     private static final int sleepTimeSeconds = 5;
 
     private SyncUserTask syncUserTask;
 
-    public UserThread(SyncUserTask syncUserTask) {
+    public NotificationThread(SyncUserTask syncUserTask) {
         this.syncUserTask = syncUserTask;
         this.setPeriod(Duration.seconds(sleepTimeSeconds));
 

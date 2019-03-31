@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import tools.ActivityQueries;
 import tools.Requests;
 import tools.SyncUserTask;
-import tools.UserThread;
+import frontend.threading.NotificationThread;
 
 import java.io.IOException;
 import java.net.URL;
@@ -73,8 +73,8 @@ public class HomepageController implements Initializable {
 
         LoginDetails loginDetails = new LoginDetails(loggedUser.getUsername(), "qwerty");
         SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, loggedUser);
-        UserThread userThread = new UserThread(syncUserTask);
-        userThread.start();
+        NotificationThread notificationThread = new NotificationThread(syncUserTask);
+        notificationThread.start();
 
         mainCopy = mainPane;
         headerCopy = headerPane;
