@@ -1,6 +1,8 @@
 package data;
 
+import org.springframework.web.client.HttpClientErrorException;
 import tools.CarbonCalculator;
+import tools.Requests;
 
 /**
  * Activity: Install solar panels.
@@ -9,7 +11,7 @@ import tools.CarbonCalculator;
  */
 public class InstallSolarPanels extends Activity {
     private int kwhSavedPerYear;
-
+    private double dailyCarbonSaved;
     /**
      * Constructor.
      */
@@ -25,6 +27,14 @@ public class InstallSolarPanels extends Activity {
 
     public void setKwhSavedPerYear(int kwhSavedPerYear) {
         this.kwhSavedPerYear = kwhSavedPerYear;
+    }
+
+    public double getDailyCarbonSaved() {
+        return dailyCarbonSaved;
+    }
+
+    public void setDailyCarbonSaved(double dailySavedCarbon) {
+        this.dailyCarbonSaved = dailySavedCarbon;
     }
 
     /**
@@ -50,4 +60,32 @@ public class InstallSolarPanels extends Activity {
 
     // TODO
     // override the performActivity method to update the user field hasInstalledSolarPanels
+
+    @Override
+    public void performActivity(User user) {
+        this.setDailyCarbonSaved(this.calculateCarbonSaved(user));
+
+        // When the solar panels are first installed, no amount of CO2 is saved immediately
+        this.setCarbonSaved(0);
+
+        // update logged in user for the gui
+        user.addActivity(this);
+
+        // update user in the database
+        try {
+            user = Requests.addActivityRequest(this, user.getUsername());
+
+            // check if an achievement is completed by this activity
+            AchievementsLogic.checkActivity(user , this);
+
+            // adds points to the user
+            user.addCO2Points(this.getCarbonSaved());
+
+
+        } catch (HttpClientErrorException e) {
+            System.out.println("Activity was not added to the database");
+            System.out.println(e.fillInStackTrace());
+        }
+    }
+
 }

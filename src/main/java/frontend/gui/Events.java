@@ -212,9 +212,10 @@ public class Events {
                                             TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
-                //todo: Add solar panels
                 InstallSolarPanels panels = new InstallSolarPanels();
                 if (loggedUser.getSimilarActivities(panels).size() > 0) {
+                    InstallSolarPanels installed = (InstallSolarPanels) loggedUser.getSimilarActivities(new InstallSolarPanels())
+                            .get(0);
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("GoGreen");
                     alert.setHeaderText("You have already installed solar panels!");
@@ -223,8 +224,7 @@ public class Events {
                                             .getSimilarActivities(panels)
                                             .get(0).getDate().toInstant(),
                                     Calendar.getInstance().getTime().toInstant())
-                                    * loggedUser
-                            .getSimilarActivities(panels).get(0).getCarbonSaved());
+                                    * installed.getDailyCarbonSaved());
                     alert.showAndWait();
                 } else {
                     TextInputDialog dialog = new TextInputDialog("0");
@@ -252,7 +252,6 @@ public class Events {
                 }
             } else {
                 if (type == 2) {
-                    //todo: Lower home temperature
                     LowerHomeTemperature temp = new LowerHomeTemperature();
                     if (temp.timesPerformedInTheSameDay(loggedUser) > 0) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);

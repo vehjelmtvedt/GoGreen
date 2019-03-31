@@ -217,6 +217,7 @@ public class User {
     }
 
     public void setTotalCarbonSaved(double totalCarbonSaved) {
+        // keep only 3 decimal places
         this.totalCarbonSaved = ((int)(totalCarbonSaved * 1000)) / 1000.0;
     }
 
