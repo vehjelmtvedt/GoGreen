@@ -19,6 +19,9 @@ public class StageSwitcher {
         homeDrawer.close();
         friendsDrawer.close();
         activityDrawer.close();
+        homeDrawer.setVisible(false);
+        friendsDrawer.setVisible(false);
+        homeDrawer.setVisible(false);
         from.setScene(to);
     }
 
