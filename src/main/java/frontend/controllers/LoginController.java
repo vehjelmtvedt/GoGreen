@@ -91,7 +91,7 @@ public class LoginController implements Initializable {
 
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
-        signupForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.sceneSwitch(
+        signupForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.signInUpSwitch(
                 Main.getPrimaryStage(), Main.getSignUp()));
         try {
             setFonts();
