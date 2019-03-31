@@ -25,7 +25,7 @@ public class User {
 
     private ArrayList<Activity> activities;
 
-    private int electricityDailyConsumption;
+    private double electricityDailyConsumption;
     private double heatingOilDailyConsumption;
     private int dailyCarKilometres;
     private String carType;
@@ -153,11 +153,11 @@ public class User {
         return this.friendRequests;
     }
 
-    public void setElectricityDailyConsumption(int electricityDailyConsumption) {
+    public void setElectricityDailyConsumption(double electricityDailyConsumption) {
         this.electricityDailyConsumption = electricityDailyConsumption;
     }
 
-    public int getElectricityDailyConsumption() {
+    public double getElectricityDailyConsumption() {
         return this.electricityDailyConsumption;
     }
 

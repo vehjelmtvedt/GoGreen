@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class InstallSolarPanelsTest {
     InstallSolarPanels panels = new InstallSolarPanels();
     User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
+
     @Test
     public void testConstructor() {
         assertEquals("Install Solar Panels", panels.getName());
@@ -17,7 +18,14 @@ public class InstallSolarPanelsTest {
     }
 
     @Test
-    public void testCalculateCarbonSaved() {
+    public void testCalculateCarbonSavedWhenSolarPanelsProduceLessElectricityThanTheUserConsumes() {
         assertEquals((int) (CarbonCalculator.electricityEmissions(1000) / 365.0), (int) panels.calculateCarbonSaved(user));
+    }
+
+    @Test
+    public void testCalculateCarbonSavedWhenSolarPanelsProduceMoreElectricityThanTheUserConsumes() {
+        panels.setKwhSavedPerYear(100000);
+        user.setElectricityDailyConsumption(10000/365.0);
+        assertEquals((int) (CarbonCalculator.electricityEmissions((int) user.getElectricityDailyConsumption())),(int) panels.calculateCarbonSaved(user));
     }
 }
