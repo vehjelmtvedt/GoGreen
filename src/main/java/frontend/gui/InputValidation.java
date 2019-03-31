@@ -2,6 +2,7 @@ package frontend.gui;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import data.InstallSolarPanels;
 import data.LoginDetails;
 import data.User;
 import frontend.controllers.ActivitiesController;
@@ -18,6 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import tools.Requests;
 
 import java.io.IOException;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,6 +45,23 @@ public class InputValidation {
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
         User loggedUser = Requests.loginRequest(loginDetails);
+
+        // update user's CO2 saved from InstallSolarPanels activity
+        if (loggedUser != null) {
+            if (loggedUser.getSimilarActivities(new InstallSolarPanels()).size() > 0) {
+                InstallSolarPanels panels = (InstallSolarPanels) loggedUser
+                        .getSimilarActivities(new InstallSolarPanels()).get(0);
+                double extraCo2Saved = ChronoUnit.DAYS.between(
+                        loggedUser.getLastLoginDate().toInstant(),
+                        Calendar.getInstance().getTime().toInstant())
+                        * panels.getDailyCarbonSaved();
+                double newValue = loggedUser.getTotalCarbonSaved() + extraCo2Saved;
+                Requests.editProfile(loginDetails,
+                        "totalCarbonSaved",
+                        newValue);
+            }
+        }
+
         if (loggedUser != null) {
             Dialog.show("Login successful", "Welcome to GoGreen, "
                     + loggedUser.getFirstName()
