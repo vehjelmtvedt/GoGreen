@@ -49,8 +49,8 @@ public class InputValidation {
         // update user's CO2 saved from InstallSolarPanels activity
         if (loggedUser != null) {
             if (loggedUser.getSimilarActivities(new InstallSolarPanels()).size() > 0) {
-                InstallSolarPanels panels = (InstallSolarPanels) loggedUser.getSimilarActivities(new InstallSolarPanels())
-                        .get(0);
+                InstallSolarPanels panels = (InstallSolarPanels) loggedUser
+                        .getSimilarActivities(new InstallSolarPanels()).get(0);
                 double extraCo2Saved = ChronoUnit.DAYS.between(
                         loggedUser.getLastLoginDate().toInstant(),
                         Calendar.getInstance().getTime().toInstant())

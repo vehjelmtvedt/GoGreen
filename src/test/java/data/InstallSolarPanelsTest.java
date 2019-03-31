@@ -18,6 +18,12 @@ public class InstallSolarPanelsTest {
     }
 
     @Test
+    public void testSetAndGetDailyCarbonSaved() {
+        panels.setDailyCarbonSaved(15);
+        assertEquals(15, (int) panels.getDailyCarbonSaved());
+    }
+
+    @Test
     public void testCalculateCarbonSavedWhenSolarPanelsProduceLessElectricityThanTheUserConsumes() {
         assertEquals((int) (CarbonCalculator.electricityEmissions(1000) / 365.0), (int) panels.calculateCarbonSaved(user));
     }
@@ -28,4 +34,13 @@ public class InstallSolarPanelsTest {
         user.setElectricityDailyConsumption(10000/365.0);
         assertEquals((int) (CarbonCalculator.electricityEmissions((int) user.getElectricityDailyConsumption())),(int) panels.calculateCarbonSaved(user));
     }
+
+    @Test
+    public void testPerformActivity() {
+        panels.setKwhSavedPerYear(10000);
+        user.setElectricityDailyConsumption(100000);
+        panels.performActivity(user);
+        assertEquals((int) (CarbonCalculator.electricityEmissions(10000) / 365.0), (int) panels.getDailyCarbonSaved());
+    }
+
 }

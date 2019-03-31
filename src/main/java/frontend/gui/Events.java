@@ -214,8 +214,8 @@ public class Events {
             if (type == 1) {
                 InstallSolarPanels panels = new InstallSolarPanels();
                 if (loggedUser.getSimilarActivities(panels).size() > 0) {
-                    InstallSolarPanels installed = (InstallSolarPanels) loggedUser.getSimilarActivities(new InstallSolarPanels())
-                            .get(0);
+                    InstallSolarPanels installed = (InstallSolarPanels) loggedUser
+                            .getSimilarActivities(new InstallSolarPanels()).get(0);
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("GoGreen");
                     alert.setHeaderText("You have already installed solar panels!");

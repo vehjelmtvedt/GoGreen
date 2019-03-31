@@ -1,6 +1,7 @@
 package data;
 
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import tools.CarbonCalculator;
 import tools.Requests;
 
@@ -12,6 +13,7 @@ import tools.Requests;
 public class InstallSolarPanels extends Activity {
     private int kwhSavedPerYear;
     private double dailyCarbonSaved;
+
     /**
      * Constructor.
      */
@@ -82,7 +84,7 @@ public class InstallSolarPanels extends Activity {
             user.addCO2Points(this.getCarbonSaved());
 
 
-        } catch (HttpClientErrorException e) {
+        } catch (ResourceAccessException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());
         }
