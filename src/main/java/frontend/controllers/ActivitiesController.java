@@ -2,11 +2,12 @@ package frontend.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import data.Activity;
+import data.InstallSolarPanels;
+import data.LowerHomeTemperature;
 import data.User;
 import frontend.gui.Events;
 import frontend.gui.General;
@@ -74,8 +75,6 @@ public class ActivitiesController implements Initializable {
     @FXML
     private JFXHamburger menu;
     @FXML
-    private JFXDrawer drawer;
-    @FXML
     private AnchorPane mainPane;
     @FXML
     private AnchorPane headerPane;
@@ -124,6 +123,10 @@ public class ActivitiesController implements Initializable {
     @FXML
     private Label goGreen;
     @FXML
+    private Label lblPanelsInstalled;
+    @FXML
+    private Label lblLoweredTemp;
+    @FXML
     private JFXRadioButton radioToday;
     @FXML
     private JFXRadioButton radioWeek;
@@ -160,8 +163,10 @@ public class ActivitiesController implements Initializable {
                 lblDistanceValidate, 2, loggedUser, activityTable);
         Events.addTransportActivity(paneTrain, inputDistance,
                 lblDistanceValidate, 3, loggedUser, activityTable);
-        Events.addHouseholdActivity(paneSolarPanels, 1, loggedUser, activityTable);
-        Events.addHouseholdActivity(paneEnergy, 2, loggedUser, activityTable);
+        Events.addHouseholdActivity(paneSolarPanels, lblPanelsInstalled,
+                lblLoweredTemp,1, loggedUser, activityTable);
+        Events.addHouseholdActivity(paneEnergy, lblPanelsInstalled,
+                lblLoweredTemp,2, loggedUser, activityTable);
 
         //add hover events for button activities
         Events.addActivityHover(paneVegetarianMeal, btnVegetarianMeal);
@@ -211,9 +216,14 @@ public class ActivitiesController implements Initializable {
         Events.addHoverOnFilter(lblApply);
         Events.clearFilters(lblClearFilters, checkList, radioList,
                 minCarbon, maxCarbon, loggedUser, activityTable);
-        Events.applyFilters(lblApply,checkList, radioList,
+        Events.applyFilters(lblApply, checkList, radioList,
                 minCarbon, maxCarbon, loggedUser, activityTable);
 
+        //setup additional
+        InstallSolarPanels panels = new InstallSolarPanels();
+        LowerHomeTemperature temp = new LowerHomeTemperature();
+        lblPanelsInstalled.setVisible(loggedUser.getSimilarActivities(panels).size() > 0);
+        lblLoweredTemp.setVisible(temp.timesPerformedInTheSameDay(loggedUser) > 0);
     }
 
     //GENERAL METHODS

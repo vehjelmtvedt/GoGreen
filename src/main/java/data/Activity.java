@@ -25,7 +25,9 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = BuyOrganicFood.class, name = "BuyOrganicFood"),
         @JsonSubTypes.Type(value = UseBikeInsteadOfCar.class, name = "UseBikeInsteadOfCar"),
         @JsonSubTypes.Type(value = UseBusInsteadOfCar.class, name = "UseBusInsteadOfCar"),
-        @JsonSubTypes.Type(value = UseTrainInsteadOfCar.class, name = "UseTrainInsteadOfCar")
+        @JsonSubTypes.Type(value = UseTrainInsteadOfCar.class, name = "UseTrainInsteadOfCar"),
+        @JsonSubTypes.Type(value = InstallSolarPanels.class, name = "InstallSolarPanels"),
+        @JsonSubTypes.Type(value = LowerHomeTemperature.class, name = "LowerHomeTemperature"),
     })
 public abstract class Activity {
     private Date date;
@@ -39,7 +41,7 @@ public abstract class Activity {
     }
 
     public Date getDate() {
-        return date;
+        return this.date;
     }
 
     public void setDate(Date date) {
@@ -51,7 +53,8 @@ public abstract class Activity {
     }
 
     public void setCarbonSaved(double carbonSaved) {
-        this.carbonSaved = carbonSaved;
+        // keep only 3 decimal places
+        this.carbonSaved = ((int)(carbonSaved * 1000)) / 1000.0;
     }
 
     public String getName() {
@@ -180,7 +183,7 @@ public abstract class Activity {
      * .
      * Returns the sum of activity carbon saved
      *
-     * @param activityList - activites list
+     * @param activityList - activities list
      * @return sum of CO2 by all activities in the list
      */
     public static double getSum(List<Activity> activityList) {
@@ -211,8 +214,6 @@ public abstract class Activity {
 
         return Double.compare(activity.carbonSaved, carbonSaved) == 0
                 && Objects.equals(date, activity.date);
-                //&& Objects.equals(name, activity.name)
-                //&& Objects.equals(category, activity.category);
     }
 
     /**

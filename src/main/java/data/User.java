@@ -25,7 +25,7 @@ public class User {
 
     private ArrayList<Activity> activities;
 
-    private int electricityDailyConsumption;
+    private double electricityDailyConsumption;
     private double heatingOilDailyConsumption;
     private int dailyCarKilometres;
     private String carType;
@@ -34,7 +34,6 @@ public class User {
     private String organicFoodConsumption;
     private String processedFoodConsumption;
     private double totalCarbonSaved;
-
     private Progress progress = new Progress();
 
     private int securityQuestionId;
@@ -153,11 +152,11 @@ public class User {
         return this.friendRequests;
     }
 
-    public void setElectricityDailyConsumption(int electricityDailyConsumption) {
+    public void setElectricityDailyConsumption(double electricityDailyConsumption) {
         this.electricityDailyConsumption = electricityDailyConsumption;
     }
 
-    public int getElectricityDailyConsumption() {
+    public double getElectricityDailyConsumption() {
         return this.electricityDailyConsumption;
     }
 
@@ -218,7 +217,8 @@ public class User {
     }
 
     public void setTotalCarbonSaved(double totalCarbonSaved) {
-        this.totalCarbonSaved = totalCarbonSaved;
+        // keep only 3 decimal places
+        this.totalCarbonSaved = ((int)(totalCarbonSaved * 1000)) / 1000.0;
     }
 
     public double getTotalCarbonSaved() {
@@ -232,6 +232,7 @@ public class User {
     public void setLastLoginDate(Date date) {
         this.lastLoginDate = date;
     }
+
 
     /**
      * Returns string representation of the User object.
@@ -329,7 +330,7 @@ public class User {
 
         for (Activity userActivity : activities) {
             if (userActivity.getClass() == activity.getClass() && !userActivity.equals(activity)) {
-                result.add(activity);
+                result.add(userActivity);
             }
         }
 
@@ -345,6 +346,7 @@ public class User {
         this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
 
     }
+
 
     /*
      * Removes a friend from the friends list
