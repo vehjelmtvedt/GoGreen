@@ -35,8 +35,8 @@ public class InstallSolarPanels extends Activity {
         return dailyCarbonSaved;
     }
 
-    public void setDailyCarbonSaved(double dailySavedCarbon) {
-        this.dailyCarbonSaved = dailySavedCarbon;
+    public void setDailyCarbonSaved(double dailyCarbonSaved) {
+        this.dailyCarbonSaved = ((int)(dailyCarbonSaved * 1000)) / 1000.0;
     }
 
     /**
