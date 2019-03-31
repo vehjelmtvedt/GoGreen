@@ -82,7 +82,7 @@ public class InputValidation {
                 e.printStackTrace();
             }
             //Go to homepage after logging in
-            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), loggedUser);
+            StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getHomepage());
 
         } else {
 
@@ -150,7 +150,7 @@ public class InputValidation {
         user.setSecurityQuestionId(secQuestionId);
 
         QuestionnaireController.setUser(user);
-        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
+        StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
     }
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
