@@ -34,7 +34,7 @@ public class User {
     private String organicFoodConsumption;
     private String processedFoodConsumption;
     private double totalCarbonSaved;
-
+    private boolean hasInstalledSolarPanels;
     private Progress progress = new Progress();
 
     private int securityQuestionId;
@@ -72,6 +72,7 @@ public class User {
         this.totalCarbonSaved = 0;
         this.lastLoginDate = Calendar.getInstance().getTime();
         this.activities = new ArrayList<>();
+        this.hasInstalledSolarPanels = false;
     }
 
     public User() {
@@ -233,6 +234,14 @@ public class User {
         this.lastLoginDate = date;
     }
 
+    public boolean isHasInstalledSolarPanels() {
+        return hasInstalledSolarPanels;
+    }
+
+    public void setHasInstalledSolarPanels(boolean hasInstalledSolarPanels) {
+        this.hasInstalledSolarPanels = hasInstalledSolarPanels;
+    }
+
     /**
      * Returns string representation of the User object.
      *
@@ -345,6 +354,7 @@ public class User {
         this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
 
     }
+
 
     /*
      * Removes a friend from the friends list
