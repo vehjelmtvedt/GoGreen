@@ -6,18 +6,20 @@ import frontend.controllers.HomepageController;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.util.Duration;
 
+import java.beans.EventHandler;
 import java.io.IOException;
 
 public class UserThread extends ScheduledService {
-    private static final int sleepTime = 5000;
+    private static final int sleepTimeSeconds = 5;
 
     private SyncUserTask syncUserTask;
 
     public UserThread(SyncUserTask syncUserTask) {
         this.syncUserTask = syncUserTask;
-        this.setPeriod(Duration.seconds(5));
+        this.setPeriod(Duration.seconds(sleepTimeSeconds));
 
         // succeeded?
         this.setOnSucceeded(s -> {
