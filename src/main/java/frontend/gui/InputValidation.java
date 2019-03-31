@@ -47,26 +47,19 @@ public class InputValidation {
         User loggedUser = Requests.loginRequest(loginDetails);
 
         // update user's CO2 saved from InstallSolarPanels activity
-        // doesn't work for now
-//        if (loggedUser != null) {
-//            if (loggedUser.getSimilarActivities(new InstallSolarPanels()).size() > 0) {
-//                System.out.println("User's total carbon saved is updated...");
-//                System.out.println("Old value: " + loggedUser.getTotalCarbonSaved());
-//                double extraCo2Saved = ChronoUnit.DAYS.between(
-//                        loggedUser.getLastLoginDate().toInstant(),
-//                        Calendar.getInstance().getTime().toInstant())
-//                        * loggedUser.getSimilarActivities(new InstallSolarPanels())
-//                        .get(0).getCarbonSaved();
-//                double newValue = loggedUser.getTotalCarbonSaved() + extraCo2Saved;
-//                System.out.println("login details: " + loginDetails.toString());
-//                System.out.println("fieldName: " + "totalCarbonSaved");
-//                System.out.println("newValue: " + loggedUser.getTotalCarbonSaved() + extraCo2Saved);
-//                Requests.editProfile(loginDetails,
-//                        "totalCarbonSaved",
-//                        (double)newValue);
-//                System.out.println("Actual value: " + newValue);
-//            }
-//        }
+        if (loggedUser != null) {
+            if (loggedUser.getSimilarActivities(new InstallSolarPanels()).size() > 0) {
+                double extraCo2Saved = ChronoUnit.DAYS.between(
+                        loggedUser.getLastLoginDate().toInstant(),
+                        Calendar.getInstance().getTime().toInstant())
+                        * loggedUser.getSimilarActivities(new InstallSolarPanels())
+                        .get(0).getCarbonSaved();
+                double newValue = loggedUser.getTotalCarbonSaved() + extraCo2Saved;
+                Requests.editProfile(loginDetails,
+                        "totalCarbonSaved",
+                        newValue);
+            }
+        }
 
         if (loggedUser != null) {
             Dialog.show("Login successful", "Welcome to GoGreen, "
