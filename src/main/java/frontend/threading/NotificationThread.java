@@ -13,7 +13,7 @@ import tools.SyncUserTask;
 import java.beans.EventHandler;
 import java.io.IOException;
 
-public class NotificationThread extends ScheduledService {
+public class NotificationThread extends ScheduledService<UserPendingData> {
     private static final int sleepTimeSeconds = 5;
 
     private SyncUserTask syncUserTask;
@@ -25,6 +25,8 @@ public class NotificationThread extends ScheduledService {
         // succeeded?
         this.setOnSucceeded(s -> {
             System.out.println("SUCCEEDED");
+            System.out.println(this.getValue().getFriendRequests());
+            System.out.println(this.getValue().getAchievements());
         });
 
         // failed
@@ -40,15 +42,10 @@ public class NotificationThread extends ScheduledService {
 
     @Override
     public Task createTask() {
-        return new Task() {
+        return new Task<UserPendingData>() {
             @Override
-            protected Object call() throws Exception {
-                UserPendingData userPendingData = syncUserTask.call();
-
-                System.out.println(userPendingData.getAchievements());
-                System.out.println(userPendingData.getFriendRequests());
-
-                return userPendingData;
+            protected UserPendingData call() throws Exception {
+                return syncUserTask.call();
             }
         };
     }
