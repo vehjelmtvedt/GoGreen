@@ -403,6 +403,7 @@
                            </font>
                         </Text>
                         <Label fx:id="lblPanelsInstalled" alignment="CENTER" layoutX="226.0" layoutY="517.0" prefHeight="21.0" prefWidth="231.0" text="- Already installed solar panels - " visible="false" />
+                        <Label fx:id="lblLoweredTemp" alignment="CENTER" layoutX="491.0" layoutY="517.0" prefHeight="21.0" prefWidth="231.0" text="- Already lowered temperature - " visible="false" />
                      </children>
                   </AnchorPane>
                </children>

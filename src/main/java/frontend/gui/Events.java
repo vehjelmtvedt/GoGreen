@@ -207,13 +207,13 @@ public class Events {
      * @param loggedUser    - user to update
      * @param activityTable - table to set history to
      */
-    public static void addHouseholdActivity(AnchorPane pane, int type,
-                                            User loggedUser, TableView<Activity> activityTable) {
+    public static void addHouseholdActivity(AnchorPane pane, Label installedPanels,
+                                            Label loweredTemp, int type, User loggedUser,
+                                            TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
                 //todo: Add solar panels
                 InstallSolarPanels panels = new InstallSolarPanels();
-                loggedUser.setHasInstalledSolarPanels(true);
                 if (loggedUser.getSimilarActivities(panels).size() > 0) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("GoGreen");
@@ -247,6 +247,7 @@ public class Events {
                         System.out.println("kwh: " + result.get());
                         panels.setKwhSavedPerYear(Integer.parseInt(result.get()));
                         panels.performActivity(loggedUser);
+                        installedPanels.setVisible(true);
                     }
                 }
             } else {
@@ -272,6 +273,7 @@ public class Events {
                             System.out.println("Degrees: " + result.get());
                             temp.setDegrees(Integer.parseInt(result.get()));
                             temp.performActivity(loggedUser);
+                            loweredTemp.setVisible(true);
                         }
                     }
                 }
