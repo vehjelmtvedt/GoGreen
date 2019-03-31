@@ -195,6 +195,10 @@ public class FriendspageController implements Initializable {
                         addButton.setOnAction(e -> {
                             Requests.sendFriendRequest(thisUser.getUsername(), tmpLabel.getText());
                             Requests.acceptFriendRequest(thisUser.getUsername(), tmpLabel.getText());
+                            fillFriendsTreeView();
+                            fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
+                            fillChart("This Week", "#cd7b4c", DateUnit.WEEK, weeklyChart);
+                            fillChart("This Month", "#b74747", DateUnit.MONTH, monthlyChart);
                         });
                         // addButton.setOnAction(e -> Requests.sendFriendRequest(
                         // thisUser.getUsername(), tmpLabel.getText()));
@@ -212,9 +216,12 @@ public class FriendspageController implements Initializable {
             if (addFriendDrawer.isOpened()) {
                 addFriendDrawer.close();
                 addFriendDrawer.setVisible(false);
+                addFriendDrawer.toBack();
+
             } else {
                 addFriendDrawer.open();
                 addFriendDrawer.setVisible(true);
+                addFriendDrawer.toFront();
             }
         });
     }
