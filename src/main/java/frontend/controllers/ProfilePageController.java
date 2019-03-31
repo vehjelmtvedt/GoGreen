@@ -110,10 +110,12 @@ public class ProfilePageController implements Initializable {
 
             ImageView achievementimage = new ImageView();
 
-            Image path = new Image("achievementsimages/1.png");
+            String pathString = "achievementsimages/" + (thisUser.getProgress().getAchievements()
+                    .get(i).getId() + 1) + ".png";
 
-            /*Image path = new Image("achievementsimages/" + thisUser.getProgress()
-                    .getAchievements().get(i).getId() + ".png");*/
+            System.out.println(pathString);
+
+            Image path = new Image(pathString);
 
             achievementimage.setFitHeight(32);
 

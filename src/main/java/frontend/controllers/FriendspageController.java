@@ -10,6 +10,8 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import data.LoginDetails;
 import data.User;
+import frontend.gui.General;
+import frontend.gui.Main;
 import frontend.gui.NavPanel;
 import frontend.gui.StageSwitcher;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,9 +19,12 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
@@ -199,10 +204,19 @@ public class FriendspageController implements Initializable {
                                 Requests.sendFriendRequest(thisUser.getUsername(), addUser);
                                 Requests.acceptFriendRequest(thisUser.getUsername(), addUser);
                                 thisUser = Requests.loginRequest(thisLoginDetails);
-                                fillFriendsTreeView();
-                                fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
-                                fillChart("This Week", "#cd7b4c", DateUnit.WEEK, weeklyChart);
-                                fillChart("This Month", "#b74747", DateUnit.MONTH, monthlyChart);
+
+                                FXMLLoader loader3 = new FXMLLoader(
+                                        Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
+                                Parent root3 = null;
+                                try {
+                                    root3 = loader3.load();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                                Scene friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
+                                Main.setFriendPage(friendPage);
+                                StageSwitcher.sceneSwitch(
+                                        Main.getPrimaryStage(), Main.getFriendsPage());
                             }
                         });
                         // addButton.setOnAction(e -> Requests.sendFriendRequest(
