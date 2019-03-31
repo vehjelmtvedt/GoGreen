@@ -193,8 +193,13 @@ public class FriendspageController implements Initializable {
                         addButton.setMaxWidth(40);
                         // Temporary change for Demo 3
                         addButton.setOnAction(e -> {
-                            Requests.sendFriendRequest(thisUser.getUsername(), tmpLabel.getText());
-                            Requests.acceptFriendRequest(thisUser.getUsername(), tmpLabel.getText());
+                            String addUser = tmpLabel.getText();
+                            if (!thisUser.getFriendRequests().contains(addUser)
+                                && !thisUser.getFriends().contains(addUser)) {
+                                Requests.sendFriendRequest(thisUser.getUsername(), addUser);
+                                Requests.acceptFriendRequest(thisUser.getUsername(), addUser);
+                                thisUser = Requests.loginRequest(thisLoginDetails);
+                            }
                         });
                         // addButton.setOnAction(e -> Requests.sendFriendRequest(
                         // thisUser.getUsername(), tmpLabel.getText()));
