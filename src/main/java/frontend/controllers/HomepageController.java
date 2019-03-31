@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import sun.jvmstat.monitor.event.HostEvent;
 import tools.ActivityQueries;
 import tools.Requests;
 import tools.SyncUserTask;
@@ -72,9 +71,8 @@ public class HomepageController implements Initializable {
             e.printStackTrace();
         }
 
-        LoginDetails loginDetails = new LoginDetails(loggedUser.getUsername(), "Tiger1466");
-        User user = Requests.instance.loginRequest(loginDetails);
-        SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, user);
+        LoginDetails loginDetails = new LoginDetails(loggedUser.getUsername(), "qwerty");
+        SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, loggedUser);
         UserThread userThread = new UserThread(syncUserTask);
         userThread.start();
 

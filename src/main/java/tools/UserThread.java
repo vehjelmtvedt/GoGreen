@@ -3,18 +3,22 @@ package tools;
 
 import data.UserPendingData;
 import frontend.controllers.HomepageController;
+import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
-public class UserThread extends Service {
+public class UserThread extends ScheduledService {
     private static final int sleepTime = 5000;
 
     private SyncUserTask syncUserTask;
 
     public UserThread(SyncUserTask syncUserTask) {
         this.syncUserTask = syncUserTask;
+        this.setPeriod(Duration.seconds(5));
+
         // succeeded?
         this.setOnSucceeded(s -> {
             System.out.println("SUCCEEDED");
@@ -36,22 +40,12 @@ public class UserThread extends Service {
         return new Task() {
             @Override
             protected Object call() throws Exception {
-                while (true) {
-                    try {
-                        Thread.sleep(sleepTime);
-                        UserPendingData userPendingData = syncUserTask.call();
+                UserPendingData userPendingData = syncUserTask.call();
 
-                        System.out.println(userPendingData.getAchievements());
-                        System.out.println(userPendingData.getFriendRequests());
-                        if (userPendingData.getFriendRequests().size() != 0) {
-                            //Alert the controllers and make them add a popup and notification
-                            //in the notification panel
-                            return userPendingData.getFriendRequests();
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+                System.out.println(userPendingData.getAchievements());
+                System.out.println(userPendingData.getFriendRequests());
+
+                return userPendingData;
             }
         };
     }
