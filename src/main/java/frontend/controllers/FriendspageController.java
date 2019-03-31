@@ -191,8 +191,13 @@ public class FriendspageController implements Initializable {
                         HBox.setMargin(addButton, new Insets(10, 10, 0, 90));
                         HBox.setMargin(tmpLabel, new Insets(15, 0, 0, 30));
                         addButton.setMaxWidth(40);
-                        addButton.setOnAction(e -> Requests.sendFriendRequest(
-                                thisUser.getUsername(), tmpLabel.getText()));
+                        // Temporary change for Demo 3
+                        addButton.setOnAction(e -> {
+                            Requests.sendFriendRequest(thisUser.getUsername(), tmpLabel.getText());
+                            Requests.acceptFriendRequest(thisUser.getUsername(), tmpLabel.getText());
+                        });
+                        // addButton.setOnAction(e -> Requests.sendFriendRequest(
+                        // thisUser.getUsername(), tmpLabel.getText()));
                         hbox.getChildren().addAll(tmpLabel, addButton);
                         results.getChildren().add(hbox);
                     }

@@ -9,6 +9,10 @@ public class UserAchievement {
     boolean completed;
     Date date;
 
+    public UserAchievement() {
+
+    }
+
     /**
      * link completed achievement to user
      * the user should have an array list of achievements .
