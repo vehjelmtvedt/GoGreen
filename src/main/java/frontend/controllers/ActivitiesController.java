@@ -2,14 +2,18 @@ package frontend.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import data.Activity;
+import data.InstallSolarPanels;
+import data.LowerHomeTemperature;
 import data.User;
 import frontend.gui.Events;
+import frontend.gui.General;
 import frontend.gui.Main;
+import frontend.gui.NavPanel;
+import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,8 +75,6 @@ public class ActivitiesController implements Initializable {
     @FXML
     private JFXHamburger menu;
     @FXML
-    private JFXDrawer drawer;
-    @FXML
     private AnchorPane mainPane;
     @FXML
     private AnchorPane headerPane;
@@ -91,6 +93,10 @@ public class ActivitiesController implements Initializable {
     @FXML
     private AnchorPane paneTrain;
     @FXML
+    private AnchorPane paneSolarPanels;
+    @FXML
+    private AnchorPane paneEnergy;
+    @FXML
     private JFXTextField inputDistance;
     @FXML
     private Label lblDistanceValidate;
@@ -101,13 +107,15 @@ public class ActivitiesController implements Initializable {
     @FXML
     private JFXButton btnTrain;
     @FXML
+    private JFXButton btnSolarPanels;
+    @FXML
+    private JFXButton btnEnergy;
+    @FXML
     private JFXCheckBox checkFood;
     @FXML
     private JFXCheckBox checkTransportation;
     @FXML
     private JFXCheckBox checkHousehold;
-    @FXML
-    private JFXCheckBox checkAll;
     @FXML
     private Label lblClearFilters;
     @FXML
@@ -115,11 +123,19 @@ public class ActivitiesController implements Initializable {
     @FXML
     private Label goGreen;
     @FXML
+    private Label lblPanelsInstalled;
+    @FXML
+    private Label lblLoweredTemp;
+    @FXML
     private JFXRadioButton radioToday;
     @FXML
     private JFXRadioButton radioWeek;
     @FXML
     private JFXRadioButton radioMonth;
+    @FXML
+    private JFXTextField minCarbon;
+    @FXML
+    private JFXTextField maxCarbon;
 
     /**
      * .
@@ -147,6 +163,10 @@ public class ActivitiesController implements Initializable {
                 lblDistanceValidate, 2, loggedUser, activityTable);
         Events.addTransportActivity(paneTrain, inputDistance,
                 lblDistanceValidate, 3, loggedUser, activityTable);
+        Events.addHouseholdActivity(paneSolarPanels, lblPanelsInstalled,
+                lblLoweredTemp,1, loggedUser, activityTable);
+        Events.addHouseholdActivity(paneEnergy, lblPanelsInstalled,
+                lblLoweredTemp,2, loggedUser, activityTable);
 
         //add hover events for button activities
         Events.addActivityHover(paneVegetarianMeal, btnVegetarianMeal);
@@ -156,10 +176,12 @@ public class ActivitiesController implements Initializable {
         Events.addActivityHover(paneBike, btnBike);
         Events.addActivityHover(paneBus, btnBus);
         Events.addActivityHover(paneTrain, btnTrain);
+        Events.addActivityHover(paneSolarPanels, btnSolarPanels);
+        Events.addActivityHover(paneEnergy, btnEnergy);
 
         //setup notification and navigation panels
         try {
-            NavPanelController.setup(drawer, menu);
+            StageSwitcher.activityDrawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
         } catch (IOException e) {
             e.printStackTrace();
@@ -180,7 +202,6 @@ public class ActivitiesController implements Initializable {
         checkList.add(checkFood);
         checkList.add(checkTransportation);
         checkList.add(checkHousehold);
-        checkList.add(checkAll);
 
         //create radio list
         radioList.add(radioToday);
@@ -188,12 +209,21 @@ public class ActivitiesController implements Initializable {
         radioList.add(radioMonth);
 
         //Add events for the filter tab in activity history
+        General.addTextListener(minCarbon);
+        General.addTextListener(maxCarbon);
         Events.addRadioToggle(radioList);
-        Events.showAllFilters(checkAll, checkList, radioList);
         Events.addHoverOnFilter(lblClearFilters);
         Events.addHoverOnFilter(lblApply);
-        Events.clearFilters(lblClearFilters, checkList, radioList);
-        Events.applyFilters(lblApply, checkAll, checkList, radioList, loggedUser, activityTable);
+        Events.clearFilters(lblClearFilters, checkList, radioList,
+                minCarbon, maxCarbon, loggedUser, activityTable);
+        Events.applyFilters(lblApply, checkList, radioList,
+                minCarbon, maxCarbon, loggedUser, activityTable);
+
+        //setup additional
+        InstallSolarPanels panels = new InstallSolarPanels();
+        LowerHomeTemperature temp = new LowerHomeTemperature();
+        lblPanelsInstalled.setVisible(loggedUser.getSimilarActivities(panels).size() > 0);
+        lblLoweredTemp.setVisible(temp.timesPerformedInTheSameDay(loggedUser) > 0);
     }
 
     //GENERAL METHODS

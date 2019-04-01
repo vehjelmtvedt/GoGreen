@@ -1,15 +1,19 @@
 package frontend.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import frontend.gui.InputValidation;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -73,11 +77,13 @@ public class SignupController implements Initializable {
     @FXML
     private Label goGreen;
 
+    @FXML
+    private JFXComboBox secQuestion;
 
+    @FXML
+    private JFXTextField secAnswer;
 
-
-
-
+    private ObservableList<String> secQuestions;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,19 +95,59 @@ public class SignupController implements Initializable {
         signupButton.setOnAction(e -> {
             try {
                 InputValidation.signUpValidate(nameFields, usernameField,
-                        emailField, passwordField, confirmPasswordField, ageField, mainPane);
+                        emailField, passwordField,
+                        confirmPasswordField, ageField,
+                        getSecurityQuestionid(), secAnswer, mainPane);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         });
-        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.sceneSwitch(
-                Main.getPrimaryStage(), Main.getSignIn()
+        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->
+                StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignIn()
         ));
         try {
             setFonts();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        mainPane.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                signupButton.fire();
+            }
+        });
+        fillSecurityQuestions(secQuestion);
+    }
+
+    /**
+     * Gets the security question ID.
+     * @return - the ID of the question
+     */
+    public int getSecurityQuestionid() {
+        if (secQuestion.getValue() == null) {
+            return -1;
+        }
+        for (int i = 0; i < 7; i++) {
+            if (secQuestion.getValue().toString().equals(secQuestions.get(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void fillSecurityQuestions(JFXComboBox secQuestion) {
+        secQuestions = FXCollections.observableArrayList(
+                "What was your childhood nickname?",
+                        "In what city did you meet your spouse/significant other?",
+                        "What is the name of your favorite childhood friend?",
+                        "What street did you live on in third grade?",
+                        "What is your oldest sibling’s birthday month and year?"
+                                + " (e.g., January 1900)",
+                        "What is the middle name of your youngest child?",
+                        "What is your oldest sibling's middle name?",
+                        "What school did you attend for sixth grade?"
+        );
+        secQuestion.setItems(secQuestions);
+
     }
 
     /**

@@ -65,7 +65,6 @@
             </Button>
          </children>
       </AnchorPane>
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="292.0" layoutY="55.0" prefHeight="695.0" prefWidth="288.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="55.0" />
       <JFXTreeTableView fx:id="friendsPane" layoutX="318.0" layoutY="557.0" prefHeight="343.0" prefWidth="327.0" style="-fx-border-color: white; -fx-text-fill: #e80000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="318.0" AnchorPane.rightAnchor="318.0" AnchorPane.topAnchor="557.0">
          <columnResizePolicy>
             <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

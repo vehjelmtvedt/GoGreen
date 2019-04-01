@@ -1,6 +1,8 @@
 package frontend.gui;
 
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -90,5 +92,22 @@ public class General {
         alert.setContentText(message);
         alert.initOwner(window);
         alert.show();
+    }
+
+    /**.
+     * Add text listener to the given field to not accept anything other than numbers
+     * @param field - field to add listener to
+     */
+    public static void addTextListener(JFXTextField field) {
+        field.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                if (!newValue.matches("^[0-9]{0,7}$")) {
+                    field.setText(oldValue);
+                }
+            }
+        });
     }
 }
