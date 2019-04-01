@@ -50,7 +50,7 @@ public class AchievementsLogicTest {
     @Test
     public void checkActivity() {
 
-        AchievementsLogic.checkActivity(user , activity);
+        AchievementsLogic.checkFoodActivity(user , activity);
         Assert.assertNotNull(user.getProgress().getAchievements().get(0));
         Assert.assertEquals(6 , user.getProgress().getAchievements().get(0).getId());
 
@@ -60,7 +60,7 @@ public class AchievementsLogicTest {
     @Test
     public void checkActivity1() {
 
-        AchievementsLogic.checkActivity(user , activity1);
+        AchievementsLogic.checkFoodActivity(user , activity1);
 
         Assert.assertNotNull(user.getProgress().getAchievements().get(0));
         Assert.assertEquals(15, user.getProgress().getAchievements().get(0).getId());
@@ -70,7 +70,7 @@ public class AchievementsLogicTest {
     @Test
     public void checkActivity2() {
 
-        AchievementsLogic.checkActivity(user , activity2);
+        AchievementsLogic.checkFoodActivity(user , activity2);
 
         Assert.assertNotNull(user.getProgress().getAchievements().get(0));
         Assert.assertEquals(16 , user.getProgress().getAchievements().get(0).getId());
@@ -79,7 +79,7 @@ public class AchievementsLogicTest {
 
     @Test
     public void checkActivity4() {
-        AchievementsLogic.checkActivity(user , activity4);
+        AchievementsLogic.checkFoodActivity(user , activity4);
         Assert.assertNotNull(user.getProgress().getAchievements().get(0));
         Assert.assertEquals(17 , user.getProgress().getAchievements().get(0).getId());
 
@@ -133,12 +133,12 @@ public class AchievementsLogicTest {
     @Test
     public void checkall() {
 
-        AchievementsLogic.checkActivity(user , activity);
-        AchievementsLogic.checkActivity(user , activity1);
-        AchievementsLogic.checkActivity(user , activity2);
+        AchievementsLogic.checkFoodActivity(user , activity);
+        AchievementsLogic.checkFoodActivity(user , activity1);
+        AchievementsLogic.checkFoodActivity(user , activity2);
 
-        AchievementsLogic.checkActivity(user , activity4);
-        AchievementsLogic.checkActivity(user , activity1);
+        AchievementsLogic.checkFoodActivity(user , activity4);
+        AchievementsLogic.checkFoodActivity(user , activity1);
 
         Assert.assertEquals(4 , user.getProgress().getAchievements().size());
 

@@ -229,11 +229,6 @@ public abstract class Activity {
         try {
             user = Requests.addActivityRequest(this, user.getUsername());
 
-            // check if an achievement is completed by this activity
-            AchievementsLogic.checkActivity(user , this);
-
-            // adds points to the user
-            user.addCO2Points(this.getCarbonSaved());
 
 
         } catch (HttpClientErrorException e) {

@@ -44,7 +44,7 @@
   {
     "_class": "data.Achievement",
     "id": 7,
-    "name": "",
+    "name": "Use the Bus once",
     "bonus": 0
   },
   {
@@ -80,8 +80,8 @@
   {
     "_class": "data.Achievement",
     "id": 13,
-    "name": "Using an electric Car",
-    "bonus": 500
+    "name": "Have a small Car",
+    "bonus": 200
   },
   {
     "_class": "data.Achievement",
@@ -107,4 +107,5 @@
     "name": "Buy organic Food",
     "bonus": 100
   }
+
 ]
