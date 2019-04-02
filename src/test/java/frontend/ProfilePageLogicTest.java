@@ -49,22 +49,6 @@ public class ProfilePageLogicTest {
         dbService.addUser(user);
     }
 
-
-    @Test
-    public void getLevel() {
-
-
-        Assert.assertEquals(1, ProfilePageLogic.getLevel(user));
-
-    }
-
-    @Test
-    public void getScore() {
-
-        double test = 0.0;
-        Assert.assertEquals(test, ProfilePageLogic.getScore(user), 0);
-    }
-
     @Test
     public void getAchievements() {
 
