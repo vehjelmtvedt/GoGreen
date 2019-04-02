@@ -39,6 +39,7 @@ public class SyncUserTask implements Callable<UserPendingData> {
         // Update achievements & friend requests
         updateUserAchievements(newUser, userPendingData);
         updateUserFriendRequests(newUser, userPendingData);
+        updateUserFriends(newUser, userPendingData);
 
         return userPendingData;
     }
@@ -98,5 +99,23 @@ public class SyncUserTask implements Callable<UserPendingData> {
 
         // Update current User requests
         user.setFriendRequests(newUser.getFriendRequests());
+    }
+
+    private void updateUserFriends(User newUser, UserPendingData userPendingData) {
+        // Create HashSets for current User's friends and new User's friends
+        HashSet<String> friendSet = new HashSet<>(user.getFriends());
+        HashSet<String> newFriendSet = new HashSet<>(newUser.getFriends());
+
+        // Calculate difference between new User's friends and current
+        // (and update it to the haset), (Essentially B - A)
+        newFriendSet.removeAll(friendSet);
+
+        // Add new friends as pending
+        for (String s : newFriendSet) {
+            userPendingData.addNewFriend(s);
+        }
+
+        // Update current User friends
+        user.setFriends(newUser.getFriends());
     }
 }

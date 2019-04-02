@@ -22,6 +22,13 @@ public class UserPendingDataTest {
     }
 
     @Test
+    public void testGetFriends() {
+        UserPendingData userPendingData = new UserPendingData();
+
+        Assert.assertNotNull(userPendingData.getFriends());
+    }
+
+    @Test
     public void testAddAchievement() {
         UserPendingData userPendingData = new UserPendingData();
         userPendingData.addNewAchievement(new UserAchievement(0, true,
@@ -45,5 +52,18 @@ public class UserPendingDataTest {
         expected.add("user_c");
 
         Assert.assertEquals(expected, userPendingData.getFriendRequests());
+    }
+
+    @Test
+    public void testAddFriends() {
+        UserPendingData userPendingData = new UserPendingData();
+        userPendingData.addNewFriend("user_a");
+        userPendingData.addNewFriend("user_c");
+
+        ArrayList<String> expected = new ArrayList<String>();
+        expected.add("user_a");
+        expected.add("user_c");
+
+        Assert.assertEquals(expected, userPendingData.getFriends());
     }
 }

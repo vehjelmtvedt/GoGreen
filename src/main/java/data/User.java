@@ -144,6 +144,10 @@ public class User {
         return this.friends;
     }
 
+    public void setFriends(ArrayList<String> friends) {
+        this.friends = friends;
+    }
+
     public ArrayList<Activity> getActivities() {
         return this.activities;
     }
