@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 public class Notifications {
 
+    /**
+     * Adds a friend request popup about every page.
+     * @param friendRequests - The new friend requests
+     * @throws IOException - fails to load fonts
+     */
     public static void friendRequest(ArrayList<String> friendRequests) throws IOException {
         int counter = 0;
         for (String name : friendRequests) {

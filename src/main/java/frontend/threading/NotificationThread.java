@@ -1,7 +1,6 @@
 package frontend.threading;
 
 import data.UserPendingData;
-import frontend.controllers.HomepageController;
 import frontend.controllers.Notifications;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;

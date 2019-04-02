@@ -47,6 +47,12 @@ public class FriendspageController implements Initializable {
 
     private static LoginDetails thisLoginDetails;
 
+    private static AnchorPane headerCopy;
+
+    private static NotificationPopup popup;
+
+    private static AnchorPane mainCopy;
+
     @FXML
     private JFXTreeTableView friendsPane;
 
@@ -94,10 +100,6 @@ public class FriendspageController implements Initializable {
 
     private List searchresults;
 
-    private static AnchorPane mainCopy;
-    public static AnchorPane headerCopy;
-    private static NotificationPopup popup;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         popup = new NotificationPopup();
@@ -120,7 +122,8 @@ public class FriendspageController implements Initializable {
 
     }
 
-    public static void popup(String heading, String body, String icon, int drawerNumber) throws IOException {
+    public static void popup(String heading, String body, String icon,
+                             int drawerNumber) throws IOException {
         String[] text = {heading, body, icon};
         popup.newNotification(mainCopy, headerCopy, text, drawerNumber);
     }

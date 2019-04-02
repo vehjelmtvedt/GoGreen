@@ -25,7 +25,8 @@ public class NotificationPopup {
      */
     public void newNotification(AnchorPane mainPane, AnchorPane headerPane,
                                 String[] popupText, int drawerNumber) throws IOException {
-        JFXDrawer drawer = addDrawer(new JFXDrawer(), drawerNumber, mainPane, headerPane, popupText);
+        JFXDrawer drawer = addDrawer(new JFXDrawer(),
+                drawerNumber, mainPane, headerPane, popupText);
         animateUsingTimeline(drawer, drawerNumber);
     }
 

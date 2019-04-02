@@ -9,7 +9,12 @@ import data.Activity;
 import data.InstallSolarPanels;
 import data.LowerHomeTemperature;
 import data.User;
-import frontend.gui.*;
+import frontend.gui.Events;
+import frontend.gui.General;
+import frontend.gui.Main;
+import frontend.gui.NavPanel;
+import frontend.gui.NotificationPopup;
+import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -228,7 +233,8 @@ public class ActivitiesController implements Initializable {
         lblLoweredTemp.setVisible(temp.timesPerformedInTheSameDay(loggedUser) > 0);
     }
 
-    public static void popup(String heading, String body, String icon, int drawerNumber) throws IOException {
+    public static void popup(String heading, String body, String icon,
+                             int drawerNumber) throws IOException {
         String[] text = {heading, body, icon};
         popup.newNotification(mainCopy, headerCopy, text, drawerNumber);
     }
