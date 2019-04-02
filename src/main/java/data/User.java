@@ -284,7 +284,7 @@ public class User {
         friends.add(friend);
 
         //checks if an achievement is completed by adding a friend
-        AchievementsLogic.checkOther(this);
+        //AchievementsLogic.checkOther(this);
     }
 
     /**
