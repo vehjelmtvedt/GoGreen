@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import sun.rmi.runtime.Log;
 import tools.ActivityQueries;
 import tools.Requests;
 import tools.SyncUserTask;
@@ -32,6 +33,7 @@ import java.util.ResourceBundle;
 
 public class HomepageController implements Initializable {
     private static User loggedUser;
+    private static LoginDetails loginDetails;
     private List<JFXButton> leaderboards = new ArrayList<>();
     private List<JFXTreeView> listTables = new ArrayList<>();
 
@@ -84,9 +86,11 @@ public class HomepageController implements Initializable {
 
     private static AnchorPane mainCopy;
     public static AnchorPane headerCopy;
+    private static NotificationPopup popup;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        popup = new NotificationPopup();
         //add buttons to leader boards list
         leaderboards.add(btnMyStats);
         leaderboards.add(btnTop5);
@@ -136,27 +140,23 @@ public class HomepageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        LoginDetails loginDetails = new LoginDetails(loggedUser.getUsername(), "qwerty");
-        SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, loggedUser);
-        NotificationThread notificationThread = new NotificationThread(syncUserTask);
-        notificationThread.start();
-
-        NotificationPopup popup = new NotificationPopup();
-        String[] text = {"Heading", "Text of the body", "sucess"};
+        mainCopy = mainPane;
+        headerCopy = headerPane;
+        ArrayList<String> test = new ArrayList<>();
+        test.add("sofun");
+        test.add("kjetil");
         headerPane.setOnMouseClicked(e -> {
             try {
-                popup.newNotification(mainPane, headerPane, text);
+                Notifications.friendRequest(test);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         });
     }
 
-    public static void popup() throws IOException {
-        NotificationPopup popup = new NotificationPopup();
-        String[] text = {"Text", "Body", "sucess"};
-        popup.newNotification(mainCopy, headerCopy, text);
+    public static void popup(String heading, String body, String icon, int drawerNumber) throws IOException {
+        String[] text = {heading, body, icon};
+        popup.newNotification(mainCopy, headerCopy, text, drawerNumber);
     }
 
     private static ObservableList<PieChart.Data> fillPieChart(User user) {
@@ -180,7 +180,11 @@ public class HomepageController implements Initializable {
      */
     public static void setUser(User passedUser) {
         loggedUser = passedUser;
-        LoginDetails loginDetails = new LoginDetails(loggedUser.getUsername(), loggedUser.getPassword());
+
+    }
+
+    public static void setLoginDetails(LoginDetails passedloginDetails) {
+        loginDetails = passedloginDetails;
         SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, loggedUser);
         NotificationThread notificationThread = new NotificationThread(syncUserTask);
         notificationThread.start();

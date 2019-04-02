@@ -67,6 +67,7 @@ public class InputValidation {
                     + loggedUser.getFirstName()
                     + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess", false);
             HomepageController.setUser(loggedUser);
+            HomepageController.setLoginDetails(loginDetails);
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);

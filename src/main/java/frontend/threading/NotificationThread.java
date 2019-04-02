@@ -2,6 +2,7 @@ package frontend.threading;
 
 import data.UserPendingData;
 import frontend.controllers.HomepageController;
+import frontend.controllers.Notifications;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
@@ -29,6 +30,13 @@ public class NotificationThread extends ScheduledService<UserPendingData> {
             System.out.println(this.getValue().getAchievements());
 
             //Check for new friend requests
+            if (this.getValue().getFriendRequests().size() != 0) {
+                try {
+                    Notifications.friendRequest(this.getValue().getFriendRequests());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
         // failed
