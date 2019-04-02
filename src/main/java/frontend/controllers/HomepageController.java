@@ -3,11 +3,13 @@ package frontend.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 
+import data.LoginDetails;
 import com.jfoenix.controls.JFXTreeView;
 import data.User;
 import frontend.gui.Events;
 import frontend.gui.Main;
 import frontend.gui.NavPanel;
+import frontend.gui.NotificationPopup;
 import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +19,9 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import tools.ActivityQueries;
+import tools.Requests;
+import tools.SyncUserTask;
+import frontend.threading.NotificationThread;
 import tools.Requests;
 
 import java.io.IOException;
@@ -77,6 +82,9 @@ public class HomepageController implements Initializable {
     @FXML
     private PieChart chartMyActivities;
 
+    private static AnchorPane mainCopy;
+    public static AnchorPane headerCopy;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //add buttons to leader boards list
@@ -128,6 +136,27 @@ public class HomepageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        LoginDetails loginDetails = new LoginDetails(loggedUser.getUsername(), "qwerty");
+        SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, loggedUser);
+        NotificationThread notificationThread = new NotificationThread(syncUserTask);
+        notificationThread.start();
+
+        NotificationPopup popup = new NotificationPopup();
+        String[] text = {"Heading", "Text of the body", "sucess"};
+        headerPane.setOnMouseClicked(e -> {
+            try {
+                popup.newNotification(mainPane, headerPane, text);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+    }
+
+    public static void popup() throws IOException {
+        NotificationPopup popup = new NotificationPopup();
+        String[] text = {"Text", "Body", "sucess"};
+        popup.newNotification(mainCopy, headerCopy, text);
     }
 
     private static ObservableList<PieChart.Data> fillPieChart(User user) {
@@ -151,6 +180,10 @@ public class HomepageController implements Initializable {
      */
     public static void setUser(User passedUser) {
         loggedUser = passedUser;
+        LoginDetails loginDetails = new LoginDetails(loggedUser.getUsername(), loggedUser.getPassword());
+        SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, loggedUser);
+        NotificationThread notificationThread = new NotificationThread(syncUserTask);
+        notificationThread.start();
     }
 
     /**

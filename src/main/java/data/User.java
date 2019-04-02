@@ -156,6 +156,10 @@ public class User {
         this.electricityDailyConsumption = electricityDailyConsumption;
     }
 
+    public void setFriendRequests(ArrayList<String> friendRequests) {
+        this.friendRequests = friendRequests;
+    }
+
     public double getElectricityDailyConsumption() {
         return this.electricityDailyConsumption;
     }
