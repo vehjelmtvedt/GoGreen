@@ -11,6 +11,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import data.LoginDetails;
 import data.User;
 import frontend.gui.NavPanel;
+import frontend.gui.NotificationPopup;
 import frontend.gui.StageSwitcher;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -93,8 +94,15 @@ public class FriendspageController implements Initializable {
 
     private List searchresults;
 
+    private static AnchorPane mainCopy;
+    public static AnchorPane headerCopy;
+    private static NotificationPopup popup;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        popup = new NotificationPopup();
+        mainCopy = main;
+        headerCopy = headerPane;
         fillFriendsTreeView();
         drawFriendRequestDrawer();
         fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
@@ -111,6 +119,12 @@ public class FriendspageController implements Initializable {
         }
 
     }
+
+    public static void popup(String heading, String body, String icon, int drawerNumber) throws IOException {
+        String[] text = {heading, body, icon};
+        popup.newNotification(mainCopy, headerCopy, text, drawerNumber);
+    }
+
     /**
      * Fills the chart on the page with data.
      * @param title - Title of the graph

@@ -85,7 +85,7 @@ public class HomepageController implements Initializable {
     private PieChart chartMyActivities;
 
     private static AnchorPane mainCopy;
-    public static AnchorPane headerCopy;
+    private static AnchorPane headerCopy;
     private static NotificationPopup popup;
 
     @Override
@@ -142,16 +142,6 @@ public class HomepageController implements Initializable {
         }
         mainCopy = mainPane;
         headerCopy = headerPane;
-        ArrayList<String> test = new ArrayList<>();
-        test.add("sofun");
-        test.add("kjetil");
-        headerPane.setOnMouseClicked(e -> {
-            try {
-                Notifications.friendRequest(test);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        });
     }
 
     public static void popup(String heading, String body, String icon, int drawerNumber) throws IOException {

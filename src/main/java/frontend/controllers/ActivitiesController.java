@@ -9,11 +9,7 @@ import data.Activity;
 import data.InstallSolarPanels;
 import data.LowerHomeTemperature;
 import data.User;
-import frontend.gui.Events;
-import frontend.gui.General;
-import frontend.gui.Main;
-import frontend.gui.NavPanel;
-import frontend.gui.StageSwitcher;
+import frontend.gui.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,6 +33,9 @@ public class ActivitiesController implements Initializable {
     private static User loggedUser;
     private static List<JFXCheckBox> checkList = new ArrayList<>();
     private static List<JFXRadioButton> radioList = new ArrayList<>();
+    private static AnchorPane mainCopy;
+    private static AnchorPane headerCopy;
+    private static NotificationPopup popup;
 
     @FXML
     private JFXButton btnFood;
@@ -146,6 +145,9 @@ public class ActivitiesController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        popup = new NotificationPopup();
+        mainCopy = mainPane;
+        headerCopy = headerPane;
         //addFonts
         try {
             goGreen.setFont(Main.getReenieBeanie(100));
@@ -224,6 +226,11 @@ public class ActivitiesController implements Initializable {
         LowerHomeTemperature temp = new LowerHomeTemperature();
         lblPanelsInstalled.setVisible(loggedUser.getSimilarActivities(panels).size() > 0);
         lblLoweredTemp.setVisible(temp.timesPerformedInTheSameDay(loggedUser) > 0);
+    }
+
+    public static void popup(String heading, String body, String icon, int drawerNumber) throws IOException {
+        String[] text = {heading, body, icon};
+        popup.newNotification(mainCopy, headerCopy, text, drawerNumber);
     }
 
     //GENERAL METHODS

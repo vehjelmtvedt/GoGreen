@@ -8,9 +8,14 @@ public class Notifications {
     public static void friendRequest(ArrayList<String> friendRequests) throws IOException {
         int counter = 0;
         for (String name : friendRequests) {
-            HomepageController.popup("Test", "Testing again " + name,
+            HomepageController.popup("Friend Request!", "From " + name,
+                    "sucess", counter);
+            FriendspageController.popup("Friend Request!", "From " + name,
+                    "sucess", counter);
+            ActivitiesController.popup("Friend Request!", "From " + name,
                     "sucess", counter);
             counter++;
+
         }
     }
 }
