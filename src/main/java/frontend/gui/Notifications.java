@@ -1,4 +1,8 @@
-package frontend.controllers;
+package frontend.gui;
+
+import frontend.controllers.ActivitiesController;
+import frontend.controllers.FriendspageController;
+import frontend.controllers.HomepageController;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +24,6 @@ public class Notifications {
             ActivitiesController.popup("Friend Request!", "From " + name,
                     "sucess", counter);
             counter++;
-
         }
     }
 }
