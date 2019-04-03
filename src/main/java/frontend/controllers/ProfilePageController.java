@@ -124,52 +124,36 @@ public class ProfilePageController implements Initializable {
             HBox hbox = new HBox();
 
             hbox.setSpacing(10.0);
-
             ImageView achievementimage = new ImageView();
-
             Image path = new Image("achievementsimages/" + thisUser.getProgress()
                     .getAchievements().get(i).getId() + ".png");
-
             achievementimage.setFitHeight(32);
-
             achievementimage.setFitWidth(32);
-
             achievementimage.setImage(path);
 
             Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
                     thisUser.getProgress().getAchievements().get(i)));
             name.setFill(Color.GREEN);
-
             Text bonus = new Text(",Got: " + ProfilePageLogic.getBonusString(
                     thisUser.getProgress().getAchievements().get(i)) + " Points");
             Text date = new Text(",Completed On: " + ProfilePageLogic.getDateString(
                     thisUser.getProgress().getAchievements().get(i)) + ".");
 
             hbox.getChildren().addAll(achievementimage, name, bonus, date);
-
             com.getChildren().add(hbox);
-
         }
 
         if (count == 0) {
-
             Label noachiements = new Label("No completed achievements yet");
             com.getChildren().add(noachiements);
         }
 
         for (Achievement a : ProfilePageLogic.getList()) {
-
             HBox hbox = new HBox();
-
             hbox.setSpacing(10.0);
-
             if (!isComplete(a)) {
-
                 ImageView achievementimage1 = new ImageView();
-
                 String image = "achievementsimages/" + a.getId() + ".png";
-
-
                 Image path1 = new Image("achievementsimages/8.png");
 
                 achievementimage1.setFitHeight(32);
