@@ -53,7 +53,8 @@ public abstract class Activity {
     }
 
     public void setCarbonSaved(double carbonSaved) {
-        this.carbonSaved = carbonSaved;
+        // keep only 3 decimal places
+        this.carbonSaved = ((int)(carbonSaved * 1000)) / 1000.0;
     }
 
     public String getName() {
@@ -228,6 +229,14 @@ public abstract class Activity {
         // update user in the database
         try {
             user = Requests.instance.addActivityRequest(this, user.getUsername());
+
+            // check if an achievement is completed by this activity
+            AchievementsLogic.checkActivity(user , this);
+
+            // adds points to the user
+            user.addCO2Points(this.getCarbonSaved());
+
+
         } catch (HttpClientErrorException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());
