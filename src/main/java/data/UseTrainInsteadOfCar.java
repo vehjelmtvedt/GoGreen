@@ -2,6 +2,10 @@ package data;
 
 import tools.CarbonCalculator;
 
+/**
+ * Activity: Travel by train instead of travelling by car.
+ * @author Kostas Lyrakis
+ */
 public class UseTrainInsteadOfCar extends TransportationActivity {
     /**
      * Constructor.

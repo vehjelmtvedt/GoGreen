@@ -2,6 +2,7 @@ package frontend.gui;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import data.InstallSolarPanels;
 import data.LoginDetails;
 import data.User;
 import frontend.controllers.ActivitiesController;
@@ -18,6 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import tools.Requests;
 
 import java.io.IOException;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -82,7 +85,7 @@ public class InputValidation {
                 e.printStackTrace();
             }
             //Go to homepage after logging in
-            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), loggedUser);
+            StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getHomepage());
 
         } else {
 
@@ -150,7 +153,7 @@ public class InputValidation {
         user.setSecurityQuestionId(secQuestionId);
 
         QuestionnaireController.setUser(user);
-        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
+        StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
     }
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,

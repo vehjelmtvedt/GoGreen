@@ -168,9 +168,11 @@ public class Requests {
      * @param newValue new value for the field
      * @return returns the updated user
      */
-    public User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
+    public static User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
+        System.out.println(newValue.getClass().getName());
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/editProfile")
-                .queryParam("fieldName",fieldName).queryParam("newValue", newValue);
+                .queryParam("fieldName",fieldName).queryParam("newValue", newValue)
+                .queryParam("typeName",newValue.getClass().getSimpleName());
         return restTemplate.postForEntity(uriBuilder.toUriString(),
                 loginDetails,User.class).getBody();
     }  
@@ -189,4 +191,30 @@ public class Requests {
 
         return restTemplate.getForEntity(uriBuilder.toUriString(),Boolean.class).getBody();
     }
+
+    /**
+     * get total Users.
+     * @return number of total users
+     */
+    public static int getTotalUsers() {
+        return restTemplate.getForEntity(url + "/getTotalUsers", int.class).getBody();
+    }
+
+    /**
+     * get total CO2 saved.
+     * @return total amount of CO2 saved
+     */
+    public static double getTotalCO2Saved() {
+        return restTemplate.getForEntity(url + "/getTotalCO2Saved",double.class).getBody();
+    }
+
+    /**
+     * get average CO2 saved.
+     * @return average CO2 saved
+     */
+    public static double getAverageCO2Saved() {
+        return restTemplate.getForEntity(url + "/getAverageCO2Saved",double.class).getBody();
+    }
+
+
 }

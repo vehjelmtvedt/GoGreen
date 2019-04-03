@@ -161,8 +161,8 @@ public class QuestionnaireController implements Initializable {
                     && !(textCarUsage.getText().isEmpty()) ) {
 
                 int householdMembers = Integer.parseInt(houseHoldNo.getValue().toString());
-                int dailyElectricityConsumption =
-                        Integer.parseInt(textElectricity.getText()) / 365 / householdMembers;
+                double dailyElectricityConsumption =
+                        Double.parseDouble(textElectricity.getText()) / 365 / householdMembers;
                 double dailyHeatingOilConsumption =
                         Integer.parseInt(textOil.getText()) / 365.0 / householdMembers;
                 String carType = carSizes.getValue().toString();
@@ -197,7 +197,7 @@ public class QuestionnaireController implements Initializable {
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
-                        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn());
+                        StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignIn());
                     }
                 }
             } else {
