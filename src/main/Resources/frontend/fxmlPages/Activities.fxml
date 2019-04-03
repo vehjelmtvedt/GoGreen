@@ -493,6 +493,11 @@
                               </Label>
                            </children>
                         </AnchorPane>
+                        <Text layoutX="241.0" layoutY="674.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOTE: Filters can be mixed and matched so don't hesitate to try them all out! ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
                </children>
