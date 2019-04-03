@@ -13,12 +13,13 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @Profile("prod")
-public class WebConfig extends WebSecurityConfigurerAdapter {
+public class SecureWebConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.requiresChannel().antMatchers("/getAllAchievements*").requiresSecure();
         http.requiresChannel().anyRequest().requiresSecure();
+
+        System.out.println("Loaded Secure Web Configuration");
     }
 
     @Bean
