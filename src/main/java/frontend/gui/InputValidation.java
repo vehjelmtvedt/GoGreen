@@ -45,11 +45,29 @@ public class InputValidation {
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
         User loggedUser = Requests.instance.loginRequest(loginDetails);
+
+        // update user's CO2 saved from InstallSolarPanels activity
+        if (loggedUser != null) {
+            if (loggedUser.getSimilarActivities(new InstallSolarPanels()).size() > 0) {
+                InstallSolarPanels panels = (InstallSolarPanels) loggedUser
+                        .getSimilarActivities(new InstallSolarPanels()).get(0);
+                double extraCo2Saved = ChronoUnit.DAYS.between(
+                        loggedUser.getLastLoginDate().toInstant(),
+                        Calendar.getInstance().getTime().toInstant())
+                        * panels.getDailyCarbonSaved();
+                double newValue = loggedUser.getTotalCarbonSaved() + extraCo2Saved;
+                Requests.instance.editProfile(loginDetails,
+                        "totalCarbonSaved",
+                        newValue);
+            }
+        }
+
         if (loggedUser != null) {
             Dialog.show("Login successful", "Welcome to GoGreen, "
                     + loggedUser.getFirstName()
                     + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess", false);
             HomepageController.setUser(loggedUser);
+            HomepageController.setLoginDetails(loginDetails);
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);
