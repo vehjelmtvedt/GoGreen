@@ -168,7 +168,8 @@ public class Requests {
      * @param newValue new value for the field
      * @return returns the updated user
      */
-    public User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
+    public static User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
+        System.out.println(newValue.getClass().getName());
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/editProfile")
                 .queryParam("fieldName",fieldName).queryParam("newValue", newValue)
                 .queryParam("typeName",newValue.getClass().getSimpleName());
