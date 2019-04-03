@@ -25,7 +25,7 @@ public class User {
 
     private ArrayList<Activity> activities;
 
-    private double electricityDailyConsumption;
+    private int electricityDailyConsumption;
     private double heatingOilDailyConsumption;
     private int dailyCarKilometres;
     private String carType;
@@ -34,6 +34,7 @@ public class User {
     private String organicFoodConsumption;
     private String processedFoodConsumption;
     private double totalCarbonSaved;
+
     private Progress progress = new Progress();
 
     private int securityQuestionId;
@@ -156,11 +157,15 @@ public class User {
         return this.friendRequests;
     }
 
-    public void setElectricityDailyConsumption(double electricityDailyConsumption) {
+    public void setFriendRequests(ArrayList<String> friendRequests) {
+        this.friendRequests = friendRequests;
+    }
+
+    public void setElectricityDailyConsumption(int electricityDailyConsumption) {
         this.electricityDailyConsumption = electricityDailyConsumption;
     }
 
-    public double getElectricityDailyConsumption() {
+    public int getElectricityDailyConsumption() {
         return this.electricityDailyConsumption;
     }
 
@@ -221,8 +226,7 @@ public class User {
     }
 
     public void setTotalCarbonSaved(double totalCarbonSaved) {
-        // keep only 3 decimal places
-        this.totalCarbonSaved = ((int)(totalCarbonSaved * 1000)) / 1000.0;
+        this.totalCarbonSaved = totalCarbonSaved;
     }
 
     public double getTotalCarbonSaved() {
@@ -236,7 +240,6 @@ public class User {
     public void setLastLoginDate(Date date) {
         this.lastLoginDate = date;
     }
-
 
     /**
      * Returns string representation of the User object.
@@ -282,9 +285,6 @@ public class User {
      */
     public void addFriend(String friend) {
         friends.add(friend);
-
-        //checks if an achievement is completed by adding a friend
-        AchievementsLogic.checkOther(this);
     }
 
     /**
@@ -334,21 +334,11 @@ public class User {
 
         for (Activity userActivity : activities) {
             if (userActivity.getClass() == activity.getClass() && !userActivity.equals(activity)) {
-                result.add(userActivity);
+                result.add(activity);
             }
         }
 
         return result;
-    }
-
-    /**
-     * addes to the points the amount of co2 save.*
-     * every one co2 unite is worth 1 point
-     * @param carbonsaved co2 saved
-     */
-    public void addCO2Points( double carbonsaved) {
-        this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
-
     }
 
 
@@ -362,6 +352,4 @@ public class User {
     //    public boolean removeFriend(String email) {
     //        return friends.remove(email);
     //    }
-
-
 }

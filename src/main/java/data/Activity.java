@@ -228,19 +228,7 @@ public abstract class Activity {
         user.addActivity(this);
         // update user in the database
         try {
-<<<<<<< HEAD
             user = Requests.instance.addActivityRequest(this, user.getUsername());
-=======
-            user = Requests.addActivityRequest(this, user.getUsername());
-
-            // check if an achievement is completed by this activity
-            AchievementsLogic.checkActivity(user , this);
-
-            // adds points to the user
-            user.addCO2Points(this.getCarbonSaved());
-
-
->>>>>>> f2fa8e4a6dece7827fa8aa43fdc380da1a5a741b
         } catch (HttpClientErrorException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());
