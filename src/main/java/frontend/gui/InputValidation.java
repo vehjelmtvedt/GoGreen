@@ -2,12 +2,14 @@ package frontend.gui;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import data.InstallSolarPanels;
 import data.LoginDetails;
 import data.User;
 import frontend.controllers.ActivitiesController;
 import frontend.controllers.FriendspageController;
 import frontend.controllers.HomepageController;
 import frontend.controllers.ProfilePageController;
+import frontend.controllers.QuestionnaireController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import tools.Requests;
 
 import java.io.IOException;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,10 +45,27 @@ public class InputValidation {
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
         User loggedUser = Requests.loginRequest(loginDetails);
+
+        // update user's CO2 saved from InstallSolarPanels activity
         if (loggedUser != null) {
-            Dialog.show(form, "Login successful", "Welcome to GoGreen, "
+            if (loggedUser.getSimilarActivities(new InstallSolarPanels()).size() > 0) {
+                InstallSolarPanels panels = (InstallSolarPanels) loggedUser
+                        .getSimilarActivities(new InstallSolarPanels()).get(0);
+                double extraCo2Saved = ChronoUnit.DAYS.between(
+                        loggedUser.getLastLoginDate().toInstant(),
+                        Calendar.getInstance().getTime().toInstant())
+                        * panels.getDailyCarbonSaved();
+                double newValue = loggedUser.getTotalCarbonSaved() + extraCo2Saved;
+                Requests.editProfile(loginDetails,
+                        "totalCarbonSaved",
+                        newValue);
+            }
+        }
+
+        if (loggedUser != null) {
+            Dialog.show("Login successful", "Welcome to GoGreen, "
                     + loggedUser.getFirstName()
-                    + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess");
+                    + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess", false);
             HomepageController.setUser(loggedUser);
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
@@ -60,7 +81,7 @@ public class InputValidation {
                 FXMLLoader loader3 = new FXMLLoader(
                         Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
                 FXMLLoader loader4 = new FXMLLoader(
-                        Main.class.getResource("/frontend/fxmlPages/ProfilePage.fxml"));
+                        Main.class.getResource("/frontend/fxmlPages/ProfilePage2.fxml"));
                 Parent root1 = loader1.load();
                 Parent root2 = loader2.load();
                 Parent root3 = loader3.load();
@@ -68,8 +89,9 @@ public class InputValidation {
                 Scene homepage = new Scene(root1, General.getBounds()[0], General.getBounds()[1]);
                 Scene activities = new Scene(root2, General.getBounds()[0], General.getBounds()[1]);
                 Scene friendPage = new Scene(root3, General.getBounds()[0], General.getBounds()[1]);
-                Scene profilePage = new Scene(root4,
-                        General.getBounds()[0], General.getBounds()[1]);
+                Scene profilePage = new Scene(
+                        root4, General.getBounds()[0], General.getBounds()[1]
+                );
 
                 //setup scenes in main class
                 Main.setActivities(activities);
@@ -80,12 +102,12 @@ public class InputValidation {
                 e.printStackTrace();
             }
             //Go to homepage after logging in
-            StageSwitcher.loginSwitch(Main.getPrimaryStage(), Main.getHomepage(), loggedUser);
+            StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getHomepage());
 
         } else {
 
-            Dialog.show(form, "Login failed",
-                    "Incorrect credentials. Try again", "DISMISS", "error");
+            Dialog.show("Login failed",
+                    "Incorrect credentials. Try again", "DISMISS", "error", false);
         }
     }
 
@@ -104,9 +126,11 @@ public class InputValidation {
     public static void signUpValidate(JFXTextField[] nameFields,
                                       JFXTextField usernameField, JFXTextField emailField,
                                       JFXPasswordField passField, JFXPasswordField passReField,
-                                      JFXTextField ageField, AnchorPane form) throws IOException {
+                                      JFXTextField ageField,
+                                      int secQuestionId,
+                                      JFXTextField secAnswer, AnchorPane form) throws IOException {
 
-        if (!signUpValidateFields(nameFields, usernameField, form)) {
+        if (!signUpValidateFields(nameFields, usernameField, secAnswer, form)) {
             return;
         }
         if (!signUpValidatePass(emailField, passField, passReField, ageField, form)) {
@@ -119,16 +143,22 @@ public class InputValidation {
         String email = emailField.getText();
 
         if (Requests.validateUserRequest(username)) {
-            Dialog.show(form, "Username Error!",
+            Dialog.show("Username Error!",
                     "A user already exists with this username. Use another username",
-                    "DISMISS", "error");
+                    "DISMISS", "error", false);
             return;
         }
 
         if (Requests.validateUserRequest(email)) {
-            Dialog.show(form, "Email Error!", "A user already exists with this email."
+            Dialog.show("Email Error!", "A user already exists with this email."
                             + "Use another email",
-                    "DISMISS", "error");
+                    "DISMISS", "error", false);
+            return;
+        }
+
+        if (secQuestionId == -1) {
+            Dialog.show("Security Question Error", "You did not specify your security question",
+                    "DISMISS", "error", false);
             return;
         }
 
@@ -136,25 +166,32 @@ public class InputValidation {
                 nameFields[1].getText(),
                 Integer.parseInt(ageField.getText()), emailField.getText(),
                 usernameField.getText(), passField.getText());
+        user.setSecurityQuestionAnswer(secAnswer.getText());
+        user.setSecurityQuestionId(secQuestionId);
 
-
-        StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Questionnaire.createScene(user, form));
+        QuestionnaireController.setUser(user);
+        StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
     }
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
                                                 JFXTextField usernameField,
+                                                JFXTextField secAnswer,
                                                 AnchorPane form) throws IOException {
         if (nameFields[0].getText().isEmpty()) {
-            Dialog.show(form, "Form Error!", "Please enter your First Name",
-                    "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter your First Name",
+                    "DISMISS", "error", false);
             return false;
         }
         if (nameFields[1].getText().isEmpty()) {
-            Dialog.show(form, "Form Error!", "Please enter your Last Name", "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter your Last Name", "DISMISS", "error", false);
             return false;
         }
         if (usernameField.getText().isEmpty()) {
-            Dialog.show(form, "Form Error!", "Please enter a username", "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter a username", "DISMISS", "error", false);
+            return false;
+        }
+        if (secAnswer.getText().isEmpty()) {
+            Dialog.show("Form Error!", "Please enter an answer", "DISMISS", "error", false);
             return false;
         }
         return true;
@@ -166,20 +203,20 @@ public class InputValidation {
                                               JFXTextField ageField,
                                               AnchorPane form) throws IOException {
         if (emailField.getText().isEmpty() || !validateEmail(emailField)) {
-            Dialog.show(form, "Form Error!", "Please enter a valid email", "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter a valid email", "DISMISS", "error", false);
             return false;
         }
 
         if (passField.getText().isEmpty() || !validatePassword(passField)) {
-            Dialog.show(form, "Form Error!", "Please enter a valid password", "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter a valid password", "DISMISS", "error", false);
             return false;
         }
         if (passReField.getText().isEmpty() || !passReField.getText().equals(passField.getText())) {
-            Dialog.show(form, "Form Error!", "Passwords do not match", "DISMISS", "error");
+            Dialog.show("Form Error!", "Passwords do not match", "DISMISS", "error", false);
             return false;
         }
         if (ageField.getText().isEmpty() || !validateAge(ageField)) {
-            Dialog.show(form, "Form Error!", "Please enter a valid age", "DISMISS", "error");
+            Dialog.show("Form Error!", "Please enter a valid age", "DISMISS", "error", false);
             return false;
         }
         return true;

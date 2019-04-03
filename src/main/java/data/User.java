@@ -17,13 +17,15 @@ public class User {
     private int age;
     private String password;
 
+    private int loginStreak;
+
     private ArrayList<String> friends;
     private ArrayList<String> friendRequests;
     private Date lastLoginDate;
 
     private ArrayList<Activity> activities;
 
-    private int electricityDailyConsumption;
+    private double electricityDailyConsumption;
     private double heatingOilDailyConsumption;
     private int dailyCarKilometres;
     private String carType;
@@ -32,9 +34,10 @@ public class User {
     private String organicFoodConsumption;
     private String processedFoodConsumption;
     private double totalCarbonSaved;
-
-    //new stuff
     private Progress progress = new Progress();
+
+    private int securityQuestionId;
+    private String securityQuestionAnswer;
 
 
     /**
@@ -54,6 +57,7 @@ public class User {
         this.email = email;
         this.username = username;
         this.password = password;
+        this.loginStreak = 0;
         this.friends = new ArrayList<>();
         this.friendRequests = new ArrayList<>();
         this.electricityDailyConsumption = 0;
@@ -104,8 +108,36 @@ public class User {
         return this.password;
     }
 
+    public int getLoginStreak() {
+        return this.loginStreak;
+    }
+
+    public void incLoginStreak() {
+        this.loginStreak++;
+    }
+
+    public void resetLoginStreak() {
+        this.loginStreak = 0;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setSecurityQuestionId(int id) {
+        this.securityQuestionId = id;
+    }
+
+    public int getSecurityQuestionId() {
+        return this.securityQuestionId;
+    }
+
+    public void setSecurityQuestionAnswer(String answer) {
+        this.securityQuestionAnswer = answer;
+    }
+
+    public String getSecurityQuestionAnswer() {
+        return this.securityQuestionAnswer;
     }
 
     public ArrayList<String> getFriends() {
@@ -120,11 +152,11 @@ public class User {
         return this.friendRequests;
     }
 
-    public void setElectricityDailyConsumption(int electricityDailyConsumption) {
+    public void setElectricityDailyConsumption(double electricityDailyConsumption) {
         this.electricityDailyConsumption = electricityDailyConsumption;
     }
 
-    public int getElectricityDailyConsumption() {
+    public double getElectricityDailyConsumption() {
         return this.electricityDailyConsumption;
     }
 
@@ -185,7 +217,8 @@ public class User {
     }
 
     public void setTotalCarbonSaved(double totalCarbonSaved) {
-        this.totalCarbonSaved = totalCarbonSaved;
+        // keep only 3 decimal places
+        this.totalCarbonSaved = ((int)(totalCarbonSaved * 1000)) / 1000.0;
     }
 
     public double getTotalCarbonSaved() {
@@ -199,6 +232,7 @@ public class User {
     public void setLastLoginDate(Date date) {
         this.lastLoginDate = date;
     }
+
 
     /**
      * Returns string representation of the User object.
@@ -244,6 +278,9 @@ public class User {
      */
     public void addFriend(String friend) {
         friends.add(friend);
+
+        //checks if an achievement is completed by adding a friend
+        AchievementsLogic.checkOther(this);
     }
 
     /**
@@ -293,11 +330,21 @@ public class User {
 
         for (Activity userActivity : activities) {
             if (userActivity.getClass() == activity.getClass() && !userActivity.equals(activity)) {
-                result.add(activity);
+                result.add(userActivity);
             }
         }
 
         return result;
+    }
+
+    /**
+     * addes to the points the amount of co2 save.*
+     * every one co2 unite is worth 1 point
+     * @param carbonsaved co2 saved
+     */
+    public void addCO2Points( double carbonsaved) {
+        this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
+
     }
 
 
@@ -311,4 +358,6 @@ public class User {
     //    public boolean removeFriend(String email) {
     //        return friends.remove(email);
     //    }
+
+
 }

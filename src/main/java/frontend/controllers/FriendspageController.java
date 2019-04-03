@@ -10,6 +10,8 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import data.LoginDetails;
 import data.User;
+import frontend.gui.NavPanel;
+import frontend.gui.StageSwitcher;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -24,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -48,9 +51,6 @@ public class FriendspageController implements Initializable {
 
     @FXML
     private JFXHamburger menu;
-
-    @FXML
-    private JFXDrawer drawer;
 
     @FXML
     private JFXDrawer addFriendDrawer;
@@ -85,15 +85,16 @@ public class FriendspageController implements Initializable {
     @FXML
     private HBox headingBox;
 
+    @FXML
+    private AnchorPane main;
+
+    @FXML
+    private AnchorPane headerPane;
+
     private List searchresults;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            NavPanelController.setup(drawer, menu);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         fillFriendsTreeView();
         drawFriendRequestDrawer();
         fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
@@ -103,8 +104,13 @@ public class FriendspageController implements Initializable {
         todayPane.prefWidthProperty().bind(headingBox.widthProperty());
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
-    }
+        try {
+            StageSwitcher.friendsDrawer = NavPanel.addNavPanel(main, headerPane, menu);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
     /**
      * Fills the chart on the page with data.
      * @param title - Title of the graph
@@ -112,6 +118,7 @@ public class FriendspageController implements Initializable {
      * @param unit - DateUnit enum, day, week or month
      * @param chart - the chart to edit
      */
+
     public void fillChart(String title, String color, DateUnit unit, BarChart chart) {
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(title);
@@ -200,9 +207,11 @@ public class FriendspageController implements Initializable {
             if (addFriendDrawer.isOpened()) {
                 addFriendDrawer.close();
                 addFriendDrawer.setVisible(false);
+                addFriendDrawer.toBack();
             } else {
                 addFriendDrawer.open();
                 addFriendDrawer.setVisible(true);
+                addFriendDrawer.toFront();
             }
         });
     }

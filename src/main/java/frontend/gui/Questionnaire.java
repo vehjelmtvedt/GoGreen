@@ -148,6 +148,7 @@ public class Questionnaire {
             String locallyProducedFoodConsumption = locallyProducedFoodOptions.getValue();
             String organicFoodConsumption = organicOptions.getValue();
             String processedFoodConsumption = processedOptions.getValue();
+
             user.setElectricityDailyConsumption(dailyElectricityConsumption);
             user.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
             user.setCarType(carType);
@@ -161,8 +162,8 @@ public class Questionnaire {
             if (response != null) {
                 if (response.equals("success")) {
                     try {
-                        Dialog.show(form, "Registration Successful!", "Enter your new credentials!",
-                                "ACCEPT", "sucess");
+                        Dialog.show("Registration Successful!", "Enter your new credentials!",
+                                "ACCEPT", "sucess", false);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }

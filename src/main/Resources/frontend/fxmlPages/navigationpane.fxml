@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -13,7 +14,7 @@
 
 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="847.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.NavPanelController">
    <children>
-      <ImageView fitHeight="166.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="166.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../pics/navbackground.png" />
          </image>

@@ -49,21 +49,6 @@ public class Requests {
     }
 
     /**
-     * Get User identified by username or email from server.
-     *
-     * @param identifier - username or email
-     * @return - the User of the identifier (if any)
-     */
-    public static User getUserRequest(String identifier) {
-        //adding the query params to the URL
-        requestFactory.setHttpClient(httpClient);
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/getUser")
-                .queryParam("identifier", identifier);
-
-        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
-    }
-
-    /**
      * Sends a friend request from one user to another.
      *
      * @param sender   - user sending the friend request
@@ -193,8 +178,8 @@ public class Requests {
      * Request to get the Top Users.
      *
      * @param loginDetails username and password for auth
-     * @param top          a limit on the number of users to return
-     * @return
+     * @param top a limit on the number of users to return
+     * @return returns a list of top "top" users
      */
     public static List<User> getTopUsers(LoginDetails loginDetails, int top) {
         requestFactory.setHttpClient(httpClient);
@@ -207,4 +192,61 @@ public class Requests {
         return restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.POST,
                 new HttpEntity<LoginDetails>(loginDetails), typeRef).getBody();
     }
+
+    /**
+     * Request to edit profile.
+     * @param loginDetails for auth
+     * @param fieldName name of the field being changed
+     * @param newValue new value for the field
+     * @return returns the updated user
+     */
+    public static User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
+        System.out.println(newValue.getClass().getName());
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/editProfile")
+                .queryParam("fieldName",fieldName).queryParam("newValue", newValue)
+                .queryParam("typeName",newValue.getClass().getSimpleName());
+        return restTemplate.postForEntity(uriBuilder.toUriString(),
+                loginDetails,User.class).getBody();
+    }  
+    
+    /**
+     * Request to rest password.
+     * @param email email of user.
+     * @param answer answer of the security question
+     * @param newPass changed password
+     * @return - true if successfully changed password, false otherwise
+     */
+    public static Boolean forgotPass(String email, int questionid, String answer, String newPass) {
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/forgotPass")
+                .queryParam("email",email).queryParam("answer",answer)
+                        .queryParam("questionid",questionid).queryParam("newPass",newPass);
+
+        return restTemplate.getForEntity(uriBuilder.toUriString(),Boolean.class).getBody();
+    }
+
+    /**
+     * get total Users.
+     * @return number of total users
+     */
+    public static int getTotalUsers() {
+        return restTemplate.getForEntity(url + "/getTotalUsers", int.class).getBody();
+    }
+
+    /**
+     * get total CO2 saved.
+     * @return total amount of CO2 saved
+     */
+    public static double getTotalCO2Saved() {
+        return restTemplate.getForEntity(url + "/getTotalCO2Saved",double.class).getBody();
+    }
+
+    /**
+     * get average CO2 saved.
+     * @return average CO2 saved
+     */
+    public static double getAverageCO2Saved() {
+        return restTemplate.getForEntity(url + "/getAverageCO2Saved",double.class).getBody();
+    }
+
+
 }
