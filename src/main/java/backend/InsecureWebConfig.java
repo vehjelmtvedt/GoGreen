@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
+@Profile("!prod")
 public class InsecureWebConfig extends WebSecurityConfigurerAdapter {
 
     @Override
