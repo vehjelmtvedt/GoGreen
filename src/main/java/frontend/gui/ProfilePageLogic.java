@@ -10,7 +10,7 @@ import java.util.List;
 public class ProfilePageLogic {
 
 
-    private static List<Achievement>  list = Requests.getAllAchievements();
+    private static List<Achievement>  list = Requests.instance.getAllAchievements();
 
 
     public static List<Achievement> getList() {

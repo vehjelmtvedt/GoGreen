@@ -2,13 +2,16 @@ package frontend.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
-
 import com.jfoenix.controls.JFXTreeView;
+
+import data.LoginDetails;
 import data.User;
 import frontend.gui.Events;
 import frontend.gui.Main;
 import frontend.gui.NavPanel;
+import frontend.gui.NotificationPopup;
 import frontend.gui.StageSwitcher;
+import frontend.threading.NotificationThread;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import tools.ActivityQueries;
 import tools.Requests;
+import tools.SyncUserTask;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,8 +31,13 @@ import java.util.ResourceBundle;
 
 public class HomepageController implements Initializable {
     private static User loggedUser;
+    private static AnchorPane mainCopy;
+    private static AnchorPane headerCopy;
+    private static NotificationPopup popup;
+    private static LoginDetails loginDetails;
     private List<JFXButton> leaderboards = new ArrayList<>();
     private List<JFXTreeView> listTables = new ArrayList<>();
+
 
     @FXML
     private JFXHamburger menu;
@@ -79,6 +88,7 @@ public class HomepageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        popup = new NotificationPopup();
         //add buttons to leader boards list
         leaderboards.add(btnMyStats);
         leaderboards.add(btnTop5);
@@ -128,6 +138,14 @@ public class HomepageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        mainCopy = mainPane;
+        headerCopy = headerPane;
+    }
+
+    public static void popup(String heading, String body, String icon,
+                             int drawerNumber) throws IOException {
+        String[] text = {heading, body, icon};
+        popup.newNotification(mainCopy, headerCopy, text, drawerNumber);
     }
 
     private static ObservableList<PieChart.Data> fillPieChart(User user) {
@@ -151,6 +169,18 @@ public class HomepageController implements Initializable {
      */
     public static void setUser(User passedUser) {
         loggedUser = passedUser;
+
+    }
+
+    /**
+     * Sets the login details and starts the notification thread.
+     * @param passedloginDetails - login details from sign in form
+     */
+    public static void setLoginDetails(LoginDetails passedloginDetails) {
+        loginDetails = passedloginDetails;
+        SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, loggedUser);
+        NotificationThread notificationThread = new NotificationThread(syncUserTask);
+        notificationThread.start();
     }
 
     /**
