@@ -1,6 +1,10 @@
 package frontend.controllers;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXProgressBar;
+import com.jfoenix.controls.JFXTextField;
 import data.Achievement;
 import data.User;
 import data.UserAchievement;
@@ -125,6 +129,7 @@ public class ProfilePageController implements Initializable {
             if (!(lastName.getText().isEmpty())) {
                 lastName.setUnFocusColor(Color.BLACK);
                 System.out.println("test");
+
             } else {
                 lastName.setUnFocusColor(Color.RED);
                 try {
@@ -151,8 +156,8 @@ public class ProfilePageController implements Initializable {
             }
         });
 
-//        ObservableValue<Number> level = ObservableValue < Number > (5);
-//        levelProgress.progressProperty().bind(thisUser.getProgress().getLevel());
+        //        ObservableValue<Number> level = ObservableValue < Number > (5);
+        //        levelProgress.progressProperty().bind(thisUser.getProgress().getLevel());
 
         try {
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
@@ -218,6 +223,9 @@ public class ProfilePageController implements Initializable {
         }
 
     }
+    /**
+       Checks completed Acheivements.
+     */
 
     public static boolean isComplete(Achievement achievement) {
         for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
