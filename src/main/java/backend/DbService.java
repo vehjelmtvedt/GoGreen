@@ -439,6 +439,13 @@ public class DbService {
      * @return - Rank of the User (integer)
      */
     public int getUserRank(String identifier) {
+        User user = getUser(identifier);
+
+        // Invalid User specified
+        if (user == null) {
+            return -1;
+        }
+
         double carbon = getUser(identifier).getTotalCarbonSaved();
 
         return (int) mongoTemplate.count(new Query( // Get count of matching documents
