@@ -1,12 +1,10 @@
 package frontend.controllers;
 
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXProgressBar;
-import com.jfoenix.controls.JFXSpinner;
+import com.jfoenix.controls.*;
 import data.Achievement;
 import data.User;
 import data.UserAchievement;
+import frontend.gui.Dialog;
 import frontend.gui.ProfilePageLogic;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -25,6 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import tools.Requests;
 
 import java.awt.*;
 import java.io.IOException;
@@ -55,13 +54,16 @@ public class ProfilePageController implements Initializable {
     private Label userName;
 
     @FXML
-    private Label name;
+    private JFXTextField firstName;
+
+    @FXML
+    private JFXTextField lastName;
+
+    @FXML
+    private JFXTextField age;
 
     @FXML
     private Label email;
-
-    @FXML
-    private Label age;
 
     @FXML
     private Label lastseen;
@@ -71,6 +73,15 @@ public class ProfilePageController implements Initializable {
 
     @FXML
     private Label level;
+
+    @FXML
+    private JFXButton firstNameSave;
+
+    @FXML
+    private JFXButton lastNameSave;
+
+    @FXML
+    private JFXButton ageSave;
 
     @FXML
     private JFXProgressBar levelProgress;
@@ -84,9 +95,6 @@ public class ProfilePageController implements Initializable {
     @FXML
     private VBox incom;
 
-    @FXML
-    private ToolBar toolBar;
-
     public static void setUser(User user) {
         thisUser = user;
     }
@@ -94,14 +102,60 @@ public class ProfilePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        userName.setText("Username: " + thisUser.getUsername());
-        name.setText("Name: " + thisUser.getFirstName() + " " + thisUser.getLastName());
-        email.setText("eMail: " + thisUser.getEmail());
-        age.setText("Age: " + thisUser.getAge() + "");
-        lastseen.setText("Last LogIn: " + thisUser.getLastLoginDate().toString());
+        userName.setText(thisUser.getUsername());
+        firstName.setText(thisUser.getFirstName());
+        lastName.setText(thisUser.getLastName());
+        email.setText(thisUser.getEmail());
+        age.setText(thisUser.getAge() + "");
+        lastseen.setText(thisUser.getLastLoginDate().toString());
         level.setText("Level: " + (thisUser.getProgress().getLevel()));
         score.setText("Total\nCarbon\nSaved: " + thisUser.getTotalCarbonSaved());
         profilePicture.setImage(new Image("frontend/Pics/user.png"));
+
+        firstNameSave.setOnAction(e -> {
+            if (!(firstName.getText().isEmpty())) {
+                firstName.setUnFocusColor(Color.BLACK);
+                System.out.println("test");
+            } else {
+                firstName.setUnFocusColor(Color.RED);
+                try {
+                    Dialog.show(mainPane, "First Name is Empty",
+                            "Please Fill in a First Name", "DISMISS", "error");
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        lastNameSave.setOnAction(e -> {
+            if (!(lastName.getText().isEmpty())) {
+                lastName.setUnFocusColor(Color.BLACK);
+                System.out.println("test");
+            } else {
+                lastName.setUnFocusColor(Color.RED);
+                try {
+                    Dialog.show(mainPane, "Last Name is Empty",
+                            "Please Fill in a Last Name", "DISMISS", "error");
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        ageSave.setOnAction(e -> {
+            if (age.getText().matches("^[0-9]{0,7}$")) {
+                age.setUnFocusColor(Color.BLACK);
+                System.out.println("test");
+            } else {
+                age.setUnFocusColor(Color.RED);
+                try {
+                    Dialog.show(mainPane, "Age is invalid",
+                            "Please Fill in a appropriate age value", "DISMISS", "error");
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
 //        ObservableValue<Number> level = ObservableValue < Number > (5);
 //        levelProgress.progressProperty().bind(thisUser.getProgress().getLevel());
