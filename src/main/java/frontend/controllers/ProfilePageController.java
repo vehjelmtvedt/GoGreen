@@ -99,12 +99,37 @@ public class ProfilePageController implements Initializable {
         thisUser = user;
     }
 
+    /**
+     * Allows any text feild to become editable.
+     * Also helps to reduce code duplication.
+     * @param button The Button Used to save the changes.
+     * @param textfeild The textField to be edited.
+     * @param logindetails The login detials of the user that are to be passed on to the server.
+     * @param editableVariable The variable to be edited.
+     * @param popupMessage1 Pop-up Header to be shown to the user.
+     * @param popupMessage2 Pop-up message to be shown to the user.
+     */
+    public static void editableFeilds(JFXButton button, JFXTextField textfeild,
+                                      LoginDetails logindetails, String editableVariable,
+                                      String popupMessage1, String popupMessage2) {
+        button.setOnAction(e -> {
+            if (!(textfeild.getText().isEmpty())) {
+                textfeild.setUnFocusColor(Color.BLACK);
+                Requests.editProfile(logindetails, editableVariable, textfeild.getText());
+            } else {
+                textfeild.setUnFocusColor(Color.RED);
+                try {
+                    Dialog.show(popupMessage1, popupMessage2, "DISMISS", "error", true);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        LoginDetails logindetails = new LoginDetails(
-                thisUser.getUsername(), thisUser.getPassword()
-        );
 
         userName.setText(thisUser.getUsername());
         firstName.setText(thisUser.getFirstName());
@@ -116,36 +141,15 @@ public class ProfilePageController implements Initializable {
         score.setText("Total\nCarbon Saved: " + thisUser.getTotalCarbonSaved());
         profilePicture.setImage(new Image("frontend/Pics/user.png"));
 
-        firstNameSave.setOnAction(e -> {
-            if (!(firstName.getText().isEmpty())) {
-                firstName.setUnFocusColor(Color.BLACK);
-                Requests.editProfile(logindetails, "firstName", firstName.getText());
-            } else {
-                firstName.setUnFocusColor(Color.RED);
-                try {
-                    Dialog.show("First Name is Empty",
-                            "Please Fill in a First Name", "DISMISS", "error", true);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
+        LoginDetails logindetails = new LoginDetails(
+                thisUser.getUsername(), thisUser.getPassword()
+        );
 
-        lastNameSave.setOnAction(e -> {
-            if (!(lastName.getText().isEmpty())) {
-                lastName.setUnFocusColor(Color.BLACK);
-                Requests.editProfile(logindetails, "lastName", lastName.getText());
+        editableFeilds(firstNameSave, firstName, logindetails, "firstName",
+                "First Name Field is Empty", "Please fill in the first name field to continue" );
 
-            } else {
-                lastName.setUnFocusColor(Color.RED);
-                try {
-                    Dialog.show("Last Name is Empty",
-                            "Please Fill in a Last Name", "DISMISS", "error", true);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
+        editableFeilds(lastNameSave,lastName,logindetails,"lastName",
+                "Last Name Field is Empty", "Please fill in the last name field to continue");
 
         ageSave.setOnAction(e -> {
             if (age.getText().matches("^[0-9]{0,7}$")) {
