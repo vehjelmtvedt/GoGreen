@@ -125,7 +125,7 @@ public class AchievementsLogic {
 
         }
 
-        //List<Achievement> list = Requests.getAllAchievements();
+        //List<Achievement> list = Requests.instance.getAllAchievements();
 
         if (!alreadythere) {
 
