@@ -128,11 +128,7 @@
                               </JFXButton>
                            </children>
                         </HBox>
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" />
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
+                        <JFXTreeTableView fx:id="tableLeaderboards" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" />
                         <Label layoutX="382.0" layoutY="456.0" text="- Ranking is determined according to the total amount of CO2 saved - " AnchorPane.leftAnchor="382.0" AnchorPane.rightAnchor="274.0" />
                      </children>
                   </AnchorPane>
