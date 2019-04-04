@@ -101,7 +101,7 @@ public class DbService {
         }
 
 
-        if (passwordEncoder().matches(password, user.getPassword())||user.getPassword().equals(password)) {
+            if (passwordEncoder().matches(password, user.getPassword())) {
             // Update last login date to current (server) time
             user.setLastLoginDate(Calendar.getInstance().getTime());
             user.resetLoginStreak();
