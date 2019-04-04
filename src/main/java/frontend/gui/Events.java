@@ -36,6 +36,7 @@ import javafx.scene.paint.Color;
 import tools.ActivityQueries;
 import tools.DateUnit;
 
+import java.io.IOException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -133,6 +134,11 @@ public class Events {
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
+            try {
+                ActivitiesController.popup("Popup","Activity performed successfully!","sucess", 0);
+            } catch (IOException exp) {
+                System.out.println("Something went wrong.");
+            }
         });
     }
 
@@ -187,6 +193,11 @@ public class Events {
 
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
+            try {
+                ActivitiesController.popup("Popup","Activity performed successfully!","sucess", 0);
+            } catch (IOException exp) {
+                System.out.println("Something went wrong.");
+            }
         });
         input.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -280,6 +291,11 @@ public class Events {
 
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
+            try {
+                ActivitiesController.popup("Popup","Activity performed successfully!","sucess", 0);
+            } catch (IOException exp) {
+                System.out.println("Something went wrong.");
+            }
         });
     }
 
