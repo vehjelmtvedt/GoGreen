@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -430,5 +431,20 @@ public class DbService {
         allStatistics.deleteUser(user);
 
         userStatistics.save(allStatistics);
+    }
+
+    /**.
+     * Gets the rank in terms of CO2 saved of the specified User
+     * @param identifier - Identifier of the User (either e-mail or username)
+     * @return - Rank of the User (integer)
+     */
+    public int getUserRank(String identifier) {
+        double carbon = getUser(identifier).getTotalCarbonSaved();
+
+        return (int) mongoTemplate.count(new Query( // Get count of matching documents
+                Criteria.where("totalCarbonSaved") // Compare totalCarbonSaved of other Users
+                .gt(carbon)), // Carbon Saved of queried Users should be greater
+                User.class) // Search in User collection
+                + 1; // Add 1 (to count in the User itself)
     }
 }
