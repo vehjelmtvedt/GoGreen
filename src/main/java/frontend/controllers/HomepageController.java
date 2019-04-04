@@ -122,7 +122,7 @@ public class HomepageController implements Initializable {
         lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
                 + " kg of CO2 so far");
         lblAverageCarbon.setText("Average person saved "
-                + ((int)(Requests.getAverageCO2Saved() * 1000)) / 1000.0
+                + ((int)(Requests.instance.getAverageCO2Saved() * 1000)) / 1000.0
                 + " kg of CO2 so far");
         btnProfile.setOnAction(event -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(),
                 Main.getProfilePage()));

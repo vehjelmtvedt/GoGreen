@@ -4,6 +4,7 @@ import data.Achievement;
 import data.Activity;
 import data.LoginDetails;
 import data.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -15,8 +16,8 @@ import java.util.List;
 public class Requests {
     public static Requests instance = new Requests();
 
-    private static RestTemplate restTemplate = new RestTemplate();
-    private static String url = "http://localhost:8080";
+    private RestTemplate restTemplate = new RestTemplate();
+    private String url = "http://localhost:8080";
 
     /**
      * Sends signup request to the server.
@@ -168,7 +169,7 @@ public class Requests {
      * @param newValue new value for the field
      * @return returns the updated user
      */
-    public static User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
+    public User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
         System.out.println(newValue.getClass().getName());
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/editProfile")
                 .queryParam("fieldName",fieldName).queryParam("newValue", newValue)
@@ -196,7 +197,7 @@ public class Requests {
      * get total Users.
      * @return number of total users
      */
-    public static int getTotalUsers() {
+    public int getTotalUsers() {
         return restTemplate.getForEntity(url + "/getTotalUsers", int.class).getBody();
     }
 
@@ -204,7 +205,7 @@ public class Requests {
      * get total CO2 saved.
      * @return total amount of CO2 saved
      */
-    public static double getTotalCO2Saved() {
+    public double getTotalCO2Saved() {
         return restTemplate.getForEntity(url + "/getTotalCO2Saved",double.class).getBody();
     }
 
@@ -212,7 +213,7 @@ public class Requests {
      * get average CO2 saved.
      * @return average CO2 saved
      */
-    public static double getAverageCO2Saved() {
+    public double getAverageCO2Saved() {
         return restTemplate.getForEntity(url + "/getAverageCO2Saved",double.class).getBody();
     }
 
