@@ -5,16 +5,13 @@ import data.Achievement;
 import data.User;
 import data.UserAchievement;
 import frontend.gui.Dialog;
+import frontend.gui.NavPanel;
 import frontend.gui.ProfilePageLogic;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.beans.value.ObservableValue;
+import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Label;
-import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -22,10 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
-import tools.Requests;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -109,7 +103,7 @@ public class ProfilePageController implements Initializable {
         age.setText(thisUser.getAge() + "");
         lastseen.setText(thisUser.getLastLoginDate().toString());
         level.setText("Level: " + (thisUser.getProgress().getLevel()));
-        score.setText("Total\nCarbon\nSaved: " + thisUser.getTotalCarbonSaved());
+        score.setText("Total\nCarbon Saved: " + thisUser.getTotalCarbonSaved());
         profilePicture.setImage(new Image("frontend/Pics/user.png"));
 
         firstNameSave.setOnAction(e -> {
@@ -119,8 +113,8 @@ public class ProfilePageController implements Initializable {
             } else {
                 firstName.setUnFocusColor(Color.RED);
                 try {
-                    Dialog.show(mainPane, "First Name is Empty",
-                            "Please Fill in a First Name", "DISMISS", "error");
+                    Dialog.show("First Name is Empty",
+                            "Please Fill in a First Name", "DISMISS", "error", true);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -134,8 +128,8 @@ public class ProfilePageController implements Initializable {
             } else {
                 lastName.setUnFocusColor(Color.RED);
                 try {
-                    Dialog.show(mainPane, "Last Name is Empty",
-                            "Please Fill in a Last Name", "DISMISS", "error");
+                    Dialog.show("Last Name is Empty",
+                            "Please Fill in a Last Name", "DISMISS", "error", true);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -149,8 +143,8 @@ public class ProfilePageController implements Initializable {
             } else {
                 age.setUnFocusColor(Color.RED);
                 try {
-                    Dialog.show(mainPane, "Age is invalid",
-                            "Please Fill in a appropriate age value", "DISMISS", "error");
+                    Dialog.show("Age is invalid",
+                            "Please Fill in a appropriate age value", "DISMISS", "error", true);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -162,7 +156,7 @@ public class ProfilePageController implements Initializable {
 
         try {
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
-            NavPanelController.setup(drawer, menu);
+            StageSwitcher.homeDrawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
         } catch (IOException e) {
             e.printStackTrace();
         }
