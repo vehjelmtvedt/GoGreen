@@ -110,7 +110,7 @@ public class UserTest {
     @Test
     public void getElectricityDailyConsumptionSuccess(){
         userOne.setElectricityDailyConsumption(70000);
-        Assert.assertEquals(70000, userOne.getElectricityDailyConsumption());
+        Assert.assertEquals(70000, (int) userOne.getElectricityDailyConsumption());
     }
 
     @Test
@@ -121,7 +121,7 @@ public class UserTest {
     @Test
     public void setElectricityDailyConsumptionSuccsess() {
         userOne.setElectricityDailyConsumption(50000);
-        Assert.assertEquals(50000, userOne.getElectricityDailyConsumption());
+        Assert.assertEquals(50000,(int) userOne.getElectricityDailyConsumption());
     }
 
     @Test
@@ -368,8 +368,11 @@ public class UserTest {
     @Test
     public void testSimilarActivities() {
         Activity activity1 = new EatVegetarianMeal();
+        activity1.setCarbonSaved(5);
         Activity activity2 = new EatVegetarianMeal();
+        activity2.setCarbonSaved(10);
         Activity activity3 = new EatVegetarianMeal();
+        activity3.setCarbonSaved(15);
 
         activeUser.addActivity(activity1);
         activeUser.addActivity(activity2);

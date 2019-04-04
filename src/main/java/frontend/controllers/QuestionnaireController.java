@@ -4,22 +4,21 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import data.User;
+import frontend.gui.Dialog;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import tools.Requests;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.function.UnaryOperator;
 
 public class QuestionnaireController implements Initializable {
 
@@ -30,6 +29,9 @@ public class QuestionnaireController implements Initializable {
 
     @FXML
     private AnchorPane graphics;
+
+    @FXML
+    private AnchorPane mainPane;
 
     @FXML
     private JFXComboBox houseHoldNo;
@@ -61,6 +63,34 @@ public class QuestionnaireController implements Initializable {
     @FXML
     private JFXButton submitButton;
 
+    /**
+     * Method used to setup the Combo Boxes with the appropriate item sets.
+     */
+    public static void comboBoxSetup(JFXComboBox comboBox, ObservableList itemList) {
+        comboBox.setItems(itemList);
+        comboBox.setValue(itemList.get(0));
+    }
+
+    /**
+     * Method Used to restrict text field inputs to a desired numeric style.
+     */
+    public static void changeListener(JFXTextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^[0-9]{0,7}$")) {
+                textField.setText(oldValue);
+            }
+        });
+    }
+
+    /**
+     * Method used to Check is a text field is filled in or not and accordingly highlight it.
+     */
+    public static void textFieldValidate(JFXTextField textField) {
+        if (textField.getText().isEmpty()) {
+            textField.setUnFocusColor(Color.RED);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -69,56 +99,10 @@ public class QuestionnaireController implements Initializable {
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
 
-        //Numeric restrain to Text Fields For any positive integer value
+        changeListener(textCarUsage);
+        changeListener(textElectricity);
+        changeListener(textOil);
 
-        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
-            String input = change.getText();
-            if (input.matches("^[0-9]{0,7}$")) {
-                return change;
-            }
-            return null;
-        };
-
-        //Numeric restrain to Text Fields For Values 1-9
-
-        UnaryOperator<TextFormatter.Change> integerFilteralt = change -> {
-            String input = change.getText();
-            if (input.matches("")) {
-                return change;
-            }
-            return null;
-        };
-
-        textCarUsage.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                if (!newValue.matches("^[0-9]{0,7}$")) {
-                    textCarUsage.setText(oldValue);
-                }
-            }
-        });
-        textElectricity.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                if (!newValue.matches("^[0-9]{0,7}$")) {
-                    textElectricity.setText(oldValue);
-                }
-            }
-        });
-        textOil.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                if (!newValue.matches("^[0-9]{0,7}$")) {
-                    textOil.setText(oldValue);
-                }
-            }
-        });
 
         //Initializing the Combo Boxes With the Specified Values
 
@@ -126,43 +110,37 @@ public class QuestionnaireController implements Initializable {
                 1,2,3,4,5,6,7,8,9
         );
 
-        houseHoldNo.setItems(householdmembers);
-        houseHoldNo.setValue(1);
+        comboBoxSetup(houseHoldNo, householdmembers);
 
         ObservableList<String> carsizes = FXCollections.observableArrayList(
                 "I don't own a car","small", "medium", "large"
         );
 
-        carSizes.setItems(carsizes);
-        carSizes.setValue("I don't own a car");
+        comboBoxSetup(carSizes, carsizes);
 
         ObservableList<String> meatanddairyoptions = FXCollections.observableArrayList(
                 "above average", "average", "below average", "vegan"
         );
 
-        meatAndDairyOptions.setItems(meatanddairyoptions);
-        meatAndDairyOptions.setValue("above average");
+        comboBoxSetup(meatAndDairyOptions, meatanddairyoptions);
 
         ObservableList<String> locallyproducedfoodoptions = FXCollections.observableArrayList(
                 "very little", "average", "above average", "almost all"
         );
 
-        locallyProducedFoodOptions.setItems(locallyproducedfoodoptions);
-        locallyProducedFoodOptions.setValue("very little");
+        comboBoxSetup(locallyProducedFoodOptions, locallyproducedfoodoptions);
 
         ObservableList<String> organicoptions = FXCollections.observableArrayList(
                 "none", "some", "most", "all"
         );
 
-        organicOptions.setItems(organicoptions);
-        organicOptions.setValue("none");
+        comboBoxSetup(organicOptions, organicoptions);
 
         ObservableList<String> processedoptions = FXCollections.observableArrayList(
                 "above average", "average", "below average", "very little"
         );
 
-        processedOptions.setItems(processedoptions);
-        processedOptions.setValue("above average");
+        comboBoxSetup(processedOptions,processedoptions);
 
         textCarUsage.setText("0");
         textCarUsage.setEditable(false);
@@ -179,34 +157,59 @@ public class QuestionnaireController implements Initializable {
         // Submit Button Logic to send information to the user object
 
         submitButton.setOnAction(e -> {
-            int householdMembers = Integer.parseInt(houseHoldNo.getValue().toString());
-            int dailyElectricityConsumption =
-                    Integer.parseInt(textElectricity.getText()) / 365 / householdMembers;
-            double dailyHeatingOilConsumption =
-                    Integer.parseInt(textOil.getText()) / 365.0 / householdMembers;
-            String carType = carSizes.getValue().toString();
-            int dailyCarKilometres = Integer.parseInt(textCarUsage.getText()) / 365;
-            String meatAndDairyConsumption = meatAndDairyOptions.getValue().toString();
-            String locallyProducedFoodConsumption =
-                    locallyProducedFoodOptions.getValue().toString();
-            String organicFoodConsumption = organicOptions.getValue().toString();
-            String processedFoodConsumption = processedOptions.getValue().toString();
+            if ( !(textElectricity.getText().isEmpty() && textOil.getText().isEmpty())
+                    && !(textCarUsage.getText().isEmpty()) ) {
 
-            thisUser.setElectricityDailyConsumption(dailyElectricityConsumption);
-            thisUser.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
-            thisUser.setCarType(carType);
-            thisUser.setDailyCarKilometres(dailyCarKilometres);
-            thisUser.setMeatAndDairyConsumption(meatAndDairyConsumption);
-            thisUser.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
-            thisUser.setOrganicFoodConsumption(organicFoodConsumption);
-            thisUser.setProcessedFoodConsumption(processedFoodConsumption);
+                int householdMembers = Integer.parseInt(houseHoldNo.getValue().toString());
+                double dailyElectricityConsumption =
+                        Double.parseDouble(textElectricity.getText()) / 365 / householdMembers;
+                double dailyHeatingOilConsumption =
+                        Integer.parseInt(textOil.getText()) / 365.0 / householdMembers;
+                String carType = carSizes.getValue().toString();
+                int dailyCarKilometres = Integer.parseInt(textCarUsage.getText()) / 365;
+                String meatAndDairyConsumption = meatAndDairyOptions.getValue().toString();
+                String locallyProducedFoodConsumption =
+                        locallyProducedFoodOptions.getValue().toString();
+                String organicFoodConsumption = organicOptions.getValue().toString();
+                String processedFoodConsumption = processedOptions.getValue().toString();
 
-            // Send the user Back to Login after Questionnaire is complete
+                thisUser.setElectricityDailyConsumption(dailyElectricityConsumption);
+                thisUser.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
+                thisUser.setCarType(carType);
+                thisUser.setDailyCarKilometres(dailyCarKilometres);
+                thisUser.setMeatAndDairyConsumption(meatAndDairyConsumption);
+                thisUser.setLocallyProducedFoodConsumption(locallyProducedFoodConsumption);
+                thisUser.setOrganicFoodConsumption(organicFoodConsumption);
+                thisUser.setProcessedFoodConsumption(processedFoodConsumption);
 
-            String response = Requests.signupRequest(thisUser);
-            if (response != null) {
-                if (response.equals("success")) {
-                    StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getSignIn());
+                // Send the user Back to Login after Questionnaire is complete
+
+                String response = Requests.signupRequest(thisUser);
+                if (response != null) {
+                    if (response.equals("success")) {
+                        try {
+                            Dialog.show(
+                                    "Questionnaire Complete",
+                                    "Questionnaire Completed Successfully\n\n"
+                                            + "You will be redirected to the SignIn Page.",
+                                    "DISMISS", "sucess", false
+                            );
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignIn());
+                    }
+                }
+            } else {
+                textFieldValidate(textOil);
+                textFieldValidate(textElectricity);
+                textFieldValidate(textCarUsage);
+                try {
+                    Dialog.show("Questionnaire Incomplete",
+                            "Please Complete the Questionnaire", "DISMISS", "error",
+                            false);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 }
             }
         });

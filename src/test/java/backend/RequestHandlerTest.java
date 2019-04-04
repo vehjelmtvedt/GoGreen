@@ -40,8 +40,7 @@ public class RequestHandlerTest
     @Test
     public void testSignupExists()
     {
-        Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(null);
-        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        Mockito.when(dbService.getUserByEmail(testUser.getEmail())).thenReturn(testUser);
         assertEquals("Email exists", requestHandler.signupController(testUser));
     }
 
@@ -128,7 +127,7 @@ public class RequestHandlerTest
 
     @Test
     public void testValidateUsername() {
-        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
+        Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(testUser);
         assertEquals("OK", requestHandler.validateUser(testUser.getUsername()));
     }
 
@@ -139,10 +138,9 @@ public class RequestHandlerTest
 
     @Test
     public void testAddActivity() {
-        Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
         EatVegetarianMeal act = new EatVegetarianMeal();
+        Mockito.when(dbService.addActivityToUser(testUser.getUsername(), act)).thenReturn(testUser);
         assertEquals(testUser, requestHandler.addActivity(act, testUser.getUsername()));
-        assertEquals(1, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
     }
 
     @Test
@@ -217,4 +215,68 @@ public class RequestHandlerTest
         Mockito.when(dbService.getAchievements()).thenReturn(testList);
         assertEquals(testList, requestHandler.getAllAchievements());
     }
+
+    @Test
+    public void editProfileInt() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        Mockito.when(dbService.editProfile(testUser,"age",24)).thenReturn(testUser);
+        assertEquals(24,requestHandler.editProfile(new LoginDetails(testUser.getUsername()
+                ,testUser.getPassword()),"age","24","Integer").getAge());
+    }
+    @Test
+    public void editProfileDouble() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
+        Mockito.when(dbService.editProfile(testUser,"totalCarbonSaved",0.0)).thenReturn(testUser);
+        assertEquals(0.0,requestHandler.editProfile(new LoginDetails(testUser.getUsername()
+                ,testUser.getPassword()),"totalCarbonSaved","0.0","Double").getTotalCarbonSaved());
+    }
+    @Test
+    public void editProfileAuthFail() {
+        Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
+        assertEquals(null,requestHandler.editProfile(new LoginDetails(testUser.getUsername()
+                ,testUser.getPassword()),"firstName","Test5","String"));
+    }
+    
+    @Test
+    public void forgotPass() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        testUser.setSecurityQuestionAnswer("A");
+        testUser.setSecurityQuestionId(1);
+        Boolean bool = true;
+        assertEquals(requestHandler.forgotPass(testUser.getEmail(),"A",1,"ASD"),bool);
+    }
+
+    @Test
+    public void forgotPassNull() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(null);
+        assertEquals(null,requestHandler.forgotPass(testUser.getEmail(),"A",1,"A"));
+    }
+
+    @Test
+    public void forgotPassWrongAnswer() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        testUser.setSecurityQuestionAnswer("A");
+        testUser.setSecurityQuestionId(1);
+        Boolean bool = false;
+        assertEquals(requestHandler.forgotPass(testUser.getEmail(),"B",1,"ASD"),bool);
+    }
+
+    @Test
+    public void getTotalCO2Saved() {
+        Mockito.when(dbService.getTotalCO2Saved()).thenReturn(100.5);
+        assertEquals(requestHandler.getTotalCO2Saved(),100.5);
+    }
+
+    @Test
+    public void getTotalUsers() {
+        Mockito.when(dbService.getTotalUsers()).thenReturn(10);
+        assertEquals(requestHandler.getTotalUsers(),10);
+    }
+
+    @Test
+    public void getAverageCO2Saved() {
+        Mockito.when(dbService.getAverageCO2Saved()).thenReturn(25.2);
+        assertEquals(requestHandler.getAverageCO2Saved(),25.2);
+    }
+
 }
