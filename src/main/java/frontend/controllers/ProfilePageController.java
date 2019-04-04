@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import data.Achievement;
+import data.LoginDetails;
 import data.User;
 import data.UserAchievement;
 import frontend.gui.Dialog;
@@ -23,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
@@ -100,6 +102,10 @@ public class ProfilePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        LoginDetails logindetails = new LoginDetails(
+                thisUser.getUsername(), thisUser.getPassword()
+        );
+
         userName.setText(thisUser.getUsername());
         firstName.setText(thisUser.getFirstName());
         lastName.setText(thisUser.getLastName());
@@ -113,7 +119,9 @@ public class ProfilePageController implements Initializable {
         firstNameSave.setOnAction(e -> {
             if (!(firstName.getText().isEmpty())) {
                 firstName.setUnFocusColor(Color.BLACK);
-                System.out.println("test");
+                System.out.println("Changing firstName");
+                System.out.println(firstName.getText());
+                Requests.editProfile(logindetails, "firstName", firstName.getText());
             } else {
                 firstName.setUnFocusColor(Color.RED);
                 try {
