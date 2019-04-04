@@ -119,8 +119,6 @@ public class ProfilePageController implements Initializable {
         firstNameSave.setOnAction(e -> {
             if (!(firstName.getText().isEmpty())) {
                 firstName.setUnFocusColor(Color.BLACK);
-                System.out.println("Changing firstName");
-                System.out.println(firstName.getText());
                 Requests.editProfile(logindetails, "firstName", firstName.getText());
             } else {
                 firstName.setUnFocusColor(Color.RED);
@@ -136,7 +134,7 @@ public class ProfilePageController implements Initializable {
         lastNameSave.setOnAction(e -> {
             if (!(lastName.getText().isEmpty())) {
                 lastName.setUnFocusColor(Color.BLACK);
-                System.out.println("test");
+                Requests.editProfile(logindetails, "lastName", lastName.getText());
 
             } else {
                 lastName.setUnFocusColor(Color.RED);
@@ -152,7 +150,7 @@ public class ProfilePageController implements Initializable {
         ageSave.setOnAction(e -> {
             if (age.getText().matches("^[0-9]{0,7}$")) {
                 age.setUnFocusColor(Color.BLACK);
-                System.out.println("test");
+                Requests.editProfile(logindetails, "age", Integer.parseInt(age.getText()));
             } else {
                 age.setUnFocusColor(Color.RED);
                 try {
