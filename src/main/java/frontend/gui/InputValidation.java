@@ -44,7 +44,7 @@ public class InputValidation {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
-        User loggedUser = Requests.loginRequest(loginDetails);
+        User loggedUser = Requests.instance.loginRequest(loginDetails);
 
         // update user's CO2 saved from InstallSolarPanels activity
         if (loggedUser != null) {
@@ -56,7 +56,7 @@ public class InputValidation {
                         Calendar.getInstance().getTime().toInstant())
                         * panels.getDailyCarbonSaved();
                 double newValue = loggedUser.getTotalCarbonSaved() + extraCo2Saved;
-                Requests.editProfile(loginDetails,
+                Requests.instance.editProfile(loginDetails,
                         "totalCarbonSaved",
                         newValue);
             }
@@ -143,14 +143,14 @@ public class InputValidation {
         String username = usernameField.getText();
         String email = emailField.getText();
 
-        if (Requests.validateUserRequest(username)) {
+        if (Requests.instance.validateUserRequest(username)) {
             Dialog.show("Username Error!",
                     "A user already exists with this username. Use another username",
                     "DISMISS", "error", false);
             return;
         }
 
-        if (Requests.validateUserRequest(email)) {
+        if (Requests.instance.validateUserRequest(email)) {
             Dialog.show("Email Error!", "A user already exists with this email."
                             + "Use another email",
                     "DISMISS", "error", false);

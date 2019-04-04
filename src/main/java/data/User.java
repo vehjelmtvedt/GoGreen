@@ -233,6 +233,13 @@ public class User {
         this.lastLoginDate = date;
     }
 
+    public void setFriends(ArrayList<String> friends) {
+        this.friends = friends;
+    }
+
+    public void setFriendRequests(ArrayList<String> friendRequests) {
+        this.friendRequests = friendRequests;
+    }
 
     /**
      * Returns string representation of the User object.
