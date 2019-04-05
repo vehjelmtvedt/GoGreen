@@ -82,9 +82,8 @@ public class ProfilePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        score.setText("TotalCarbonSaved: " + thisUser.getTotalCarbonSaved());
+        lastseenLabel.setText("Last LogIn: " + thisUser.getLastLoginDate().toString());
 
-        // userNameLabel.setText("UserName: " + thisUser.getUsername());
 
         nameLabel.setText("Name: " + thisUser.getFirstName() + thisUser.getLastName());
 
@@ -92,27 +91,8 @@ public class ProfilePageController implements Initializable {
 
         ageLabel.setText("Age: " + thisUser.getAge() + "");
 
-        lastseenLabel.setText("Last LogIn: " + thisUser.getLastLoginDate().toString());
-
-        level.setText("Level: " + ProfilePageLogic.getLevel(thisUser));
-
-        Image badgeimg = new Image(ProfilePageLogic.getBadge(thisUser));
-
-        badge.setImage(badgeimg);
-
-
-        addCompletedAchievements(com);
-        addPendingAchievements(incom);
-
-
-        if (count == 0) {
-
-            Label noachiements = new Label("No completed achievements yet");
-            anchorPanecom.getChildren().add(noachiements);
-            anchorPanecom.setMinWidth(300.0);
-            //completedtab.disableProperty();
-
-        }
+        updateStates();
+        updateAchievements();
 
 
         backButton.setOnAction(e ->
@@ -159,6 +139,7 @@ public class ProfilePageController implements Initializable {
             for (int i = 0; i < thisUser.getProgress().getAchievements().size(); i++) {
 
 
+
                 count++;
 
                 HBox hbox = new HBox();
@@ -167,19 +148,11 @@ public class ProfilePageController implements Initializable {
 
                 ImageView achievementimage = new ImageView();
 
-                //File file = new File(ProfilePageLogic.getUserAchievementImagePath(thisUser.getProgress().getAchievements().get(i)));
-
-                //FileInputStream inputStream = new FileInputStream(file);
-
-                //Image path1 = new Image(ProfilePageLogic.getUserAchievementImagePath(thisUser.getProgress().getAchievements().get(i)));
-                //Image path1 = new Image(inputStream);
-
                 achievementimage.setFitHeight(32);
 
                 achievementimage.setFitWidth(32);
 
                 achievementimage.setImage(ProfilePageLogic.getUserAchievementImagePath((thisUser.getProgress().getAchievements().get(i))));
-
 
                 Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
                         thisUser.getProgress().getAchievements().get(i)));
@@ -222,7 +195,7 @@ public class ProfilePageController implements Initializable {
 
                     achievementimage.setFitWidth(32);
 
-                    achievementimage.setImage(new Image("achievementsimages/1.png"));
+                    achievementimage.setImage((ProfilePageLogic.getAchievementImagePath(a)));
 
                     Text name = new Text(a.getName());
                     Text points = new Text(" , Complete to Get: " + a.getBonus() + " points.");
@@ -238,6 +211,33 @@ public class ProfilePageController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+    }
+
+    public void updateAchievements() {
+
+        com.getChildren().clear();
+        incom.getChildren().clear();
+
+        addCompletedAchievements(com);
+        addPendingAchievements(incom);
+
+        updateStates();
+
+
+    }
+    public void updateStates() {
+
+        score.setText("Score: " + thisUser.getProgress().getPoints());
+
+
+
+        level.setText("Level: " + ProfilePageLogic.getLevel(thisUser));
+
+        Image badgeimg = new Image(ProfilePageLogic.getBadge(thisUser));
+
+        badge.setImage(badgeimg);
+
+
     }
 
 }

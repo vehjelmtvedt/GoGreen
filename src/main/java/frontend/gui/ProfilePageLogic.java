@@ -103,7 +103,7 @@ public class ProfilePageLogic {
 
         stringBuilder.append(a.getId());
 
-        String path = "achievementsimages/" +  0 + ".png";
+        String path = "achievementsimages/" +  stringBuilder.toString() + ".png";
 
         return new Image(path);
 
