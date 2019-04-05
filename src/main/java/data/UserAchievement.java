@@ -10,7 +10,9 @@ public class UserAchievement {
     Date date;
 
 
-
+    /**a default constructor.
+     *
+     */
     public UserAchievement() {
         this.id = 0;
         this.completed = false;
@@ -47,6 +49,10 @@ public class UserAchievement {
         this.date = date;
     }
 
+    /** a simple to string method.
+     *
+     * @return the string result
+     */
     public String toString() {
 
         return this.getId() + this.getDate().toString();

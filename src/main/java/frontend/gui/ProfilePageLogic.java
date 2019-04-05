@@ -6,7 +6,6 @@ import data.UserAchievement;
 import javafx.scene.image.Image;
 import tools.Requests;
 
-
 import java.util.List;
 
 public class ProfilePageLogic {
@@ -96,12 +95,17 @@ public class ProfilePageLogic {
 
     }
 
-
-    public static Image getAchievementImagePath(Achievement a) {
+    /**creates an Image for the achievement.
+     *
+     *
+     * @param achievement the achievement that needs the image
+     * @return the correct image to the achievement
+     */
+    public static Image getAchievementImagePath(Achievement achievement) {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(a.getId());
+        stringBuilder.append(achievement.getId());
 
         String path = "achievementsimages/" +  stringBuilder.toString() + ".png";
 
@@ -109,11 +113,17 @@ public class ProfilePageLogic {
 
     }
 
-    public static Image getUserAchievementImagePath(UserAchievement a) {
+    /**creates an Image for the achievement.
+     *
+     *
+     * @param userAchievement the achievement that needs the image
+     * @return the correct image to the achievement
+     */
+    public static Image getUserAchievementImagePath(UserAchievement userAchievement) {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(a.getId());
+        stringBuilder.append(userAchievement.getId());
 
         String path = "achievementsimages/" +  stringBuilder.toString() + ".png";
 

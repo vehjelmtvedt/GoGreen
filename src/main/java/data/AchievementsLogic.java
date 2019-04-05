@@ -187,7 +187,8 @@ public class AchievementsLogic {
             //for now its hard codded
             user.getProgress().setPoints(user.getProgress().getPoints() + 100);
 
-            System.out.println("added ......................................" + user.getProgress().getPoints());
+            System.out.println("added ..................."
+                    + "..................." + user.getProgress().getPoints());
 
             for (int i = 0 ; i < user.getProgress().getAchievements().size() ; i++) {
 

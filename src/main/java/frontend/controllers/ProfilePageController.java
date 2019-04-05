@@ -20,9 +20,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-
-
+import java.io.FileNotFoundException;
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
 
@@ -73,8 +73,6 @@ public class ProfilePageController implements Initializable {
     @FXML
     private ToolBar toolBar;
 
-    private static int count = 0;
-
 
     /**
      * how should the page be set up.
@@ -94,10 +92,8 @@ public class ProfilePageController implements Initializable {
         updateStates();
         updateAchievements();
 
-
         backButton.setOnAction(e ->
                 StageSwitcher.sceneSwitch(Main.getPrimaryStage(), Main.getHomepage()));
-
 
     }
 
@@ -128,6 +124,11 @@ public class ProfilePageController implements Initializable {
 
     }
 
+    /**
+     * Adds the completed achievements to the Vbox.
+     *
+     * @param com the one that contains the completed achievements
+     */
     public static void addCompletedAchievements(VBox com) {
 
         try {
@@ -152,7 +153,8 @@ public class ProfilePageController implements Initializable {
 
                 achievementimage.setFitWidth(32);
 
-                achievementimage.setImage(ProfilePageLogic.getUserAchievementImagePath((thisUser.getProgress().getAchievements().get(i))));
+                achievementimage.setImage(ProfilePageLogic.getUserAchievementImagePath(
+                        thisUser.getProgress().getAchievements().get(i)));
 
                 Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
                         thisUser.getProgress().getAchievements().get(i)));
@@ -169,14 +171,18 @@ public class ProfilePageController implements Initializable {
 
             }
 
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
 
             System.out.println(e.toString());
 
         }
 
     }
-
+    /**
+     * Adds the incompleted achievements to the Vbox.
+     *
+     * @param incom the one that contains the incompleted achievements
+     */
 
     public static void addPendingAchievements(VBox incom) {
 
@@ -195,7 +201,7 @@ public class ProfilePageController implements Initializable {
 
                     achievementimage.setFitWidth(32);
 
-                    achievementimage.setImage((ProfilePageLogic.getAchievementImagePath(a)));
+                    achievementimage.setImage(ProfilePageLogic.getAchievementImagePath(a));
 
                     Text name = new Text(a.getName());
                     Text points = new Text(" , Complete to Get: " + a.getBonus() + " points.");
@@ -208,11 +214,14 @@ public class ProfilePageController implements Initializable {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println(e.toString());
         }
     }
 
+    /**this updates the achievements .
+     *
+     */
     public void updateAchievements() {
 
         com.getChildren().clear();
@@ -225,18 +234,19 @@ public class ProfilePageController implements Initializable {
 
 
     }
+
+    /**this updates the states.
+     *
+     */
     public void updateStates() {
 
         score.setText("Score: " + thisUser.getProgress().getPoints());
-
-
 
         level.setText("Level: " + ProfilePageLogic.getLevel(thisUser));
 
         Image badgeimg = new Image(ProfilePageLogic.getBadge(thisUser));
 
         badge.setImage(badgeimg);
-
 
     }
 
