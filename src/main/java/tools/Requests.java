@@ -137,7 +137,7 @@ public class Requests {
      * Request to get all achievements.
      * @return a list of achievements
      */
-    public List<Achievement> getAllAchievements() {
+    public static List<Achievement> getAllAchievements() {
         ParameterizedTypeReference<List<Achievement>> typeRef =
                 new ParameterizedTypeReference<List<Achievement>>() {};
         return restTemplate.exchange(url + "/getAllAchievements",HttpMethod.GET,
