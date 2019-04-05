@@ -29,7 +29,10 @@ public class Requests {
     private String url;
 
     protected Requests() {
-        String url = System.getProperty("remote.url");
+        url = System.getProperty("remote.url");
+
+        // Uncomment to test via remote server
+        //url = "https://cse38-go-green.herokuapp.com";
 
         if (url != null && !url.contains("localhost")) {
             buildSecureRestTemplate(url);
