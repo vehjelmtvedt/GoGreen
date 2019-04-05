@@ -55,17 +55,6 @@ public class ProfilePageLogicTest {
         Assert.assertNotNull(user.getProgress().getAchievements().get(0));
     }
 
-    @Test
-    public void getBadge() {
-
-        String test = "badges/1.png";
-
-        user.setTotalCarbonSaved(0);
-
-        Assert.assertTrue(test.equals(ProfilePageLogic.getBadge(user)));
-
-    }
-
 //    @Test
 //    public void getNameString() {
 //        dbService.getAchievements();

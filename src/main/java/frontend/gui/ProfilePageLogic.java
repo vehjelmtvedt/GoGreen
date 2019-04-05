@@ -16,13 +16,6 @@ public class ProfilePageLogic {
     }
 
     /**
-     * returns string with badge path.
-     */
-    public static String getBadge(User user) {
-        return "badges/" + user.getProgress().getLevel() + ".png";
-    }
-
-    /**
      * this returns a String with Achievement name and completion date.
      *
      * @return String with Achievement name and completion date

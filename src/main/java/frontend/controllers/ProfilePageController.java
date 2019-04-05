@@ -87,9 +87,6 @@ public class ProfilePageController implements Initializable {
     private JFXProgressBar levelProgress;
 
     @FXML
-    private JFXProgressBar carbonSavedProgress;
-
-    @FXML
     private VBox com;
 
     @FXML
@@ -133,6 +130,8 @@ public class ProfilePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        levelProgress.setProgress((Double.parseDouble(Integer.toString(thisUser.getProgress().getLevel()))) / 8.0);
 
         userName.setText(thisUser.getUsername());
         firstName.setText(thisUser.getFirstName());
@@ -224,7 +223,6 @@ public class ProfilePageController implements Initializable {
                 hbox.getChildren().addAll(achievementimage1, name, points);
                 incom.getChildren().add(hbox);
             }
-
         }
 
         int levelcount = 1;
