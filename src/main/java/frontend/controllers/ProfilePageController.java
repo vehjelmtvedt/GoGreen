@@ -19,7 +19,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import tools.Requests;
+
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -64,25 +65,15 @@ public class ProfilePageController implements Initializable {
     private Label score;
 
     @FXML
-    private static VBox  com;
+    private VBox com;
 
     @FXML
-    private static VBox incom;
+    private VBox incom;
 
     @FXML
     private ToolBar toolBar;
 
     private static int count = 0;
-
-    public static VBox getCom() {
-        return com;
-    }
-
-
-    public static VBox getIncom() {
-        return incom;
-    }
-
 
 
     /**
@@ -108,6 +99,7 @@ public class ProfilePageController implements Initializable {
         Image badgeimg = new Image(ProfilePageLogic.getBadge(thisUser));
 
         badge.setImage(badgeimg);
+
 
         addCompletedAchievements(com);
         addPendingAchievements(incom);
@@ -158,82 +150,95 @@ public class ProfilePageController implements Initializable {
 
     public static void addCompletedAchievements(VBox com) {
 
-        ProfilePageController.setUser(thisUser);
+        try {
 
-        // for every completed achievement module  is created
-        // and added to a VBox small pics might be added later
-        for (int i = 0; i < thisUser.getProgress().getAchievements().size(); i++) {
+            ProfilePageController.setUser(thisUser);
 
-            count++;
-
-            HBox hbox = new HBox();
-
-            hbox.setSpacing(10.0);
-
-            ImageView achievementimage = new ImageView();
-
-            Image path = new Image("achievementsimages/" + thisUser.getProgress()
-                    .getAchievements().get(i).getId() + ".png");
-
-            achievementimage.setFitHeight(32);
-
-            achievementimage.setFitWidth(32);
-
-            achievementimage.setImage(path);
+            // for every completed achievement module  is created
+            // and added to a VBox small pics might be added later
+            for (int i = 0; i < thisUser.getProgress().getAchievements().size(); i++) {
 
 
-            Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
-                    thisUser.getProgress().getAchievements().get(i)));
-            name.setFill(Color.GREEN);
+                count++;
 
-            Text bonus = new Text(", Earned: " + ProfilePageLogic.getBonusString(
-                    thisUser.getProgress().getAchievements().get(i)) + " Points");
-            Text date = new Text(", Completed On: " + ProfilePageLogic.getDateString(
-                    thisUser.getProgress().getAchievements().get(i)) + ".");
+                HBox hbox = new HBox();
 
-            hbox.getChildren().addAll(achievementimage, name, bonus, date);
+                hbox.setSpacing(10.0);
 
-            com.getChildren().add(hbox);
+                ImageView achievementimage = new ImageView();
 
-        }
+                //File file = new File(ProfilePageLogic.getUserAchievementImagePath(thisUser.getProgress().getAchievements().get(i)));
 
-    }
+                //FileInputStream inputStream = new FileInputStream(file);
 
-    public static void addPendingAchievements(VBox incom) {
-        for (Achievement a : ProfilePageLogic.getList()) {
+                //Image path1 = new Image(ProfilePageLogic.getUserAchievementImagePath(thisUser.getProgress().getAchievements().get(i)));
+                //Image path1 = new Image(inputStream);
 
-            HBox hbox = new HBox();
+                achievementimage.setFitHeight(32);
 
-            hbox.setSpacing(10.0);
+                achievementimage.setFitWidth(32);
 
-            if (!isComplete(a)) {
-
-                ImageView achievementimage1 = new ImageView();
-
-                String image = "achievementsimages/" + a.getId() + ".png";
+                achievementimage.setImage(ProfilePageLogic.getUserAchievementImagePath((thisUser.getProgress().getAchievements().get(i))));
 
 
-                Image path1 = new Image("achievementsimages/8.png");
+                Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
+                        thisUser.getProgress().getAchievements().get(i)));
+                name.setFill(Color.GREEN);
 
-                achievementimage1.setFitHeight(32);
+                Text bonus = new Text(", Earned: " + ProfilePageLogic.getBonusString(
+                        thisUser.getProgress().getAchievements().get(i)) + " Points");
+                Text date = new Text(", Completed On: " + ProfilePageLogic.getDateString(
+                        thisUser.getProgress().getAchievements().get(i)) + ".");
 
-                achievementimage1.setFitWidth(32);
+                hbox.getChildren().addAll(achievementimage, name, bonus, date);
 
-                achievementimage1.setImage(path1);
+                com.getChildren().add(hbox);
 
-
-                Text name = new Text(a.getName());
-                Text points = new Text(" , Complete to Get: " + a.getBonus() + " points.");
-
-
-                hbox.getChildren().addAll(achievementimage1, name, points);
-
-                incom.getChildren().add(hbox);
             }
 
+        } catch (Exception e) {
+
+            System.out.println(e.toString());
+
         }
+
     }
 
+
+    public static void addPendingAchievements(VBox incom) {
+
+        try {
+
+            for (Achievement a : ProfilePageLogic.getList()) {
+
+                if (!isComplete(a)) {
+                    ImageView achievementimage = new ImageView();
+
+                    HBox hbox = new HBox();
+
+                    hbox.setSpacing(10.0);
+
+                    achievementimage.setFitHeight(32);
+
+                    achievementimage.setFitWidth(32);
+
+                    achievementimage.setImage(new Image("achievementsimages/1.png"));
+
+                    Text name = new Text(a.getName());
+                    Text points = new Text(" , Complete to Get: " + a.getBonus() + " points.");
+
+
+                    hbox.getChildren().addAll(achievementimage, name, points);
+
+                    incom.getChildren().add(hbox);
+
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
 
 }
 

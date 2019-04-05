@@ -3,7 +3,9 @@ package frontend.gui;
 import data.Achievement;
 import data.User;
 import data.UserAchievement;
+import javafx.scene.image.Image;
 import tools.Requests;
+
 
 import java.util.List;
 
@@ -94,6 +96,32 @@ public class ProfilePageLogic {
 
     }
 
+
+    public static Image getAchievementImagePath(Achievement a) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(a.getId());
+
+        String path = "achievementsimages/" +  0 + ".png";
+
+        return new Image(path);
+
+    }
+
+    public static Image getUserAchievementImagePath(UserAchievement a) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(a.getId());
+
+        String path = "achievementsimages/" +  stringBuilder.toString() + ".png";
+
+
+
+        return new Image(path);
+
+    }
 
 
 
