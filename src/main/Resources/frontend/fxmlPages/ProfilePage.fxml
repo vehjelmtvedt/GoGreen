@@ -129,7 +129,14 @@
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
-                                    <AnchorPane layoutX="10.0" layoutY="38.0" prefHeight="200.0" prefWidth="506.0" />
+                                    <AnchorPane layoutX="10.0" layoutY="38.0" prefHeight="200.0" prefWidth="506.0">
+                                       <children>
+                                          <ScrollPane layoutX="-3.0" prefHeight="200.0" prefWidth="506.0">
+                                             <content>
+                                                <HBox fx:id="badgeZone" prefHeight="186.0" prefWidth="506.0" />
+                                             </content>
+                                          </ScrollPane>
+                                       </children></AnchorPane>
                                  </children>
                               </AnchorPane>
                               <JFXProgressBar fx:id="levelProgress" layoutX="163.0" layoutY="88.0" prefHeight="13.0" prefWidth="54.0" />

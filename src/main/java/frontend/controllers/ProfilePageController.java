@@ -95,6 +95,9 @@ public class ProfilePageController implements Initializable {
     @FXML
     private VBox incom;
 
+    @FXML
+    private HBox badgeZone;
+
     public static void setUser(User user) {
         thisUser = user;
     }
@@ -183,9 +186,7 @@ public class ProfilePageController implements Initializable {
         for (int i = 0; i < thisUser.getProgress().getAchievements().size(); i++) {
 
             count++;
-
             HBox hbox = new HBox();
-
             hbox.setSpacing(10.0);
             ImageView achievementimage = new ImageView();
             Image path = new Image("achievementsimages/" + thisUser.getProgress()
@@ -193,7 +194,6 @@ public class ProfilePageController implements Initializable {
             achievementimage.setFitHeight(32);
             achievementimage.setFitWidth(32);
             achievementimage.setImage(path);
-
             Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
                     thisUser.getProgress().getAchievements().get(i)));
             name.setFill(Color.GREEN);
@@ -201,7 +201,6 @@ public class ProfilePageController implements Initializable {
                     thisUser.getProgress().getAchievements().get(i)) + " Points");
             Text date = new Text(",Completed On: " + ProfilePageLogic.getDateString(
                     thisUser.getProgress().getAchievements().get(i)) + ".");
-
             hbox.getChildren().addAll(achievementimage, name, bonus, date);
             com.getChildren().add(hbox);
         }
@@ -216,21 +215,31 @@ public class ProfilePageController implements Initializable {
             hbox.setSpacing(10.0);
             if (!isComplete(a)) {
                 ImageView achievementimage1 = new ImageView();
-                String image = "achievementsimages/" + a.getId() + ".png";
                 Image path1 = new Image("achievementsimages/8.png");
-
                 achievementimage1.setFitHeight(32);
                 achievementimage1.setFitWidth(32);
                 achievementimage1.setImage(path1);
-
                 Text name = new Text(a.getName());
                 Text points = new Text(",Complete to Get: " + a.getBonus() + " points.");
-
                 hbox.getChildren().addAll(achievementimage1, name, points);
                 incom.getChildren().add(hbox);
             }
 
         }
+
+        int levelcount = 1;
+        for (int i = 1; i <= (thisUser.getProgress().getLevel()); i++) {
+
+            ImageView badgeimage = new ImageView();
+            Image path = new Image("badges/" + levelcount + ".png");
+            badgeimage.setFitHeight(150);
+            badgeimage.setFitWidth(150);
+            badgeimage.setImage(path);
+            badgeZone.getChildren().add(badgeimage);
+            levelcount++;
+        }
+
+
 
     }
     /**
