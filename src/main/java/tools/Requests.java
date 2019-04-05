@@ -4,10 +4,13 @@ import data.Achievement;
 import data.Activity;
 import data.LoginDetails;
 import data.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -16,8 +19,31 @@ import java.util.List;
 public class Requests {
     public static Requests instance = new Requests();
 
-    private RestTemplate restTemplate = new RestTemplate();
-    private String url = "http://localhost:8080";
+    private RestTemplate restTemplate;
+    private String url;
+
+    protected Requests() {
+        buildInsecureRestTemplate();
+    }
+
+    private void buildInsecureRestTemplate() {
+        url = "http://localhost:8080";
+        restTemplate = new RestTemplate();
+    }
+
+    private void buildSecureRestTemplate() {
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setSSLHostnameVerifier(new NoopHostnameVerifier()).build();
+
+        HttpComponentsClientHttpRequestFactory requestFactory
+                = new HttpComponentsClientHttpRequestFactory();
+
+        restTemplate = new RestTemplate(requestFactory);
+
+        requestFactory.setHttpClient(httpClient);
+
+        url = "https://cse38-go-green.herokuapp.com";
+    }
 
     /**
      * Sends signup request to the server.

@@ -2,6 +2,7 @@ package frontend.gui;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import data.Achievement;
 import data.InstallSolarPanels;
 import data.LoginDetails;
 import data.User;
@@ -21,6 +22,7 @@ import tools.Requests;
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
