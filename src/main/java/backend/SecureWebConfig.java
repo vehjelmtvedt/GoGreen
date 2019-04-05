@@ -19,21 +19,10 @@ public class SecureWebConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.requiresChannel().anyRequest().requiresSecure();
 
+        // We do not need CSRF protection, since the application will
+        // not be used on a webpage.
+        http.csrf().disable();
+
         System.out.println("Loaded Secure Web Configuration");
-    }
-
-    @Bean
-    public RestTemplate restTemplate() {
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setSSLHostnameVerifier(new NoopHostnameVerifier()).build();
-
-        HttpComponentsClientHttpRequestFactory requestFactory
-                = new HttpComponentsClientHttpRequestFactory();
-
-        RestTemplate restTemplate = new RestTemplate(requestFactory);
-
-        requestFactory.setHttpClient(httpClient);
-
-        return restTemplate;
     }
 }
