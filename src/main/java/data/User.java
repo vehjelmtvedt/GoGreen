@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 
 public class User {
 
@@ -19,8 +20,8 @@ public class User {
 
     private int loginStreak;
 
-    private ArrayList<String> friends;
-    private ArrayList<String> friendRequests;
+    private HashSet<String> friends;
+    private HashSet<String> friendRequests;
     private Date lastLoginDate;
 
     private ArrayList<Activity> activities;
@@ -58,8 +59,8 @@ public class User {
         this.username = username;
         this.password = password;
         this.loginStreak = 0;
-        this.friends = new ArrayList<>();
-        this.friendRequests = new ArrayList<>();
+        this.friends = new HashSet<>();
+        this.friendRequests = new HashSet<>();
         this.electricityDailyConsumption = 0;
         this.heatingOilDailyConsumption = 0;
         this.carType = "default";
@@ -140,7 +141,7 @@ public class User {
         return this.securityQuestionAnswer;
     }
 
-    public ArrayList<String> getFriends() {
+    public HashSet<String> getFriends() {
         return this.friends;
     }
 
@@ -148,7 +149,7 @@ public class User {
         return this.activities;
     }
 
-    public ArrayList<String> getFriendRequests() {
+    public HashSet<String> getFriendRequests() {
         return this.friendRequests;
     }
 
@@ -233,11 +234,11 @@ public class User {
         this.lastLoginDate = date;
     }
 
-    public void setFriends(ArrayList<String> friends) {
+    public void setFriends(HashSet<String> friends) {
         this.friends = friends;
     }
 
-    public void setFriendRequests(ArrayList<String> friendRequests) {
+    public void setFriendRequests(HashSet<String> friendRequests) {
         this.friendRequests = friendRequests;
     }
 
