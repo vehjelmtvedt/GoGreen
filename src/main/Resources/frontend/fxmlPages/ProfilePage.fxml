@@ -124,16 +124,16 @@
                               </Label>
                               <AnchorPane layoutX="234.0" layoutY="45.0" prefHeight="252.0" prefWidth="511.0" style="-fx-border-color: black;">
                                  <children>
-                                    <Label layoutX="191.0" prefHeight="29.0" prefWidth="107.0" text="My Badges">
+                                    <Label layoutX="191.0" layoutY="9.0" prefHeight="29.0" prefWidth="107.0" text="My Badges">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
                                     <AnchorPane layoutX="10.0" layoutY="38.0" prefHeight="200.0" prefWidth="506.0">
                                        <children>
-                                          <ScrollPane layoutX="-3.0" prefHeight="200.0" prefWidth="506.0">
+                                          <ScrollPane layoutX="13.0" layoutY="9.0" prefHeight="182.0" prefWidth="481.0" style="-fx-background-color: white;">
                                              <content>
-                                                <HBox fx:id="badgeZone" prefHeight="184.0" prefWidth="496.0" />
+                                                <HBox fx:id="badgeZone" prefHeight="162.0" prefWidth="480.0" />
                                              </content>
                                           </ScrollPane>
                                        </children></AnchorPane>
@@ -154,7 +154,7 @@
                      <children>
                         <AnchorPane prefHeight="335.0" prefWidth="760.0" style="-fx-border-color: black;">
                            <children>
-                              <Label layoutX="199.0" layoutY="6.0" prefHeight="26.0" prefWidth="289.0" text="My Completed Acheivements" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="274.0">
+                              <Label layoutX="200.0" layoutY="14.0" prefHeight="26.0" prefWidth="289.0" text="My Completed Acheivements" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="275.0">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -171,7 +171,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="331.0" prefWidth="762.0" style="-fx-border-color: black;">
                            <children>
-                              <Label layoutX="252.0" prefHeight="26.0" prefWidth="263.0" text="My Pending Acheivements" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="255.0">
+                              <Label layoutX="254.0" layoutY="14.0" prefHeight="26.0" prefWidth="254.0" text="My Pending Acheivements" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="253.0">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
