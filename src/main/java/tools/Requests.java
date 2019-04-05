@@ -29,10 +29,10 @@ public class Requests {
     private String url;
 
     protected Requests() {
-        String profile = System.getProperty("active-profile");
+        String url = System.getProperty("remote.url");
 
-        if (profile != null && profile.equals("prod")) {
-            buildSecureRestTemplate();
+        if (url != null && !url.contains("localhost")) {
+            buildSecureRestTemplate(url);
         } else {
             buildInsecureRestTemplate();
         }
@@ -46,10 +46,12 @@ public class Requests {
         restTemplate = new RestTemplate();
     }
 
+
     /**.
      * Sets the REST Template to an HTTPS secure REST Template that connects to remote Heroku host
+     * @param remoteUrl - Remote Host URL
      */
-    private void buildSecureRestTemplate() {
+    private void buildSecureRestTemplate(String remoteUrl) {
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setSSLHostnameVerifier(new NoopHostnameVerifier()).build();
 
@@ -60,7 +62,7 @@ public class Requests {
 
         restTemplate = new RestTemplate(requestFactory);
 
-        url = "https://cse38-go-green.herokuapp.com";
+        url = remoteUrl;
     }
 
     /**

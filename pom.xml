@@ -171,14 +171,12 @@
             </activation>
             <properties>
                 <spring.profiles.active>dev</spring.profiles.active>
-                <active-profile>dev</active-profile>
             </properties>
         </profile>
         <profile>
             <id>prod</id>
             <properties>
                 <spring.profiles.active>prod</spring.profiles.active>
-                <active-profile>prod</active-profile>
             </properties>
         </profile>
     </profiles>
