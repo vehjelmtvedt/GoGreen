@@ -29,14 +29,26 @@ public class Requests {
     private String url;
 
     protected Requests() {
-        buildInsecureRestTemplate();
+        String profile = System.getProperty("active-profile");
+
+        if (profile != null && profile.equals("prod")) {
+            buildSecureRestTemplate();
+        } else {
+            buildInsecureRestTemplate();
+        }
     }
 
+    /**.
+     * Sets the REST Template to an HTTP REST Template that connects to localhost with port 8080
+     */
     private void buildInsecureRestTemplate() {
         url = "http://localhost:8080";
         restTemplate = new RestTemplate();
     }
 
+    /**.
+     * Sets the REST Template to an HTTPS secure REST Template that connects to remote Heroku host
+     */
     private void buildSecureRestTemplate() {
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setSSLHostnameVerifier(new NoopHostnameVerifier()).build();
