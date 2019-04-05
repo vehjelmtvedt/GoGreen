@@ -20,11 +20,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import tools.ActivityQueries;
+import tools.DateUnit;
 import tools.Requests;
 import tools.SyncUserTask;
 
@@ -68,8 +72,6 @@ public class HomepageController implements Initializable {
     @FXML
     private JFXButton btnProfile;
     @FXML
-    private JFXButton btnMyStats;
-    @FXML
     private JFXButton btnTop5;
     @FXML
     private JFXButton btnTop10;
@@ -78,24 +80,56 @@ public class HomepageController implements Initializable {
     @FXML
     private JFXButton btnTop50;
     @FXML
-    private JFXTreeTableView tableLeaderboards;
+    private JFXButton btnTop100;
+    @FXML
+    private JFXTreeTableView tableTop5;
+    @FXML
+    private JFXTreeTableView tableTop10;
+    @FXML
+    private JFXTreeTableView tableTop25;
+    @FXML
+    private JFXTreeTableView tableTop50;
+    @FXML
+    private JFXTreeTableView tableTop100;
     @FXML
     private PieChart chartMyActivities;
+    @FXML
+    private BarChart barChart;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         popup = new NotificationPopup();
         //add buttons to leader boards list
-        leaderboards.add(btnMyStats);
         leaderboards.add(btnTop5);
         leaderboards.add(btnTop10);
         leaderboards.add(btnTop25);
         leaderboards.add(btnTop50);
+        leaderboards.add(btnTop100);
 
         Events.addLeaderboards(leaderboards);
 
         //switch leaderboards upon clicking
-        fillLeaderboards(5);
+        fillLeaderboards(5, tableTop5);
+        fillLeaderboards(10, tableTop10);
+        fillLeaderboards(25, tableTop25);
+        fillLeaderboards(50, tableTop50);
+        fillLeaderboards(100, tableTop100);
+
+        btnTop5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            hideLeaderboards(tableTop5, tableTop10, tableTop25, tableTop50, tableTop100);
+        });
+        btnTop10.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            hideLeaderboards(tableTop10, tableTop5, tableTop25, tableTop50, tableTop100);
+        });
+        btnTop25.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            hideLeaderboards(tableTop25, tableTop5, tableTop10, tableTop50, tableTop100);
+        });
+        btnTop25.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            hideLeaderboards(tableTop50, tableTop5, tableTop10, tableTop50, tableTop100);
+        });
+        btnTop100.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            hideLeaderboards(tableTop100, tableTop5, tableTop10, tableTop25, tableTop50);
+        });
 
         //addFonts
         try {
@@ -121,6 +155,7 @@ public class HomepageController implements Initializable {
 
         //charts on the right
         chartMyActivities.setData(fillPieChart(loggedUser));
+        fillChart("Your CO2 Savings", barChart);
 
         Events.addJfxButtonHover(btnProfile);
 
@@ -218,8 +253,9 @@ public class HomepageController implements Initializable {
      * Fill the table tree view with the leaderboards
      *
      * @param top - the first x people to show on the leaderboards
+     * @param table - the first x people to show on the leaderboards
      */
-    public void fillLeaderboards(int top) {
+    public void fillLeaderboards(int top, JFXTreeTableView table) {
         JFXTreeTableColumn<UserItem, String>
                 usernameColumn = new JFXTreeTableColumn<>("User");
         usernameColumn.setCellValueFactory(param -> param.getValue().getValue().username);
@@ -230,12 +266,12 @@ public class HomepageController implements Initializable {
         levelColumn.setCellValueFactory(param -> param.getValue().getValue().level);
 
         JFXTreeTableColumn<UserItem, String>
-                totalActivitiesColumn = new JFXTreeTableColumn<>("Friends");
+                totalActivitiesColumn = new JFXTreeTableColumn<>("Activities");
         totalActivitiesColumn.setCellValueFactory(param ->
                 param.getValue().getValue().totalActivities);
 
         JFXTreeTableColumn<UserItem, String>
-                totalFriendsColumn = new JFXTreeTableColumn<>("Activities");
+                totalFriendsColumn = new JFXTreeTableColumn<>("Friends");
         totalFriendsColumn.setCellValueFactory(param ->
                 param.getValue().getValue().totalFriends);
 
@@ -254,13 +290,46 @@ public class HomepageController implements Initializable {
         final TreeItem<UserItem> root = new RecursiveTreeItem<>(
                 userList, RecursiveTreeObject::getChildren);
 
-        tableLeaderboards.getColumns().setAll(usernameColumn, levelColumn, totalActivitiesColumn,
-                totalFriendsColumn, totalCarbonSavedColumn);
-        tableLeaderboards.setRoot(root);
-        tableLeaderboards.setShowRoot(false);
-
         styleTreeView(usernameColumn, levelColumn, totalActivitiesColumn,
                 totalFriendsColumn, totalCarbonSavedColumn);
+
+        table.getColumns().setAll(usernameColumn, levelColumn, totalActivitiesColumn,
+                totalFriendsColumn, totalCarbonSavedColumn);
+        table.setRoot(root);
+        table.setShowRoot(false);
+    }
+
+    /**
+     * Adds the data to the first bar chart.
+     *
+     * @param series - the series to add data to
+     */
+    public void populateBarChart(XYChart.Series series) {
+        ActivityQueries thisQuery = new ActivityQueries(loggedUser.getActivities());
+        series.getData().add(new XYChart.Data("Today",
+                thisQuery.getTotalCO2Saved(DateUnit.TODAY)));
+        series.getData().add(new XYChart.Data("Last Week",
+                thisQuery.getTotalCO2Saved(DateUnit.WEEK)));
+        series.getData().add(new XYChart.Data("Last Month",
+                thisQuery.getTotalCO2Saved(DateUnit.MONTH)));
+    }
+
+    private void fillChart(String title, BarChart chart) {
+        XYChart.Series series = new XYChart.Series();
+        series.setName(title);
+        populateBarChart(series);
+        chart.getData().addAll(series);
+        chart.setLegendVisible(false);
+    }
+
+    private static void hideLeaderboards(JFXTreeTableView shown,
+                                         JFXTreeTableView first, JFXTreeTableView second,
+                                         JFXTreeTableView third, JFXTreeTableView fourth) {
+        shown.setVisible(true);
+        first.setVisible(false);
+        second.setVisible(false);
+        third.setVisible(false);
+        fourth.setVisible(false);
     }
 
     /**

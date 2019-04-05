@@ -15,7 +15,7 @@ import data.UseBikeInsteadOfCar;
 import data.UseBusInsteadOfCar;
 import data.UseTrainInsteadOfCar;
 import data.User;
-import frontend.controllers.ActivitiesController;
+import frontend.controllers.ActivitiesController;   
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
