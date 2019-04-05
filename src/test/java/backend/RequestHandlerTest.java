@@ -279,4 +279,17 @@ public class RequestHandlerTest
         assertEquals(requestHandler.getAverageCO2Saved(),25.2);
     }
 
+    @Test
+    public void getRank() {
+        Mockito.when(dbService.grantAccess(testUser.getEmail(),testUser.getPassword())).thenReturn(testUser);
+        Mockito.when(dbService.getUserRank(testUser.getEmail())).thenReturn(5);
+        assertEquals(requestHandler.getRank(new LoginDetails(testUser.getEmail(),testUser.getPassword())),5);
+    }
+
+    @Test
+    public void getRankFail() {
+        Mockito.when(dbService.grantAccess(testUser.getEmail(),testUser.getPassword())).thenReturn(null);
+        assertEquals(requestHandler.getRank(new LoginDetails(testUser.getEmail(),testUser.getPassword())),-1);
+    }
+
 }

@@ -217,6 +217,20 @@ public class RequestHandler {
         return dbService.getAverageCO2Saved();
     }
 
+    /**
+     * request to get rank of a user.
+     * @param loginDetails auth and identifier
+     * @return the rank
+     */
+    @RequestMapping("/getRank")
+    public int getRank(@RequestBody LoginDetails loginDetails) {
+        if (dbService.grantAccess(loginDetails.getIdentifier(),
+                loginDetails.getPassword()) != null) {
+            return dbService.getUserRank(loginDetails.getIdentifier());
+        }
+        return -1;
+    }
+
 }
 
 

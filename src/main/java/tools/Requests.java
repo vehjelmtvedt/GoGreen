@@ -213,7 +213,16 @@ public class Requests {
      * @return average CO2 saved
      */
     public static double getAverageCO2Saved() {
-        return restTemplate.getForEntity(url + "/getAverageCO2Saved",double.class).getBody();
+        return restTemplate.getForEntity(url + "/getAverageCO2Saved", double.class).getBody();
+    }
+
+    /**
+     * get rank of the user.
+     * @param loginDetails authentication and identity of user
+     * @return the rank of the user
+     */
+    public int getUserRanking(LoginDetails loginDetails) {
+        return restTemplate.postForEntity(url + "/getRank",loginDetails,int.class).getBody();
     }
 
 
