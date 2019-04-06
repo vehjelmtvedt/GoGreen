@@ -1,11 +1,9 @@
 package data;
 
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+
 
 
 public class AchievementsLogic {
@@ -230,7 +228,7 @@ public class AchievementsLogic {
      * this method checks every achievement if its already in the List, if not add it.
      *
      * @param user current user
-     * @param ids  achievement to check
+     * @param id  achievement to check
      * @param date date to add
      */
     public static void addAchievemnt(User user, int id, Date date) {
