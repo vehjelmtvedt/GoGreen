@@ -180,6 +180,13 @@ public class ActivityQueriesTest {
     }
 
     @Test
+    public void testFilterByDateOneFrom() {
+        Date fromDate = DateUtils.getDateBefore(Calendar.getInstance().getTime(), DateUnit.WEEK);
+        addActivitiesToUser(activeUser, 0, 5, 1);
+        Assert.assertEquals(1, activityQuery.filterActivitiesByDate(fromDate, today).size());
+    }
+
+    @Test
     public void testFilterByDateAllInRage() {
         Date fromDate = getDateRewind(10);
 
