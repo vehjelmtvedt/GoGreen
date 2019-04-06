@@ -142,6 +142,18 @@
     "id": 23,
     "name": "Achieve level 8",
     "bonus": 2000
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 24,
+    "name": "User the train once",
+    "bonus": 2000
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 25,
+    "name": "User the train often",
+    "bonus": 2000
   }
 
 ]

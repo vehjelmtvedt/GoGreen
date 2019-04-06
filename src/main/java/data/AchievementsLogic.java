@@ -33,7 +33,6 @@ public class AchievementsLogic {
 
         }
 
-
         //Using public transport once id 4
         if (activity instanceof UseBusInsteadOfCar || activity instanceof UseTrainInsteadOfCar) {
             addAchievemnt(user, 4, activity.getDate());
@@ -44,15 +43,33 @@ public class AchievementsLogic {
             addAchievemnt(user, 5, activity.getDate());
 
         }
+    }
+    /**
+     * checks more transport related activity if it completes an achievement.
+     *
+     * @param user     current user
+     * @param activity current activity
+     */
 
+    public static void checkTranspostActivity1(User user , Activity activity) {
         //Use the Bus once 7
         if (activity instanceof UseBusInsteadOfCar) {
 
             addAchievemnt(user, 7, activity.getDate());
         }
 
-    }
+        //use the train once 24
+        if (activity instanceof UseTrainInsteadOfCar) {
+            addAchievemnt(user, 24, activity.getDate());
+        }
 
+        //use the train once 25
+        if (activity instanceof UseTrainInsteadOfCar
+                && user.getSimilarActivities(activity).size() > 4) {
+            addAchievemnt(user, 25, activity.getDate());
+        }
+
+    }
 
     /**
      * checks food related activity if it completes an achievement.
@@ -140,27 +157,54 @@ public class AchievementsLogic {
             addAchievemnt(user, 14, Calendar.getInstance().getTime());
         }
 
+
+
         //todo
         //Being on the top of the board id 10
         //Being second on top of the board id 11
         //Be third on top of the larboard 18
-        //Achieve level 4 19
-        //Achieve level 5 20
-        //Achieve level 6 21
-        //Achieve level 7 22
-        //Achieve level 8 23
         //Getting solar Power 12
+
+    }
+
+    /**check if the user has a level to grant the corresponding achievement.
+     *
+     * @param user user to check
+     */
+    public static void checkLevel(User user) {
+
+        //Achieve level 4 19
+        if (user.getProgress().getLevel() >= 4) {
+            addAchievemnt(user, 19, Calendar.getInstance().getTime());
+        }
+        //Achieve level 5 20
+        if (user.getProgress().getLevel() >= 5) {
+            addAchievemnt(user, 20, Calendar.getInstance().getTime());
+        }
+        //Achieve level 6 21
+        if (user.getProgress().getLevel() >= 6) {
+            addAchievemnt(user, 21, Calendar.getInstance().getTime());
+        }
+        //Achieve level 7 22
+        if (user.getProgress().getLevel() >= 7) {
+            addAchievemnt(user, 22, Calendar.getInstance().getTime());
+        }
+        //Achieve level 8 23
+        if (user.getProgress().getLevel() == 8) {
+            addAchievemnt(user, 23, Calendar.getInstance().getTime());
+        }
 
     }
 
 
     /**
      * this method checks every achievement if its already in the List, if not add it.
+     *
      * @param user current user
-     * @param id achievement to check
+     * @param id   achievement to check
      * @param date date to add
      */
-    public static void addAchievemnt(User user , int id , Date date) {
+    public static void addAchievemnt(User user, int id, Date date) {
 
         boolean alreadythere = false;
 
@@ -180,12 +224,13 @@ public class AchievementsLogic {
 
             user.getProgress().getAchievements().add(userAchievement);
 
-            user.getProgress().setPoints(user.getProgress().getPoints() + DbService.getAchievementPoints(id));
+            user.getProgress().setPoints(user.getProgress().getPoints()
+                    + DbService.getAchievementPoints(id));
 
-//            System.out.println("added ..... .............." + DbService.getAchievementPoints(id)
-//                    + "..................." + user.getProgress().getPoints());
+            //System.out.println("added ..... .............." + DbService.getAchievementPoints(id)
+            //       + "..................." + user.getProgress().getPoints());
 
-            for (int i = 0 ; i < user.getProgress().getAchievements().size() ; i++) {
+            for (int i = 0; i < user.getProgress().getAchievements().size(); i++) {
 
                 System.out.println(user.getProgress().getAchievements().get(i).toString());
 

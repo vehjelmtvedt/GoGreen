@@ -20,7 +20,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-import java.io.FileNotFoundException;
 import java.net.URL;
 
 import java.util.ResourceBundle;
@@ -132,42 +131,42 @@ public class ProfilePageController implements Initializable {
     public static void addCompletedAchievements(VBox com) {
 
 
-            ProfilePageController.setUser(thisUser);
+        ProfilePageController.setUser(thisUser);
 
-            // for every completed achievement module  is created
-            // and added to a VBox small pics might be added later
-            for (int i = 0; i < thisUser.getProgress().getAchievements().size(); i++) {
+        // for every completed achievement module  is created
+        // and added to a VBox small pics might be added later
+        for (int i = 0; i < thisUser.getProgress().getAchievements().size(); i++) {
 
+            HBox hbox = new HBox();
 
-                HBox hbox = new HBox();
+            hbox.setSpacing(10.0);
 
-                hbox.setSpacing(10.0);
+            ImageView achievementimage = new ImageView();
 
-                ImageView achievementimage = new ImageView();
+            achievementimage.setFitHeight(32);
 
-                achievementimage.setFitHeight(32);
+            achievementimage.setFitWidth(32);
 
-                achievementimage.setFitWidth(32);
+            achievementimage.setImage(ProfilePageLogic.getUserAchievementImagePath(
+                    thisUser.getProgress().getAchievements().get(i)));
 
-                achievementimage.setImage(ProfilePageLogic.getUserAchievementImagePath(
-                        thisUser.getProgress().getAchievements().get(i)));
+            Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
+                    thisUser.getProgress().getAchievements().get(i)));
+            name.setFill(Color.GREEN);
 
-                Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
-                        thisUser.getProgress().getAchievements().get(i)));
-                name.setFill(Color.GREEN);
+            Text bonus = new Text(", Earned: " + ProfilePageLogic.getBonusString(
+                    thisUser.getProgress().getAchievements().get(i)) + " Points");
+            Text date = new Text(", Completed On: " + ProfilePageLogic.getDateString(
+                    thisUser.getProgress().getAchievements().get(i)) + ".");
 
-                Text bonus = new Text(", Earned: " + ProfilePageLogic.getBonusString(
-                        thisUser.getProgress().getAchievements().get(i)) + " Points");
-                Text date = new Text(", Completed On: " + ProfilePageLogic.getDateString(
-                        thisUser.getProgress().getAchievements().get(i)) + ".");
+            hbox.getChildren().addAll(achievementimage, name, bonus, date);
 
-                hbox.getChildren().addAll(achievementimage, name, bonus, date);
+            com.getChildren().add(hbox);
 
-                com.getChildren().add(hbox);
-
-            }
+        }
 
     }
+
     /**
      * Adds the incompleted achievements to the Vbox.
      *
@@ -209,8 +208,8 @@ public class ProfilePageController implements Initializable {
         }
     }
 
-    /**this updates the achievements .
-     *
+    /**
+     * this updates the achievements .
      */
     public void updateAchievements() {
 
@@ -225,8 +224,8 @@ public class ProfilePageController implements Initializable {
 
     }
 
-    /**this updates the states.
-     *
+    /**
+     * this updates the states.
      */
     public void updateStates() {
 

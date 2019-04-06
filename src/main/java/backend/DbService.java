@@ -433,6 +433,11 @@ public class DbService {
         userStatistics.save(allStatistics);
     }
 
+    /**get the bonus for an achievement.
+     *
+     * @param id this id of the said achievement
+     * @return the bonus points to be added
+     */
     public static int getAchievementPoints(int id) {
 
         List<Achievement> list = Requests.getAllAchievements();

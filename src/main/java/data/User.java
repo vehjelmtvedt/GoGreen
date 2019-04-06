@@ -313,6 +313,7 @@ public class User {
         // check if an achievement is completed by this activity
         AchievementsLogic.checkFoodActivity(this , activity);
         AchievementsLogic.checkTranspostActivity(this , activity);
+        AchievementsLogic.checkTranspostActivity1(this , activity);
 
         // adds points to the user
         this.addCO2Points(activity.getCarbonSaved());
@@ -351,6 +352,8 @@ public class User {
      */
     public void addCO2Points( double carbonsaved) {
         this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
+
+        AchievementsLogic.checkLevel(this);
 
     }
 
