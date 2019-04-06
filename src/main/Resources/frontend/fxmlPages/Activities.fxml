@@ -393,15 +393,18 @@
                                     <JFXCheckBox fx:id="checkFood" checkedColor="GREEN" text="Food">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
-                                       </cursor></JFXCheckBox>
+                                       </cursor>
+                                    </JFXCheckBox>
                                     <JFXCheckBox fx:id="checkTransportation" checkedColor="GREEN" text="Transportation">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
-                                       </cursor></JFXCheckBox>
+                                       </cursor>
+                                    </JFXCheckBox>
                                     <JFXCheckBox fx:id="checkHousehold" checkedColor="GREEN" text="Household">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
-                                       </cursor></JFXCheckBox>
+                                       </cursor>
+                                    </JFXCheckBox>
                                  </children>
                               </VBox>
                               <Line endX="100.0" layoutX="158.0" layoutY="48.0" startX="-100.0" AnchorPane.leftAnchor="57.5" AnchorPane.rightAnchor="56.5" />

@@ -172,7 +172,8 @@ public final class CarbonCalculator {
      * Miscellaneous spending emissions.
      *
      */
-    public static double miscellaneousSpendingEmisions(MiscellaneousSpending miscellaneousSpending) {
+    public static double miscellaneousSpendingEmisions(MiscellaneousSpending
+                                                               miscellaneousSpending) {
         return miscellaneousSpending.carbonEmissions;
     }
 

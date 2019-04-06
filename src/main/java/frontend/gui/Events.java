@@ -11,11 +11,13 @@ import data.BuyOrganicFood;
 import data.EatVegetarianMeal;
 import data.InstallSolarPanels;
 import data.LowerHomeTemperature;
+import data.RecyclePaper;
+import data.RecyclePlastic;
 import data.UseBikeInsteadOfCar;
 import data.UseBusInsteadOfCar;
 import data.UseTrainInsteadOfCar;
 import data.User;
-import frontend.controllers.ActivitiesController;   
+import frontend.controllers.ActivitiesController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -261,31 +263,37 @@ public class Events {
                         installedPanels.setVisible(true);
                     }
                 }
-            } else {
-                if (type == 2) {
-                    LowerHomeTemperature temp = new LowerHomeTemperature();
-                    if (temp.timesPerformedInTheSameDay(loggedUser) > 0) {
-                        Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setTitle("Warning");
-                        alert.setHeaderText("Oops");
-                        alert.setContentText(
-                                "It looks like you already did this today,"
-                                        + " you can try again tomorrow!");
-                        alert.showAndWait();
-                    } else {
-                        List<String> choices = Arrays.asList( "1", "2", "3", "4", "5");
-                        ChoiceDialog<String> dialog = new ChoiceDialog<>("1", choices);
-                        dialog.setTitle("Lower Home Temperature");
-                        dialog.setHeaderText("How many degrees did you turn your thermostat down?");
-                        dialog.setContentText("Degrees:");
-                        Optional<String> result = dialog.showAndWait();
-                        if (result.isPresent()) {
-                            System.out.println("Degrees: " + result.get());
-                            temp.setDegrees(Integer.parseInt(result.get()));
-                            temp.performActivity(loggedUser);
-                            loweredTemp.setVisible(true);
-                        }
+            } else if (type == 2) {
+                LowerHomeTemperature temp = new LowerHomeTemperature();
+                if (temp.timesPerformedInTheSameDay(loggedUser) > 0) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("Oops");
+                    alert.setContentText(
+                            "It looks like you already did this today,"
+                                    + " you can try again tomorrow!");
+                    alert.showAndWait();
+                } else {
+                    List<String> choices = Arrays.asList( "1", "2", "3", "4", "5");
+                    ChoiceDialog<String> dialog = new ChoiceDialog<>("1", choices);
+                    dialog.setTitle("Lower Home Temperature");
+                    dialog.setHeaderText("How many degrees did you turn your thermostat down?");
+                    dialog.setContentText("Degrees:");
+                    Optional<String> result = dialog.showAndWait();
+                    if (result.isPresent()) {
+                        System.out.println("Degrees: " + result.get());
+                        temp.setDegrees(Integer.parseInt(result.get()));
+                        temp.performActivity(loggedUser);
+                        loweredTemp.setVisible(true);
                     }
+                }
+            } else if (type == 3) {
+                RecyclePlastic activity = new RecyclePlastic();
+                activity.performActivity(loggedUser);
+            } else {
+                if (type == 4) {
+                    RecyclePaper activity = new RecyclePaper();
+                    activity.performActivity(loggedUser);
                 }
             }
 

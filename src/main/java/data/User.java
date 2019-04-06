@@ -217,7 +217,7 @@ public class User {
 
     public void setTotalCarbonSaved(double totalCarbonSaved) {
         // keep only 3 decimal places
-        this.totalCarbonSaved = ((int)(totalCarbonSaved * 1000)) / 1000.0;
+        this.totalCarbonSaved = ((int) (totalCarbonSaved * 1000)) / 1000.0;
     }
 
     public double getTotalCarbonSaved() {
@@ -247,6 +247,7 @@ public class User {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
     /**
      * Returns string representation of the User object.
      *
@@ -317,24 +318,30 @@ public class User {
 
     // ---------- ACTIVITY METHODS ----------
 
-    /**.
+    /**
+     * .
      * Adds a new activity to user's activities list
+     *
      * @param activity - Activity to add
      */
     public void addActivity(Activity activity) {
         this.activities.add(activity);
     }
 
-    /**.
+    /**
+     * .
      * Removes an activity from user's activities list
+     *
      * @param activity - Activity to remove
      */
     public void removeActivity(Activity activity) {
         this.activities.remove(activity);
     }
 
-    /**.
+    /**
+     * .
      * Returns a list of activities that are of the same type of the specified activity.
+     *
      * @param activity - Activity to compare to
      * @return List of activities of same type
      */
@@ -353,9 +360,10 @@ public class User {
     /**
      * addes to the points the amount of co2 save.*
      * every one co2 unite is worth 1 point
+     *
      * @param carbonsaved co2 saved
      */
-    public void addCO2Points( double carbonsaved) {
+    public void addCO2Points(double carbonsaved) {
         this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
 
     }

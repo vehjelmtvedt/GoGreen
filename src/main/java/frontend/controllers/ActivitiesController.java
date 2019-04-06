@@ -59,6 +59,10 @@ public class ActivitiesController implements Initializable {
     @FXML
     private JFXButton btnNonProFood;
     @FXML
+    private JFXButton btnPlastic;
+    @FXML
+    private JFXButton btnPaper;
+    @FXML
     private Pane paneFood;
     @FXML
     private Pane paneTransportation;
@@ -100,6 +104,10 @@ public class ActivitiesController implements Initializable {
     private AnchorPane paneSolarPanels;
     @FXML
     private AnchorPane paneEnergy;
+    @FXML
+    private AnchorPane panePlastic;
+    @FXML
+    private AnchorPane panePaper;
     @FXML
     private JFXTextField inputDistance;
     @FXML
@@ -174,6 +182,10 @@ public class ActivitiesController implements Initializable {
                 lblLoweredTemp,1, loggedUser, activityTable);
         Events.addHouseholdActivity(paneEnergy, lblPanelsInstalled,
                 lblLoweredTemp,2, loggedUser, activityTable);
+        Events.addHouseholdActivity(panePlastic, null, null, 3,
+                loggedUser, activityTable);
+        Events.addHouseholdActivity(panePaper, null, null, 4,
+                loggedUser, activityTable);
 
         //add hover events for button activities
         Events.addActivityHover(paneVegetarianMeal, btnVegetarianMeal);
@@ -185,6 +197,8 @@ public class ActivitiesController implements Initializable {
         Events.addActivityHover(paneTrain, btnTrain);
         Events.addActivityHover(paneSolarPanels, btnSolarPanels);
         Events.addActivityHover(paneEnergy, btnEnergy);
+        Events.addActivityHover(panePlastic,btnPlastic);
+        Events.addActivityHover(panePaper, btnPaper);
 
         //setup notification and navigation panels
         try {
