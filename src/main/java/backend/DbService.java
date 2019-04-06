@@ -477,10 +477,10 @@ public class DbService {
     }
 
     /**
-     * this method checks every achievement if its already in the List, if not add it.
+     * this method checks every achievements if its already in the List, if not add it.
      *
      * @param user current user
-     * @param ids   achievement to check
+     * @param ids   achievements to check
      * @param date date to add
      */
     public void addAchievemnt(User user, ArrayList ids, Date date) {
@@ -535,9 +535,9 @@ public class DbService {
     }
 
     /**
-     * addes to the points the amount of co2 save.*
+     * addes to the points the amount of co2 save.
      * every one co2 unite is worth 1 point
-     *
+     * @param user user to add points to
      * @param carbonsaved co2 saved
      */
     public void addCO2Points(User user , double carbonsaved) {
