@@ -319,12 +319,13 @@ public class Events {
      * @param loggedUser - the user who performs the activity
      * @param activityTable - the history table
      */
-    public static void addRecyclingActivity(AnchorPane pane, Label plastic, Label paper, int type,
+    public static void addRecyclingActivity(AnchorPane pane, Label lblPlastic,
+                                            Label lblPaper, int type,
                                             User loggedUser, TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
-                RecyclePlastic activity = new RecyclePlastic();
-                if (activity.timesPerformedInTheSameDay(loggedUser) > 0) {
+                RecyclePlastic plastic = new RecyclePlastic();
+                if (plastic.timesPerformedInTheSameDay(loggedUser) > 0) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Warning");
                     alert.setHeaderText("Oops");
@@ -333,13 +334,13 @@ public class Events {
                                     + " you can try again tomorrow!");
                     alert.showAndWait();
                 } else {
-                    activity.performActivity(loggedUser);
-                    plastic.setVisible(true);
+                    plastic.performActivity(loggedUser);
+                    lblPlastic.setVisible(true);
                 }
             } else {
                 if (type == 2) {
-                    RecyclePaper activity = new RecyclePaper();
-                    if (activity.timesPerformedInTheSameDay(loggedUser) > 0) {
+                    RecyclePaper paper = new RecyclePaper();
+                    if (paper.timesPerformedInTheSameDay(loggedUser) > 0) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Warning");
                         alert.setHeaderText("Oops");
@@ -348,8 +349,8 @@ public class Events {
                                         + " you can try again tomorrow!");
                         alert.showAndWait();
                     } else {
-                        activity.performActivity(loggedUser);
-                        paper.setVisible(true);
+                        paper.performActivity(loggedUser);
+                        lblPaper.setVisible(true);
                     }
                 }
             }
