@@ -8,6 +8,8 @@ import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.InstallSolarPanels;
 import data.LowerHomeTemperature;
+import data.RecyclePaper;
+import data.RecyclePlastic;
 import data.User;
 import frontend.gui.Events;
 import frontend.gui.General;
@@ -139,6 +141,10 @@ public class ActivitiesController implements Initializable {
     @FXML
     private Label lblLoweredTemp;
     @FXML
+    private Label lblPlastic;
+    @FXML
+    private Label lblPaper;
+    @FXML
     private JFXRadioButton radioToday;
     @FXML
     private JFXRadioButton radioWeek;
@@ -182,8 +188,8 @@ public class ActivitiesController implements Initializable {
                 lblLoweredTemp,1, loggedUser, activityTable);
         Events.addHouseholdActivity(paneEnergy, lblPanelsInstalled,
                 lblLoweredTemp,2, loggedUser, activityTable);
-        Events.addRecyclingActivity(panePlastic, 1, loggedUser, activityTable);
-        Events.addRecyclingActivity(panePaper, 2, loggedUser, activityTable);
+        Events.addRecyclingActivity(panePlastic, lblPlastic, lblPaper,1, loggedUser, activityTable);
+        Events.addRecyclingActivity(panePaper, lblPlastic, lblPaper,2, loggedUser, activityTable);
 
         //add hover events for button activities
         Events.addActivityHover(paneVegetarianMeal, btnVegetarianMeal);
@@ -238,11 +244,15 @@ public class ActivitiesController implements Initializable {
         Events.applyFilters(lblApply, checkList, radioList,
                 minCarbon, maxCarbon, loggedUser, activityTable);
 
-        //setup additional
+        //setup additional labels
         InstallSolarPanels panels = new InstallSolarPanels();
         LowerHomeTemperature temp = new LowerHomeTemperature();
         lblPanelsInstalled.setVisible(loggedUser.getSimilarActivities(panels).size() > 0);
         lblLoweredTemp.setVisible(temp.timesPerformedInTheSameDay(loggedUser) > 0);
+        RecyclePlastic plastic = new RecyclePlastic();
+        lblPlastic.setVisible(plastic.timesPerformedInTheSameDay(loggedUser) > 0);
+        RecyclePaper paper = new RecyclePaper();
+        lblPaper.setVisible(paper.timesPerformedInTheSameDay(loggedUser) > 0);
     }
 
     public static void popup(String heading, String body, String icon,

@@ -319,16 +319,38 @@ public class Events {
      * @param loggedUser - the user who performs the activity
      * @param activityTable - the history table
      */
-    public static void addRecyclingActivity(AnchorPane pane, int type,
+    public static void addRecyclingActivity(AnchorPane pane, Label plastic, Label paper, int type,
                                             User loggedUser, TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
                 RecyclePlastic activity = new RecyclePlastic();
-                activity.performActivity(loggedUser);
+                if (activity.timesPerformedInTheSameDay(loggedUser) > 0) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("Oops");
+                    alert.setContentText(
+                            "It looks like you already did this today,"
+                                    + " you can try again tomorrow!");
+                    alert.showAndWait();
+                } else {
+                    activity.performActivity(loggedUser);
+                    plastic.setVisible(true);
+                }
             } else {
                 if (type == 2) {
                     RecyclePaper activity = new RecyclePaper();
-                    activity.performActivity(loggedUser);
+                    if (activity.timesPerformedInTheSameDay(loggedUser) > 0) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText("Oops");
+                        alert.setContentText(
+                                "It looks like you already did this today,"
+                                        + " you can try again tomorrow!");
+                        alert.showAndWait();
+                    } else {
+                        activity.performActivity(loggedUser);
+                        paper.setVisible(true);
+                    }
                 }
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
