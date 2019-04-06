@@ -1,8 +1,12 @@
 package tools;
 
 import data.Activity;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.BarChart;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -249,53 +253,43 @@ public class ActivityQueries {
         return Activity.getSum(activityList);
     }
 
-    //    /**
-    //     * .
-    //     * get the number of activities performed by the user in each
-    //     * category of activities i.e. Food, Transportation, Household
-    //     *
-    //     * @return - Array of int corresponding to each category
-    //     */
-    //    public ArrayList<int[]> getNrOfActivitiesByCat() {
-    //        int[] countCat = new int[3];
-    //        int[] countFood = new int[4];
-    //        int[] countTransportation = new int[3];
-    //        int[] countHousehold = new int[2];
-    //        String activityName;
-    //        for (Activity activity : this.activities) {
-    //            if (activity.getCategory().equals("Food")) {
-    //                countCat[0]++;
-    //                activityName = activity.getName();
-    //                switch (activityName) {
-    //                    case "Eat Vegetarian Meal" :
-    //                        countFood[0]++;
-    //                        break;
-    //                    case "Buy Organic Food" :
-    //                        countFood[1]++;
-    //                        break;
-    //                    case "Buy Locally Produced Food" :
-    //                        countFood[2]++;
-    //                        break;
-    //                    case "Buy Non-Processed Food" :
-    //                        countFood[3]++;
-    //                        break;
-    //                    default :
-    //                        break;
-    //                }
-    //            } else if (activity.getCategory().equals("Transportation")) {
-    //                countCat[1]++;
-    //
-    //            } else {
-    //                countCat[2]++;
-    //            }
-    //        }
-    //        ArrayList<int[]> counted = new ArrayList<>();
-    //        counted.add(countCat);
-    //        counted.add(countFood);
-    //        System.out.println(countFood[0] + countFood[1] + countFood[2] + countFood[3]);
-    //        counted.add(countTransportation);
-    //        counted.add(countHousehold);
-    //
-    //        return counted;
-    //    }
+    // ---------- CHART METHODS ----------
+
+    /**.
+     * Returns a List to be used directly for a Chart which contains entries
+     * for CO2 savings of a week, starting from the today's date and moving
+     * 7 days back
+     * @return - ObservableList of BarChart Data objects with fully constructed entries
+     */
+    public ObservableList<BarChart.Data> getWeeklyCO2Savings() {
+        // Filters the activities for one week for efficiency
+        activities = filterActivitiesByDate(DateUnit.WEEK);
+
+        // Create a new ObservableList with BarChart Data
+        ObservableList<BarChart.Data> list = FXCollections.observableArrayList();
+
+        // Get the Date of today
+        Date date = DateUtils.dateToday();
+
+        // Iterate for 7 days to get the data for the entire week
+        for (int i = 0; i < DateUnit.WEEK.getNumDays(); ++i) {
+            // Get the Day of Week String name for the entry label
+            String dayName = DateUtils.getDayName(date);
+
+            // Get the CO2 saved for the date
+            double co2Saved = getTotalCO2Saved(DateUnit.TODAY);
+
+            // Add entry to ObservableList
+            list.add(new BarChart.Data<>(dayName, co2Saved));
+
+            // Rewind Date back by 1 day
+            date = DateUtils.getDateBefore(date, DateUnit.DAY);
+        }
+
+        // Reverse the list (since the first date we added was today)
+        Collections.reverse(list);
+
+        // Return the ObservableList to be plugged directly to a BarChart
+        return list;
+    }
 }

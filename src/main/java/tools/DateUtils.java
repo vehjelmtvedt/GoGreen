@@ -1,5 +1,6 @@
 package tools;
 
+import java.time.DayOfWeek;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -39,6 +40,20 @@ public class DateUtils {
 
         // Return new Date
         return calendar.getTime();
+    }
+
+    /**.
+     * Gets the name of the day of the week the specified Date is in (Monday, Tuesday, ..)
+     * @param date - Date
+     * @return - Day Of Week of the Date as String
+     */
+    public static String getDayName(Date date) {
+        // Set Calendar's date to the one specified
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        // Get DayOfWeek as String
+        return DayOfWeek.of(calendar.get(Calendar.DAY_OF_WEEK)).toString();
     }
 
     /**.

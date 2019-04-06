@@ -1,6 +1,9 @@
 package tools;
 
 import data.*;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -320,5 +323,28 @@ public class ActivityQueriesTest {
         types.add(BuyNonProcessedFood.class);
 
         Assert.assertEquals(20, activityQuery.filterActivitiesByType(types).size());
+    }
+
+    @Test
+    public void testGetWeeklyCO2SavingsNone() {
+        // Construct an expected list of dates
+        List<String> expected = new ArrayList<>();
+
+        Calendar calendar = Calendar.getInstance();
+        for (int i = 0; i < 7; ++i) {
+            expected.add(DateUtils.getDayName(calendar.getTime()));
+            calendar.add(Calendar.DATE, -1);
+        }
+
+        // Reverse the list (since first day added was today's date)
+        Collections.reverse(expected);
+
+        // Get actual result
+        ObservableList<BarChart.Data> list = activityQuery.getWeeklyCO2Savings();
+
+        List<Object> days = list.stream().map(XYChart.Data::getXValue)
+                .collect(Collectors.toList());
+
+        Assert.assertEquals(expected, days);
     }
 }
