@@ -60,11 +60,21 @@ public class DateUtils {
      * Helper method to set date's hour, minute, second to 0
      * @param calendar - calendar instance to modify
      */
-    private static void setDateToMidnight(Calendar calendar) {
+    public static void setDateToMidnight(Calendar calendar) {
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
+    }
 
+    /**.
+     * Helper method set date's hour, minute, second to the very near end of the day
+     * @param calendar - calendar instance to modify
+     */
+    public static void setDateToEnd(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getMaximum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getMaximum(Calendar.MILLISECOND));
     }
 }

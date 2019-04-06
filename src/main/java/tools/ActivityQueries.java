@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.BarChart;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class ActivityQueries {
     private List<Activity> activities;
@@ -95,6 +92,11 @@ public class ActivityQueries {
             toIndex--;
         }
 
+        // No activities exist
+        if (toIndex == -1) {
+            return new ArrayList<>();
+        }
+
         int fromIndex = toIndex;
 
         // Now that we have the index of the last valid activity, we now loop
@@ -105,17 +107,21 @@ public class ActivityQueries {
             // Activity is not in our range, we may break, since all the other
             // preceding activities are also before the "from" date
             if (activity.getDate().before(from)) {
-                if (fromIndex == toIndex) { // edge case where no activities fit the range
-                    return new ArrayList<>();
-                }
-
                 break;
             }
         }
 
-        // Edge case where no matching activities found
-        if (fromIndex == -1) {
-            return new ArrayList<>();
+        // Edge case where fromIndex matches toIndex
+        if (fromIndex == toIndex) {
+            Date date = activities.get(fromIndex).getDate();
+
+            // In the case where fromIndex matches toIndex, the Date is out of range
+            // if the date is not equal to from or to AND if the date is both not after
+            // from and not before to.
+            if ((!date.after(from) || !date.before(to))
+                    && !date.equals(from) && !date.equals(to)) {
+                return new ArrayList<>();
+            }
         }
 
         // Return the appropriate sublist
@@ -268,22 +274,26 @@ public class ActivityQueries {
         // Create a new ObservableList with BarChart Data
         ObservableList<BarChart.Data> list = FXCollections.observableArrayList();
 
-        // Get the Date of today
-        Date date = DateUtils.dateToday();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DateUtils.dateToday());
 
         // Iterate for 7 days to get the data for the entire week
         for (int i = 0; i < DateUnit.WEEK.getNumDays(); ++i) {
+            DateUtils.setDateToEnd(calendar);
+            Date toDate = calendar.getTime();
+            DateUtils.setDateToMidnight(calendar);
+            Date fromDate = calendar.getTime();
+
             // Get the Day of Week String name for the entry label
-            String dayName = DateUtils.getDayName(date);
+            String dayName = DateUtils.getDayName(toDate);
 
             // Get the CO2 saved for the date
-            double co2Saved = getTotalCO2Saved(DateUnit.TODAY);
+            double co2Saved = getTotalCO2Saved(fromDate, toDate);
 
             // Add entry to ObservableList
             list.add(new BarChart.Data<>(dayName, co2Saved));
 
-            // Rewind Date back by 1 day
-            date = DateUtils.getDateBefore(date, DateUnit.DAY);
+            calendar.add(Calendar.DATE, -1);
         }
 
         // Reverse the list (since the first date we added was today)
