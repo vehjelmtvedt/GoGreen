@@ -64,13 +64,13 @@ public class ProfilePageController implements Initializable {
     private Label userName;
 
     @FXML
-    private JFXTextField firstName;
+    private Label firstName;
 
     @FXML
-    private JFXTextField lastName;
+    private Label lastName;
 
     @FXML
-    private JFXTextField age;
+    private Label age;
 
     @FXML
     private Label email;
@@ -85,16 +85,7 @@ public class ProfilePageController implements Initializable {
     private Label level;
 
     @FXML
-    private JFXButton firstNameSave;
-
-    @FXML
-    private JFXButton lastNameSave;
-
-    @FXML
-    private JFXButton ageSave;
-
-    @FXML
-    private JFXButton editProfilePic;
+    private JFXButton editProfile;
 
     @FXML
     private JFXProgressBar levelProgress;
@@ -132,35 +123,6 @@ public class ProfilePageController implements Initializable {
         return false;
     }
 
-
-    /**
-     * Allows any text feild to become editable.
-     * Also helps to reduce code duplication.
-     * @param button The Button Used to save the changes.
-     * @param textfeild The textField to be edited.
-     * @param editableVariable The variable to be edited.
-     * @param popupMessage1 Pop-up Header to be shown to the user.
-     * @param popupMessage2 Pop-up message to be shown to the user.
-     */
-    public static void editableFeilds(JFXButton button, JFXTextField textfeild,
-                                      String editableVariable, String popupMessage1,
-                                      String popupMessage2) {
-        button.setOnAction(e -> {
-            if (!(textfeild.getText().isEmpty())) {
-                textfeild.setUnFocusColor(Color.BLACK);
-                Requests.editProfile(thisLoginDetails, editableVariable, textfeild.getText());
-            } else {
-                textfeild.setUnFocusColor(Color.RED);
-                try {
-                    Dialog.show(popupMessage1, popupMessage2, "DISMISS", "error", true);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-    }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -178,15 +140,7 @@ public class ProfilePageController implements Initializable {
         score.setText("Total\nCarbon\nSaved: " + thisUser.getTotalCarbonSaved());
         profilePicture.setImage(new Image("avatars/" + thisUser.getAvatar() + ".jpg"));
 
-        editableFeilds(firstNameSave, firstName,"firstName",
-                "First Name Field is Empty", "Please fill in the first name field to continue" );
-
-        editableFeilds(lastNameSave,lastName,"lastName",
-                "Last Name Field is Empty", "Please fill in the last name field to continue");
-
-        editProfilePic.setOnAction(e -> {
-
-            System.out.println("profile pic test");
+        editProfile.setOnAction(e -> {
 
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);
@@ -202,27 +156,11 @@ public class ProfilePageController implements Initializable {
             }
             EditProfilePopUpController controller = loader.getController();
 
-
             Scene scene = new Scene(popup,
                     General.getBounds()[0] / 2, General.getBounds()[1] / 2);
             stage.setScene(scene);
             stage.show();
             stage.toFront();
-        });
-
-        ageSave.setOnAction(e -> {
-            if (age.getText().matches("^[0-9]{0,7}$")) {
-                age.setUnFocusColor(Color.BLACK);
-                Requests.editProfile(thisLoginDetails, "age", Integer.parseInt(age.getText()));
-            } else {
-                age.setUnFocusColor(Color.RED);
-                try {
-                    Dialog.show("Age is invalid",
-                            "Please Fill in a appropriate age value", "DISMISS", "error", true);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
         });
 
         //        ObservableValue<Number> level = ObservableValue < Number > (5);

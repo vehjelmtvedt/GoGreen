@@ -1,6 +1,7 @@
 package frontend.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import data.LoginDetails;
 import data.User;
 import javafx.fxml.FXML;
@@ -10,14 +11,14 @@ import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import tools.Requests;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EditProfilePopUpController extends ProfilePageController implements Initializable {
+public class EditProfilePopUpController implements Initializable {
 
     private static User thisUser;
 
@@ -27,10 +28,26 @@ public class EditProfilePopUpController extends ProfilePageController implements
     private HBox avatarZone;
 
     @FXML
-    private JFXButton save;
+    private JFXTextField firstName;
+
+    @FXML
+    private JFXTextField lastName;
+
+    @FXML
+    private JFXTextField age;
 
     @FXML
     private JFXButton close;
+
+    @FXML
+    private JFXButton firstNameSave;
+
+    @FXML
+    private JFXButton lastNameSave;
+
+    @FXML
+    private JFXButton ageSave;
+
 
     public static void setUser(User user) {
         thisUser = user;
@@ -40,13 +57,48 @@ public class EditProfilePopUpController extends ProfilePageController implements
         thisLoginDetails = loginDetails;
     }
 
+    /**
+     * Allows any text field to become editable.
+     * Also helps to reduce code duplication.
+     * @param button The Button Used to save the changes.
+     * @param textfield The textField to be edited.
+     * @param editableVariable The variable to be edited.
+     */
+    public static void editableFields(JFXButton button, JFXTextField textfield,
+                                      String editableVariable) {
+        button.setOnAction(e -> {
+            if (!(textfield.getText().isEmpty())) {
+                textfield.setUnFocusColor(Color.BLACK);
+                Requests.editProfile(thisLoginDetails, editableVariable, textfield.getText());
+            } else {
+                textfield.setUnFocusColor(Color.RED);
+            }
+        });
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        firstName.setText(thisUser.getFirstName());
+        lastName.setText(thisUser.getLastName());
+        age.setText(Integer.toString(thisUser.getAge()));
 
         close.setOnAction( e -> {
             Stage stage = (Stage) close.getScene().getWindow();
             stage.close();
         });
+
+        ageSave.setOnAction(e -> {
+            if ( (age.getText().matches("^[0-9]{0,3}$")) && (!(age.getText().isEmpty())) ) {
+                age.setUnFocusColor(javafx.scene.paint.Color.BLACK);
+                Requests.editProfile(thisLoginDetails, "age", Integer.parseInt(age.getText()));
+            } else {
+                age.setUnFocusColor(Color.RED);
+            }
+        });
+
+        editableFields(firstNameSave, firstName,"firstName");
+        editableFields(lastNameSave,lastName,"lastName");
 
         int count = 1;
         for (int i = 1; i <= 12; i++) {
@@ -67,9 +119,7 @@ public class EditProfilePopUpController extends ProfilePageController implements
                 avatarimage.setImage(new Image("avatars/13.jpg"));
                 Requests.editProfile(thisLoginDetails, "avatar", avatarimage.getId());
             });
-
             count ++;
         }
-
     }
 }
