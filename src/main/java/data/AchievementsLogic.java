@@ -1,7 +1,11 @@
 package data;
 
+import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class AchievementsLogic {
@@ -13,13 +17,16 @@ public class AchievementsLogic {
      * @param user     current user
      * @param activity current activity
      */
-    public static int checkTranspostActivity(User user, Activity activity) {
+    public static ArrayList checkTranspostActivity(User user, Activity activity) {
+
+        ArrayList results = new ArrayList();
 
         //Using a bicycle id 2
         if (activity instanceof UseBikeInsteadOfCar) {
 
             addAchievemnt(user, 2, activity.getDate());
-            return 2;
+
+            results.add(2);
 
         }
 
@@ -29,23 +36,24 @@ public class AchievementsLogic {
                 && user.getSimilarActivities(activity).size() > 4) {
 
             addAchievemnt(user, 3, activity.getDate());
-            return 3;
+            results.add(3);
         }
 
         //Using bus once id 4
-        if (activity instanceof UseBusInsteadOfCar ) {
+        if (activity instanceof UseBusInsteadOfCar) {
             addAchievemnt(user, 4, activity.getDate());
-            return 4;
+            results.add(4);
         }
         //Using  bus often id 5
         if (activity instanceof UseBusInsteadOfCar
                 && (user.getSimilarActivities(activity).size() > 4)) {
             addAchievemnt(user, 5, activity.getDate());
-            return 5;
+            results.add(5);
 
         }
-        return -1;
+        return results;
     }
+
     /**
      * checks more transport related activity if it completes an achievement.
      *
@@ -53,27 +61,30 @@ public class AchievementsLogic {
      * @param activity current activity
      */
 
-    public static int checkTranspostActivity1(User user , Activity activity) {
+    public static ArrayList checkTranspostActivity1(User user, Activity activity) {
+
+        ArrayList results = new ArrayList();
+
         //Use the Bus once 7
         if (activity instanceof UseBusInsteadOfCar) {
 
             addAchievemnt(user, 7, activity.getDate());
-            return 7;
+            results.add(7);
         }
 
         //use the train once 24
         if (activity instanceof UseTrainInsteadOfCar) {
             addAchievemnt(user, 24, activity.getDate());
-            return 24;
+            results.add(24);
         }
 
         //use the train often 25
         if (activity instanceof UseTrainInsteadOfCar
                 && user.getSimilarActivities(activity).size() > 4) {
             addAchievemnt(user, 25, activity.getDate());
-            return 25;
+            results.add(25);
         }
-        return -1;
+        return results;
     }
 
     /**
@@ -82,13 +93,15 @@ public class AchievementsLogic {
      * @param user     current user
      * @param activity current activity
      */
-    public static int checkFoodActivity(User user, Activity activity) {
+    public static ArrayList checkFoodActivity(User user, Activity activity) {
+
+        ArrayList results = new ArrayList();
 
         //Eating vegetarian food for the first time id 6
         if (activity instanceof EatVegetarianMeal) {
 
             addAchievemnt(user, 6, activity.getDate());
-            return 6;
+            results.add(6);
         }
 
 
@@ -96,23 +109,23 @@ public class AchievementsLogic {
         if (activity instanceof BuyLocallyProducedFood) {
 
             addAchievemnt(user, 15, activity.getDate());
-            return 15;
+            results.add(15);
         }
 
         //Buy Non Processed Food 16
         if (activity instanceof BuyNonProcessedFood) {
 
             addAchievemnt(user, 16, activity.getDate());
-            return 16;
+            results.add(16);
         }
         //buy organic food 17
         if (activity instanceof BuyOrganicFood) {
 
             addAchievemnt(user, 17, activity.getDate());
-            return 17;
+            results.add(17);
         }
 
-        return 0;
+        return results;
 
     }
 
@@ -121,20 +134,22 @@ public class AchievementsLogic {
      *
      * @param user current user
      */
-    public static int checkOther(User user) {
+    public static ArrayList checkOther(User user) {
+
+        ArrayList results = new ArrayList();
 
         //Saved your first CO2 id 0
         if (user.getTotalCarbonSaved() > 0 && user.getActivities().size() > 0) {
 
             addAchievemnt(user, 0, user.getActivities().get(0).getDate());
-            return 0;
+            results.add(0);
         }
 
         //Adding more than five Activites id 1
         if (user.getActivities().size() > 5) {
 
             addAchievemnt(user, 1, user.getActivities().get(4).getDate());
-            return 1;
+            results.add(1);
         }
 
         //Adding your first friend id 8
@@ -142,28 +157,27 @@ public class AchievementsLogic {
         if (user.getFriends().size() > 0) {
 
             addAchievemnt(user, 8, Calendar.getInstance().getTime());
-            return 8;
+            results.add(8);
         }
 
         //Adding more than 10 friends id 9
         if (user.getFriends().size() > 10) {
 
             addAchievemnt(user, 9, Calendar.getInstance().getTime());
-            return 9;
+            results.add(9);
         }
 
         //Have a small Car 13
         if (user.getCarType().equals("small")) {
             addAchievemnt(user, 13, Calendar.getInstance().getTime());
-            return 13;
+            results.add(13);
         }
 
         //Being Vegan 14
         if (user.getMeatAndDairyConsumption().equals("vegan")) {
             addAchievemnt(user, 14, Calendar.getInstance().getTime());
-            return 14;
+            results.add(14);
         }
-
 
 
         //todo
@@ -171,41 +185,44 @@ public class AchievementsLogic {
         //Being second on top of the board id 11
         //Be third on top of the larboard 18
         //Getting solar Power 12
-        return -1;
+        return results;
     }
 
-    /**check if the user has a level to grant the corresponding achievement.
+    /**
+     * check if the user has a level to grant the corresponding achievement.
      *
      * @param user user to check
      */
-    public static int checkLevel(User user) {
+    public static ArrayList checkLevel(User user) {
+
+        ArrayList results = new ArrayList();
 
         //Achieve level 4 19
         if (user.getProgress().getLevel() >= 4) {
             addAchievemnt(user, 19, Calendar.getInstance().getTime());
-            return 19;
+            results.add(19);
         }
         //Achieve level 5 20
         if (user.getProgress().getLevel() >= 5) {
             addAchievemnt(user, 20, Calendar.getInstance().getTime());
-            return 20;
+            results.add(20);
         }
         //Achieve level 6 21
         if (user.getProgress().getLevel() >= 6) {
             addAchievemnt(user, 21, Calendar.getInstance().getTime());
-            return 21;
+            results.add(21);
         }
         //Achieve level 7 22
         if (user.getProgress().getLevel() >= 7) {
             addAchievemnt(user, 22, Calendar.getInstance().getTime());
-            return 19;
+            results.add(22);
         }
         //Achieve level 8 23
         if (user.getProgress().getLevel() == 8) {
             addAchievemnt(user, 23, Calendar.getInstance().getTime());
-            return 23;
+            results.add(23);
         }
-        return -1;
+        return results;
     }
 
 
@@ -213,12 +230,13 @@ public class AchievementsLogic {
      * this method checks every achievement if its already in the List, if not add it.
      *
      * @param user current user
-     * @param id   achievement to check
+     * @param ids  achievement to check
      * @param date date to add
      */
     public static void addAchievemnt(User user, int id, Date date) {
 
-        System.out.println("detected achievement"   +  id + "  on " + date.toString());
+
+        System.out.println("detected achievement" + id + "  on " + date.toString());
 
     }
 

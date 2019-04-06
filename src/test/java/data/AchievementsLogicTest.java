@@ -22,7 +22,7 @@ public class AchievementsLogicTest {
     public void checkActivity() {
 
 
-        Assert.assertEquals(6 , AchievementsLogic.checkFoodActivity(user , activity));
+        Assert.assertEquals(6 , AchievementsLogic.checkFoodActivity(user , activity).get(0));
 
     }
 
@@ -30,35 +30,35 @@ public class AchievementsLogicTest {
     @Test
     public void checkActivity1() {
 
-        Assert.assertEquals(15 , AchievementsLogic.checkFoodActivity(user , activity1));
+        Assert.assertEquals(15 , AchievementsLogic.checkFoodActivity(user , activity1).get(0));
 
     }
 
     @Test
     public void checkActivity2() {
 
-        Assert.assertEquals(16 , AchievementsLogic.checkFoodActivity(user , activity2));
+        Assert.assertEquals(16 , AchievementsLogic.checkFoodActivity(user , activity2).get(0));
     }
 
 
     @Test
     public void checkActivity3() {
-        Assert.assertEquals(24, AchievementsLogic.checkTranspostActivity1(user , activity3));
+        Assert.assertEquals(24, AchievementsLogic.checkTranspostActivity1(user , activity3).get(0));
     }
 
 
     @Test
     public void checkActivity4() {
-        Assert.assertEquals(17, AchievementsLogic.checkFoodActivity(user , activity4));
+        Assert.assertEquals(17, AchievementsLogic.checkFoodActivity(user , activity4).get(0));
     }
 
     @Test
     public void checkActivity5() {
-        Assert.assertEquals(4, AchievementsLogic.checkTranspostActivity(user , activity5));
+        Assert.assertEquals(4, AchievementsLogic.checkTranspostActivity(user , activity5).get(0));
     }
     @Test
     public void checkActivity6() {
-        Assert.assertEquals(2, AchievementsLogic.checkTranspostActivity(user , activity6));
+        Assert.assertEquals(2, AchievementsLogic.checkTranspostActivity(user , activity6).get(0));
     }
 
     @Test // id 0
@@ -69,7 +69,7 @@ public class AchievementsLogicTest {
 
 
 
-        Assert.assertEquals(0 , AchievementsLogic.checkOther(user));
+        Assert.assertEquals(0 , AchievementsLogic.checkOther(user).get(0));
 
     }
 
@@ -83,14 +83,14 @@ public class AchievementsLogicTest {
         user.getActivities().add(activity4);
 
 
-        Assert.assertEquals(1 , AchievementsLogic.checkOther(user));
+        Assert.assertEquals(1 , AchievementsLogic.checkOther(user).get(0));
     }
 
     @Test
     public void checkOther2(){
         user.addFriend("test");
 
-        Assert.assertEquals(8 , AchievementsLogic.checkOther(user));
+        Assert.assertEquals(8 , AchievementsLogic.checkOther(user).get(0));
     }
 
 

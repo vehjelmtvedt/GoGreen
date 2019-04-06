@@ -480,49 +480,55 @@ public class DbService {
      * this method checks every achievement if its already in the List, if not add it.
      *
      * @param user current user
-     * @param id   achievement to check
+     * @param ids   achievement to check
      * @param date date to add
      */
-    public void addAchievemnt(User user, int id, Date date) {
+    public void addAchievemnt(User user, ArrayList ids, Date date) {
 
-        //if something went wrong
-        if (id == -1) {
-            return;
-        }
+        for (Object object : ids) {
 
-        boolean alreadythere = false;
+            int id = (Integer) object;
 
-        for (UserAchievement userAchievement : user.getProgress().getAchievements()) {
 
-            if (userAchievement.getId() == id) {
-
-                alreadythere = true;
-                break;
+            //if something went wrong
+            if (id == -1) {
+                return;
             }
 
-        }
-        if (!alreadythere) {
+            boolean alreadythere = false;
 
-            UserAchievement userAchievement = new UserAchievement(id, true, date);
+            for (UserAchievement userAchievement : user.getProgress().getAchievements()) {
 
-            user.getProgress().getAchievements().add(userAchievement);
+                if (userAchievement.getId() == id) {
 
-            String idstring = Integer.toString(id);
+                    alreadythere = true;
+                    break;
+                }
 
-            System.out.println(idstring         + "looking for this ");
+            }
+            if (!alreadythere) {
 
-            List<Achievement> list = getAchievements();
+                UserAchievement userAchievement = new UserAchievement(id, true, date);
 
-            user.getProgress().addPoints(list.get(id).getBonus());
+                user.getProgress().getAchievements().add(userAchievement);
 
-            System.out.println("Added: id " + userAchievement.getId()
-                    + " list.get(id).getBonus() points "
-                    +
-                    " now have " + user.getProgress().getAchievements().size()
-                    +
-                     " competed"  + "this user now has "
-                    +
-                    user.getProgress().getPoints() + "points");
+                String idstring = Integer.toString(id);
+
+                System.out.println(idstring + "looking for this ");
+
+                List<Achievement> list = getAchievements();
+
+                user.getProgress().addPoints(list.get(id).getBonus());
+
+                System.out.println("Added: id " + userAchievement.getId()
+                        + " list.get(id).getBonus() points "
+                        +
+                        " now have " + user.getProgress().getAchievements().size()
+                        +
+                        " competed" + "this user now has "
+                        +
+                        user.getProgress().getPoints() + "points");
+            }
         }
 
         addUser(user);

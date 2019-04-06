@@ -178,7 +178,7 @@ public class DbServiceTest {
 
         assertEquals(expected, result);
     }
-    
+
     @Test
     public void testBefriendUsersNull1() {
         dbService.addUser(testUser2);
@@ -326,7 +326,7 @@ public class DbServiceTest {
     public void testEditProfileWrongField() {
         assertEquals(null,dbService.editProfile(testUser,"asd",10));
     }
-    
+
     @Test
     public void testGetTopFriendsEmpty() {
         List<User> friends = dbService.getTopFriends(testUser.getUsername(), 5);
@@ -364,7 +364,10 @@ public class DbServiceTest {
     @Test
     public void addAchievemnt() {
 
-        dbService.addAchievemnt(testUser , 0 , new Date(1,1,1));
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0);
+
+        dbService.addAchievemnt(testUser , arrayList , new Date(1,1,1));
 
         Assert.assertNotNull(testUser.getProgress().getAchievements().get(0));
 
@@ -374,7 +377,10 @@ public class DbServiceTest {
     @Test
     public void addAchievemntPoints() {
 
-        dbService.addAchievemnt(testUser , 0 , new Date(1,1,1));
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0);
+
+        dbService.addAchievemnt(testUser , arrayList , new Date(1,1,1));
 
 
 
