@@ -36,6 +36,8 @@ public class User {
     private double totalCarbonSaved;
     private Progress progress = new Progress();
 
+    private String avatar;
+
     private int securityQuestionId;
     private String securityQuestionAnswer;
 
@@ -80,9 +82,6 @@ public class User {
         return progress;
     }
 
-    public void setProgress(Progress progress) {
-        this.progress = progress;
-    }
 
     public String getFirstName() {
         return this.firstName;
@@ -241,6 +240,13 @@ public class User {
         this.friendRequests = friendRequests;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
     /**
      * Returns string representation of the User object.
      *
