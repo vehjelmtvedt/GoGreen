@@ -9,13 +9,13 @@ import data.Achievement;
 import data.LoginDetails;
 import data.User;
 import data.UserAchievement;
-import frontend.gui.Dialog;
-import frontend.gui.NavPanel;
-import frontend.gui.ProfilePageLogic;
-import frontend.gui.StageSwitcher;
+import frontend.gui.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,6 +24,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import tools.Requests;
 
 import java.io.IOException;
@@ -84,6 +87,9 @@ public class ProfilePageController implements Initializable {
     private JFXButton ageSave;
 
     @FXML
+    private JFXButton editProfilePic;
+
+    @FXML
     private JFXProgressBar levelProgress;
 
     @FXML
@@ -131,7 +137,9 @@ public class ProfilePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        levelProgress.setProgress((Double.parseDouble(Integer.toString(thisUser.getProgress().getLevel()))) / 8.0);
+        levelProgress.setProgress(
+                (Double.parseDouble(Integer.toString(thisUser.getProgress().getLevel()))) / 8.0
+        );
 
         userName.setText(thisUser.getUsername());
         firstName.setText(thisUser.getFirstName());
@@ -152,6 +160,36 @@ public class ProfilePageController implements Initializable {
 
         editableFeilds(lastNameSave,lastName,logindetails,"lastName",
                 "Last Name Field is Empty", "Please fill in the last name field to continue");
+
+        editProfilePic.setOnAction(e -> {
+
+            System.out.println("hello");
+
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            FXMLLoader dialogloader = new FXMLLoader(
+                    Main.class.getResource("/frontend/fxmlPages/EditProfilePopUp.fxml"));
+            Parent dialog = null;
+            try {
+                dialog = dialogloader.load();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            DialogController controller = dialogloader.getController();
+
+            controller.setHeading("Test");
+            controller.setBody("Test");
+            controller.setButtonText("Test");
+            controller.setIcon("Test");
+
+            Scene scene = new Scene(dialog,
+                    General.getBounds()[0] / 2, General.getBounds()[1] / 2);
+            stage.setScene(scene);
+            stage.show();
+            stage.toFront();
+        });
 
         ageSave.setOnAction(e -> {
             if (age.getText().matches("^[0-9]{0,7}$")) {
