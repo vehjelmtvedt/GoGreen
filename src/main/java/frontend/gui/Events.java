@@ -288,12 +288,36 @@ public class Events {
                     }
                 }
             } else if (type == 3) {
-                RecyclePlastic activity = new RecyclePlastic();
-                activity.performActivity(loggedUser);
+                RecyclePlastic plastic = new RecyclePlastic();
+                if (plastic.timesPerformedInTheSameDay(loggedUser) > 0) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("Oops");
+                    alert.setContentText(
+                            "It looks like you already did this today,"
+                                    + " you can try again tomorrow!");
+                    alert.showAndWait();
+                } else {
+                    RecyclePlastic activity = new RecyclePlastic();
+                    activity.performActivity(loggedUser);
+
+                }
             } else {
                 if (type == 4) {
-                    RecyclePaper activity = new RecyclePaper();
-                    activity.performActivity(loggedUser);
+                    RecyclePaper paper = new RecyclePaper();
+                    if (paper.timesPerformedInTheSameDay(loggedUser) > 0) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText("Oops");
+                        alert.setContentText(
+                                "It looks like you already did this today,"
+                                        + " you can try again tomorrow!");
+                        alert.showAndWait();
+                    } else {
+                        RecyclePaper activity = new RecyclePaper();
+                        activity.performActivity(loggedUser);
+
+                    }
                 }
             }
 
