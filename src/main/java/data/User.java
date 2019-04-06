@@ -309,8 +309,7 @@ public class User {
         this.activities.add(activity);
 
 
-        // adds points to the user
-        this.addCO2Points(activity.getCarbonSaved());
+
 
     }
 

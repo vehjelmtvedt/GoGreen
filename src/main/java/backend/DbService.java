@@ -15,13 +15,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tools.Requests;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -192,7 +188,9 @@ public class DbService {
             users.save(acceptingUser);
 
             //checks if an achievement is completed by adding a friend
-            AchievementsLogic.checkOther(acceptingUser);
+            addAchievemnt(acceptingUser , AchievementsLogic.checkOther(acceptingUser), Calendar.getInstance().getTime());
+
+            ;
 
             return acceptingUser;
         } else {
@@ -265,10 +263,15 @@ public class DbService {
         updateTotalCo2SavedStatistics(returned);
 
         // check if an achievement is completed by this activity
-        AchievementsLogic.checkFoodActivity(returned, activity);
-        AchievementsLogic.checkTranspostActivity(returned, activity);
-        AchievementsLogic.checkTranspostActivity1(returned, activity);
+        addAchievemnt(returned , AchievementsLogic.checkFoodActivity(returned, activity) , activity.getDate());
+        addAchievemnt(returned , AchievementsLogic.checkTranspostActivity(returned, activity) , activity.getDate());
+        addAchievemnt(returned , AchievementsLogic.checkTranspostActivity1(returned, activity) , activity.getDate());
 
+        // adds points to the user
+        returned.addCO2Points(activity.getCarbonSaved());
+
+        //checks the users level
+        addAchievemnt(returned , AchievementsLogic.checkLevel(returned) , Calendar.getInstance().getTime());
 
         return returned;
     }
@@ -434,6 +437,10 @@ public class DbService {
         allStatistics.addTotalCo2Saved(recentActivity.getCarbonSaved());
 
         userStatistics.save(allStatistics);
+
+        //checks the users level
+        addAchievemnt(user , AchievementsLogic.checkLevel(user) , Calendar.getInstance().getTime());
+
     }
 
     private void updateTotalUsersStatistics() {
@@ -470,5 +477,42 @@ public class DbService {
             return 0;
         }
     }
+
+
+    /**
+     * this method checks every achievement if its already in the List, if not add it.
+     *
+     * @param user current user
+     * @param id   achievement to check
+     * @param date date to add
+     */
+    public void addAchievemnt(User user, int id, Date date) {
+
+        boolean alreadythere = false;
+
+        for (UserAchievement userAchievement : user.getProgress().getAchievements()) {
+
+            if (userAchievement.getId() == id) {
+
+                alreadythere = true;
+                break;
+            }
+
+        }
+        if (!alreadythere) {
+
+            UserAchievement userAchievement = new UserAchievement(id, true, date);
+
+            user.getProgress().getAchievements().add(userAchievement);
+
+            String idstring = Integer.toString(id);
+
+            if (achievements.findById(idstring).isPresent())
+                user.getProgress().addPoints(achievements.findById(idstring).get().getBonus());
+
+        }
+
+    }
+
 
 }
