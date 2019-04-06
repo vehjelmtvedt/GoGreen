@@ -261,33 +261,68 @@ public class Events {
                         panels.setKwhSavedPerYear(Integer.parseInt(result.get()));
                         panels.performActivity(loggedUser);
                         installedPanels.setVisible(true);
+
+                        //show popup upon performing an activity
+                        try {
+                            ActivitiesController.popup("Popup","Activity performed successfully!",
+                                    "sucess", 0);
+                        } catch (IOException exp) {
+                            System.out.println("Something went wrong.");
+                        }
                     }
                 }
-            } else if (type == 2) {
-                LowerHomeTemperature temp = new LowerHomeTemperature();
-                if (temp.timesPerformedInTheSameDay(loggedUser) > 0) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning");
-                    alert.setHeaderText("Oops");
-                    alert.setContentText(
-                            "It looks like you already did this today,"
-                                    + " you can try again tomorrow!");
-                    alert.showAndWait();
-                } else {
-                    List<String> choices = Arrays.asList( "1", "2", "3", "4", "5");
-                    ChoiceDialog<String> dialog = new ChoiceDialog<>("1", choices);
-                    dialog.setTitle("Lower Home Temperature");
-                    dialog.setHeaderText("How many degrees did you turn your thermostat down?");
-                    dialog.setContentText("Degrees:");
-                    Optional<String> result = dialog.showAndWait();
-                    if (result.isPresent()) {
-                        System.out.println("Degrees: " + result.get());
-                        temp.setDegrees(Integer.parseInt(result.get()));
-                        temp.performActivity(loggedUser);
-                        loweredTemp.setVisible(true);
+            } else {
+                if (type == 2) {
+                    LowerHomeTemperature temp = new LowerHomeTemperature();
+                    if (temp.timesPerformedInTheSameDay(loggedUser) > 0) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText("Oops");
+                        alert.setContentText(
+                                "It looks like you already did this today,"
+                                        + " you can try again tomorrow!");
+                        alert.showAndWait();
+                    } else {
+                        List<String> choices = Arrays.asList("1", "2", "3", "4", "5");
+                        ChoiceDialog<String> dialog = new ChoiceDialog<>("1", choices);
+                        dialog.setTitle("Lower Home Temperature");
+                        dialog.setHeaderText("How many degrees did you turn your thermostat down?");
+                        dialog.setContentText("Degrees:");
+                        Optional<String> result = dialog.showAndWait();
+                        if (result.isPresent()) {
+                            System.out.println("Degrees: " + result.get());
+                            temp.setDegrees(Integer.parseInt(result.get()));
+                            temp.performActivity(loggedUser);
+                            loweredTemp.setVisible(true);
+
+                            //show popup upon performing an activity
+                            try {
+                                ActivitiesController.popup("Popup",
+                                        "Activity performed successfully!",
+                                        "sucess", 0);
+                            } catch (IOException exp) {
+                                System.out.println("Something went wrong.");
+                            }
+                        }
                     }
                 }
-            } else if (type == 3) {
+            }
+            ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
+            activityTable.setItems(activities);
+        });
+    }
+
+    /**.
+     * Add recycling activity(part of Household category)
+     * @param pane - pane to be clicked
+     * @param type - type of recycling
+     * @param loggedUser - the user who performs the activity
+     * @param activityTable - the history table
+     */
+    public static void addRecyclingActivity(AnchorPane pane, int type,
+                                            User loggedUser, TableView<Activity> activityTable) {
+        pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (type == 1) {
                 RecyclePlastic plastic = new RecyclePlastic();
                 if (plastic.timesPerformedInTheSameDay(loggedUser) > 0) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -303,7 +338,7 @@ public class Events {
 
                 }
             } else {
-                if (type == 4) {
+                if (type == 2) {
                     RecyclePaper paper = new RecyclePaper();
                     if (paper.timesPerformedInTheSameDay(loggedUser) > 0) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -320,9 +355,10 @@ public class Events {
                     }
                 }
             }
-
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
+
+            //show popup upon performing an activity
             try {
                 ActivitiesController.popup("Popup","Activity performed successfully!","sucess", 0);
             } catch (IOException exp) {

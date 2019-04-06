@@ -182,10 +182,8 @@ public class ActivitiesController implements Initializable {
                 lblLoweredTemp,1, loggedUser, activityTable);
         Events.addHouseholdActivity(paneEnergy, lblPanelsInstalled,
                 lblLoweredTemp,2, loggedUser, activityTable);
-        Events.addHouseholdActivity(panePlastic, null, null, 3,
-                loggedUser, activityTable);
-        Events.addHouseholdActivity(panePaper, null, null, 4,
-                loggedUser, activityTable);
+        Events.addRecyclingActivity(panePlastic, 1, loggedUser, activityTable);
+        Events.addRecyclingActivity(panePaper, 2, loggedUser, activityTable);
 
         //add hover events for button activities
         Events.addActivityHover(paneVegetarianMeal, btnVegetarianMeal);
