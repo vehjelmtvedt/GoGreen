@@ -30,5 +30,5 @@ public class RecyclePaperTest {
         Assert.assertEquals(1, user.getSimilarActivities(new RecyclePaper()).size());
 
     }
-    
+
 }
