@@ -93,5 +93,54 @@ public class AchievementsLogicTest {
         Assert.assertEquals(8 , AchievementsLogic.checkOther(user).get(0));
     }
 
+    @Test
+    public void checkTranspostActivity() {
 
+        AchievementsLogic.checkTranspostActivity(user , activity5);
+        AchievementsLogic.checkTranspostActivity(user , activity5);
+        AchievementsLogic.checkTranspostActivity(user , activity5);
+        AchievementsLogic.checkTranspostActivity(user , activity5);
+        AchievementsLogic.checkTranspostActivity(user , activity5);
+        AchievementsLogic.checkTranspostActivity(user , activity5);
+
+        Assert.assertEquals(4 , AchievementsLogic.checkTranspostActivity(user , activity5).get(0));
+
+    }
+
+    @Test
+    public void testvegan() {
+
+        user.setMeatAndDairyConsumption("vegan");
+
+        Assert.assertEquals(14 , AchievementsLogic.checkOther(user).get(0));
+
+
+    }
+
+    @Test
+    public void tescar() {
+
+        user.setCarType("small");
+
+        Assert.assertEquals(13 , AchievementsLogic.checkOther(user).get(0));
+
+
+    }
+
+    @Test
+    public void testfriend() {
+
+        user.getFriends().add("test1");
+        Assert.assertEquals(8 , AchievementsLogic.checkOther(user).get(0));
+
+    }
+    @Test
+    public void testfriend1() {
+
+        for (int k = 0 ; k < 10 ; k++ ) {
+            user.getFriends().add("test" + k);
+        }
+        Assert.assertEquals(8 , AchievementsLogic.checkOther(user).get(0));
+
+    }
 }

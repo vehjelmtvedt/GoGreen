@@ -63,8 +63,8 @@ public class AchievementsLogic {
 
         ArrayList results = new ArrayList();
 
-        //Use the Bus once 7
-        if (activity instanceof UseBusInsteadOfCar) {
+        //Use dp 50 activities 7
+        if (user.getActivities().size() > 49) {
 
             addAchievemnt(user, 7, activity.getDate());
             results.add(7);

@@ -489,12 +489,6 @@ public class DbService {
 
             int id = (Integer) object;
 
-
-            //if something went wrong
-            if (id == -1) {
-                return;
-            }
-
             boolean alreadythere = false;
 
             for (UserAchievement userAchievement : user.getProgress().getAchievements()) {
