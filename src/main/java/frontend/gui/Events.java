@@ -336,6 +336,14 @@ public class Events {
                 } else {
                     plastic.performActivity(loggedUser);
                     lblPlastic.setVisible(true);
+
+                    //show popup upon performing an activity
+                    try {
+                        ActivitiesController.popup("Popup",
+                                "Activity performed successfully!","sucess", 0);
+                    } catch (IOException exp) {
+                        System.out.println("Something went wrong.");
+                    }
                 }
             } else {
                 if (type == 2) {
@@ -351,18 +359,19 @@ public class Events {
                     } else {
                         paper.performActivity(loggedUser);
                         lblPaper.setVisible(true);
+
+                        //show popup upon performing an activity
+                        try {
+                            ActivitiesController.popup("Popup",
+                                    "Activity performed successfully!","sucess", 0);
+                        } catch (IOException exp) {
+                            System.out.println("Something went wrong.");
+                        }
                     }
                 }
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
-
-            //show popup upon performing an activity
-            try {
-                ActivitiesController.popup("Popup","Activity performed successfully!","sucess", 0);
-            } catch (IOException exp) {
-                System.out.println("Something went wrong.");
-            }
         });
     }
 
