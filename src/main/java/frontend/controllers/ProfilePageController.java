@@ -34,6 +34,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import tools.Requests;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,6 +47,9 @@ public class ProfilePageController implements Initializable {
     private static LoginDetails thisLoginDetails;
 
     @FXML
+    ImageView profilePicture;
+
+    @FXML
     JFXHamburger menu;
 
     @FXML
@@ -56,9 +60,6 @@ public class ProfilePageController implements Initializable {
 
     @FXML
     AnchorPane headerPane;
-
-    @FXML
-    private ImageView profilePicture;
 
     @FXML
     private Label userName;
@@ -117,7 +118,7 @@ public class ProfilePageController implements Initializable {
     }
 
     /**
-     Checks completed Acheivements.
+     Checks completed Achievements.
      */
     public static boolean isComplete(Achievement achievement) {
         for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
@@ -172,7 +173,7 @@ public class ProfilePageController implements Initializable {
         lastseen.setText(thisUser.getLastLoginDate().toString());
         level.setText("Level: " + (thisUser.getProgress().getLevel()));
         score.setText("Total\nCarbon Saved: " + thisUser.getTotalCarbonSaved());
-        profilePicture.setImage(new Image("frontend/Pics/user.png"));
+        profilePicture.setImage(new Image("avatars/defaultUser.png"));
 
         editableFeilds(firstNameSave, firstName,"firstName",
                 "First Name Field is Empty", "Please fill in the first name field to continue" );
@@ -182,28 +183,24 @@ public class ProfilePageController implements Initializable {
 
         editProfilePic.setOnAction(e -> {
 
-            System.out.println("hello");
+            System.out.println("profile pic test");
 
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);
             stage.initModality(Modality.APPLICATION_MODAL);
 
-            FXMLLoader dialogloader = new FXMLLoader(
+            FXMLLoader loader = new FXMLLoader(
                     Main.class.getResource("/frontend/fxmlPages/EditProfilePopUp.fxml"));
-            Parent dialog = null;
+            Parent popup = null;
             try {
-                dialog = dialogloader.load();
+                popup = loader.load();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-            DialogController controller = dialogloader.getController();
+            EditProfilePopUpController controller = loader.getController();
 
-            controller.setHeading("Test");
-            controller.setBody("Test");
-            controller.setButtonText("Test");
-            controller.setIcon("Test");
 
-            Scene scene = new Scene(dialog,
+            Scene scene = new Scene(popup,
                     General.getBounds()[0] / 2, General.getBounds()[1] / 2);
             stage.setScene(scene);
             stage.show();

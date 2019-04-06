@@ -2,33 +2,24 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: green; -fx-border-width: 3px;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.DialogController">
+<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: green; -fx-border-width: 3px;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.EditProfilePopUpController">
    <children>
-      <Label fx:id="heading" layoutX="57.0" layoutY="58.0" prefHeight="53.0" prefWidth="511.0" text="BIG HEADING" AnchorPane.leftAnchor="54.0" AnchorPane.topAnchor="55.0">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <Text fx:id="body" layoutX="57.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here is the body text" wrappingWidth="505.0000011920929">
-         <font>
-            <Font size="37.0" />
-         </font>
-      </Text>
-      <JFXButton fx:id="button" layoutX="412.0" layoutY="302.0" prefHeight="62.0" prefWidth="158.0" style="-fx-background-color: blue;" text="CONFRIM" textFill="WHITE" AnchorPane.bottomAnchor="36.0" AnchorPane.rightAnchor="30.0">
+      <Label fx:id="heading" layoutX="253.0" layoutY="14.0" prefHeight="27.0" prefWidth="94.0" text="Edit Profile" AnchorPane.leftAnchor="253.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="18.0" />
          </font>
-      </JFXButton>
-      <ImageView fx:id="icon" fitHeight="87.0" fitWidth="92.0" layoutX="300.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="213.0" AnchorPane.topAnchor="41.0">
-         <image>
-            <Image url="@../../../../../../../OOPP/template/src/main/Resources/frontend/Pics/sucess.png" />
-         </image>
-      </ImageView>
+      </Label>
+      <ScrollPane layoutX="31.0" layoutY="61.0" prefHeight="162.0" prefWidth="544.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="58.0">
+         <content>
+            <HBox fx:id="avatarZone" prefHeight="142.0" prefWidth="537.0" />
+         </content>
+      </ScrollPane>
+      <JFXButton layoutX="429.0" layoutY="359.0" text="Save" />
+      <JFXButton fx:id="close" layoutX="510.0" layoutY="359.0" text="Close" />
    </children>
 </AnchorPane>

@@ -5,11 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import data.InstallSolarPanels;
 import data.LoginDetails;
 import data.User;
-import frontend.controllers.ActivitiesController;
-import frontend.controllers.FriendspageController;
-import frontend.controllers.HomepageController;
-import frontend.controllers.ProfilePageController;
-import frontend.controllers.QuestionnaireController;
+import frontend.controllers.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -73,6 +69,8 @@ public class InputValidation {
             FriendspageController.setLoginDetails(loginDetails);
             ProfilePageController.setUser(loggedUser);
             ProfilePageController.setLoginDetails(loginDetails);
+            EditProfilePopUpController.setUser(loggedUser);
+            EditProfilePopUpController.setLoginDetails(loginDetails);
 
             //setup .fxml pages after successfully logging in
             try {
