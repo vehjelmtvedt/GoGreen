@@ -19,7 +19,7 @@ public class AchievementsLogic {
         if (activity instanceof UseBikeInsteadOfCar) {
 
             addAchievemnt(user, 2, activity.getDate());
-            return 19;
+            return 2;
 
         }
 
@@ -29,19 +29,19 @@ public class AchievementsLogic {
                 && user.getSimilarActivities(activity).size() > 4) {
 
             addAchievemnt(user, 3, activity.getDate());
-            return 19;
+            return 3;
         }
 
-        //Using public transport once id 4
-        if (activity instanceof UseBusInsteadOfCar || activity instanceof UseTrainInsteadOfCar) {
+        //Using bus once id 4
+        if (activity instanceof UseBusInsteadOfCar ) {
             addAchievemnt(user, 4, activity.getDate());
-            return 19;
+            return 4;
         }
-        //Using public transport often id 5
-        if ((activity instanceof UseBusInsteadOfCar || activity instanceof UseTrainInsteadOfCar)
+        //Using  bus often id 5
+        if (activity instanceof UseBusInsteadOfCar
                 && (user.getSimilarActivities(activity).size() > 4)) {
             addAchievemnt(user, 5, activity.getDate());
-            return 19;
+            return 5;
 
         }
         return -1;
@@ -58,20 +58,20 @@ public class AchievementsLogic {
         if (activity instanceof UseBusInsteadOfCar) {
 
             addAchievemnt(user, 7, activity.getDate());
-            return 19;
+            return 7;
         }
 
         //use the train once 24
         if (activity instanceof UseTrainInsteadOfCar) {
             addAchievemnt(user, 24, activity.getDate());
-            return 19;
+            return 24;
         }
 
-        //use the train once 25
+        //use the train often 25
         if (activity instanceof UseTrainInsteadOfCar
                 && user.getSimilarActivities(activity).size() > 4) {
             addAchievemnt(user, 25, activity.getDate());
-            return 19;
+            return 25;
         }
         return -1;
     }
@@ -84,12 +84,11 @@ public class AchievementsLogic {
      */
     public static int checkFoodActivity(User user, Activity activity) {
 
-
         //Eating vegetarian food for the first time id 6
         if (activity instanceof EatVegetarianMeal) {
 
             addAchievemnt(user, 6, activity.getDate());
-            return 19;
+            return 6;
         }
 
 
@@ -97,23 +96,23 @@ public class AchievementsLogic {
         if (activity instanceof BuyLocallyProducedFood) {
 
             addAchievemnt(user, 15, activity.getDate());
-            return 19;
+            return 15;
         }
 
         //Buy Non Processed Food 16
         if (activity instanceof BuyNonProcessedFood) {
 
             addAchievemnt(user, 16, activity.getDate());
-            return 19;
+            return 16;
         }
         //buy organic food 17
         if (activity instanceof BuyOrganicFood) {
 
             addAchievemnt(user, 17, activity.getDate());
-            return 19;
+            return 17;
         }
 
-        return -1;
+        return 0;
 
     }
 
@@ -128,14 +127,14 @@ public class AchievementsLogic {
         if (user.getTotalCarbonSaved() > 0 && user.getActivities().size() > 0) {
 
             addAchievemnt(user, 0, user.getActivities().get(0).getDate());
-            return 19;
+            return 0;
         }
 
         //Adding more than five Activites id 1
         if (user.getActivities().size() > 5) {
 
             addAchievemnt(user, 1, user.getActivities().get(4).getDate());
-            return 19;
+            return 1;
         }
 
         //Adding your first friend id 8
@@ -143,26 +142,26 @@ public class AchievementsLogic {
         if (user.getFriends().size() > 0) {
 
             addAchievemnt(user, 8, Calendar.getInstance().getTime());
-            return 19;
+            return 8;
         }
 
         //Adding more than 10 friends id 9
         if (user.getFriends().size() > 10) {
 
             addAchievemnt(user, 9, Calendar.getInstance().getTime());
-            return 19;
+            return 9;
         }
 
         //Have a small Car 13
         if (user.getCarType().equals("small")) {
             addAchievemnt(user, 13, Calendar.getInstance().getTime());
-            return 19;
+            return 13;
         }
 
         //Being Vegan 14
         if (user.getMeatAndDairyConsumption().equals("vegan")) {
             addAchievemnt(user, 14, Calendar.getInstance().getTime());
-            return 19;
+            return 14;
         }
 
 
@@ -189,12 +188,12 @@ public class AchievementsLogic {
         //Achieve level 5 20
         if (user.getProgress().getLevel() >= 5) {
             addAchievemnt(user, 20, Calendar.getInstance().getTime());
-            return 19;
+            return 20;
         }
         //Achieve level 6 21
         if (user.getProgress().getLevel() >= 6) {
             addAchievemnt(user, 21, Calendar.getInstance().getTime());
-            return 19;
+            return 21;
         }
         //Achieve level 7 22
         if (user.getProgress().getLevel() >= 7) {
@@ -204,7 +203,7 @@ public class AchievementsLogic {
         //Achieve level 8 23
         if (user.getProgress().getLevel() == 8) {
             addAchievemnt(user, 23, Calendar.getInstance().getTime());
-            return 19;
+            return 23;
         }
         return -1;
     }
@@ -218,6 +217,8 @@ public class AchievementsLogic {
      * @param date date to add
      */
     public static void addAchievemnt(User user, int id, Date date) {
+
+        System.out.println("detected achievement"   +  id + "  on " + date.toString());
 
     }
 

@@ -14,10 +14,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -363,4 +360,27 @@ public class DbServiceTest {
         List<User> friends = dbService.getTopFriends(testUserNonExistent.getUsername(), 5);
         Assert.assertEquals(new ArrayList<User>(), friends);
     }
+
+    @Test
+    public void addAchievemnt() {
+
+        dbService.addAchievemnt(testUser , 0 , new Date(1,1,1));
+
+        Assert.assertNotNull(testUser.getProgress().getAchievements().get(0));
+
+
+    }
+
+    @Test
+    public void addAchievemntPoints() {
+
+        dbService.addAchievemnt(testUser , 0 , new Date(1,1,1));
+
+
+
+        Assert.assertTrue(testUser.getProgress().getAchievements().size() == 1);
+
+
+    }
+
 }

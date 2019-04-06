@@ -201,6 +201,8 @@ public class DbService {
             //checks if an achievement is completed by adding a friend
             addAchievemnt(acceptingUser , AchievementsLogic.checkOther(acceptingUser),
                      Calendar.getInstance().getTime());
+            addAchievemnt(requestingUser , AchievementsLogic.checkOther(requestingUser),
+                    Calendar.getInstance().getTime());
 
             return acceptingUser;
         } else {
@@ -261,6 +263,7 @@ public class DbService {
      * @return - Updated User
      */
     public User addActivityToUser(String username, Activity activity) {
+
         User returned = getUserByUsername(username);
 
         if (returned == null || activity == null) {
@@ -281,11 +284,13 @@ public class DbService {
                 returned, activity) , activity.getDate());
 
         // adds points to the user
-        returned.addCO2Points(activity.getCarbonSaved());
+        addCO2Points(returned , activity.getCarbonSaved());
 
         //checks the users level
         addAchievemnt(returned , AchievementsLogic.checkLevel(returned),
                 Calendar.getInstance().getTime());
+
+        addUser(returned);
 
         return returned;
     }
@@ -472,28 +477,6 @@ public class DbService {
     }
 
     /**
-     * get the bonus for an achievement.
-     *
-     * @param id this id of the said achievement
-     * @return the bonus points to be added
-     */
-    public int getAchievementPoints(int id) {
-
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(id);
-
-        if (achievements.findById(stringBuilder.toString()).isPresent()) {
-
-            return achievements.findById(stringBuilder.toString()).get().getId();
-
-
-        } else {
-            return 0;
-        }
-    }
-
-
-    /**
      * this method checks every achievement if its already in the List, if not add it.
      *
      * @param user current user
@@ -501,6 +484,11 @@ public class DbService {
      * @param date date to add
      */
     public void addAchievemnt(User user, int id, Date date) {
+
+        //if something went wrong
+        if (id == -1) {
+            return;
+        }
 
         boolean alreadythere = false;
 
@@ -521,12 +509,40 @@ public class DbService {
 
             String idstring = Integer.toString(id);
 
-            if (achievements.findById(idstring).isPresent()) {
-                user.getProgress().addPoints(achievements.findById(idstring).get().getBonus());
-            }
+            System.out.println(idstring         + "looking for this ");
+
+            List<Achievement> list = getAchievements();
+
+            user.getProgress().addPoints(list.get(id).getBonus());
+
+            System.out.println("Added: id " + userAchievement.getId()
+                    + " list.get(id).getBonus() points "
+                    +
+                    " now have " + user.getProgress().getAchievements().size()
+                    +
+                     " competed"  + "this user now has "
+                    +
+                    user.getProgress().getPoints() + "points");
         }
 
+        addUser(user);
     }
+
+    /**
+     * addes to the points the amount of co2 save.*
+     * every one co2 unite is worth 1 point
+     *
+     * @param carbonsaved co2 saved
+     */
+    public void addCO2Points(User user , double carbonsaved) {
+
+        System.out.println("In addCO2Points   going to add" + carbonsaved);
+
+        user.getProgress().setPoints(user.getProgress().getPoints() + carbonsaved * 300);
+
+
+    }
+
 
 
 }

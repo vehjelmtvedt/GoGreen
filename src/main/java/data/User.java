@@ -301,28 +301,31 @@ public class User {
 
     // ---------- ACTIVITY METHODS ----------
 
-    /**.
+    /**
+     * .
      * Adds a new activity to user's activities list
+     *
      * @param activity - Activity to add
      */
     public void addActivity(Activity activity) {
         this.activities.add(activity);
 
-
-
-
     }
 
-    /**.
+    /**
+     * .
      * Removes an activity from user's activities list
+     *
      * @param activity - Activity to remove
      */
     public void removeActivity(Activity activity) {
         this.activities.remove(activity);
     }
 
-    /**.
+    /**
+     * .
      * Returns a list of activities that are of the same type of the specified activity.
+     *
      * @param activity - Activity to compare to
      * @return List of activities of same type
      */
@@ -338,17 +341,6 @@ public class User {
         return result;
     }
 
-    /**
-     * addes to the points the amount of co2 save.*
-     * every one co2 unite is worth 1 point
-     * @param carbonsaved co2 saved
-     */
-    public void addCO2Points( double carbonsaved) {
-        this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
-
-        AchievementsLogic.checkLevel(this);
-
-    }
 
     /*
      * Removes a friend from the friends list

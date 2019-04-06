@@ -26,13 +26,13 @@
   {
     "_class": "data.Achievement",
     "id": 4,
-    "name": "Using public transport once",
+    "name": "Use bus once",
     "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 5,
-    "name": "Using public transport often",
+    "name": "Use bus often",
     "bonus": 500
   },
   {
