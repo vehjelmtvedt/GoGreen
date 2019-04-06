@@ -17,7 +17,7 @@ import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EditProfilePopUpController implements Initializable {
+public class EditProfilePopUpController extends ProfilePageController implements Initializable {
 
     private static User thisUser;
 

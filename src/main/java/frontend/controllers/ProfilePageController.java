@@ -34,7 +34,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import tools.Requests;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -117,6 +116,10 @@ public class ProfilePageController implements Initializable {
         thisLoginDetails = loginDetails;
     }
 
+    public void setPicture(Image image) {
+        profilePicture.setImage(image);
+    }
+
     /**
      Checks completed Achievements.
      */
@@ -172,7 +175,7 @@ public class ProfilePageController implements Initializable {
         age.setText(thisUser.getAge() + "");
         lastseen.setText(thisUser.getLastLoginDate().toString());
         level.setText("Level: " + (thisUser.getProgress().getLevel()));
-        score.setText("Total\nCarbon Saved: " + thisUser.getTotalCarbonSaved());
+        score.setText("Total\nCarbon\nSaved: " + thisUser.getTotalCarbonSaved());
         profilePicture.setImage(new Image("avatars/defaultUser.png"));
 
         editableFeilds(firstNameSave, firstName,"firstName",
