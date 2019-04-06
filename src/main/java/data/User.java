@@ -73,6 +73,7 @@ public class User {
         this.totalCarbonSaved = 0;
         this.lastLoginDate = Calendar.getInstance().getTime();
         this.activities = new ArrayList<>();
+        this.avatar = "0";
     }
 
     public User() {

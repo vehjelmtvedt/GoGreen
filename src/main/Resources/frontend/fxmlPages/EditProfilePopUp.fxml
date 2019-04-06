@@ -14,12 +14,11 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="31.0" layoutY="61.0" prefHeight="162.0" prefWidth="544.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="58.0">
+      <ScrollPane layoutX="34.0" layoutY="61.0" prefHeight="162.0" prefWidth="544.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="61.0">
          <content>
             <HBox fx:id="avatarZone" prefHeight="142.0" prefWidth="537.0" />
          </content>
       </ScrollPane>
-      <JFXButton layoutX="429.0" layoutY="359.0" text="Save" />
       <JFXButton fx:id="close" layoutX="510.0" layoutY="359.0" text="Close" />
    </children>
 </AnchorPane>

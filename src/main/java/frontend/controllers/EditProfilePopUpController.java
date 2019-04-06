@@ -53,6 +53,7 @@ public class EditProfilePopUpController extends ProfilePageController implements
 
             ImageView avatarimage = new ImageView();
             javafx.scene.image.Image path = new Image("avatars/" + count + ".jpg");
+            avatarimage.setId(Integer.toString(count));
             avatarimage.setFitHeight(150);
             avatarimage.setFitWidth(150);
             avatarimage.setImage(path);
@@ -63,7 +64,8 @@ public class EditProfilePopUpController extends ProfilePageController implements
             avatarZone.getChildren().add(separator);
 
             avatarimage.setOnMouseClicked(e -> {
-                avatarimage.setImage(new Image("avatars/success.png"));
+                avatarimage.setImage(new Image("avatars/13.jpg"));
+                Requests.editProfile(thisLoginDetails, "avatar", avatarimage.getId());
             });
 
             count ++;

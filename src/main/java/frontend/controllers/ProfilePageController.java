@@ -176,7 +176,7 @@ public class ProfilePageController implements Initializable {
         lastseen.setText(thisUser.getLastLoginDate().toString());
         level.setText("Level: " + (thisUser.getProgress().getLevel()));
         score.setText("Total\nCarbon\nSaved: " + thisUser.getTotalCarbonSaved());
-        profilePicture.setImage(new Image("avatars/defaultUser.png"));
+        profilePicture.setImage(new Image("avatars/" + thisUser.getAvatar() + ".jpg"));
 
         editableFeilds(firstNameSave, firstName,"firstName",
                 "First Name Field is Empty", "Please fill in the first name field to continue" );
