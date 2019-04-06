@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tools.Requests;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -430,5 +431,11 @@ public class DbService {
         allStatistics.deleteUser(user);
 
         userStatistics.save(allStatistics);
+    }
+
+    public static int getAchievementPoints(int id) {
+
+        List<Achievement> list = Requests.getAllAchievements();
+        return list.get(id).getBonus();
     }
 }

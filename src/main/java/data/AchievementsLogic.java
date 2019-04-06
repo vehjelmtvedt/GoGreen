@@ -1,5 +1,7 @@
 package data;
 
+import backend.DbService;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -43,7 +45,7 @@ public class AchievementsLogic {
 
         }
 
-        //Use the Bus once 7 // an or statement should be added for the user who do not have a car
+        //Use the Bus once 7
         if (activity instanceof UseBusInsteadOfCar) {
 
             addAchievemnt(user, 7, activity.getDate());
@@ -71,13 +73,7 @@ public class AchievementsLogic {
         }
 
 
-
-        //Getting solar Power 12
-        //todo
-
-
-
-        //Buy Local Food15
+        //Buy Local Food 15
         if (activity instanceof BuyLocallyProducedFood) {
 
             addAchievemnt(user, 15, activity.getDate());
@@ -120,7 +116,6 @@ public class AchievementsLogic {
 
         }
 
-
         //Adding your first friend id 8
         // the date is the date of the time this was checked
         if (user.getFriends().size() > 0) {
@@ -135,10 +130,6 @@ public class AchievementsLogic {
 
         }
 
-        //Being on the top of the board for a day id 10
-        //Being on the top of the board for a week id 11
-        //todo
-
         //Have a small Car 13
         if (user.getCarType().equals("small")) {
             addAchievemnt(user, 13, Calendar.getInstance().getTime());
@@ -148,6 +139,17 @@ public class AchievementsLogic {
         if (user.getMeatAndDairyConsumption().equals("vegan")) {
             addAchievemnt(user, 14, Calendar.getInstance().getTime());
         }
+
+        //todo
+        //Being on the top of the board id 10
+        //Being second on top of the board id 11
+        //Be third on top of the larboard 18
+        //Achieve level 4 19
+        //Achieve level 5 20
+        //Achieve level 6 21
+        //Achieve level 7 22
+        //Achieve level 8 23
+        //Getting solar Power 12
 
     }
 
@@ -172,23 +174,16 @@ public class AchievementsLogic {
 
         }
 
-        //List<Achievement> list = Requests.getAllAchievements();
-
         if (!alreadythere) {
 
             UserAchievement userAchievement = new UserAchievement(id, true, date);
 
             user.getProgress().getAchievements().add(userAchievement);
 
-            // adds point depending on the achievements
-            //user.getProgress().setPoints(user.getProgress().getPoints() +
-            // list.get(id).getBonus());
+            user.getProgress().setPoints(user.getProgress().getPoints() + DbService.getAchievementPoints(id));
 
-            //for now its hard codded
-            user.getProgress().setPoints(user.getProgress().getPoints() + 100);
-
-            System.out.println("added ..................."
-                    + "..................." + user.getProgress().getPoints());
+//            System.out.println("added ..... .............." + DbService.getAchievementPoints(id)
+//                    + "..................." + user.getProgress().getPoints());
 
             for (int i = 0 ; i < user.getProgress().getAchievements().size() ; i++) {
 
@@ -197,9 +192,6 @@ public class AchievementsLogic {
             }
 
         }
-
-
-
 
     }
 

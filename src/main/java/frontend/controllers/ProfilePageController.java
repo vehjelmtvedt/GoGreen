@@ -131,7 +131,6 @@ public class ProfilePageController implements Initializable {
      */
     public static void addCompletedAchievements(VBox com) {
 
-        try {
 
             ProfilePageController.setUser(thisUser);
 
@@ -139,9 +138,6 @@ public class ProfilePageController implements Initializable {
             // and added to a VBox small pics might be added later
             for (int i = 0; i < thisUser.getProgress().getAchievements().size(); i++) {
 
-
-
-                count++;
 
                 HBox hbox = new HBox();
 
@@ -170,12 +166,6 @@ public class ProfilePageController implements Initializable {
                 com.getChildren().add(hbox);
 
             }
-
-        } catch (FileNotFoundException e) {
-
-            System.out.println(e.toString());
-
-        }
 
     }
     /**

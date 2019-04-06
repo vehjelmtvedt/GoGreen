@@ -9,43 +9,43 @@
     "_class": "data.Achievement",
     "id": 1,
     "name": "Adding more than five Activites",
-    "bonus": 100
+    "bonus": 500
   },
   {
     "_class": "data.Achievement",
     "id": 2,
     "name": "Use bicycle",
-    "bonus": 50
+    "bonus": 250
   },
   {
     "_class": "data.Achievement",
     "id": 3,
     "name": "Use a bicycle often",
-    "bonus": 150
+    "bonus": 400
   },
   {
     "_class": "data.Achievement",
     "id": 4,
     "name": "Using public transport once",
-    "bonus": 50
+    "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 5,
     "name": "Using public transport often",
-    "bonus": 150
+    "bonus": 500
   },
   {
     "_class": "data.Achievement",
     "id": 6,
     "name": "Eating vegetarian food",
-    "bonus": 100
+    "bonus": 300
   },
   {
     "_class": "data.Achievement",
     "id": 7,
     "name": "Use the Bus once",
-    "bonus": 0
+    "bonus": 100
   },
   {
     "_class": "data.Achievement",
@@ -62,14 +62,14 @@
   {
     "_class": "data.Achievement",
     "id": 10,
-    "name": "Being on the top of the board for a day",
-    "bonus": 200
+    "name": "Being on the top of the board",
+    "bonus": 1000
   },
   {
     "_class": "data.Achievement",
     "id": 11,
-    "name": "Being on the top of the board for a week ",
-    "bonus": 1000
+    "name": "Being second on top of the board",
+    "bonus": 750
   },
   {
     "_class": "data.Achievement",
@@ -81,13 +81,13 @@
     "_class": "data.Achievement",
     "id": 13,
     "name": "Have a small Car",
-    "bonus": 200
+    "bonus": 300
   },
   {
     "_class": "data.Achievement",
     "id": 14,
     "name": "Being Vegan",
-    "bonus": 500
+    "bonus": 300
   },
   {
     "_class": "data.Achievement",
@@ -106,6 +106,42 @@
     "id": 17,
     "name": "Buy organic Food",
     "bonus": 100
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 18,
+    "name": "Be third on top of the larboard",
+    "bonus": 500
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 19,
+    "name": "Achieve level 4",
+    "bonus": 500
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 20,
+    "name": "Achieve level 5",
+    "bonus": 800
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 21,
+    "name": "Achieve level 6",
+    "bonus": 1000
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 22,
+    "name": "Achieve level 7",
+    "bonus": 1500
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 23,
+    "name": "Achieve level 8",
+    "bonus": 2000
   }
 
 ]
