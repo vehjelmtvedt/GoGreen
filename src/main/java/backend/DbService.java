@@ -3,10 +3,7 @@ package backend;
 import backend.repos.AchievementRepository;
 import backend.repos.UserRepository;
 import backend.repos.UserStatisticsRepository;
-import data.Achievement;
-import data.Activity;
-import data.User;
-import data.UserStatistics;
+import data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
@@ -157,8 +154,10 @@ public class DbService {
         return user.orElse(null);
     }
 
-    /**.
+    /**
+     * .
      * Gets user from the database (by identifier [email/password])
+     *
      * @param identifier - identifier (can be e-mail or username
      * @return - User object (password encoded!), or null if not present
      */
@@ -191,6 +190,10 @@ public class DbService {
             // Update changes in database
             users.save(requestingUser);
             users.save(acceptingUser);
+
+            //checks if an achievement is completed by adding a friend
+            AchievementsLogic.checkOther(acceptingUser);
+
             return acceptingUser;
         } else {
             return null;
@@ -260,6 +263,13 @@ public class DbService {
         returned.setTotalCarbonSaved(returned.getTotalCarbonSaved() + activity.getCarbonSaved());
         addUser(returned);
         updateTotalCo2SavedStatistics(returned);
+
+        // check if an achievement is completed by this activity
+        AchievementsLogic.checkFoodActivity(returned, activity);
+        AchievementsLogic.checkTranspostActivity(returned, activity);
+        AchievementsLogic.checkTranspostActivity1(returned, activity);
+
+
         return returned;
     }
 
@@ -299,8 +309,10 @@ public class DbService {
                 User.class); // result as User Object
     }
 
-    /**.
+    /**
+     * .
      * Gets User's friends
+     *
      * @param identifier - identifier (e-mail/username) of User
      * @return - List of User's friends
      */
@@ -318,10 +330,12 @@ public class DbService {
         }
     }
 
-    /**.
+    /**
+     * .
      * Gets User's top friends
+     *
      * @param identifier - identifier (e-mail/username) of User
-     * @param top - Number of top friends to return
+     * @param top        - Number of top friends to return
      * @return - top n friends of user
      */
     public List<User> getTopFriends(String identifier, int top) {
@@ -353,12 +367,13 @@ public class DbService {
 
     /**
      * Edits and updates user.
-     * @param user the user to update
+     *
+     * @param user      the user to update
      * @param fieldName name of the field to update
-     * @param newValue new value of the field
+     * @param newValue  new value of the field
      * @return the updated User
      */
-    public User editProfile(User user,String fieldName, Object newValue) {
+    public User editProfile(User user, String fieldName, Object newValue) {
         try {
             Field field = user.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
@@ -370,9 +385,11 @@ public class DbService {
         addUser(user);
         return user;
     }
-    
-    /**.
+
+    /**
+     * .
      * Returns the total amount of CO2 saved by all the users
+     *
      * @return - Total amount of CO2 saved
      */
     public double getTotalCO2Saved() {
@@ -433,14 +450,25 @@ public class DbService {
         userStatistics.save(allStatistics);
     }
 
-    /**get the bonus for an achievement.
+    /**
+     * get the bonus for an achievement.
      *
      * @param id this id of the said achievement
      * @return the bonus points to be added
      */
-    public static int getAchievementPoints(int id) {
+    public int getAchievementPoints(int id) {
 
-        List<Achievement> list = Requests.getAllAchievements();
-        return list.get(id).getBonus();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(id);
+
+        if (achievements.findById(stringBuilder.toString()).isPresent()) {
+
+            return achievements.findById(stringBuilder.toString()).get().getId();
+
+
+        } else {
+            return 0;
+        }
     }
+
 }

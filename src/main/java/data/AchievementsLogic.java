@@ -220,6 +220,8 @@ public class AchievementsLogic {
 
         if (!alreadythere) {
 
+
+
             UserAchievement userAchievement = new UserAchievement(id, true, date);
 
             user.getProgress().getAchievements().add(userAchievement);

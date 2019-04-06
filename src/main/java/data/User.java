@@ -278,8 +278,6 @@ public class User {
     public void addFriend(String friend) {
         friends.add(friend);
 
-        //checks if an achievement is completed by adding a friend
-        AchievementsLogic.checkOther(this);
     }
 
     /**
@@ -310,10 +308,6 @@ public class User {
     public void addActivity(Activity activity) {
         this.activities.add(activity);
 
-        // check if an achievement is completed by this activity
-        AchievementsLogic.checkFoodActivity(this , activity);
-        AchievementsLogic.checkTranspostActivity(this , activity);
-        AchievementsLogic.checkTranspostActivity1(this , activity);
 
         // adds points to the user
         this.addCO2Points(activity.getCarbonSaved());
