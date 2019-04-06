@@ -234,7 +234,7 @@ public class AchievementsLogic {
     public static void addAchievemnt(User user, int id, Date date) {
 
 
-        System.out.println("detected achievement" + id + "  on " + date.toString());
+        System.out.println("detected achievement " + id + "  on " + date.toString());
 
     }
 
