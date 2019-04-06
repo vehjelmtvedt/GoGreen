@@ -3,7 +3,13 @@ package backend;
 import backend.repos.AchievementRepository;
 import backend.repos.UserRepository;
 import backend.repos.UserStatisticsRepository;
-import data.*;
+
+import data.Achievement;
+import data.AchievementsLogic;
+import data.Activity;
+import data.User;
+import data.UserAchievement;
+import data.UserStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +23,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Field;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -188,9 +199,8 @@ public class DbService {
             users.save(acceptingUser);
 
             //checks if an achievement is completed by adding a friend
-            addAchievemnt(acceptingUser , AchievementsLogic.checkOther(acceptingUser), Calendar.getInstance().getTime());
-
-            ;
+            addAchievemnt(acceptingUser , AchievementsLogic.checkOther(acceptingUser),
+                     Calendar.getInstance().getTime());
 
             return acceptingUser;
         } else {
@@ -263,15 +273,19 @@ public class DbService {
         updateTotalCo2SavedStatistics(returned);
 
         // check if an achievement is completed by this activity
-        addAchievemnt(returned , AchievementsLogic.checkFoodActivity(returned, activity) , activity.getDate());
-        addAchievemnt(returned , AchievementsLogic.checkTranspostActivity(returned, activity) , activity.getDate());
-        addAchievemnt(returned , AchievementsLogic.checkTranspostActivity1(returned, activity) , activity.getDate());
+        addAchievemnt(returned , AchievementsLogic.checkFoodActivity(
+                returned, activity) , activity.getDate());
+        addAchievemnt(returned , AchievementsLogic.checkTranspostActivity(
+                returned, activity) , activity.getDate());
+        addAchievemnt(returned , AchievementsLogic.checkTranspostActivity1(
+                returned, activity) , activity.getDate());
 
         // adds points to the user
         returned.addCO2Points(activity.getCarbonSaved());
 
         //checks the users level
-        addAchievemnt(returned , AchievementsLogic.checkLevel(returned) , Calendar.getInstance().getTime());
+        addAchievemnt(returned , AchievementsLogic.checkLevel(returned),
+                Calendar.getInstance().getTime());
 
         return returned;
     }
@@ -507,9 +521,9 @@ public class DbService {
 
             String idstring = Integer.toString(id);
 
-            if (achievements.findById(idstring).isPresent())
+            if (achievements.findById(idstring).isPresent()) {
                 user.getProgress().addPoints(achievements.findById(idstring).get().getBonus());
-
+            }
         }
 
     }
