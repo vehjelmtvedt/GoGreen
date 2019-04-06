@@ -9,7 +9,12 @@ import data.Achievement;
 import data.LoginDetails;
 import data.User;
 import data.UserAchievement;
-import frontend.gui.*;
+import frontend.gui.Dialog;
+import frontend.gui.General;
+import frontend.gui.Main;
+import frontend.gui.NavPanel;
+import frontend.gui.ProfilePageLogic;
+import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,6 +42,8 @@ import java.util.ResourceBundle;
 public class ProfilePageController implements Initializable {
 
     private static User thisUser;
+
+    private static LoginDetails thisLoginDetails;
 
     @FXML
     JFXHamburger menu;
@@ -105,23 +112,39 @@ public class ProfilePageController implements Initializable {
         thisUser = user;
     }
 
+    public static void setLoginDetails(LoginDetails loginDetails) {
+        thisLoginDetails = loginDetails;
+    }
+
+    /**
+     Checks completed Acheivements.
+     */
+    public static boolean isComplete(Achievement achievement) {
+        for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
+            if (achievement.getId() == userAchievement.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     /**
      * Allows any text feild to become editable.
      * Also helps to reduce code duplication.
      * @param button The Button Used to save the changes.
      * @param textfeild The textField to be edited.
-     * @param logindetails The login detials of the user that are to be passed on to the server.
      * @param editableVariable The variable to be edited.
      * @param popupMessage1 Pop-up Header to be shown to the user.
      * @param popupMessage2 Pop-up message to be shown to the user.
      */
     public static void editableFeilds(JFXButton button, JFXTextField textfeild,
-                                      LoginDetails logindetails, String editableVariable,
-                                      String popupMessage1, String popupMessage2) {
+                                      String editableVariable, String popupMessage1,
+                                      String popupMessage2) {
         button.setOnAction(e -> {
             if (!(textfeild.getText().isEmpty())) {
                 textfeild.setUnFocusColor(Color.BLACK);
-                Requests.editProfile(logindetails, editableVariable, textfeild.getText());
+                Requests.editProfile(thisLoginDetails, editableVariable, textfeild.getText());
             } else {
                 textfeild.setUnFocusColor(Color.RED);
                 try {
@@ -151,14 +174,10 @@ public class ProfilePageController implements Initializable {
         score.setText("Total\nCarbon Saved: " + thisUser.getTotalCarbonSaved());
         profilePicture.setImage(new Image("frontend/Pics/user.png"));
 
-        LoginDetails logindetails = new LoginDetails(
-                thisUser.getUsername(), thisUser.getPassword()
-        );
-
-        editableFeilds(firstNameSave, firstName, logindetails, "firstName",
+        editableFeilds(firstNameSave, firstName,"firstName",
                 "First Name Field is Empty", "Please fill in the first name field to continue" );
 
-        editableFeilds(lastNameSave,lastName,logindetails,"lastName",
+        editableFeilds(lastNameSave,lastName,"lastName",
                 "Last Name Field is Empty", "Please fill in the last name field to continue");
 
         editProfilePic.setOnAction(e -> {
@@ -194,7 +213,7 @@ public class ProfilePageController implements Initializable {
         ageSave.setOnAction(e -> {
             if (age.getText().matches("^[0-9]{0,7}$")) {
                 age.setUnFocusColor(Color.BLACK);
-                Requests.editProfile(logindetails, "age", Integer.parseInt(age.getText()));
+                Requests.editProfile(thisLoginDetails, "age", Integer.parseInt(age.getText()));
             } else {
                 age.setUnFocusColor(Color.RED);
                 try {
@@ -277,18 +296,6 @@ public class ProfilePageController implements Initializable {
 
 
 
-    }
-    /**
-       Checks completed Acheivements.
-     */
-
-    public static boolean isComplete(Achievement achievement) {
-        for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
-            if (achievement.getId() == userAchievement.getId()) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

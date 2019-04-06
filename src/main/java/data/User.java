@@ -252,6 +252,7 @@ public class User {
      *
      * @return String
      */
+
     public String toString() {
         StringBuilder userString = new StringBuilder();
         userString.append("First name: ").append(this.firstName).append('\n');

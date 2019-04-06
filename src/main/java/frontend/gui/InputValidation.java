@@ -72,6 +72,7 @@ public class InputValidation {
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);
             ProfilePageController.setUser(loggedUser);
+            ProfilePageController.setLoginDetails(loginDetails);
 
             //setup .fxml pages after successfully logging in
             try {
