@@ -158,7 +158,7 @@ public class Questionnaire {
             user.setOrganicFoodConsumption(organicFoodConsumption);
             user.setProcessedFoodConsumption(processedFoodConsumption);
 
-            String response = Requests.signupRequest(user);
+            String response = Requests.instance.signupRequest(user);
             if (response != null) {
                 if (response.equals("success")) {
                     try {

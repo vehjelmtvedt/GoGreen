@@ -58,32 +58,32 @@ public class RequestsTest {
 
     @Test
     public void testSignupRequest(){
-        assertEquals("success", Requests.signupRequest(testUser));
+        assertEquals("success", Requests.instance.signupRequest(testUser));
     }
 
     @Test
     public void testSignupRequestUsernameExists() {
         Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
-        assertEquals("Username exists", Requests.signupRequest(testUser));
+        assertEquals("Username exists", Requests.instance.signupRequest(testUser));
     }
 
     @Test
     public void testSignupRequestEmailExists() {
         Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(null);
         Mockito.when(dbService.getUserByEmail(testUser.getEmail())).thenReturn(testUser);
-        assertEquals("Email exists", Requests.signupRequest(testUser));
+        assertEquals("Email exists", Requests.instance.signupRequest(testUser));
     }
 
     @Test
     public void loginRequest() {
         Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        assertEquals(testUser, Requests.loginRequest(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
+        assertEquals(testUser, Requests.instance.loginRequest(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
     @Test
     public void loginRequestFail() {
-        assertEquals(null, Requests.loginRequest(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
+        assertEquals(null, Requests.instance.loginRequest(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
     @Test
@@ -91,14 +91,14 @@ public class RequestsTest {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
         Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
-        assertEquals(testUser2, Requests.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+        assertEquals(testUser2, Requests.instance.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
     @Test
     public void testSendFriendRequestInvalid() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         Mockito.when(dbService.addFriendRequest("invalid", testUser2.getUsername())).thenReturn(null);
-        assertEquals(null, Requests.sendFriendRequest("invalid", testUser2.getUsername()));
+        assertEquals(null, Requests.instance.sendFriendRequest("invalid", testUser2.getUsername()));
     }
 
     @Test
@@ -106,9 +106,9 @@ public class RequestsTest {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
         Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
-        assertEquals(testUser2, Requests.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+        assertEquals(testUser2, Requests.instance.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
         Mockito.when(dbService.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
-        assertEquals(testUser2, Requests.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+        assertEquals(testUser2, Requests.instance.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
     @Test
@@ -116,26 +116,26 @@ public class RequestsTest {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
         Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
-        assertEquals(testUser2, Requests.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+        assertEquals(testUser2, Requests.instance.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
         Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
-        assertEquals(testUser2, Requests.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+        assertEquals(testUser2, Requests.instance.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
     @Test
     public void testValidateUserRequestEmail() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        assertTrue(Requests.validateUserRequest(testUser.getEmail()));
+        assertTrue(Requests.instance.validateUserRequest(testUser.getEmail()));
     }
 
     @Test
     public void testValidateUserRequestUsername() {
         Mockito.when(dbService.getUser(testUser.getUsername())).thenReturn(testUser);
-        assertTrue(Requests.validateUserRequest(testUser.getUsername()));
+        assertTrue(Requests.instance.validateUserRequest(testUser.getUsername()));
     }
 
     @Test
     public void testValidateUserRequestInvalid() {
-        assertFalse(Requests.validateUserRequest("Invalid"));
+        assertFalse(Requests.instance.validateUserRequest("Invalid"));
     }
 
     @Test
@@ -144,13 +144,13 @@ public class RequestsTest {
 
         Mockito.when(dbService.addActivityToUser(testUser.getUsername(), activity)).thenReturn(testUser);
 
-        assertEquals(testUser, Requests.addActivityRequest(activity, testUser.getUsername()));
+        assertEquals(testUser, Requests.instance.addActivityRequest(activity, testUser.getUsername()));
     }
 
     @Test
     public void testAddActivityRequestInvalidUser() {
         EatVegetarianMeal activity = new EatVegetarianMeal();
-        assertEquals(null, Requests.addActivityRequest(activity, "invalid"));
+        assertEquals(null, Requests.instance.addActivityRequest(activity, "invalid"));
     }
 
     @Test
@@ -159,9 +159,9 @@ public class RequestsTest {
         List<User> testList = new ArrayList();
         testList.add(testUser);
         Mockito.when(dbService.getFriends(testUser.getUsername())).thenReturn(testList);
-        assertEquals(testList, Requests.getFriends(new LoginDetails(testUser.getUsername(),
+        assertEquals(testList, Requests.instance.getFriends(new LoginDetails(testUser.getUsername(),
                 testUser.getPassword())));
-        assertEquals(1, Requests.getFriends(new LoginDetails(testUser.getUsername(), testUser.getPassword())).size());
+        assertEquals(1, Requests.instance.getFriends(new LoginDetails(testUser.getUsername(), testUser.getPassword())).size());
     }
 
     @Test
@@ -170,7 +170,7 @@ public class RequestsTest {
         List<String> testList = new ArrayList();
         testList.add(testUser.getUsername());
         Mockito.when(dbService.getMatchingUsers(testUser.getUsername())).thenReturn(testList);
-        assertEquals(testList,Requests.getMatchingUsersRequest(testUser.getUsername(), new LoginDetails(testUser.getUsername(),
+        assertEquals(testList,Requests.instance.getMatchingUsersRequest(testUser.getUsername(), new LoginDetails(testUser.getUsername(),
                 testUser.getPassword())));
     }
 
@@ -179,7 +179,7 @@ public class RequestsTest {
         List<Achievement> testList = new ArrayList();
         testList.add(new Achievement());
         Mockito.when(dbService.getAchievements()).thenReturn(testList);
-        assertEquals(testList.get(0).getId(),Requests.getAllAchievements().get(0).getId());
+        assertEquals(testList.get(0).getId(),Requests.instance.getAllAchievements().get(0).getId());
     }
 
     @Test
@@ -188,14 +188,14 @@ public class RequestsTest {
         List<User> testList = new ArrayList<>();
         testList.add(testUser);
         Mockito.when(dbService.getTopUsers(1)).thenReturn(testList);
-        assertEquals(testList,Requests.getTopUsers(new LoginDetails(testUser.getUsername(),testUser.getPassword()),1));
+        assertEquals(testList,Requests.instance.getTopUsers(new LoginDetails(testUser.getUsername(),testUser.getPassword()),1));
     }
 
     @Test
     public void testEditProfile() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
         Mockito.when(dbService.editProfile(testUser,"firstName","test")).thenReturn(testUser);
-        assertEquals("Test",Requests.editProfile(new LoginDetails(testUser.getUsername(),
+        assertEquals("Test",Requests.instance.editProfile(new LoginDetails(testUser.getUsername(),
                 testUser.getPassword()),"firstName","test").getFirstName());
     }
     
@@ -203,6 +203,26 @@ public class RequestsTest {
     public void testforgotPass() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(), testUser.getPassword())).thenReturn(null);
         Boolean bool = false;
-        assertEquals(null,Requests.forgotPass(testUser.getEmail(),1,"A","B"));
+        assertEquals(null,Requests.instance.forgotPass(testUser.getEmail(),1,"A","B"));
     }
+
+    @Test
+    public void getTotalUsers() {
+        Mockito.when(dbService.getTotalUsers()).thenReturn(10);
+        assertEquals(10,Requests.getTotalUsers());
+    }
+
+    @Test
+    public void getAverageCO2Saved() {
+        Mockito.when(dbService.getAverageCO2Saved()).thenReturn(10.5);
+        assertEquals(10.5,Requests.getAverageCO2Saved());
+    }
+
+    @Test
+    public void getTotalCO2Saved() {
+        Mockito.when(dbService.getTotalCO2Saved()).thenReturn(100.5);
+        assertEquals(100.5,Requests.getTotalCO2Saved());
+    }
+
+
 }

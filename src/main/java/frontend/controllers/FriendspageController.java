@@ -10,6 +10,9 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import data.LoginDetails;
 import data.User;
+import frontend.gui.NavPanel;
+import frontend.gui.NotificationPopup;
+import frontend.gui.StageSwitcher;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -44,14 +47,17 @@ public class FriendspageController implements Initializable {
 
     private static LoginDetails thisLoginDetails;
 
+    private static AnchorPane headerCopy;
+
+    private static NotificationPopup popup;
+
+    private static AnchorPane mainCopy;
+
     @FXML
     private JFXTreeTableView friendsPane;
 
     @FXML
     private JFXHamburger menu;
-
-    @FXML
-    private JFXDrawer drawer;
 
     @FXML
     private JFXDrawer addFriendDrawer;
@@ -96,11 +102,9 @@ public class FriendspageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            NavPanelController.setup(drawer, menu);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        popup = new NotificationPopup();
+        mainCopy = main;
+        headerCopy = headerPane;
         fillFriendsTreeView();
         drawFriendRequestDrawer();
         fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
@@ -110,6 +114,18 @@ public class FriendspageController implements Initializable {
         todayPane.prefWidthProperty().bind(headingBox.widthProperty());
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
+        try {
+            StageSwitcher.friendsDrawer = NavPanel.addNavPanel(main, headerPane, menu);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void popup(String heading, String body, String icon,
+                             int drawerNumber) throws IOException {
+        String[] text = {heading, body, icon};
+        popup.newNotification(mainCopy, headerCopy, text, drawerNumber);
     }
 
     /**
@@ -119,6 +135,7 @@ public class FriendspageController implements Initializable {
      * @param unit - DateUnit enum, day, week or month
      * @param chart - the chart to edit
      */
+
     public void fillChart(String title, String color, DateUnit unit, BarChart chart) {
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(title);
@@ -150,7 +167,7 @@ public class FriendspageController implements Initializable {
         ActivityQueries thisQuery = new ActivityQueries(thisUser.getActivities());
         series1.getData().add(new XYChart.Data("You",
                 thisQuery.getTotalCO2Saved(unit)));
-        List<User> friendsList = Requests.getFriends(thisLoginDetails);
+        List<User> friendsList = Requests.instance.getFriends(thisLoginDetails);
         for (User friend : friendsList) {
             if (counter >= 5) {
                 return;
@@ -191,7 +208,7 @@ public class FriendspageController implements Initializable {
                         HBox.setMargin(addButton, new Insets(10, 10, 0, 90));
                         HBox.setMargin(tmpLabel, new Insets(15, 0, 0, 30));
                         addButton.setMaxWidth(40);
-                        addButton.setOnAction(e -> Requests.sendFriendRequest(
+                        addButton.setOnAction(e -> Requests.instance.sendFriendRequest(
                                 thisUser.getUsername(), tmpLabel.getText()));
                         hbox.getChildren().addAll(tmpLabel, addButton);
                         results.getChildren().add(hbox);
@@ -207,9 +224,11 @@ public class FriendspageController implements Initializable {
             if (addFriendDrawer.isOpened()) {
                 addFriendDrawer.close();
                 addFriendDrawer.setVisible(false);
+                addFriendDrawer.toBack();
             } else {
                 addFriendDrawer.open();
                 addFriendDrawer.setVisible(true);
+                addFriendDrawer.toFront();
             }
         });
     }
@@ -221,7 +240,7 @@ public class FriendspageController implements Initializable {
      * @return - list of users matching the keyword
      */
     public List getSearchResults(String keyword) {
-        return Requests.getMatchingUsersRequest(keyword, thisLoginDetails);
+        return Requests.instance.getMatchingUsersRequest(keyword, thisLoginDetails);
     }
 
     /**
@@ -273,7 +292,7 @@ public class FriendspageController implements Initializable {
 
     private ObservableList<UserItem> getTableData() {
         ObservableList<UserItem> friendsList = FXCollections.observableArrayList();
-        List<User> friends = Requests.getFriends(thisLoginDetails);
+        List<User> friends = Requests.instance.getFriends(thisLoginDetails);
         for (Object friend : friends) {
             User thisFriend = (User) friend;
             String activity = "This user has no activities";

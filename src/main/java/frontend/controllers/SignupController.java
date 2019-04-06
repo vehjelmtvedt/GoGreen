@@ -97,13 +97,13 @@ public class SignupController implements Initializable {
                 InputValidation.signUpValidate(nameFields, usernameField,
                         emailField, passwordField,
                         confirmPasswordField, ageField,
-                        getSecurityQuestionID(), secAnswer, mainPane);
+                        getSecurityQuestionid(), secAnswer, mainPane);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         });
-        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.sceneSwitch(
-                Main.getPrimaryStage(), Main.getSignIn()
+        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->
+                StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignIn()
         ));
         try {
             setFonts();
@@ -122,7 +122,7 @@ public class SignupController implements Initializable {
      * Gets the security question ID.
      * @return - the ID of the question
      */
-    public int getSecurityQuestionID() {
+    public int getSecurityQuestionid() {
         if (secQuestion.getValue() == null) {
             return -1;
         }

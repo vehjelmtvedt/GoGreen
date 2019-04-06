@@ -160,7 +160,14 @@ public class RequestHandler {
      */
     @RequestMapping("/editProfile")
     public User editProfile(@RequestBody LoginDetails loginDetails, @RequestParam String fieldName,
-                            @RequestParam Object newValue) {
+                            @RequestParam Object newValue,@RequestParam String typeName) {
+
+        if (typeName.equals("Integer")) {
+            newValue = Integer.parseInt((String)newValue);
+        } else if (typeName.equals("Double")) {
+            newValue = Double.parseDouble((String)newValue);
+        }
+
         User user = dbService.grantAccess(loginDetails.getIdentifier(),loginDetails.getPassword());
         System.out.println(user);
         if (user == null) {
@@ -194,6 +201,22 @@ public class RequestHandler {
 
         return false;
     }
+
+    @RequestMapping("/getTotalUsers")
+    public int getTotalUsers() {
+        return dbService.getTotalUsers();
+    }
+
+    @RequestMapping("/getTotalCO2Saved")
+    public double getTotalCO2Saved() {
+        return dbService.getTotalCO2Saved();
+    }
+
+    @RequestMapping("/getAverageCO2Saved")
+    public double getAverageCO2Saved() {
+        return dbService.getAverageCO2Saved();
+    }
+
 }
 
 

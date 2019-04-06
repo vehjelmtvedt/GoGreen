@@ -24,14 +24,10 @@ public class NotificationPopup {
      * @throws IOException - if it fails to load fonts
      */
     public void newNotification(AnchorPane mainPane, AnchorPane headerPane,
-                                String[] popupText) throws IOException {
-        for (int i = 0; i < 4; i++) {
-            if (closed[i]) {
-                JFXDrawer drawer = addDrawer(new JFXDrawer(), i, mainPane, headerPane, popupText);
-                animateUsingTimeline(drawer, i);
-                break;
-            }
-        }
+                                String[] popupText, int drawerNumber) throws IOException {
+        JFXDrawer drawer = addDrawer(new JFXDrawer(),
+                drawerNumber, mainPane, headerPane, popupText);
+        animateUsingTimeline(drawer, drawerNumber);
     }
 
     private void animateUsingTimeline(JFXDrawer drawer, int drawerNumber) {
@@ -78,7 +74,6 @@ public class NotificationPopup {
         AnchorPane.setLeftAnchor(image, 10.0);
         AnchorPane.setTopAnchor(body, 65.0);
         AnchorPane.setLeftAnchor(body, 70.0);
-
 
 
         drawer.setSidePane(content);
