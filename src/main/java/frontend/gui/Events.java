@@ -123,7 +123,7 @@ public class Events {
             button.setOpacity(0.75);
         });
     }
-
+    
     /**
      * .
      * Add food activities to the user upon clicking
