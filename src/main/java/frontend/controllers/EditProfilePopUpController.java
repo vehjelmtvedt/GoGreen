@@ -69,7 +69,8 @@ public class EditProfilePopUpController implements Initializable {
         button.setOnAction(e -> {
             if (!(textfield.getText().isEmpty())) {
                 textfield.setUnFocusColor(Color.BLACK);
-                Requests.editProfile(thisLoginDetails, editableVariable, textfield.getText());
+                Requests.instance.editProfile(
+                        thisLoginDetails, editableVariable, textfield.getText());
             } else {
                 textfield.setUnFocusColor(Color.RED);
             }
@@ -91,7 +92,8 @@ public class EditProfilePopUpController implements Initializable {
         ageSave.setOnAction(e -> {
             if ( (age.getText().matches("^[0-9]{0,3}$")) && (!(age.getText().isEmpty())) ) {
                 age.setUnFocusColor(javafx.scene.paint.Color.BLACK);
-                Requests.editProfile(thisLoginDetails, "age", Integer.parseInt(age.getText()));
+                Requests.instance.editProfile(
+                        thisLoginDetails, "age", Integer.parseInt(age.getText()));
             } else {
                 age.setUnFocusColor(Color.RED);
             }
@@ -117,7 +119,7 @@ public class EditProfilePopUpController implements Initializable {
 
             avatarimage.setOnMouseClicked(e -> {
                 avatarimage.setImage(new Image("avatars/13.jpg"));
-                Requests.editProfile(thisLoginDetails, "avatar", avatarimage.getId());
+                Requests.instance.editProfile(thisLoginDetails, "avatar", avatarimage.getId());
             });
             count ++;
         }
