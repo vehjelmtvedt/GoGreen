@@ -5,7 +5,9 @@ import com.jfoenix.controls.JFXTextField;
 import data.InstallSolarPanels;
 import data.LoginDetails;
 import data.User;
+
 import frontend.controllers.ActivitiesController;
+import frontend.controllers.EditProfilePopUpController;
 import frontend.controllers.FriendspageController;
 import frontend.controllers.HomepageController;
 import frontend.controllers.ProfilePageController;
@@ -72,6 +74,8 @@ public class InputValidation {
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);
             ProfilePageController.setUser(loggedUser);
+            EditProfilePopUpController.setUser(loggedUser);
+            EditProfilePopUpController.setLoginDetails(loginDetails);
 
             //setup .fxml pages after successfully logging in
             try {
@@ -82,7 +86,7 @@ public class InputValidation {
                 FXMLLoader loader3 = new FXMLLoader(
                         Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
                 FXMLLoader loader4 = new FXMLLoader(
-                        Main.class.getResource("/frontend/fxmlPages/ProfilePage2.fxml"));
+                        Main.class.getResource("/frontend/fxmlPages/ProfilePage.fxml"));
                 Parent root1 = loader1.load();
                 Parent root2 = loader2.load();
                 Parent root3 = loader3.load();

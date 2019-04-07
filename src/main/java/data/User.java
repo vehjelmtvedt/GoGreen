@@ -73,6 +73,7 @@ public class User {
         this.totalCarbonSaved = 0;
         this.lastLoginDate = Calendar.getInstance().getTime();
         this.activities = new ArrayList<>();
+        this.avatar = "0";
     }
 
     public User() {
@@ -253,6 +254,7 @@ public class User {
      *
      * @return String
      */
+
     public String toString() {
         StringBuilder userString = new StringBuilder();
         userString.append("First name: ").append(this.firstName).append('\n');
