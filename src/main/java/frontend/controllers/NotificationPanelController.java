@@ -139,13 +139,10 @@ public class NotificationPanelController implements Initializable {
 
     /**
      * Sets the login details and starts the notification thread.
-     * @param passedloginDetails - login details from sign in form
+     * @param passedLoginDetails - login details from sign in form
      */
-    public static void setLoginDetails(LoginDetails passedloginDetails) {
-        loginDetails = passedloginDetails;
-        SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, loggedUser);
-        NotificationThread notificationThread = new NotificationThread(syncUserTask);
-        notificationThread.start();
+    public static void setLoginDetails(LoginDetails passedLoginDetails) {
+        loginDetails = passedLoginDetails;
     }
 
     //public static fillNotifications()
