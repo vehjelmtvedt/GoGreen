@@ -223,12 +223,12 @@ public class RequestHandler {
      * @return the rank
      */
     @RequestMapping("/getRank")
-    public int getRank(@RequestBody LoginDetails loginDetails) {
+    public Integer getRank(@RequestBody LoginDetails loginDetails) {
         if (dbService.grantAccess(loginDetails.getIdentifier(),
                 loginDetails.getPassword()) != null) {
             return dbService.getUserRank(loginDetails.getIdentifier());
         }
-        return -1;
+        return null;
     }
 
 }

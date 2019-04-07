@@ -228,7 +228,8 @@ public class RequestsTest {
     public void getRank() {
         Mockito.when(dbService.grantAccess(testUser.getEmail(),testUser.getPassword())).thenReturn(testUser);
         Mockito.when(dbService.getUserRank(testUser.getEmail())).thenReturn(5);
-        assertEquals(Requests.instance.getUserRanking(new LoginDetails(testUser.getEmail(),testUser.getPassword())),5);
+        Integer x = 5;
+        assertEquals(Requests.instance.getUserRanking(new LoginDetails(testUser.getEmail(),testUser.getPassword())),x);
     }
 
 }

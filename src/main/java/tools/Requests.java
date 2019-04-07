@@ -265,7 +265,7 @@ public class Requests {
      * @param loginDetails authentication and identity of user
      * @return the rank of the user
      */
-    public int getUserRanking(LoginDetails loginDetails) {
+    public Integer getUserRanking(LoginDetails loginDetails) {
         return restTemplate.postForEntity(url + "/getRank",loginDetails,int.class).getBody();
     }
 
