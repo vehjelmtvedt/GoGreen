@@ -108,13 +108,14 @@ public class HomepageController implements Initializable {
 
         Events.addLeaderboards(leaderboards);
 
-        //switch leaderboards upon clicking
+        //Populate leaderboards with entries
         fillLeaderboards(5, tableTop5);
         fillLeaderboards(10, tableTop10);
         fillLeaderboards(25, tableTop25);
         fillLeaderboards(50, tableTop50);
         fillLeaderboards(100, tableTop100);
 
+        //switch leaderboards upon clicking
         btnTop5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             hideLeaderboards(tableTop5, tableTop10, tableTop25, tableTop50, tableTop100);
         });
@@ -154,8 +155,8 @@ public class HomepageController implements Initializable {
                 Main.getProfilePage()));
 
         //charts on the right
-        chartMyActivities.setData(fillPieChart(loggedUser));
-        fillChart("Your CO2 Savings", barChart);
+        fillPieChart(loggedUser, chartMyActivities);
+        fillBarChart("Your CO2 Savings", barChart);
 
         Events.addJfxButtonHover(btnProfile);
 
@@ -175,17 +176,17 @@ public class HomepageController implements Initializable {
         popup.newNotification(mainCopy, headerCopy, text, drawerNumber);
     }
 
-    private static ObservableList<PieChart.Data> fillPieChart(User user) {
+    private static void fillPieChart(User user, PieChart chart) {
         ActivityQueries queries = new ActivityQueries(user.getActivities());
 
-        return FXCollections.observableArrayList(
+        chart.setData(FXCollections.observableArrayList(
                 new PieChart.Data("Food",
                         queries.filterActivities("Food").size()),
                 new PieChart.Data("Transportation",
                         queries.filterActivities("Transportation").size()),
                 new PieChart.Data("Household",
                         queries.filterActivities("Household").size())
-        );
+        ));
     }
 
 
@@ -314,7 +315,7 @@ public class HomepageController implements Initializable {
                 thisQuery.getTotalCO2Saved(DateUnit.MONTH)));
     }
 
-    private void fillChart(String title, BarChart chart) {
+    private void fillBarChart(String title, BarChart chart) {
         XYChart.Series series = new XYChart.Series();
         series.setName(title);
         populateBarChart(series);
