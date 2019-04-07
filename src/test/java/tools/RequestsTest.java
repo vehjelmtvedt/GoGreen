@@ -209,19 +209,19 @@ public class RequestsTest {
     @Test
     public void getTotalUsers() {
         Mockito.when(dbService.getTotalUsers()).thenReturn(10);
-        assertEquals(10,Requests.getTotalUsers());
+        assertEquals(10,Requests.instance.getTotalUsers());
     }
 
     @Test
     public void getAverageCO2Saved() {
         Mockito.when(dbService.getAverageCO2Saved()).thenReturn(10.5);
-        assertEquals(10.5,Requests.getAverageCO2Saved());
+        assertEquals(10.5,Requests.instance.getAverageCO2Saved());
     }
 
     @Test
     public void getTotalCO2Saved() {
         Mockito.when(dbService.getTotalCO2Saved()).thenReturn(100.5);
-        assertEquals(100.5,Requests.getTotalCO2Saved());
+        assertEquals(100.5,Requests.instance.getTotalCO2Saved());
     }
 
 
