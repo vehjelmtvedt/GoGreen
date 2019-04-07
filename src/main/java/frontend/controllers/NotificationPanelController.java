@@ -40,12 +40,12 @@ public class NotificationPanelController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        int count = 0;
+        for (String fromUser : loggedUser.getFriendRequests()) {
+            ++count;
+            addFriendRequest(friendsContainer, fromUser, count);
+        }
 
-        //        for (String fromUser : loggedUser.getFriendRequests()) {
-        //            addFriendRequest(friendsContainer, fromUser);
-        //        }
-        addFriendRequest(friendsContainer, "Gigel", 1);
-        addFriendRequest(friendsContainer, "Messi ", 2);
         markAllRead.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
             markAllRead.setUnderline(true);
             markAllRead.setCursor(Cursor.HAND);
