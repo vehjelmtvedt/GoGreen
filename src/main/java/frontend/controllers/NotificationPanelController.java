@@ -3,6 +3,7 @@ package frontend.controllers;
 import data.LoginDetails;
 import data.User;
 import frontend.gui.Events;
+import frontend.gui.FriendRequest;
 import frontend.gui.Main;
 import frontend.threading.NotificationThread;
 import javafx.fxml.FXML;
@@ -43,7 +44,8 @@ public class NotificationPanelController implements Initializable {
         //        for (String fromUser : loggedUser.getFriendRequests()) {
         //            addFriendRequest(friendsContainer, fromUser);
         //        }
-
+        addFriendRequest(friendsContainer, "Gigel", 1);
+        addFriendRequest(friendsContainer, "Messi ", 2);
         markAllRead.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
             markAllRead.setUnderline(true);
             markAllRead.setCursor(Cursor.HAND);
@@ -56,14 +58,14 @@ public class NotificationPanelController implements Initializable {
         notificationPane.setVisible(false);
     }
 
-    //    private void addFriendRequest(VBox container, String fromUser) {
-    //        FriendRequest friendRequest = new FriendRequest();
-    //        try {
-    //            friendRequest.newFriendRequest(container, fromUser);
-    //        } catch (IOException exp) {
-    //            System.out.println("Something went wrong");
-    //        }
-    //    }
+    private void addFriendRequest(VBox container, String fromUser, int parity) {
+        FriendRequest friendRequest = new FriendRequest();
+        try {
+            friendRequest.newFriendRequest(container, fromUser, parity);
+        } catch (IOException exp) {
+            System.out.println("Something went wrong");
+        }
+    }
 
     private static void setup(ImageView notificationIcon,
                               ImageView logoutIcon, AnchorPane parentPane) throws IOException {

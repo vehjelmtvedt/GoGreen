@@ -11,7 +11,7 @@
    <children>
       <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="65.0" prefWidth="327.0" style="-fx-border-width: 2; -fx-border-style: none none solid none; -fx-border-color: #c6c6c6;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="6.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Notifications" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="24.0" />
+            <Label layoutX="10.0" layoutY="28.0" prefHeight="25.0" prefWidth="146.0" style="-fx-font-weight: bold;" text="Friend Requests" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="26.0" />
             <Label fx:id="markAllRead" layoutX="257.0" layoutY="26.0" text="Mark All as Read" textFill="#0085ff" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="24.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
