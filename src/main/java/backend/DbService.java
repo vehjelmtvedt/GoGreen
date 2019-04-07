@@ -199,9 +199,9 @@ public class DbService {
             users.save(acceptingUser);
 
             //checks if an achievement is completed by adding a friend
-            addAchievemnt(acceptingUser , AchievementsLogic.checkOther(acceptingUser),
+            addAchievement(acceptingUser , AchievementsLogic.checkOther(acceptingUser),
                      Calendar.getInstance().getTime());
-            addAchievemnt(requestingUser , AchievementsLogic.checkOther(requestingUser),
+            addAchievement(requestingUser , AchievementsLogic.checkOther(requestingUser),
                     Calendar.getInstance().getTime());
 
             return acceptingUser;
@@ -276,18 +276,18 @@ public class DbService {
         updateTotalCo2SavedStatistics(returned);
 
         // check if an achievement is completed by this activity
-        addAchievemnt(returned , AchievementsLogic.checkFoodActivity(
+        addAchievement(returned , AchievementsLogic.checkFoodActivity(
                 returned, activity) , activity.getDate());
-        addAchievemnt(returned , AchievementsLogic.checkTranspostActivity(
+        addAchievement(returned , AchievementsLogic.checkTranspostActivity(
                 returned, activity) , activity.getDate());
-        addAchievemnt(returned , AchievementsLogic.checkTranspostActivity1(
+        addAchievement(returned , AchievementsLogic.checkTranspostActivity1(
                 returned, activity) , activity.getDate());
 
         // adds points to the user
         addCO2Points(returned , activity.getCarbonSaved());
 
         //checks the users level
-        addAchievemnt(returned , AchievementsLogic.checkLevel(returned),
+        addAchievement(returned , AchievementsLogic.checkLevel(returned),
                 Calendar.getInstance().getTime());
 
         addUser(returned);
@@ -458,7 +458,7 @@ public class DbService {
         userStatistics.save(allStatistics);
 
         //checks the users level
-        addAchievemnt(user , AchievementsLogic.checkLevel(user) , Calendar.getInstance().getTime());
+        addAchievement(user , AchievementsLogic.checkLevel(user) , Calendar.getInstance().getTime());
 
     }
 
@@ -483,11 +483,9 @@ public class DbService {
      * @param ids   achievements to check
      * @param date date to add
      */
-    public void addAchievemnt(User user, ArrayList ids, Date date) {
+    public void addAchievement(User user, ArrayList<Integer> ids, Date date) {
 
-        for (Object object : ids) {
-
-            int id = (Integer) object;
+        for (Integer id : ids) {
 
             boolean alreadythere = false;
 

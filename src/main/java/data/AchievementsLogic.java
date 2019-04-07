@@ -15,9 +15,9 @@ public class AchievementsLogic {
      * @param user     current user
      * @param activity current activity
      */
-    public static ArrayList checkTranspostActivity(User user, Activity activity) {
+    public static ArrayList<Integer> checkTranspostActivity(User user, Activity activity) {
 
-        ArrayList results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList();
 
         //Using a bicycle id 2
         if (activity instanceof UseBikeInsteadOfCar) {
@@ -59,9 +59,9 @@ public class AchievementsLogic {
      * @param activity current activity
      */
 
-    public static ArrayList checkTranspostActivity1(User user, Activity activity) {
+    public static ArrayList<Integer> checkTranspostActivity1(User user, Activity activity) {
 
-        ArrayList results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList();
 
         //Use dp 50 activities 7
         if (user.getActivities().size() > 49) {
@@ -91,9 +91,9 @@ public class AchievementsLogic {
      * @param user     current user
      * @param activity current activity
      */
-    public static ArrayList checkFoodActivity(User user, Activity activity) {
+    public static ArrayList<Integer> checkFoodActivity(User user, Activity activity) {
 
-        ArrayList results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList();
 
         //Eating vegetarian food for the first time id 6
         if (activity instanceof EatVegetarianMeal) {
@@ -132,9 +132,9 @@ public class AchievementsLogic {
      *
      * @param user current user
      */
-    public static ArrayList checkOther(User user) {
+    public static ArrayList<Integer> checkOther(User user) {
 
-        ArrayList results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList();
 
         //Saved your first CO2 id 0
         if (user.getTotalCarbonSaved() > 0 && user.getActivities().size() > 0) {
@@ -191,9 +191,9 @@ public class AchievementsLogic {
      *
      * @param user user to check
      */
-    public static ArrayList checkLevel(User user) {
+    public static ArrayList<Integer> checkLevel(User user) {
 
-        ArrayList results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList();
 
         //Achieve level 4 19
         if (user.getProgress().getLevel() >= 4) {

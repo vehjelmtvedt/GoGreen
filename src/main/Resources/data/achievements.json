@@ -20,7 +20,7 @@
   {
     "_class": "data.Achievement",
     "id": 3,
-    "name": "Use a bicycle often",
+    "name": "Use a bicycle 5 times",
     "bonus": 400
   },
   {
@@ -32,13 +32,13 @@
   {
     "_class": "data.Achievement",
     "id": 5,
-    "name": "Use bus often",
+    "name": "Use bus 5 times",
     "bonus": 500
   },
   {
     "_class": "data.Achievement",
     "id": 6,
-    "name": "Eating vegetarian food",
+    "name": "Eat vegetarian food",
     "bonus": 300
   },
   {
@@ -50,31 +50,31 @@
   {
     "_class": "data.Achievement",
     "id": 8,
-    "name": "Adding your first friend",
+    "name": "Add your first friend",
     "bonus": 50
   },
   {
     "_class": "data.Achievement",
     "id": 9,
-    "name": "Adding more than 10 friends",
+    "name": "Add more than 10 friends",
     "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 10,
-    "name": "Being on the top of the board",
+    "name": "Be on the top of the board",
     "bonus": 1000
   },
   {
     "_class": "data.Achievement",
     "id": 11,
-    "name": "Being second on top of the board",
+    "name": "Be second on top of the board",
     "bonus": 750
   },
   {
     "_class": "data.Achievement",
     "id": 12,
-    "name": "Getting solar Power",
+    "name": "Get solar Power",
     "bonus": 500
   },
   {
@@ -146,13 +146,13 @@
   {
     "_class": "data.Achievement",
     "id": 24,
-    "name": "User the train once",
+    "name": "Use the train ",
     "bonus": 2000
   },
   {
     "_class": "data.Achievement",
     "id": 25,
-    "name": "User the train often",
+    "name": "Use the train 5 times",
     "bonus": 2000
   }
 

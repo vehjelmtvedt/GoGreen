@@ -1,7 +1,6 @@
 package backend;
 
 import data.Achievement;
-import data.EatVegetarianMeal;
 import data.User;
 import org.junit.Assert;
 import org.junit.Before;
@@ -367,7 +366,7 @@ public class DbServiceTest {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0);
 
-        dbService.addAchievemnt(testUser , arrayList , new Date(1,1,1));
+        dbService.addAchievement(testUser , arrayList , new Date(1,1,1));
 
         Assert.assertNotNull(testUser.getProgress().getAchievements().get(0));
 
@@ -380,7 +379,7 @@ public class DbServiceTest {
         ArrayList arrayList = new ArrayList();
         arrayList.add(0);
 
-        dbService.addAchievemnt(testUser , arrayList , new Date(1,1,1));
+        dbService.addAchievement(testUser , arrayList , new Date(1,1,1));
 
 
 
