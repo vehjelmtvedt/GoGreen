@@ -4,12 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
-import com.jfoenix.controls.JFXTextField;
 import data.Achievement;
-import data.LoginDetails;
 import data.User;
 import data.UserAchievement;
-import frontend.gui.Dialog;
 import frontend.gui.General;
 import frontend.gui.Main;
 import frontend.gui.NavPanel;
@@ -32,7 +29,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,8 +38,6 @@ import java.util.ResourceBundle;
 public class ProfilePageController implements Initializable {
 
     private static User thisUser;
-
-    private static LoginDetails thisLoginDetails;
 
     @FXML
     ImageView profilePicture;
@@ -101,14 +95,6 @@ public class ProfilePageController implements Initializable {
 
     public static void setUser(User user) {
         thisUser = user;
-    }
-
-    public static void setLoginDetails(LoginDetails loginDetails) {
-        thisLoginDetails = loginDetails;
-    }
-
-    public void setPicture(Image image) {
-        profilePicture.setImage(image);
     }
 
     /**
