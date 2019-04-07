@@ -18,5 +18,10 @@
                </cursor></Label>
          </children>
       </AnchorPane>
+      <ScrollPane layoutY="74.0" prefHeight="361.0" prefWidth="329.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+         <content>
+            <VBox fx:id="friendsContainer" prefHeight="360.0" prefWidth="327.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

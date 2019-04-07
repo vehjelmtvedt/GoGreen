@@ -354,14 +354,4 @@ public class HomepageController implements Initializable {
         NotificationThread notificationThread = new NotificationThread(syncUserTask);
         notificationThread.start();
     }
-
-    /**
-     * .
-     * Get the logged in User
-     *
-     * @return logged User
-     */
-    public static User getUser() {
-        return loggedUser;
-    }
 }

@@ -1,7 +1,10 @@
 package frontend.controllers;
 
+import data.LoginDetails;
+import data.User;
 import frontend.gui.Events;
 import frontend.gui.Main;
+import frontend.threading.NotificationThread;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,25 +16,33 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import tools.Requests;
+import tools.SyncUserTask;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class NotificationPanelController implements Initializable {
-
+    private static User loggedUser;
+    private static LoginDetails loginDetails;
     private static boolean notifySelected = false;
 
     @FXML
     private AnchorPane notificationPane;
-
     @FXML
     private Label markAllRead;
-
+    @FXML
+    private VBox friendsContainer;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //        for (String fromUser : loggedUser.getFriendRequests()) {
+        //            addFriendRequest(friendsContainer, fromUser);
+        //        }
 
         markAllRead.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
             markAllRead.setUnderline(true);
@@ -44,6 +55,15 @@ public class NotificationPanelController implements Initializable {
 
         notificationPane.setVisible(false);
     }
+
+    //    private void addFriendRequest(VBox container, String fromUser) {
+    //        FriendRequest friendRequest = new FriendRequest();
+    //        try {
+    //            friendRequest.newFriendRequest(container, fromUser);
+    //        } catch (IOException exp) {
+    //            System.out.println("Something went wrong");
+    //        }
+    //    }
 
     private static void setup(ImageView notificationIcon,
                               ImageView logoutIcon, AnchorPane parentPane) throws IOException {
@@ -103,4 +123,28 @@ public class NotificationPanelController implements Initializable {
         headerPane.getChildren().add(iconBox);
         setup(notificationIcon, logoutIcon, mainPane);
     }
+
+    /**
+     * .
+     * Sets the current logged in User to the one that was passed
+     *
+     * @param passedUser Logged in current user
+     */
+    public static void setUser(User passedUser) {
+        loggedUser = passedUser;
+
+    }
+
+    /**
+     * Sets the login details and starts the notification thread.
+     * @param passedloginDetails - login details from sign in form
+     */
+    public static void setLoginDetails(LoginDetails passedloginDetails) {
+        loginDetails = passedloginDetails;
+        SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, loggedUser);
+        NotificationThread notificationThread = new NotificationThread(syncUserTask);
+        notificationThread.start();
+    }
+
+    //public static fillNotifications()
 }
