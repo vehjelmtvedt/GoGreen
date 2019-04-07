@@ -73,6 +73,7 @@ public class User {
         this.totalCarbonSaved = 0;
         this.lastLoginDate = Calendar.getInstance().getTime();
         this.activities = new ArrayList<>();
+        this.avatar = "0";
     }
 
     public User() {
@@ -217,7 +218,7 @@ public class User {
 
     public void setTotalCarbonSaved(double totalCarbonSaved) {
         // keep only 3 decimal places
-        this.totalCarbonSaved = ((int)(totalCarbonSaved * 1000)) / 1000.0;
+        this.totalCarbonSaved = ((int) (totalCarbonSaved * 1000)) / 1000.0;
     }
 
     public double getTotalCarbonSaved() {
@@ -247,11 +248,13 @@ public class User {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
     /**
      * Returns string representation of the User object.
      *
      * @return String
      */
+
     public String toString() {
         StringBuilder userString = new StringBuilder();
         userString.append("First name: ").append(this.firstName).append('\n');
@@ -355,6 +358,16 @@ public class User {
         return result;
     }
 
+    /**
+     * addes to the points the amount of co2 save.*
+     * every one co2 unite is worth 1 point
+     *
+     * @param carbonsaved co2 saved
+     */
+    public void addCO2Points(double carbonsaved) {
+        this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
+
+    }
 
 
     /*

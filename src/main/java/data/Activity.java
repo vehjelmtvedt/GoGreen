@@ -28,6 +28,8 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = UseTrainInsteadOfCar.class, name = "UseTrainInsteadOfCar"),
         @JsonSubTypes.Type(value = InstallSolarPanels.class, name = "InstallSolarPanels"),
         @JsonSubTypes.Type(value = LowerHomeTemperature.class, name = "LowerHomeTemperature"),
+        @JsonSubTypes.Type(value = RecyclePaper.class, name = "RecyclePaper"),
+        @JsonSubTypes.Type(value = RecyclePlastic.class, name = "RecyclePlastic"),
     })
 public abstract class Activity {
     private Date date;

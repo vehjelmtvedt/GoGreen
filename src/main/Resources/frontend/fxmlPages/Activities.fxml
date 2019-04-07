@@ -343,6 +343,12 @@
                                     <Font size="18.0" />
                                  </font>
                               </Text>
+                              <HBox layoutX="779.0" layoutY="412.0" prefHeight="37.0" prefWidth="474.0" spacing="25.0">
+                                 <children>
+                                    <Label fx:id="lblPlastic" alignment="CENTER" prefHeight="21.0" prefWidth="231.0" text="- Already recycled plastic today- " visible="false" />
+                                    <Label fx:id="lblPaper" alignment="CENTER" prefHeight="21.0" prefWidth="231.0" text="- Already recycled paper today - " visible="false" />
+                                 </children>
+                              </HBox>
                            </children>
                         </AnchorPane>
                      </children>
@@ -393,15 +399,18 @@
                                     <JFXCheckBox fx:id="checkFood" checkedColor="GREEN" text="Food">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
-                                       </cursor></JFXCheckBox>
+                                       </cursor>
+                                    </JFXCheckBox>
                                     <JFXCheckBox fx:id="checkTransportation" checkedColor="GREEN" text="Transportation">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
-                                       </cursor></JFXCheckBox>
+                                       </cursor>
+                                    </JFXCheckBox>
                                     <JFXCheckBox fx:id="checkHousehold" checkedColor="GREEN" text="Household">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
-                                       </cursor></JFXCheckBox>
+                                       </cursor>
+                                    </JFXCheckBox>
                                  </children>
                               </VBox>
                               <Line endX="100.0" layoutX="158.0" layoutY="48.0" startX="-100.0" AnchorPane.leftAnchor="57.5" AnchorPane.rightAnchor="56.5" />

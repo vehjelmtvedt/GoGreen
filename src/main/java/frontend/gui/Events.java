@@ -11,11 +11,13 @@ import data.BuyOrganicFood;
 import data.EatVegetarianMeal;
 import data.InstallSolarPanels;
 import data.LowerHomeTemperature;
+import data.RecyclePaper;
+import data.RecyclePlastic;
 import data.UseBikeInsteadOfCar;
 import data.UseBusInsteadOfCar;
 import data.UseTrainInsteadOfCar;
 import data.User;
-import frontend.controllers.ActivitiesController;   
+import frontend.controllers.ActivitiesController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -259,6 +261,14 @@ public class Events {
                         panels.setKwhSavedPerYear(Integer.parseInt(result.get()));
                         panels.performActivity(loggedUser);
                         installedPanels.setVisible(true);
+
+                        //show popup upon performing an activity
+                        try {
+                            ActivitiesController.popup("Popup","Activity performed successfully!",
+                                    "sucess", 0);
+                        } catch (IOException exp) {
+                            System.out.println("Something went wrong.");
+                        }
                     }
                 }
             } else {
@@ -273,7 +283,7 @@ public class Events {
                                         + " you can try again tomorrow!");
                         alert.showAndWait();
                     } else {
-                        List<String> choices = Arrays.asList( "1", "2", "3", "4", "5");
+                        List<String> choices = Arrays.asList("1", "2", "3", "4", "5");
                         ChoiceDialog<String> dialog = new ChoiceDialog<>("1", choices);
                         dialog.setTitle("Lower Home Temperature");
                         dialog.setHeaderText("How many degrees did you turn your thermostat down?");
@@ -284,18 +294,84 @@ public class Events {
                             temp.setDegrees(Integer.parseInt(result.get()));
                             temp.performActivity(loggedUser);
                             loweredTemp.setVisible(true);
+
+                            //show popup upon performing an activity
+                            try {
+                                ActivitiesController.popup("Popup",
+                                        "Activity performed successfully!",
+                                        "sucess", 0);
+                            } catch (IOException exp) {
+                                System.out.println("Something went wrong.");
+                            }
                         }
                     }
                 }
             }
-
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
-            try {
-                ActivitiesController.popup("Popup","Activity performed successfully!","sucess", 0);
-            } catch (IOException exp) {
-                System.out.println("Something went wrong.");
+        });
+    }
+
+    /**.
+     * Add recycling activity(part of Household category)
+     * @param pane - pane to be clicked
+     * @param type - type of recycling
+     * @param loggedUser - the user who performs the activity
+     * @param activityTable - the history table
+     */
+    public static void addRecyclingActivity(AnchorPane pane, Label lblPlastic,
+                                            Label lblPaper, int type,
+                                            User loggedUser, TableView<Activity> activityTable) {
+        pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (type == 1) {
+                RecyclePlastic plastic = new RecyclePlastic();
+                if (plastic.timesPerformedInTheSameDay(loggedUser) > 0) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("Oops");
+                    alert.setContentText(
+                            "It looks like you already did this today,"
+                                    + " you can try again tomorrow!");
+                    alert.showAndWait();
+                } else {
+                    plastic.performActivity(loggedUser);
+                    lblPlastic.setVisible(true);
+
+                    //show popup upon performing an activity
+                    try {
+                        ActivitiesController.popup("Popup",
+                                "Activity performed successfully!","sucess", 0);
+                    } catch (IOException exp) {
+                        System.out.println("Something went wrong.");
+                    }
+                }
+            } else {
+                if (type == 2) {
+                    RecyclePaper paper = new RecyclePaper();
+                    if (paper.timesPerformedInTheSameDay(loggedUser) > 0) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText("Oops");
+                        alert.setContentText(
+                                "It looks like you already did this today,"
+                                        + " you can try again tomorrow!");
+                        alert.showAndWait();
+                    } else {
+                        paper.performActivity(loggedUser);
+                        lblPaper.setVisible(true);
+
+                        //show popup upon performing an activity
+                        try {
+                            ActivitiesController.popup("Popup",
+                                    "Activity performed successfully!","sucess", 0);
+                        } catch (IOException exp) {
+                            System.out.println("Something went wrong.");
+                        }
+                    }
+                }
             }
+            ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
+            activityTable.setItems(activities);
         });
     }
 
