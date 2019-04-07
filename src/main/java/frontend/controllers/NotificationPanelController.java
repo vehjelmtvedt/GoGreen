@@ -1,6 +1,9 @@
 package frontend.controllers;
 
+import data.LoginDetails;
+import data.User;
 import frontend.gui.Events;
+import frontend.gui.FriendRequest;
 import frontend.gui.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,25 +16,32 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class NotificationPanelController implements Initializable {
-
+    private static User loggedUser;
+    private static LoginDetails loginDetails;
     private static boolean notifySelected = false;
 
     @FXML
     private AnchorPane notificationPane;
-
     @FXML
     private Label markAllRead;
-
+    @FXML
+    private VBox friendsContainer;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        int count = 0;
+        for (String fromUser : loggedUser.getFriendRequests()) {
+            ++count;
+            addFriendRequest(friendsContainer, fromUser, count);
+        }
 
         markAllRead.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
             markAllRead.setUnderline(true);
@@ -43,6 +53,15 @@ public class NotificationPanelController implements Initializable {
         });
 
         notificationPane.setVisible(false);
+    }
+
+    private void addFriendRequest(VBox container, String fromUser, int parity) {
+        FriendRequest friendRequest = new FriendRequest();
+        try {
+            friendRequest.newFriendRequest(container, fromUser, parity);
+        } catch (IOException exp) {
+            System.out.println("Something went wrong");
+        }
     }
 
     private static void setup(ImageView notificationIcon,
@@ -103,4 +122,25 @@ public class NotificationPanelController implements Initializable {
         headerPane.getChildren().add(iconBox);
         setup(notificationIcon, logoutIcon, mainPane);
     }
+
+    /**
+     * .
+     * Sets the current logged in User to the one that was passed
+     *
+     * @param passedUser Logged in current user
+     */
+    public static void setUser(User passedUser) {
+        loggedUser = passedUser;
+
+    }
+
+    /**
+     * Sets the login details and starts the notification thread.
+     * @param passedLoginDetails - login details from sign in form
+     */
+    public static void setLoginDetails(LoginDetails passedLoginDetails) {
+        loginDetails = passedLoginDetails;
+    }
+
+    //public static fillNotifications()
 }
