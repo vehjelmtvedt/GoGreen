@@ -170,7 +170,7 @@ public final class CarbonCalculator {
 
     /**
      * Miscellaneous spending emissions.
-     *
+     * @return carbonEmissions per year in kg
      */
     public static double miscellaneousSpendingEmisions(MiscellaneousSpending
                                                                miscellaneousSpending) {
