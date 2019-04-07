@@ -5,7 +5,6 @@ import data.User;
 import frontend.gui.Events;
 import frontend.gui.FriendRequest;
 import frontend.gui.Main;
-import frontend.threading.NotificationThread;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,8 +17,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import tools.Requests;
-import tools.SyncUserTask;
 
 import java.io.IOException;
 import java.net.URL;
