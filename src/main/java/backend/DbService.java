@@ -458,7 +458,8 @@ public class DbService {
         userStatistics.save(allStatistics);
 
         //checks the users level
-        addAchievement(user , AchievementsLogic.checkLevel(user) , Calendar.getInstance().getTime());
+        addAchievement(user , AchievementsLogic.checkLevel(user) ,
+                 Calendar.getInstance().getTime());
 
     }
 
@@ -498,6 +499,11 @@ public class DbService {
                 }
 
             }
+
+            // I tried .contains()  is uses the equals method
+            // for user Achievement  that checks the id along with the date ,
+            // this means that same achievements with different dates are going to be added
+
             if (!alreadythere) {
 
                 UserAchievement userAchievement = new UserAchievement(id, true, date);
@@ -523,7 +529,7 @@ public class DbService {
             }
         }
 
-        addUser(user);
+        //addUser(user);
     }
 
     /**

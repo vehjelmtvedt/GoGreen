@@ -141,6 +141,5 @@ public class AchievementsLogicTest {
             user.getFriends().add("test" + k);
         }
         Assert.assertTrue(8 == AchievementsLogic.checkOther(user).get(0));
-
     }
 }
