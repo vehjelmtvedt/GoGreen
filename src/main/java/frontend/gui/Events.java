@@ -81,6 +81,21 @@ public class Events {
 
     /**
      * .
+     * Add hover events for the save buttons on the edit profile page
+     *
+     * @param button - button to add events to
+     */
+    public static void addSaveButtonHover(JFXButton button) {
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+            button.setStyle("-fx-background-color: #00db00");
+        });
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            button.setStyle("-fx-background-color: transparent;");
+        });
+    }
+
+    /**
+     * .
      * Add hover event for navigation panel buttons
      *
      * @param button button to add hover to inside nav bar
@@ -94,8 +109,10 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add hover event for JFX buttons
+     *
      * @param button - button to add hover event to
      */
     public static void addJfxButtonHover(JFXButton button) {
@@ -137,7 +154,8 @@ public class Events {
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
             try {
-                ActivitiesController.popup("Popup","Activity performed successfully!","sucess", 0);
+                ActivitiesController.popup("Popup", "Activity performed successfully!",
+                        "sucess", 0);
             } catch (IOException exp) {
                 System.out.println("Something went wrong.");
             }
@@ -196,7 +214,8 @@ public class Events {
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
             try {
-                ActivitiesController.popup("Popup","Activity performed successfully!","sucess", 0);
+                ActivitiesController.popup("Popup", "Activity performed successfully!",
+                        "sucess", 0);
             } catch (IOException exp) {
                 System.out.println("Something went wrong.");
             }
@@ -213,8 +232,10 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add household activities to the user upon clicking
+     *
      * @param pane          - pane to be clicked
      * @param type          - type of activity
      * @param loggedUser    - user to update
@@ -234,10 +255,10 @@ public class Events {
                     alert.setHeaderText("You have already installed solar panels!");
                     alert.setContentText("Total CO2 saved by your solar panels: "
                             + ChronoUnit.DAYS.between(loggedUser
-                                            .getSimilarActivities(panels)
-                                            .get(0).getDate().toInstant(),
-                                    Calendar.getInstance().getTime().toInstant())
-                                    * installed.getDailyCarbonSaved());
+                                    .getSimilarActivities(panels)
+                                    .get(0).getDate().toInstant(),
+                            Calendar.getInstance().getTime().toInstant())
+                            * installed.getDailyCarbonSaved());
                     alert.showAndWait();
                 } else {
                     TextInputDialog dialog = new TextInputDialog("0");
@@ -264,7 +285,7 @@ public class Events {
 
                         //show popup upon performing an activity
                         try {
-                            ActivitiesController.popup("Popup","Activity performed successfully!",
+                            ActivitiesController.popup("Popup", "Activity performed successfully!",
                                     "sucess", 0);
                         } catch (IOException exp) {
                             System.out.println("Something went wrong.");
@@ -312,11 +333,13 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add recycling activity(part of Household category)
-     * @param pane - pane to be clicked
-     * @param type - type of recycling
-     * @param loggedUser - the user who performs the activity
+     *
+     * @param pane          - pane to be clicked
+     * @param type          - type of recycling
+     * @param loggedUser    - the user who performs the activity
      * @param activityTable - the history table
      */
     public static void addRecyclingActivity(AnchorPane pane, Label lblPlastic,
@@ -340,7 +363,7 @@ public class Events {
                     //show popup upon performing an activity
                     try {
                         ActivitiesController.popup("Popup",
-                                "Activity performed successfully!","sucess", 0);
+                                "Activity performed successfully!", "sucess", 0);
                     } catch (IOException exp) {
                         System.out.println("Something went wrong.");
                     }
@@ -363,7 +386,7 @@ public class Events {
                         //show popup upon performing an activity
                         try {
                             ActivitiesController.popup("Popup",
-                                    "Activity performed successfully!","sucess", 0);
+                                    "Activity performed successfully!", "sucess", 0);
                         } catch (IOException exp) {
                             System.out.println("Something went wrong.");
                         }
@@ -482,7 +505,7 @@ public class Events {
     }
 
     private static List<Activity> applyCategoryFilters(List<Activity> activities,
-                                             List<JFXCheckBox> checkList) {
+                                                       List<JFXCheckBox> checkList) {
         ActivityQueries activityQueries = new ActivityQueries(activities);
         List<String> categoryFilters = new ArrayList<>();
         for (JFXCheckBox filter : checkList) {
@@ -494,7 +517,7 @@ public class Events {
     }
 
     private static List<Activity> applyTimeFilters(List<Activity> activities,
-                                         List<JFXRadioButton> radioList) {
+                                                   List<JFXRadioButton> radioList) {
         ActivityQueries activityQueries = new ActivityQueries(activities);
         for (JFXRadioButton filter : radioList) {
             if (filter.isSelected()) {
@@ -514,7 +537,7 @@ public class Events {
     }
 
     private static List<Activity> applyCarbonFilters(List<Activity> activities,
-                                           JFXTextField min, JFXTextField max) {
+                                                     JFXTextField min, JFXTextField max) {
         ActivityQueries activityQueries = new ActivityQueries(activities);
 
         if (!min.getText().equals("") && !max.getText().equals("")) {
@@ -560,8 +583,10 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add leaderboards events to the the leaderboards buttons
+     *
      * @param leaderboards - list containing buttons for all types of leaderboards
      */
     public static void addLeaderboards(List<JFXButton> leaderboards) {

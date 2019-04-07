@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import data.LoginDetails;
 import data.User;
+import frontend.gui.Events;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
@@ -79,6 +80,11 @@ public class EditProfilePopUpController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //add hover events for the buttons that edit the profile information;
+        Events.addSaveButtonHover(firstNameSave);
+        Events.addSaveButtonHover(lastNameSave);
+        Events.addSaveButtonHover(ageSave);
+        Events.addJfxButtonHover(close);
 
         firstName.setText(thisUser.getFirstName());
         lastName.setText(thisUser.getLastName());
