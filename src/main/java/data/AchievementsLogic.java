@@ -1,5 +1,7 @@
 package data;
 
+import tools.ActivityQueries;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -42,9 +44,15 @@ public class AchievementsLogic {
             addAchievemnt(user, 4, activity.getDate());
             results.add(4);
         }
+
+        ActivityQueries activityQueries = new ActivityQueries(user.getActivities());
+
+        //activityQueries.filterActivitiesByType(); // by type
+        //activityQueries.filterActivities(); // by category
+
         //Using  bus often id 5
         if (activity instanceof UseBusInsteadOfCar
-                && (user.getSimilarActivities(activity).size() > 4)) {
+                && activityQueries.filterActivitiesByType(activity.getClass()).size() > 4) {
             addAchievemnt(user, 5, activity.getDate());
             results.add(5);
 

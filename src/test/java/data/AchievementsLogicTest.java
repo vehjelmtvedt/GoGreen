@@ -137,9 +137,9 @@ public class AchievementsLogicTest {
     @Test
     public void testfriend1() {
 
-        for (int k = 0 ; k < 10 ; k++ ) {
+        for (int k = 0 ; k <= 10 ; k++ ) {
             user.getFriends().add("test" + k);
         }
-        Assert.assertTrue(8 == AchievementsLogic.checkOther(user).get(0));
+        Assert.assertTrue(AchievementsLogic.checkOther(user).contains(9));
     }
 }
