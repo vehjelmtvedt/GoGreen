@@ -32,8 +32,8 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
 
+import java.util.ResourceBundle;
 
 public class ProfilePageController implements Initializable {
 
@@ -98,7 +98,7 @@ public class ProfilePageController implements Initializable {
     }
 
     /**
-     Checks completed Achievements.
+     * Checks completed Achievements.
      */
     public static boolean isComplete(Achievement achievement) {
         for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
@@ -159,10 +159,12 @@ public class ProfilePageController implements Initializable {
             e.printStackTrace();
         }
 
-        int count = 0;
+
+        ProfilePageController.setUser(thisUser);
 
         // for every completed achievement module  is created
         // and added to a VBox small pics might be added later
+        int count = 1;
         for (int i = 0; i < thisUser.getProgress().getAchievements().size(); i++) {
 
             count++;
@@ -179,7 +181,7 @@ public class ProfilePageController implements Initializable {
             name.setFill(Color.GREEN);
             Text bonus = new Text(",Got: " + ProfilePageLogic.getBonusString(
                     thisUser.getProgress().getAchievements().get(i)) + " Points");
-            Text date = new Text(",Completed On: " + ProfilePageLogic.getDateString(
+            Text date = new Text(", Completed On: " + ProfilePageLogic.getDateString(
                     thisUser.getProgress().getAchievements().get(i)) + ".");
             hbox.getChildren().addAll(achievementimage, name, bonus, date);
             com.getChildren().add(hbox);
@@ -207,7 +209,7 @@ public class ProfilePageController implements Initializable {
         }
 
         int levelcount = 1;
-        for (int i = 1; i <= (thisUser.getProgress().getLevel()); i++) {
+        for (int i = 1; i <= thisUser.getProgress().getLevel(); i++) {
 
             ImageView badgeimage = new ImageView();
             Image path = new Image("badges/" + levelcount + ".png");
@@ -217,11 +219,9 @@ public class ProfilePageController implements Initializable {
             badgeZone.getChildren().add(badgeimage);
             levelcount++;
         }
-
-
-
     }
-
+//    addCompletedAchievements(com);
+//    addPendingAchievements(incom);
 }
 
 

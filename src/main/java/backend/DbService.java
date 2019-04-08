@@ -3,9 +3,12 @@ package backend;
 import backend.repos.AchievementRepository;
 import backend.repos.UserRepository;
 import backend.repos.UserStatisticsRepository;
+
 import data.Achievement;
+import data.AchievementsLogic;
 import data.Activity;
 import data.User;
+import data.UserAchievement;
 import data.UserStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -20,8 +23,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Field;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -156,8 +161,10 @@ public class DbService {
         return user.orElse(null);
     }
 
-    /**.
+    /**
+     * .
      * Gets user from the database (by identifier [email/password])
+     *
      * @param identifier - identifier (can be e-mail or username
      * @return - User object (password encoded!), or null if not present
      */
@@ -187,9 +194,17 @@ public class DbService {
             requestingUser.addFriend(acceptingUser.getUsername());
             acceptingUser.addFriend(requestingUser.getUsername());
             acceptingUser.deleteFriendRequest(requester);
+            
             // Update changes in database
             users.save(requestingUser);
             users.save(acceptingUser);
+
+            //checks if an achievement is completed by adding a friend
+            addAchievement(acceptingUser , AchievementsLogic.checkOther(acceptingUser),
+                     Calendar.getInstance().getTime());
+            addAchievement(requestingUser , AchievementsLogic.checkOther(requestingUser),
+                    Calendar.getInstance().getTime());
+
             return true;
         } else {
             return false;
@@ -249,6 +264,7 @@ public class DbService {
      * @return - Updated User
      */
     public User addActivityToUser(String username, Activity activity) {
+
         User returned = getUserByUsername(username);
 
         if (returned == null || activity == null) {
@@ -259,6 +275,24 @@ public class DbService {
         returned.setTotalCarbonSaved(returned.getTotalCarbonSaved() + activity.getCarbonSaved());
         addUser(returned);
         updateTotalCo2SavedStatistics(returned);
+
+        // check if an achievement is completed by this activity
+        addAchievement(returned , AchievementsLogic.checkFoodActivity(
+                returned, activity) , activity.getDate());
+        addAchievement(returned , AchievementsLogic.checkTranspostActivity(
+                returned, activity) , activity.getDate());
+        addAchievement(returned , AchievementsLogic.checkTranspostActivity1(
+                returned, activity) , activity.getDate());
+
+        // adds points to the user
+        addCO2Points(returned , activity.getCarbonSaved());
+
+        //checks the users level
+        addAchievement(returned , AchievementsLogic.checkLevel(returned),
+                Calendar.getInstance().getTime());
+
+        addUser(returned);
+
         return returned;
     }
 
@@ -298,8 +332,10 @@ public class DbService {
                 User.class); // result as User Object
     }
 
-    /**.
+    /**
+     * .
      * Gets User's friends
+     *
      * @param identifier - identifier (e-mail/username) of User
      * @return - List of User's friends
      */
@@ -317,10 +353,12 @@ public class DbService {
         }
     }
 
-    /**.
+    /**
+     * .
      * Gets User's top friends
+     *
      * @param identifier - identifier (e-mail/username) of User
-     * @param top - Number of top friends to return
+     * @param top        - Number of top friends to return
      * @return - top n friends of user
      */
     public List<User> getTopFriends(String identifier, int top) {
@@ -352,12 +390,13 @@ public class DbService {
 
     /**
      * Edits and updates user.
-     * @param user the user to update
+     *
+     * @param user      the user to update
      * @param fieldName name of the field to update
-     * @param newValue new value of the field
+     * @param newValue  new value of the field
      * @return the updated User
      */
-    public User editProfile(User user,String fieldName, Object newValue) {
+    public User editProfile(User user, String fieldName, Object newValue) {
         try {
             Field field = user.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
@@ -369,9 +408,11 @@ public class DbService {
         addUser(user);
         return user;
     }
-    
-    /**.
+
+    /**
+     * .
      * Returns the total amount of CO2 saved by all the users
+     *
      * @return - Total amount of CO2 saved
      */
     public double getTotalCO2Saved() {
@@ -416,6 +457,11 @@ public class DbService {
         allStatistics.addTotalCo2Saved(recentActivity.getCarbonSaved());
 
         userStatistics.save(allStatistics);
+
+        //checks the users level
+        addAchievement(user , AchievementsLogic.checkLevel(user) ,
+                 Calendar.getInstance().getTime());
+
     }
 
     private void updateTotalUsersStatistics() {
@@ -430,6 +476,76 @@ public class DbService {
         allStatistics.deleteUser(user);
 
         userStatistics.save(allStatistics);
+    }
+
+    /**
+     * this method checks every achievements if its already in the List, if not add it.
+     *
+     * @param user current user
+     * @param ids   achievements to check
+     * @param date date to add
+     */
+    public void addAchievement(User user, ArrayList<Integer> ids, Date date) {
+
+        for (Integer id : ids) {
+
+            boolean alreadythere = false;
+
+            for (UserAchievement userAchievement : user.getProgress().getAchievements()) {
+
+                if (userAchievement.getId() == id) {
+
+                    alreadythere = true;
+                    break;
+                }
+
+            }
+
+            // I tried .contains()  is uses the equals method
+            // for user Achievement  that checks the id along with the date ,
+            // this means that same achievements with different dates are going to be added
+
+            if (!alreadythere) {
+
+                UserAchievement userAchievement = new UserAchievement(id, true, date);
+
+                user.getProgress().getAchievements().add(userAchievement);
+
+                String idstring = Integer.toString(id);
+
+                System.out.println(idstring + "looking for this ");
+
+                List<Achievement> list = getAchievements();
+
+                user.getProgress().addPoints(list.get(id).getBonus());
+
+                System.out.println("Added: id " + userAchievement.getId()
+                        + " list.get(id).getBonus() points "
+                        +
+                        " now have " + user.getProgress().getAchievements().size()
+                        +
+                        " competed" + "this user now has "
+                        +
+                        user.getProgress().getPoints() + " points");
+            }
+        }
+
+        //addUser(user);
+    }
+
+    /**
+     * addes to the points the amount of co2 save.
+     * every one co2 unite is worth 1 point
+     * @param user user to add points to
+     * @param carbonsaved co2 saved
+     */
+    public void addCO2Points(User user , double carbonsaved) {
+
+        System.out.println("In addCO2Points   going to add " + carbonsaved);
+
+        user.getProgress().setPoints(user.getProgress().getPoints() + carbonsaved * 300);
+
+
     }
 
     /**.
