@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 
 public class SyncUserTaskTest {
     private Requests requests = Mockito.mock(Requests.class);
@@ -41,8 +42,8 @@ public class SyncUserTaskTest {
 
     @Before
     public void setupFriendRequests() {
-        ArrayList<String> requests1 = new ArrayList<>();
-        ArrayList<String> requests2 = new ArrayList<>();
+        HashSet<String> requests1 = new HashSet<>();
+        HashSet<String> requests2 = new HashSet<>();
 
         String req1 = "abc";
         String req2 = "differentPerson";
@@ -59,8 +60,8 @@ public class SyncUserTaskTest {
 
     @Before
     public void setupFriends() {
-        ArrayList<String> friends1 = new ArrayList<>();
-        ArrayList<String> friends2 = new ArrayList<>();
+        HashSet<String> friends1 = new HashSet<>();
+        HashSet<String> friends2 = new HashSet<>();
 
         String friend1 = "user_a";
         String friend2 = "user_b";

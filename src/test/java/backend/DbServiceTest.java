@@ -1,7 +1,6 @@
 package backend;
 
 import data.Achievement;
-import data.EatVegetarianMeal;
 import data.User;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,10 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -181,7 +177,7 @@ public class DbServiceTest {
 
         assertEquals(expected, result);
     }
-    
+
     @Test
     public void testBefriendUsersNull1() {
         dbService.addUser(testUser2);
@@ -205,8 +201,8 @@ public class DbServiceTest {
         dbService.addFriendRequest(testUser2.getUsername(), testUser3.getUsername());
         Assert.assertEquals(1, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
         dbService.acceptFriendRequest(dbService.getUser(testUser2.getEmail()).getUsername(), dbService.getUser(testUser3.getEmail()).getUsername());
-        Assert.assertEquals("test_userFr",dbService.getUser(testUser2.getEmail()).getFriends().get(0));
-        Assert.assertEquals("test_userF",dbService.getUser(testUser3.getEmail()).getFriends().get(0));
+        Assert.assertEquals(true,dbService.getUser(testUser2.getEmail()).getFriends().contains("test_userFr"));
+        Assert.assertEquals(true,dbService.getUser(testUser3.getEmail()).getFriends().contains("test_userF"));
         Assert.assertEquals(0, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
         dbService.deleteUser(testUser2.getEmail());
         dbService.deleteUser(testUser3.getEmail());
@@ -214,7 +210,7 @@ public class DbServiceTest {
 
     @Test
     public void testBefriendUsersBothNull() {
-        assertEquals(null, dbService.acceptFriendRequest(null, null));
+        assertEquals(false, dbService.acceptFriendRequest(null, null));
     }
 
     @Test
@@ -245,7 +241,7 @@ public class DbServiceTest {
 
     @Test
     public void testAddFriendRequestBothNull() { //false, false
-        assertEquals(null, dbService.addFriendRequest(null, null));
+        assertEquals(false, dbService.addFriendRequest(null, null));
     }
 
     @Test
@@ -278,7 +274,7 @@ public class DbServiceTest {
 
     @Test
     public void testRejectFriendRequestBothNull() {
-        assertEquals(null, dbService.rejectFriendRequest(null, null));
+        assertEquals(false, dbService.rejectFriendRequest(null, null));
     }
 
     @Test
@@ -329,7 +325,7 @@ public class DbServiceTest {
     public void testEditProfileWrongField() {
         assertEquals(null,dbService.editProfile(testUser,"asd",10));
     }
-    
+
     @Test
     public void testGetTopFriendsEmpty() {
         List<User> friends = dbService.getTopFriends(testUser.getUsername(), 5);
@@ -362,5 +358,53 @@ public class DbServiceTest {
     public void testGetTopFriendsNoUser() {
         List<User> friends = dbService.getTopFriends(testUserNonExistent.getUsername(), 5);
         Assert.assertEquals(new ArrayList<User>(), friends);
+    }
+
+    @Test
+    public void addAchievemnt() {
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0);
+
+        dbService.addAchievement(testUser , arrayList , new Date(1,1,1));
+
+        Assert.assertNotNull(testUser.getProgress().getAchievements().get(0));
+
+
+    }
+
+    @Test
+    public void addAchievemntPoints() {
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0);
+
+        dbService.addAchievement(testUser , arrayList , new Date(1,1,1));
+
+
+
+        Assert.assertTrue(testUser.getProgress().getAchievements().size() == 1);
+
+
+    }
+
+    public void testGetRankNull() {
+        Assert.assertEquals(-1, dbService.getUserRank(testUserNonExistent.getUsername()));
+    }
+
+    @Test
+    public void testGetRankTop5() {
+        User top5User = dbService.getTopUsers(15).get(4);
+        int rank = dbService.getUserRank(top5User.getUsername());
+
+        Assert.assertEquals(5, rank);
+    }
+
+    @Test
+    public void testGetRankTop1() {
+        User top1User = dbService.getTopUsers(15).get(0);
+        int rank = dbService.getUserRank(top1User.getUsername());
+
+        Assert.assertEquals(1, rank);
     }
 }
