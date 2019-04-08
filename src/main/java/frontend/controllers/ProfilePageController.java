@@ -7,7 +7,13 @@ import com.jfoenix.controls.JFXProgressBar;
 import data.Achievement;
 import data.User;
 import data.UserAchievement;
-import frontend.gui.*;
+
+import frontend.gui.Events;
+import frontend.gui.General;
+import frontend.gui.Main;
+import frontend.gui.NavPanel;
+import frontend.gui.ProfilePageLogic;
+import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -58,6 +64,9 @@ public class ProfilePageController implements Initializable {
 
     @FXML
     private Label lastName;
+
+    @FXML
+    private Label lblGoGreen;
 
     @FXML
     private Label age;
@@ -214,6 +223,13 @@ public class ProfilePageController implements Initializable {
             badgeimage.setImage(path);
             badgeZone.getChildren().add(badgeimage);
             levelcount++;
+        }
+
+        //setup fonts
+        try {
+            lblGoGreen.setFont(Main.getReenieBeanie(100));
+        } catch (IOException e) {
+            System.out.println("Fonts not found");
         }
     }
     //addCompletedAchievements(com);
