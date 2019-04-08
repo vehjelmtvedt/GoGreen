@@ -216,8 +216,8 @@ public class ProfilePageController implements Initializable {
             levelcount++;
         }
     }
-//    addCompletedAchievements(com);
-//    addPendingAchievements(incom);
+    //addCompletedAchievements(com);
+    //addPendingAchievements(incom);
 }
 
 
