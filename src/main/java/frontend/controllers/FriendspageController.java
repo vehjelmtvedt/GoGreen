@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
@@ -209,6 +210,7 @@ public class FriendspageController implements Initializable {
                         tmpLabel.setPrefWidth(hbox.getPrefWidth() / 2);
                         JFXButton addButton = new JFXButton("+");
                         addButton.setStyle("-fx-background-color: #5b8d5b;");
+                        addButton.setCursor(Cursor.HAND);
                         addButton.setPrefWidth(hbox.getPrefWidth() / 3);
                         tmpLabel.setStyle("-fx-text-fill: white;");
                         HBox.setMargin(addButton, new Insets(10, 10, 0, 90));
