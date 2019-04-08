@@ -88,14 +88,8 @@ public class RequestsTest {
 
     @Test
     public void testSendFriendRequestValid() {
-<<<<<<< src/test/java/tools/RequestsTest.java
         Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(true);
         assertEquals(true, Requests.instance.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
-=======
-        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
-        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
-        assertEquals(testUser2, Requests.instance.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
     @Test
@@ -103,41 +97,22 @@ public class RequestsTest {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         Mockito.when(dbService.addFriendRequest("invalid", testUser2.getUsername())).thenReturn(null);
         assertEquals(null, Requests.instance.sendFriendRequest("invalid", testUser2.getUsername()));
->>>>>>> src/test/java/tools/RequestsTest.java
     }
 
     @Test
     public void testAcceptFriendRequest() {
-<<<<<<< src/test/java/tools/RequestsTest.java
         Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(true);
         assertEquals(true, Requests.instance.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
         Mockito.when(dbService.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(true);
         assertEquals(true, Requests.instance.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername()));
-=======
-        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
-        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
-        assertEquals(testUser2, Requests.instance.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
-        Mockito.when(dbService.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
-        assertEquals(testUser2, Requests.instance.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername()));
->>>>>>> src/test/java/tools/RequestsTest.java
     }
 
     @Test
     public void testRejectFriendRequest() {
-<<<<<<< src/test/java/tools/RequestsTest.java
         Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(true);
         assertEquals(true, Requests.instance.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
         Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(true);
         assertEquals(true, Requests.instance.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername()));
-=======
-        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        Mockito.when(dbService.getUser(testUser2.getEmail())).thenReturn(testUser2);
-        Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
-        assertEquals(testUser2, Requests.instance.sendFriendRequest(testUser.getUsername(), testUser2.getUsername()));
-        Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(testUser2);
-        assertEquals(testUser2, Requests.instance.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername()));
->>>>>>> src/test/java/tools/RequestsTest.java
     }
 
     @Test

@@ -86,11 +86,7 @@ public class Requests {
      * @param receiver - user receiving the friend request
      * @return - returns the User who sent the request
      */
-<<<<<<< src/main/java/tools/Requests.java
     public boolean sendFriendRequest(String sender, String receiver) {
-=======
-    public User sendFriendRequest(String sender, String receiver) {
->>>>>>> src/main/java/tools/Requests.java
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/friendrequest")
                 .queryParam("sender", sender)
@@ -105,11 +101,7 @@ public class Requests {
      * @param accepting - user who accepts the request
      * @return - User accepting the friend request
      */
-<<<<<<< src/main/java/tools/Requests.java
     public boolean acceptFriendRequest(String sender, String accepting) {
-=======
-    public User acceptFriendRequest(String sender, String accepting) {
->>>>>>> src/main/java/tools/Requests.java
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/acceptfriend")
                 .queryParam("sender", sender)
@@ -124,11 +116,7 @@ public class Requests {
      * @param rejecting - user who is rejecting the request
      * @return - User rejecting the friend request
      */
-<<<<<<< src/main/java/tools/Requests.java
     public boolean rejectFriendRequest(String sender, String rejecting) {
-=======
-    public User rejectFriendRequest(String sender, String rejecting) {
->>>>>>> src/main/java/tools/Requests.java
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/rejectfriend")
                 .queryParam("sender", sender)
