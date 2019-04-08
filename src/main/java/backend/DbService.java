@@ -185,7 +185,7 @@ public class DbService {
      * @param accepting - username of User accepting the request.
      * @param requester - username of User who sent the request.
      */
-    public User acceptFriendRequest(String requester, String accepting) {
+    public boolean acceptFriendRequest(String requester, String accepting) {
         User requestingUser = getUserByUsername(requester);
         User acceptingUser = getUserByUsername(accepting);
 
@@ -194,6 +194,7 @@ public class DbService {
             requestingUser.addFriend(acceptingUser.getUsername());
             acceptingUser.addFriend(requestingUser.getUsername());
             acceptingUser.deleteFriendRequest(requester);
+            
             // Update changes in database
             users.save(requestingUser);
             users.save(acceptingUser);
@@ -204,9 +205,9 @@ public class DbService {
             addAchievement(requestingUser , AchievementsLogic.checkOther(requestingUser),
                     Calendar.getInstance().getTime());
 
-            return acceptingUser;
+            return true;
         } else {
-            return null;
+            return false;
         }
     }
 
@@ -217,7 +218,7 @@ public class DbService {
      * @param senderUsername   - The username of the friend request sender
      * @param receiverUsername - The username of the user receiving the request
      */
-    public User addFriendRequest(String senderUsername, String receiverUsername) {
+    public boolean addFriendRequest(String senderUsername, String receiverUsername) {
         User sender = getUserByUsername(senderUsername);
         User receiver = getUserByUsername(receiverUsername);
 
@@ -225,9 +226,9 @@ public class DbService {
             receiver.newFriendRequest(sender.getUsername());
             // Update only the User that received the friend request
             users.save(receiver);
-            return receiver;
+            return true;
         } else {
-            return null;
+            return false;
         }
     }
 
@@ -239,7 +240,7 @@ public class DbService {
      * @param rejectingUser - the user whose friend request should be rejected
      */
 
-    public User rejectFriendRequest(String rejectedUser, String rejectingUser) {
+    public boolean rejectFriendRequest(String rejectedUser, String rejectingUser) {
         User rejected = getUserByUsername(rejectedUser);
         User rejecting = getUserByUsername(rejectingUser);
 
@@ -248,9 +249,9 @@ public class DbService {
             rejecting.deleteFriendRequest(rejectedUser);
             // Update only the User that rejected the friend request
             users.save(rejecting);
-            return rejecting;
+            return true;
         } else {
-            return null;
+            return false;
         }
     }
 

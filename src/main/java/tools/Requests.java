@@ -86,13 +86,13 @@ public class Requests {
      * @param receiver - user receiving the friend request
      * @return - returns the User who sent the request
      */
-    public User sendFriendRequest(String sender, String receiver) {
+    public boolean sendFriendRequest(String sender, String receiver) {
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/friendrequest")
                 .queryParam("sender", sender)
                 .queryParam("receiver", receiver);
 
-        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), boolean.class).getBody();
     }
 
     /**
@@ -101,13 +101,13 @@ public class Requests {
      * @param accepting - user who accepts the request
      * @return - User accepting the friend request
      */
-    public User acceptFriendRequest(String sender, String accepting) {
+    public boolean acceptFriendRequest(String sender, String accepting) {
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/acceptfriend")
                 .queryParam("sender", sender)
                 .queryParam("accepting", accepting);
 
-        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), boolean.class).getBody();
     }
 
     /**
@@ -116,13 +116,13 @@ public class Requests {
      * @param rejecting - user who is rejecting the request
      * @return - User rejecting the friend request
      */
-    public User rejectFriendRequest(String sender, String rejecting) {
+    public boolean rejectFriendRequest(String sender, String rejecting) {
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/rejectfriend")
                 .queryParam("sender", sender)
                 .queryParam("rejecting", rejecting);
 
-        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), boolean.class).getBody();
     }
 
     /**
