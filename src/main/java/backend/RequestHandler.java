@@ -59,17 +59,20 @@ public class RequestHandler {
     }
 
     @RequestMapping("/friendrequest")
-    public User friendRequest(@RequestParam String sender, @RequestParam String receiver) {
+    public boolean friendRequest(@RequestParam String sender,
+                                 @RequestParam String receiver) {
         return dbService.addFriendRequest(sender, receiver);
     }
 
     @RequestMapping("/acceptfriend")
-    public User acceptFriendRequest(@RequestParam String sender, @RequestParam String accepting) {
+    public boolean acceptFriendRequest(@RequestParam String sender,
+                                       @RequestParam String accepting) {
         return dbService.acceptFriendRequest(sender, accepting);
     }
 
     @RequestMapping("/rejectfriend")
-    public User rejectFriendRequest(@RequestParam String sender, @RequestParam String rejecting) {
+    public boolean rejectFriendRequest(@RequestParam String sender,
+                                       @RequestParam String rejecting) {
         return dbService.rejectFriendRequest(sender, rejecting);
 
     }
@@ -215,6 +218,20 @@ public class RequestHandler {
     @RequestMapping("/getAverageCO2Saved")
     public double getAverageCO2Saved() {
         return dbService.getAverageCO2Saved();
+    }
+
+    /**
+     * request to get rank of a user.
+     * @param loginDetails auth and identifier
+     * @return the rank
+     */
+    @RequestMapping("/getRank")
+    public Integer getRank(@RequestBody LoginDetails loginDetails) {
+        if (dbService.grantAccess(loginDetails.getIdentifier(),
+                loginDetails.getPassword()) != null) {
+            return dbService.getUserRank(loginDetails.getIdentifier());
+        }
+        return null;
     }
 
 }

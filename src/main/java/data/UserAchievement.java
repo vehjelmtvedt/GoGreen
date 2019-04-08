@@ -9,6 +9,16 @@ public class UserAchievement {
     boolean completed;
     Date date;
 
+
+    /**a default constructor.
+     *
+     */
+    public UserAchievement() {
+        this.id = 0;
+        this.completed = false;
+        this.date = null;
+    }
+
     /**
      * link completed achievement to user
      * the user should have an array list of achievements .
@@ -16,8 +26,7 @@ public class UserAchievement {
      * @param id        reference to the achievement
      * @param completed flag
      * @param date      date on completion
-     */
-
+     *                     */
     public UserAchievement(int id, boolean completed, Date date) {
         this.id = id;
         this.completed = completed;
@@ -40,5 +49,14 @@ public class UserAchievement {
         this.date = date;
     }
 
+    /** a simple to string method.
+     *
+     * @return the string result
+     */
+    public String toString() {
+
+        return this.getId() + this.getDate().toString();
+
+    }
 
 }

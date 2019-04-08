@@ -4,9 +4,13 @@ import data.Achievement;
 import data.Activity;
 import data.LoginDetails;
 import data.User;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -15,8 +19,48 @@ import java.util.List;
 public class Requests {
     public static Requests instance = new Requests();
 
-    private static RestTemplate restTemplate = new RestTemplate();
-    private static String url = "http://localhost:8080";
+    private RestTemplate restTemplate;
+    private String url;
+
+    protected Requests() {
+        url = System.getProperty("remote.url");
+
+        // Uncomment to test via remote server
+        //url = "https://cse38-go-green.herokuapp.com";
+
+        if (url != null && !url.contains("localhost")) {
+            buildSecureRestTemplate(url);
+        } else {
+            buildInsecureRestTemplate();
+        }
+    }
+
+    /**.
+     * Sets the REST Template to an HTTP REST Template that connects to localhost with port 8080
+     */
+    private void buildInsecureRestTemplate() {
+        url = "http://localhost:8080";
+        restTemplate = new RestTemplate();
+    }
+
+
+    /**.
+     * Sets the REST Template to an HTTPS secure REST Template that connects to remote Heroku host
+     * @param remoteUrl - Remote Host URL
+     */
+    private void buildSecureRestTemplate(String remoteUrl) {
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setSSLHostnameVerifier(new NoopHostnameVerifier()).build();
+
+        HttpComponentsClientHttpRequestFactory requestFactory
+                = new HttpComponentsClientHttpRequestFactory();
+
+        requestFactory.setHttpClient(httpClient);
+
+        restTemplate = new RestTemplate(requestFactory);
+
+        url = remoteUrl;
+    }
 
     /**
      * Sends signup request to the server.
@@ -42,13 +86,13 @@ public class Requests {
      * @param receiver - user receiving the friend request
      * @return - returns the User who sent the request
      */
-    public User sendFriendRequest(String sender, String receiver) {
+    public boolean sendFriendRequest(String sender, String receiver) {
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/friendrequest")
                 .queryParam("sender", sender)
                 .queryParam("receiver", receiver);
 
-        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), boolean.class).getBody();
     }
 
     /**
@@ -57,13 +101,13 @@ public class Requests {
      * @param accepting - user who accepts the request
      * @return - User accepting the friend request
      */
-    public User acceptFriendRequest(String sender, String accepting) {
+    public boolean acceptFriendRequest(String sender, String accepting) {
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/acceptfriend")
                 .queryParam("sender", sender)
                 .queryParam("accepting", accepting);
 
-        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), boolean.class).getBody();
     }
 
     /**
@@ -72,13 +116,13 @@ public class Requests {
      * @param rejecting - user who is rejecting the request
      * @return - User rejecting the friend request
      */
-    public User rejectFriendRequest(String sender, String rejecting) {
+    public boolean rejectFriendRequest(String sender, String rejecting) {
         //adding the query params to the URL
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/rejectfriend")
                 .queryParam("sender", sender)
                 .queryParam("rejecting", rejecting);
 
-        return restTemplate.getForEntity(uriBuilder.toUriString(), User.class).getBody();
+        return restTemplate.getForEntity(uriBuilder.toUriString(), boolean.class).getBody();
     }
 
     /**
@@ -168,7 +212,7 @@ public class Requests {
      * @param newValue new value for the field
      * @return returns the updated user
      */
-    public static User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
+    public User editProfile(LoginDetails loginDetails, String fieldName, Object newValue) {
         System.out.println(newValue.getClass().getName());
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/editProfile")
                 .queryParam("fieldName",fieldName).queryParam("newValue", newValue)
@@ -196,7 +240,7 @@ public class Requests {
      * get total Users.
      * @return number of total users
      */
-    public static int getTotalUsers() {
+    public int getTotalUsers() {
         return restTemplate.getForEntity(url + "/getTotalUsers", int.class).getBody();
     }
 
@@ -204,7 +248,7 @@ public class Requests {
      * get total CO2 saved.
      * @return total amount of CO2 saved
      */
-    public static double getTotalCO2Saved() {
+    public double getTotalCO2Saved() {
         return restTemplate.getForEntity(url + "/getTotalCO2Saved",double.class).getBody();
     }
 
@@ -212,8 +256,17 @@ public class Requests {
      * get average CO2 saved.
      * @return average CO2 saved
      */
-    public static double getAverageCO2Saved() {
-        return restTemplate.getForEntity(url + "/getAverageCO2Saved",double.class).getBody();
+    public double getAverageCO2Saved() {
+        return restTemplate.getForEntity(url + "/getAverageCO2Saved", double.class).getBody();
+    }
+
+    /**
+     * get rank of the user.
+     * @param loginDetails authentication and identity of user
+     * @return the rank of the user
+     */
+    public Integer getUserRanking(LoginDetails loginDetails) {
+        return restTemplate.postForEntity(url + "/getRank",loginDetails,int.class).getBody();
     }
 
 

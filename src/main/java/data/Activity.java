@@ -28,6 +28,8 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = UseTrainInsteadOfCar.class, name = "UseTrainInsteadOfCar"),
         @JsonSubTypes.Type(value = InstallSolarPanels.class, name = "InstallSolarPanels"),
         @JsonSubTypes.Type(value = LowerHomeTemperature.class, name = "LowerHomeTemperature"),
+        @JsonSubTypes.Type(value = RecyclePaper.class, name = "RecyclePaper"),
+        @JsonSubTypes.Type(value = RecyclePlastic.class, name = "RecyclePlastic"),
     })
 public abstract class Activity {
     private Date date;
@@ -230,11 +232,6 @@ public abstract class Activity {
         try {
             user = Requests.instance.addActivityRequest(this, user.getUsername());
 
-            // check if an achievement is completed by this activity
-            AchievementsLogic.checkActivity(user , this);
-
-            // adds points to the user
-            user.addCO2Points(this.getCarbonSaved());
 
 
         } catch (HttpClientErrorException e) {
