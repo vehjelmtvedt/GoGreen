@@ -46,14 +46,6 @@ public final class CarbonCalculator {
         }
     }
 
-    public enum MiscellaneousSpending {
-        ABOVE_AVERAGE(5000), AVERAGE(3400), BELOW_AVERAGE(2400), VERY_LITTLE(1400);
-        private int carbonEmissions;
-        MiscellaneousSpending(int carbonEmissions) {
-            this.carbonEmissions = carbonEmissions;
-        }
-    }
-
     // Category: Household energy consumption
 
     /** calculates carbon emissions from electricity.
@@ -168,14 +160,7 @@ public final class CarbonCalculator {
         return processedFoodConsumption.carbonEmissions;
     }
 
-    /**
-     * Miscellaneous spending emissions.
-     * @return carbonEmissions per year in kg
-     */
-    public static double miscellaneousSpendingEmisions(MiscellaneousSpending
-                                                               miscellaneousSpending) {
-        return miscellaneousSpending.carbonEmissions;
-    }
+
 
 }
 
