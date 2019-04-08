@@ -15,10 +15,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -182,7 +179,7 @@ public class DbServiceTest {
 
         assertEquals(expected, result);
     }
-    
+
     @Test
     public void testBefriendUsersNull1() {
         dbService.addUser(testUser2);
@@ -330,7 +327,7 @@ public class DbServiceTest {
     public void testEditProfileWrongField() {
         assertEquals(null,dbService.editProfile(testUser,"asd",10));
     }
-    
+
     @Test
     public void testGetTopFriendsEmpty() {
         List<User> friends = dbService.getTopFriends(testUser.getUsername(), 5);
@@ -366,6 +363,33 @@ public class DbServiceTest {
     }
 
     @Test
+    public void addAchievemnt() {
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0);
+
+        dbService.addAchievement(testUser , arrayList , new Date(1,1,1));
+
+        Assert.assertNotNull(testUser.getProgress().getAchievements().get(0));
+
+
+    }
+
+    @Test
+    public void addAchievemntPoints() {
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(0);
+
+        dbService.addAchievement(testUser , arrayList , new Date(1,1,1));
+
+
+
+        Assert.assertTrue(testUser.getProgress().getAchievements().size() == 1);
+
+
+    }
+
     public void testGetRankNull() {
         Assert.assertEquals(-1, dbService.getUserRank(testUserNonExistent.getUsername()));
     }

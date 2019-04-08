@@ -75,4 +75,19 @@ public class AchievementTest {
 
     }
 
+    @Test
+    public void equals2() {
+        Achievement test2 = new Achievement(2 , "test12" , 100);
+
+        Assert.assertFalse(test2.equals(test));
+
+    }
+
+    @Test
+    public void equals3() {
+        Achievement test2 = new Achievement(2 , "test1" , 1000);
+
+        Assert.assertFalse(test2.equals(test));
+
+    }
 }

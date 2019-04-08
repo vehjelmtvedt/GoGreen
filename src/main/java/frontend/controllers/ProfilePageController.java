@@ -7,6 +7,8 @@ import com.jfoenix.controls.JFXProgressBar;
 import data.Achievement;
 import data.User;
 import data.UserAchievement;
+
+import frontend.gui.Events;
 import frontend.gui.General;
 import frontend.gui.Main;
 import frontend.gui.NavPanel;
@@ -32,8 +34,8 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
 
+import java.util.ResourceBundle;
 
 public class ProfilePageController implements Initializable {
 
@@ -62,6 +64,9 @@ public class ProfilePageController implements Initializable {
 
     @FXML
     private Label lastName;
+
+    @FXML
+    private Label lblGoGreen;
 
     @FXML
     private Label age;
@@ -98,7 +103,7 @@ public class ProfilePageController implements Initializable {
     }
 
     /**
-     Checks completed Achievements.
+     * Checks completed Achievements.
      */
     public static boolean isComplete(Achievement achievement) {
         for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
@@ -111,7 +116,7 @@ public class ProfilePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        Events.addJfxButtonHover(editProfile);
         levelProgress.setProgress(
                 (Double.parseDouble(Integer.toString(thisUser.getProgress().getLevel()))) / 8.0
         );
@@ -159,10 +164,12 @@ public class ProfilePageController implements Initializable {
             e.printStackTrace();
         }
 
-        int count = 0;
+
+        ProfilePageController.setUser(thisUser);
 
         // for every completed achievement module  is created
         // and added to a VBox small pics might be added later
+        int count = 1;
         for (int i = 0; i < thisUser.getProgress().getAchievements().size(); i++) {
 
             count++;
@@ -179,7 +186,7 @@ public class ProfilePageController implements Initializable {
             name.setFill(Color.GREEN);
             Text bonus = new Text(",Got: " + ProfilePageLogic.getBonusString(
                     thisUser.getProgress().getAchievements().get(i)) + " Points");
-            Text date = new Text(",Completed On: " + ProfilePageLogic.getDateString(
+            Text date = new Text(", Completed On: " + ProfilePageLogic.getDateString(
                     thisUser.getProgress().getAchievements().get(i)) + ".");
             hbox.getChildren().addAll(achievementimage, name, bonus, date);
             com.getChildren().add(hbox);
@@ -207,7 +214,7 @@ public class ProfilePageController implements Initializable {
         }
 
         int levelcount = 1;
-        for (int i = 1; i <= (thisUser.getProgress().getLevel()); i++) {
+        for (int i = 1; i <= thisUser.getProgress().getLevel(); i++) {
 
             ImageView badgeimage = new ImageView();
             Image path = new Image("badges/" + levelcount + ".png");
@@ -218,10 +225,15 @@ public class ProfilePageController implements Initializable {
             levelcount++;
         }
 
-
-
+        //setup fonts
+        try {
+            lblGoGreen.setFont(Main.getReenieBeanie(100));
+        } catch (IOException e) {
+            System.out.println("Fonts not found");
+        }
     }
-
+    //addCompletedAchievements(com);
+    //addPendingAchievements(incom);
 }
 
 

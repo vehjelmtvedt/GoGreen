@@ -1,58 +1,28 @@
 package data;
 
-import backend.DbService;
-import backend.RequestHandler;
-import backend.Server;
 import org.junit.Assert;
-import org.junit.Before;
+
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.annotation.Resource;
-
-
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = Server.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_CLASS)
 
 public class AchievementsLogicTest {
-
-    @MockBean
-    private DbService dbService;
-
-    @InjectMocks
-    @Resource
-    RequestHandler requestHandler;
 
     Activity activity = new EatVegetarianMeal();
     Activity activity1 = new BuyLocallyProducedFood();
     Activity activity2 = new BuyNonProcessedFood();
+    Activity activity3 = new UseTrainInsteadOfCar();
     Activity activity4 = new BuyOrganicFood();
+    Activity activity5 = new UseBusInsteadOfCar();
+    Activity activity6 = new UseBikeInsteadOfCar();
 
 
     User user = new User("Active", "User", 20, "active_user@email.com", "active_user", "pwd123");
 
 
-
-    @Before
-    public void setup(){
-        dbService.addUser(user);
-
-
-
-    }
-
     @Test
     public void checkActivity() {
 
-        AchievementsLogic.checkActivity(user , activity);
-        Assert.assertNotNull(user.getProgress().getAchievements().get(0));
-        Assert.assertEquals(6 , user.getProgress().getAchievements().get(0).getId());
+
+        Assert.assertTrue(6 == AchievementsLogic.checkFoodActivity(user , activity).get(0));
 
     }
 
@@ -60,29 +30,35 @@ public class AchievementsLogicTest {
     @Test
     public void checkActivity1() {
 
-        AchievementsLogic.checkActivity(user , activity1);
-
-        Assert.assertNotNull(user.getProgress().getAchievements().get(0));
-        Assert.assertEquals(15, user.getProgress().getAchievements().get(0).getId());
+        Assert.assertTrue(15 == AchievementsLogic.checkFoodActivity(user , activity1).get(0));
 
     }
 
     @Test
     public void checkActivity2() {
 
-        AchievementsLogic.checkActivity(user , activity2);
+        Assert.assertTrue(16 == AchievementsLogic.checkFoodActivity(user , activity2).get(0));
+    }
 
-        Assert.assertNotNull(user.getProgress().getAchievements().get(0));
-        Assert.assertEquals(16 , user.getProgress().getAchievements().get(0).getId());
+
+    @Test
+    public void checkActivity3() {
+        Assert.assertTrue(24 == AchievementsLogic.checkTranspostActivity1(user , activity3).get(0));
     }
 
 
     @Test
     public void checkActivity4() {
-        AchievementsLogic.checkActivity(user , activity4);
-        Assert.assertNotNull(user.getProgress().getAchievements().get(0));
-        Assert.assertEquals(17 , user.getProgress().getAchievements().get(0).getId());
+        Assert.assertTrue(17 == AchievementsLogic.checkFoodActivity(user , activity4).get(0));
+    }
 
+    @Test
+    public void checkActivity5() {
+        Assert.assertTrue(4 == AchievementsLogic.checkTranspostActivity(user , activity5).get(0));
+    }
+    @Test
+    public void checkActivity6() {
+        Assert.assertTrue(2 == AchievementsLogic.checkTranspostActivity(user , activity6).get(0));
     }
 
     @Test // id 0
@@ -91,12 +67,9 @@ public class AchievementsLogicTest {
         user.getActivities().add(activity);
         user.setTotalCarbonSaved(100.0);
 
-        AchievementsLogic.checkOther(user);
 
 
-        Assert.assertNotNull(user.getProgress().getAchievements().get(0));
-
-        Assert.assertEquals(0 , user.getProgress().getAchievements().get(0).getId());
+        Assert.assertTrue(0 == AchievementsLogic.checkOther(user).get(0));
 
     }
 
@@ -110,59 +83,63 @@ public class AchievementsLogicTest {
         user.getActivities().add(activity4);
 
 
-        AchievementsLogic.checkOther(user);
-
-        Assert.assertNotNull(user.getProgress().getAchievements().get(0));
-
-        Assert.assertEquals(1 , user.getProgress().getAchievements().get(0).getId());
+        Assert.assertTrue(1 == AchievementsLogic.checkOther(user).get(0));
     }
 
     @Test
     public void checkOther2(){
         user.addFriend("test");
 
-
-
-        AchievementsLogic.checkOther(user);
-
-        Assert.assertNotNull(user.getProgress().getAchievements().get(0));
-
-        Assert.assertEquals(8 , user.getProgress().getAchievements().get(0).getId());
+        Assert.assertTrue(8 == AchievementsLogic.checkOther(user).get(0));
     }
 
     @Test
-    public void checkall() {
+    public void checkTranspostActivity() {
 
-        AchievementsLogic.checkActivity(user , activity);
-        AchievementsLogic.checkActivity(user , activity1);
-        AchievementsLogic.checkActivity(user , activity2);
+        AchievementsLogic.checkTranspostActivity(user , activity5);
+        AchievementsLogic.checkTranspostActivity(user , activity5);
+        AchievementsLogic.checkTranspostActivity(user , activity5);
+        AchievementsLogic.checkTranspostActivity(user , activity5);
+        AchievementsLogic.checkTranspostActivity(user , activity5);
+        AchievementsLogic.checkTranspostActivity(user , activity5);
 
-        AchievementsLogic.checkActivity(user , activity4);
-        AchievementsLogic.checkActivity(user , activity1);
-
-        Assert.assertEquals(4 , user.getProgress().getAchievements().size());
-
-
+        Assert.assertTrue(4 == AchievementsLogic.checkTranspostActivity(user , activity5).get(0));
 
     }
 
     @Test
-    public void checkOther3(){
-        user.addFriend("test");
+    public void testvegan() {
 
-        for (int i = 0 ; i < 11 ; i++){
+        user.setMeatAndDairyConsumption("vegan");
 
-            user.addFriend("test" + i);
+        Assert.assertTrue(14 == AchievementsLogic.checkOther(user).get(0));
 
+
+    }
+
+    @Test
+    public void tescar() {
+        user.setCarType("small");
+        //user.addFriend("test" + i);
+
+        Assert.assertTrue(13 == AchievementsLogic.checkOther(user).get(0));
+
+
+    }
+
+    @Test
+    public void testfriend() {
+
+        user.getFriends().add("test1");
+        Assert.assertTrue(8 == AchievementsLogic.checkOther(user).get(0));
+
+    }
+    @Test
+    public void testfriend1() {
+
+        for (int k = 0 ; k < 10 ; k++ ) {
+            user.getFriends().add("test" + k);
         }
-
-        AchievementsLogic.checkOther(user);
-
-        Assert.assertEquals(9 , user.getProgress().getAchievements().get(1).getId());
-
-
-
+        Assert.assertTrue(8 == AchievementsLogic.checkOther(user).get(0));
     }
-
-
 }
