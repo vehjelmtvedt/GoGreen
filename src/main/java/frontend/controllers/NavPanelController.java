@@ -41,6 +41,7 @@ public class NavPanelController implements Initializable {
         friends.setOnAction(e -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getFriendsPage()));
         myProfile.setOnAction(e -> StageSwitcher.sceneSwitch(
-                Main.getPrimaryStage() , Main.getProfilePage()));
+                Main.getPrimaryStage() , Main.getProfilePage())
+        );
     }
 }

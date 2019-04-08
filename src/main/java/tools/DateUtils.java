@@ -1,5 +1,6 @@
 package tools;
 
+import java.time.DayOfWeek;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -42,14 +43,38 @@ public class DateUtils {
     }
 
     /**.
+     * Gets the name of the day of the week the specified Date is in (Monday, Tuesday, ..)
+     * @param date - Date
+     * @return - Day Of Week of the Date as String
+     */
+    public static String getDayName(Date date) {
+        // Set Calendar's date to the one specified
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        // Get DayOfWeek as String
+        return DayOfWeek.of(calendar.get(Calendar.DAY_OF_WEEK)).toString();
+    }
+
+    /**.
      * Helper method to set date's hour, minute, second to 0
      * @param calendar - calendar instance to modify
      */
-    private static void setDateToMidnight(Calendar calendar) {
+    public static void setDateToMidnight(Calendar calendar) {
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
+    }
 
+    /**.
+     * Helper method set date's hour, minute, second to the very near end of the day
+     * @param calendar - calendar instance to modify
+     */
+    public static void setDateToEnd(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getMaximum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getMaximum(Calendar.MILLISECOND));
     }
 }

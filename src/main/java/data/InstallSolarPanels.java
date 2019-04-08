@@ -74,13 +74,7 @@ public class InstallSolarPanels extends Activity {
 
         // update user in the database
         try {
-            user = Requests.addActivityRequest(this, user.getUsername());
-
-            // check if an achievement is completed by this activity
-            AchievementsLogic.checkActivity(user , this);
-
-            // adds points to the user
-            user.addCO2Points(this.getCarbonSaved());
+            user = Requests.instance.addActivityRequest(this, user.getUsername());
 
 
         } catch (ResourceAccessException e) {

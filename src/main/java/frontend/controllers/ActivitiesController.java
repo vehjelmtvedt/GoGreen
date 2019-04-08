@@ -8,11 +8,14 @@ import com.jfoenix.controls.JFXTextField;
 import data.Activity;
 import data.InstallSolarPanels;
 import data.LowerHomeTemperature;
+import data.RecyclePaper;
+import data.RecyclePlastic;
 import data.User;
 import frontend.gui.Events;
 import frontend.gui.General;
 import frontend.gui.Main;
 import frontend.gui.NavPanel;
+import frontend.gui.NotificationPopup;
 import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,6 +40,9 @@ public class ActivitiesController implements Initializable {
     private static User loggedUser;
     private static List<JFXCheckBox> checkList = new ArrayList<>();
     private static List<JFXRadioButton> radioList = new ArrayList<>();
+    private static AnchorPane mainCopy;
+    private static AnchorPane headerCopy;
+    private static NotificationPopup popup;
 
     @FXML
     private JFXButton btnFood;
@@ -54,6 +60,10 @@ public class ActivitiesController implements Initializable {
     private JFXButton btnOrganicFood;
     @FXML
     private JFXButton btnNonProFood;
+    @FXML
+    private JFXButton btnPlastic;
+    @FXML
+    private JFXButton btnPaper;
     @FXML
     private Pane paneFood;
     @FXML
@@ -97,6 +107,10 @@ public class ActivitiesController implements Initializable {
     @FXML
     private AnchorPane paneEnergy;
     @FXML
+    private AnchorPane panePlastic;
+    @FXML
+    private AnchorPane panePaper;
+    @FXML
     private JFXTextField inputDistance;
     @FXML
     private Label lblDistanceValidate;
@@ -127,6 +141,10 @@ public class ActivitiesController implements Initializable {
     @FXML
     private Label lblLoweredTemp;
     @FXML
+    private Label lblPlastic;
+    @FXML
+    private Label lblPaper;
+    @FXML
     private JFXRadioButton radioToday;
     @FXML
     private JFXRadioButton radioWeek;
@@ -146,6 +164,9 @@ public class ActivitiesController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        popup = new NotificationPopup();
+        mainCopy = mainPane;
+        headerCopy = headerPane;
         //addFonts
         try {
             goGreen.setFont(Main.getReenieBeanie(100));
@@ -167,6 +188,8 @@ public class ActivitiesController implements Initializable {
                 lblLoweredTemp,1, loggedUser, activityTable);
         Events.addHouseholdActivity(paneEnergy, lblPanelsInstalled,
                 lblLoweredTemp,2, loggedUser, activityTable);
+        Events.addRecyclingActivity(panePlastic, lblPlastic, lblPaper,1, loggedUser, activityTable);
+        Events.addRecyclingActivity(panePaper, lblPlastic, lblPaper,2, loggedUser, activityTable);
 
         //add hover events for button activities
         Events.addActivityHover(paneVegetarianMeal, btnVegetarianMeal);
@@ -178,6 +201,8 @@ public class ActivitiesController implements Initializable {
         Events.addActivityHover(paneTrain, btnTrain);
         Events.addActivityHover(paneSolarPanels, btnSolarPanels);
         Events.addActivityHover(paneEnergy, btnEnergy);
+        Events.addActivityHover(panePlastic,btnPlastic);
+        Events.addActivityHover(panePaper, btnPaper);
 
         //setup notification and navigation panels
         try {
@@ -219,11 +244,21 @@ public class ActivitiesController implements Initializable {
         Events.applyFilters(lblApply, checkList, radioList,
                 minCarbon, maxCarbon, loggedUser, activityTable);
 
-        //setup additional
+        //setup additional labels
         InstallSolarPanels panels = new InstallSolarPanels();
         LowerHomeTemperature temp = new LowerHomeTemperature();
         lblPanelsInstalled.setVisible(loggedUser.getSimilarActivities(panels).size() > 0);
         lblLoweredTemp.setVisible(temp.timesPerformedInTheSameDay(loggedUser) > 0);
+        RecyclePlastic plastic = new RecyclePlastic();
+        lblPlastic.setVisible(plastic.timesPerformedInTheSameDay(loggedUser) > 0);
+        RecyclePaper paper = new RecyclePaper();
+        lblPaper.setVisible(paper.timesPerformedInTheSameDay(loggedUser) > 0);
+    }
+
+    public static void popup(String heading, String body, String icon,
+                             int drawerNumber) throws IOException {
+        String[] text = {heading, body, icon};
+        popup.newNotification(mainCopy, headerCopy, text, drawerNumber);
     }
 
     //GENERAL METHODS

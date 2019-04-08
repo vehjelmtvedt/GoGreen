@@ -5,9 +5,12 @@ import com.jfoenix.controls.JFXTextField;
 import data.InstallSolarPanels;
 import data.LoginDetails;
 import data.User;
+
 import frontend.controllers.ActivitiesController;
+import frontend.controllers.EditProfilePopUpController;
 import frontend.controllers.FriendspageController;
 import frontend.controllers.HomepageController;
+import frontend.controllers.NotificationPanelController;
 import frontend.controllers.ProfilePageController;
 import frontend.controllers.QuestionnaireController;
 import javafx.fxml.FXMLLoader;
@@ -44,7 +47,7 @@ public class InputValidation {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
-        User loggedUser = Requests.loginRequest(loginDetails);
+        User loggedUser = Requests.instance.loginRequest(loginDetails);
 
         // update user's CO2 saved from InstallSolarPanels activity
         if (loggedUser != null) {
@@ -56,7 +59,7 @@ public class InputValidation {
                         Calendar.getInstance().getTime().toInstant())
                         * panels.getDailyCarbonSaved();
                 double newValue = loggedUser.getTotalCarbonSaved() + extraCo2Saved;
-                Requests.editProfile(loginDetails,
+                Requests.instance.editProfile(loginDetails,
                         "totalCarbonSaved",
                         newValue);
             }
@@ -67,10 +70,15 @@ public class InputValidation {
                     + loggedUser.getFirstName()
                     + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess", false);
             HomepageController.setUser(loggedUser);
+            HomepageController.setLoginDetails(loginDetails);
             ActivitiesController.setUser(loggedUser);
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);
             ProfilePageController.setUser(loggedUser);
+            NotificationPanelController.setUser(loggedUser);
+            NotificationPanelController.setLoginDetails(loginDetails);
+            EditProfilePopUpController.setUser(loggedUser);
+            EditProfilePopUpController.setLoginDetails(loginDetails);
 
             //setup .fxml pages after successfully logging in
             try {
@@ -81,7 +89,7 @@ public class InputValidation {
                 FXMLLoader loader3 = new FXMLLoader(
                         Main.class.getResource("/frontend/fxmlPages/FriendPage.fxml"));
                 FXMLLoader loader4 = new FXMLLoader(
-                        Main.class.getResource("/frontend/fxmlPages/ProfilePage2.fxml"));
+                        Main.class.getResource("/frontend/fxmlPages/ProfilePage.fxml"));
                 Parent root1 = loader1.load();
                 Parent root2 = loader2.load();
                 Parent root3 = loader3.load();
@@ -142,14 +150,14 @@ public class InputValidation {
         String username = usernameField.getText();
         String email = emailField.getText();
 
-        if (Requests.validateUserRequest(username)) {
+        if (Requests.instance.validateUserRequest(username)) {
             Dialog.show("Username Error!",
                     "A user already exists with this username. Use another username",
                     "DISMISS", "error", false);
             return;
         }
 
-        if (Requests.validateUserRequest(email)) {
+        if (Requests.instance.validateUserRequest(email)) {
             Dialog.show("Email Error!", "A user already exists with this email."
                             + "Use another email",
                     "DISMISS", "error", false);
