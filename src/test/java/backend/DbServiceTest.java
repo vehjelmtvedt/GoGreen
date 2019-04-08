@@ -1,6 +1,7 @@
 package backend;
 
 import data.Achievement;
+import data.BuyLocallyProducedFood;
 import data.EatVegetarianMeal;
 import data.User;
 import org.junit.Assert;
@@ -383,5 +384,30 @@ public class DbServiceTest {
         int rank = dbService.getUserRank(top1User.getUsername());
 
         Assert.assertEquals(1, rank);
+    }
+
+    @Test
+    public void testLoginStreakNull() {
+        dbService.grantAccess(testUser.getEmail(),"ggg");
+        dbService.grantAccess(testUser.getEmail(),"ggg");
+        dbService.grantAccess(testUser.getEmail(),"ggg");
+        dbService.grantAccess(testUser.getEmail(),"ggg");
+        assertEquals(dbService.grantAccess(testUser.getEmail(),testUser.getPassword()),null);
+    }
+
+    @Test
+    public void testAddActivityNull() {
+        assertEquals(dbService.addActivityToUser(testUser.getUsername(),null),null);
+    }
+
+    @Test
+    public void testAddActivityUserNull() {
+        assertEquals(dbService.addActivityToUser(testUser.getEmail(),new BuyLocallyProducedFood()),null);
+    }
+
+    @Test
+    public void testDeleteUserNonExistent() {
+        dbService.deleteUser(testUserNonExistent.getEmail());
+        assertEquals(dbService.getUser(testUserNonExistent.getEmail()),null);
     }
 }

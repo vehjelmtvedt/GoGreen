@@ -109,6 +109,7 @@ public class DbService {
         }
 
         user.incLoginStreak();
+        users.save(user);
         return null;
     }
 
