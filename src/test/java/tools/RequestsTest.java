@@ -95,7 +95,7 @@ public class RequestsTest {
     @Test
     public void testSendFriendRequestInvalid() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
-        Mockito.when(dbService.addFriendRequest("invalid", testUser2.getUsername())).thenReturn(null);
+        Mockito.when(dbService.addFriendRequest("invalid", testUser2.getUsername())).thenReturn(false);
         assertEquals(false, Requests.instance.sendFriendRequest("invalid", testUser2.getUsername()));
     }
 
