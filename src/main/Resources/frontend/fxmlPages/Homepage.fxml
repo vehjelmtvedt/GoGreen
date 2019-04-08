@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1699.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
    <children>
       <AnchorPane fx:id="headerPane" prefHeight="137.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -29,17 +29,26 @@
          <children>
             <AnchorPane layoutY="44.0" prefHeight="524.0" prefWidth="1400.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
                <children>
-                  <AnchorPane layoutX="256.0" layoutY="40.0" prefHeight="200.0" prefWidth="1124.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="319.0" AnchorPane.topAnchor="40.0">
+                  <AnchorPane layoutX="185.0" layoutY="46.0" prefHeight="200.0" prefWidth="1173.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="341.0" AnchorPane.topAnchor="46.0">
                      <children>
                         <Circle fx:id="circleProfile" fill="GREEN" layoutX="100.0" layoutY="100.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-                        <AnchorPane layoutX="233.0" prefHeight="200.0" prefWidth="683.0" AnchorPane.leftAnchor="233.0" AnchorPane.rightAnchor="0.0">
+                        <AnchorPane layoutX="282.0" prefHeight="200.0" prefWidth="891.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <HBox layoutY="100.0" prefHeight="100.0" prefWidth="730.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                              <HBox layoutY="100.0" prefHeight="100.0" prefWidth="891.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                  <children>
                                     <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
                                        <children>
                                           <Label text="LEVEL" />
-                                          <Label fx:id="lblLevel" text="1" />
+                                          <Label fx:id="lblLevel" text="NaN" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="30.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                                       <children>
+                                          <Label text="RANK" />
+                                          <Label fx:id="lblRank" text="NaN" />
                                        </children>
                                        <padding>
                                           <Insets top="30.0" />
@@ -48,7 +57,7 @@
                                     <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
                                        <children>
                                           <Label text="FRIENDS" />
-                                          <Label fx:id="lblFriends" text="13" />
+                                          <Label fx:id="lblFriends" text="NaN" />
                                        </children>
                                        <padding>
                                           <Insets top="30.0" />
@@ -56,8 +65,8 @@
                                     </VBox>
                                     <VBox prefHeight="100.0" prefWidth="132.0" spacing="15.0">
                                        <children>
-                                          <Label text="TOTAL ACTIVITIES" />
-                                          <Label fx:id="lblActivities" text="24" />
+                                          <Label text="ACTIVITIES" />
+                                          <Label fx:id="lblActivities" text="NaN" />
                                        </children>
                                        <padding>
                                           <Insets top="30.0" />
@@ -66,7 +75,7 @@
                                     <VBox prefHeight="100.0" prefWidth="132.0" spacing="15.0">
                                        <children>
                                           <Label text="PROGRESS" />
-                                          <Label fx:id="lblProgress" text="100 XP NEEDED" />
+                                          <Label fx:id="lblProgress" text="NaN Points left" />
                                        </children>
                                        <padding>
                                           <Insets top="30.0" />
@@ -74,7 +83,7 @@
                                     </VBox>
                                     <JFXButton fx:id="btnProfile" alignment="CENTER" buttonType="RAISED" opacity="0.75" prefHeight="44.0" prefWidth="123.0" style="-fx-background-color: GREEN;" text="View full profile">
                                        <HBox.margin>
-                                          <Insets left="80.0" top="35.0" />
+                                          <Insets top="35.0" />
                                        </HBox.margin>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
@@ -85,7 +94,7 @@
                               <HBox layoutY="53.0" prefHeight="47.0" prefWidth="730.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                                  <children>
                                     <Label fx:id="lblEmail" text="your@email.com" />
-                                    <Label fx:id="lblYourCarbon" text="You have saved NaN kg of CO2 so far" />
+                                    <Label fx:id="lblYourCarbon" text="- You have saved NaN kg of CO2 so far - " />
                                     <Label fx:id="lblAverageCarbon" text="Average person saved NaN kg of CO2" />
                                  </children>
                               </HBox>
@@ -100,7 +109,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="256.0" layoutY="259.0" prefHeight="503.0" prefWidth="1124.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="319.0">
                      <children>
-                        <HBox layoutX="208.0" prefHeight="47.0" prefWidth="815.0" spacing="33.0" AnchorPane.topAnchor="0.0">
+                        <HBox layoutX="208.0" prefHeight="47.0" prefWidth="815.0" spacing="50.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <JFXButton fx:id="btnTop5" alignment="CENTER" buttonType="RAISED" prefHeight="44.0" prefWidth="123.0" style="-fx-background-color: #00db00;" text="Top 5">
                                  <cursor>
@@ -135,10 +144,10 @@
                         <JFXTreeTableView fx:id="tableTop50" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
                         <JFXTreeTableView fx:id="tableTop100" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
 
-                        <Label layoutX="382.0" layoutY="456.0" text="- Ranking is determined according to the total amount of CO2 saved - " AnchorPane.leftAnchor="382.0" AnchorPane.rightAnchor="274.0" />
+                                                <Label layoutX="382.0" layoutY="456.0" text="- Ranking is determined according to the total amount of CO2 saved - " AnchorPane.leftAnchor="382.0" AnchorPane.rightAnchor="274.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="1324.0" layoutY="-34.0" prefHeight="806.0" prefWidth="369.0">
+                  <AnchorPane layoutX="1410.0" layoutY="-33.0" prefHeight="806.0" prefWidth="369.0">
                      <children>
                         <VBox layoutY="14.0" prefHeight="792.0" prefWidth="369.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
                            <children>
@@ -202,7 +211,7 @@
                         </VBox>
                      </children>
                      <padding>
-                        <Insets left="50.0" />
+                        <Insets left="100.0" />
                      </padding>
                   </AnchorPane>
                </children>
