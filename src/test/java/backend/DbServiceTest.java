@@ -201,8 +201,8 @@ public class DbServiceTest {
         dbService.addFriendRequest(testUser2.getUsername(), testUser3.getUsername());
         Assert.assertEquals(1, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
         dbService.acceptFriendRequest(dbService.getUser(testUser2.getEmail()).getUsername(), dbService.getUser(testUser3.getEmail()).getUsername());
-        Assert.assertEquals("test_userFr",dbService.getUser(testUser2.getEmail()).getFriends().get(0));
-        Assert.assertEquals("test_userF",dbService.getUser(testUser3.getEmail()).getFriends().get(0));
+        Assert.assertEquals(true,dbService.getUser(testUser2.getEmail()).getFriends().contains("test_userFr"));
+        Assert.assertEquals(true,dbService.getUser(testUser3.getEmail()).getFriends().contains("test_userF"));
         Assert.assertEquals(0, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
         dbService.deleteUser(testUser2.getEmail());
         dbService.deleteUser(testUser3.getEmail());
@@ -388,4 +388,23 @@ public class DbServiceTest {
 
     }
 
+    public void testGetRankNull() {
+        Assert.assertEquals(-1, dbService.getUserRank(testUserNonExistent.getUsername()));
+    }
+
+    @Test
+    public void testGetRankTop5() {
+        User top5User = dbService.getTopUsers(15).get(4);
+        int rank = dbService.getUserRank(top5User.getUsername());
+
+        Assert.assertEquals(5, rank);
+    }
+
+    @Test
+    public void testGetRankTop1() {
+        User top1User = dbService.getTopUsers(15).get(0);
+        int rank = dbService.getUserRank(top1User.getUsername());
+
+        Assert.assertEquals(1, rank);
+    }
 }

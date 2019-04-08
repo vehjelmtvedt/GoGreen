@@ -547,6 +547,25 @@ public class DbService {
 
     }
 
+    /**.
+     * Gets the rank in terms of CO2 saved of the specified User
+     * @param identifier - Identifier of the User (either e-mail or username)
+     * @return - Rank of the User (integer)
+     */
+    public int getUserRank(String identifier) {
+        User user = getUser(identifier);
 
+        // Invalid User specified
+        if (user == null) {
+            return -1;
+        }
 
+        double carbon = getUser(identifier).getTotalCarbonSaved();
+
+        return (int) mongoTemplate.count(new Query( // Get count of matching documents
+                Criteria.where("totalCarbonSaved") // Compare totalCarbonSaved of other Users
+                .gt(carbon)), // Carbon Saved of queried Users should be greater
+                User.class) // Search in User collection
+                + 1; // Add 1 (to count in the User itself)
+    }
 }

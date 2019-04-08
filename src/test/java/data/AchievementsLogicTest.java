@@ -119,8 +119,8 @@ public class AchievementsLogicTest {
 
     @Test
     public void tescar() {
-
         user.setCarType("small");
+        user.addFriend("test" + i);
 
         Assert.assertTrue(13 == AchievementsLogic.checkOther(user).get(0));
 

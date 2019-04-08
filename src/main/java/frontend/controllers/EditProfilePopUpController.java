@@ -4,9 +4,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import data.LoginDetails;
 import data.User;
+import frontend.gui.Events;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
+import javafx.scene.Cursor;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -79,6 +81,11 @@ public class EditProfilePopUpController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //add hover events for the buttons that edit the profile information;
+        Events.addSaveButtonHover(firstNameSave);
+        Events.addSaveButtonHover(lastNameSave);
+        Events.addSaveButtonHover(ageSave);
+        Events.addJfxButtonHover(close);
 
         firstName.setText(thisUser.getFirstName());
         lastName.setText(thisUser.getLastName());
@@ -106,6 +113,10 @@ public class EditProfilePopUpController implements Initializable {
         for (int i = 1; i <= 12; i++) {
 
             ImageView avatarimage = new ImageView();
+
+            //set the cursor to be Cursor.Hand whenever it is hovered
+            avatarimage.setCursor(Cursor.HAND);
+
             javafx.scene.image.Image path = new Image("avatars/" + count + ".jpg");
             avatarimage.setId(Integer.toString(count));
             avatarimage.setFitHeight(150);
