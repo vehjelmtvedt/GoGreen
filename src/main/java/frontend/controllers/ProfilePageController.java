@@ -35,7 +35,6 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
-
 public class ProfilePageController implements Initializable {
 
     private static User thisUser;
@@ -99,7 +98,7 @@ public class ProfilePageController implements Initializable {
     }
 
     /**
-     Checks completed Achievements.
+     * Checks completed Achievements.
      */
     public static boolean isComplete(Achievement achievement) {
         for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
@@ -165,6 +164,7 @@ public class ProfilePageController implements Initializable {
 
         // for every completed achievement module  is created
         // and added to a VBox small pics might be added later
+        int count = 1;
         for (int i = 0; i < thisUser.getProgress().getAchievements().size(); i++) {
 
             count++;
@@ -207,10 +207,9 @@ public class ProfilePageController implements Initializable {
                 incom.getChildren().add(hbox);
             }
         }
-    }
 
         int levelcount = 1;
-        for (int i = 1; i <= (thisUser.getProgress().getLevel()); i++) {
+        for (int i = 1; i <= thisUser.getProgress().getLevel(); i++) {
 
             ImageView badgeimage = new ImageView();
             Image path = new Image("badges/" + levelcount + ".png");
@@ -220,20 +219,11 @@ public class ProfilePageController implements Initializable {
             badgeZone.getChildren().add(badgeimage);
             levelcount++;
         }
-
-        addCompletedAchievements(com);
-        addPendingAchievements(incom);
-
-
     }
-
+//    addCompletedAchievements(com);
+//    addPendingAchievements(incom);
 }
 
 
-        Image badgeimg = new Image(ProfilePageLogic.getBadge(thisUser));
-
-        badge.setImage(badgeimg);
-
-    }
 
 
