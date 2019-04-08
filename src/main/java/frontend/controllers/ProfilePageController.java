@@ -7,11 +7,7 @@ import com.jfoenix.controls.JFXProgressBar;
 import data.Achievement;
 import data.User;
 import data.UserAchievement;
-import frontend.gui.General;
-import frontend.gui.Main;
-import frontend.gui.NavPanel;
-import frontend.gui.ProfilePageLogic;
-import frontend.gui.StageSwitcher;
+import frontend.gui.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -111,7 +107,7 @@ public class ProfilePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        Events.addJfxButtonHover(editProfile);
         levelProgress.setProgress(
                 (Double.parseDouble(Integer.toString(thisUser.getProgress().getLevel()))) / 8.0
         );
