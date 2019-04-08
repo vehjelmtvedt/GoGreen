@@ -152,7 +152,7 @@ public class AchievementsLogicTest {
 
         for (int i = 0 ; i < 11 ; i++){
 
-            user.addFriend("test" + 1);
+            user.addFriend("test" + i);
 
         }
 

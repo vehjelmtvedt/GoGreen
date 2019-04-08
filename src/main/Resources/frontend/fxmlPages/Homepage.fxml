@@ -84,8 +84,8 @@
                               <HBox layoutY="53.0" prefHeight="47.0" prefWidth="730.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                                  <children>
                                     <Label fx:id="lblEmail" text="your@email.com" />
-                                    <Label fx:id="lblYourCarbon" text="You have saved 8.1212 kg of CO2 so far" />
-                                    <Label fx:id="lblYourCarbon1" text="Average person saved 9.12121212 kg of CO2" />
+                                    <Label fx:id="lblYourCarbon" text="You have saved NaN kg of CO2 so far" />
+                                    <Label fx:id="lblAverageCarbon" text="Average person saved NaN kg of CO2" />
                                  </children>
                               </HBox>
                               <Label fx:id="lblName" layoutY="14.0" text="YOUR NAME" textFill="GREEN">
@@ -101,12 +101,7 @@
                      <children>
                         <HBox layoutX="208.0" prefHeight="47.0" prefWidth="815.0" spacing="33.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <JFXButton fx:id="btnMyStats" alignment="CENTER" buttonType="RAISED" prefHeight="44.0" prefWidth="123.0" style="-fx-background-color: #00db00;" text="My stats">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                              <JFXButton fx:id="btnTop5" alignment="CENTER" buttonType="RAISED" prefHeight="44.0" prefWidth="123.0" text="Top 5">
+                              <JFXButton fx:id="btnTop5" alignment="CENTER" buttonType="RAISED" prefHeight="44.0" prefWidth="123.0" style="-fx-background-color: #00db00;" text="Top 5">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -126,13 +121,19 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </JFXButton>
+                              <JFXButton fx:id="btnTop100" alignment="CENTER" buttonType="RAISED" prefHeight="44.0" prefWidth="123.0" text="Top 100">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
                            </children>
                         </HBox>
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" />
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
+                        <JFXTreeTableView fx:id="tableTop5" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" />
+                        <JFXTreeTableView fx:id="tableTop10" visible="false" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" />
+                        <JFXTreeTableView fx:id="tableTop25" visible="false" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" />
+                        <JFXTreeTableView fx:id="tableTop50" visible="false" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" />
+                        <JFXTreeTableView fx:id="tableTop100" visible="false" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" />
+
                         <Label layoutX="382.0" layoutY="456.0" text="- Ranking is determined according to the total amount of CO2 saved - " AnchorPane.leftAnchor="382.0" AnchorPane.rightAnchor="274.0" />
                      </children>
                   </AnchorPane>
@@ -155,7 +156,7 @@
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin></PieChart>
-                              <Label alignment="CENTER" text="CO2 SAVED IN THE LAST 7 DAYS" textFill="GREEN" underline="true">
+                              <Label alignment="CENTER" text="CO2 SAVED BY TIME PERIOD" textFill="GREEN" underline="true">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -166,7 +167,7 @@
                                     <Insets left="20.0" top="40.0" />
                                  </VBox.margin>
                               </Label>
-                              <AreaChart prefHeight="218.0" prefWidth="273.0">
+                              <BarChart fx:id="barChart" prefHeight="218.0" prefWidth="273.0">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />
                                 </xAxis>
@@ -176,7 +177,7 @@
                                  <VBox.margin>
                                     <Insets top="30.0" />
                                  </VBox.margin>
-                              </AreaChart>
+                              </BarChart>
                            </children>
                         </VBox>
                      </children>

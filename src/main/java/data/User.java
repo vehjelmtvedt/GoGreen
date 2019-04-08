@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 
 public class User {
 
@@ -19,13 +20,13 @@ public class User {
 
     private int loginStreak;
 
-    private ArrayList<String> friends;
-    private ArrayList<String> friendRequests;
+    private HashSet<String> friends;
+    private HashSet<String> friendRequests;
     private Date lastLoginDate;
 
     private ArrayList<Activity> activities;
 
-    private int electricityDailyConsumption;
+    private double electricityDailyConsumption;
     private double heatingOilDailyConsumption;
     private int dailyCarKilometres;
     private String carType;
@@ -34,8 +35,9 @@ public class User {
     private String organicFoodConsumption;
     private String processedFoodConsumption;
     private double totalCarbonSaved;
-
     private Progress progress = new Progress();
+
+    private String avatar;
 
     private int securityQuestionId;
     private String securityQuestionAnswer;
@@ -59,8 +61,8 @@ public class User {
         this.username = username;
         this.password = password;
         this.loginStreak = 0;
-        this.friends = new ArrayList<>();
-        this.friendRequests = new ArrayList<>();
+        this.friends = new HashSet<>();
+        this.friendRequests = new HashSet<>();
         this.electricityDailyConsumption = 0;
         this.heatingOilDailyConsumption = 0;
         this.carType = "default";
@@ -72,6 +74,7 @@ public class User {
         this.totalCarbonSaved = 0;
         this.lastLoginDate = Calendar.getInstance().getTime();
         this.activities = new ArrayList<>();
+        this.avatar = "0";
     }
 
     public User() {
@@ -81,9 +84,6 @@ public class User {
         return progress;
     }
 
-    public void setProgress(Progress progress) {
-        this.progress = progress;
-    }
 
     public String getFirstName() {
         return this.firstName;
@@ -141,7 +141,7 @@ public class User {
         return this.securityQuestionAnswer;
     }
 
-    public ArrayList<String> getFriends() {
+    public HashSet<String> getFriends() {
         return this.friends;
     }
 
@@ -149,15 +149,15 @@ public class User {
         return this.activities;
     }
 
-    public ArrayList<String> getFriendRequests() {
+    public HashSet<String> getFriendRequests() {
         return this.friendRequests;
     }
 
-    public void setElectricityDailyConsumption(int electricityDailyConsumption) {
+    public void setElectricityDailyConsumption(double electricityDailyConsumption) {
         this.electricityDailyConsumption = electricityDailyConsumption;
     }
 
-    public int getElectricityDailyConsumption() {
+    public double getElectricityDailyConsumption() {
         return this.electricityDailyConsumption;
     }
 
@@ -218,7 +218,8 @@ public class User {
     }
 
     public void setTotalCarbonSaved(double totalCarbonSaved) {
-        this.totalCarbonSaved = totalCarbonSaved;
+        // keep only 3 decimal places
+        this.totalCarbonSaved = ((int) (totalCarbonSaved * 1000)) / 1000.0;
     }
 
     public double getTotalCarbonSaved() {
@@ -233,11 +234,28 @@ public class User {
         this.lastLoginDate = date;
     }
 
+    public void setFriends(HashSet<String> friends) {
+        this.friends = friends;
+    }
+
+    public void setFriendRequests(HashSet<String> friendRequests) {
+        this.friendRequests = friendRequests;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     /**
      * Returns string representation of the User object.
      *
      * @return String
      */
+
     public String toString() {
         StringBuilder userString = new StringBuilder();
         userString.append("First name: ").append(this.firstName).append('\n');
@@ -303,24 +321,30 @@ public class User {
 
     // ---------- ACTIVITY METHODS ----------
 
-    /**.
+    /**
+     * .
      * Adds a new activity to user's activities list
+     *
      * @param activity - Activity to add
      */
     public void addActivity(Activity activity) {
         this.activities.add(activity);
     }
 
-    /**.
+    /**
+     * .
      * Removes an activity from user's activities list
+     *
      * @param activity - Activity to remove
      */
     public void removeActivity(Activity activity) {
         this.activities.remove(activity);
     }
 
-    /**.
+    /**
+     * .
      * Returns a list of activities that are of the same type of the specified activity.
+     *
      * @param activity - Activity to compare to
      * @return List of activities of same type
      */
@@ -329,7 +353,7 @@ public class User {
 
         for (Activity userActivity : activities) {
             if (userActivity.getClass() == activity.getClass() && !userActivity.equals(activity)) {
-                result.add(activity);
+                result.add(userActivity);
             }
         }
 
@@ -339,12 +363,14 @@ public class User {
     /**
      * addes to the points the amount of co2 save.*
      * every one co2 unite is worth 1 point
+     *
      * @param carbonsaved co2 saved
      */
-    public void addCO2Points( double carbonsaved) {
+    public void addCO2Points(double carbonsaved) {
         this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
 
     }
+
 
     /*
      * Removes a friend from the friends list

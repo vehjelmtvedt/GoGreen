@@ -110,7 +110,7 @@ public class UserTest {
     @Test
     public void getElectricityDailyConsumptionSuccess(){
         userOne.setElectricityDailyConsumption(70000);
-        Assert.assertEquals(70000, userOne.getElectricityDailyConsumption());
+        Assert.assertEquals(70000, (int) userOne.getElectricityDailyConsumption());
     }
 
     @Test
@@ -121,7 +121,7 @@ public class UserTest {
     @Test
     public void setElectricityDailyConsumptionSuccsess() {
         userOne.setElectricityDailyConsumption(50000);
-        Assert.assertEquals(50000, userOne.getElectricityDailyConsumption());
+        Assert.assertEquals(50000,(int) userOne.getElectricityDailyConsumption());
     }
 
     @Test
@@ -264,13 +264,13 @@ public class UserTest {
     public void getFriendRequestsSuccessNotEmpty() {
         userOne.newFriendRequest("testname");
         Assert.assertEquals(1, userOne.getFriendRequests().size());
-        Assert.assertEquals("testname", userOne.getFriendRequests().get(0));
+        Assert.assertEquals(true, userOne.getFriendRequests().contains("testname"));
     }
 
     @Test
     public void testAddFriend() {
         userOne.addFriend("friend1");
-        Assert.assertEquals(userOne.getFriends().get(0),"friend1");
+        Assert.assertEquals(userOne.getFriends().contains("friend1"),true);
     }
 
     @Test
@@ -285,16 +285,16 @@ public class UserTest {
     public void testNewFriendRequest() {
         userOne.newFriendRequest("testfriend");
         Assert.assertEquals(1, userOne.getFriendRequests().size());
-        Assert.assertEquals("testfriend", userOne.getFriendRequests().get(0));
+        Assert.assertEquals(true, userOne.getFriendRequests().contains("testfriend"));
     }
 
     @Test
     public void testDeleteFriendRequest() {
         userOne.newFriendRequest("testfriend");
         userOne.newFriendRequest("testfriend2");
-        Assert.assertEquals("testfriend2", userOne.getFriendRequests().get(1));
+        Assert.assertEquals(true, userOne.getFriendRequests().contains("testfriend2"));
         userOne.deleteFriendRequest("testfriend");
-        Assert.assertEquals("testfriend2", userOne.getFriendRequests().get(0));
+        Assert.assertEquals(true, userOne.getFriendRequests().contains("testfriend2"));
     }
 
     @Test

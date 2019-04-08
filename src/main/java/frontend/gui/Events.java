@@ -9,6 +9,10 @@ import data.BuyLocallyProducedFood;
 import data.BuyNonProcessedFood;
 import data.BuyOrganicFood;
 import data.EatVegetarianMeal;
+import data.InstallSolarPanels;
+import data.LowerHomeTemperature;
+import data.RecyclePaper;
+import data.RecyclePlastic;
 import data.UseBikeInsteadOfCar;
 import data.UseBusInsteadOfCar;
 import data.UseTrainInsteadOfCar;
@@ -20,9 +24,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -31,8 +38,13 @@ import javafx.scene.paint.Color;
 import tools.ActivityQueries;
 import tools.DateUnit;
 
+import java.io.IOException;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 public class Events {
 
@@ -69,6 +81,21 @@ public class Events {
 
     /**
      * .
+     * Add hover events for the save buttons on the edit profile page
+     *
+     * @param button - button to add events to
+     */
+    public static void addSaveButtonHover(JFXButton button) {
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+            button.setStyle("-fx-background-color: #00db00");
+        });
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            button.setStyle("-fx-background-color: transparent;");
+        });
+    }
+
+    /**
+     * .
      * Add hover event for navigation panel buttons
      *
      * @param button button to add hover to inside nav bar
@@ -82,8 +109,10 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add hover event for JFX buttons
+     *
      * @param button - button to add hover event to
      */
     public static void addJfxButtonHover(JFXButton button) {
@@ -94,7 +123,7 @@ public class Events {
             button.setOpacity(0.75);
         });
     }
-
+    
     /**
      * .
      * Add food activities to the user upon clicking
@@ -124,6 +153,12 @@ public class Events {
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
+            try {
+                ActivitiesController.popup("Popup", "Activity performed successfully!",
+                        "sucess", 0);
+            } catch (IOException exp) {
+                System.out.println("Something went wrong.");
+            }
         });
     }
 
@@ -178,6 +213,12 @@ public class Events {
 
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
+            try {
+                ActivitiesController.popup("Popup", "Activity performed successfully!",
+                        "sucess", 0);
+            } catch (IOException exp) {
+                System.out.println("Something went wrong.");
+            }
         });
         input.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -191,24 +232,167 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add household activities to the user upon clicking
+     *
      * @param pane          - pane to be clicked
      * @param type          - type of activity
      * @param loggedUser    - user to update
      * @param activityTable - table to set history to
      */
-    public static void addHouseholdActivity(AnchorPane pane, int type,
+    public static void addHouseholdActivity(AnchorPane pane, Label installedPanels,
+                                            Label loweredTemp, int type, User loggedUser,
+                                            TableView<Activity> activityTable) {
+        pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (type == 1) {
+                InstallSolarPanels panels = new InstallSolarPanels();
+                if (loggedUser.getSimilarActivities(panels).size() > 0) {
+                    InstallSolarPanels installed = (InstallSolarPanels) loggedUser
+                            .getSimilarActivities(new InstallSolarPanels()).get(0);
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("GoGreen");
+                    alert.setHeaderText("You have already installed solar panels!");
+                    alert.setContentText("Total CO2 saved by your solar panels: "
+                            + ChronoUnit.DAYS.between(loggedUser
+                                    .getSimilarActivities(panels)
+                                    .get(0).getDate().toInstant(),
+                            Calendar.getInstance().getTime().toInstant())
+                            * installed.getDailyCarbonSaved());
+                    alert.showAndWait();
+                } else {
+                    TextInputDialog dialog = new TextInputDialog("0");
+                    dialog.setTitle("Install Solar Panels");
+                    dialog.setHeaderText(
+                            "Amount of kwh that your solar panel installation produces per year: ");
+                    dialog.setContentText("kwh:");
+                    dialog.getEditor().textProperty().addListener(new ChangeListener<String>() {
+                        @Override
+                        public void changed(
+                                ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+                            if (!newValue.matches("^[0-9]{0,7}$")) {
+                                dialog.getEditor().setText(oldValue);
+                            }
+                        }
+                    });
+                    Optional<String> result = dialog.showAndWait();
+                    if (result.isPresent()) {
+                        System.out.println("kwh: " + result.get());
+                        panels.setKwhSavedPerYear(Integer.parseInt(result.get()));
+                        panels.performActivity(loggedUser);
+                        installedPanels.setVisible(true);
+
+                        //show popup upon performing an activity
+                        try {
+                            ActivitiesController.popup("Popup", "Activity performed successfully!",
+                                    "sucess", 0);
+                        } catch (IOException exp) {
+                            System.out.println("Something went wrong.");
+                        }
+                    }
+                }
+            } else {
+                if (type == 2) {
+                    LowerHomeTemperature temp = new LowerHomeTemperature();
+                    if (temp.timesPerformedInTheSameDay(loggedUser) > 0) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText("Oops");
+                        alert.setContentText(
+                                "It looks like you already did this today,"
+                                        + " you can try again tomorrow!");
+                        alert.showAndWait();
+                    } else {
+                        List<String> choices = Arrays.asList("1", "2", "3", "4", "5");
+                        ChoiceDialog<String> dialog = new ChoiceDialog<>("1", choices);
+                        dialog.setTitle("Lower Home Temperature");
+                        dialog.setHeaderText("How many degrees did you turn your thermostat down?");
+                        dialog.setContentText("Degrees:");
+                        Optional<String> result = dialog.showAndWait();
+                        if (result.isPresent()) {
+                            System.out.println("Degrees: " + result.get());
+                            temp.setDegrees(Integer.parseInt(result.get()));
+                            temp.performActivity(loggedUser);
+                            loweredTemp.setVisible(true);
+
+                            //show popup upon performing an activity
+                            try {
+                                ActivitiesController.popup("Popup",
+                                        "Activity performed successfully!",
+                                        "sucess", 0);
+                            } catch (IOException exp) {
+                                System.out.println("Something went wrong.");
+                            }
+                        }
+                    }
+                }
+            }
+            ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
+            activityTable.setItems(activities);
+        });
+    }
+
+    /**
+     * .
+     * Add recycling activity(part of Household category)
+     *
+     * @param pane          - pane to be clicked
+     * @param type          - type of recycling
+     * @param loggedUser    - the user who performs the activity
+     * @param activityTable - the history table
+     */
+    public static void addRecyclingActivity(AnchorPane pane, Label lblPlastic,
+                                            Label lblPaper, int type,
                                             User loggedUser, TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
-                //todo: Add solar panels
+                RecyclePlastic plastic = new RecyclePlastic();
+                if (plastic.timesPerformedInTheSameDay(loggedUser) > 0) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("Oops");
+                    alert.setContentText(
+                            "It looks like you already did this today,"
+                                    + " you can try again tomorrow!");
+                    alert.showAndWait();
+                } else {
+                    plastic.performActivity(loggedUser);
+                    lblPlastic.setVisible(true);
+
+                    //show popup upon performing an activity
+                    try {
+                        ActivitiesController.popup("Popup",
+                                "Activity performed successfully!", "sucess", 0);
+                    } catch (IOException exp) {
+                        System.out.println("Something went wrong.");
+                    }
+                }
             } else {
                 if (type == 2) {
-                    //todo: Lower home temperature
+                    RecyclePaper paper = new RecyclePaper();
+                    if (paper.timesPerformedInTheSameDay(loggedUser) > 0) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText("Oops");
+                        alert.setContentText(
+                                "It looks like you already did this today,"
+                                        + " you can try again tomorrow!");
+                        alert.showAndWait();
+                    } else {
+                        paper.performActivity(loggedUser);
+                        lblPaper.setVisible(true);
+
+                        //show popup upon performing an activity
+                        try {
+                            ActivitiesController.popup("Popup",
+                                    "Activity performed successfully!", "sucess", 0);
+                        } catch (IOException exp) {
+                            System.out.println("Something went wrong.");
+                        }
+                    }
                 }
             }
-
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
         });
@@ -321,7 +505,7 @@ public class Events {
     }
 
     private static List<Activity> applyCategoryFilters(List<Activity> activities,
-                                             List<JFXCheckBox> checkList) {
+                                                       List<JFXCheckBox> checkList) {
         ActivityQueries activityQueries = new ActivityQueries(activities);
         List<String> categoryFilters = new ArrayList<>();
         for (JFXCheckBox filter : checkList) {
@@ -333,7 +517,7 @@ public class Events {
     }
 
     private static List<Activity> applyTimeFilters(List<Activity> activities,
-                                         List<JFXRadioButton> radioList) {
+                                                   List<JFXRadioButton> radioList) {
         ActivityQueries activityQueries = new ActivityQueries(activities);
         for (JFXRadioButton filter : radioList) {
             if (filter.isSelected()) {
@@ -353,7 +537,7 @@ public class Events {
     }
 
     private static List<Activity> applyCarbonFilters(List<Activity> activities,
-                                           JFXTextField min, JFXTextField max) {
+                                                     JFXTextField min, JFXTextField max) {
         ActivityQueries activityQueries = new ActivityQueries(activities);
 
         if (!min.getText().equals("") && !max.getText().equals("")) {
@@ -399,8 +583,10 @@ public class Events {
         });
     }
 
-    /**.
+    /**
+     * .
      * Add leaderboards events to the the leaderboards buttons
+     *
      * @param leaderboards - list containing buttons for all types of leaderboards
      */
     public static void addLeaderboards(List<JFXButton> leaderboards) {

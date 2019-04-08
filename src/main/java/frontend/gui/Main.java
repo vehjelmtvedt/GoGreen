@@ -19,7 +19,6 @@ public class Main extends Application {
     private static Scene activities;
     private static Scene friendPage;
     private static Scene profilePage;
-    private static Scene progress;
     private static String cssIntro;
 
     @Override
@@ -72,10 +71,6 @@ public class Main extends Application {
 
     public static Scene getQuestionnaire() {
         return Questionnaire;
-    }
-
-    public static Scene getProgress() {
-        return progress;
     }
 
     public static Scene getActivities() {

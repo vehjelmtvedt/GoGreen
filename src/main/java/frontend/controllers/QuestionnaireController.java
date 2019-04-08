@@ -161,8 +161,8 @@ public class QuestionnaireController implements Initializable {
                     && !(textCarUsage.getText().isEmpty()) ) {
 
                 int householdMembers = Integer.parseInt(houseHoldNo.getValue().toString());
-                int dailyElectricityConsumption =
-                        Integer.parseInt(textElectricity.getText()) / 365 / householdMembers;
+                double dailyElectricityConsumption =
+                        Double.parseDouble(textElectricity.getText()) / 365 / householdMembers;
                 double dailyHeatingOilConsumption =
                         Integer.parseInt(textOil.getText()) / 365.0 / householdMembers;
                 String carType = carSizes.getValue().toString();
@@ -184,7 +184,7 @@ public class QuestionnaireController implements Initializable {
 
                 // Send the user Back to Login after Questionnaire is complete
 
-                String response = Requests.signupRequest(thisUser);
+                String response = Requests.instance.signupRequest(thisUser);
                 if (response != null) {
                     if (response.equals("success")) {
                         try {

@@ -247,4 +247,37 @@ public class RequestHandlerTest
         Boolean bool = false;
         assertEquals(requestHandler.forgotPass(testUser.getEmail(),"B",1,"ASD"),bool);
     }
+
+    @Test
+    public void getTotalCO2Saved() {
+        Mockito.when(dbService.getTotalCO2Saved()).thenReturn(100.5);
+        assertEquals(requestHandler.getTotalCO2Saved(),100.5);
+    }
+
+    @Test
+    public void getTotalUsers() {
+        Mockito.when(dbService.getTotalUsers()).thenReturn(10);
+        assertEquals(requestHandler.getTotalUsers(),10);
+    }
+
+    @Test
+    public void getAverageCO2Saved() {
+        Mockito.when(dbService.getAverageCO2Saved()).thenReturn(25.2);
+        assertEquals(requestHandler.getAverageCO2Saved(),25.2);
+    }
+
+    @Test
+    public void getRank() {
+        Mockito.when(dbService.grantAccess(testUser.getEmail(),testUser.getPassword())).thenReturn(testUser);
+        Mockito.when(dbService.getUserRank(testUser.getEmail())).thenReturn(5);
+        Integer x = 5;
+        assertEquals(requestHandler.getRank(new LoginDetails(testUser.getEmail(),testUser.getPassword())),x);
+    }
+
+    @Test
+    public void getRankFail() {
+        Mockito.when(dbService.grantAccess(testUser.getEmail(),testUser.getPassword())).thenReturn(null);
+        assertEquals(requestHandler.getRank(new LoginDetails(testUser.getEmail(),testUser.getPassword())),null);
+    }
+
 }

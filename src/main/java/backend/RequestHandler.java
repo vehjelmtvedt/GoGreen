@@ -204,6 +204,36 @@ public class RequestHandler {
 
         return false;
     }
+
+    @RequestMapping("/getTotalUsers")
+    public int getTotalUsers() {
+        return dbService.getTotalUsers();
+    }
+
+    @RequestMapping("/getTotalCO2Saved")
+    public double getTotalCO2Saved() {
+        return dbService.getTotalCO2Saved();
+    }
+
+    @RequestMapping("/getAverageCO2Saved")
+    public double getAverageCO2Saved() {
+        return dbService.getAverageCO2Saved();
+    }
+
+    /**
+     * request to get rank of a user.
+     * @param loginDetails auth and identifier
+     * @return the rank
+     */
+    @RequestMapping("/getRank")
+    public Integer getRank(@RequestBody LoginDetails loginDetails) {
+        if (dbService.grantAccess(loginDetails.getIdentifier(),
+                loginDetails.getPassword()) != null) {
+            return dbService.getUserRank(loginDetails.getIdentifier());
+        }
+        return null;
+    }
+
 }
 
 
