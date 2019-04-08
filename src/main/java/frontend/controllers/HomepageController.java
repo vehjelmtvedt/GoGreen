@@ -25,8 +25,11 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import tools.ActivityQueries;
 import tools.DateUnit;
 import tools.Requests;
@@ -72,6 +75,10 @@ public class HomepageController implements Initializable {
     @FXML
     private Label lblWelcome;
     @FXML
+    private Label lblRank;
+    @FXML
+    private Label lblProgress;
+    @FXML
     private JFXButton btnProfile;
     @FXML
     private JFXButton btnTop5;
@@ -99,6 +106,8 @@ public class HomepageController implements Initializable {
     private BarChart barChart;
     @FXML
     private BarChart weekChart;
+    @FXML
+    private Circle circleProfile;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -145,10 +154,15 @@ public class HomepageController implements Initializable {
         }
 
         //profile information + greeting messages upon logging in
+        circleProfile.setFill(new ImagePattern(
+                new Image("avatars/" + loggedUser.getAvatar() + ".jpg")));
         lblName.setText(loggedUser.getFirstName().toUpperCase() + " "
                 + loggedUser.getLastName().toUpperCase());
         lblEmail.setText(loggedUser.getEmail());
         lblLevel.setText(Integer.toString(loggedUser.getProgress().getLevel()));
+        lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
+        lblProgress.setText(Double.toString(loggedUser.getProgress().pointsNeeded())
+                + " Points left");
         lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
         lblFriends.setText(Integer.toString(loggedUser.getFriends().size()));
         lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
