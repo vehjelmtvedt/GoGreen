@@ -347,7 +347,7 @@ public class ActivityQueriesTest {
         Collections.reverse(expected);
 
         // Get actual result
-        ObservableList<BarChart.Data> list = activityQuery.getWeeklyCO2Savings();
+        ObservableList<XYChart.Data> list = activityQuery.getWeeklyCO2Savings();
 
         List<Object> days = list.stream().map(XYChart.Data::getXValue)
                 .collect(Collectors.toList());
@@ -386,7 +386,7 @@ public class ActivityQueriesTest {
         activityQuery.setActivities(activities);
 
         // Get result
-        ObservableList<BarChart.Data> list = activityQuery.getWeeklyCO2Savings();
+        ObservableList<XYChart.Data> list = activityQuery.getWeeklyCO2Savings();
 
         List<Object> savings = list.stream().map(XYChart.Data::getYValue)
                 .collect(Collectors.toList());

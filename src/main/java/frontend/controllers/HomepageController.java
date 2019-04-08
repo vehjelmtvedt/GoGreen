@@ -70,6 +70,8 @@ public class HomepageController implements Initializable {
     @FXML
     private Label lblAverageCarbon;
     @FXML
+    private Label lblWelcome;
+    @FXML
     private JFXButton btnProfile;
     @FXML
     private JFXButton btnTop5;
@@ -95,6 +97,8 @@ public class HomepageController implements Initializable {
     private PieChart chartMyActivities;
     @FXML
     private BarChart barChart;
+    @FXML
+    private BarChart weekChart;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -135,11 +139,12 @@ public class HomepageController implements Initializable {
         //addFonts
         try {
             goGreen.setFont(Main.getReenieBeanie(100));
+            lblWelcome.setFont(Main.getReenieBeanie(40));
         } catch (IOException e) {
             System.out.println("Fonts not found");
         }
 
-        //profile information
+        //profile information + greeting messages upon logging in
         lblName.setText(loggedUser.getFirstName().toUpperCase() + " "
                 + loggedUser.getLastName().toUpperCase());
         lblEmail.setText(loggedUser.getEmail());
@@ -157,6 +162,7 @@ public class HomepageController implements Initializable {
         //charts on the right
         fillPieChart(loggedUser, chartMyActivities);
         fillBarChart("Your CO2 Savings", barChart);
+        fillWeekChart(loggedUser, weekChart);
 
         Events.addJfxButtonHover(btnProfile);
 
@@ -180,15 +186,14 @@ public class HomepageController implements Initializable {
         ActivityQueries queries = new ActivityQueries(user.getActivities());
 
         chart.setData(FXCollections.observableArrayList(
-                new PieChart.Data("Food",
+                new PieChart.Data("FOOD",
                         queries.filterActivities("Food").size()),
-                new PieChart.Data("Transportation",
+                new PieChart.Data("TRANSPORTATION",
                         queries.filterActivities("Transportation").size()),
-                new PieChart.Data("Household",
+                new PieChart.Data("HOUSEHOLD",
                         queries.filterActivities("Household").size())
         ));
     }
-
 
     /**
      * Gives style to the tree view.
@@ -307,11 +312,11 @@ public class HomepageController implements Initializable {
      */
     public void populateBarChart(XYChart.Series series) {
         ActivityQueries thisQuery = new ActivityQueries(loggedUser.getActivities());
-        series.getData().add(new XYChart.Data("Today",
+        series.getData().add(new XYChart.Data("TODAY",
                 thisQuery.getTotalCO2Saved(DateUnit.TODAY)));
-        series.getData().add(new XYChart.Data("Last Week",
+        series.getData().add(new XYChart.Data("LAST WEEK",
                 thisQuery.getTotalCO2Saved(DateUnit.WEEK)));
-        series.getData().add(new XYChart.Data("Last Month",
+        series.getData().add(new XYChart.Data("LAST MONTH",
                 thisQuery.getTotalCO2Saved(DateUnit.MONTH)));
     }
 
@@ -321,6 +326,15 @@ public class HomepageController implements Initializable {
         populateBarChart(series);
         chart.getData().addAll(series);
         chart.setLegendVisible(false);
+    }
+
+    private static void fillWeekChart(User user, BarChart barChart) {
+        ActivityQueries queries = new ActivityQueries(user.getActivities());
+        XYChart.Series series = new XYChart.Series();
+        series.getData().addAll(queries.getWeeklyCO2Savings());
+        barChart.getData().addAll(series);
+        barChart.getXAxis().setTickLabelRotation(45);
+        barChart.setLegendVisible(false);
     }
 
     private static void hideLeaderboards(JFXTreeTableView shown,

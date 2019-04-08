@@ -3,7 +3,7 @@ package tools;
 import data.Activity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -271,12 +271,12 @@ public class ActivityQueries {
      * 7 days back
      * @return - ObservableList of BarChart Data objects with fully constructed entries
      */
-    public ObservableList<BarChart.Data> getWeeklyCO2Savings() {
+    public ObservableList<XYChart.Data> getWeeklyCO2Savings() {
         // Filters the activities for one week for efficiency
         activities = filterActivitiesByDate(DateUnit.WEEK);
 
         // Create a new ObservableList with BarChart Data
-        ObservableList<BarChart.Data> list = FXCollections.observableArrayList();
+        ObservableList<XYChart.Data> list = FXCollections.observableArrayList();
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(DateUtils.dateToday());
@@ -295,7 +295,7 @@ public class ActivityQueries {
             double co2Saved = getTotalCO2Saved(fromDate, toDate);
 
             // Add entry to ObservableList
-            list.add(new BarChart.Data<>(dayName, co2Saved));
+            list.add(new XYChart.Data<>(dayName, co2Saved));
 
             calendar.add(Calendar.DATE, -1);
         }
