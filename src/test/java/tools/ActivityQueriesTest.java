@@ -1,6 +1,9 @@
 package tools;
 
 import data.*;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -177,6 +180,13 @@ public class ActivityQueriesTest {
     }
 
     @Test
+    public void testFilterByDateOneFrom() {
+        Date fromDate = DateUtils.getDateBefore(Calendar.getInstance().getTime(), DateUnit.WEEK);
+        addActivitiesToUser(activeUser, 0, 5, 1);
+        Assert.assertEquals(1, activityQuery.filterActivitiesByDate(fromDate, today).size());
+    }
+
+    @Test
     public void testFilterByDateAllInRage() {
         Date fromDate = getDateRewind(10);
 
@@ -320,5 +330,67 @@ public class ActivityQueriesTest {
         types.add(BuyNonProcessedFood.class);
 
         Assert.assertEquals(20, activityQuery.filterActivitiesByType(types).size());
+    }
+
+    @Test
+    public void testGetWeeklyCO2SavingsDays() {
+        // Construct an expected list of dates
+        List<String> expected = new ArrayList<>();
+
+        Calendar calendar = Calendar.getInstance();
+        for (int i = 0; i < 7; ++i) {
+            expected.add(DateUtils.getDayName(calendar.getTime()));
+            calendar.add(Calendar.DATE, -1);
+        }
+
+        // Reverse the list (since first day added was today's date)
+        Collections.reverse(expected);
+
+        // Get actual result
+        ObservableList<BarChart.Data> list = activityQuery.getWeeklyCO2Savings();
+
+        List<Object> days = list.stream().map(XYChart.Data::getXValue)
+                .collect(Collectors.toList());
+
+        Assert.assertEquals(expected, days);
+    }
+
+    @Test
+    public void testGetWeeklyCO2SavingsCarbon() {
+        List<Double> expected = new ArrayList<>();
+        ArrayList<Activity> activities = new ArrayList<>();
+
+        Calendar calendar = Calendar.getInstance();
+
+        for (int i = 1; i <= 7; ++i) {
+            // Construct CO2Saved variable and add it to expected list of results
+            double co2saved = (i*i)+5*i;
+            expected.add(co2saved);
+
+            // Create new activity and set it with appropriate date & CO2 Saved
+            Activity activity = new EatVegetarianMeal();
+            activity.setDate(calendar.getTime());
+            activity.setCarbonSaved(co2saved);
+
+            activities.add(activity);
+
+            // Rewind 1 day back
+            calendar.add(Calendar.DATE, -1);
+        }
+
+        // Reverse the expected & activities lists (since we keep rewinding days)
+        Collections.reverse(expected);
+        Collections.reverse(activities);
+
+        // Load the activities to activityQuery
+        activityQuery.setActivities(activities);
+
+        // Get result
+        ObservableList<BarChart.Data> list = activityQuery.getWeeklyCO2Savings();
+
+        List<Object> savings = list.stream().map(XYChart.Data::getYValue)
+                .collect(Collectors.toList());
+
+        Assert.assertEquals(expected, savings);
     }
 }
