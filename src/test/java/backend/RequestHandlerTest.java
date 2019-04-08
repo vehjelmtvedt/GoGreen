@@ -280,4 +280,12 @@ public class RequestHandlerTest
         assertEquals(requestHandler.getRank(new LoginDetails(testUser.getEmail(),testUser.getPassword())),null);
     }
 
+    @Test
+    public void testSecurityQuestionFalse() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        testUser.setSecurityQuestionId(1);
+        testUser.setSecurityQuestionAnswer("F");
+        Boolean b = false;
+        assertEquals(requestHandler.forgotPass(testUser.getEmail(),"A",2,"ABC"),b);
+    }
 }
