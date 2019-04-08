@@ -10,6 +10,7 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import data.LoginDetails;
 import data.User;
+import frontend.gui.Main;
 import frontend.gui.NavPanel;
 import frontend.gui.NotificationPopup;
 import frontend.gui.StageSwitcher;
@@ -52,6 +53,9 @@ public class FriendspageController implements Initializable {
     private static NotificationPopup popup;
 
     private static AnchorPane mainCopy;
+
+    @FXML
+    private Label lblGoGreen;
 
     @FXML
     private JFXTreeTableView friendsPane;
@@ -114,8 +118,10 @@ public class FriendspageController implements Initializable {
         todayPane.prefWidthProperty().bind(headingBox.widthProperty());
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
+
         try {
             StageSwitcher.friendsDrawer = NavPanel.addNavPanel(main, headerPane, menu);
+            lblGoGreen.setFont(Main.getReenieBeanie(100));
         } catch (IOException e) {
             e.printStackTrace();
         }

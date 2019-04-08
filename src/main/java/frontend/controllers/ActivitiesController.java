@@ -167,12 +167,7 @@ public class ActivitiesController implements Initializable {
         popup = new NotificationPopup();
         mainCopy = mainPane;
         headerCopy = headerPane;
-        //addFonts
-        try {
-            goGreen.setFont(Main.getReenieBeanie(100));
-        } catch (IOException e) {
-            System.out.println("Fonts not found");
-        }
+
         //add Activity Event on clicking ( plus add in history table )
         Events.addFoodActivity(paneVegetarianMeal, 1, loggedUser, activityTable);
         Events.addFoodActivity(paneOrganicFood, 2, loggedUser, activityTable);
@@ -206,6 +201,7 @@ public class ActivitiesController implements Initializable {
 
         //setup notification and navigation panels
         try {
+            goGreen.setFont(Main.getReenieBeanie(100));
             StageSwitcher.activityDrawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
         } catch (IOException e) {

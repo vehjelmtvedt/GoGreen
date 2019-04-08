@@ -145,14 +145,6 @@ public class HomepageController implements Initializable {
             hideLeaderboards(tableTop100, tableTop5, tableTop10, tableTop25, tableTop50);
         });
 
-        //addFonts
-        try {
-            goGreen.setFont(Main.getReenieBeanie(100));
-            lblWelcome.setFont(Main.getReenieBeanie(40));
-        } catch (IOException e) {
-            System.out.println("Fonts not found");
-        }
-
         //profile information + greeting messages upon logging in
         circleProfile.setFill(new ImagePattern(
                 new Image("avatars/" + loggedUser.getAvatar() + ".jpg")));
@@ -181,6 +173,8 @@ public class HomepageController implements Initializable {
         Events.addJfxButtonHover(btnProfile);
 
         try {
+            goGreen.setFont(Main.getReenieBeanie(100));
+            lblWelcome.setFont(Main.getReenieBeanie(40));
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
             StageSwitcher.homeDrawer = NavPanel.addNavPanel(mainPane, headerPane, menu);
         } catch (IOException e) {
