@@ -363,4 +363,25 @@ public class DbServiceTest {
         List<User> friends = dbService.getTopFriends(testUserNonExistent.getUsername(), 5);
         Assert.assertEquals(new ArrayList<User>(), friends);
     }
+
+    @Test
+    public void testGetRankNull() {
+        Assert.assertEquals(-1, dbService.getUserRank(testUserNonExistent.getUsername()));
+    }
+
+    @Test
+    public void testGetRankTop5() {
+        User top5User = dbService.getTopUsers(15).get(4);
+        int rank = dbService.getUserRank(top5User.getUsername());
+
+        Assert.assertEquals(5, rank);
+    }
+
+    @Test
+    public void testGetRankTop1() {
+        User top1User = dbService.getTopUsers(15).get(0);
+        int rank = dbService.getUserRank(top1User.getUsername());
+
+        Assert.assertEquals(1, rank);
+    }
 }
