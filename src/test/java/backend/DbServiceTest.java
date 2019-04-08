@@ -214,7 +214,7 @@ public class DbServiceTest {
 
     @Test
     public void testBefriendUsersBothNull() {
-        assertEquals(null, dbService.acceptFriendRequest(null, null));
+        assertEquals(false, dbService.acceptFriendRequest(null, null));
     }
 
     @Test
@@ -245,7 +245,7 @@ public class DbServiceTest {
 
     @Test
     public void testAddFriendRequestBothNull() { //false, false
-        assertEquals(null, dbService.addFriendRequest(null, null));
+        assertEquals(false, dbService.addFriendRequest(null, null));
     }
 
     @Test
@@ -278,7 +278,7 @@ public class DbServiceTest {
 
     @Test
     public void testRejectFriendRequestBothNull() {
-        assertEquals(null, dbService.rejectFriendRequest(null, null));
+        assertEquals(false, dbService.rejectFriendRequest(null, null));
     }
 
     @Test
