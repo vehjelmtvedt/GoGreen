@@ -240,8 +240,8 @@ public class ProfilePageController implements Initializable {
         }
 
         if (count == 0) {
-            Label noachiements = new Label("No completed achievements yet");
-            com.getChildren().add(noachiements);
+            Label noAchievements = new Label("No completed achievements available for viewing.");
+            com.getChildren().add(noAchievements);
         }
 
         for (Achievement a : ProfilePageLogic.getList()) {
