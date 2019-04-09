@@ -152,7 +152,7 @@ public class HomepageController implements Initializable {
                 + loggedUser.getLastName().toUpperCase());
         lblEmail.setText(loggedUser.getEmail());
         lblLevel.setText(Integer.toString(loggedUser.getProgress().getLevel()));
-            lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
+        lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
         lblProgress.setText(Double.toString(loggedUser.getProgress().pointsNeeded())
                 + " Points left");
         lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
