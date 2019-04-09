@@ -38,13 +38,13 @@
   {
     "_class": "data.Achievement",
     "id": 6,
-    "name": "Eat one vegetarian meal.",
+    "name": "First vegetarian meal.",
     "bonus": 300
   },
   {
     "_class": "data.Achievement",
     "id": 7,
-    "name": "Add at least 50 activities.",
+    "name": "Perform 50 activities.",
     "bonus": 100
   },
   {
@@ -74,7 +74,7 @@
   {
     "_class": "data.Achievement",
     "id": 12,
-    "name": "Install some solar panels.",
+    "name": "Install solar panels.",
     "bonus": 500
   },
   {
@@ -92,19 +92,19 @@
   {
     "_class": "data.Achievement",
     "id": 15,
-    "name": "Buy some local produce.",
+    "name": "Buy local produce.",
     "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 16,
-    "name": "Buy some unprocessed food.",
+    "name": "Buy unprocessed food.",
     "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 17,
-    "name": "Buy some organic food.",
+    "name": "Buy organic food.",
     "bonus": 100
   },
   {
