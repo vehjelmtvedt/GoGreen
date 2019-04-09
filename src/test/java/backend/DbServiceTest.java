@@ -334,6 +334,9 @@ public class DbServiceTest {
     }
 
     @Test
+    public void testEditProfilePassword() { assertEquals(24,dbService.editProfile(testUser,"password","abc").getAge());}
+
+    @Test
     public void testGetTopFriendsEmpty() {
         List<User> friends = dbService.getTopFriends(testUser.getUsername(), 5);
 

@@ -402,6 +402,9 @@ public class DbService {
      */
     public User editProfile(User user, String fieldName, Object newValue) {
         try {
+            if (fieldName.equals("password")) {
+                newValue = encodePassword((String) newValue);
+            }
             Field field = user.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
             field.set(user, newValue);
@@ -409,7 +412,7 @@ public class DbService {
         } catch (IllegalAccessException | NoSuchFieldException e) {
             return null;
         }
-        addUser(user);
+        users.save(user);
         return user;
     }
 
