@@ -152,7 +152,7 @@ public class HomepageController implements Initializable {
                 + loggedUser.getLastName().toUpperCase());
         lblEmail.setText(loggedUser.getEmail());
         lblLevel.setText(Integer.toString(loggedUser.getProgress().getLevel()));
-        lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
+            lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
         lblProgress.setText(Double.toString(loggedUser.getProgress().pointsNeeded())
                 + " Points left");
         lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
@@ -341,7 +341,6 @@ public class HomepageController implements Initializable {
         XYChart.Series series = new XYChart.Series();
         series.getData().addAll(queries.getWeeklyCO2Savings());
         barChart.getData().addAll(series);
-        barChart.getXAxis().setTickLabelRotation(45);
         barChart.setLegendVisible(false);
     }
 
