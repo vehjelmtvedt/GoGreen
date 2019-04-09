@@ -32,7 +32,8 @@ public class EatVegetarianMeal extends Activity {
      * A user with average meat and dairy consumption behaves like one with below average.
      */
     public double averageToBelowAverage() {
-        return CarbonCalculator.meatAndDairyConsumptionEmissions(CarbonCalculator.MeatAndDairyConsumption.AVERAGE) / 365.0
+        return CarbonCalculator.meatAndDairyConsumptionEmissions(
+                CarbonCalculator.MeatAndDairyConsumption.AVERAGE) / 365.0
                 - CarbonCalculator.meatAndDairyConsumptionEmissions(
                         CarbonCalculator.MeatAndDairyConsumption.BELOW_AVERAGE) / 365.0;
     }

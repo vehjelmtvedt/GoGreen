@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FriendRequestController implements Initializable {
+    private static String thisUsername;
+
     @FXML
     private Label lblUsername;
     @FXML
@@ -17,7 +19,6 @@ public class FriendRequestController implements Initializable {
     @FXML
     private JFXButton btnDecline;
 
-    private static String thisUsername;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

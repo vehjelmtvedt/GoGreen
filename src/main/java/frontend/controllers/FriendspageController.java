@@ -194,7 +194,7 @@ public class FriendspageController implements Initializable {
                 results.getChildren().clear();
                 for (int i = 0; i < searchresults.size(); i++) {
                     if (!searchresults.get(i).equals(thisUser.getUsername())
-                    && !thisUser.getFriends().contains(searchresults.get(i))) {
+                        && !thisUser.getFriends().contains(searchresults.get(i))) {
                         HBox hbox = new HBox();
                         VBox.setMargin(hbox, new Insets(0, 20, 0, 20));
                         hbox.setStyle("-fx-background-color: #4286f4;");
