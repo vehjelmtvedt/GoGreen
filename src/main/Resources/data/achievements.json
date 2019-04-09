@@ -2,157 +2,157 @@
   {
     "_class": "data.Achievement",
     "id": 0,
-    "name": "Saved your first CO2",
+    "name": "Save CO2 at least once.",
     "bonus": 50
   },
   {
     "_class": "data.Achievement",
     "id": 1,
-    "name": "Adding more than five Activites",
+    "name": "Add more than five activities",
     "bonus": 500
   },
   {
     "_class": "data.Achievement",
     "id": 2,
-    "name": "Use bicycle",
+    "name": "Use the bicycle at least once.",
     "bonus": 250
   },
   {
     "_class": "data.Achievement",
     "id": 3,
-    "name": "Use a bicycle 5 times",
+    "name": "Use a bicycle at least 5 times",
     "bonus": 400
   },
   {
     "_class": "data.Achievement",
     "id": 4,
-    "name": "Use bus once",
+    "name": "Use the bus at least once.",
     "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 5,
-    "name": "Use bus 5 times",
+    "name": "Use the bus at least 5 times.",
     "bonus": 500
   },
   {
     "_class": "data.Achievement",
     "id": 6,
-    "name": "Eat vegetarian food",
+    "name": "First vegetarian meal.",
     "bonus": 300
   },
   {
     "_class": "data.Achievement",
     "id": 7,
-    "name": "Add 50 Activities",
+    "name": "Perform 50 activities.",
     "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 8,
-    "name": "Add your first friend",
+    "name": "Add a friend.",
     "bonus": 50
   },
   {
     "_class": "data.Achievement",
     "id": 9,
-    "name": "Add more than 10 friends",
+    "name": "Add at least 10 friends.",
     "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 10,
-    "name": "Be on the top of the board",
+    "name": "Reach the top of the leader board.",
     "bonus": 1000
   },
   {
     "_class": "data.Achievement",
     "id": 11,
-    "name": "Be second on top of the board",
+    "name": "Reach second place on the leader board.",
     "bonus": 750
   },
   {
     "_class": "data.Achievement",
     "id": 12,
-    "name": "Get solar Power",
+    "name": "Install solar panels.",
     "bonus": 500
   },
   {
     "_class": "data.Achievement",
     "id": 13,
-    "name": "Have a small Car",
+    "name": "Own a small car.",
     "bonus": 300
   },
   {
     "_class": "data.Achievement",
     "id": 14,
-    "name": "Being Vegan",
+    "name": "Take up a vegan lifestyle.",
     "bonus": 300
   },
   {
     "_class": "data.Achievement",
     "id": 15,
-    "name": "Buy Local Food",
+    "name": "Buy local produce.",
     "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 16,
-    "name": "Buy Non Processed Food",
+    "name": "Buy unprocessed food.",
     "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 17,
-    "name": "Buy organic Food",
+    "name": "Buy organic food.",
     "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 18,
-    "name": "Be third on top of the larboard",
+    "name": "Reach third place on the leader board.",
     "bonus": 500
   },
   {
     "_class": "data.Achievement",
     "id": 19,
-    "name": "Achieve level 4",
+    "name": "Reach level 4.",
     "bonus": 500
   },
   {
     "_class": "data.Achievement",
     "id": 20,
-    "name": "Achieve level 5",
+    "name": "Reach level 5.",
     "bonus": 800
   },
   {
     "_class": "data.Achievement",
     "id": 21,
-    "name": "Achieve level 6",
+    "name": "Reach level 6.",
     "bonus": 1000
   },
   {
     "_class": "data.Achievement",
     "id": 22,
-    "name": "Achieve level 7",
+    "name": "Reach level 7.",
     "bonus": 1500
   },
   {
     "_class": "data.Achievement",
     "id": 23,
-    "name": "Achieve level 8",
+    "name": "Reach level 8.",
     "bonus": 2000
   },
   {
     "_class": "data.Achievement",
     "id": 24,
-    "name": "Use the train ",
+    "name": "Use the train at least once.",
     "bonus": 2000
   },
   {
     "_class": "data.Achievement",
     "id": 25,
-    "name": "Use the train 5 times",
+    "name": "Use the train at least 5 times.",
     "bonus": 2000
   }
 

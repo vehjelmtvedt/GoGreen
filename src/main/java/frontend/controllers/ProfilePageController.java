@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import data.Achievement;
+import data.LoginDetails;
 import data.User;
 import data.UserAchievement;
 
@@ -27,10 +28,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,8 +45,10 @@ public class ProfilePageController implements Initializable {
 
     private static User thisUser;
 
+    private  static LoginDetails loginDetails;
+
     @FXML
-    ImageView profilePicture;
+    Circle profilePicture;
 
     @FXML
     JFXHamburger menu;
@@ -84,6 +90,9 @@ public class ProfilePageController implements Initializable {
     private Label level;
 
     @FXML
+    private Label rank;
+
+    @FXML
     private JFXButton editProfile;
 
     @FXML
@@ -102,6 +111,10 @@ public class ProfilePageController implements Initializable {
         thisUser = user;
     }
 
+    public static void setLoginDetails(LoginDetails passedloginDetails) {
+        loginDetails = passedloginDetails;
+    }
+
     /**
      * Checks completed Achievements.
      */
@@ -114,12 +127,43 @@ public class ProfilePageController implements Initializable {
         return false;
     }
 
+
+    /**
+     * Retrieves the number of points needed for each level above the users current level.
+     *
+     * @return Points needed to achieve the respective level.
+     */
+    public double getLevelPoints() {
+        int level = thisUser.getProgress().getLevel();
+        if (level == 1) {
+            return 700.0;
+        } else if (level == 2) {
+            return 2000.0;
+        } else if (level == 3) {
+            return 5500.0;
+        } else if (level == 4) {
+            return 14800.0;
+        } else if (level == 5) {
+            return 40300.0;
+        } else if (level == 6) {
+            return 109700.0;
+        } else if (level == 7) {
+            return 298100.0;
+        } else if (level == 8) {
+            return 298100.0;
+        } else {
+            return 0.0;
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Events.addJfxButtonHover(editProfile);
         levelProgress.setProgress(
-                (Double.parseDouble(Integer.toString(thisUser.getProgress().getLevel()))) / 8.0
+                (thisUser.getProgress().getPoints()) / (getLevelPoints())
         );
+        System.out.println("Test---------------------" + thisUser.getProgress().pointsNeeded());
+        System.out.println("Test---------------------" + thisUser.getProgress().getPoints());
 
         userName.setText(thisUser.getUsername());
         firstName.setText(thisUser.getFirstName());
@@ -127,9 +171,11 @@ public class ProfilePageController implements Initializable {
         email.setText(thisUser.getEmail());
         age.setText(thisUser.getAge() + "");
         lastseen.setText(thisUser.getLastLoginDate().toString());
-        level.setText("Level: " + (thisUser.getProgress().getLevel()));
-        score.setText("Total\nCarbon\nSaved: " + thisUser.getTotalCarbonSaved());
-        profilePicture.setImage(new Image("avatars/" + thisUser.getAvatar() + ".jpg"));
+        level.setText("" + thisUser.getProgress().getLevel());
+        score.setText("" + thisUser.getTotalCarbonSaved());
+        rank.setText("" + Requests.instance.getUserRanking(loginDetails));
+        profilePicture.setFill(new ImagePattern(
+                new Image("avatars/" + thisUser.getAvatar() + ".jpg")));
 
         editProfile.setOnAction(e -> {
 
@@ -184,17 +230,18 @@ public class ProfilePageController implements Initializable {
             Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
                     thisUser.getProgress().getAchievements().get(i)));
             name.setFill(Color.GREEN);
-            Text bonus = new Text(",Got: " + ProfilePageLogic.getBonusString(
+            Text bonus = new Text("Received: " + ProfilePageLogic.getBonusString(
                     thisUser.getProgress().getAchievements().get(i)) + " Points");
-            Text date = new Text(", Completed On: " + ProfilePageLogic.getDateString(
+            bonus.setFill(Color.GREEN);
+            Text date = new Text("Completed On: " + ProfilePageLogic.getDateString(
                     thisUser.getProgress().getAchievements().get(i)) + ".");
             hbox.getChildren().addAll(achievementimage, name, bonus, date);
             com.getChildren().add(hbox);
         }
 
         if (count == 0) {
-            Label noachiements = new Label("No completed achievements yet");
-            com.getChildren().add(noachiements);
+            Label noAchievements = new Label("No completed achievements available for viewing.");
+            com.getChildren().add(noAchievements);
         }
 
         for (Achievement a : ProfilePageLogic.getList()) {
@@ -207,7 +254,7 @@ public class ProfilePageController implements Initializable {
                 achievementimage1.setFitWidth(32);
                 achievementimage1.setImage(path1);
                 Text name = new Text(a.getName());
-                Text points = new Text(",Complete to Get: " + a.getBonus() + " points.");
+                Text points = new Text("Complete to receive: " + a.getBonus() + " points.");
                 hbox.getChildren().addAll(achievementimage1, name, points);
                 incom.getChildren().add(hbox);
             }
