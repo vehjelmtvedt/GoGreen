@@ -434,4 +434,9 @@ public class DbServiceTest {
         dbService.deleteUser(testUserNonExistent.getEmail());
         assertEquals(dbService.getUser(testUserNonExistent.getEmail()),null);
     }
+
+    @Test
+    public void getUserRankNull() {
+        assertEquals(dbService.getUserRank("asdfg"),-1);
+    }
 }
