@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -17,11 +25,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.FriendspageController">
+<AnchorPane fx:id="main" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.FriendspageController">
     <children>
       <AnchorPane layoutY="198.0" prefHeight="266.0" prefWidth="963.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="198.0">
          <children>
-            <HBox fx:id="dataPane" prefHeight="267.0" prefWidth="963.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox fx:id="dataPane" layoutX="131.0" prefHeight="267.0" prefWidth="1539.0" spacing="80.0" AnchorPane.leftAnchor="131.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="0.0">
                <children>
                   <BarChart fx:id="todayChart">
                     <xAxis>
@@ -50,18 +58,24 @@
                </children></HBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="headerPane" layoutX="-7.0" prefHeight="137.0" prefWidth="966.0" style="-fx-background-color: #379B1E #379B1E;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="headerPane" layoutX="-7.0" prefHeight="137.0" prefWidth="966.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="goGreen" alignment="BASELINE_CENTER" layoutX="357.0" layoutY="32.0" text="GoGreen" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="357.0" AnchorPane.rightAnchor="344.0" AnchorPane.topAnchor="32.0">
+            <Label fx:id="lblGoGreen" alignment="BASELINE_CENTER" layoutX="357.0" layoutY="32.0" text="GoGreen" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="582.0" AnchorPane.rightAnchor="582.0" AnchorPane.topAnchor="32.0">
                <font>
                   <Font size="60.0" />
                </font>
             </Label>
-            <JFXHamburger fx:id="menu" layoutX="22.0" layoutY="22.0" />
+            <JFXHamburger fx:id="menu" layoutX="26.0" layoutY="59.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXHamburger>
             <Button fx:id="addFriendButton" layoutX="712.0" layoutY="26.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="210.0" style="-fx-background-color: #4286f4;" text="+ Add Friend" textFill="#363f9a" AnchorPane.bottomAnchor="78.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="26.0">
                <font>
                   <Font size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </AnchorPane>
