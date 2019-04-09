@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import data.Achievement;
+import data.LoginDetails;
 import data.User;
 import data.UserAchievement;
 
@@ -33,6 +34,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +44,8 @@ import java.util.ResourceBundle;
 public class ProfilePageController implements Initializable {
 
     private static User thisUser;
+
+    private  static LoginDetails loginDetails;
 
     @FXML
     Circle profilePicture;
@@ -86,6 +90,9 @@ public class ProfilePageController implements Initializable {
     private Label level;
 
     @FXML
+    private Label rank;
+
+    @FXML
     private JFXButton editProfile;
 
     @FXML
@@ -102,6 +109,10 @@ public class ProfilePageController implements Initializable {
 
     public static void setUser(User user) {
         thisUser = user;
+    }
+
+    public static void setLoginDetails(LoginDetails passedloginDetails) {
+        loginDetails = passedloginDetails;
     }
 
     /**
@@ -152,6 +163,7 @@ public class ProfilePageController implements Initializable {
                 (thisUser.getProgress().getPoints()) / (getLevelPoints())
         );
         System.out.println("Test---------------------" + thisUser.getProgress().pointsNeeded());
+        System.out.println("Test---------------------" + thisUser.getProgress().getPoints());
 
         userName.setText(thisUser.getUsername());
         firstName.setText(thisUser.getFirstName());
@@ -161,6 +173,7 @@ public class ProfilePageController implements Initializable {
         lastseen.setText(thisUser.getLastLoginDate().toString());
         level.setText("" + thisUser.getProgress().getLevel());
         score.setText("" + thisUser.getTotalCarbonSaved());
+        rank.setText("" + Requests.instance.getUserRanking(loginDetails));
         profilePicture.setFill(new ImagePattern(
                 new Image("avatars/" + thisUser.getAvatar() + ".jpg")));
 
@@ -217,9 +230,10 @@ public class ProfilePageController implements Initializable {
             Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
                     thisUser.getProgress().getAchievements().get(i)));
             name.setFill(Color.GREEN);
-            Text bonus = new Text(",Got: " + ProfilePageLogic.getBonusString(
+            Text bonus = new Text("Received: " + ProfilePageLogic.getBonusString(
                     thisUser.getProgress().getAchievements().get(i)) + " Points");
-            Text date = new Text(", Completed On: " + ProfilePageLogic.getDateString(
+            bonus.setFill(Color.GREEN);
+            Text date = new Text("Completed On: " + ProfilePageLogic.getDateString(
                     thisUser.getProgress().getAchievements().get(i)) + ".");
             hbox.getChildren().addAll(achievementimage, name, bonus, date);
             com.getChildren().add(hbox);
@@ -240,7 +254,7 @@ public class ProfilePageController implements Initializable {
                 achievementimage1.setFitWidth(32);
                 achievementimage1.setImage(path1);
                 Text name = new Text(a.getName());
-                Text points = new Text(",Complete to Get: " + a.getBonus() + " points.");
+                Text points = new Text("Complete to receive: " + a.getBonus() + " points.");
                 hbox.getChildren().addAll(achievementimage1, name, points);
                 incom.getChildren().add(hbox);
             }
