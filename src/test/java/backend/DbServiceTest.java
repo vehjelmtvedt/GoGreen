@@ -108,7 +108,9 @@ public class DbServiceTest {
 
     @Test
     public void testAuthenticationGrant() {
-        assertEquals(testUser.getUsername(),dbService.grantAccess(testUser.getEmail(), "pwd").getUsername());
+        User test = new User("a","a",1,"a@A.com","a","abc");
+        dbService.addUser(test);
+        assertEquals(test.getUsername(),dbService.grantAccess(test.getEmail(), "abc").getUsername());
     }
 
     @Test

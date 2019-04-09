@@ -100,12 +100,9 @@ public class DbService {
      */
     public User grantAccess(String identifier, String password) {
         User user = getUser(identifier);
-
         if (user == null || user.getLoginStreak() == maxLoginStreak) {
             return null;
         }
-
-
         if (passwordEncoder().matches(password, user.getPassword())) {
             // Update last login date to current (server) time
             user.setLastLoginDate(Calendar.getInstance().getTime());
