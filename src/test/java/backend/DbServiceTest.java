@@ -108,7 +108,9 @@ public class DbServiceTest {
 
     @Test
     public void testAuthenticationGrant() {
-        assertEquals(testUser.getUsername(),dbService.grantAccess(testUser.getEmail(), "pwd").getUsername());
+        User test = new User("a","a",1,"a@A.com","a","abc");
+        dbService.addUser(test);
+        assertEquals(test.getUsername(),dbService.grantAccess(test.getEmail(), "abc").getUsername());
     }
 
     @Test
@@ -332,6 +334,9 @@ public class DbServiceTest {
     public void testEditProfileWrongField() {
         assertEquals(null,dbService.editProfile(testUser,"asd",10));
     }
+
+    @Test
+    public void testEditProfilePassword() { assertEquals(24,dbService.editProfile(testUser,"password","abc").getAge());}
 
     @Test
     public void testGetTopFriendsEmpty() {
