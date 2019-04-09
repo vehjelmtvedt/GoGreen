@@ -27,6 +27,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -42,7 +44,7 @@ public class ProfilePageController implements Initializable {
     private static User thisUser;
 
     @FXML
-    ImageView profilePicture;
+    Circle profilePicture;
 
     @FXML
     JFXHamburger menu;
@@ -129,7 +131,8 @@ public class ProfilePageController implements Initializable {
         lastseen.setText(thisUser.getLastLoginDate().toString());
         level.setText("Level: " + (thisUser.getProgress().getLevel()));
         score.setText("Total\nCarbon\nSaved: " + thisUser.getTotalCarbonSaved());
-        profilePicture.setImage(new Image("avatars/" + thisUser.getAvatar() + ".jpg"));
+        profilePicture.setFill(new ImagePattern(
+                new Image("avatars/" + thisUser.getAvatar() + ".jpg")));
 
         editProfile.setOnAction(e -> {
 

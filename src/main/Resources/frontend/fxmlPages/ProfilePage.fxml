@@ -8,13 +8,13 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainPane" prefHeight="800.0" prefWidth="1555.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ProfilePageController">
@@ -48,7 +48,6 @@
                                  <children>
                                     <AnchorPane prefHeight="328.0" prefWidth="760.0" style="-fx-border-color: green; -fx-border-width: 3px;">
                                        <children>
-                                          <ImageView fx:id="profilePicture" fitHeight="207.0" fitWidth="187.0" layoutX="48.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="41.0" />
                                           <Label layoutX="258.0" layoutY="-1.0" prefHeight="29.0" prefWidth="214.0" text="Profile Information" AnchorPane.leftAnchor="258.0" AnchorPane.rightAnchor="288.0" AnchorPane.topAnchor="-1.0">
                                              <font>
                                                 <Font size="24.0" />
@@ -114,6 +113,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </JFXButton>
+                                          <Circle fx:id="profilePicture" fill="DODGERBLUE" layoutX="147.0" layoutY="150.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                                        </children>
                                        <HBox.margin>
                                           <Insets left="10.0" right="10.0" />
