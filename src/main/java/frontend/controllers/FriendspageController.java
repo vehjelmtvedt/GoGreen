@@ -10,6 +10,7 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import data.LoginDetails;
 import data.User;
+import frontend.gui.Main;
 import frontend.gui.NavPanel;
 import frontend.gui.NotificationPopup;
 import frontend.gui.StageSwitcher;
@@ -20,6 +21,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
@@ -52,6 +54,9 @@ public class FriendspageController implements Initializable {
     private static NotificationPopup popup;
 
     private static AnchorPane mainCopy;
+
+    @FXML
+    private Label lblGoGreen;
 
     @FXML
     private JFXTreeTableView friendsPane;
@@ -114,9 +119,11 @@ public class FriendspageController implements Initializable {
         todayPane.prefWidthProperty().bind(headingBox.widthProperty());
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
+
         try {
             NotificationPanelController.addNotificationPanel(headerPane, main);
             StageSwitcher.friendsDrawer = NavPanel.addNavPanel(main, headerPane, menu);
+            lblGoGreen.setFont(Main.getReenieBeanie(100));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -204,6 +211,7 @@ public class FriendspageController implements Initializable {
                         tmpLabel.setPrefWidth(hbox.getPrefWidth() / 2);
                         JFXButton addButton = new JFXButton("+");
                         addButton.setStyle("-fx-background-color: #5b8d5b;");
+                        addButton.setCursor(Cursor.HAND);
                         addButton.setPrefWidth(hbox.getPrefWidth() / 3);
                         tmpLabel.setStyle("-fx-text-fill: white;");
                         HBox.setMargin(addButton, new Insets(10, 10, 0, 90));

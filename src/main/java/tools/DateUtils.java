@@ -52,8 +52,14 @@ public class DateUtils {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+
+        if (dayOfWeek == 0) {
+            dayOfWeek = 7;
+        }
+
         // Get DayOfWeek as String
-        return DayOfWeek.of(calendar.get(Calendar.DAY_OF_WEEK)).toString();
+        return DayOfWeek.of(dayOfWeek).toString();
     }
 
     /**.

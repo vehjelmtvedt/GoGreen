@@ -194,7 +194,7 @@ public class RequestHandler {
         if (user == null) {
             return null;
         }
-        System.out.println(user.toString());
+
         if (user.getSecurityQuestionAnswer().equals(answer)
                 && user.getSecurityQuestionId() == questionid) {
             user.setPassword(newPass);
