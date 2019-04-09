@@ -245,6 +245,13 @@ public class DbServiceTest {
     }
 
     @Test
+    public void friendRequestEachOther() {
+        dbService.addFriendRequest(testUser.getUsername(),testUser2.getUsername());
+        dbService.addFriendRequest(testUser2.getUsername(),testUser.getUsername());
+        User testUserF = dbService.getUser(testUser.getEmail());
+        assertEquals(testUserF.getFriends().contains(testUser2.getUsername()),true);
+    }
+    @Test
     public void testRejectFriendRequest() {
         dbService.addUser(testUser2);
         dbService.addUser(testUser3);

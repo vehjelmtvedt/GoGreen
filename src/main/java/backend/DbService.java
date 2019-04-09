@@ -220,8 +220,12 @@ public class DbService {
      */
     public boolean addFriendRequest(String senderUsername, String receiverUsername) {
         User sender = getUserByUsername(senderUsername);
-        User receiver = getUserByUsername(receiverUsername);
 
+        if (sender != null && sender.getFriendRequests().contains(receiverUsername)) {
+            acceptFriendRequest(receiverUsername,senderUsername);
+        }
+
+        User receiver = getUserByUsername(receiverUsername);
         if (sender != null && receiver != null) {
             receiver.newFriendRequest(sender.getUsername());
             // Update only the User that received the friend request
