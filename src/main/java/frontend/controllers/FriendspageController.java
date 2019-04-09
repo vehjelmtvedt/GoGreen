@@ -115,11 +115,11 @@ public class FriendspageController implements Initializable {
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
         try {
+            NotificationPanelController.addNotificationPanel(headerPane, main);
             StageSwitcher.friendsDrawer = NavPanel.addNavPanel(main, headerPane, menu);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void popup(String heading, String body, String icon,

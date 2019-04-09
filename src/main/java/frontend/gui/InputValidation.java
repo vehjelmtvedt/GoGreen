@@ -6,13 +6,7 @@ import data.InstallSolarPanels;
 import data.LoginDetails;
 import data.User;
 
-import frontend.controllers.ActivitiesController;
-import frontend.controllers.EditProfilePopUpController;
-import frontend.controllers.FriendspageController;
-import frontend.controllers.HomepageController;
-import frontend.controllers.NotificationPanelController;
-import frontend.controllers.ProfilePageController;
-import frontend.controllers.QuestionnaireController;
+import frontend.controllers.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -79,6 +73,7 @@ public class InputValidation {
             NotificationPanelController.setLoginDetails(loginDetails);
             EditProfilePopUpController.setUser(loggedUser);
             EditProfilePopUpController.setLoginDetails(loginDetails);
+            FriendRequestController.setThisUsername(loggedUser.getUsername());
 
             //setup .fxml pages after successfully logging in
             try {
@@ -129,20 +124,19 @@ public class InputValidation {
      * @param passField     User's password field
      * @param passReField   User's re-password field
      * @param ageField      User's age field
-     * @param form          Form containing input fields
      */
-    public static void signUpValidate(JFXTextField[] nameFields,
+    public static boolean signUpValidate(JFXTextField[] nameFields,
                                       JFXTextField usernameField, JFXTextField emailField,
                                       JFXPasswordField passField, JFXPasswordField passReField,
                                       JFXTextField ageField,
                                       int secQuestionId,
-                                      JFXTextField secAnswer, AnchorPane form) throws IOException {
+                                      JFXTextField secAnswer) throws IOException {
 
-        if (!signUpValidateFields(nameFields, usernameField, secAnswer, form)) {
-            return;
+        if (!signUpValidateFields(nameFields, usernameField, secAnswer)) {
+            return false;
         }
-        if (!signUpValidatePass(emailField, passField, passReField, ageField, form)) {
-            return;
+        if (!signUpValidatePass(emailField, passField, passReField, ageField)) {
+            return false;
         }
 
         //send requests to the server to see if username and password already exist
@@ -154,20 +148,20 @@ public class InputValidation {
             Dialog.show("Username Error!",
                     "A user already exists with this username. Use another username",
                     "DISMISS", "error", false);
-            return;
+            return false;
         }
 
         if (Requests.instance.validateUserRequest(email)) {
             Dialog.show("Email Error!", "A user already exists with this email."
                             + "Use another email",
                     "DISMISS", "error", false);
-            return;
+            return false;
         }
 
         if (secQuestionId == -1) {
             Dialog.show("Security Question Error", "You did not specify your security question",
                     "DISMISS", "error", false);
-            return;
+            return false;
         }
 
         User user = new User(nameFields[0].getText(),
@@ -179,12 +173,12 @@ public class InputValidation {
 
         QuestionnaireController.setUser(user);
         StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
+        return true;
     }
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
                                                 JFXTextField usernameField,
-                                                JFXTextField secAnswer,
-                                                AnchorPane form) throws IOException {
+                                                JFXTextField secAnswer) throws IOException {
         if (nameFields[0].getText().isEmpty()) {
             Dialog.show("Form Error!", "Please enter your First Name",
                     "DISMISS", "error", false);
@@ -208,8 +202,7 @@ public class InputValidation {
     private static boolean signUpValidatePass(JFXTextField emailField,
                                               JFXPasswordField passField,
                                               JFXPasswordField passReField,
-                                              JFXTextField ageField,
-                                              AnchorPane form) throws IOException {
+                                              JFXTextField ageField) throws IOException {
         if (emailField.getText().isEmpty() || !validateEmail(emailField)) {
             Dialog.show("Form Error!", "Please enter a valid email", "DISMISS", "error", false);
             return false;
