@@ -107,6 +107,7 @@ public class SignupController implements Initializable {
                 usernameField.setText(null);
                 passwordField.setText(null);
                 confirmPasswordField.setText(null);
+                secAnswer.setText(null);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

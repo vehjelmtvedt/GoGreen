@@ -67,6 +67,7 @@ public class NotificationPopup {
         image.setFitWidth(40);
         AnchorPane content = new AnchorPane();
         content.getChildren().addAll(heading, body, image);
+        content.setStyle("-fx-background-color: #c6c6c6;");
 
         AnchorPane.setTopAnchor(heading, 10.0);
         AnchorPane.setLeftAnchor(heading, 10.0);
