@@ -6,13 +6,6 @@ import java.util.Date;
 
 public class DateUtils {
     /**.
-     * Constructs a DateUtils instance
-     */
-    public DateUtils() {
-
-    }
-
-    /**.
      * Returns the date of today
      * @return - Date corresponding to today's date
      */

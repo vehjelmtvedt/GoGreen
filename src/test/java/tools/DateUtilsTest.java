@@ -38,4 +38,26 @@ public class DateUtilsTest {
 
         Assert.assertEquals(calendar.getTime(), result);
     }
+
+    @Test
+    public void testGetDayName() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, 5);
+
+        String expected = "THURSDAY";
+        String result = DateUtils.getDayName(calendar.getTime());
+
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void testGetDayNameSunday() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, 1);
+
+        String expected = "SUNDAY";
+        String result = DateUtils.getDayName(calendar.getTime());
+
+        Assert.assertEquals(expected, result);
+    }
 }
