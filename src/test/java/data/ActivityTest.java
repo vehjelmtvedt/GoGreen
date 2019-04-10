@@ -164,6 +164,17 @@ public class ActivityTest {
         User userOne = new User("Vetle", "Hjelmtvedt", 19,
                 "vetle@hjelmtvedt.com","test", "password123");
 
+        EatVegetarianMeal activity = new EatVegetarianMeal();
+        activity.performActivity(userOne, Requests.instance);
+
+        Assert.assertEquals(1, userOne.getActivities().size());
+    }
+
+    @Test
+    public void testPerformActivityRequest() {
+        User userOne = new User("Vetle", "Hjelmtvedt", 19,
+                "vetle@hjelmtvedt.com","test", "password123");
+
         // Mock Requests class
         Requests mockRequests = Mockito.mock(Requests.class);
 
@@ -184,17 +195,5 @@ public class ActivityTest {
 
         // Check if userOne is updated accordingly
         Assert.assertEquals(activity, userOne.getActivities().get(0));
-    }
-
-    @Test
-    public void testPerformActivityNoConnection() {
-        User userOne = new User("Vetle", "Hjelmtvedt", 19,
-                "vetle@hjelmtvedt.com","test", "password123");
-
-        EatVegetarianMeal activity = new EatVegetarianMeal();
-
-        Assert.assertThrows(ResourceAccessException.class, () -> {
-            activity.performActivity(userOne, Requests.instance);
-        });
     }
 }

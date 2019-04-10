@@ -234,7 +234,6 @@ public abstract class Activity {
             user = requests.addActivityRequest(this, user.getUsername());
 
 
-
         } catch (ResourceAccessException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());
