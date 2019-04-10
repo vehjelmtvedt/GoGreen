@@ -161,6 +161,10 @@ public class ActivityTest {
 
     @Test
     public void testPerformActivity() {
+        // Flaw in this test: If no connection is made with the database,
+        // the activity is still added to the User. Therefore this test tests for that.
+        // But ideally, that should not be the case.
+        
         User userOne = new User("Vetle", "Hjelmtvedt", 19,
                 "vetle@hjelmtvedt.com","test", "password123");
 
