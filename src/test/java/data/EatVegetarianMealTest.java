@@ -3,8 +3,11 @@ package data;
 import data.BuyOrganicFood;
 import data.EatVegetarianMeal;
 import data.User;
+import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 import tools.CarbonCalculator;
+import tools.Requests;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -152,18 +155,30 @@ public class EatVegetarianMealTest {
         assertEquals(1, meal.timesPerformedInTheSameDay(userOne));
     }
 
-//    @Test
-//    public void testPerformActivity() {
-//        User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
-//        user.setTotalCarbonSaved(0);
-//        user.setMeatAndDairyConsumption("above average");
-//        meal.performActivity(user);
-//        assertTrue(user.getActivities().contains(meal));
-//        assertEquals((int) meal.aboveAverageToAverage(), (int) meal.getCarbonSaved());
-//        meal.performActivity(user);
-//        meal.performActivity(user);
-//        assertEquals(3, meal.timesPerformedInTheSameDay(user));
-//        assertEquals(1, (int)user.getTotalCarbonSaved());
-//        assertEquals(0, (int) meal.getCarbonSaved());
-//    }
+    @Test
+    public void testPerformActivity() {
+        // Mock Requests class
+        Requests mockRequests = Mockito.mock(Requests.class);
+
+        // Create expected new User that is returned by request
+        User newUser = new User(userOne.getFirstName(), userOne.getLastName(), userOne.getAge(),
+                userOne.getEmail(), userOne.getUsername(), userOne.getPassword());
+
+        // Create new activity and add it
+        EatVegetarianMeal activity = new EatVegetarianMeal();
+        newUser.addActivity(activity);
+
+        // Mock mockRequests object to return updated user upon adding activity
+        Mockito.when(mockRequests.addActivityRequest(activity, userOne.getUsername()))
+            .thenReturn(newUser);
+
+        // Set Requests.instance to mock instance
+        Requests.instance = mockRequests;
+
+        // Perform the activity by the User
+        activity.performActivity(userOne);
+
+        // Check if userOne is updated accordingly
+        Assert.assertEquals(activity, userOne.getActivities().get(0));
+    }
 }
