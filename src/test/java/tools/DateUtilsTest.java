@@ -12,7 +12,7 @@ public class DateUtilsTest {
     @Test
     public void testDateToday() {
         long today = Calendar.getInstance().getTime().getTime();
-        long today2 = DateUtils.dateToday().getTime();
+        long today2 = DateUtils.instance.dateToday().getTime();
 
         // Allow minor difference of 100ms
         Assert.assertEquals(today, today2, 100);
@@ -21,7 +21,7 @@ public class DateUtilsTest {
     @Test
     public void testDateBefore() {
         // Current date
-        Date today = DateUtils.dateToday();
+        Date today = DateUtils.instance.dateToday();
 
         // Set calendar 1 week back from today
         Calendar calendar = Calendar.getInstance();
@@ -34,7 +34,7 @@ public class DateUtilsTest {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
 
-        Date result = DateUtils.getDateBefore(today, DateUnit.WEEK);
+        Date result = DateUtils.instance.getDateBefore(today, DateUnit.WEEK);
 
         Assert.assertEquals(calendar.getTime(), result);
     }
@@ -45,7 +45,7 @@ public class DateUtilsTest {
         calendar.set(Calendar.DAY_OF_WEEK, 5);
 
         String expected = "THURSDAY";
-        String result = DateUtils.getDayName(calendar.getTime());
+        String result = DateUtils.instance.getDayName(calendar.getTime());
 
         Assert.assertEquals(expected, result);
     }
@@ -56,7 +56,7 @@ public class DateUtilsTest {
         calendar.set(Calendar.DAY_OF_WEEK, 1);
 
         String expected = "SUNDAY";
-        String result = DateUtils.getDayName(calendar.getTime());
+        String result = DateUtils.instance.getDayName(calendar.getTime());
 
         Assert.assertEquals(expected, result);
     }

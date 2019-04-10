@@ -127,7 +127,7 @@ public class ActivityTest {
 
     @Test
     public void testEqualsSame() {
-        Date date = DateUtils.dateToday();
+        Date date = DateUtils.instance.dateToday();
         EatVegetarianMeal activity = new EatVegetarianMeal();
         activity.setDate(date);
         EatVegetarianMeal activity2 = new EatVegetarianMeal();
@@ -139,7 +139,7 @@ public class ActivityTest {
     @Test
     public void testEqualsDifferentDate() {
         EatVegetarianMeal activity = new EatVegetarianMeal();
-        activity.setDate(DateUtils.getDateBefore(Calendar.getInstance().getTime(), DateUnit.MONTH));
+        activity.setDate(DateUtils.instance.getDateBefore(Calendar.getInstance().getTime(), DateUnit.MONTH));
         EatVegetarianMeal activity2 = new EatVegetarianMeal();
 
         Assert.assertNotEquals(activity, activity2);

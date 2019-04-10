@@ -5,11 +5,20 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtils {
+    public static DateUtils instance = new DateUtils();
+
+    /**.
+     * Constructs a DateUtils instance
+     */
+    protected DateUtils() {
+
+    }
+
     /**.
      * Returns the date of today
      * @return - Date corresponding to today's date
      */
-    public static Date dateToday() {
+    public Date dateToday() {
         return Calendar.getInstance().getTime();
     }
 
@@ -19,7 +28,7 @@ public class DateUtils {
      * @param dateUnit - the date unit to use (DAY, WEEK, MONTH, YEAR)
      * @return - the new date with the current date and the difference applied
      */
-    public static Date getDateBefore(Date date, DateUnit dateUnit) {
+    public Date getDateBefore(Date date, DateUnit dateUnit) {
         // Get the time difference
         int diff = dateUnit.getNumDays();
 
@@ -40,7 +49,7 @@ public class DateUtils {
      * @param date - Date
      * @return - Day Of Week of the Date as String
      */
-    public static String getDayName(Date date) {
+    public String getDayName(Date date) {
         // Set Calendar's date to the one specified
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -59,7 +68,7 @@ public class DateUtils {
      * Helper method to set date's hour, minute, second to 0
      * @param calendar - calendar instance to modify
      */
-    public static void setDateToMidnight(Calendar calendar) {
+    public void setDateToMidnight(Calendar calendar) {
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
@@ -70,7 +79,7 @@ public class DateUtils {
      * Helper method set date's hour, minute, second to the very near end of the day
      * @param calendar - calendar instance to modify
      */
-    public static void setDateToEnd(Calendar calendar) {
+    public void setDateToEnd(Calendar calendar) {
         calendar.set(Calendar.HOUR_OF_DAY, calendar.getMaximum(Calendar.HOUR_OF_DAY));
         calendar.set(Calendar.MINUTE, calendar.getMaximum(Calendar.MINUTE));
         calendar.set(Calendar.SECOND, calendar.getMaximum(Calendar.SECOND));
