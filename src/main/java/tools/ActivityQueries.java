@@ -118,8 +118,7 @@ public class ActivityQueries {
             // In the case where fromIndex matches toIndex, the Date is out of range
             // if the date is not equal to from or to AND if the date is both not after
             // from and not before to.
-            if ((!date.after(from) || !date.before(to))
-                    && !date.equals(from) && !date.equals(to)) {
+            if (!DateUtils.instance.checkDateInRange(date, from, to)) {
                 return new ArrayList<>();
             }
         }
