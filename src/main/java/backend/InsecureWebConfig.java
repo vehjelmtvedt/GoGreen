@@ -21,9 +21,4 @@ public class InsecureWebConfig extends WebSecurityConfigurerAdapter {
 
         System.out.println("Loaded Insecure Web Configuration");
     }
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 }
