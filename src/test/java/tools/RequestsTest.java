@@ -57,6 +57,10 @@ public class RequestsTest {
 
     @Test
     public void testInsecureConfig() {
+        String testUrl = "localhost";
+        System.setProperty("remote.url", testUrl);
+
+        Requests.instance = new Requests();
         Assert.assertEquals("http://localhost:8080", Requests.instance.url);
     }
 

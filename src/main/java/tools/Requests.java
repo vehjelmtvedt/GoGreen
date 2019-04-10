@@ -19,8 +19,8 @@ import java.util.List;
 public class Requests {
     public static Requests instance = new Requests();
 
-    private RestTemplate restTemplate;
     protected String url;
+    private RestTemplate restTemplate;
 
     protected Requests() {
         url = System.getProperty("remote.url");
