@@ -23,11 +23,6 @@ public class RequestHandler {
     @Resource(name = "DbService")
     private DbService dbService;
 
-    /*    @RequestMapping("/greeting")
-        public String respond() {
-            return "TestGreeting";
-        }*/
-
     /**
      * .
      * Login REST Method
