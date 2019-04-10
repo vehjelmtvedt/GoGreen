@@ -60,4 +60,60 @@ public class DateUtilsTest {
 
         Assert.assertEquals(expected, result);
     }
+
+    @Test
+    public void testDateInRange() {
+        Calendar calendar = Calendar.getInstance();
+        Date date = DateUtils.instance.dateToday();
+        calendar.setTime(date);
+
+        calendar.add(Calendar.DATE, -1);
+        Date from = calendar.getTime();
+
+        calendar.add(Calendar.DATE, 3);
+        Date to = calendar.getTime();
+
+        Assert.assertTrue(DateUtils.instance.checkDateInRange(date, from, to));
+    }
+
+    @Test
+    public void testDateNotInRange() {
+        Calendar calendar = Calendar.getInstance();
+        Date date = DateUtils.instance.dateToday();
+        calendar.setTime(date);
+
+        calendar.add(Calendar.DATE, 5);
+        Date from = calendar.getTime();
+
+        calendar.add(Calendar.DATE, 8);
+        Date to = calendar.getTime();
+
+        Assert.assertFalse(DateUtils.instance.checkDateInRange(date, from, to));
+    }
+
+    @Test
+    public void testDateEquals1() {
+        Calendar calendar = Calendar.getInstance();
+        Date date = DateUtils.instance.dateToday();
+        calendar.setTime(date);
+
+        Date from = calendar.getTime();
+        Date to = calendar.getTime();
+
+        Assert.assertTrue(DateUtils.instance.checkDateInRange(date, from, to));
+    }
+
+    @Test
+    public void testDateEquals2() {
+        Calendar calendar = Calendar.getInstance();
+        Date date = DateUtils.instance.dateToday();
+        calendar.setTime(date);
+
+        Date to = calendar.getTime();
+
+        calendar.add(Calendar.DATE, -1);
+        Date from = calendar.getTime();
+
+        Assert.assertTrue(DateUtils.instance.checkDateInRange(date, from, to));
+    }
 }
