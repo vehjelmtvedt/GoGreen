@@ -21,11 +21,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tools.DateUtils;
 
 import java.lang.reflect.Field;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -105,7 +105,7 @@ public class DbService {
         }
         if (passwordEncoder().matches(password, user.getPassword())) {
             // Update last login date to current (server) time
-            user.setLastLoginDate(Calendar.getInstance().getTime());
+            user.setLastLoginDate(DateUtils.instance.dateToday());
             user.resetLoginStreak();
             return user;
         }
@@ -199,9 +199,9 @@ public class DbService {
 
             //checks if an achievement is completed by adding a friend
             addAchievement(acceptingUser , AchievementsLogic.checkOther(acceptingUser),
-                     Calendar.getInstance().getTime());
+                     DateUtils.instance.dateToday());
             addAchievement(requestingUser , AchievementsLogic.checkOther(requestingUser),
-                    Calendar.getInstance().getTime());
+                    DateUtils.instance.dateToday());
 
             return true;
         } else {
@@ -291,7 +291,7 @@ public class DbService {
 
         //checks the users level
         addAchievement(returned , AchievementsLogic.checkLevel(returned),
-                Calendar.getInstance().getTime());
+                DateUtils.instance.dateToday());
 
         addUser(returned);
 
@@ -465,7 +465,7 @@ public class DbService {
 
         //checks the users level
         addAchievement(user , AchievementsLogic.checkLevel(user) ,
-                 Calendar.getInstance().getTime());
+                DateUtils.instance.dateToday());
 
     }
 

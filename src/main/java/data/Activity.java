@@ -3,10 +3,10 @@ package data;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.web.client.HttpClientErrorException;
+import tools.DateUtils;
 import tools.Requests;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +38,7 @@ public abstract class Activity {
     private String category;
 
     public Activity() {
-        this.date = Calendar.getInstance().getTime();
+        this.date = DateUtils.instance.dateToday();
         this.carbonSaved = 0;
     }
 
@@ -94,7 +94,7 @@ public abstract class Activity {
      */
     public ArrayList<Activity> getActivitiesOfTheSameTypePerformedInTheSameDay(User user) {
         ArrayList<Activity> result = new ArrayList<Activity>();
-        Date currentDate = Calendar.getInstance().getTime();
+        Date currentDate = DateUtils.instance.dateToday();
         String currentMonth = currentDate.toString().split(" ")[1];
         String currentDay = currentDate.toString().split(" ")[2];
         String currentYear = currentDate.toString().split(" ")[5];

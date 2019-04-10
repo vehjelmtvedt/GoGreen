@@ -1,9 +1,9 @@
 package data;
 
 import tools.CarbonCalculator;
+import tools.DateUtils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -56,7 +56,7 @@ public abstract class TransportationActivity extends Activity {
      * @return user's savings in kg
      */
     public double calculateCarbonSavedTodayByTransportationActivities(User user) {
-        Date currentDate = Calendar.getInstance().getTime();
+        Date currentDate = DateUtils.instance.dateToday();
         String currentMonth = currentDate.toString().split(" ")[1];
         String currentDay = currentDate.toString().split(" ")[2];
         String currentYear = currentDate.toString().split(" ")[5];
@@ -89,7 +89,7 @@ public abstract class TransportationActivity extends Activity {
      * @return kilometres (int)
      */
     public int calculateTotalKilometresTravelledToday(User user) {
-        Date currentDate = Calendar.getInstance().getTime();
+        Date currentDate = DateUtils.instance.dateToday();
         String currentMonth = currentDate.toString().split(" ")[1];
         String currentDay = currentDate.toString().split(" ")[2];
         String currentYear =
