@@ -223,14 +223,14 @@ public abstract class Activity {
      *
      * @param user user currently logged in
      */
-    public void performActivity(User user) {
+    public void performActivity(User user, Requests requests) {
         this.setCarbonSaved(this.calculateCarbonSaved(user));
         user.setTotalCarbonSaved(user.getTotalCarbonSaved() + this.calculateCarbonSaved(user));
         // update logged in user for the gui
         user.addActivity(this);
         // update user in the database
         try {
-            user = Requests.instance.addActivityRequest(this, user.getUsername());
+            user = requests.addActivityRequest(this, user.getUsername());
 
 
 

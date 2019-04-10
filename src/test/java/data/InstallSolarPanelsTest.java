@@ -2,6 +2,7 @@ package data;
 
 import org.junit.Test;
 import tools.CarbonCalculator;
+import tools.Requests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -39,7 +40,7 @@ public class InstallSolarPanelsTest {
     public void testPerformActivity() {
         panels.setKwhSavedPerYear(10000);
         user.setElectricityDailyConsumption(100000);
-        panels.performActivity(user);
+        panels.performActivity(user, Requests.instance);
         assertEquals((int) (CarbonCalculator.electricityEmissions(10000) / 365.0), (int) panels.getDailyCarbonSaved());
     }
 

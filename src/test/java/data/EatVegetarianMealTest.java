@@ -172,11 +172,8 @@ public class EatVegetarianMealTest {
         Mockito.when(mockRequests.addActivityRequest(activity, userOne.getUsername()))
             .thenReturn(newUser);
 
-        // Set Requests.instance to mock instance
-        Requests.instance = mockRequests;
-
         // Perform the activity by the User
-        activity.performActivity(userOne);
+        activity.performActivity(userOne, mockRequests);
 
         // Check if userOne is updated accordingly
         Assert.assertEquals(activity, userOne.getActivities().get(0));

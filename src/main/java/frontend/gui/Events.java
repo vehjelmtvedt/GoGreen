@@ -38,6 +38,7 @@ import javafx.scene.paint.Color;
 import tools.ActivityQueries;
 import tools.DateUnit;
 import tools.DateUtils;
+import tools.Requests;
 
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
@@ -138,17 +139,17 @@ public class Events {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
                 EatVegetarianMeal meal = new EatVegetarianMeal();
-                meal.performActivity(loggedUser);
+                meal.performActivity(loggedUser, Requests.instance);
             } else if (type == 2) {
                 BuyOrganicFood food = new BuyOrganicFood();
-                food.performActivity(loggedUser);
+                food.performActivity(loggedUser, Requests.instance);
             } else if (type == 3) {
                 BuyLocallyProducedFood food = new BuyLocallyProducedFood();
-                food.performActivity(loggedUser);
+                food.performActivity(loggedUser, Requests.instance);
             } else {
                 if (type == 4) {
                     BuyNonProcessedFood food = new BuyNonProcessedFood();
-                    food.performActivity(loggedUser);
+                    food.performActivity(loggedUser, Requests.instance);
                 }
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
@@ -200,15 +201,15 @@ public class Events {
             if (type == 1) {
                 UseBikeInsteadOfCar travel = new UseBikeInsteadOfCar();
                 travel.setKilometres(distance);
-                travel.performActivity(loggedUser);
+                travel.performActivity(loggedUser, Requests.instance);
             } else if (type == 2) {
                 UseBusInsteadOfCar travel = new UseBusInsteadOfCar();
                 travel.setKilometres(distance);
-                travel.performActivity(loggedUser);
+                travel.performActivity(loggedUser, Requests.instance);
             } else if (type == 3) {
                 UseTrainInsteadOfCar travel = new UseTrainInsteadOfCar();
                 travel.setKilometres(distance);
-                travel.performActivity(loggedUser);
+                travel.performActivity(loggedUser, Requests.instance);
             }
 
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
@@ -280,7 +281,7 @@ public class Events {
                     if (result.isPresent()) {
                         System.out.println("kwh: " + result.get());
                         panels.setKwhSavedPerYear(Integer.parseInt(result.get()));
-                        panels.performActivity(loggedUser);
+                        panels.performActivity(loggedUser, Requests.instance);
                         installedPanels.setVisible(true);
 
                         //show popup upon performing an activity
@@ -313,7 +314,7 @@ public class Events {
                         if (result.isPresent()) {
                             System.out.println("Degrees: " + result.get());
                             temp.setDegrees(Integer.parseInt(result.get()));
-                            temp.performActivity(loggedUser);
+                            temp.performActivity(loggedUser, Requests.instance);
                             loweredTemp.setVisible(true);
 
                             //show popup upon performing an activity
@@ -357,7 +358,7 @@ public class Events {
                                     + " you can try again tomorrow!");
                     alert.showAndWait();
                 } else {
-                    plastic.performActivity(loggedUser);
+                    plastic.performActivity(loggedUser, Requests.instance);
                     lblPlastic.setVisible(true);
 
                     //show popup upon performing an activity
@@ -380,7 +381,7 @@ public class Events {
                                         + " you can try again tomorrow!");
                         alert.showAndWait();
                     } else {
-                        paper.performActivity(loggedUser);
+                        paper.performActivity(loggedUser, Requests.instance);
                         lblPaper.setVisible(true);
 
                         //show popup upon performing an activity
