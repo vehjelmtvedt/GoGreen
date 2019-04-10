@@ -20,7 +20,7 @@ public class Requests {
     public static Requests instance = new Requests();
 
     private RestTemplate restTemplate;
-    private String url;
+    protected String url;
 
     protected Requests() {
         url = System.getProperty("remote.url");

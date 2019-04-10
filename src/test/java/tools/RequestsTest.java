@@ -8,6 +8,7 @@ import data.Achievement;
 import data.EatVegetarianMeal;
 import data.LoginDetails;
 import data.User;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,6 +55,24 @@ public class RequestsTest {
         dbService.addUser(testUser3);
     }
 
+    @Test
+    public void testInsecureConfig() {
+        Assert.assertEquals("http://localhost:8080", Requests.instance.url);
+    }
+
+    @Test
+    public void testSecureConfig() {
+        String testUrl = "test-url";
+        System.setProperty("remote.url", testUrl);
+
+        Requests.instance = new Requests();
+
+        Assert.assertEquals(testUrl, Requests.instance.url);
+
+        // Undo secure config
+        System.clearProperty("remote.url");
+        Requests.instance = new Requests();
+    }
 
 
     @Test
