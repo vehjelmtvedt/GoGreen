@@ -85,4 +85,18 @@ public class DateUtils {
         calendar.set(Calendar.SECOND, calendar.getMaximum(Calendar.SECOND));
         calendar.set(Calendar.MILLISECOND, calendar.getMaximum(Calendar.MILLISECOND));
     }
+
+    /**.
+     * Returns true if specified date is between (inclusive) the
+     * two specified dates.
+     * @param date - Date to check
+     * @param from - Starting date
+     * @param to - End date
+     * @return - True if date within range
+     */
+    public boolean checkDateInRange(Date date, Date from, Date to) {
+        return (date.after(from) && date.before(to))
+                || date.equals(from)
+                || date.equals(to);
+    }
 }
