@@ -154,28 +154,4 @@ public class EatVegetarianMealTest {
         userOne.addActivity(meal2);
         assertEquals(1, meal.timesPerformedInTheSameDay(userOne));
     }
-
-    @Test
-    public void testPerformActivity() {
-        // Mock Requests class
-        Requests mockRequests = Mockito.mock(Requests.class);
-
-        // Create expected new User that is returned by request
-        User newUser = new User(userOne.getFirstName(), userOne.getLastName(), userOne.getAge(),
-                userOne.getEmail(), userOne.getUsername(), userOne.getPassword());
-
-        // Create new activity and add it
-        EatVegetarianMeal activity = new EatVegetarianMeal();
-        newUser.addActivity(activity);
-
-        // Mock mockRequests object to return updated user upon adding activity
-        Mockito.when(mockRequests.addActivityRequest(activity, userOne.getUsername()))
-            .thenReturn(newUser);
-
-        // Perform the activity by the User
-        activity.performActivity(userOne, mockRequests);
-
-        // Check if userOne is updated accordingly
-        Assert.assertEquals(activity, userOne.getActivities().get(0));
-    }
 }
