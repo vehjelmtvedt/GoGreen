@@ -37,12 +37,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import tools.ActivityQueries;
 import tools.DateUnit;
+import tools.DateUtils;
 
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -257,7 +257,7 @@ public class Events {
                             + ChronoUnit.DAYS.between(loggedUser
                                     .getSimilarActivities(panels)
                                     .get(0).getDate().toInstant(),
-                            Calendar.getInstance().getTime().toInstant())
+                            DateUtils.instance.dateToday().toInstant())
                             * installed.getDailyCarbonSaved());
                     alert.showAndWait();
                 } else {
