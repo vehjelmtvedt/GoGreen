@@ -105,15 +105,11 @@ public class ActivityQueries {
 
         // Now that we have the index of the last valid activity, we now loop
         // until we find an activity that is not in the range of the dates
-        for (; fromIndex > 0; --fromIndex) {
-            Activity activity = activities.get(fromIndex - 1);
-
-            // Activity is not in our range, we may break, since all the other
-            // preceding activities are also before the "from" date
-            if (activity.getDate().before(from)) {
-                break;
-            }
+        while (fromIndex > 0
+                && !activities.get(fromIndex - 1).getDate().before(from)) {
+            fromIndex--;
         }
+
 
         // Edge case where fromIndex matches toIndex
         if (fromIndex == toIndex) {
