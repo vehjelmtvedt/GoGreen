@@ -3,6 +3,7 @@ package data;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import tools.DateUtils;
 import tools.Requests;
 
@@ -234,7 +235,7 @@ public abstract class Activity {
 
 
 
-        } catch (HttpClientErrorException e) {
+        } catch (ResourceAccessException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());
         }
