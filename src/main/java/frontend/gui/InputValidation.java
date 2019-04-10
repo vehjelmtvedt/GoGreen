@@ -19,11 +19,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import tools.DateUtils;
 import tools.Requests;
 
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,7 +56,7 @@ public class InputValidation {
                         .getSimilarActivities(new InstallSolarPanels()).get(0);
                 double extraCo2Saved = ChronoUnit.DAYS.between(
                         loggedUser.getLastLoginDate().toInstant(),
-                        Calendar.getInstance().getTime().toInstant())
+                        DateUtils.instance.dateToday().toInstant())
                         * panels.getDailyCarbonSaved();
                 double newValue = loggedUser.getTotalCarbonSaved() + extraCo2Saved;
                 Requests.instance.editProfile(loginDetails,
