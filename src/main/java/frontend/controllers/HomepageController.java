@@ -122,16 +122,22 @@ public class HomepageController implements Initializable {
         loginDetails = logDetails;
 
         //update the field values on the homepage dashboard
+        circleProfile.setFill(new ImagePattern(
+                new Image("avatars/" + loggedUser.getAvatar() + ".jpg")));
+        lblName.setText(loggedUser.getFirstName().toUpperCase() + " "
+                + loggedUser.getLastName().toUpperCase());
+        lblEmail.setText(loggedUser.getEmail());
         lblLevel.setText(Integer.toString(loggedUser.getProgress().getLevel()));
+        lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
+        lblProgress.setText(loggedUser.getProgress().pointsNeeded()
+                + " Points left");
         lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
+        lblFriends.setText(Integer.toString(loggedUser.getFriends().size()));
         lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
                 + " kg of CO2 so far");
         lblAverageCarbon.setText("Average person saved "
                 + ((int)(Requests.instance.getAverageCO2Saved() * 1000)) / 1000.0
                 + " kg of CO2 so far");
-        lblProgress.setText(loggedUser.getProgress().pointsNeeded()
-                + " Points left");
-        lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
 
         //update user information for the homepage charts
         fillPieChart(loggedUser, chartMyActivities);
@@ -159,15 +165,6 @@ public class HomepageController implements Initializable {
         leaderboards.add(btnTop50);
         leaderboards.add(btnTop100);
 
-        Events.addLeaderboards(leaderboards);
-
-        //Populate leaderboards with entries
-        fillLeaderboards(5, tableTop5);
-        fillLeaderboards(10, tableTop10);
-        fillLeaderboards(25, tableTop25);
-        fillLeaderboards(50, tableTop50);
-        fillLeaderboards(100, tableTop100);
-
         //update leaderboards upon clicking refresh button
         btnRefresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> updateLeaderboards());
 
@@ -188,33 +185,16 @@ public class HomepageController implements Initializable {
             hideLeaderboards(tableTop100, tableTop5, tableTop10, tableTop25, tableTop50);
         });
 
-        //profile information + greeting messages upon logging in
-        circleProfile.setFill(new ImagePattern(
-                new Image("avatars/" + loggedUser.getAvatar() + ".jpg")));
-        lblName.setText(loggedUser.getFirstName().toUpperCase() + " "
-                + loggedUser.getLastName().toUpperCase());
-        lblEmail.setText(loggedUser.getEmail());
-        lblLevel.setText(Integer.toString(loggedUser.getProgress().getLevel()));
-        lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
-        lblProgress.setText(loggedUser.getProgress().pointsNeeded()
-                + " Points left");
-        lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
-        lblFriends.setText(Integer.toString(loggedUser.getFriends().size()));
-        lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
-                + " kg of CO2 so far");
-        lblAverageCarbon.setText("Average person saved "
-                + ((int)(Requests.instance.getAverageCO2Saved() * 1000)) / 1000.0
-                + " kg of CO2 so far");
-        btnProfile.setOnAction(event -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(),
-                Main.getProfilePage()));
+        //update profile information and leaderboards
+        updateUser(loggedUser, loginDetails);
+        updateLeaderboards();
 
-        //charts on the right
-        fillPieChart(loggedUser, chartMyActivities);
-        fillBarChart("Your CO2 Savings", barChart);
-        fillWeekChart(loggedUser, weekChart);
-
+        Events.addLeaderboards(leaderboards);
         Events.addJfxButtonHover(btnProfile);
         Events.addJfxButtonHover(btnRefresh);
+        
+        btnProfile.setOnAction(event -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(),
+                Main.getProfilePage()));
 
         try {
             goGreen.setFont(Main.getReenieBeanie(100));
