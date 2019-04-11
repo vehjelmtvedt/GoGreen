@@ -43,7 +43,9 @@ GNU 3.0
 
 ## Project Formalities
 
-### Reports & Meetings
+### Requirements
+
+#### Reports & Meetings
 * Meeting Agendas & Notes - doc/meetings/
 * Checkstyle Reports - doc/reports/checkstyle
 * Scrum Screenshots (Sprint Plans) - doc/reports/scrumBoard
@@ -51,7 +53,7 @@ GNU 3.0
 * Test Coverage Reports - doc/reports/weeklyCoverage
 * Final report - doc/reports/final-report
 
-### Mockito Classes
+#### Mockito Classes
 The following test classes (under src/test/java/) contained Mockito based testing (depending on the class, some contained less, some contained omre):
 * UserRequestHandlerTest.java (backend)
 * AppRequestHandlerTest.java (backend)
@@ -61,7 +63,7 @@ The following test classes (under src/test/java/) contained Mockito based testin
 * InstallSolarPanelsTest.java (data)
 * ActivityTest.java (data)
 
-### Large PR Example
+#### Large PR Example
 [Our Largest PR  (Completed Achievements)](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/merge_requests/80)
 
 ### Personal Development Plans
