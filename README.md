@@ -3,7 +3,31 @@
 
 # GoGreen - CSE1105 Group 38 Project
 
-## Person Development Plans
+## General
+### About
+This repository is a complete Java Desktop Application project consisting of 2 parts - the Server & the Client.
+The project is a web application that functions much like a social network for tracking the amount of carbon saved per user.
+
+Overview Images:
+"images to be added here"
+
+
+### How To Run
+1. Clone the repository using the HTTPS link (https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template.git).
+To do this in the Bash terminal, run the "git clone" command.
+2. Import the project in your favourite Java IDE (such as IntelliJ or Eclipse). The project runs using Maven, therefore
+it must be imported as a Maven project.
+3. Once imported and the project is opened in the IDE, make sure to build the project. (Preferred JDK 8, although it should
+function properly on higher versions)
+4. To start the application without packaging it, run the Server first, which is located under src/main/java/backend/Server.java
+5. After running the Server, as many instances of the Client may be opened as needed. The clietn is located in src/main/java/frontend/gui/Main.java
+
+## Project Formalities
+### Mockito Classes
+The following classes contained Mockito based testing (depending on the class, some contained less, some contained omre):
+1. 
+
+### Person Development Plans
 
 **Vetle Grim Hjelmtvedt**
 
