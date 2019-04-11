@@ -10,6 +10,7 @@ import data.BuyNonProcessedFood;
 import data.BuyOrganicFood;
 import data.EatVegetarianMeal;
 import data.InstallSolarPanels;
+import data.LoginDetails;
 import data.LowerHomeTemperature;
 import data.RecyclePaper;
 import data.RecyclePlastic;
@@ -38,6 +39,7 @@ import javafx.scene.paint.Color;
 import tools.ActivityQueries;
 import tools.DateUnit;
 import tools.DateUtils;
+import tools.Requests;
 
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
@@ -609,5 +611,25 @@ public class Events {
             });
         }
     }
+
+    /**.
+     * Reset the avatar list to normal when selecting a profile picture
+     * @param avatarList - list containing all profile pictures
+     * @param thisLoginDetails - the user that updates his profile picture
+     */
+    public static void unCheckImages(List<ImageView> avatarList, LoginDetails thisLoginDetails) {
+        for (ImageView avatar : avatarList) {
+            avatar.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                avatar.setImage(new Image("avatars/13.jpg"));
+                Requests.instance.editProfile(thisLoginDetails, "avatar", avatar.getId());
+                for (ImageView other : avatarList) {
+                    if (other != avatar) {
+                        other.setImage(new Image("avatars/" + other.getId() + ".jpg"));
+                    }
+                }
+            });
+        }
+    }
+
 }
 
