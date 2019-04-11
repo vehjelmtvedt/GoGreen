@@ -78,5 +78,5 @@ heroku-deploy:
   script:
     - echo "Deploy to Heroku"
     - mvn heroku:deploy
-#  only:
-#    - master
+  only:
+    - master
