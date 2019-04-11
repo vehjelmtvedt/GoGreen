@@ -166,6 +166,7 @@ public class Events {
                         "sucess", 0);
                 homepageController.updateUser(loggedUser, loginDetails);
                 profilePageController.updateAchievements(loggedUser);
+                profilePageController.updateUser(loggedUser);
             } catch (IOException exp) {
                 System.out.println("Something went wrong.");
             }
@@ -225,6 +226,7 @@ public class Events {
             activityTable.setItems(activities);
             homepageController.updateUser(loggedUser, loginDetails);
             profilePageController.updateAchievements(loggedUser);
+            profilePageController.updateUser(loggedUser);
             try {
                 ActivitiesController.popup("Popup", "Activity performed successfully!",
                         "sucess", 0);
@@ -345,6 +347,7 @@ public class Events {
             activityTable.setItems(activities);
             homepageController.updateUser(loggedUser, loginDetails);
             profilePageController.updateAchievements(loggedUser);
+            profilePageController.updateUser(loggedUser);
         });
     }
 
@@ -411,6 +414,7 @@ public class Events {
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
             homepageController.updateUser(loggedUser, loginDetails);
+            profilePageController.updateUser(loggedUser);
             profilePageController.updateAchievements(loggedUser);
         });
     }
