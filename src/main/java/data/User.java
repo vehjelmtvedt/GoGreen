@@ -1,9 +1,9 @@
 package data;
 
 import org.springframework.data.annotation.Id;
+import tools.DateUtils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -72,7 +72,7 @@ public class User {
         this.organicFoodConsumption = "default";
         this.processedFoodConsumption = "default";
         this.totalCarbonSaved = 0;
-        this.lastLoginDate = Calendar.getInstance().getTime();
+        this.lastLoginDate = DateUtils.instance.dateToday();
         this.activities = new ArrayList<>();
         this.avatar = "0";
     }
@@ -358,7 +358,6 @@ public class User {
 
         return result;
     }
-    
 
     /*
      * Removes a friend from the friends list
@@ -370,6 +369,5 @@ public class User {
     //    public boolean removeFriend(String email) {
     //        return friends.remove(email);
     //    }
-
 
 }

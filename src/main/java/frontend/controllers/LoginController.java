@@ -80,6 +80,7 @@ public class LoginController implements Initializable {
         });
 
         Events.addHoverOnFilter(forgotPass);
+
         forgotPass.setOnMouseClicked(e -> {
             try {
                 setForgotPassStage();

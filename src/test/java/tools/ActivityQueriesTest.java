@@ -181,7 +181,7 @@ public class ActivityQueriesTest {
 
     @Test
     public void testFilterByDateOneFrom() {
-        Date fromDate = DateUtils.getDateBefore(Calendar.getInstance().getTime(), DateUnit.WEEK);
+        Date fromDate = DateUtils.instance.getDateBefore(Calendar.getInstance().getTime(), DateUnit.WEEK);
         addActivitiesToUser(activeUser, 0, 5, 1);
         Assert.assertEquals(1, activityQuery.filterActivitiesByDate(fromDate, today).size());
     }
@@ -339,7 +339,7 @@ public class ActivityQueriesTest {
 
         Calendar calendar = Calendar.getInstance();
         for (int i = 0; i < 7; ++i) {
-            expected.add(DateUtils.getDayName(calendar.getTime()));
+            expected.add(DateUtils.instance.getDayName(calendar.getTime()));
             calendar.add(Calendar.DATE, -1);
         }
 
@@ -347,7 +347,7 @@ public class ActivityQueriesTest {
         Collections.reverse(expected);
 
         // Get actual result
-        ObservableList<BarChart.Data> list = activityQuery.getWeeklyCO2Savings();
+        ObservableList<XYChart.Data> list = activityQuery.getWeeklyCO2Savings();
 
         List<Object> days = list.stream().map(XYChart.Data::getXValue)
                 .collect(Collectors.toList());
@@ -386,7 +386,7 @@ public class ActivityQueriesTest {
         activityQuery.setActivities(activities);
 
         // Get result
-        ObservableList<BarChart.Data> list = activityQuery.getWeeklyCO2Savings();
+        ObservableList<XYChart.Data> list = activityQuery.getWeeklyCO2Savings();
 
         List<Object> savings = list.stream().map(XYChart.Data::getYValue)
                 .collect(Collectors.toList());

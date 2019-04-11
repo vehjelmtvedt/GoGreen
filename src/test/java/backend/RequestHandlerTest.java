@@ -234,18 +234,29 @@ public class RequestHandlerTest
     }
 
     @Test
-    public void forgotPassNull() {
-        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(null);
-        assertEquals(null,requestHandler.forgotPass(testUser.getEmail(),"A",1,"A"));
-    }
-
-    @Test
     public void forgotPassWrongAnswer() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
         testUser.setSecurityQuestionAnswer("A");
         testUser.setSecurityQuestionId(1);
+        dbService.addUser(testUser);
         Boolean bool = false;
-        assertEquals(requestHandler.forgotPass(testUser.getEmail(),"B",1,"ASD"),bool);
+        assertEquals(requestHandler.forgotPass(testUser.getEmail(), "B", 1, "ASD"), bool);
+    }
+
+    @Test
+    public void forgotPassWrongId() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        testUser.setSecurityQuestionAnswer("A");
+        testUser.setSecurityQuestionId(2);
+        dbService.addUser(testUser);
+        Boolean bool = false;
+        assertEquals(requestHandler.forgotPass(testUser.getEmail(), "A", 1, "ASD"), bool);
+    }
+
+    @Test
+    public void forgotPassNull() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(null);
+        assertEquals(null,requestHandler.forgotPass(testUser.getEmail(),"A",1,"A"));
     }
 
     @Test
@@ -280,4 +291,12 @@ public class RequestHandlerTest
         assertEquals(requestHandler.getRank(new LoginDetails(testUser.getEmail(),testUser.getPassword())),null);
     }
 
+    @Test
+    public void testSecurityQuestionFalse() {
+        Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(testUser);
+        testUser.setSecurityQuestionId(1);
+        testUser.setSecurityQuestionAnswer("F");
+        Boolean b = false;
+        assertEquals(requestHandler.forgotPass(testUser.getEmail(),"A",2,"ABC"),b);
+    }
 }

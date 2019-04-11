@@ -21,11 +21,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tools.DateUtils;
 
 import java.lang.reflect.Field;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -100,20 +100,18 @@ public class DbService {
      */
     public User grantAccess(String identifier, String password) {
         User user = getUser(identifier);
-
         if (user == null || user.getLoginStreak() == maxLoginStreak) {
             return null;
         }
-
-
         if (passwordEncoder().matches(password, user.getPassword())) {
             // Update last login date to current (server) time
-            user.setLastLoginDate(Calendar.getInstance().getTime());
+            user.setLastLoginDate(DateUtils.instance.dateToday());
             user.resetLoginStreak();
             return user;
         }
 
         user.incLoginStreak();
+        users.save(user);
         return null;
     }
 
@@ -201,9 +199,9 @@ public class DbService {
 
             //checks if an achievement is completed by adding a friend
             addAchievement(acceptingUser , AchievementsLogic.checkOther(acceptingUser),
-                     Calendar.getInstance().getTime());
+                     DateUtils.instance.dateToday());
             addAchievement(requestingUser , AchievementsLogic.checkOther(requestingUser),
-                    Calendar.getInstance().getTime());
+                    DateUtils.instance.dateToday());
 
             return true;
         } else {
@@ -220,8 +218,12 @@ public class DbService {
      */
     public boolean addFriendRequest(String senderUsername, String receiverUsername) {
         User sender = getUserByUsername(senderUsername);
-        User receiver = getUserByUsername(receiverUsername);
 
+        if (sender != null && sender.getFriendRequests().contains(receiverUsername)) {
+            acceptFriendRequest(receiverUsername,senderUsername);
+        }
+
+        User receiver = getUserByUsername(receiverUsername);
         if (sender != null && receiver != null) {
             receiver.newFriendRequest(sender.getUsername());
             // Update only the User that received the friend request
@@ -289,7 +291,7 @@ public class DbService {
 
         //checks the users level
         addAchievement(returned , AchievementsLogic.checkLevel(returned),
-                Calendar.getInstance().getTime());
+                DateUtils.instance.dateToday());
 
         addUser(returned);
 
@@ -398,6 +400,9 @@ public class DbService {
      */
     public User editProfile(User user, String fieldName, Object newValue) {
         try {
+            if (fieldName.equals("password")) {
+                newValue = encodePassword((String) newValue);
+            }
             Field field = user.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
             field.set(user, newValue);
@@ -405,7 +410,7 @@ public class DbService {
         } catch (IllegalAccessException | NoSuchFieldException e) {
             return null;
         }
-        addUser(user);
+        users.save(user);
         return user;
     }
 
@@ -460,7 +465,7 @@ public class DbService {
 
         //checks the users level
         addAchievement(user , AchievementsLogic.checkLevel(user) ,
-                 Calendar.getInstance().getTime());
+                DateUtils.instance.dateToday());
 
     }
 

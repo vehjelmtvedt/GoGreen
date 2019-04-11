@@ -1,6 +1,8 @@
 package backend;
 
 import data.Achievement;
+import data.BuyLocallyProducedFood;
+import data.EatVegetarianMeal;
 import data.User;
 import org.junit.Assert;
 import org.junit.Before;
@@ -108,7 +110,9 @@ public class DbServiceTest {
 
     @Test
     public void testAuthenticationGrant() {
-        assertEquals(testUser.getUsername(),dbService.grantAccess(testUser.getEmail(), "pwd").getUsername());
+        User test = new User("a","a",1,"a@A.com","a","abc");
+        dbService.addUser(test);
+        assertEquals(test.getUsername(),dbService.grantAccess(test.getEmail(), "abc").getUsername());
     }
 
     @Test
@@ -245,6 +249,13 @@ public class DbServiceTest {
     }
 
     @Test
+    public void friendRequestEachOther() {
+        dbService.addFriendRequest(testUser.getUsername(),testUser2.getUsername());
+        dbService.addFriendRequest(testUser2.getUsername(),testUser.getUsername());
+        User testUserF = dbService.getUser(testUser.getEmail());
+        assertEquals(testUserF.getFriends().contains(testUser2.getUsername()),true);
+    }
+    @Test
     public void testRejectFriendRequest() {
         dbService.addUser(testUser2);
         dbService.addUser(testUser3);
@@ -327,6 +338,9 @@ public class DbServiceTest {
     }
 
     @Test
+    public void testEditProfilePassword() { assertEquals(24,dbService.editProfile(testUser,"password","abc").getAge());}
+
+    @Test
     public void testGetTopFriendsEmpty() {
         List<User> friends = dbService.getTopFriends(testUser.getUsername(), 5);
 
@@ -406,5 +420,35 @@ public class DbServiceTest {
         int rank = dbService.getUserRank(top1User.getUsername());
 
         Assert.assertEquals(1, rank);
+    }
+
+    @Test
+    public void testLoginStreakNull() {
+        dbService.grantAccess(testUser.getEmail(),"ggg");
+        dbService.grantAccess(testUser.getEmail(),"ggg");
+        dbService.grantAccess(testUser.getEmail(),"ggg");
+        dbService.grantAccess(testUser.getEmail(),"ggg");
+        assertEquals(dbService.grantAccess(testUser.getEmail(),testUser.getPassword()),null);
+    }
+
+    @Test
+    public void testAddActivityNull() {
+        assertEquals(dbService.addActivityToUser(testUser.getUsername(),null),null);
+    }
+
+    @Test
+    public void testAddActivityUserNull() {
+        assertEquals(dbService.addActivityToUser(testUser.getEmail(),new BuyLocallyProducedFood()),null);
+    }
+
+    @Test
+    public void testDeleteUserNonExistent() {
+        dbService.deleteUser(testUserNonExistent.getEmail());
+        assertEquals(dbService.getUser(testUserNonExistent.getEmail()),null);
+    }
+
+    @Test
+    public void getUserRankNull() {
+        assertEquals(dbService.getUserRank("asdfg"),-1);
     }
 }
