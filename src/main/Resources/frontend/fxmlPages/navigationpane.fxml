@@ -31,7 +31,6 @@
                   <Image url="@../Pics/user.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="90.0" layoutY="99.0" text="See personal info" />
          </children>
       </Pane>
       <Pane prefHeight="150.0" prefWidth="200.0">
@@ -45,7 +44,6 @@
                   <Image url="@../Pics/home.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="77.0" layoutY="99.0" text="View your dashboard" />
          </children>
       </Pane>
       <Pane prefHeight="150.0" prefWidth="200.0">
@@ -59,7 +57,6 @@
                   <Image url="@../Pics/activityIcon.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="90.0" layoutY="99.0" text="Perform activities" />
          </children>
       </Pane>
       <Pane prefHeight="150.0" prefWidth="200.0">
@@ -73,7 +70,6 @@
                   <Image url="@../Pics/friendsIcon.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="109.0" layoutY="99.0" text="Add friends" />
          </children>
       </Pane>
    </children>

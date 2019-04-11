@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import tools.Requests;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditProfilePopUpController implements Initializable {
@@ -25,6 +27,8 @@ public class EditProfilePopUpController implements Initializable {
     private static User thisUser;
 
     private static LoginDetails thisLoginDetails;
+
+    private static List<ImageView> avatarList = new ArrayList<>();
 
     @FXML
     private HBox avatarZone;
@@ -128,11 +132,11 @@ public class EditProfilePopUpController implements Initializable {
             separator.setOrientation(Orientation.VERTICAL);
             avatarZone.getChildren().add(separator);
 
-            avatarimage.setOnMouseClicked(e -> {
-                avatarimage.setImage(new Image("avatars/13.jpg"));
-                Requests.instance.editProfile(thisLoginDetails, "avatar", avatarimage.getId());
-            });
+            avatarList.add(avatarimage);
+
             count ++;
         }
+
+        Events.unCheckImages(avatarList, thisLoginDetails);
     }
 }
