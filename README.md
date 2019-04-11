@@ -19,8 +19,27 @@ To do this in the Bash terminal, run the "git clone" command.
 it must be imported as a Maven project.
 3. Once imported and the project is opened in the IDE, make sure to build the project. (Preferred JDK 8, although it should
 function properly on higher versions)
-4. To start the application without packaging it, run the Server first, which is located under src/main/java/backend/Server.java
-5. After running the Server, as many instances of the Client may be opened as needed. The clietn is located in src/main/java/frontend/gui/Main.java
+4. After which, the codebase is ready to be used. It can either be packaged using Maven to produce the required .jars for the application,
+or ran from the IDE.
+
+### Starting the Application
+1. To start the application without packaging it, run the Server first, which is located under src/main/java/backend/Server.java
+2. After running the Server, as many instances of the Client may be opened as needed. The clietn is located in src/main/java/frontend/gui/Main.java
+3. Using this method, the connections will be insecure and run through localhost via port 8080.
+
+### Running Tests
+The tests are located in src/test. There are two ways to run the tests:
+* IDE - Some Java IDEs allow to run tests and show the coverage results automatically. To do this in IntelliJ, for example, navigate to the test directory,
+right click on the java package and click 'Run All Tests'.
+* Maven - A universal way to run the tests is to run a Maven command on the project. mvn test will run the tests to check for success, and mvn install will
+run the tests to check if the 90% minimum test coverage criteria is met as well.
+
+### Running Checkstyle
+* Maven - simply run the Maven command mvn checkstyle:check. Less than 5 warnings must exist for the build to succeed.
+* IDE - some Java IDEs have Checkstyle plugins. These can also be used to see the Checkstyle warnings & errors.
+
+### License
+GNU 3.0
 
 ## Project Formalities
 ### Mockito Classes
