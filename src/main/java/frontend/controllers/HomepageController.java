@@ -360,7 +360,7 @@ public class HomepageController implements Initializable {
      *
      * @param passedUser Logged in current user
      */
-    public static void setUser(User passedUser) {
+    public static void setUser(User  passedUser) {
         loggedUser = passedUser;
 
     }
