@@ -101,7 +101,7 @@ public class EditProfilePopUpController implements Initializable {
         });
 
         ageSave.setOnAction(e -> {
-            if ( (age.getText().matches("^[0-9]{0,3}$")) && (!(age.getText().isEmpty())) ) {
+            if ( (age.getText().matches("^[0-9]*$")) && (!(age.getText().isEmpty())) ) {
                 age.setUnFocusColor(javafx.scene.paint.Color.BLACK);
                 Requests.instance.editProfile(
                         thisLoginDetails, "age", Integer.parseInt(age.getText()));
