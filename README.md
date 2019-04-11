@@ -24,8 +24,14 @@ function properly on higher versions)
 
 ## Project Formalities
 ### Mockito Classes
-The following classes contained Mockito based testing (depending on the class, some contained less, some contained omre):
-1. 
+The following test classes (under src/test/java/) contained Mockito based testing (depending on the class, some contained less, some contained omre):
+1. UserRequestHandlerTest.java (backend)
+2. AppRequestHandlerTest.java (backend)
+3. DbLoaderTest.java (backend)
+4. RequestsTest.java (frontend)
+5. SyncUserTask.java (tools)
+6. InstallSolarPanelsTest.java (data)
+7. ActivityTest.java (data)
 
 ### Person Development Plans
 
