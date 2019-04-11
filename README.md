@@ -8,8 +8,12 @@
 This repository is a complete Java Desktop Application project consisting of 2 parts - the Server & the Client.
 The project is a web application that functions much like a social network for tracking the amount of carbon saved per user.
 
-Overview Images:
-"images to be added here"
+
+<img src="doc/app-preview/homepage-overview.png"  width="600">
+Homepage Overview
+
+<img src="doc/app-preview/server-overview.png"  width="600">
+Server Workflow Overview
 
 
 ### How To Run
