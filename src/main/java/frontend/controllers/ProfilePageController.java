@@ -146,6 +146,7 @@ public class ProfilePageController implements Initializable {
         //reset achievement containers before updating values
         completed.getChildren().clear();
         incompleted.getChildren().clear();
+        badgeZone.getChildren().clear();
 
         // for every completed achievement module  is created
         // and added to a VBox small pics might be added later
