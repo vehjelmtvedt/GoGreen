@@ -98,7 +98,12 @@
                                     <Label fx:id="lblAverageCarbon" text="Average person saved NaN kg of CO2" />
                                  </children>
                               </HBox>
-                              <Label fx:id="lblName" layoutY="14.0" text="YOUR NAME" textFill="GREEN">
+                              <Label fx:id="lblFirstName" layoutY="14.0" prefHeight="30.0" prefWidth="132.0" text="FIRST NAME" textFill="GREEN">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblLastName" layoutX="132.0" layoutY="14.0" prefHeight="30.0" prefWidth="158.0" text="LAST NAME" textFill="GREEN">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>

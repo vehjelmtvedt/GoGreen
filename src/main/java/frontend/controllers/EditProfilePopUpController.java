@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditProfilePopUpController implements Initializable {
+    public static HomepageController homepageController;
+    public static ProfilePageController profilePageController;
     private static User thisUser;
     private static LoginDetails thisLoginDetails;
     private static List<ImageView> avatarList = new ArrayList<>();
@@ -64,6 +66,14 @@ public class EditProfilePopUpController implements Initializable {
         button.setOnAction(e -> {
             if (!(textfield.getText().isEmpty())) {
                 textfield.setUnFocusColor(Color.BLACK);
+                if (editableVariable.equals("firstName")) {
+                    homepageController.updateFirstName(textfield.getText());
+                    profilePageController.updateFirstName(textfield.getText());
+                }
+                if (editableVariable.equals("lastName")) {
+                    homepageController.updateLastName(textfield.getText());
+                    profilePageController.updateLastName(textfield.getText());
+                }
                 Requests.instance.editProfile(
                         thisLoginDetails, editableVariable, textfield.getText());
             } else {
@@ -95,6 +105,7 @@ public class EditProfilePopUpController implements Initializable {
                 age.setUnFocusColor(javafx.scene.paint.Color.BLACK);
                 Requests.instance.editProfile(
                         thisLoginDetails, "age", Integer.parseInt(age.getText()));
+                profilePageController.updateAge(age.getText());
             } else {
                 age.setUnFocusColor(Color.RED);
             }

@@ -87,6 +87,30 @@ public class ProfilePageController implements Initializable {
     private HBox badgeZone;
 
     /**.
+     * Update the age field with the new value
+     * @param newAge - new value for age
+     */
+    public void updateAge(String newAge) {
+        age.setText(newAge);
+    }
+
+    /**.
+     * Update the first name field with the new value
+     * @param newFirstName - new value for first name
+     */
+    public void updateFirstName(String newFirstName) {
+        firstName.setText(newFirstName);
+    }
+
+    /**.
+     * Update the last name field with the new value
+     * @param newLastName - new value for last name
+     */
+    public void updateLastName(String newLastName) {
+        lastName.setText(newLastName);
+    }
+
+    /**.
      * Update the user's profile page information
      * @param user - user to update info to
      */
@@ -116,6 +140,7 @@ public class ProfilePageController implements Initializable {
         //add all required events & set controller in the events class
         Events.addJfxButtonHover(editProfile);
         Events.profilePageController = this;
+        EditProfilePopUpController.profilePageController = this;
 
         //fill in the user information on the profile page
         updateUser(thisUser);

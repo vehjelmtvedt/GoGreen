@@ -57,7 +57,9 @@ public class HomepageController implements Initializable {
     @FXML
     private AnchorPane headerPane;
     @FXML
-    private Label lblName;
+    private Label lblFirstName;
+    @FXML
+    private Label lblLastName;
     @FXML
     private Label goGreen;
     @FXML
@@ -112,6 +114,22 @@ public class HomepageController implements Initializable {
     private Circle circleProfile;
 
     /**.
+     * Update the first name for the label containing the full name of the user
+     * @param newFirstName - new first name value
+     */
+    public void updateFirstName(String newFirstName) {
+        lblFirstName.setText(newFirstName);
+    }
+
+    /**.
+     * Update the last name for the label containing the full name of the user
+     * @param newLastName - new last name value
+     */
+    public void updateLastName(String newLastName) {
+        lblLastName.setText(newLastName);
+    }
+
+    /**.
      * Update the user information on the homepage
      * @param user - current logged user
      * @param logDetails - current login details (assigned to user)
@@ -124,8 +142,8 @@ public class HomepageController implements Initializable {
         //update the field values on the homepage dashboard
         circleProfile.setFill(new ImagePattern(
                 new Image("avatars/" + loggedUser.getAvatar() + ".jpg")));
-        lblName.setText(loggedUser.getFirstName().toUpperCase() + " "
-                + loggedUser.getLastName().toUpperCase());
+        lblFirstName.setText(loggedUser.getFirstName().toUpperCase());
+        lblLastName.setText(loggedUser.getLastName().toUpperCase());
         lblEmail.setText(loggedUser.getEmail());
         lblLevel.setText(Integer.toString(loggedUser.getProgress().getLevel()));
         lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
@@ -156,6 +174,7 @@ public class HomepageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Events.homepageController = this;
+        EditProfilePopUpController.homepageController = this;
 
         popup = new NotificationPopup();
         //add buttons to leader boards list
