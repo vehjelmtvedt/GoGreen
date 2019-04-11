@@ -1,11 +1,9 @@
 ![coverage](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/develop/coverage.svg)
 ![pipeline](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/develop/pipeline.svg)
 
-# CSE1105 Group 38 Project
+# GoGreen - CSE1105 Group 38 Project
 
-Person Development Plan
-
------------------
+## Person Development Plans
 
 **Vetle Grim Hjelmtvedt**
 
@@ -60,6 +58,7 @@ teammates are serious about this project and that we are going to do a really go
 
 NetID: elatoskinas
 
+<img src="doc/photos/ourProfilePictures/EvaldasLatoskinas.jpg"  width="300">
 ![](doc/photos/ourProfilePictures/EvaldasLatoskinas.jpg)
 
 Strong Points:
