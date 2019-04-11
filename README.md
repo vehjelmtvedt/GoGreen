@@ -10,7 +10,7 @@
 NetID: vhjelmtvedt
 Student number: 4813928
 
-![](doc/photos/ourProfilePictures/vetlehjelmtvedt.jpg)
+<img src="doc/photos/ourProfilePictures/vetlehjelmtvedt.jpg"  width="400">
 
 My strong points that would be applicable to working in a team is flexibility and communication. In previous group projects I have been flexible in terms of what task I have to do in that group that may not have been what I wanted to do. Also, I communicated the issues that I had with that task, and other team members were able to help me. 
 
@@ -32,7 +32,7 @@ The first step to reaching my goal is am writing this, becoming aware of my goal
 
 NetID: amoraru
 
-![](doc/photos/ourProfilePictures/Alexandru.jpeg)
+<img src="doc/photos/ourProfilePictures/Alexandru.jpeg"  width="400">
 
 My strong points regarding this project, meaning what would be applicable in this case,
 are communication and planning. I think these are shown in a team-based project since I
@@ -58,8 +58,7 @@ teammates are serious about this project and that we are going to do a really go
 
 NetID: elatoskinas
 
-<img src="doc/photos/ourProfilePictures/EvaldasLatoskinas.jpg"  width="300">
-![](doc/photos/ourProfilePictures/EvaldasLatoskinas.jpg)
+<img src="doc/photos/ourProfilePictures/EvaldasLatoskinas.jpg"  width="400">
 
 Strong Points:
 
@@ -107,7 +106,7 @@ Project Expectations:
 
 NetID : othabet
 
-![](doc/photos/ourProfilePictures/they_see_me_sailen_they_haten.jpeg)
+<img src="doc/photos/ourProfilePictures/they_see_me_sailen_they_haten.jpeg"  width="400">
 
 What are two of your strong points?
 
@@ -152,7 +151,7 @@ My team mate are great people and Im sure they will help me along the way.
 
 NetID: JClemente
 
-![](doc/photos/ourProfilePictures/JeanLouis.jpeg)
+<img src="doc/photos/ourProfilePictures/JeanLouis.jpeg"  width="400">
 
 The strong points that I think I contribute to the team are my problem solving and organization skills.
 I previous group projects I was able to contribute by effectively delegating work amongst members as well as 
@@ -188,7 +187,7 @@ prior experience that they have in programming.
 NetID: shashankanand
 Student ID: 4790987
 
-![](doc/photos/ourProfilePictures/ShashankAnand.JPG)
+<img src="doc/photos/ourProfilePictures/ShashankAnand.JPG"  width="400">
 
 My strong points are being able to solve complex programming problems, also devising 
 algorithms to solve them. I am also good at recovering from any mistakes made midway 
@@ -215,7 +214,7 @@ great success by the end of this project.
 NetID: klyrakis
 Student number: 4799364
 
-![](doc/photos/ourProfilePictures/klyrakis.jpg)
+<img src="doc/photos/ourProfilePictures/klyrakis.jpg"  width="400">
 
 Strong Points:
 
