@@ -2,6 +2,7 @@ package data;
 
 import org.junit.Assert;
 import org.junit.Test;
+import tools.Requests;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -23,7 +24,7 @@ public class RecyclePlasticTest {
     @Test
     public void testPerformActivity() {
         try {
-            plastic.performActivity(user);
+            plastic.performActivity(user, Requests.instance);
         } catch (Exception e) {
         }
         Assert.assertEquals(1, user.getSimilarActivities(new RecyclePlastic()).size());
