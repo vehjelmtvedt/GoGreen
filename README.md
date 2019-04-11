@@ -42,15 +42,27 @@ run the tests to check if the 90% minimum test coverage criteria is met as well.
 GNU 3.0
 
 ## Project Formalities
+
+### Reports & Meetings
+* Meeting Agendas & Notes - doc/meetings/
+* Checkstyle Reports - doc/reports/checkstyle
+* Scrum Screenshots (Sprint Plans) - doc/reports/scrumBoard
+* Sprint Reviews - doc/reports/sprint-review
+* Test Coverage Reports - doc/reports/weeklyCoverage
+* Final report - doc/reports/final-report
+
 ### Mockito Classes
 The following test classes (under src/test/java/) contained Mockito based testing (depending on the class, some contained less, some contained omre):
-1. UserRequestHandlerTest.java (backend)
-2. AppRequestHandlerTest.java (backend)
-3. DbLoaderTest.java (backend)
-4. RequestsTest.java (frontend)
-5. SyncUserTask.java (tools)
-6. InstallSolarPanelsTest.java (data)
-7. ActivityTest.java (data)
+* UserRequestHandlerTest.java (backend)
+* AppRequestHandlerTest.java (backend)
+* DbLoaderTest.java (backend)
+* RequestsTest.java (frontend)
+* SyncUserTask.java (tools)
+* InstallSolarPanelsTest.java (data)
+* ActivityTest.java (data)
+
+### Large PR Example
+[Our Largest PR  (Completed Achievements)](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/merge_requests/80)
 
 ### Personal Development Plans
 
