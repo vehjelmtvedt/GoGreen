@@ -3,6 +3,7 @@ package data;
 import org.junit.Assert;
 import org.junit.Test;
 import tools.CarbonCalculator;
+import tools.Requests;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -24,7 +25,7 @@ public class RecyclePaperTest {
     @Test
     public void testPerformActivity() {
         try {
-            paper.performActivity(user);
+            paper.performActivity(user, Requests.instance);
         } catch (Exception e) {
         }
         Assert.assertEquals(1, user.getSimilarActivities(new RecyclePaper()).size());

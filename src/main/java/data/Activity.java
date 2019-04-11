@@ -3,6 +3,7 @@ package data;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import tools.DateUtils;
 import tools.Requests;
 
@@ -223,18 +224,17 @@ public abstract class Activity {
      *
      * @param user user currently logged in
      */
-    public void performActivity(User user) {
+    public void performActivity(User user, Requests requests) {
         this.setCarbonSaved(this.calculateCarbonSaved(user));
         user.setTotalCarbonSaved(user.getTotalCarbonSaved() + this.calculateCarbonSaved(user));
         // update logged in user for the gui
         user.addActivity(this);
         // update user in the database
         try {
-            user = Requests.instance.addActivityRequest(this, user.getUsername());
+            user = requests.addActivityRequest(this, user.getUsername());
 
 
-
-        } catch (HttpClientErrorException e) {
+        } catch (ResourceAccessException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());
         }

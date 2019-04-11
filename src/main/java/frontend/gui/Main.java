@@ -128,6 +128,4 @@ public class Main extends Application {
         return Font.loadFont(new ClassPathResource("/fonts/ReenieBeanie.ttf")
                 .getInputStream(), size);
     }
-
-
 }

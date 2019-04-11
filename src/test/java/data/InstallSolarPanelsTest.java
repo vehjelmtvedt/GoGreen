@@ -1,7 +1,10 @@
 package data;
 
+import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 import tools.CarbonCalculator;
+import tools.Requests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -39,8 +42,31 @@ public class InstallSolarPanelsTest {
     public void testPerformActivity() {
         panels.setKwhSavedPerYear(10000);
         user.setElectricityDailyConsumption(100000);
-        panels.performActivity(user);
+        panels.performActivity(user, Requests.instance);
         assertEquals((int) (CarbonCalculator.electricityEmissions(10000) / 365.0), (int) panels.getDailyCarbonSaved());
+    }
+
+    @Test
+    public void testPerformActivityRequest() {
+        // Mock Requests class
+        Requests mockRequests = Mockito.mock(Requests.class);
+
+
+        panels.setKwhSavedPerYear(10000);
+        user.setElectricityDailyConsumption(100000);
+
+        // Create expected new User that is returned by request
+        User newUser = new User(user.getFirstName(), user.getLastName(), user.getAge(),
+                user.getEmail(), user.getUsername(), user.getPassword());
+        newUser.addActivity(panels);
+
+        // Mock mockRequests object to return updated user upon adding activity
+        Mockito.when(mockRequests.addActivityRequest(panels, user.getUsername()))
+                .thenReturn(newUser);
+
+        panels.performActivity(user, mockRequests);
+
+        Assert.assertEquals(panels, user.getActivities().get(0));
     }
 
 }

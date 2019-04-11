@@ -18,38 +18,31 @@ import javafx.stage.Stage;
 import tools.Requests;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditProfilePopUpController implements Initializable {
-
     private static User thisUser;
-
     private static LoginDetails thisLoginDetails;
+    private static List<ImageView> avatarList = new ArrayList<>();
 
     @FXML
     private HBox avatarZone;
-
     @FXML
     private JFXTextField firstName;
-
     @FXML
     private JFXTextField lastName;
-
     @FXML
     private JFXTextField age;
-
     @FXML
     private JFXButton close;
-
     @FXML
     private JFXButton firstNameSave;
-
     @FXML
     private JFXButton lastNameSave;
-
     @FXML
     private JFXButton ageSave;
-
 
     public static void setUser(User user) {
         thisUser = user;
@@ -81,6 +74,7 @@ public class EditProfilePopUpController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         //add hover events for the buttons that edit the profile information;
         Events.addSaveButtonHover(firstNameSave);
         Events.addSaveButtonHover(lastNameSave);
@@ -97,7 +91,7 @@ public class EditProfilePopUpController implements Initializable {
         });
 
         ageSave.setOnAction(e -> {
-            if ( (age.getText().matches("^[0-9]{0,3}$")) && (!(age.getText().isEmpty())) ) {
+            if ( (age.getText().matches("^[0-9]*$")) && (!(age.getText().isEmpty())) ) {
                 age.setUnFocusColor(javafx.scene.paint.Color.BLACK);
                 Requests.instance.editProfile(
                         thisLoginDetails, "age", Integer.parseInt(age.getText()));
@@ -128,11 +122,11 @@ public class EditProfilePopUpController implements Initializable {
             separator.setOrientation(Orientation.VERTICAL);
             avatarZone.getChildren().add(separator);
 
-            avatarimage.setOnMouseClicked(e -> {
-                avatarimage.setImage(new Image("avatars/13.jpg"));
-                Requests.instance.editProfile(thisLoginDetails, "avatar", avatarimage.getId());
-            });
+            avatarList.add(avatarimage);
+
             count ++;
         }
+
+        Events.unCheckImages(avatarList, thisLoginDetails);
     }
 }
