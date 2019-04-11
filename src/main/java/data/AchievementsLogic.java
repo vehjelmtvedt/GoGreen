@@ -4,7 +4,7 @@ import tools.ActivityQueries;
 
 import java.util.ArrayList;
 
-public class AchievementsLogic {
+public abstract class AchievementsLogic {
 
 
     /**

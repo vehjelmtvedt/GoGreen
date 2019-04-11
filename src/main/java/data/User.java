@@ -358,6 +358,7 @@ public class User {
 
         return result;
     }
+    
 
     /*
      * Removes a friend from the friends list
