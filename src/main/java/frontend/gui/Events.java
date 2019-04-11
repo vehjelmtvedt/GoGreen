@@ -138,7 +138,7 @@ public class Events {
      * @param loggedUser    user to update
      * @param activityTable table to set history to
      */
-    public static void addFoodActivity(AnchorPane pane, int type,
+    public static void addFoodActivity(AnchorPane pane, int type, LoginDetails loginDetails,
                                        User loggedUser, TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
@@ -162,7 +162,7 @@ public class Events {
                 ActivitiesController.popup("Popup", "Activity performed successfully!",
                         "sucess", 0);
 
-                homepageController.updateUser(loggedUser);
+                homepageController.updateUser(loggedUser, loginDetails);
             } catch (IOException exp) {
                 System.out.println("Something went wrong.");
             }
@@ -181,7 +181,7 @@ public class Events {
      * @param activityTable activity history table
      */
     public static void addTransportActivity(AnchorPane pane, JFXTextField input, Label verify,
-                                            int type, User loggedUser,
+                                            int type, LoginDetails loginDetails, User loggedUser,
                                             TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             int distance = -1;
@@ -220,6 +220,7 @@ public class Events {
 
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
+            homepageController.updateUser(loggedUser, loginDetails);
             try {
                 ActivitiesController.popup("Popup", "Activity performed successfully!",
                         "sucess", 0);
@@ -249,7 +250,8 @@ public class Events {
      * @param activityTable - table to set history to
      */
     public static void addHouseholdActivity(AnchorPane pane, Label installedPanels,
-                                            Label loweredTemp, int type, User loggedUser,
+                                            Label loweredTemp, int type, LoginDetails loginDetails,
+                                            User loggedUser,
                                             TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
@@ -337,6 +339,7 @@ public class Events {
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
+            homepageController.updateUser(loggedUser, loginDetails);
         });
     }
 
@@ -350,7 +353,7 @@ public class Events {
      * @param activityTable - the history table
      */
     public static void addRecyclingActivity(AnchorPane pane, Label lblPlastic,
-                                            Label lblPaper, int type,
+                                            Label lblPaper, int type, LoginDetails loginDetails,
                                             User loggedUser, TableView<Activity> activityTable) {
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (type == 1) {
@@ -402,6 +405,7 @@ public class Events {
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
+            homepageController.updateUser(loggedUser, loginDetails);
         });
     }
 

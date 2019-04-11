@@ -72,6 +72,7 @@ public class InputValidation {
             HomepageController.setUser(loggedUser);
             HomepageController.setLoginDetails(loginDetails);
             ActivitiesController.setUser(loggedUser);
+            ActivitiesController.setLoginDetails(loginDetails);
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);
             ProfilePageController.setUser(loggedUser);

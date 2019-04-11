@@ -109,9 +109,32 @@ public class HomepageController implements Initializable {
     @FXML
     private Circle circleProfile;
 
-    public void updateUser(User user) {
+    /**.
+     * Update the user information on the homepage
+     * @param user - current logged user
+     * @param logDetails - current login details (assigned to user>)
+     */
+    public void updateUser(User user, LoginDetails logDetails) {
+        //update the user and his login details
         loggedUser = user;
+        loginDetails = logDetails;
+
+        //update the field values on the homepage dashboard
+        lblLevel.setText(Integer.toString(loggedUser.getProgress().getLevel()));
         lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
+        lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
+                + " kg of CO2 so far");
+        lblAverageCarbon.setText("Average person saved "
+                + ((int)(Requests.instance.getAverageCO2Saved() * 1000)) / 1000.0
+                + " kg of CO2 so far");
+        lblProgress.setText(loggedUser.getProgress().pointsNeeded()
+                + " Points left");
+        lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
+
+        //update user information for the homepage charts
+        fillPieChart(loggedUser, chartMyActivities);
+        fillBarChart("Your CO2 Savings", barChart);
+        fillWeekChart(loggedUser, weekChart);
     }
 
     @Override
@@ -160,7 +183,7 @@ public class HomepageController implements Initializable {
         lblEmail.setText(loggedUser.getEmail());
         lblLevel.setText(Integer.toString(loggedUser.getProgress().getLevel()));
         lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
-        lblProgress.setText(Double.toString(loggedUser.getProgress().pointsNeeded())
+        lblProgress.setText(loggedUser.getProgress().pointsNeeded()
                 + " Points left");
         lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
         lblFriends.setText(Integer.toString(loggedUser.getFriends().size()));
