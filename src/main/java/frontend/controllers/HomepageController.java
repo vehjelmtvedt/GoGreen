@@ -192,7 +192,7 @@ public class HomepageController implements Initializable {
         Events.addLeaderboards(leaderboards);
         Events.addJfxButtonHover(btnProfile);
         Events.addJfxButtonHover(btnRefresh);
-        
+
         btnProfile.setOnAction(event -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(),
                 Main.getProfilePage()));
 
@@ -217,6 +217,7 @@ public class HomepageController implements Initializable {
     private static void fillPieChart(User user, PieChart chart) {
         ActivityQueries queries = new ActivityQueries(user.getActivities());
 
+        chart.getData().clear();
         chart.setData(FXCollections.observableArrayList(
                 new PieChart.Data("FOOD",
                         queries.filterActivities("Food").size()),
@@ -356,6 +357,7 @@ public class HomepageController implements Initializable {
         XYChart.Series series = new XYChart.Series();
         series.setName(title);
         populateBarChart(series);
+        chart.getData().clear();
         chart.getData().addAll(series);
         chart.setLegendVisible(false);
     }
@@ -364,6 +366,7 @@ public class HomepageController implements Initializable {
         ActivityQueries queries = new ActivityQueries(user.getActivities());
         XYChart.Series series = new XYChart.Series();
         series.getData().addAll(queries.getWeeklyCO2Savings());
+        barChart.getData().clear();
         barChart.getData().addAll(series);
         barChart.setLegendVisible(false);
     }

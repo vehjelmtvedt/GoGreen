@@ -146,6 +146,7 @@ public class FriendspageController implements Initializable {
      */
 
     public void fillChart(String title, String color, DateUnit unit, BarChart chart) {
+        chart.getData().clear();
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(title);
         populateBarChart(series1, unit);
