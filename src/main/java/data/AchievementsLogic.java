@@ -4,7 +4,7 @@ import tools.ActivityQueries;
 
 import java.util.ArrayList;
 
-public abstract class AchievementsLogic {
+public class AchievementsLogic {
 
 
     /**
@@ -16,6 +16,7 @@ public abstract class AchievementsLogic {
     public static ArrayList<Integer> checkTranspostActivity(User user, Activity activity) {
 
         ArrayList<Integer> results = new ArrayList();
+        results.add(0);
 
         ActivityQueries activityQueries = new ActivityQueries(user.getActivities());
         //Using a bicycle id 2
@@ -58,8 +59,9 @@ public abstract class AchievementsLogic {
      */
 
     public static ArrayList<Integer> checkTranspostActivity1(User user, Activity activity) {
-
         ArrayList<Integer> results = new ArrayList();
+        results.add(0);
+
         ActivityQueries activityQueries = new ActivityQueries(user.getActivities());
         //Use dp 50 activities 7
         if (user.getActivities().size() > 49) {
@@ -87,8 +89,10 @@ public abstract class AchievementsLogic {
      */
     public static ArrayList<Integer> checkFoodActivity(User user, Activity activity) {
 
-        ArrayList<Integer> results = new ArrayList();
 
+
+        ArrayList<Integer> results = new ArrayList();
+        results.add(0);
         //Eating vegetarian food for the first time id 6
         if (activity instanceof EatVegetarianMeal) {
             results.add(6);
@@ -170,6 +174,7 @@ public abstract class AchievementsLogic {
     public static ArrayList<Integer> checkLevel(User user) {
 
         ArrayList<Integer> results = new ArrayList();
+        results.add(0);
 
         //Achieve level 4 19
         if (user.getProgress().getLevel() >= 4) {
