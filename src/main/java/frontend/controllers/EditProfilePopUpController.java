@@ -23,37 +23,26 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditProfilePopUpController implements Initializable {
-
     private static User thisUser;
-
     private static LoginDetails thisLoginDetails;
-
     private static List<ImageView> avatarList = new ArrayList<>();
 
     @FXML
     private HBox avatarZone;
-
     @FXML
     private JFXTextField firstName;
-
     @FXML
     private JFXTextField lastName;
-
     @FXML
     private JFXTextField age;
-
     @FXML
     private JFXButton close;
-
     @FXML
     private JFXButton firstNameSave;
-
     @FXML
     private JFXButton lastNameSave;
-
     @FXML
     private JFXButton ageSave;
-
 
     public static void setUser(User user) {
         thisUser = user;
@@ -85,6 +74,7 @@ public class EditProfilePopUpController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         //add hover events for the buttons that edit the profile information;
         Events.addSaveButtonHover(firstNameSave);
         Events.addSaveButtonHover(lastNameSave);
