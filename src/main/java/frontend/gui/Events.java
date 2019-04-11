@@ -19,6 +19,7 @@ import data.UseBusInsteadOfCar;
 import data.UseTrainInsteadOfCar;
 import data.User;
 import frontend.controllers.ActivitiesController;
+import frontend.controllers.HomepageController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -49,6 +50,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class Events {
+
+    public static HomepageController homepageController;
 
     /**
      * .
@@ -158,6 +161,8 @@ public class Events {
             try {
                 ActivitiesController.popup("Popup", "Activity performed successfully!",
                         "sucess", 0);
+
+                homepageController.updateUser(loggedUser);
             } catch (IOException exp) {
                 System.out.println("Something went wrong.");
             }

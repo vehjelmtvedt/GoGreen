@@ -109,8 +109,15 @@ public class HomepageController implements Initializable {
     @FXML
     private Circle circleProfile;
 
+    public void updateUser(User user) {
+        loggedUser = user;
+        lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Events.homepageController = this;
+
         popup = new NotificationPopup();
         //add buttons to leader boards list
         leaderboards.add(btnTop5);
