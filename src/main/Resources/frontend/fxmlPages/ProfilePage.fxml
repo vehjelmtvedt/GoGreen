@@ -94,7 +94,7 @@
                                                 </Label>
                                                 <Label fx:id="userName" minWidth="91.0" prefHeight="23.0" prefWidth="245.0" text="UserName_Placeholder" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                 <Label fx:id="email" minWidth="102.0" prefHeight="23.0" prefWidth="242.0" text="Email_Placeholder" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label fx:id="lastseen" minWidth="194.0" prefHeight="23.0" prefWidth="245.0" text="Last Seen_Placeholder" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <Label fx:id="lastSeen" minWidth="194.0" prefHeight="23.0" prefWidth="245.0" text="Last Seen_Placeholder" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                                 <Label text="Last Seen:" GridPane.rowIndex="5">
                                                    <font>
                                                       <Font size="18.0" />

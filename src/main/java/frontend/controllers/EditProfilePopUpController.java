@@ -126,7 +126,6 @@ public class EditProfilePopUpController implements Initializable {
 
             count ++;
         }
-
-        Events.unCheckImages(avatarList, thisLoginDetails);
+        Events.unCheckImages(avatarList, thisUser, thisLoginDetails);
     }
 }

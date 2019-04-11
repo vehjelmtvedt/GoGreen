@@ -52,7 +52,7 @@ public class FriendspageController implements Initializable {
     private static AnchorPane headerCopy;
     private static NotificationPopup popup;
     private static AnchorPane mainCopy;
-    private List searchresults;
+    private List searchResults;
 
     @FXML
     private Label lblGoGreen;
@@ -198,17 +198,17 @@ public class FriendspageController implements Initializable {
             if (searchField.getText().trim().isEmpty()) {
                 results.getChildren().clear();
             } else {
-                searchresults = getSearchResults(searchField.getText());
+                searchResults = getSearchResults(searchField.getText());
 
                 results.getChildren().clear();
-                for (int i = 0; i < searchresults.size(); i++) {
-                    if (!searchresults.get(i).equals(thisUser.getUsername())) {
+                for (int i = 0; i < searchResults.size(); i++) {
+                    if (!searchResults.get(i).equals(thisUser.getUsername())) {
                         HBox hbox = new HBox();
                         VBox.setMargin(hbox, new Insets(0, 20, 0, 20));
                         hbox.setStyle("-fx-background-color: #4286f4;");
                         hbox.setPrefWidth(results.getPrefWidth());
                         hbox.setPrefHeight(50);
-                        Label tmpLabel = new Label(searchresults.get(i).toString());
+                        Label tmpLabel = new Label(searchResults.get(i).toString());
                         tmpLabel.setPrefWidth(hbox.getPrefWidth() / 2);
                         JFXButton addButton = new JFXButton("+");
                         addButton.setStyle("-fx-background-color: #5b8d5b;");

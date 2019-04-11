@@ -20,6 +20,7 @@ import data.UseTrainInsteadOfCar;
 import data.User;
 import frontend.controllers.ActivitiesController;
 import frontend.controllers.HomepageController;
+import frontend.controllers.ProfilePageController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -52,6 +53,7 @@ import java.util.Optional;
 public class Events {
 
     public static HomepageController homepageController;
+    public static ProfilePageController profilePageController;
 
     /**
      * .
@@ -443,27 +445,6 @@ public class Events {
 
     /**
      * .
-     * Display all activities
-     *
-     * @param checkBox  - checkbox to add event to
-     * @param checkList - list containing category filtering
-     * @param radioList - list containing date filtering
-     */
-    public static void showAllFilters(JFXCheckBox checkBox, List<JFXCheckBox> checkList,
-                                      List<JFXRadioButton> radioList) {
-        checkBox.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            for (JFXCheckBox filter : checkList) {
-                filter.setDisable(checkBox.isSelected());
-            }
-            for (JFXRadioButton filter : radioList) {
-                filter.setDisable(checkBox.isSelected());
-            }
-            checkBox.setDisable(false);
-        });
-    }
-
-    /**
-     * .
      * Clear all activity history filters
      *
      * @param clear     - label to add event to
@@ -628,16 +609,25 @@ public class Events {
      * @param avatarList       - list containing all profile pictures
      * @param thisLoginDetails - the user that updates his profile picture
      */
-    public static void unCheckImages(List<ImageView> avatarList, LoginDetails thisLoginDetails) {
+    public static void unCheckImages(List<ImageView> avatarList, User user,
+                                     LoginDetails thisLoginDetails) {
         for (ImageView avatar : avatarList) {
             avatar.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 avatar.setImage(new Image("avatars/13.jpg"));
+
+                //update user on the client side & send request to update user on the server side
+                user.setAvatar(avatar.getId());
                 Requests.instance.editProfile(thisLoginDetails, "avatar", avatar.getId());
+
                 for (ImageView other : avatarList) {
                     if (other != avatar) {
                         other.setImage(new Image("avatars/" + other.getId() + ".jpg"));
                     }
                 }
+
+                //update user information on profile page & homepage once avatar was changed
+                profilePageController.updateUser(user);
+                homepageController.updateUser(user, thisLoginDetails);
             });
         }
     }

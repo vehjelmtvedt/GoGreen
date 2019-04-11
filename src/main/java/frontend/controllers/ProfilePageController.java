@@ -42,143 +42,85 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ProfilePageController implements Initializable {
-
     private static User thisUser;
-
-    private  static LoginDetails loginDetails;
-
-    @FXML
-    Circle profilePicture;
-
-    @FXML
-    JFXHamburger menu;
+    private static LoginDetails loginDetails;
 
     @FXML
     JFXDrawer drawer;
-
     @FXML
-    AnchorPane mainPane;
-
+    private Circle profilePicture;
     @FXML
-    AnchorPane headerPane;
-
+    private JFXHamburger menu;
+    @FXML
+    private AnchorPane mainPane;
+    @FXML
+    private AnchorPane headerPane;
     @FXML
     private Label userName;
-
     @FXML
     private Label firstName;
-
     @FXML
     private Label lastName;
-
     @FXML
     private Label lblGoGreen;
-
     @FXML
     private Label age;
-
     @FXML
     private Label email;
-
     @FXML
-    private Label lastseen;
-
+    private Label lastSeen;
     @FXML
     private Label score;
-
     @FXML
     private Label level;
-
     @FXML
     private Label rank;
-
     @FXML
     private JFXButton editProfile;
-
     @FXML
     private JFXProgressBar levelProgress;
-
     @FXML
     private VBox com;
-
     @FXML
     private VBox incom;
-
     @FXML
     private HBox badgeZone;
 
-    public static void setUser(User user) {
+    /**.
+     * Update the user's profile page information
+     * @param user - user to update info to
+     */
+    public void updateUser(User user) {
+        //update the current user
         thisUser = user;
-    }
 
-    public static void setLoginDetails(LoginDetails passedloginDetails) {
-        loginDetails = passedloginDetails;
-    }
-
-    /**
-     * Checks completed Achievements.
-     */
-    public static boolean isComplete(Achievement achievement) {
-        for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
-            if (achievement.getId() == userAchievement.getId()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /**
-     * Retrieves the number of points needed for each level above the users current level.
-     *
-     * @return Points needed to achieve the respective level.
-     */
-    public double getLevelPoints() {
-        int level = thisUser.getProgress().getLevel();
-        if (level == 1) {
-            return 700.0;
-        } else if (level == 2) {
-            return 2000.0;
-        } else if (level == 3) {
-            return 5500.0;
-        } else if (level == 4) {
-            return 14800.0;
-        } else if (level == 5) {
-            return 40300.0;
-        } else if (level == 6) {
-            return 109700.0;
-        } else if (level == 7) {
-            return 298100.0;
-        } else if (level == 8) {
-            return 298100.0;
-        } else {
-            return 0.0;
-        }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        Events.addJfxButtonHover(editProfile);
+        //update the user information fields on the profile page
         levelProgress.setProgress(
                 (thisUser.getProgress().getPoints()) / (getLevelPoints())
         );
-        System.out.println("Test---------------------" + thisUser.getProgress().pointsNeeded());
-        System.out.println("Test---------------------" + thisUser.getProgress().getPoints());
-
         userName.setText(thisUser.getUsername());
         firstName.setText(thisUser.getFirstName());
         lastName.setText(thisUser.getLastName());
         email.setText(thisUser.getEmail());
         age.setText(thisUser.getAge() + "");
-        lastseen.setText(thisUser.getLastLoginDate().toString());
+        lastSeen.setText(thisUser.getLastLoginDate().toString());
         level.setText("" + thisUser.getProgress().getLevel());
         score.setText("" + thisUser.getTotalCarbonSaved());
         rank.setText("" + Requests.instance.getUserRanking(loginDetails));
         profilePicture.setFill(new ImagePattern(
                 new Image("avatars/" + thisUser.getAvatar() + ".jpg")));
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //add all required events & set controller in the events class
+        Events.addJfxButtonHover(editProfile);
+        Events.profilePageController = this;
+
+        //fill in the user information on the profile page
+        updateUser(thisUser);
 
         editProfile.setOnAction(e -> {
-
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -199,9 +141,6 @@ public class ProfilePageController implements Initializable {
             stage.show();
             stage.toFront();
         });
-
-        //        ObservableValue<Number> level = ObservableValue < Number > (5);
-        //        levelProgress.progressProperty().bind(thisUser.getProgress().getLevel());
 
         try {
             NotificationPanelController.addNotificationPanel(headerPane, mainPane);
@@ -279,8 +218,55 @@ public class ProfilePageController implements Initializable {
             System.out.println("Fonts not found");
         }
     }
-    //addCompletedAchievements(com);
-    //addPendingAchievements(incom);
+
+    /**
+     * Checks completed Achievements.
+     */
+    public static boolean isComplete(Achievement achievement) {
+        for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
+            if (achievement.getId() == userAchievement.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Retrieves the number of points needed for each level above the users current level.
+     *
+     * @return Points needed to achieve the respective level.
+     */
+    public double getLevelPoints() {
+        int level = thisUser.getProgress().getLevel();
+        if (level == 1) {
+            return 700.0;
+        } else if (level == 2) {
+            return 2000.0;
+        } else if (level == 3) {
+            return 5500.0;
+        } else if (level == 4) {
+            return 14800.0;
+        } else if (level == 5) {
+            return 40300.0;
+        } else if (level == 6) {
+            return 109700.0;
+        } else if (level == 7) {
+            return 298100.0;
+        } else if (level == 8) {
+            return 298100.0;
+        } else {
+            return 0.0;
+        }
+    }
+
+    public static void setUser(User user) {
+        thisUser = user;
+    }
+
+    public static void setLoginDetails(LoginDetails passedLoginDetails) {
+        loginDetails = passedLoginDetails;
+    }
+
 }
 
 
