@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -21,45 +22,40 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class QuestionnaireController implements Initializable {
-
     private static User thisUser;
 
     @FXML
+    private Label lblLine1;
+    @FXML
+    private Label lblLine2;
+    @FXML
+    private Label lblLine3;
+    @FXML
+    private Label goGreen;
+    @FXML
     private ImageView background;
-
     @FXML
     private AnchorPane graphics;
-
     @FXML
     private AnchorPane mainPane;
-
     @FXML
     private JFXComboBox houseHoldNo;
-
     @FXML
     private JFXTextField textElectricity;
-
     @FXML
     private JFXTextField textOil;
-
     @FXML
     private JFXTextField textCarUsage;
-
     @FXML
     private JFXComboBox carSizes;
-
     @FXML
     private JFXComboBox meatAndDairyOptions;
-
     @FXML
     private JFXComboBox locallyProducedFoodOptions;
-
     @FXML
     private JFXComboBox organicOptions;
-
     @FXML
     private JFXComboBox processedOptions;
-
     @FXML
     private JFXButton submitButton;
 
@@ -93,6 +89,16 @@ public class QuestionnaireController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //setup fonts
+        try {
+            goGreen.setFont(Main.getReenieBeanie(100));
+            lblLine1.setFont(Main.getReenieBeanie(40));
+            lblLine2.setFont(Main.getReenieBeanie(40));
+            lblLine3.setFont(Main.getReenieBeanie(50));
+        } catch (IOException exp) {
+            System.out.println("Something went wrong");
+        }
 
         // Helps to Keep the image scaling in check
 
