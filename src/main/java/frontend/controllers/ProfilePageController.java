@@ -143,6 +143,10 @@ public class ProfilePageController implements Initializable {
         //update user object on profile page
         thisUser = user;
 
+        //reset achievement containers before updating values
+        completed.getChildren().clear();
+        incompleted.getChildren().clear();
+
         // for every completed achievement module  is created
         // and added to a VBox small pics might be added later
         int count = 1;
@@ -208,6 +212,7 @@ public class ProfilePageController implements Initializable {
         //add all required events & set controller in the events class
         Events.addJfxButtonHover(editProfile);
         Events.profilePageController = this;
+        NavPanelController.profilePageController = this;
         EditProfilePopUpController.profilePageController = this;
 
         //fill in the user information on the profile page
