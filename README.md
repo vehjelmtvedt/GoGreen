@@ -33,7 +33,7 @@ The following test classes (under src/test/java/) contained Mockito based testin
 6. InstallSolarPanelsTest.java (data)
 7. ActivityTest.java (data)
 
-### Person Development Plans
+### Personal Development Plans
 
 **Vetle Grim Hjelmtvedt**
 
