@@ -75,12 +75,10 @@ public class AchievementsLogicTest {
 
     @Test
     public void checkOther1(){
-        user.getActivities().add(activity);
-        user.getActivities().add(activity1);
-        user.getActivities().add(activity2);
-        user.getActivities().add(activity4);
-        user.getActivities().add(activity4);
-        user.getActivities().add(activity4);
+
+        for (int i = 0 ; i < 6 ; i++) {
+            user.addActivity(new UseTrainInsteadOfCar());
+        }
 
 
         Assert.assertTrue(1 == AchievementsLogic.checkOther(user).get(0));
@@ -96,14 +94,11 @@ public class AchievementsLogicTest {
     @Test
     public void checkTranspostActivity() {
 
-        AchievementsLogic.checkTranspostActivity(user , activity5);
-        AchievementsLogic.checkTranspostActivity(user , activity5);
-        AchievementsLogic.checkTranspostActivity(user , activity5);
-        AchievementsLogic.checkTranspostActivity(user , activity5);
-        AchievementsLogic.checkTranspostActivity(user , activity5);
-        AchievementsLogic.checkTranspostActivity(user , activity5);
+        for (int i = 0 ; i < 6 ; i++) {
+            user.addActivity(new UseBusInsteadOfCar());
+        }
 
-        Assert.assertTrue(4 == AchievementsLogic.checkTranspostActivity(user , activity5).get(0));
+        Assert.assertTrue(AchievementsLogic.checkTranspostActivity(user , activity5).contains(5));
 
     }
 
@@ -120,7 +115,6 @@ public class AchievementsLogicTest {
     @Test
     public void tescar() {
         user.setCarType("small");
-        //user.addFriend("test" + i);
 
         Assert.assertTrue(13 == AchievementsLogic.checkOther(user).get(0));
 
