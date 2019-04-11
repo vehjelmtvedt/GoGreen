@@ -136,4 +136,37 @@ public class AchievementsLogicTest {
         }
         Assert.assertTrue(AchievementsLogic.checkOther(user).contains(9));
     }
+
+    @Test
+    public void testusebike5times() {
+
+        for (int i = 0 ; i < 5 ; i++) {
+            user.addActivity(new UseBikeInsteadOfCar());
+        }
+
+        Assert.assertTrue(AchievementsLogic.checkTranspostActivity(user , new UseBikeInsteadOfCar()).contains(3));
+
+    }
+
+    @Test
+    public void testadd50activities() {
+
+        for (int i = 0 ; i < 50 ; i++) {
+            user.addActivity(new UseBikeInsteadOfCar());
+        }
+
+        Assert.assertTrue(AchievementsLogic.checkTranspostActivity1(user , new UseBikeInsteadOfCar()).contains(7));
+
+    }
+
+    @Test
+    public void testusetrain5times() {
+
+        for (int i = 0 ; i < 5 ; i++) {
+            user.addActivity(new UseTrainInsteadOfCar());
+        }
+
+        Assert.assertTrue(AchievementsLogic.checkTranspostActivity1(user , new UseTrainInsteadOfCar()).contains(25));
+
+    }
 }

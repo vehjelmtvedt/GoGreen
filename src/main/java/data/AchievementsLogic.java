@@ -123,7 +123,7 @@ public class AchievementsLogic {
         ArrayList<Integer> results = new ArrayList();
 
         //Saved your first CO2 id 0
-        if (user.getTotalCarbonSaved() > 0 && user.getActivities().size() > 0) {
+        if (user.getTotalCarbonSaved() > 0) {
             results.add(0);
         }
 
