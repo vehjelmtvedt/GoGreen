@@ -107,7 +107,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="256.0" layoutY="259.0" prefHeight="503.0" prefWidth="1124.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="319.0">
+                  <AnchorPane layoutX="256.0" layoutY="259.0" prefHeight="545.0" prefWidth="1225.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="319.0">
                      <children>
                         <HBox layoutX="208.0" prefHeight="47.0" prefWidth="815.0" spacing="50.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -144,7 +144,12 @@
                         <JFXTreeTableView fx:id="tableTop50" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
                         <JFXTreeTableView fx:id="tableTop100" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
 
-                                                <Label layoutX="382.0" layoutY="456.0" text="- Ranking is determined according to the total amount of CO2 saved - " AnchorPane.leftAnchor="382.0" AnchorPane.rightAnchor="274.0" />
+                                                <Label alignment="CENTER" layoutX="374.0" layoutY="501.0" text="- Ranking is determined according to the total amount of CO2 saved - " />
+                        <JFXButton fx:id="btnRefresh" layoutX="503.0" layoutY="452.0" opacity="0.75" prefHeight="31.0" prefWidth="209.0" style="-fx-background-color: green;" text="Refresh Leaderboards">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="1410.0" layoutY="-33.0" prefHeight="806.0" prefWidth="369.0">

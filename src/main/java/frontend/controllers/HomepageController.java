@@ -79,6 +79,8 @@ public class HomepageController implements Initializable {
     @FXML
     private Label lblProgress;
     @FXML
+    private JFXButton btnRefresh;
+    @FXML
     private JFXButton btnProfile;
     @FXML
     private JFXButton btnTop5;
@@ -112,7 +114,7 @@ public class HomepageController implements Initializable {
     /**.
      * Update the user information on the homepage
      * @param user - current logged user
-     * @param logDetails - current login details (assigned to user>)
+     * @param logDetails - current login details (assigned to user)
      */
     public void updateUser(User user, LoginDetails logDetails) {
         //update the user and his login details
@@ -137,6 +139,14 @@ public class HomepageController implements Initializable {
         fillWeekChart(loggedUser, weekChart);
     }
 
+    private void updateLeaderboards() {
+        fillLeaderboards(5, tableTop5);
+        fillLeaderboards(10, tableTop10);
+        fillLeaderboards(25, tableTop25);
+        fillLeaderboards(50, tableTop50);
+        fillLeaderboards(100, tableTop100);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Events.homepageController = this;
@@ -157,6 +167,9 @@ public class HomepageController implements Initializable {
         fillLeaderboards(25, tableTop25);
         fillLeaderboards(50, tableTop50);
         fillLeaderboards(100, tableTop100);
+
+        //update leaderboards upon clicking refresh button
+        btnRefresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> updateLeaderboards());
 
         //switch leaderboards upon clicking
         btnTop5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -201,6 +214,7 @@ public class HomepageController implements Initializable {
         fillWeekChart(loggedUser, weekChart);
 
         Events.addJfxButtonHover(btnProfile);
+        Events.addJfxButtonHover(btnRefresh);
 
         try {
             goGreen.setFont(Main.getReenieBeanie(100));

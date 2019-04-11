@@ -107,6 +107,7 @@ public class FriendspageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         popup = new NotificationPopup();
         mainCopy = main;
         headerCopy = headerPane;

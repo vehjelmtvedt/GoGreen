@@ -128,7 +128,7 @@ public class Events {
             button.setOpacity(0.75);
         });
     }
-    
+
     /**
      * .
      * Add food activities to the user upon clicking
@@ -158,10 +158,10 @@ public class Events {
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
+
             try {
                 ActivitiesController.popup("Popup", "Activity performed successfully!",
                         "sucess", 0);
-
                 homepageController.updateUser(loggedUser, loginDetails);
             } catch (IOException exp) {
                 System.out.println("Something went wrong.");
@@ -621,9 +621,11 @@ public class Events {
         }
     }
 
-    /**.
+    /**
+     * .
      * Reset the avatar list to normal when selecting a profile picture
-     * @param avatarList - list containing all profile pictures
+     *
+     * @param avatarList       - list containing all profile pictures
      * @param thisLoginDetails - the user that updates his profile picture
      */
     public static void unCheckImages(List<ImageView> avatarList, LoginDetails thisLoginDetails) {
