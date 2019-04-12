@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.geometry.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
@@ -120,23 +121,53 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="textElectricity" prefHeight="27.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXTextField fx:id="textOil" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <JFXTextField fx:id="textCarUsage" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <JFXComboBox fx:id="carSizes" prefHeight="27.0" prefWidth="204.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <JFXComboBox fx:id="meatAndDairyOptions" prefHeight="27.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <JFXComboBox fx:id="locallyProducedFoodOptions" prefHeight="27.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <JFXComboBox fx:id="organicOptions" prefHeight="27.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <JFXComboBox fx:id="processedOptions" prefHeight="27.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <JFXTextField fx:id="textElectricity" prefHeight="27.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXTextField>
+                  <JFXTextField fx:id="textOil" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXTextField>
+                  <JFXTextField fx:id="textCarUsage" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXTextField>
+                  <JFXComboBox fx:id="carSizes" prefHeight="27.0" prefWidth="204.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXComboBox>
+                  <JFXComboBox fx:id="meatAndDairyOptions" prefHeight="27.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXComboBox>
+                  <JFXComboBox fx:id="locallyProducedFoodOptions" prefHeight="27.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXComboBox>
+                  <JFXComboBox fx:id="organicOptions" prefHeight="27.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXComboBox>
+                  <JFXComboBox fx:id="processedOptions" prefHeight="27.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXComboBox>
                   <JFXButton fx:id="submitButton" prefHeight="27.0" prefWidth="199.0" style="-fx-background-color: green;" text="SUBMIT" GridPane.columnIndex="1" GridPane.rowIndex="9">
                      <font>
                         <Font size="24.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets bottom="20.0" />
+                        <Insets bottom="40.0" />
                      </GridPane.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
-                  <JFXComboBox fx:id="houseHoldNo" prefHeight="27.0" prefWidth="146.0" GridPane.columnIndex="1" />
+                  <JFXComboBox fx:id="houseHoldNo" prefHeight="27.0" prefWidth="146.0" GridPane.columnIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXComboBox>
                </children>
             </GridPane>
          </children>

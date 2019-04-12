@@ -26,10 +26,13 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></JFXButton>
-            <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="66.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgProfile" fitHeight="36.0" fitWidth="35.0" layoutX="66.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Pics/user.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </Pane>
@@ -39,10 +42,13 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></JFXButton>
-            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="66.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgHome" disable="true" fitHeight="35.0" fitWidth="35.0" layoutX="66.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Pics/home.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </Pane>
@@ -52,10 +58,13 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></JFXButton>
-            <ImageView fitHeight="48.0" fitWidth="53.0" layoutX="66.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgActivity" disable="true" fitHeight="48.0" fitWidth="53.0" layoutX="66.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Pics/activityIcon.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </Pane>
@@ -65,10 +74,13 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></JFXButton>
-            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="66.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgFriends" disable="true" fitHeight="35.0" fitWidth="35.0" layoutX="66.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Pics/friendsIcon.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </Pane>
