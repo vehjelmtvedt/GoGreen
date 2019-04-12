@@ -20,18 +20,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import tools.DateUtils;
+import tools.InputValidationTool;
 import tools.Requests;
 
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class InputValidation {
-    private static final String passPattern =
-            "((?=.*[a-z]).{6,15})";
-    private static final String emailPattern =
-            "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+";
+
 
 
     /**
@@ -211,48 +208,28 @@ public class InputValidation {
                                               JFXPasswordField passReField,
                                               JFXTextField ageField,
                                               AnchorPane form) throws IOException {
-        if (emailField.getText().isEmpty() || !validateEmail(emailField)) {
+        if (emailField.getText().isEmpty()
+                || !InputValidationTool.validateEmail(emailField.getText())) {
             Dialog.show("Form Error!", "Please enter a valid email", "DISMISS", "error", false);
             return false;
         }
 
-        if (passField.getText().isEmpty() || !validatePassword(passField)) {
+        if (passField.getText().isEmpty()
+                || !InputValidationTool.validatePassword(passField.getText())) {
             Dialog.show("Form Error!", "Please enter a valid password", "DISMISS", "error", false);
             return false;
         }
-        if (passReField.getText().isEmpty() || !passReField.getText().equals(passField.getText())) {
+        if (passReField.getText().isEmpty()
+                || !passReField.getText().equals(passField.getText())) {
             Dialog.show("Form Error!", "Passwords do not match", "DISMISS", "error", false);
             return false;
         }
-        if (ageField.getText().isEmpty() || !validateAge(ageField)) {
+        if (ageField.getText().isEmpty()
+                || !InputValidationTool.validateAge(ageField.getText())  ) {
             Dialog.show("Form Error!", "Please enter a valid age", "DISMISS", "error", false);
             return false;
         }
         return true;
     }
 
-    private static boolean validatePassword(JFXPasswordField input) {
-        String pass = input.getText();
-        Pattern pattern = Pattern.compile(passPattern);
-        Matcher matcher = pattern.matcher(pass);
-
-        return matcher.matches();
-    }
-
-    private static boolean validateEmail(JFXTextField input) {
-        String email = input.getText();
-        Pattern pattern = Pattern.compile(emailPattern);
-        Matcher matcher = pattern.matcher(email);
-
-        return matcher.matches();
-    }
-
-    private static boolean validateAge(TextField input) {
-        try {
-            int age = Integer.parseInt(input.getText());
-            return age >= 0;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 }
