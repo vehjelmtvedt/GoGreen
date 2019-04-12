@@ -11,6 +11,16 @@ public class InputValidationToolTest {
     }
 
     @Test
+    public void testAgeValidationFalse() {
+        assertEquals(InputValidationTool.validateAge("-1"),false);
+    }
+
+    @Test
+    public void testAgeValidationInvalidInput() {
+        assertEquals(InputValidationTool.validateAge("abc"),false);
+    }
+
+    @Test
     public void testPassValidation() {
         assertEquals(InputValidationTool.validatePassword("qwerty"),true);
     }
