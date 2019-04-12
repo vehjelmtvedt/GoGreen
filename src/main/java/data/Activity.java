@@ -3,10 +3,11 @@ package data;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
+import tools.DateUtils;
 import tools.Requests;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +39,7 @@ public abstract class Activity {
     private String category;
 
     public Activity() {
-        this.date = Calendar.getInstance().getTime();
+        this.date = DateUtils.instance.dateToday();
         this.carbonSaved = 0;
     }
 
@@ -94,7 +95,7 @@ public abstract class Activity {
      */
     public ArrayList<Activity> getActivitiesOfTheSameTypePerformedInTheSameDay(User user) {
         ArrayList<Activity> result = new ArrayList<Activity>();
-        Date currentDate = Calendar.getInstance().getTime();
+        Date currentDate = DateUtils.instance.dateToday();
         String currentMonth = currentDate.toString().split(" ")[1];
         String currentDay = currentDate.toString().split(" ")[2];
         String currentYear = currentDate.toString().split(" ")[5];
@@ -223,18 +224,17 @@ public abstract class Activity {
      *
      * @param user user currently logged in
      */
-    public void performActivity(User user) {
+    public void performActivity(User user, Requests requests) {
         this.setCarbonSaved(this.calculateCarbonSaved(user));
         user.setTotalCarbonSaved(user.getTotalCarbonSaved() + this.calculateCarbonSaved(user));
         // update logged in user for the gui
         user.addActivity(this);
         // update user in the database
         try {
-            user = Requests.instance.addActivityRequest(this, user.getUsername());
+            user = requests.addActivityRequest(this, user.getUsername());
 
 
-
-        } catch (HttpClientErrorException e) {
+        } catch (ResourceAccessException e) {
             System.out.println("Activity was not added to the database");
             System.out.println(e.fillInStackTrace());
         }

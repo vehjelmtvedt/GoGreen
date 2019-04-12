@@ -1,25 +1,25 @@
 package tools;
 
 
-import backend.RequestHandler;
+import backend.AppRequestHandler;
+import backend.UserRequestHandler;
 import backend.Server;
 import backend.DbService;
 import data.Achievement;
 import data.EatVegetarianMeal;
 import data.LoginDetails;
 import data.User;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import tools.Requests;
 
 import javax.annotation.Resource;
 
@@ -40,7 +40,11 @@ public class RequestsTest {
 
     @InjectMocks
     @Resource
-    RequestHandler requestHandler;
+    UserRequestHandler userRequestHandler;
+
+    @InjectMocks
+    @Resource
+    AppRequestHandler appRequestHandler;
 
     private final User testUser = new User("Test", "User", 24, "test@email.com","dummy", "pwd");
     private final User testUser2 = new User("Test2", "User2", 24, "test2@email.com","dummy2", "pwd2");
@@ -54,6 +58,28 @@ public class RequestsTest {
         dbService.addUser(testUser3);
     }
 
+    @Test
+    public void testInsecureConfig() {
+        String testUrl = "localhost";
+        System.setProperty("remote.url", testUrl);
+
+        Requests.instance = new Requests();
+        Assert.assertEquals("http://localhost:8080", Requests.instance.url);
+    }
+
+    @Test
+    public void testSecureConfig() {
+        String testUrl = "test-url";
+        System.setProperty("remote.url", testUrl);
+
+        Requests.instance = new Requests();
+
+        Assert.assertEquals(testUrl, Requests.instance.url);
+
+        // Undo secure config
+        System.clearProperty("remote.url");
+        Requests.instance = new Requests();
+    }
 
 
     @Test

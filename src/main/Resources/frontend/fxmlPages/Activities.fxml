@@ -23,213 +23,6 @@
       </AnchorPane>
       <AnchorPane layoutX="301.0" layoutY="137.0" prefHeight="722.0" prefWidth="1098.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="301.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="137.0">
          <children>
-            <Pane fx:id="paneFood" layoutX="-17.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <AnchorPane layoutX="61.0" layoutY="42.0" prefHeight="587.0" prefWidth="1241.0">
-                     <children>
-                        <HBox alignment="CENTER" layoutX="159.0" layoutY="275.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="159.0">
-                           <children>
-                              <AnchorPane fx:id="paneVegetarianMeal" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <JFXButton fx:id="btnVegetarianMeal" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Add vegetarian meal" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/vegMealIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </AnchorPane>
-                              <AnchorPane fx:id="paneOrganicFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/organicFoodIcon.jpg" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnOrganicFood" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy organic food" />
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </AnchorPane>
-                              <AnchorPane fx:id="paneLocalFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/localFoodIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnLocalFood" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy locally produced food" />
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </AnchorPane>
-                              <AnchorPane fx:id="paneNonProFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/processedFoodIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnNonProFood" buttonType="RAISED" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy non-processed food" />
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </AnchorPane>
-                           </children>
-                        </HBox>
-                        <Text layoutX="311.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Why should you #GoGreen?" textAlignment="CENTER" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="311.4453125" AnchorPane.topAnchor="0.044921875">
-                           <font>
-                              <Font size="50.0" />
-                           </font>
-                           <effect>
-                              <Glow />
-                           </effect>
-                        </Text>
-                        <Text layoutX="281.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adopting our #GoGreen lifestyle can be the perfect way to stay healthy and happy." textAlignment="CENTER" wrappingWidth="679.12841796875">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="281.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vegetarian foods are vital not just for our healthy living but for the environment too." textAlignment="CENTER" wrappingWidth="679.12841796875">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </Pane>
-            <Pane fx:id="paneTransportation" layoutX="-7.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <AnchorPane layoutX="14.0" layoutY="22.0" prefHeight="587.0" prefWidth="1285.0">
-                     <children>
-                        <HBox alignment="CENTER" layoutX="120.0" layoutY="275.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="14.0">
-                           <children>
-                              <AnchorPane fx:id="paneBike" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/bikeIcon2.png" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnBike" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Bike">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </JFXButton>
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                              </AnchorPane>
-                              <AnchorPane fx:id="paneBus" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/busIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnBus" layoutY="238.0" prefHeight="60.0" prefWidth="231.0" style="-fx-background-color: green;" text="by Bus">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </JFXButton>
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                              </AnchorPane>
-                              <AnchorPane fx:id="paneTrain" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/trainIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnTrain" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Train">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </JFXButton>
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                              </AnchorPane>
-                           </children>
-                        </HBox>
-                        <Text layoutX="480.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transportation" wrappingWidth="324.7314453125" AnchorPane.topAnchor="41.044921875">
-                           <effect>
-                              <Glow />
-                           </effect>
-                           <font>
-                              <Font size="50.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </Text>
-                        <Label alignment="CENTER" layoutX="147.0" layoutY="186.0" prefHeight="45.0" prefWidth="154.0" text="I travelled" textAlignment="CENTER">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="inputDistance" alignment="CENTER_RIGHT" focusColor="GREEN" layoutX="402.0" layoutY="186.0" maxWidth="212.0" minWidth="130.0" prefHeight="45.0" prefWidth="141.0" promptText="number of km">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </JFXTextField>
-                        <Label fx:id="lblDistanceValidate" alignment="CENTER" layoutX="613.0" layoutY="179.0" prefHeight="45.0" prefWidth="212.0" text="Invalid input. Try again" textFill="RED" visible="false">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Text layoutX="846.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to use the transportation calculator?" textAlignment="CENTER" underline="true" wrappingWidth="424.18310546875">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Text>
-                        <VBox layoutX="902.0" layoutY="384.0" prefHeight="137.0" prefWidth="313.0" spacing="15.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. Type in the distance you travelled">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. Click on the transportation you used ">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3. Let us handle the rest">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </Pane>
             <Pane fx:id="paneHousehold" layoutX="-3.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutY="38.0" prefHeight="627.0" prefWidth="1298.0">
@@ -355,11 +148,235 @@
                   </AnchorPane>
                </children>
             </Pane>
+            <Pane fx:id="paneFood" layoutX="-17.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane layoutX="60.0" layoutY="88.0" prefHeight="587.0" prefWidth="1241.0">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="159.0" layoutY="251.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="38.0" AnchorPane.rightAnchor="159.0">
+                           <children>
+                              <AnchorPane fx:id="paneVegetarianMeal" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <JFXButton fx:id="btnVegetarianMeal" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Add vegetarian meal" />
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/vegMealIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                              <AnchorPane fx:id="paneOrganicFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/organicFoodIcon.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnOrganicFood" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy organic food" />
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                              <AnchorPane fx:id="paneLocalFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/localFoodIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnLocalFood" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy locally produced food" />
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                              <AnchorPane fx:id="paneNonProFood" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/processedFoodIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnNonProFood" buttonType="RAISED" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" ripplerFill="WHITE" style="-fx-background-color: green;" text="Buy non-processed food" />
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <Text layoutX="311.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Why should you #GoGreen?" textAlignment="CENTER" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="311.4453125" AnchorPane.topAnchor="48.044921875">
+                           <font>
+                              <Font size="50.0" />
+                           </font>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </Text>
+                        <Text layoutX="281.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adopting our #GoGreen lifestyle can be the perfect way to stay healthy and happy." textAlignment="CENTER" wrappingWidth="679.12841796875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="281.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vegetarian foods are vital not just for our healthy living but for the environment too." textAlignment="CENTER" wrappingWidth="679.12841796875">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <Text fx:id="lblHistory1" layoutX="624.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food">
+                     <effect>
+                        <Glow />
+                     </effect>
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane fx:id="paneTransportation" layoutX="-7.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane layoutX="14.0" layoutY="22.0" prefHeight="587.0" prefWidth="1285.0">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="120.0" layoutY="275.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="14.0">
+                           <children>
+                              <AnchorPane fx:id="paneBike" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/bikeIcon2.png" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnBike" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Bike">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                              <AnchorPane fx:id="paneBus" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/busIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnBus" layoutY="238.0" prefHeight="60.0" prefWidth="231.0" style="-fx-background-color: green;" text="by Bus">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                              <AnchorPane fx:id="paneTrain" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/trainIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnTrain" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Train">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <Text layoutX="480.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transportation" wrappingWidth="324.7314453125" AnchorPane.topAnchor="41.044921875">
+                           <effect>
+                              <Glow />
+                           </effect>
+                           <font>
+                              <Font size="50.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </Text>
+                        <Label alignment="CENTER" layoutX="147.0" layoutY="186.0" prefHeight="45.0" prefWidth="154.0" text="I travelled" textAlignment="CENTER">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="inputDistance" alignment="CENTER_RIGHT" focusColor="GREEN" layoutX="402.0" layoutY="186.0" maxWidth="212.0" minWidth="130.0" prefHeight="45.0" prefWidth="141.0" promptText="number of km">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="lblDistanceValidate" alignment="CENTER" layoutX="613.0" layoutY="179.0" prefHeight="45.0" prefWidth="212.0" text="Invalid input. Try again" textFill="RED" visible="false">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Text layoutX="846.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to use the transportation calculator?" textAlignment="CENTER" underline="true" wrappingWidth="424.18310546875">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <VBox layoutX="902.0" layoutY="384.0" prefHeight="137.0" prefWidth="313.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. Type in the distance you travelled">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. Click on the transportation you used ">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3. Let us handle the rest">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </Pane>
             <Pane fx:id="paneHistory" layoutX="-7.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="131.0" layoutY="8.0" prefHeight="722.0" prefWidth="1098.0">
                      <children>
-                        <Text layoutX="201.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity history">
+                        <Text fx:id="lblHistory" layoutX="201.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity history">
                            <effect>
                               <Glow />
                            </effect>

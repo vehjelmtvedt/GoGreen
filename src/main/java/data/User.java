@@ -1,9 +1,9 @@
 package data;
 
 import org.springframework.data.annotation.Id;
+import tools.DateUtils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -72,7 +72,7 @@ public class User {
         this.organicFoodConsumption = "default";
         this.processedFoodConsumption = "default";
         this.totalCarbonSaved = 0;
-        this.lastLoginDate = Calendar.getInstance().getTime();
+        this.lastLoginDate = DateUtils.instance.dateToday();
         this.activities = new ArrayList<>();
         this.avatar = "0";
     }
@@ -359,18 +359,6 @@ public class User {
         return result;
     }
 
-    /**
-     * addes to the points the amount of co2 save.*
-     * every one co2 unite is worth 1 point
-     *
-     * @param carbonsaved co2 saved
-     */
-    public void addCO2Points(double carbonsaved) {
-        this.getProgress().setPoints(this.getProgress().getPoints() + carbonsaved * 300);
-
-    }
-
-
     /*
      * Removes a friend from the friends list
      *
@@ -381,6 +369,5 @@ public class User {
     //    public boolean removeFriend(String email) {
     //        return friends.remove(email);
     //    }
-
 
 }

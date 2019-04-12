@@ -71,8 +71,8 @@ public class ActivityQueries {
      * @return - filtered List of activities done within the specified time period
      */
     public List<Activity> filterActivitiesByDate(DateUnit dateUnit) {
-        Date today = DateUtils.dateToday();
-        Date startDate = DateUtils.getDateBefore(today, dateUnit);
+        Date today = DateUtils.instance.dateToday();
+        Date startDate = DateUtils.instance.getDateBefore(today, dateUnit);
 
         return filterActivitiesByDate(startDate, today);
     }
@@ -105,15 +105,11 @@ public class ActivityQueries {
 
         // Now that we have the index of the last valid activity, we now loop
         // until we find an activity that is not in the range of the dates
-        for (; fromIndex > 0; --fromIndex) {
-            Activity activity = activities.get(fromIndex - 1);
-
-            // Activity is not in our range, we may break, since all the other
-            // preceding activities are also before the "from" date
-            if (activity.getDate().before(from)) {
-                break;
-            }
+        while (fromIndex > 0
+                && !activities.get(fromIndex - 1).getDate().before(from)) {
+            fromIndex--;
         }
+
 
         // Edge case where fromIndex matches toIndex
         if (fromIndex == toIndex) {
@@ -122,8 +118,7 @@ public class ActivityQueries {
             // In the case where fromIndex matches toIndex, the Date is out of range
             // if the date is not equal to from or to AND if the date is both not after
             // from and not before to.
-            if ((!date.after(from) || !date.before(to))
-                    && !date.equals(from) && !date.equals(to)) {
+            if (!DateUtils.instance.checkDateInRange(date, from, to)) {
                 return new ArrayList<>();
             }
         }
@@ -219,8 +214,8 @@ public class ActivityQueries {
      * @return - total CO2 saved
      */
     public double getTotalCO2Saved(DateUnit dateUnit) {
-        Date today = DateUtils.dateToday();
-        Date startDate = DateUtils.getDateBefore(today, dateUnit);
+        Date today = DateUtils.instance.dateToday();
+        Date startDate = DateUtils.instance.getDateBefore(today, dateUnit);
 
         return getTotalCO2Saved(startDate, today);
     }
@@ -233,7 +228,7 @@ public class ActivityQueries {
      * @return - total CO2 saved from specified date until today
      */
     public double getTotalCO2Saved(Date fromDate) {
-        Date today = DateUtils.dateToday();
+        Date today = DateUtils.instance.dateToday();
 
         return getTotalCO2Saved(fromDate, today);
     }
@@ -279,17 +274,17 @@ public class ActivityQueries {
         ObservableList<XYChart.Data> list = FXCollections.observableArrayList();
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(DateUtils.dateToday());
+        calendar.setTime(DateUtils.instance.dateToday());
 
         // Iterate for 7 days to get the data for the entire week
         for (int i = 0; i < DateUnit.WEEK.getNumDays(); ++i) {
-            DateUtils.setDateToEnd(calendar);
+            DateUtils.instance.setDateToEnd(calendar);
             Date toDate = calendar.getTime();
-            DateUtils.setDateToMidnight(calendar);
+            DateUtils.instance.setDateToMidnight(calendar);
             Date fromDate = calendar.getTime();
 
             // Get the Day of Week String name for the entry label
-            String dayName = DateUtils.getDayName(toDate);
+            String dayName = DateUtils.instance.getDayName(toDate);
 
             // Get the CO2 saved for the date
             double co2Saved = getTotalCO2Saved(fromDate, toDate);

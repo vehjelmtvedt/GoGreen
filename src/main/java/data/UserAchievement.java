@@ -49,14 +49,4 @@ public class UserAchievement {
         this.date = date;
     }
 
-    /** a simple to string method.
-     *
-     * @return the string result
-     */
-    public String toString() {
-
-        return this.getId() + this.getDate().toString();
-
-    }
-
 }

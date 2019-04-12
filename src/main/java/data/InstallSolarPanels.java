@@ -63,7 +63,7 @@ public class InstallSolarPanels extends Activity {
     // override the performActivity method to update the user field hasInstalledSolarPanels
 
     @Override
-    public void performActivity(User user) {
+    public void performActivity(User user, Requests requests) {
         this.setDailyCarbonSaved(this.calculateCarbonSaved(user));
 
         // When the solar panels are first installed, no amount of CO2 is saved immediately
@@ -74,7 +74,7 @@ public class InstallSolarPanels extends Activity {
 
         // update user in the database
         try {
-            user = Requests.instance.addActivityRequest(this, user.getUsername());
+            user = requests.addActivityRequest(this, user.getUsername());
 
 
         } catch (ResourceAccessException e) {
