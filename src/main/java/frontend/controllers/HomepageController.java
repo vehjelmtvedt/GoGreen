@@ -57,7 +57,9 @@ public class HomepageController implements Initializable {
     @FXML
     private AnchorPane headerPane;
     @FXML
-    private Label lblName;
+    private Label lblFirstName;
+    @FXML
+    private Label lblLastName;
     @FXML
     private Label goGreen;
     @FXML
@@ -78,6 +80,8 @@ public class HomepageController implements Initializable {
     private Label lblRank;
     @FXML
     private Label lblProgress;
+    @FXML
+    private JFXButton btnRefresh;
     @FXML
     private JFXButton btnProfile;
     @FXML
@@ -109,8 +113,69 @@ public class HomepageController implements Initializable {
     @FXML
     private Circle circleProfile;
 
+    /**.
+     * Update the first name for the label containing the full name of the user
+     * @param newFirstName - new first name value
+     */
+    public void updateFirstName(String newFirstName) {
+        lblFirstName.setText(newFirstName);
+    }
+
+    /**.
+     * Update the last name for the label containing the full name of the user
+     * @param newLastName - new last name value
+     */
+    public void updateLastName(String newLastName) {
+        lblLastName.setText(newLastName);
+    }
+
+    /**.
+     * Update the user information on the homepage
+     * @param user - current logged user
+     * @param logDetails - current login details (assigned to user)
+     */
+    public void updateUser(User user, LoginDetails logDetails) {
+        //update the user and his login details
+        loggedUser = user;
+        loginDetails = logDetails;
+
+        //update the field values on the homepage dashboard
+        circleProfile.setFill(new ImagePattern(
+                new Image("avatars/" + loggedUser.getAvatar() + ".jpg")));
+        lblFirstName.setText(loggedUser.getFirstName().toUpperCase());
+        lblLastName.setText(loggedUser.getLastName().toUpperCase());
+        lblEmail.setText(loggedUser.getEmail());
+        lblLevel.setText(Integer.toString(loggedUser.getProgress().getLevel()));
+        lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
+        lblProgress.setText(loggedUser.getProgress().pointsNeeded()
+                + " Points left");
+        lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
+        lblFriends.setText(Integer.toString(loggedUser.getFriends().size()));
+        lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
+                + " kg of CO2 so far");
+        lblAverageCarbon.setText("Average person saved "
+                + ((int)(Requests.instance.getAverageCO2Saved() * 1000)) / 1000.0
+                + " kg of CO2 so far");
+
+        //update user information for the homepage charts
+        fillPieChart(loggedUser, chartMyActivities);
+        fillBarChart("Your CO2 Savings", barChart);
+        fillWeekChart(loggedUser, weekChart);
+    }
+
+    private void updateLeaderboards() {
+        fillLeaderboards(5, tableTop5);
+        fillLeaderboards(10, tableTop10);
+        fillLeaderboards(25, tableTop25);
+        fillLeaderboards(50, tableTop50);
+        fillLeaderboards(100, tableTop100);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Events.homepageController = this;
+        EditProfilePopUpController.homepageController = this;
+
         popup = new NotificationPopup();
         //add buttons to leader boards list
         leaderboards.add(btnTop5);
@@ -119,14 +184,8 @@ public class HomepageController implements Initializable {
         leaderboards.add(btnTop50);
         leaderboards.add(btnTop100);
 
-        Events.addLeaderboards(leaderboards);
-
-        //Populate leaderboards with entries
-        fillLeaderboards(5, tableTop5);
-        fillLeaderboards(10, tableTop10);
-        fillLeaderboards(25, tableTop25);
-        fillLeaderboards(50, tableTop50);
-        fillLeaderboards(100, tableTop100);
+        //update leaderboards upon clicking refresh button
+        btnRefresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> updateLeaderboards());
 
         //switch leaderboards upon clicking
         btnTop5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -145,32 +204,16 @@ public class HomepageController implements Initializable {
             hideLeaderboards(tableTop100, tableTop5, tableTop10, tableTop25, tableTop50);
         });
 
-        //profile information + greeting messages upon logging in
-        circleProfile.setFill(new ImagePattern(
-                new Image("avatars/" + loggedUser.getAvatar() + ".jpg")));
-        lblName.setText(loggedUser.getFirstName().toUpperCase() + " "
-                + loggedUser.getLastName().toUpperCase());
-        lblEmail.setText(loggedUser.getEmail());
-        lblLevel.setText(Integer.toString(loggedUser.getProgress().getLevel()));
-        lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
-        lblProgress.setText(Double.toString(loggedUser.getProgress().pointsNeeded())
-                + " Points left");
-        lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
-        lblFriends.setText(Integer.toString(loggedUser.getFriends().size()));
-        lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
-                + " kg of CO2 so far");
-        lblAverageCarbon.setText("Average person saved "
-                + ((int)(Requests.instance.getAverageCO2Saved() * 1000)) / 1000.0
-                + " kg of CO2 so far");
+        //update profile information and leaderboards
+        updateUser(loggedUser, loginDetails);
+        updateLeaderboards();
+
+        Events.addLeaderboards(leaderboards);
+        Events.addJfxButtonHover(btnProfile);
+        Events.addJfxButtonHover(btnRefresh);
+
         btnProfile.setOnAction(event -> StageSwitcher.sceneSwitch(Main.getPrimaryStage(),
                 Main.getProfilePage()));
-
-        //charts on the right
-        fillPieChart(loggedUser, chartMyActivities);
-        fillBarChart("Your CO2 Savings", barChart);
-        fillWeekChart(loggedUser, weekChart);
-
-        Events.addJfxButtonHover(btnProfile);
 
         try {
             goGreen.setFont(Main.getReenieBeanie(100));
@@ -193,6 +236,7 @@ public class HomepageController implements Initializable {
     private static void fillPieChart(User user, PieChart chart) {
         ActivityQueries queries = new ActivityQueries(user.getActivities());
 
+        chart.getData().clear();
         chart.setData(FXCollections.observableArrayList(
                 new PieChart.Data("FOOD",
                         queries.filterActivities("Food").size()),
@@ -332,6 +376,7 @@ public class HomepageController implements Initializable {
         XYChart.Series series = new XYChart.Series();
         series.setName(title);
         populateBarChart(series);
+        chart.getData().clear();
         chart.getData().addAll(series);
         chart.setLegendVisible(false);
     }
@@ -340,6 +385,7 @@ public class HomepageController implements Initializable {
         ActivityQueries queries = new ActivityQueries(user.getActivities());
         XYChart.Series series = new XYChart.Series();
         series.getData().addAll(queries.getWeeklyCO2Savings());
+        barChart.getData().clear();
         barChart.getData().addAll(series);
         barChart.setLegendVisible(false);
     }

@@ -10,6 +10,7 @@ import frontend.controllers.ActivitiesController;
 import frontend.controllers.EditProfilePopUpController;
 import frontend.controllers.FriendspageController;
 import frontend.controllers.HomepageController;
+import frontend.controllers.NavPanelController;
 import frontend.controllers.NotificationPanelController;
 import frontend.controllers.ProfilePageController;
 import frontend.controllers.QuestionnaireController;
@@ -72,6 +73,7 @@ public class InputValidation {
             HomepageController.setUser(loggedUser);
             HomepageController.setLoginDetails(loginDetails);
             ActivitiesController.setUser(loggedUser);
+            ActivitiesController.setLoginDetails(loginDetails);
             FriendspageController.setUser(loggedUser);
             FriendspageController.setLoginDetails(loginDetails);
             ProfilePageController.setUser(loggedUser);
@@ -80,6 +82,7 @@ public class InputValidation {
             NotificationPanelController.setLoginDetails(loginDetails);
             EditProfilePopUpController.setUser(loggedUser);
             EditProfilePopUpController.setLoginDetails(loginDetails);
+            NavPanelController.setUser(loggedUser);
 
             //setup .fxml pages after successfully logging in
             try {
