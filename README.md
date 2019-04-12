@@ -43,6 +43,21 @@ run the tests to check if the 90% minimum test coverage criteria is met as well.
 * Maven - simply run the Maven command mvn checkstyle:check. Less than 5 warnings must exist for the build to succeed.
 * IDE - some Java IDEs have Checkstyle plugins. These can also be used to see the Checkstyle warnings & errors.
 
+### Building Jars
+* Server Jar: Simply run the 'mvn package' maven command. This will then appear under target/ as 'GoGreen-1.0.jar'.
+* JavaFX Jar: Run the 'jfx:jar' maven command, which will create an executable .jar file for the client.
+This will then appear under target/jfx/app/ as 'GoGreen-1.0.jar'.
+
+### Running the Client Jar
+java -jar 'GoGreen-1.0.jar'
+
+*Runs the client with connections to localhost*
+
+java -Dremote.url=https://cse38-go-green.herokuapp.com -jar "OOP-Project-0.1-SNAPSHOT-jfx.jar"
+
+*Runs the client with connections to a remote url (in this case, our server running on Heroku)*
+
+
 ### License
 GNU 3.0
 
