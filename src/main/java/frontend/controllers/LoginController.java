@@ -70,8 +70,12 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loginButton.setOnAction(e -> {
             try {
-                InputValidation.signInValidate(usernameField,
+                boolean valid = InputValidation.signInValidate(usernameField,
                         passwordField, mainPane);
+                if (valid) {
+                    usernameField.setText(null);
+                    passwordField.setText(null);
+                }
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

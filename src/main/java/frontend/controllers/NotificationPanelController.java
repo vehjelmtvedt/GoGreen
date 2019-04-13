@@ -64,6 +64,8 @@ public class NotificationPanelController implements Initializable {
     public void fillFriendRequests() {
         User currUser = Requests.instance.loginRequest(loginDetails);
 
+        System.out.println("NEW SIZE OF FRIEND REQUESTS:" + currUser.getFriendRequests().size());
+
         friendsContainer.getChildren().clear();
 
         for (String fromUser : currUser.getFriendRequests()) {

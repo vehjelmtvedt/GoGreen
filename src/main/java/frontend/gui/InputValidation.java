@@ -33,7 +33,7 @@ public class InputValidation {
      * @param passField  password input field
      * @param form       form containing input fields
      */
-    public static void signInValidate(TextField emailField,
+    public static boolean signInValidate(TextField emailField,
                                       PasswordField passField, AnchorPane form) throws IOException {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
@@ -106,9 +106,11 @@ public class InputValidation {
             }
             //Go to homepage after logging in
             StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getHomepage());
+            return true;
         } else {
             Dialog.show("Login failed",
                     "Incorrect credentials. Try again", "DISMISS", "error", false);
+            return false;
         }
     }
 
