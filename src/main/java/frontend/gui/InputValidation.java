@@ -131,79 +131,77 @@ public class InputValidation {
      * Validation for input in sign up form
      *
      * @param nameFields    array of fields containing the user's name
-     * @param usernameField User's username name field
-     * @param emailField    User's email field
-     * @param passField     User's password field
-     * @param passReField   User's re-password field
+     * @param primaryFields fields containing username & email
      * @param ageField      User's age field
      */
-    public static void signUpValidate(JFXTextField[] nameFields,
-                                      JFXTextField usernameField, JFXTextField emailField,
-                                      JFXPasswordField passField, JFXPasswordField passReField,
-                                      JFXTextField ageField,
-                                      int secQuestionId,
-                                      JFXTextField secAnswer) throws IOException {
+    public static boolean signUpValidate(JFXTextField[] nameFields,
+                                      JFXTextField[] primaryFields,
+                                      JFXPasswordField[] passFields, JFXTextField ageField,
+                                      int secQuestionId, JFXTextField secAnswer)
+            throws IOException {
 
-        if (!signUpValidateFields(nameFields, usernameField, secAnswer)) {
-            return;
+        if (!signUpValidateFields(nameFields, primaryFields[1], secAnswer)) {
+            return false;
         }
-        if (!signUpValidatePass(emailField, passField, passReField, ageField)) {
-            return;
+        if (!signUpValidatePass(primaryFields[0], passFields, ageField)) {
+            return false;
         }
 
         //send requests to the server to see if username and password already exist
         //before proceeding to the questionnaire page
-        String username = usernameField.getText();
-        String email = emailField.getText();
+        String username = primaryFields[1].getText();
+        String email = primaryFields[0].getText();
 
         if (Requests.instance.validateUserRequest(username)) {
             Dialog.show("Username Error!",
                     "A user already exists with this username. Use another username",
                     "DISMISS", "error", false);
-            return;
+            return false;
         }
 
         if (Requests.instance.validateUserRequest(email)) {
             Dialog.show("Email Error!", "A user already exists with this email."
                             + "Use another email",
                     "DISMISS", "error", false);
-            return;
+            return false;
         }
 
         if (secQuestionId == -1) {
             Dialog.show("Security Question Error", "You did not specify your security question",
                     "DISMISS", "error", false);
-            return;
+            return false;
         }
 
         User user = new User(nameFields[0].getText(),
                 nameFields[1].getText(),
-                Integer.parseInt(ageField.getText()), emailField.getText(),
-                usernameField.getText(), passField.getText());
+                Integer.parseInt(ageField.getText()), primaryFields[0].getText(),
+                primaryFields[1].getText(), passFields[0].getText());
         user.setSecurityQuestionAnswer(secAnswer.getText());
         user.setSecurityQuestionId(secQuestionId);
 
         QuestionnaireController.setUser(user);
         StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getQuestionnaire());
+
+        return true;
     }
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
                                                 JFXTextField usernameField,
                                                 JFXTextField secAnswer) throws IOException {
-        if (nameFields[0].getText().isEmpty()) {
+        if (nameFields[0].getText() == null || nameFields[0].getText().equals("")) {
             Dialog.show("Form Error!", "Please enter your First Name",
                     "DISMISS", "error", false);
             return false;
         }
-        if (nameFields[1].getText().isEmpty()) {
+        if (nameFields[1].getText() == null || nameFields[1].getText().equals("")) {
             Dialog.show("Form Error!", "Please enter your Last Name", "DISMISS", "error", false);
             return false;
         }
-        if (usernameField.getText().isEmpty()) {
+        if (usernameField.getText() == null || usernameField.getText().equals("")) {
             Dialog.show("Form Error!", "Please enter a username", "DISMISS", "error", false);
             return false;
         }
-        if (secAnswer.getText().isEmpty()) {
+        if (secAnswer.getText() == null || secAnswer.getText().equals("")) {
             Dialog.show("Form Error!", "Please enter an answer", "DISMISS", "error", false);
             return false;
         }
@@ -211,27 +209,25 @@ public class InputValidation {
     }
 
     private static boolean signUpValidatePass(JFXTextField emailField,
-                                              JFXPasswordField passField,
-                                              JFXPasswordField passReField,
+                                              JFXPasswordField[] passFields,
                                               JFXTextField ageField) throws IOException {
-        if (emailField.getText().isEmpty()
+        if (emailField.getText() == null
                 || !InputValidationTool.validateEmail(emailField.getText())) {
             Dialog.show("Form Error!", "Please enter a valid email", "DISMISS", "error", false);
             return false;
         }
 
-        if (passField.getText().isEmpty()
-                || !InputValidationTool.validatePassword(passField.getText())) {
+        if (passFields[0].getText() == null
+                || !InputValidationTool.validatePassword(passFields[0].getText())) {
             Dialog.show("Form Error!", "Please enter a valid password", "DISMISS", "error", false);
             return false;
         }
-        if (passReField.getText().isEmpty()
-                || !passReField.getText().equals(passField.getText())) {
+        if (passFields[1].getText() == null || passFields[1].getText().equals("")
+                || !passFields[1].getText().equals(passFields[0].getText())) {
             Dialog.show("Form Error!", "Passwords do not match", "DISMISS", "error", false);
             return false;
         }
-        if (ageField.getText().isEmpty()
-                || !InputValidationTool.validateAge(ageField.getText())  ) {
+        if (ageField.getText() == null || !InputValidationTool.validateAge(ageField.getText())) {
             Dialog.show("Form Error!", "Please enter a valid age", "DISMISS", "error", false);
             return false;
         }

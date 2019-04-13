@@ -116,31 +116,35 @@ public class SignupController implements Initializable {
         timeline.play();
 
         //create arrays for fields to clean up code usage in Input Validation
-        JFXTextField[] nameFields = new JFXTextField[2];
-        JFXPasswordField[] passFields = new JFXPasswordField[2];
+        JFXTextField[] nameFields = new JFXTextField[2]; //first & last name
+        JFXPasswordField[] passFields = new JFXPasswordField[2]; // passwords
         nameFields[0] = firstNameField;
         nameFields[1] = lastNameField;
         passFields[0] = passwordField;
         passFields[1] = confirmPasswordField;
 
+        JFXTextField[] primaryFields = new JFXTextField[2]; //email && username
+        primaryFields[0] = emailField;
+        primaryFields[1] = usernameField;
+
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
         signupButton.setOnAction(e -> {
             try {
-                InputValidation.signUpValidate(nameFields, usernameField,
-                        emailField, passwordField,
-                        confirmPasswordField, ageField,
-                        getSecurityQuestionid(), secAnswer);
+                boolean succeeded = InputValidation.signUpValidate(nameFields, primaryFields,
+                        passFields, ageField, getSecurityQuestionid(), secAnswer);
 
-                //Reset fields
-                firstNameField.setText(null);
-                lastNameField.setText(null);
-                emailField.setText(null);
-                ageField.setText(null);
-                usernameField.setText(null);
-                passwordField.setText(null);
-                confirmPasswordField.setText(null);
-                secAnswer.setText(null);
+                //Reset fields if everything went alright
+                if (succeeded) {
+                    firstNameField.setText(null);
+                    lastNameField.setText(null);
+                    emailField.setText(null);
+                    ageField.setText(null);
+                    usernameField.setText(null);
+                    passwordField.setText(null);
+                    confirmPasswordField.setText(null);
+                    secAnswer.setText(null);
+                }
 
             } catch (IOException e1) {
                 e1.printStackTrace();
