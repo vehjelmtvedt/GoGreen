@@ -295,8 +295,8 @@ public class DbService {
         addAchievement(returned, AchievementsLogic.checkLevel(returned),
                 DateUtils.instance.dateToday());
 
-        //checks the larboards
-        addAchievement(returned , checkleaderbaords(returned) , DateUtils.instance.dateToday());
+        //checks the leaderboards
+        addAchievement(returned , checkLeaderboards(returned) , DateUtils.instance.dateToday());
 
         returned.getProgress().hasChangedCheck();
 
@@ -582,7 +582,7 @@ public class DbService {
      * @param user user to check
      * @return array of ids
      */
-    public ArrayList<Integer> checkleaderbaords(User user) {
+    public ArrayList<Integer> checkLeaderboards(User user) {
 
         ArrayList<Integer> results = new ArrayList();
 
