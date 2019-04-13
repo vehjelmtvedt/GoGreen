@@ -147,13 +147,44 @@
     "_class": "data.Achievement",
     "id": 24,
     "name": "Use the train at least once.",
-    "bonus": 2000
+    "bonus": 100
   },
   {
     "_class": "data.Achievement",
     "id": 25,
     "name": "Use the train at least 5 times.",
-    "bonus": 2000
+    "bonus": 500
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 26,
+    "name": "Reach Rank 10 in the leaderboards",
+    "bonus": 500
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 27,
+    "name": "Reach Rank 5 in the leaderboards",
+    "bonus": 700
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 28,
+    "name": "Recycle Paper once",
+    "bonus": 100
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 29,
+    "name": "Recycle Plastic once",
+    "bonus": 100
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 30,
+    "name": "Lower Home Temperature",
+    "bonus": 100
   }
+
 
 ]

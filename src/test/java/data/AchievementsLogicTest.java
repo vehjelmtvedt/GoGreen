@@ -15,6 +15,12 @@ public class AchievementsLogicTest {
     Activity activity6 = new UseBikeInsteadOfCar();
 
 
+    InstallSolarPanels installSolarPanels = new InstallSolarPanels();
+    RecyclePlastic recyclePlastic = new RecyclePlastic();
+    RecyclePaper recyclePaper = new RecyclePaper();
+    LowerHomeTemperature lowerHomeTemperature = new LowerHomeTemperature();
+
+
     User user = new User("Active", "User", 20, "active_user@email.com", "active_user", "pwd123");
 
 
@@ -177,5 +183,25 @@ public class AchievementsLogicTest {
 
         Assert.assertNotNull(achievementsLogic);
 
+    }
+
+    @Test
+    public void checkotherActivities() {
+        Assert.assertTrue(AchievementsLogic.checkotherActivities(user , installSolarPanels).contains(12));
+     }
+
+    @Test
+    public void checkotherActivities1() {
+        Assert.assertTrue(AchievementsLogic.checkotherActivities(user , recyclePaper).contains(28));
+    }
+
+
+    @Test
+    public void checkotherActivities2() {
+        Assert.assertTrue(AchievementsLogic.checkotherActivities(user , lowerHomeTemperature).contains(30));
+    }
+    @Test
+    public void checkotherActivities3() {
+        Assert.assertTrue(AchievementsLogic.checkotherActivities(user , recyclePlastic).contains(29));
     }
 }

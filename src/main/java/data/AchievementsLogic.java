@@ -39,9 +39,6 @@ public class AchievementsLogic {
         }
 
 
-        //activityQueries.filterActivitiesByType(); // by type
-        //activityQueries.filterActivities(); // by category
-
         //Using  bus often id 5
         if (activity instanceof UseBusInsteadOfCar
                 && activityQueries.filterActivitiesByType(activity.getClass()).size() > 4) {
@@ -88,7 +85,6 @@ public class AchievementsLogic {
      * @param activity current activity
      */
     public static ArrayList<Integer> checkFoodActivity(User user, Activity activity) {
-
 
 
         ArrayList<Integer> results = new ArrayList();
@@ -158,11 +154,6 @@ public class AchievementsLogic {
         }
 
 
-        //todo
-        //Being on the top of the board id 10
-        //Being second on top of the board id 11
-        //Be third on top of the larboard 18
-        //Getting solar Power 12
         return results;
     }
 
@@ -196,6 +187,37 @@ public class AchievementsLogic {
         if (user.getProgress().getLevel() == 8) {
             results.add(23);
         }
+        return results;
+    }
+
+    /**
+     * checks if the activity completes an achievement.
+     *
+     * @param user the user
+     * @param activity to check
+     * @return array of ids
+     */
+    public static ArrayList<Integer> checkotherActivities(User user, Activity activity) {
+        ArrayList<Integer> results = new ArrayList<>();
+
+        // solar panels 12
+        if (activity instanceof InstallSolarPanels) {
+            results.add(12);
+        }
+
+        //Recycle Paper 28
+        if (activity instanceof RecyclePaper) {
+            results.add(28);
+        }
+        //Recycle plastic 29
+        if (activity instanceof RecyclePlastic) {
+            results.add(29);
+        }
+        //Lower Home Temperature
+        if (activity instanceof LowerHomeTemperature) {
+            results.add(30);
+        }
+
         return results;
     }
 
