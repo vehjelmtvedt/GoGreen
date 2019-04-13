@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -59,7 +60,7 @@ public class NotificationPopup {
                              AnchorPane headerPane, String[] popupText) throws IOException {
         Label heading = new Label(popupText[0]);
         heading.setFont(Main.getRobotoBold(24));
-        Label body = new Label(popupText[1]);
+        Text body = new Text(popupText[1]);
         body.setFont(Main.getRobotoThin(19));
 
         ImageView image = new ImageView(new Image("frontend/Pics/" + popupText[2] + ".png"));
@@ -67,6 +68,7 @@ public class NotificationPopup {
         image.setFitWidth(40);
         AnchorPane content = new AnchorPane();
         content.getChildren().addAll(heading, body, image);
+        content.setStyle("-fx-background-color: #c6c6c6;");
 
         AnchorPane.setTopAnchor(heading, 10.0);
         AnchorPane.setLeftAnchor(heading, 10.0);
@@ -77,7 +79,7 @@ public class NotificationPopup {
 
 
         drawer.setSidePane(content);
-        drawer.setDefaultDrawerSize(270);
+        drawer.setDefaultDrawerSize(320);
         drawer.setMinHeight(130);
         drawer.setDirection(JFXDrawer.DrawerDirection.RIGHT);
         mainPane.getChildren().addAll(drawer);
