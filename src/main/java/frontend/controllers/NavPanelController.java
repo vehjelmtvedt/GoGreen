@@ -1,14 +1,12 @@
 package frontend.controllers;
 
 import data.LoginDetails;
-import data.User;
 import frontend.gui.Events;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +14,6 @@ import java.util.ResourceBundle;
 
 public class NavPanelController implements Initializable {
     public static ProfilePageController profilePageController;
-    private static User thisUser;
     private static LoginDetails thisLoginDetails;
 
     @FXML
@@ -27,14 +24,6 @@ public class NavPanelController implements Initializable {
     private Button activity;
     @FXML
     private Button friends;
-    @FXML
-    private ImageView imgHome;
-    @FXML
-    private ImageView imgProfile;
-    @FXML
-    private ImageView imgActivity;
-    @FXML
-    private ImageView imgFriends;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,10 +45,6 @@ public class NavPanelController implements Initializable {
             StageSwitcher.sceneSwitch(
                     Main.getPrimaryStage(), Main.getProfilePage());
         });
-    }
-
-    public static void setUser(User user) {
-        thisUser = user;
     }
 
     public static void setLoginDetails(LoginDetails loginDetails) {
