@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -18,7 +19,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <AnchorPane fx:id="main" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.FriendspageController">
     <children>
       <AnchorPane layoutY="198.0" prefHeight="266.0" prefWidth="963.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="198.0">
@@ -92,7 +92,7 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <JFXDrawer fx:id="addFriendDrawer" defaultDrawerSize="292.0" direction="TOP" layoutX="675.0" layoutY="72.0" prefHeight="248.0" prefWidth="319.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="61.0">
+      <JFXDrawer fx:id="addFriendDrawer" defaultDrawerSize="292.0" direction="TOP" layoutX="675.0" layoutY="93.0" prefHeight="216.0" prefWidth="322.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="93.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="319.0">
                <children>
