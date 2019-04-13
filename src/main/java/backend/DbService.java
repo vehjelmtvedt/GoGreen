@@ -399,9 +399,11 @@ public class DbService {
      * @return the updated User
      */
     public User editProfile(User user, String fieldName, Object newValue) {
+        System.out.println(fieldName);
         try {
             if (fieldName.equals("password")) {
                 newValue = encodePassword((String) newValue);
+                System.out.println(newValue);
             }
             Field field = user.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);

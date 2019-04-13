@@ -155,8 +155,7 @@ public class UserRequestHandler {
 
         if (user.getSecurityQuestionAnswer().equals(answer)
                 && user.getSecurityQuestionId() == questionid) {
-            user.setPassword(newPass);
-            dbService.addUser(user);
+            dbService.editProfile(user, "password", newPass);
             return true;
         }
 
