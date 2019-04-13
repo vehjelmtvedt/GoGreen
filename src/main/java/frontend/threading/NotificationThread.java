@@ -42,6 +42,16 @@ public class NotificationThread extends ScheduledService<UserPendingData> {
                     e.printStackTrace();
                 }
             }
+
+            //Check for new achievements
+            if (this.getValue().getAchievements().size() != 0) {
+                try {
+                    System.out.println("NEW ACHIEVEMENT");
+                    Notifications.newAchievement(this.getValue().getAchievements());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
         // failed
