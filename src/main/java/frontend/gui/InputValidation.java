@@ -21,7 +21,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import tools.DateUtils;
 import tools.InputValidationTool;
 import tools.Requests;
@@ -40,10 +39,9 @@ public class InputValidation {
      *
      * @param emailField email input field
      * @param passField  password input field
-     * @param form       form containing input fields
      */
     public static boolean signInValidate(TextField emailField,
-                                      PasswordField passField, AnchorPane form) throws IOException {
+                                      PasswordField passField) throws IOException {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
 
@@ -138,19 +136,18 @@ public class InputValidation {
      * @param passField     User's password field
      * @param passReField   User's re-password field
      * @param ageField      User's age field
-     * @param form          Form containing input fields
      */
     public static void signUpValidate(JFXTextField[] nameFields,
                                       JFXTextField usernameField, JFXTextField emailField,
                                       JFXPasswordField passField, JFXPasswordField passReField,
                                       JFXTextField ageField,
                                       int secQuestionId,
-                                      JFXTextField secAnswer, AnchorPane form) throws IOException {
+                                      JFXTextField secAnswer) throws IOException {
 
-        if (!signUpValidateFields(nameFields, usernameField, secAnswer, form)) {
+        if (!signUpValidateFields(nameFields, usernameField, secAnswer)) {
             return;
         }
-        if (!signUpValidatePass(emailField, passField, passReField, ageField, form)) {
+        if (!signUpValidatePass(emailField, passField, passReField, ageField)) {
             return;
         }
 
@@ -192,8 +189,7 @@ public class InputValidation {
 
     private static boolean signUpValidateFields(JFXTextField[] nameFields,
                                                 JFXTextField usernameField,
-                                                JFXTextField secAnswer,
-                                                AnchorPane form) throws IOException {
+                                                JFXTextField secAnswer) throws IOException {
         if (nameFields[0].getText().isEmpty()) {
             Dialog.show("Form Error!", "Please enter your First Name",
                     "DISMISS", "error", false);
@@ -217,8 +213,7 @@ public class InputValidation {
     private static boolean signUpValidatePass(JFXTextField emailField,
                                               JFXPasswordField passField,
                                               JFXPasswordField passReField,
-                                              JFXTextField ageField,
-                                              AnchorPane form) throws IOException {
+                                              JFXTextField ageField) throws IOException {
         if (emailField.getText().isEmpty()
                 || !InputValidationTool.validateEmail(emailField.getText())) {
             Dialog.show("Form Error!", "Please enter a valid email", "DISMISS", "error", false);

@@ -98,8 +98,7 @@ public class LoginController implements Initializable {
 
         loginButton.setOnAction(e -> {
             try {
-                boolean valid = InputValidation.signInValidate(usernameField,
-                        passwordField, mainPane);
+                boolean valid = InputValidation.signInValidate(usernameField, passwordField);
                 if (valid) {
                     usernameField.setText(null);
                     passwordField.setText(null);
