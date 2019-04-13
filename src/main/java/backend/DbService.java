@@ -192,15 +192,15 @@ public class DbService {
             requestingUser.addFriend(acceptingUser.getUsername());
             acceptingUser.addFriend(requestingUser.getUsername());
             acceptingUser.deleteFriendRequest(requester);
-            
+
             // Update changes in database
             users.save(requestingUser);
             users.save(acceptingUser);
 
             //checks if an achievement is completed by adding a friend
-            addAchievement(acceptingUser , AchievementsLogic.checkOther(acceptingUser),
-                     DateUtils.instance.dateToday());
-            addAchievement(requestingUser , AchievementsLogic.checkOther(requestingUser),
+            addAchievement(acceptingUser, AchievementsLogic.checkOther(acceptingUser),
+                    DateUtils.instance.dateToday());
+            addAchievement(requestingUser, AchievementsLogic.checkOther(requestingUser),
                     DateUtils.instance.dateToday());
 
             return true;
@@ -220,7 +220,7 @@ public class DbService {
         User sender = getUserByUsername(senderUsername);
 
         if (sender != null && sender.getFriendRequests().contains(receiverUsername)) {
-            acceptFriendRequest(receiverUsername,senderUsername);
+            acceptFriendRequest(receiverUsername, senderUsername);
         }
 
         User receiver = getUserByUsername(receiverUsername);
@@ -279,19 +279,26 @@ public class DbService {
         updateTotalCo2SavedStatistics(returned);
 
         // check if an achievement is completed by this activity
-        addAchievement(returned , AchievementsLogic.checkFoodActivity(
-                returned, activity) , activity.getDate());
-        addAchievement(returned , AchievementsLogic.checkTranspostActivity(
-                returned, activity) , activity.getDate());
-        addAchievement(returned , AchievementsLogic.checkTranspostActivity1(
-                returned, activity) , activity.getDate());
+        addAchievement(returned, AchievementsLogic.checkFoodActivity(
+                returned, activity), activity.getDate());
+        addAchievement(returned, AchievementsLogic.checkTranspostActivity(
+                returned, activity), activity.getDate());
+        addAchievement(returned, AchievementsLogic.checkTranspostActivity1(
+                returned, activity), activity.getDate());
+        addAchievement(returned , AchievementsLogic.checkotherActivities(
+                returned , activity ), activity.getDate());
 
         // adds points to the user
-        addCO2Points(returned , activity.getCarbonSaved());
+        addCO2Points(returned, activity.getCarbonSaved());
 
         //checks the users level
-        addAchievement(returned , AchievementsLogic.checkLevel(returned),
+        addAchievement(returned, AchievementsLogic.checkLevel(returned),
                 DateUtils.instance.dateToday());
+
+        //checks the leaderboards
+        addAchievement(returned , checkLeaderboards(returned) , DateUtils.instance.dateToday());
+
+        //returned.getProgress().hasChangedCheck();
 
         addUser(returned);
 
@@ -466,7 +473,7 @@ public class DbService {
         userStatistics.save(allStatistics);
 
         //checks the users level
-        addAchievement(user , AchievementsLogic.checkLevel(user) ,
+        addAchievement(user, AchievementsLogic.checkLevel(user),
                 DateUtils.instance.dateToday());
 
     }
@@ -489,7 +496,7 @@ public class DbService {
      * this method checks every achievements if its already in the List, if not add it.
      *
      * @param user current user
-     * @param ids   achievements to check
+     * @param ids  achievements to check
      * @param date date to add
      */
     public void addAchievement(User user, ArrayList<Integer> ids, Date date) {
@@ -520,20 +527,11 @@ public class DbService {
 
                 String idstring = Integer.toString(id);
 
-                System.out.println(idstring + "looking for this ");
-
                 List<Achievement> list = getAchievements();
 
                 user.getProgress().addPoints(list.get(id).getBonus());
 
-                System.out.println("Added: id " + userAchievement.getId()
-                        + " list.get(id).getBonus() points "
-                        +
-                        " now have " + user.getProgress().getAchievements().size()
-                        +
-                        " competed" + "this user now has "
-                        +
-                        user.getProgress().getPoints() + " points");
+                //user.getProgress().hasChangedCheck();
             }
         }
 
@@ -543,20 +541,23 @@ public class DbService {
     /**
      * addes to the points the amount of co2 save.
      * every one co2 unite is worth 1 point
-     * @param user user to add points to
+     *
+     * @param user        user to add points to
      * @param carbonsaved co2 saved
      */
-    public void addCO2Points(User user , double carbonsaved) {
+    public void addCO2Points(User user, double carbonsaved) {
 
-        System.out.println("In addCO2Points   going to add " + carbonsaved);
+        //user.getProgress().hasChangedCheck();
 
         user.getProgress().setPoints(user.getProgress().getPoints() + carbonsaved * 300);
 
 
     }
 
-    /**.
+    /**
+     * .
      * Gets the rank in terms of CO2 saved of the specified User
+     *
      * @param identifier - Identifier of the User (either e-mail or username)
      * @return - Rank of the User (integer)
      */
@@ -571,9 +572,45 @@ public class DbService {
         double carbon = getUser(identifier).getTotalCarbonSaved();
 
         return (int) mongoTemplate.count(new Query( // Get count of matching documents
-                Criteria.where("totalCarbonSaved") // Compare totalCarbonSaved of other Users
-                .gt(carbon)), // Carbon Saved of queried Users should be greater
+                        Criteria.where("totalCarbonSaved") // Compare totalCarbonSaved of other Users
+                                .gt(carbon)), // Carbon Saved of queried Users should be greater
                 User.class) // Search in User collection
                 + 1; // Add 1 (to count in the User itself)
     }
+
+    /**
+     * for leader boards achievement logic.
+     *
+     * @param user user to check
+     * @return array of ids
+     */
+    public ArrayList<Integer> checkLeaderboards(User user) {
+
+        ArrayList<Integer> results = new ArrayList();
+
+        //Reach the top ten 26
+        if (getTopUsers(10).contains(user)) {
+            results.add(26);
+        }
+        //Reach the top five Users id 28
+        if (getTopUsers(5).contains(user)) {
+            results.add(27);
+        }
+        //Reach third place on the leader board id 18
+        if (getTopUsers(3).contains(user)) {
+            results.add(18);
+        }
+        //Reach second place on the leader board id 11
+        if (getTopUsers(2).contains(user)) {
+            results.add(11);
+        }
+        //Reach the top of the leader board id 10
+        if (getTopUsers(1).contains(user)) {
+            results.add(10);
+        }
+
+        return results;
+
+    }
+
 }
