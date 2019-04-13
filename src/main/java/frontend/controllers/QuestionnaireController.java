@@ -113,6 +113,7 @@ public class QuestionnaireController implements Initializable {
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+
         //add required events
         Events.addJfxButtonHover(submitButton);
 

@@ -3,17 +3,14 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-
-<!--suppress ALL -->
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="900.0" prefWidth="1400.0" stylesheets="@../Stylesheets/Style.css"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="frontend.controllers.LoginController">
     <AnchorPane fx:id="graphics" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity"
                 minWidth="-Infinity" prefHeight="900.0" prefWidth="542.0" AnchorPane.bottomAnchor="0.0"
@@ -36,7 +33,7 @@
                 <Font size="30.0"/>
             </font>
         </Label>
-        <Label fx:id="line2" layoutX="113.0" layoutY="525.0" prefHeight="68.0" prefWidth="320.0"
+        <Label fx:id="line2" layoutX="111.0" layoutY="525.0" prefHeight="68.0" prefWidth="320.0"
                text="○ Compare with friends" textFill="WHITE">
             <font>
                 <Font size="25.0"/>
@@ -65,8 +62,8 @@
                 <Font size="25.0"/>
             </font>
         </Label>
-        <Label fx:id="lblTotalUsers" layoutX="190.0" layoutY="795.0" prefHeight="30.0" prefWidth="320.0"
-               text="Users" textFill="WHITE">
+        <Label fx:id="lblTotalUsers" layoutX="190.0" layoutY="795.0" prefHeight="30.0" prefWidth="320.0" text="Users"
+               textFill="WHITE">
             <font>
                 <Font size="25.0"/>
             </font>
@@ -78,8 +75,9 @@
             </font>
         </Label>
     </AnchorPane>
-    <AnchorPane fx:id="fieldPane" layoutX="667.0" layoutY="108.0" prefHeight="793.0" prefWidth="656.0"
-                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="108.0">
+    <!--suppress JavaFxUnresolvedFxIdReference -->
+    <AnchorPane fx:id="fieldPane" layoutX="656.0" layoutY="227.0" prefHeight="673.0" prefWidth="656.0"
+                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="656.0" AnchorPane.topAnchor="227.0">
         <JFXButton fx:id="loginButton" contentDisplay="CENTER" layoutX="80.0" layoutY="363.0" prefHeight="74.0"
                    prefWidth="200.0" ripplerFill="WHITE"
                    style="-fx-background-radius: 30px; -fx-border-color: #AFCF2C#AFCF2C; -fx-border-radius: 30px; -fx-border-width: 5px;"
@@ -114,8 +112,8 @@
                 <Cursor fx:constant="TEXT"/>
             </cursor>
         </JFXTextField>
-        <JFXPasswordField fx:id="passwordField" focusColor="#379b1e" layoutX="84.0" layoutY="281.0"
-                          prefHeight="36.0" prefWidth="410.0" promptText="Password" AnchorPane.leftAnchor="91.0"
+        <JFXPasswordField fx:id="passwordField" focusColor="#379b1e" layoutX="84.0" layoutY="281.0" prefHeight="36.0"
+                          prefWidth="410.0" promptText="Password" AnchorPane.leftAnchor="91.0"
                           AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="281.0">
             <cursor>
                 <Cursor fx:constant="TEXT"/>

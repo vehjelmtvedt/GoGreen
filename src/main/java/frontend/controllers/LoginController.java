@@ -110,7 +110,9 @@ public class LoginController implements Initializable {
 
         });
 
+        //add required filters
         Events.addHoverOnFilter(forgotPass);
+        Events.addLoginHover(loginButton);
 
         forgotPass.setOnMouseClicked(e -> {
             try {

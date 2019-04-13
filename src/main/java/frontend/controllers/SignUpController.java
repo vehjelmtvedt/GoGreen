@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import frontend.gui.Events;
 import frontend.gui.InputValidation;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
@@ -161,6 +162,9 @@ public class SignUpController implements Initializable {
             }
         });
         fillSecurityQuestions(secQuestion);
+
+        //add required events
+        Events.addLoginHover(signUpButton);
     }
 
     /**

@@ -87,6 +87,15 @@ public class Events {
         button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> button.setStyle("-fx-background-color: transparent;"));
     }
 
+    /**.
+     * Add hover events for the login/sign-up pages
+     * @param button - button to add events to
+     */
+    public static void addLoginHover(JFXButton button) {
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> button.setUnderline(true));
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> button.setUnderline(false));
+    }
+
     /**
      * .
      * Add hover event for navigation panel buttons

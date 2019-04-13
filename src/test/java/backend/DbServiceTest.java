@@ -453,4 +453,46 @@ public class DbServiceTest {
     public void getUserRankNull() {
         assertEquals(dbService.getUserRank("asdfg"),-1);
     }
+
+    @Test
+    public void testCheckLeaderBoardsTop1() {
+        User user = dbService.getTopUsers(1).get(0);
+        ArrayList<Integer> result = dbService.checkLeaderboards(user);
+        Assert.assertTrue(result.contains(10));
+    }
+
+    @Test
+    public void testCheckLeaderBoardsTop2() {
+        User user = dbService.getTopUsers(2).get(1);
+        ArrayList<Integer> result = dbService.checkLeaderboards(user);
+        Assert.assertTrue(result.contains(11));
+    }
+
+    @Test
+    public void testCheckLeaderBoardsTop3() {
+        User user = dbService.getTopUsers(3).get(2);
+        ArrayList<Integer> result = dbService.checkLeaderboards(user);
+        Assert.assertTrue(result.contains(18));
+    }
+
+    @Test
+    public void testCheckLeaderBoardsTop5() {
+        User user = dbService.getTopUsers(5).get(4);
+        ArrayList<Integer> result = dbService.checkLeaderboards(user);
+        Assert.assertTrue(result.contains(27));
+    }
+
+    @Test
+    public void testCheckLeaderBoardsTop10() {
+        User user = dbService.getTopUsers(10).get(9);
+        ArrayList<Integer> result = dbService.checkLeaderboards(user);
+        Assert.assertTrue(result.contains(26));
+    }
+
+    @Test
+    public void testCheckLeaderBoardsNone() {
+        User user = dbService.getTopUsers(11).get(10);
+        ArrayList<Integer> result = dbService.checkLeaderboards(user);
+        Assert.assertTrue(result.isEmpty());
+    }
 }
