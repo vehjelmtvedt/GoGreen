@@ -23,17 +23,14 @@ public class FriendRequestController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         btnAccept.setOnAction(e -> {
-            Requests.instance.acceptFriendRequest(thisUsername, lblUsername.getText());
-            //Delete the friend request here
-            NotificationPanelController panelController = new NotificationPanelController();
-            panelController.deleteFriendRequest(lblUsername.getText());
+            Requests.instance.acceptFriendRequest(lblUsername.getText(), thisUsername);
+            //Delete the friend request h
         });
 
         btnDecline.setOnAction(e -> {
-            Requests.instance.rejectFriendRequest(thisUsername, lblUsername.getText());
+            Requests.instance.rejectFriendRequest(lblUsername.getText(), thisUsername);
             //Delete the friend request here
-            NotificationPanelController panelController = new NotificationPanelController();
-            panelController.deleteFriendRequest(lblUsername.getText());
+
         });
 
     }
@@ -49,5 +46,4 @@ public class FriendRequestController implements Initializable {
     public static void setThisUsername(String username) {
         thisUsername = username;
     }
-
 }

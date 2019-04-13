@@ -6,14 +6,7 @@ import data.InstallSolarPanels;
 import data.LoginDetails;
 import data.User;
 
-import frontend.controllers.ActivitiesController;
-import frontend.controllers.EditProfilePopUpController;
-import frontend.controllers.FriendspageController;
-import frontend.controllers.HomepageController;
-import frontend.controllers.NavPanelController;
-import frontend.controllers.NotificationPanelController;
-import frontend.controllers.ProfilePageController;
-import frontend.controllers.QuestionnaireController;
+import frontend.controllers.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -80,6 +73,7 @@ public class InputValidation {
             EditProfilePopUpController.setUser(loggedUser);
             EditProfilePopUpController.setLoginDetails(loginDetails);
             NavPanelController.setUser(loggedUser);
+            FriendRequestController.setThisUsername(loggedUser.getUsername());
 
             //setup .fxml pages after successfully logging in
             try {

@@ -1,6 +1,7 @@
 package frontend.threading;
 
 import data.UserPendingData;
+import frontend.controllers.NotificationPanelController;
 import frontend.gui.Notifications;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
@@ -13,6 +14,9 @@ public class NotificationThread extends ScheduledService<UserPendingData> {
     private static final int sleepTimeSeconds = 5;
 
     private SyncUserTask syncUserTask;
+
+    public static NotificationPanelController notificationPanelController;
+
 
     /**.
      * Creates a new NotificationThread for the specified User
@@ -32,6 +36,7 @@ public class NotificationThread extends ScheduledService<UserPendingData> {
             if (this.getValue().getFriendRequests().size() != 0) {
                 try {
                     Notifications.friendRequest(this.getValue().getFriendRequests());
+                    notificationPanelController.fillFriendRequests();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

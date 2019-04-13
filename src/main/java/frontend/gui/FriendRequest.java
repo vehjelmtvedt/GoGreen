@@ -16,7 +16,7 @@ public class FriendRequest {
      * @param fromUser - the username that send a request
      * @throws IOException - if something loads incorrectly
      */
-    public void newFriendRequest(VBox container, String fromUser, int parity) throws IOException {
+    public void newFriendRequest(VBox container, String fromUser) throws IOException {
         FXMLLoader requestLoader = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/FriendRequest.fxml"));
         Parent request = requestLoader.load();

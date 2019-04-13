@@ -5,6 +5,7 @@ import data.User;
 import frontend.gui.Events;
 import frontend.gui.FriendRequest;
 import frontend.gui.Main;
+import frontend.threading.NotificationThread;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,11 +42,10 @@ public class NotificationPanelController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        int count = 0;
-        for (String fromUser : loggedUser.getFriendRequests()) {
-            ++count;
-            addFriendRequest(friendsContainer, fromUser, count);
-        }
+        NotificationThread.notificationPanelController = this;
+
+
+        fillFriendRequests();
 
         markAllRead.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
             markAllRead.setUnderline(true);
@@ -60,10 +61,22 @@ public class NotificationPanelController implements Initializable {
         friendsContainerCopy = friendsContainer;
     }
 
-    private void addFriendRequest(VBox container, String fromUser, int parity) {
+    public void fillFriendRequests() {
+        User currUser = Requests.instance.loginRequest(loginDetails);
+
+        friendsContainer.getChildren().clear();
+
+        for (String fromUser : currUser.getFriendRequests()) {
+            addFriendRequest(friendsContainer, fromUser);
+        }
+        setUser(currUser);
+    }
+
+
+    private void addFriendRequest(VBox container, String fromUser) {
         FriendRequest friendRequest = new FriendRequest();
         try {
-            friendRequest.newFriendRequest(container, fromUser, parity);
+            friendRequest.newFriendRequest(container, fromUser);
         } catch (IOException exp) {
             System.out.println("Something went wrong");
         }
@@ -72,7 +85,7 @@ public class NotificationPanelController implements Initializable {
     public void deleteFriendRequest(String username) {
         Node old = friendsContainer.lookup("#" + username);
         System.out.println("Removing node: " + old.toString());
-        friendsContainer.getChildren().clear();
+        friendsContainer.getChildren().remove(old);
     }
 
 
