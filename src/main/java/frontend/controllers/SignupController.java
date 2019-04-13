@@ -97,7 +97,7 @@ public class SignupController implements Initializable {
                 InputValidation.signUpValidate(nameFields, usernameField,
                         emailField, passwordField,
                         confirmPasswordField, ageField,
-                        getSecurityQuestionid(), secAnswer);
+                        getSecurityQuestionid(), secAnswer, mainPane);
 
                 //Reset fields
                 firstNameField.setText(null);

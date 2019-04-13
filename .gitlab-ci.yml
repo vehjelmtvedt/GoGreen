@@ -71,3 +71,12 @@ full-report:
       - target/site/
   only:
     - master
+    
+# Deploys to Heroku
+heroku-deploy:
+  stage: deploy
+  script:
+    - echo "Deploy to Heroku"
+    - mvn heroku:deploy
+  only:
+    - master

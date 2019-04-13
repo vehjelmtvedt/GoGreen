@@ -1,5 +1,6 @@
 package frontend.controllers;
 
+import data.User;
 import frontend.gui.Events;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
@@ -12,16 +13,15 @@ import java.util.ResourceBundle;
 
 
 public class NavPanelController implements Initializable {
+    public static ProfilePageController profilePageController;
+    private static User thisUser;
 
     @FXML
     private Button myProfile;
-
     @FXML
     private Button home;
-
     @FXML
     private Button activity;
-
     @FXML
     private Button friends;
 
@@ -40,8 +40,14 @@ public class NavPanelController implements Initializable {
                 Main.getPrimaryStage(), Main.getActivities()));
         friends.setOnAction(e -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getFriendsPage()));
-        myProfile.setOnAction(e -> StageSwitcher.sceneSwitch(
-                Main.getPrimaryStage() , Main.getProfilePage())
-        );
+        myProfile.setOnAction(e -> {
+            profilePageController.updateUser(thisUser);
+            StageSwitcher.sceneSwitch(
+                    Main.getPrimaryStage(), Main.getProfilePage());
+        });
+    }
+
+    public static void setUser(User user) {
+        thisUser = user;
     }
 }

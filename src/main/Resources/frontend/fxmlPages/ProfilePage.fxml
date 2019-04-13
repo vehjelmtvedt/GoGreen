@@ -94,7 +94,7 @@
                                                 </Label>
                                                 <Label fx:id="userName" minWidth="91.0" prefHeight="23.0" prefWidth="245.0" text="UserName_Placeholder" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                 <Label fx:id="email" minWidth="102.0" prefHeight="23.0" prefWidth="242.0" text="Email_Placeholder" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label fx:id="lastseen" minWidth="194.0" prefHeight="23.0" prefWidth="245.0" text="Last Seen_Placeholder" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <Label fx:id="lastSeen" minWidth="194.0" prefHeight="23.0" prefWidth="245.0" text="Last Seen_Placeholder" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                                 <Label text="Last Seen:" GridPane.rowIndex="5">
                                                    <font>
                                                       <Font size="18.0" />
@@ -193,7 +193,7 @@
                                     </Label>
                                     <ScrollPane layoutX="26.0" layoutY="52.0" prefHeight="262.0" prefWidth="705.0">
                                        <content>
-                                          <VBox fx:id="com" prefHeight="262.0" prefWidth="687.0" />
+                                          <VBox fx:id="completed" prefHeight="262.0" prefWidth="687.0" />
                                        </content>
                                     </ScrollPane>
                                  </children>
@@ -210,7 +210,7 @@
                                     </Label>
                                     <ScrollPane layoutX="25.0" layoutY="48.0" prefHeight="262.0" prefWidth="705.0" style="-fx-background-color: transparent;">
                                        <content>
-                                          <VBox fx:id="incom" prefHeight="262.0" prefWidth="687.0" />
+                                          <VBox fx:id="incompleted" prefHeight="262.0" prefWidth="687.0" />
                                        </content>
                                     </ScrollPane>
                                  </children>

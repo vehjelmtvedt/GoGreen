@@ -10,6 +10,7 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import data.LoginDetails;
 import data.User;
+import frontend.gui.Events;
 import frontend.gui.Main;
 import frontend.gui.NavPanel;
 import frontend.gui.NotificationPopup;
@@ -29,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -46,80 +48,80 @@ import java.util.ResourceBundle;
 public class FriendspageController implements Initializable {
 
     private static User thisUser;
-
     private static LoginDetails thisLoginDetails;
-
     private static AnchorPane headerCopy;
-
     private static NotificationPopup popup;
-
     private static AnchorPane mainCopy;
+    private List searchResults;
 
     @FXML
     private Label lblGoGreen;
-
     @FXML
     private JFXTreeTableView friendsPane;
-
     @FXML
     private JFXHamburger menu;
-
     @FXML
     private JFXDrawer addFriendDrawer;
-
+    @FXML
+    private JFXButton btnRefresh;
     @FXML
     private Button addFriendButton;
-
     @FXML
     private JFXTextField searchField;
-
     @FXML
     private VBox results;
-
     @FXML
     private BarChart todayChart;
-
     @FXML
     private BarChart weeklyChart;
-
     @FXML
     private BarChart monthlyChart;
-
     @FXML
     private StackPane todayPane;
-
     @FXML
     private StackPane weekPane;
-
     @FXML
     private StackPane monthPane;
-
     @FXML
     private HBox headingBox;
-
     @FXML
     private AnchorPane main;
-
     @FXML
     private AnchorPane headerPane;
 
-    private List searchresults;
+    /**.
+     * Update the leaderboards and user information on the Friends page
+     * @param user - the current logged in user
+     */
+    public void updateCharts(User user) {
+        //update the user object
+        thisUser = user;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        popup = new NotificationPopup();
-        mainCopy = main;
-        headerCopy = headerPane;
         fillFriendsTreeView();
         drawFriendRequestDrawer();
         fillChart("Today", "#6976ae", DateUnit.DAY, todayChart);
         fillChart("This Week", "#cd7b4c", DateUnit.WEEK, weeklyChart);
         fillChart("This Month", "#b74747", DateUnit.MONTH, monthlyChart);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        popup = new NotificationPopup();
+        mainCopy = main;
+        headerCopy = headerPane;
+
+        //update the user information on the friends page
+        updateCharts(thisUser);
 
         todayPane.prefWidthProperty().bind(headingBox.widthProperty());
         weekPane.prefWidthProperty().bind(headingBox.widthProperty());
         monthPane.prefWidthProperty().bind(headingBox.widthProperty());
 
+        btnRefresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> updateCharts(thisUser));
+
+        //add needed events
+        Events.addJfxButtonHover(btnRefresh);
         try {
             NotificationPanelController.addNotificationPanel(headerPane, main);
             StageSwitcher.friendsDrawer = NavPanel.addNavPanel(main, headerPane, menu);
@@ -127,6 +129,7 @@ public class FriendspageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public static void popup(String heading, String body, String icon,
@@ -144,6 +147,7 @@ public class FriendspageController implements Initializable {
      */
 
     public void fillChart(String title, String color, DateUnit unit, BarChart chart) {
+        chart.getData().clear();
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(title);
         populateBarChart(series1, unit);
@@ -196,18 +200,18 @@ public class FriendspageController implements Initializable {
             if (searchField.getText().trim().isEmpty()) {
                 results.getChildren().clear();
             } else {
-                searchresults = getSearchResults(searchField.getText());
+                searchResults = getSearchResults(searchField.getText());
 
                 results.getChildren().clear();
-                for (int i = 0; i < searchresults.size(); i++) {
-                    if (!searchresults.get(i).equals(thisUser.getUsername())
-                        && !thisUser.getFriends().contains(searchresults.get(i))) {
+                for (int i = 0; i < searchResults.size(); i++) {
+                    if (!searchResults.get(i).equals(thisUser.getUsername())
+                        && !thisUser.getFriends().contains(searchResults.get(i))) {
                         HBox hbox = new HBox();
                         VBox.setMargin(hbox, new Insets(0, 20, 0, 20));
                         hbox.setStyle("-fx-background-color: #4286f4;");
                         hbox.setPrefWidth(results.getPrefWidth());
                         hbox.setPrefHeight(50);
-                        Label tmpLabel = new Label(searchresults.get(i).toString());
+                        Label tmpLabel = new Label(searchResults.get(i).toString());
                         tmpLabel.setPrefWidth(hbox.getPrefWidth() / 2);
                         JFXButton addButton = new JFXButton("+");
                         addButton.setStyle("-fx-background-color: #5b8d5b;");
