@@ -127,6 +127,16 @@ public class SignupController implements Initializable {
                         emailField, passwordField,
                         confirmPasswordField, ageField,
                         getSecurityQuestionid(), secAnswer, mainPane);
+
+                //Reset fields
+                firstNameField.setText(null);
+                lastNameField.setText(null);
+                emailField.setText(null);
+                ageField.setText(null);
+                usernameField.setText(null);
+                passwordField.setText(null);
+                confirmPasswordField.setText(null);
+                secAnswer.setText(null);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
