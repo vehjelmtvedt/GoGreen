@@ -80,6 +80,7 @@ public class InputValidation {
             EditProfilePopUpController.setUser(loggedUser);
             EditProfilePopUpController.setLoginDetails(loginDetails);
             NavPanelController.setUser(loggedUser);
+            NavPanelController.setLoginDetails(loginDetails);
 
             //setup .fxml pages after successfully logging in
             try {

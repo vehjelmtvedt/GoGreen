@@ -131,12 +131,11 @@ public class HomepageController implements Initializable {
 
     /**.
      * Update the user information on the homepage
-     * @param user - current logged user
      * @param logDetails - current login details (assigned to user)
      */
-    public void updateUser(User user, LoginDetails logDetails) {
+    public void updateUser(LoginDetails logDetails) {
         //update the user and his login details
-        loggedUser = user;
+        loggedUser = Requests.instance.loginRequest(logDetails);
         loginDetails = logDetails;
 
         //update the field values on the homepage dashboard
@@ -205,7 +204,7 @@ public class HomepageController implements Initializable {
         });
 
         //update profile information and leaderboards
-        updateUser(loggedUser, loginDetails);
+        updateUser(loginDetails);
         updateLeaderboards();
 
         Events.addLeaderboards(leaderboards);

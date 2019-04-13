@@ -112,11 +112,11 @@ public class ProfilePageController implements Initializable {
 
     /**.
      * Update the user's profile page information
-     * @param user - user to update info to
+     * @param loginDetails - user to update info to
      */
-    public void updateUser(User user) {
+    public void updateUser(LoginDetails loginDetails) {
         //update the current user
-        thisUser = user;
+        thisUser = Requests.instance.loginRequest(loginDetails);
 
         //update the user information fields on the profile page
         levelProgress.setProgress(
@@ -137,11 +137,11 @@ public class ProfilePageController implements Initializable {
 
     /**.
      * Update the containers with completed & uncompleted achievements
-     * @param user - user view to update
+     * @param loginDetails - user view to update
      */
-    public void updateAchievements(User user) {
+    public void updateAchievements(LoginDetails loginDetails) {
         //update user object on profile page
-        thisUser = user;
+        thisUser = Requests.instance.loginRequest(loginDetails);
 
         //reset achievement containers before updating values
         completed.getChildren().clear();
@@ -151,25 +151,25 @@ public class ProfilePageController implements Initializable {
         // for every completed achievement module  is created
         // and added to a VBox small pics might be added later
         int count = 1;
-        for (int i = 0; i < user.getProgress().getAchievements().size(); i++) {
+        for (int i = 0; i < thisUser.getProgress().getAchievements().size(); i++) {
 
             count++;
             HBox hbox = new HBox();
             hbox.setSpacing(10.0);
             ImageView achievementimage = new ImageView();
-            Image path = new Image("achievementsimages/" + user.getProgress()
+            Image path = new Image("achievementsimages/" + thisUser.getProgress()
                     .getAchievements().get(i).getId() + ".png");
             achievementimage.setFitHeight(32);
             achievementimage.setFitWidth(32);
             achievementimage.setImage(path);
             Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
-                    user.getProgress().getAchievements().get(i)));
+                    thisUser.getProgress().getAchievements().get(i)));
             name.setFill(Color.GREEN);
             Text bonus = new Text("Received: " + ProfilePageLogic.getBonusString(
-                    user.getProgress().getAchievements().get(i)) + " Points");
+                    thisUser.getProgress().getAchievements().get(i)) + " Points");
             bonus.setFill(Color.GREEN);
             Text date = new Text("Completed On: " + ProfilePageLogic.getDateString(
-                    user.getProgress().getAchievements().get(i)) + ".");
+                    thisUser.getProgress().getAchievements().get(i)) + ".");
             hbox.getChildren().addAll(achievementimage, name, bonus, date);
             completed.getChildren().add(hbox);
         }
@@ -196,7 +196,7 @@ public class ProfilePageController implements Initializable {
         }
 
         int levelcount = 1;
-        for (int i = 1; i <= user.getProgress().getLevel(); i++) {
+        for (int i = 1; i <= thisUser.getProgress().getLevel(); i++) {
 
             ImageView badgeimage = new ImageView();
             Image path = new Image("badges/" + levelcount + ".png");
@@ -217,8 +217,8 @@ public class ProfilePageController implements Initializable {
         EditProfilePopUpController.profilePageController = this;
 
         //fill in the user information on the profile page
-        updateUser(thisUser);
-        updateAchievements(thisUser);
+        updateUser(loginDetails);
+        updateAchievements(loginDetails);
 
         editProfile.setOnAction(e -> {
             Stage stage = new Stage();
