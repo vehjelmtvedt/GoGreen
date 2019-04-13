@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -10,7 +17,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" stylesheets="@../Stylesheets/Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.LoginController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" stylesheets="@../Stylesheets/Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.LoginController">
    <children>
       <AnchorPane fx:id="graphics" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="542.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -28,7 +35,7 @@
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label fx:id="line2" layoutX="113.0" layoutY="525.0" prefHeight="68.0" prefWidth="320.0" text="○ Compare with friends" textFill="WHITE">
+            <Label fx:id="line2" layoutX="111.0" layoutY="525.0" prefHeight="68.0" prefWidth="320.0" text="○ Compare with friends" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
@@ -65,7 +72,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="fieldPane" layoutX="667.0" layoutY="108.0" prefHeight="793.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="108.0">
+      <AnchorPane fx:id="fieldPane" layoutX="656.0" layoutY="227.0" prefHeight="673.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="656.0" AnchorPane.topAnchor="227.0">
          <children>
             <JFXButton fx:id="loginButton" contentDisplay="CENTER" layoutX="80.0" layoutY="363.0" prefHeight="74.0" prefWidth="200.0" ripplerFill="WHITE" style="-fx-background-radius: 30px; -fx-border-color: #AFCF2C#AFCF2C; -fx-border-radius: 30px; -fx-border-width: 5px;" text="LOG IN" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="376.0" AnchorPane.topAnchor="363.0">
                <font>
