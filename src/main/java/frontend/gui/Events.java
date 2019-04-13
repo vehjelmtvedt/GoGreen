@@ -164,8 +164,7 @@ public class Events {
             try {
                 ActivitiesController.popup("Popup", "Activity performed successfully!",
                         "sucess", 0);
-                homepageController.updateUser(loggedUser, loginDetails);
-                profilePageController.updateAchievements(loggedUser);
+                homepageController.updateUser(loginDetails);
             } catch (IOException exp) {
                 System.out.println("Something went wrong.");
             }
@@ -223,8 +222,7 @@ public class Events {
 
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
-            homepageController.updateUser(loggedUser, loginDetails);
-            profilePageController.updateAchievements(loggedUser);
+            homepageController.updateUser(loginDetails);
             try {
                 ActivitiesController.popup("Popup", "Activity performed successfully!",
                         "sucess", 0);
@@ -343,8 +341,7 @@ public class Events {
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
-            homepageController.updateUser(loggedUser, loginDetails);
-            profilePageController.updateAchievements(loggedUser);
+            homepageController.updateUser(loginDetails);
         });
     }
 
@@ -410,8 +407,7 @@ public class Events {
             }
             ObservableList<Activity> activities = ActivitiesController.getActivities(loggedUser);
             activityTable.setItems(activities);
-            homepageController.updateUser(loggedUser, loginDetails);
-            profilePageController.updateAchievements(loggedUser);
+            homepageController.updateUser(loginDetails);
         });
     }
 
@@ -643,8 +639,8 @@ public class Events {
                 }
 
                 //update user information on profile page & homepage once avatar was changed
-                profilePageController.updateUser(user);
-                homepageController.updateUser(user, thisLoginDetails);
+                profilePageController.updateUser(thisLoginDetails);
+                homepageController.updateUser(thisLoginDetails);
             });
         }
     }
