@@ -66,9 +66,12 @@ public class InputValidation {
         }
 
         if (loggedUser != null) {
+            //prompt the user with a dialog popup message
             Dialog.show("Login successful", "Welcome to GoGreen, "
                     + loggedUser.getFirstName()
                     + " " + loggedUser.getLastName() + "!", "DISMISS", "sucess", false);
+
+            //Set the login details & user to the required page controllers
             HomepageController.setUser(loggedUser);
             HomepageController.setLoginDetails(loginDetails);
             ActivitiesController.setUser(loggedUser);
@@ -110,6 +113,7 @@ public class InputValidation {
                 Main.setHomepage(homepage);
                 Main.setFriendPage(friendPage);
                 Main.setProfilePage(profilePage);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -117,6 +121,7 @@ public class InputValidation {
             StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getHomepage());
             return true;
         } else {
+            //prompt user with a dialog popup for failing to login
             Dialog.show("Login failed",
                     "Incorrect credentials. Try again", "DISMISS", "error", false);
             return false;
