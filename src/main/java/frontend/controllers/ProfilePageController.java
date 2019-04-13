@@ -39,9 +39,11 @@ import tools.Requests;
 import java.io.IOException;
 import java.net.URL;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class ProfilePageController implements Initializable {
+public class ProfilePageController implements Initializable , Observer {
     private static User thisUser;
     private static LoginDetails loginDetails;
 
@@ -307,6 +309,10 @@ public class ProfilePageController implements Initializable {
         loginDetails = passedLoginDetails;
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        updateAchievements(thisUser);
+    }
 }
 
 

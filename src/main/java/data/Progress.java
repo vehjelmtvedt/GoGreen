@@ -1,8 +1,9 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Progress {
+public class Progress extends Observable {
 
     private double points;
     private ArrayList<UserAchievement> achievements;
@@ -96,6 +97,13 @@ public class Progress {
             return 0;
 
         }
+    }
+
+    public void hasChangedCheck() {
+
+        setChanged();
+        notifyObservers();
+
     }
 }
 

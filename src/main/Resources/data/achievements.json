@@ -154,6 +154,37 @@
     "id": 25,
     "name": "Use the train at least 5 times.",
     "bonus": 2000
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 26,
+    "name": "Reach the top ten",
+    "bonus": 2000
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 27,
+    "name": "Reach the top five Users",
+    "bonus": 2000
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 28,
+    "name": "Recycle Paper",
+    "bonus": 2000
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 29,
+    "name": "Recycle Plastic",
+    "bonus": 2000
+  },
+  {
+    "_class": "data.Achievement",
+    "id": 30,
+    "name": "Lower Home Temperature",
+    "bonus": 2000
   }
+
 
 ]
