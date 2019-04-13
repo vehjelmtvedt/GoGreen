@@ -36,7 +36,7 @@
                   <HBox fx:id="avatarZone" prefHeight="142.0" prefWidth="543.0" />
                </content>
             </ScrollPane>
-            <Label alignment="CENTER" layoutX="162.0" layoutY="4.0" prefHeight="21.0" prefWidth="270.0" text="Please Choose a display Picture" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="162.0" />
+            <Label alignment="CENTER" layoutX="162.0" layoutY="4.0" prefHeight="21.0" prefWidth="270.0" text="Please Choose Your Avatar" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="162.0" />
             <GridPane layoutX="25.0" layoutY="209.0" prefHeight="114.0" prefWidth="325.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="107.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="109.0" />
@@ -67,7 +67,7 @@
                   <JFXTextField fx:id="firstName" focusColor="GREEN" text="First Name Placeholder" GridPane.columnIndex="1" />
                   <JFXTextField fx:id="lastName" focusColor="GREEN" text="Last Name Placeholder" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <JFXTextField fx:id="age" focusColor="GREEN" text="Age Placeholder" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <JFXButton fx:id="firstNameSave" alignment="CENTER" prefHeight="25.0" prefWidth="50.0" text="Save" GridPane.columnIndex="2">
+                  <JFXButton fx:id="firstNameSave" alignment="CENTER" prefHeight="25.0" prefWidth="60.0" text="Save" GridPane.columnIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -78,7 +78,7 @@
                         <Insets left="5.0" />
                      </padding>
                   </JFXButton>
-                  <JFXButton fx:id="lastNameSave" alignment="CENTER" prefHeight="25.0" prefWidth="50.0" text="Save" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <JFXButton fx:id="lastNameSave" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" text="Save" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -89,7 +89,7 @@
                         <Insets left="5.0" />
                      </padding>
                   </JFXButton>
-                  <JFXButton fx:id="ageSave" alignment="CENTER" prefHeight="25.0" prefWidth="50.0" text="Save" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <JFXButton fx:id="ageSave" alignment="CENTER" prefHeight="27.0" prefWidth="60.0" text="Save" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>

@@ -509,6 +509,10 @@ public class Events {
                 categoryFilters.add(filter.getText());
             }
         }
+        //if there are no filters selected, return all activities
+        if (categoryFilters.isEmpty()) {
+            return activities;
+        }
         return activityQueries.filterActivitiesByCategories(categoryFilters);
     }
 
@@ -537,8 +541,8 @@ public class Events {
         ActivityQueries activityQueries = new ActivityQueries(activities);
 
         if (!min.getText().equals("") && !max.getText().equals("")) {
-            double minValue = Integer.parseInt(min.getText());
-            double maxValue = Integer.parseInt(max.getText());
+            double minValue = Double.parseDouble(min.getText());
+            double maxValue = Double.parseDouble(max.getText());
             if (minValue > maxValue) {
                 max.setUnFocusColor(Color.rgb(255, 0, 0));
                 max.setFocusColor(Color.rgb(255, 0, 0));
@@ -551,7 +555,16 @@ public class Events {
                 min.setFocusColor(Color.rgb(0, 128, 0));
                 return activityQueries.filterActivitiesByCO2Saved(minValue, maxValue);
             }
+        } else if (!min.getText().equals("") && max.getText().equals("")) {
+            double minValue = Double.parseDouble(min.getText());
+            return activityQueries.filterActivitiesByCO2Saved(minValue, true);
+        } else {
+            if (min.getText().equals("") && !max.getText().equals("")) {
+                double maxValue = Double.parseDouble(max.getText());
+                return activityQueries.filterActivitiesByCO2Saved(maxValue, false);
+            }
         }
+
         return activities;
     }
 

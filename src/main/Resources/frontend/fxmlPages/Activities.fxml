@@ -27,7 +27,7 @@
                <children>
                   <AnchorPane layoutY="38.0" prefHeight="627.0" prefWidth="1298.0">
                      <children>
-                        <Text layoutX="562.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Household" wrappingWidth="244.341796875">
+                        <Text layoutX="487.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Household" textAlignment="CENTER" wrappingWidth="405.341796875">
                            <effect>
                               <Glow />
                            </effect>
@@ -148,6 +148,128 @@
                   </AnchorPane>
                </children>
             </Pane>
+            <Pane fx:id="paneTransportation" layoutX="-7.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane layoutX="14.0" layoutY="22.0" prefHeight="587.0" prefWidth="1285.0">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="120.0" layoutY="275.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="14.0">
+                           <children>
+                              <AnchorPane fx:id="paneBike" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/bikeIcon2.png" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnBike" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Bike">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                              <AnchorPane fx:id="paneBus" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/busIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnBus" layoutY="238.0" prefHeight="60.0" prefWidth="231.0" style="-fx-background-color: green;" text="by Bus">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                              <AnchorPane fx:id="paneTrain" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Pics/trainIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btnTrain" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Train">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <Text layoutX="418.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transportation" textAlignment="CENTER" wrappingWidth="507.7314453125" AnchorPane.topAnchor="37.044921875">
+                           <effect>
+                              <Glow />
+                           </effect>
+                           <font>
+                              <Font size="50.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </Text>
+                        <Label alignment="CENTER" layoutX="147.0" layoutY="186.0" prefHeight="45.0" prefWidth="154.0" text="I travelled" textAlignment="CENTER">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="inputDistance" alignment="CENTER_RIGHT" focusColor="GREEN" layoutX="402.0" layoutY="186.0" maxWidth="212.0" minWidth="130.0" prefHeight="45.0" prefWidth="141.0" promptText="number of km">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="lblDistanceValidate" alignment="CENTER" layoutX="613.0" layoutY="179.0" prefHeight="45.0" prefWidth="212.0" text="Invalid input. Try again" textFill="RED" visible="false">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Text layoutX="846.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to use the transportation calculator?" textAlignment="CENTER" underline="true" wrappingWidth="424.18310546875">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <VBox layoutX="902.0" layoutY="384.0" prefHeight="137.0" prefWidth="313.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. Type in the distance you travelled">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. Click on the transportation you used ">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3. Let us handle the rest">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </Pane>
             <Pane fx:id="paneFood" layoutX="-17.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="60.0" layoutY="88.0" prefHeight="587.0" prefWidth="1241.0">
@@ -240,7 +362,7 @@
                         </Text>
                      </children>
                   </AnchorPane>
-                  <Text fx:id="lblHistory1" layoutX="624.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food">
+                  <Text fx:id="lblHistory1" layoutX="568.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Food" textAlignment="CENTER" wrappingWidth="225.0">
                      <effect>
                         <Glow />
                      </effect>
@@ -250,133 +372,11 @@
                   </Text>
                </children>
             </Pane>
-            <Pane fx:id="paneTransportation" layoutX="-7.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <AnchorPane layoutX="14.0" layoutY="22.0" prefHeight="587.0" prefWidth="1285.0">
-                     <children>
-                        <HBox alignment="CENTER" layoutX="120.0" layoutY="275.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0" AnchorPane.bottomAnchor="14.0">
-                           <children>
-                              <AnchorPane fx:id="paneBike" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/bikeIcon2.png" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnBike" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Bike">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </JFXButton>
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </AnchorPane>
-                              <AnchorPane fx:id="paneBus" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/busIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnBus" layoutY="238.0" prefHeight="60.0" prefWidth="231.0" style="-fx-background-color: green;" text="by Bus">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </JFXButton>
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </AnchorPane>
-                              <AnchorPane fx:id="paneTrain" prefHeight="298.0" prefWidth="212.0" style="-fx-background-color: #c6c6c6;">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Pics/trainIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnTrain" layoutY="238.0" prefHeight="60.0" prefWidth="212.0" style="-fx-background-color: green;" text="by Train">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </JFXButton>
-                                 </children>
-                                 <effect>
-                                    <DropShadow />
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </AnchorPane>
-                           </children>
-                        </HBox>
-                        <Text layoutX="480.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transportation" wrappingWidth="324.7314453125" AnchorPane.topAnchor="41.044921875">
-                           <effect>
-                              <Glow />
-                           </effect>
-                           <font>
-                              <Font size="50.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </Text>
-                        <Label alignment="CENTER" layoutX="147.0" layoutY="186.0" prefHeight="45.0" prefWidth="154.0" text="I travelled" textAlignment="CENTER">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="inputDistance" alignment="CENTER_RIGHT" focusColor="GREEN" layoutX="402.0" layoutY="186.0" maxWidth="212.0" minWidth="130.0" prefHeight="45.0" prefWidth="141.0" promptText="number of km">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </JFXTextField>
-                        <Label fx:id="lblDistanceValidate" alignment="CENTER" layoutX="613.0" layoutY="179.0" prefHeight="45.0" prefWidth="212.0" text="Invalid input. Try again" textFill="RED" visible="false">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Text layoutX="846.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to use the transportation calculator?" textAlignment="CENTER" underline="true" wrappingWidth="424.18310546875">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Text>
-                        <VBox layoutX="902.0" layoutY="384.0" prefHeight="137.0" prefWidth="313.0" spacing="15.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. Type in the distance you travelled">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. Click on the transportation you used ">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3. Let us handle the rest">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </Pane>
             <Pane fx:id="paneHistory" layoutX="-7.0" prefHeight="700.0" prefWidth="1010.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="131.0" layoutY="8.0" prefHeight="722.0" prefWidth="1098.0">
                      <children>
-                        <Text fx:id="lblHistory" layoutX="201.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity history">
+                        <Text fx:id="lblHistory" layoutX="114.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity history" textAlignment="CENTER" wrappingWidth="498.0">
                            <effect>
                               <Glow />
                            </effect>
