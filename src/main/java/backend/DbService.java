@@ -298,7 +298,7 @@ public class DbService {
         //checks the larboards
         addAchievement(returned , checkleaderbaords(returned) , DateUtils.instance.dateToday());
 
-        returned.getProgress().hasChangedCheck();
+        //returned.getProgress().hasChangedCheck();
 
         addUser(returned);
 
@@ -529,7 +529,7 @@ public class DbService {
 
                 user.getProgress().addPoints(list.get(id).getBonus());
 
-                user.getProgress().hasChangedCheck();
+                //user.getProgress().hasChangedCheck();
             }
         }
 
@@ -545,7 +545,7 @@ public class DbService {
      */
     public void addCO2Points(User user, double carbonsaved) {
 
-        user.getProgress().hasChangedCheck();
+        //user.getProgress().hasChangedCheck();
 
         user.getProgress().setPoints(user.getProgress().getPoints() + carbonsaved * 300);
 
