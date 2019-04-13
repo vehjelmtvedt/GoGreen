@@ -46,7 +46,7 @@ import java.util.ResourceBundle;
 
 
 @SuppressWarnings("unchecked")
-public class FriendspageController implements Initializable {
+public class FriendsPageController implements Initializable {
 
     private static User thisUser;
     private static LoginDetails thisLoginDetails;

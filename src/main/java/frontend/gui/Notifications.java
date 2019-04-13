@@ -3,7 +3,7 @@ package frontend.gui;
 import data.Achievement;
 import data.UserAchievement;
 import frontend.controllers.ActivitiesController;
-import frontend.controllers.FriendspageController;
+import frontend.controllers.FriendsPageController;
 import frontend.controllers.HomepageController;
 import tools.Requests;
 
@@ -22,7 +22,7 @@ public class Notifications {
         for (String name : friendRequests) {
             HomepageController.popup("Friend Request!", "From " + name,
                     "sucess", counter);
-            FriendspageController.popup("Friend Request!", "From " + name,
+            FriendsPageController.popup("Friend Request!", "From " + name,
                     "sucess", counter);
             ActivitiesController.popup("Friend Request!", "From " + name,
                     "sucess", counter);
@@ -45,7 +45,7 @@ public class Notifications {
             currAchievement = all.get(userAchievement.getId());
             HomepageController.popup("Achievement!", currAchievement.getName(),
                     "sucess", counter);
-            FriendspageController.popup("Achievement!", currAchievement.getName(),
+            FriendsPageController.popup("Achievement!", currAchievement.getName(),
                     "sucess", counter);
             ActivitiesController.popup("Achievement!", currAchievement.getName(),
                     "sucess", counter);

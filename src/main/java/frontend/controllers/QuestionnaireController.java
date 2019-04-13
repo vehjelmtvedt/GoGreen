@@ -143,47 +143,47 @@ public class QuestionnaireController implements Initializable {
 
         //Initializing the Combo Boxes With the Specified Values
 
-        ObservableList<Integer> householdmembers = FXCollections.observableArrayList(
+        ObservableList<Integer> householdMembers = FXCollections.observableArrayList(
                 1,2,3,4,5,6,7,8,9
         );
 
-        comboBoxSetup(houseHoldNo, householdmembers);
+        comboBoxSetup(houseHoldNo, householdMembers);
 
-        ObservableList<String> carsizes = FXCollections.observableArrayList(
+        ObservableList<String> carSizes = FXCollections.observableArrayList(
                 "I don't own a car","small", "medium", "large"
         );
 
-        comboBoxSetup(carSizes, carsizes);
+        comboBoxSetup(this.carSizes, carSizes);
 
-        ObservableList<String> meatanddairyoptions = FXCollections.observableArrayList(
+        ObservableList<String> meatAndDairyOptions = FXCollections.observableArrayList(
                 "above average", "average", "below average", "vegan"
         );
 
-        comboBoxSetup(meatAndDairyOptions, meatanddairyoptions);
+        comboBoxSetup(this.meatAndDairyOptions, meatAndDairyOptions);
 
-        ObservableList<String> locallyproducedfoodoptions = FXCollections.observableArrayList(
+        ObservableList<String> locallyProducedFoodOptions = FXCollections.observableArrayList(
                 "very little", "average", "above average", "almost all"
         );
 
-        comboBoxSetup(locallyProducedFoodOptions, locallyproducedfoodoptions);
+        comboBoxSetup(this.locallyProducedFoodOptions, locallyProducedFoodOptions);
 
-        ObservableList<String> organicoptions = FXCollections.observableArrayList(
+        ObservableList<String> organicOptions = FXCollections.observableArrayList(
                 "none", "some", "most", "all"
         );
 
-        comboBoxSetup(organicOptions, organicoptions);
+        comboBoxSetup(this.organicOptions, organicOptions);
 
-        ObservableList<String> processedoptions = FXCollections.observableArrayList(
+        ObservableList<String> processedOptions = FXCollections.observableArrayList(
                 "above average", "average", "below average", "very little"
         );
 
-        comboBoxSetup(processedOptions,processedoptions);
+        comboBoxSetup(this.processedOptions,processedOptions);
 
         textCarUsage.setText("0");
         textCarUsage.setEditable(false);
 
-        carSizes.setOnAction(e -> {
-            if (carSizes.getValue().toString().equals("I don't own a car")) {
+        this.carSizes.setOnAction(e -> {
+            if (this.carSizes.getValue().toString().equals("I don't own a car")) {
                 textCarUsage.setText("0");
                 textCarUsage.setEditable(false);
             } else {
@@ -202,13 +202,13 @@ public class QuestionnaireController implements Initializable {
                         Double.parseDouble(textElectricity.getText()) / 365 / householdMembers;
                 double dailyHeatingOilConsumption =
                         Integer.parseInt(textOil.getText()) / 365.0 / householdMembers;
-                String carType = carSizes.getValue().toString();
+                String carType = this.carSizes.getValue().toString();
                 int dailyCarKilometres = Integer.parseInt(textCarUsage.getText()) / 365;
-                String meatAndDairyConsumption = meatAndDairyOptions.getValue().toString();
+                String meatAndDairyConsumption = this.meatAndDairyOptions.getValue().toString();
                 String locallyProducedFoodConsumption =
-                        locallyProducedFoodOptions.getValue().toString();
-                String organicFoodConsumption = organicOptions.getValue().toString();
-                String processedFoodConsumption = processedOptions.getValue().toString();
+                        this.locallyProducedFoodOptions.getValue().toString();
+                String organicFoodConsumption = this.organicOptions.getValue().toString();
+                String processedFoodConsumption = this.processedOptions.getValue().toString();
 
                 thisUser.setElectricityDailyConsumption(dailyElectricityConsumption);
                 thisUser.setHeatingOilDailyConsumption(dailyHeatingOilConsumption);
@@ -221,7 +221,7 @@ public class QuestionnaireController implements Initializable {
 
                 // Send the user Back to Login after Questionnaire is complete
 
-                String response = Requests.instance.signupRequest(thisUser);
+                String response = Requests.instance.signUpRequest(thisUser);
                 if (response != null) {
                     if (response.equals("success")) {
                         try {

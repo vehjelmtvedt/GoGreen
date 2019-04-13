@@ -173,7 +173,7 @@ public class Events {
      * Add transport activities to the user upon clicking
      *
      * @param pane          pane to click
-     * @param input         textfield with input
+     * @param input         text field with input
      * @param verify        input label for user verification
      * @param type          type of activity
      * @param loggedUser    user to modify

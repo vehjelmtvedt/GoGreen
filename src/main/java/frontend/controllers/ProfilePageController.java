@@ -83,7 +83,7 @@ public class ProfilePageController implements Initializable {
     @FXML
     private VBox completed;
     @FXML
-    private VBox incompleted;
+    private VBox incomplete;
     @FXML
     private HBox badgeZone;
 
@@ -154,7 +154,7 @@ public class ProfilePageController implements Initializable {
 
         //reset achievement containers before updating values
         completed.getChildren().clear();
-        incompleted.getChildren().clear();
+        incomplete.getChildren().clear();
         badgeZone.getChildren().clear();
 
         // for every completed achievement module  is created
@@ -165,12 +165,12 @@ public class ProfilePageController implements Initializable {
             count++;
             HBox hbox = new HBox();
             hbox.setSpacing(10.0);
-            ImageView achievementimage = new ImageView();
+            ImageView achievementImage = new ImageView();
             Image path = new Image("achievementsimages/" + thisUser.getProgress()
                     .getAchievements().get(i).getId() + ".png");
-            achievementimage.setFitHeight(32);
-            achievementimage.setFitWidth(32);
-            achievementimage.setImage(path);
+            achievementImage.setFitHeight(32);
+            achievementImage.setFitWidth(32);
+            achievementImage.setImage(path);
             Text name = new Text(i + 1 + ") " + ProfilePageLogic.getNameString(
                     thisUser.getProgress().getAchievements().get(i)));
             name.setFill(Color.GREEN);
@@ -179,7 +179,7 @@ public class ProfilePageController implements Initializable {
             bonus.setFill(Color.GREEN);
             Text date = new Text("Completed On: " + ProfilePageLogic.getDateString(
                     thisUser.getProgress().getAchievements().get(i)) + ".");
-            hbox.getChildren().addAll(achievementimage, name, bonus, date);
+            hbox.getChildren().addAll(achievementImage, name, bonus, date);
             completed.getChildren().add(hbox);
         }
 
@@ -192,28 +192,28 @@ public class ProfilePageController implements Initializable {
             HBox hbox = new HBox();
             hbox.setSpacing(10.0);
             if (!isComplete(a)) {
-                ImageView achievementimage1 = new ImageView();
+                ImageView achievementImage1 = new ImageView();
                 Image path1 = new Image("achievementsimages/8.png");
-                achievementimage1.setFitHeight(32);
-                achievementimage1.setFitWidth(32);
-                achievementimage1.setImage(path1);
+                achievementImage1.setFitHeight(32);
+                achievementImage1.setFitWidth(32);
+                achievementImage1.setImage(path1);
                 Text name = new Text(a.getName());
                 Text points = new Text("Complete to receive: " + a.getBonus() + " points.");
-                hbox.getChildren().addAll(achievementimage1, name, points);
-                incompleted.getChildren().add(hbox);
+                hbox.getChildren().addAll(achievementImage1, name, points);
+                incomplete.getChildren().add(hbox);
             }
         }
 
-        int levelcount = 1;
+        int levelCount = 1;
         for (int i = 1; i <= thisUser.getProgress().getLevel(); i++) {
 
-            ImageView badgeimage = new ImageView();
-            Image path = new Image("badges/" + levelcount + ".png");
-            badgeimage.setFitHeight(150);
-            badgeimage.setFitWidth(150);
-            badgeimage.setImage(path);
-            badgeZone.getChildren().add(badgeimage);
-            levelcount++;
+            ImageView badgeImage = new ImageView();
+            Image path = new Image("badges/" + levelCount + ".png");
+            badgeImage.setFitHeight(150);
+            badgeImage.setFitWidth(150);
+            badgeImage.setImage(path);
+            badgeZone.getChildren().add(badgeImage);
+            levelCount++;
         }
     }
 

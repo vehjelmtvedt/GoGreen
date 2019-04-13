@@ -376,7 +376,7 @@ public class DbServiceTest {
     }
 
     @Test
-    public void addAchievemnt() {
+    public void addAchievement() {
 
         ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.add(0);
@@ -390,7 +390,7 @@ public class DbServiceTest {
 
     @SuppressWarnings("deprecation")
     @Test
-    public void addAchievemntPoints() {
+    public void addAchievementPoints() {
 
         ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.add(0);

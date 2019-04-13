@@ -504,13 +504,13 @@ public class DbService {
 
         for (Integer id : ids) {
 
-            boolean alreadythere = false;
+            boolean alreadyThere = false;
 
             for (UserAchievement userAchievement : user.getProgress().getAchievements()) {
 
                 if (userAchievement.getId() == id) {
 
-                    alreadythere = true;
+                    alreadyThere = true;
                     break;
                 }
 
@@ -520,13 +520,13 @@ public class DbService {
             // for user Achievement  that checks the id along with the date ,
             // this means that same achievements with different dates are going to be added
 
-            if (!alreadythere) {
+            if (!alreadyThere) {
 
                 UserAchievement userAchievement = new UserAchievement(id, true, date);
 
                 user.getProgress().getAchievements().add(userAchievement);
 
-                String idstring = Integer.toString(id);
+                String idString = Integer.toString(id);
 
                 List<Achievement> list = getAchievements();
 
@@ -540,17 +540,17 @@ public class DbService {
     }
 
     /**
-     * addes to the points the amount of co2 save.
+     * Adds to the points the amount of co2 save.
      * every one co2 unite is worth 1 point
      *
      * @param user        user to add points to
-     * @param carbonsaved co2 saved
+     * @param carbonSaved co2 saved
      */
-    private void addCO2Points(User user, double carbonsaved) {
+    private void addCO2Points(User user, double carbonSaved) {
 
         //user.getProgress().hasChangedCheck();
 
-        user.getProgress().setPoints(user.getProgress().getPoints() + carbonsaved * 300);
+        user.getProgress().setPoints(user.getProgress().getPoints() + carbonSaved * 300);
 
 
     }

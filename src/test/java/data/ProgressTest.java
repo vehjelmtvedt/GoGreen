@@ -89,7 +89,7 @@ public class ProgressTest {
     }
 
     @Test
-    public void pointsNeededtest() {
+    public void pointsNeededTest() {
 
         user.getProgress().setPoints(0);
 
@@ -99,7 +99,7 @@ public class ProgressTest {
     }
 
     @Test
-    public void pointsNeededtest1() {
+    public void pointsNeededTest1() {
 
         user.getProgress().setPoints(700);
 
@@ -111,7 +111,7 @@ public class ProgressTest {
     }
 
     @Test
-    public void pointsNeededtest2() {
+    public void pointsNeededTest2() {
 
         user.getProgress().setPoints(561000000);
 

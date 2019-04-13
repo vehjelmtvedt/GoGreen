@@ -29,7 +29,7 @@ or ran from the IDE.
 
 ### Starting the Application
 1. To start the application without packaging it, run the Server first, which is located under src/main/java/backend/Server.java
-2. After running the Server, as many instances of the Client may be opened as needed. The clietn is located in src/main/java/frontend/gui/Main.java
+2. After running the Server, as many instances of the Client may be opened as needed. The client is located in src/main/java/frontend/gui/Main.java
 3. Using this method, the connections will be insecure and run through localhost via port 8080.
 
 ### Running Tests
@@ -74,7 +74,7 @@ GNU 3.0
 * Final report - doc/reports/final-report
 
 #### Mockito Classes
-The following test classes (under src/test/java/) contained Mockito based testing (depending on the class, some contained less, some contained omre):
+The following test classes (under src/test/java/) contained Mockito based testing (depending on the class, some contained less, some contained more):
 * UserRequestHandlerTest.java (backend)
 * AppRequestHandlerTest.java (backend)
 * DbLoaderTest.java (backend)
@@ -123,7 +123,7 @@ My strong points regarding this project, meaning what would be applicable in thi
 are communication and planning. I think these are shown in a team-based project since I
 am able to communicate and interact well with others while also planning ahead of time.
 However, one of my weak points might be that I sometimes seem to be a bit bossy and
-therefore tend to influnece my ideas on others. Other than that, I think that I am
+therefore tend to influence my ideas on others. Other than that, I think that I am
 suitable for a team-project.
 
 My goal regarding this project is to learn useful skills for a future job in IT, since
@@ -313,7 +313,7 @@ Weak Points:
 
 What I expect to get from this project:
 * Learn how to work in an agile environment and understand scrum methodology
-* Learn to work with the popular tools like git, maven, trello that we will use 
+* Learn to work with the popular tools like git and maven that we will use
 * Obtain marketable skills that will make me more competitive in future job applications
 
 

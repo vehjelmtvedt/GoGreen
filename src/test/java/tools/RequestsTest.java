@@ -83,21 +83,21 @@ public class RequestsTest {
 
 
     @Test
-    public void testSignupRequest(){
-        assertEquals("success", Requests.instance.signupRequest(testUser));
+    public void testSignUpRequest(){
+        assertEquals("success", Requests.instance.signUpRequest(testUser));
     }
 
     @Test
-    public void testSignupRequestUsernameExists() {
+    public void testSignUpRequestUsernameExists() {
         Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
-        assertEquals("Username exists", Requests.instance.signupRequest(testUser));
+        assertEquals("Username exists", Requests.instance.signUpRequest(testUser));
     }
 
     @Test
-    public void testSignupRequestEmailExists() {
+    public void testSignUpRequestEmailExists() {
         Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(null);
         Mockito.when(dbService.getUserByEmail(testUser.getEmail())).thenReturn(testUser);
-        assertEquals("Email exists", Requests.instance.signupRequest(testUser));
+        assertEquals("Email exists", Requests.instance.signUpRequest(testUser));
     }
 
     @Test
@@ -220,7 +220,7 @@ public class RequestsTest {
     }
     
     @Test
-    public void testforgotPass() {
+    public void testForgotPass() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(), testUser.getPassword())).thenReturn(null);
         assertNull(Requests.instance.forgotPass(testUser.getEmail(), 1, "A", "B"));
     }

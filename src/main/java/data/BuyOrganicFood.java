@@ -18,7 +18,7 @@ public class BuyOrganicFood extends Activity {
      * A user that never used to buy organic food,
      * now bought some.
      */
-    public double nonetoSome() {
+    public double noneToSome() {
         return CarbonCalculator.nonOrganicFoodEmissions(
                 CarbonCalculator.OrganicFoodConsumption.NONE) / 365.0
                 - CarbonCalculator.nonOrganicFoodEmissions(
@@ -59,7 +59,7 @@ public class BuyOrganicFood extends Activity {
         if (timesPerformedInTheSameDay == 0) {
             switch (organicFoodConsumption) {
                 case "none":
-                    return nonetoSome();
+                    return noneToSome();
                 case "some":
                     return someToMost();
                 case "most":

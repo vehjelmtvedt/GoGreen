@@ -96,7 +96,7 @@ public class BuyNonProcessedFoodTest {
     }
 
     @Test
-    public void testCalculateCarbonSavedByVerryLittleUser() {
+    public void testCalculateCarbonSavedByVeryLittleUser() {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setProcessedFoodConsumption("very little");
         assertEquals(0, (int) food.calculateCarbonSaved(user));

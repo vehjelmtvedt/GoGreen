@@ -166,7 +166,7 @@
             </AnchorPane>
             <HBox prefHeight="341.0" prefWidth="1555.0">
                <AnchorPane prefHeight="335.0" prefWidth="760.0" style="-fx-border-color: green; -fx-border-width: 3px;">
-                  <Label layoutX="206.0" layoutY="14.0" prefHeight="26.0" prefWidth="291.0" text="My Completed Acheivements" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="263.0">
+                  <Label layoutX="206.0" layoutY="14.0" prefHeight="26.0" prefWidth="291.0" text="My Completed Achievements" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="263.0">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -179,13 +179,13 @@
                   </HBox.margin>
                </AnchorPane>
                <AnchorPane prefHeight="331.0" prefWidth="762.0" style="-fx-border-color: green; -fx-border-width: 3px;">
-                  <Label layoutX="263.0" layoutY="14.0" prefHeight="26.0" prefWidth="260.0" text="My Pending Acheivements" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="239.0">
+                  <Label layoutX="263.0" layoutY="14.0" prefHeight="26.0" prefWidth="260.0" text="My Pending Achievements" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="239.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
                   <ScrollPane layoutX="25.0" layoutY="48.0" prefHeight="262.0" prefWidth="705.0" style="-fx-background-color: transparent;">
-                     <VBox fx:id="incompleted" prefHeight="262.0" prefWidth="687.0" />
+                     <VBox fx:id="incomplete" prefHeight="262.0" prefWidth="687.0" />
                   </ScrollPane>
                   <HBox.margin>
                      <Insets left="10.0" right="10.0" />

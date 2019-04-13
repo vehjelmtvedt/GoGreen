@@ -9,6 +9,7 @@
     Description: 
 Checkstyle configuration that checks the Google coding conventions (https://google-styleguide.googlecode.com/svn-history/r130/trunk/javaguide.html).
 -->
+<!--suppress XmlHighlighting -->
 <module name="Checker">
   <property name="severity" value="warning"/>
   <property name="charset" value="UTF-8"/>

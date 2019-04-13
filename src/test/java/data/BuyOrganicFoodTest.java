@@ -1,8 +1,5 @@
 package data;
 
-import data.BuyOrganicFood;
-import data.EatVegetarianMeal;
-import data.User;
 import org.junit.Test;
 import tools.CarbonCalculator;
 
@@ -36,7 +33,7 @@ public class BuyOrganicFoodTest {
                 CarbonCalculator.OrganicFoodConsumption.NONE) / 365.0
                 - CarbonCalculator.nonOrganicFoodEmissions(
                 CarbonCalculator.OrganicFoodConsumption.SOME) / 365.0);
-        assertEquals(result, (int) food.nonetoSome());
+        assertEquals(result, (int) food.noneToSome());
     }
 
     @Test
@@ -75,7 +72,7 @@ public class BuyOrganicFoodTest {
     public void testCarbonSavedByUserThatDoesNotConsumeAnyOrganicFood() {
         User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
         user.setOrganicFoodConsumption("none");
-        assertEquals((int) food.nonetoSome(), (int) food.calculateCarbonSaved(user));
+        assertEquals((int) food.noneToSome(), (int) food.calculateCarbonSaved(user));
         user.addActivity(food);
         assertEquals((int) food.someToMost(), (int) food.calculateCarbonSaved(user));
         user.addActivity(food);

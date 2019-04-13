@@ -64,11 +64,11 @@ public class Requests {
     }
 
     /**
-     * Sends signup request to the server.
+     * Sends sign up request to the server.
      * @param user - user signing up
      * @return response from the server.
      */
-    public String signupRequest(User user) {
+    public String signUpRequest(User user) {
         return restTemplate.postForEntity(url + "/signup",user,String.class).getBody();
     }
 
@@ -166,7 +166,7 @@ public class Requests {
     }
 
     /**
-     * Requets to retrieve list of friends.
+     * Request to retrieve list of friends.
      * @param loginDetails - login details of User requesting their friends.
      * @return - list of friends.
      */

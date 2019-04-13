@@ -51,7 +51,7 @@
             <Image url="@../Pics/gogreen.png"/>
         </ImageView>
         <Label fx:id="line4" layoutX="113.0" layoutY="750.0" prefHeight="68.0" prefWidth="432.0"
-               text="○ Total Users Registerd:" textFill="WHITE">
+               text="○ Total Users Registered:" textFill="WHITE">
             <font>
                 <Font size="25.0"/>
             </font>
@@ -96,7 +96,7 @@
                 <Font size="43.0"/>
             </font>
         </Label>
-        <Label fx:id="signupForward" alignment="BASELINE_CENTER" layoutX="224.0" layoutY="49.0" text="Sign up"
+        <Label fx:id="signUpForward" alignment="BASELINE_CENTER" layoutX="224.0" layoutY="49.0" text="Sign up"
                textFill="#868282" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="49.0">
             <font>
                 <Font size="43.0"/>

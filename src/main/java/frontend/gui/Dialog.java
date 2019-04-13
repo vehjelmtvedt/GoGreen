@@ -30,11 +30,11 @@ public class Dialog {
         if (blocking) {
             stage.initModality(Modality.APPLICATION_MODAL);
         }
-        FXMLLoader dialogloader = new FXMLLoader(
+        FXMLLoader dialogLoader = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/Dialog.fxml"));
-        Parent dialog = dialogloader.load();
+        Parent dialog = dialogLoader.load();
 
-        DialogController controller = dialogloader.getController();
+        DialogController controller = dialogLoader.getController();
 
         controller.setHeading(headerText);
         controller.setBody(bodyText);

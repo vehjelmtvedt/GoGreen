@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @SuppressWarnings({"unchecked", "WeakerAccess"})
-public class ForgotpassController implements Initializable {
+public class ForgotPassController implements Initializable {
 
     @FXML
     private JFXComboBox secQuestion;

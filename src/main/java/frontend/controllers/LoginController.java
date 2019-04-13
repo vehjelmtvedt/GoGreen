@@ -52,7 +52,7 @@ public class LoginController implements Initializable {
     private ImageView background;
 
     @FXML
-    private Label signupForward;
+    private Label signUpForward;
 
     @FXML
     private Label goGreen;
@@ -125,7 +125,7 @@ public class LoginController implements Initializable {
 
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
-        signupForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->
+        signUpForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->
                 StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignUp()));
         try {
             setFonts();
@@ -165,7 +165,7 @@ public class LoginController implements Initializable {
         lblSaved.setFont(Main.getReenieBeanie(30));
         lblTotalUsers.setFont(Main.getReenieBeanie(30));
         login.setFont(Main.getRobotoThin(45));
-        signupForward.setFont(Main.getRobotoThin(45));
+        signUpForward.setFont(Main.getRobotoThin(45));
         loginButton.setFont(Main.getRobotoThin(28));
 
     }

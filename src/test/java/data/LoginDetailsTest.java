@@ -33,7 +33,7 @@ public class LoginDetailsTest {
     public void toStringSuccess() {  assertEquals(detailOne.toString(),"Email: test\nPassword: pass\n");}
 
     @Test
-    public void toStrinFailuccess() {  assertNotEquals(detailOne.toString(),"");}
+    public void toStringFail() {  assertNotEquals(detailOne.toString(),"");}
 
     @Test
     public void testConstructor(){

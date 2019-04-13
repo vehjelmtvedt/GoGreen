@@ -22,7 +22,7 @@
 <!--suppress ALL -->
 <AnchorPane fx:id="main" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="900.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/10.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.FriendspageController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.FriendsPageController">
     <AnchorPane layoutY="198.0" prefHeight="266.0" prefWidth="963.0" AnchorPane.leftAnchor="0.0"
                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="198.0">
         <HBox fx:id="dataPane" layoutX="131.0" prefHeight="267.0" prefWidth="1539.0" spacing="80.0"

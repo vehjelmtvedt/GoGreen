@@ -7,7 +7,7 @@
 - A user can fill in a form to see what is his/her current carbon footprint.
 - A user can track how much CO<sub>2</sub> has saved.
 - Users can compare the CO<sub>2</sub> they saved with their friends.
-- Users can perform "green activites" and see how much CO<sub>2</sub> they save (if any).
+- Users can perform "green activities" and see how much CO<sub>2</sub> they save (if any).
 - Users can see the rewards they have received. 
 
 ## Details:
@@ -19,5 +19,5 @@
     * Buying local produce.
     * Using bike instead of car.
     * Using public transport instead of car.
-    * Lowering the temprature of your home. (?????)
+    * Lowering the temperature of your home. (?????)
     * Install solar panels

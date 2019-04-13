@@ -15,7 +15,7 @@ class SecureWebConfig extends WebSecurityConfigurerAdapter {
         http.requiresChannel().anyRequest().requiresSecure();
 
         // We do not need CSRF protection, since the application will
-        // not be used on a webpage.
+        // not be used on a web page.
         http.csrf().disable();
 
         System.out.println("Loaded Secure Web Configuration");

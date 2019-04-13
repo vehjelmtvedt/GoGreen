@@ -52,7 +52,7 @@
             <Image url="@../Pics/gogreen.png"/>
         </ImageView>
         <Label fx:id="line4" layoutX="113.0" layoutY="750.0" prefHeight="68.0" prefWidth="432.0"
-               text="○ Total Users Registerd:" textFill="WHITE">
+               text="○ Total Users Registered:" textFill="WHITE">
             <font>
                 <Font size="25.0"/>
             </font>

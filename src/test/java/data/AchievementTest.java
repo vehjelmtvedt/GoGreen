@@ -22,14 +22,14 @@ public class AchievementTest {
     }
 
     @Test
-    public void testname(){
+    public void testName(){
         String name = "test1";
 
         Assert.assertEquals(test.getName(), name);
     }
 
     @Test
-    public void testbonus(){
+    public void testBonus(){
         int num = 100;
         Assert.assertEquals(num , test.getBonus());
 
