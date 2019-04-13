@@ -39,8 +39,6 @@ import tools.Requests;
 import java.io.IOException;
 import java.net.URL;
 
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 public class ProfilePageController implements Initializable {
@@ -88,32 +86,40 @@ public class ProfilePageController implements Initializable {
     @FXML
     private HBox badgeZone;
 
-    /**.
+    /**
+     * .
      * Update the age field with the new value
+     *
      * @param newAge - new value for age
      */
     public void updateAge(String newAge) {
         age.setText(newAge);
     }
 
-    /**.
+    /**
+     * .
      * Update the first name field with the new value
+     *
      * @param newFirstName - new value for first name
      */
     public void updateFirstName(String newFirstName) {
         firstName.setText(newFirstName);
     }
 
-    /**.
+    /**
+     * .
      * Update the last name field with the new value
+     *
      * @param newLastName - new value for last name
      */
     public void updateLastName(String newLastName) {
         lastName.setText(newLastName);
     }
 
-    /**.
+    /**
+     * .
      * Update the user's profile page information
+     *
      * @param user - user to update info to
      */
     public void updateUser(User user) {
@@ -137,8 +143,10 @@ public class ProfilePageController implements Initializable {
                 new Image("avatars/" + thisUser.getAvatar() + ".jpg")));
     }
 
-    /**.
+    /**
+     * .
      * Update the containers with completed & uncompleted achievements
+     *
      * @param user - user view to update
      */
     public void updateAchievements(User user) {
@@ -309,10 +317,7 @@ public class ProfilePageController implements Initializable {
         loginDetails = passedLoginDetails;
     }
 
-//    @Override
-//    public void update(Observable observable, Object arg) {
-//        updateAchievements(thisUser);
-//    }
+
 }
 
 
