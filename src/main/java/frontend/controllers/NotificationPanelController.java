@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class NotificationPanelController implements Initializable {
+public class    NotificationPanelController implements Initializable {
     private static User loggedUser;
     private static LoginDetails loginDetails;
     private static boolean notifySelected = false;
