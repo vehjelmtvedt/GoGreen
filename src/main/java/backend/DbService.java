@@ -593,19 +593,19 @@ public class DbService {
         if (getTopUsers(10).contains(user)) {
             results.add(26);
         }
-        //Reach the top five Users
+        //Reach the top five Users id 28
         if (getTopUsers(5).contains(user)) {
             results.add(27);
         }
-        //Reach third place on the leader board
+        //Reach third place on the leader board id 18
         if (getTopUsers(3).contains(user)) {
             results.add(18);
         }
-        //Reach second place on the leader board
+        //Reach second place on the leader board id 11
         if (getTopUsers(2).contains(user)) {
             results.add(11);
         }
-        //Reach the top of the leader board
+        //Reach the top of the leader board id 10
         if (getTopUsers(1).contains(user)) {
             results.add(10);
         }
