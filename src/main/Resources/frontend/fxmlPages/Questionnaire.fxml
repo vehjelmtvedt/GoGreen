@@ -121,18 +121,9 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="textElectricity" prefHeight="27.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></JFXTextField>
-                  <JFXTextField fx:id="textOil" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></JFXTextField>
-                  <JFXTextField fx:id="textCarUsage" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></JFXTextField>
+                  <JFXTextField fx:id="textElectricity" prefHeight="27.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="textOil" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <JFXTextField fx:id="textCarUsage" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <JFXComboBox fx:id="carSizes" prefHeight="27.0" prefWidth="204.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -153,7 +144,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXComboBox>
-                  <JFXButton fx:id="submitButton" prefHeight="27.0" prefWidth="199.0" style="-fx-background-color: green;" text="SUBMIT" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                  <JFXButton fx:id="submitButton" opacity="0.75" prefHeight="27.0" prefWidth="199.0" style="-fx-background-color: green;" text="SUBMIT" GridPane.columnIndex="1" GridPane.rowIndex="9">
                      <font>
                         <Font size="24.0" />
                      </font>

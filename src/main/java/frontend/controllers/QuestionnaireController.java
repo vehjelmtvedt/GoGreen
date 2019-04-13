@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import data.User;
 import frontend.gui.Dialog;
+import frontend.gui.Events;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
 import javafx.collections.FXCollections;
@@ -89,6 +90,8 @@ public class QuestionnaireController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //add required events
+        Events.addJfxButtonHover(submitButton);
 
         //setup fonts
         try {
