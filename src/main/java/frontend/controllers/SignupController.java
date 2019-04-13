@@ -105,45 +105,54 @@ public class SignupController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        lblSaved.setText(Math.floor(Requests.instance.getTotalCO2Saved()) + " KG");
+        lblTotalUsers.setText(Requests.instance.getTotalUsers() + " Users");
 
-        lblSaved.setText("0 KG");
-        lblTotalUsers.setText("0 Users");
-
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2500), ae -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10000), ae -> {
             lblSaved.setText(Math.floor(Requests.instance.getTotalCO2Saved()) + " KG");
             lblTotalUsers.setText(Requests.instance.getTotalUsers() + " Users");
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        JFXTextField[] nameFields = new JFXTextField[2];
+        //create arrays for fields to clean up code usage in Input Validation
+        JFXTextField[] nameFields = new JFXTextField[2]; //first & last name
+        JFXPasswordField[] passFields = new JFXPasswordField[2]; // passwords
         nameFields[0] = firstNameField;
         nameFields[1] = lastNameField;
+        passFields[0] = passwordField;
+        passFields[1] = confirmPasswordField;
+
+        JFXTextField[] primaryFields = new JFXTextField[2]; //email && username
+        primaryFields[0] = emailField;
+        primaryFields[1] = usernameField;
+
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
         signupButton.setOnAction(e -> {
             try {
-                InputValidation.signUpValidate(nameFields, usernameField,
-                        emailField, passwordField,
-                        confirmPasswordField, ageField,
-                        getSecurityQuestionid(), secAnswer, mainPane);
+                boolean succeeded = InputValidation.signUpValidate(nameFields, primaryFields,
+                        passFields, ageField, getSecurityQuestionid(), secAnswer);
 
-                //Reset fields
-                firstNameField.setText(null);
-                lastNameField.setText(null);
-                emailField.setText(null);
-                ageField.setText(null);
-                usernameField.setText(null);
-                passwordField.setText(null);
-                confirmPasswordField.setText(null);
-                secAnswer.setText(null);
+                //Reset fields if everything went alright
+                if (succeeded) {
+                    firstNameField.setText(null);
+                    lastNameField.setText(null);
+                    emailField.setText(null);
+                    ageField.setText(null);
+                    usernameField.setText(null);
+                    passwordField.setText(null);
+                    confirmPasswordField.setText(null);
+                    secAnswer.setText(null);
+                }
+
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         });
-        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->
-                StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignIn()
-        ));
+        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignIn());
+        });
         try {
             setFonts();
         } catch (IOException e) {
@@ -159,6 +168,7 @@ public class SignupController implements Initializable {
 
     /**
      * Gets the security question ID.
+     *
      * @return - the ID of the question
      */
     public int getSecurityQuestionid() {
@@ -176,14 +186,14 @@ public class SignupController implements Initializable {
     private void fillSecurityQuestions(JFXComboBox secQuestion) {
         secQuestions = FXCollections.observableArrayList(
                 "What was your childhood nickname?",
-                        "In what city did you meet your spouse/significant other?",
-                        "What is the name of your favorite childhood friend?",
-                        "What street did you live on in third grade?",
-                        "What is your oldest sibling’s birthday month and year?"
-                                + " (e.g., January 1900)",
-                        "What is the middle name of your youngest child?",
-                        "What is your oldest sibling's middle name?",
-                        "What school did you attend for sixth grade?"
+                "In what city did you meet your spouse/significant other?",
+                "What is the name of your favorite childhood friend?",
+                "What street did you live on in third grade?",
+                "What is your oldest sibling’s birthday month and year?"
+                        + " (e.g., January 1900)",
+                "What is the middle name of your youngest child?",
+                "What is your oldest sibling's middle name?",
+                "What school did you attend for sixth grade?"
         );
         secQuestion.setItems(secQuestions);
 

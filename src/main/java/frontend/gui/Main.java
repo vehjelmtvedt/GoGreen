@@ -109,11 +109,6 @@ public class Main extends Application {
         profilePage = scene;
     }
 
-    public static void setQuestionnaire(Scene scene) {
-        Questionnaire = scene;
-    }
-
-
     public static Font getRobotoThin(double size) throws IOException {
         return Font.loadFont(new ClassPathResource("/fonts/Roboto-thin.ttf")
                 .getInputStream(), size);
