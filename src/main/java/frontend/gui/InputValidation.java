@@ -8,12 +8,14 @@ import data.User;
 
 import frontend.controllers.ActivitiesController;
 import frontend.controllers.EditProfilePopUpController;
+import frontend.controllers.FriendRequestController;
 import frontend.controllers.FriendspageController;
 import frontend.controllers.HomepageController;
 import frontend.controllers.NavPanelController;
 import frontend.controllers.NotificationPanelController;
 import frontend.controllers.ProfilePageController;
 import frontend.controllers.QuestionnaireController;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,7 +42,7 @@ public class InputValidation {
      * @param passField  password input field
      * @param form       form containing input fields
      */
-    public static void signInValidate(TextField emailField,
+    public static boolean signInValidate(TextField emailField,
                                       PasswordField passField, AnchorPane form) throws IOException {
 
         LoginDetails loginDetails = new LoginDetails(emailField.getText(), passField.getText());
@@ -80,6 +82,7 @@ public class InputValidation {
             EditProfilePopUpController.setUser(loggedUser);
             EditProfilePopUpController.setLoginDetails(loginDetails);
             NavPanelController.setUser(loggedUser);
+            FriendRequestController.setThisUsername(loggedUser.getUsername());
 
             //setup .fxml pages after successfully logging in
             try {
@@ -112,11 +115,11 @@ public class InputValidation {
             }
             //Go to homepage after logging in
             StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getHomepage());
-
+            return true;
         } else {
-
             Dialog.show("Login failed",
                     "Incorrect credentials. Try again", "DISMISS", "error", false);
+            return false;
         }
     }
 

@@ -16,7 +16,7 @@ public class FriendRequest {
      * @param fromUser - the username that send a request
      * @throws IOException - if something loads incorrectly
      */
-    public void newFriendRequest(VBox container, String fromUser, int parity) throws IOException {
+    public void newFriendRequest(VBox container, String fromUser) throws IOException {
         FXMLLoader requestLoader = new FXMLLoader(
                 Main.class.getResource("/frontend/fxmlPages/FriendRequest.fxml"));
         Parent request = requestLoader.load();
@@ -25,9 +25,8 @@ public class FriendRequest {
         controller.setUsername(fromUser);
 
         AnchorPane friendRequest = (AnchorPane) request;
-        //        if (parity % 2 == 0) {
-        //            friendRequest.setStyle("-fx-background-color: #c6c6c6");
-        //        }
+        //set ID for the new friend request
+        friendRequest.setId(fromUser);
         container.getChildren().add(friendRequest);
     }
 }
