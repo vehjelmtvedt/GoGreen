@@ -298,7 +298,7 @@ public class DbService {
         //checks the leaderboards
         addAchievement(returned , checkLeaderboards(returned) , DateUtils.instance.dateToday());
 
-        returned.getProgress().hasChangedCheck();
+        //returned.getProgress().hasChangedCheck();
 
         addUser(returned);
 
@@ -406,9 +406,11 @@ public class DbService {
      * @return the updated User
      */
     public User editProfile(User user, String fieldName, Object newValue) {
+        System.out.println(fieldName);
         try {
             if (fieldName.equals("password")) {
                 newValue = encodePassword((String) newValue);
+                System.out.println(newValue);
             }
             Field field = user.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
@@ -529,7 +531,7 @@ public class DbService {
 
                 user.getProgress().addPoints(list.get(id).getBonus());
 
-                user.getProgress().hasChangedCheck();
+                //user.getProgress().hasChangedCheck();
             }
         }
 
@@ -545,7 +547,7 @@ public class DbService {
      */
     public void addCO2Points(User user, double carbonsaved) {
 
-        user.getProgress().hasChangedCheck();
+        //user.getProgress().hasChangedCheck();
 
         user.getProgress().setPoints(user.getProgress().getPoints() + carbonsaved * 300);
 

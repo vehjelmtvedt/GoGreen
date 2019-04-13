@@ -1,6 +1,7 @@
 package frontend.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import frontend.gui.Events;
 import frontend.gui.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +28,9 @@ public class DialogController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //add required events
+        Events.addJfxButtonHover(button);
+
         button.setOnAction(e -> {
             Stage stage = (Stage) button.getScene().getWindow();
             stage.close();

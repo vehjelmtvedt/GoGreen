@@ -123,6 +123,7 @@ public class FriendspageController implements Initializable {
         //add needed events
         Events.addJfxButtonHover(btnRefresh);
         try {
+            NotificationPanelController.addNotificationPanel(headerPane, main);
             StageSwitcher.friendsDrawer = NavPanel.addNavPanel(main, headerPane, menu);
             lblGoGreen.setFont(Main.getReenieBeanie(100));
         } catch (IOException e) {
@@ -203,7 +204,8 @@ public class FriendspageController implements Initializable {
 
                 results.getChildren().clear();
                 for (int i = 0; i < searchResults.size(); i++) {
-                    if (!searchResults.get(i).equals(thisUser.getUsername())) {
+                    if (!searchResults.get(i).equals(thisUser.getUsername())
+                        && !thisUser.getFriends().contains(searchResults.get(i))) {
                         HBox hbox = new HBox();
                         VBox.setMargin(hbox, new Insets(0, 20, 0, 20));
                         hbox.setStyle("-fx-background-color: #4286f4;");
