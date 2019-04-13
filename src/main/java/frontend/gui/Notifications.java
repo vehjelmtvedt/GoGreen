@@ -30,10 +30,16 @@ public class Notifications {
         }
     }
 
+    /**.
+     * Add new achievement popup upon completing
+     * @param achievements - achievements list
+     * @throws IOException - exception to throw if something goes wrong
+     */
     public static void newAchievement(ArrayList<UserAchievement> achievements) throws IOException {
         int counter = 0;
         Achievement currAchievement;
-        ArrayList<Achievement> all = (ArrayList<Achievement>) Requests.instance.getAllAchievements();
+        ArrayList<Achievement> all = (ArrayList<Achievement>)
+                Requests.instance.getAllAchievements();
 
         for (UserAchievement userAchievement : achievements) {
             currAchievement = all.get(userAchievement.getId());
