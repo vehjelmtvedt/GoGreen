@@ -43,7 +43,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class ProfilePageController implements Initializable , Observer {
+public class ProfilePageController implements Initializable {
     private static User thisUser;
     private static LoginDetails loginDetails;
 
@@ -309,10 +309,10 @@ public class ProfilePageController implements Initializable , Observer {
         loginDetails = passedLoginDetails;
     }
 
-    @Override
-    public void update(Observable observable, Object arg) {
-        updateAchievements(thisUser);
-    }
+//    @Override
+//    public void update(Observable observable, Object arg) {
+//        updateAchievements(thisUser);
+//    }
 }
 
 
