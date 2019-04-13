@@ -25,9 +25,8 @@ public class FriendRequest {
         controller.setUsername(fromUser);
 
         AnchorPane friendRequest = (AnchorPane) request;
-        //        if (parity % 2 == 0) {
-        //            friendRequest.setStyle("-fx-background-color: #c6c6c6");
-        //        }
+        //set ID for the new friend request
+        friendRequest.setId(fromUser);
         container.getChildren().add(friendRequest);
     }
 }

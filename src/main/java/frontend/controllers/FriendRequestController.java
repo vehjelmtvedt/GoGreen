@@ -24,11 +24,16 @@ public class FriendRequestController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         btnAccept.setOnAction(e -> {
             Requests.instance.acceptFriendRequest(thisUsername, lblUsername.getText());
+            //Delete the friend request here
+            NotificationPanelController panelController = new NotificationPanelController();
+            panelController.deleteFriendRequest(lblUsername.getText());
         });
 
         btnDecline.setOnAction(e -> {
             Requests.instance.rejectFriendRequest(thisUsername, lblUsername.getText());
-
+            //Delete the friend request here
+            NotificationPanelController panelController = new NotificationPanelController();
+            panelController.deleteFriendRequest(lblUsername.getText());
         });
 
     }

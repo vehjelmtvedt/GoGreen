@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +35,8 @@ public class NotificationPanelController implements Initializable {
     @FXML
     private VBox friendsContainer;
 
+    private static VBox friendsContainerCopy;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -53,6 +56,8 @@ public class NotificationPanelController implements Initializable {
         });
 
         notificationPane.setVisible(false);
+
+        friendsContainerCopy = friendsContainer;
     }
 
     private void addFriendRequest(VBox container, String fromUser, int parity) {
@@ -63,6 +68,14 @@ public class NotificationPanelController implements Initializable {
             System.out.println("Something went wrong");
         }
     }
+
+    public void deleteFriendRequest(String username) {
+        Node old = friendsContainer.lookup("#" + username);
+        System.out.println("Removing node: " + old.toString());
+        friendsContainer.getChildren().clear();
+    }
+
+
 
     private static void setup(ImageView notificationIcon,
                               ImageView logoutIcon, AnchorPane parentPane) throws IOException {
