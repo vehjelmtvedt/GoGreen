@@ -86,10 +86,10 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        lblSaved.setText("0 KG");
-        lblTotalUsers.setText("0 Users");
+        lblSaved.setText(Math.floor(Requests.instance.getTotalCO2Saved()) + " KG");
+        lblTotalUsers.setText(Requests.instance.getTotalUsers() + " Users");
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2500), ae -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10000), ae -> {
             lblSaved.setText(Math.floor(Requests.instance.getTotalCO2Saved()) + " KG");
             lblTotalUsers.setText(Requests.instance.getTotalUsers() + " Users");
         }));

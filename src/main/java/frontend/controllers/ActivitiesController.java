@@ -324,16 +324,6 @@ public class ActivitiesController implements Initializable {
         thisUser = passedUser;
     }
 
-    /**
-     * .
-     * Get the logged in User
-     *
-     * @return logged User
-     */
-    public static User getUser() {
-        return thisUser;
-    }
-
     public static void setLoginDetails(LoginDetails passedLoginDetails) {
         thisLoginDetails = passedLoginDetails;
     }

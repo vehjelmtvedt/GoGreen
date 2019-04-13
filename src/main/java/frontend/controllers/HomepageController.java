@@ -202,7 +202,7 @@ public class HomepageController implements Initializable {
             hideLeaderboards(tableTop100, tableTop5, tableTop10, tableTop25, tableTop50);
         });
 
-        //update profile information and leaderboards
+        //update profile information and leaderboards upon initialising page
         updateUser(thisLoginDetails);
         updateLeaderboards();
 

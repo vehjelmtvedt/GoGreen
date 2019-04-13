@@ -105,11 +105,10 @@ public class SignupController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        lblSaved.setText(Math.floor(Requests.instance.getTotalCO2Saved()) + " KG");
+        lblTotalUsers.setText(Requests.instance.getTotalUsers() + " Users");
 
-        lblSaved.setText("0 KG");
-        lblTotalUsers.setText("0 Users");
-
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2500), ae -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10000), ae -> {
             lblSaved.setText(Math.floor(Requests.instance.getTotalCO2Saved()) + " KG");
             lblTotalUsers.setText(Requests.instance.getTotalUsers() + " Users");
         }));
