@@ -572,8 +572,8 @@ public class DbService {
         double carbon = getUser(identifier).getTotalCarbonSaved();
 
         return (int) mongoTemplate.count(new Query( // Get count of matching documents
-                        Criteria.where("totalCarbonSaved") // Compare totalCarbonSaved of other Users
-                                .gt(carbon)), // Carbon Saved of queried Users should be greater
+                Criteria.where("totalCarbonSaved") // Compare totalCarbonSaved of other Users
+                .gt(carbon)), // Carbon Saved of queried Users should be greater
                 User.class) // Search in User collection
                 + 1; // Add 1 (to count in the User itself)
     }
@@ -588,24 +588,26 @@ public class DbService {
 
         ArrayList<Integer> results = new ArrayList();
 
+        int rank = getUserRank(user.getUsername());
+
         //Reach the top ten 26
-        if (getTopUsers(10).contains(user)) {
+        if (rank <= 10) {
             results.add(26);
         }
         //Reach the top five Users id 28
-        if (getTopUsers(5).contains(user)) {
+        if (rank <= 5) {
             results.add(27);
         }
         //Reach third place on the leader board id 18
-        if (getTopUsers(3).contains(user)) {
+        if (rank <= 3) {
             results.add(18);
         }
         //Reach second place on the leader board id 11
-        if (getTopUsers(2).contains(user)) {
+        if (rank <= 2) {
             results.add(11);
         }
         //Reach the top of the leader board id 10
-        if (getTopUsers(1).contains(user)) {
+        if (rank == 1) {
             results.add(10);
         }
 
