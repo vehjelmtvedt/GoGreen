@@ -81,7 +81,7 @@ public class InputValidation {
             NotificationPanelController.setLoginDetails(loginDetails);
             EditProfilePopUpController.setUser(loggedUser);
             EditProfilePopUpController.setLoginDetails(loginDetails);
-            NavPanelController.setUser(loggedUser);
+            NavPanelController.setLoginDetails(loginDetails);
             FriendRequestController.setThisUsername(loggedUser.getUsername());
 
             //setup .fxml pages after successfully logging in

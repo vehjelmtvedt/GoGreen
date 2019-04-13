@@ -42,11 +42,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomepageController implements Initializable {
-    private static User loggedUser;
+    private static User thisUser;
+    private static LoginDetails thisLoginDetails;
     private static AnchorPane mainCopy;
     private static AnchorPane headerCopy;
     private static NotificationPopup popup;
-    private static LoginDetails loginDetails;
     private List<JFXButton> leaderboards = new ArrayList<>();
 
 
@@ -131,36 +131,34 @@ public class HomepageController implements Initializable {
 
     /**.
      * Update the user information on the homepage
-     * @param user - current logged user
-     * @param logDetails - current login details (assigned to user)
+     * @param loginDetails - current login details (assigned to user)
      */
-    public void updateUser(User user, LoginDetails logDetails) {
+    public void updateUser(LoginDetails loginDetails) {
         //update the user and his login details
-        loggedUser = user;
-        loginDetails = logDetails;
+        thisUser = Requests.instance.loginRequest(loginDetails);
 
         //update the field values on the homepage dashboard
         circleProfile.setFill(new ImagePattern(
-                new Image("avatars/" + loggedUser.getAvatar() + ".jpg")));
-        lblFirstName.setText(loggedUser.getFirstName().toUpperCase());
-        lblLastName.setText(loggedUser.getLastName().toUpperCase());
-        lblEmail.setText(loggedUser.getEmail());
-        lblLevel.setText(Integer.toString(loggedUser.getProgress().getLevel()));
-        lblRank.setText(Integer.toString(Requests.instance.getUserRanking(loginDetails)));
-        lblProgress.setText(loggedUser.getProgress().pointsNeeded()
+                new Image("avatars/" + thisUser.getAvatar() + ".jpg")));
+        lblFirstName.setText(thisUser.getFirstName().toUpperCase());
+        lblLastName.setText(thisUser.getLastName().toUpperCase());
+        lblEmail.setText(thisUser.getEmail());
+        lblLevel.setText(Integer.toString(thisUser.getProgress().getLevel()));
+        lblRank.setText(Integer.toString(Requests.instance.getUserRanking(thisLoginDetails)));
+        lblProgress.setText(thisUser.getProgress().pointsNeeded()
                 + " Points left");
-        lblActivities.setText(Integer.toString(loggedUser.getActivities().size()));
-        lblFriends.setText(Integer.toString(loggedUser.getFriends().size()));
-        lblYourCarbon.setText("You have saved " + loggedUser.getTotalCarbonSaved()
+        lblActivities.setText(Integer.toString(thisUser.getActivities().size()));
+        lblFriends.setText(Integer.toString(thisUser.getFriends().size()));
+        lblYourCarbon.setText("You have saved " + thisUser.getTotalCarbonSaved()
                 + " kg of CO2 so far");
         lblAverageCarbon.setText("Average person saved "
                 + ((int)(Requests.instance.getAverageCO2Saved() * 1000)) / 1000.0
                 + " kg of CO2 so far");
 
         //update user information for the homepage charts
-        fillPieChart(loggedUser, chartMyActivities);
+        fillPieChart(thisUser, chartMyActivities);
         fillBarChart("Your CO2 Savings", barChart);
-        fillWeekChart(loggedUser, weekChart);
+        fillWeekChart(thisUser, weekChart);
     }
 
     private void updateLeaderboards() {
@@ -205,7 +203,7 @@ public class HomepageController implements Initializable {
         });
 
         //update profile information and leaderboards
-        updateUser(loggedUser, loginDetails);
+        updateUser(thisLoginDetails);
         updateLeaderboards();
 
         Events.addLeaderboards(leaderboards);
@@ -286,7 +284,7 @@ public class HomepageController implements Initializable {
 
     private ObservableList<UserItem> getTableData(int top) {
         ObservableList<UserItem> friendsList = FXCollections.observableArrayList();
-        List<User> users = Requests.instance.getTopUsers(loginDetails, top);
+        List<User> users = Requests.instance.getTopUsers(thisLoginDetails, top);
 
         for (Object user : users) {
             User thisUser = (User) user;
@@ -363,7 +361,7 @@ public class HomepageController implements Initializable {
      * @param series - the series to add data to
      */
     public void populateBarChart(XYChart.Series series) {
-        ActivityQueries thisQuery = new ActivityQueries(loggedUser.getActivities());
+        ActivityQueries thisQuery = new ActivityQueries(thisUser.getActivities());
         series.getData().add(new XYChart.Data("TODAY",
                 thisQuery.getTotalCO2Saved(DateUnit.TODAY)));
         series.getData().add(new XYChart.Data("LAST WEEK",
@@ -407,17 +405,17 @@ public class HomepageController implements Initializable {
      * @param passedUser Logged in current user
      */
     public static void setUser(User  passedUser) {
-        loggedUser = passedUser;
+        thisUser = passedUser;
 
     }
 
     /**
      * Sets the login details and starts the notification thread.
-     * @param passedloginDetails - login details from sign in form
+     * @param passedLoginDetails - login details from sign in form
      */
-    public static void setLoginDetails(LoginDetails passedloginDetails) {
-        loginDetails = passedloginDetails;
-        SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, loginDetails, loggedUser);
+    public static void setLoginDetails(LoginDetails passedLoginDetails) {
+        thisLoginDetails = passedLoginDetails;
+        SyncUserTask syncUserTask = new SyncUserTask(Requests.instance, thisLoginDetails, thisUser);
         NotificationThread notificationThread = new NotificationThread(syncUserTask);
         notificationThread.start();
     }

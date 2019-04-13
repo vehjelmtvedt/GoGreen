@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ActivitiesController implements Initializable {
-    private static User loggedUser;
+    private static User thisUser;
     private static LoginDetails thisLoginDetails;
     private static List<JFXCheckBox> checkList = new ArrayList<>();
     private static List<JFXRadioButton> radioList = new ArrayList<>();
@@ -171,24 +171,24 @@ public class ActivitiesController implements Initializable {
         headerCopy = headerPane;
 
         //add Activity Event on clicking ( plus add in history table )
-        Events.addFoodActivity(paneVegetarianMeal, 1, thisLoginDetails, loggedUser, activityTable);
-        Events.addFoodActivity(paneOrganicFood, 2, thisLoginDetails, loggedUser, activityTable);
-        Events.addFoodActivity(paneLocalFood, 3, thisLoginDetails, loggedUser, activityTable);
-        Events.addFoodActivity(paneNonProFood, 4, thisLoginDetails, loggedUser, activityTable);
+        Events.addFoodActivity(paneVegetarianMeal, 1, thisLoginDetails, thisUser, activityTable);
+        Events.addFoodActivity(paneOrganicFood, 2, thisLoginDetails, thisUser, activityTable);
+        Events.addFoodActivity(paneLocalFood, 3, thisLoginDetails, thisUser, activityTable);
+        Events.addFoodActivity(paneNonProFood, 4, thisLoginDetails, thisUser, activityTable);
         Events.addTransportActivity(paneBike, inputDistance,
-                lblDistanceValidate, 1, thisLoginDetails, loggedUser, activityTable);
+                lblDistanceValidate, 1, thisLoginDetails, thisUser, activityTable);
         Events.addTransportActivity(paneBus, inputDistance,
-                lblDistanceValidate, 2, thisLoginDetails, loggedUser, activityTable);
+                lblDistanceValidate, 2, thisLoginDetails, thisUser, activityTable);
         Events.addTransportActivity(paneTrain, inputDistance,
-                lblDistanceValidate, 3, thisLoginDetails, loggedUser, activityTable);
+                lblDistanceValidate, 3, thisLoginDetails, thisUser, activityTable);
         Events.addHouseholdActivity(paneSolarPanels, lblPanelsInstalled,
-                lblLoweredTemp,1, thisLoginDetails, loggedUser, activityTable);
+                lblLoweredTemp,1, thisLoginDetails, thisUser, activityTable);
         Events.addHouseholdActivity(paneEnergy, lblPanelsInstalled,
-                lblLoweredTemp,2, thisLoginDetails, loggedUser, activityTable);
+                lblLoweredTemp,2, thisLoginDetails, thisUser, activityTable);
         Events.addRecyclingActivity(panePlastic, lblPlastic, lblPaper,1,
-                thisLoginDetails, loggedUser, activityTable);
+                thisLoginDetails, thisUser, activityTable);
         Events.addRecyclingActivity(panePaper, lblPlastic, lblPaper,2,
-                thisLoginDetails, loggedUser, activityTable);
+                thisLoginDetails, thisUser, activityTable);
 
         //add hover events for button activities
         Events.addActivityHover(paneVegetarianMeal, btnVegetarianMeal);
@@ -218,8 +218,8 @@ public class ActivitiesController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
         carbonColumn.setCellValueFactory(new PropertyValueFactory<>("CarbonSaved"));
 
-        activityTable.setItems(getActivities(loggedUser));
-        if (loggedUser.getActivities().isEmpty()) {
+        activityTable.setItems(getActivities(thisUser));
+        if (thisUser.getActivities().isEmpty()) {
             activityTable.setPlaceholder(new Label("No previous activities"));
         }
 
@@ -240,19 +240,19 @@ public class ActivitiesController implements Initializable {
         Events.addHoverOnFilter(lblClearFilters);
         Events.addHoverOnFilter(lblApply);
         Events.clearFilters(lblClearFilters, checkList, radioList,
-                minCarbon, maxCarbon, loggedUser, activityTable);
+                minCarbon, maxCarbon, thisUser, activityTable);
         Events.applyFilters(lblApply, checkList, radioList,
-                minCarbon, maxCarbon, loggedUser, activityTable);
+                minCarbon, maxCarbon, thisUser, activityTable);
 
         //setup additional labels
         InstallSolarPanels panels = new InstallSolarPanels();
         LowerHomeTemperature temp = new LowerHomeTemperature();
-        lblPanelsInstalled.setVisible(loggedUser.getSimilarActivities(panels).size() > 0);
-        lblLoweredTemp.setVisible(temp.timesPerformedInTheSameDay(loggedUser) > 0);
+        lblPanelsInstalled.setVisible(thisUser.getSimilarActivities(panels).size() > 0);
+        lblLoweredTemp.setVisible(temp.timesPerformedInTheSameDay(thisUser) > 0);
         RecyclePlastic plastic = new RecyclePlastic();
-        lblPlastic.setVisible(plastic.timesPerformedInTheSameDay(loggedUser) > 0);
+        lblPlastic.setVisible(plastic.timesPerformedInTheSameDay(thisUser) > 0);
         RecyclePaper paper = new RecyclePaper();
-        lblPaper.setVisible(paper.timesPerformedInTheSameDay(loggedUser) > 0);
+        lblPaper.setVisible(paper.timesPerformedInTheSameDay(thisUser) > 0);
     }
 
     public static void popup(String heading, String body, String icon,
@@ -321,7 +321,7 @@ public class ActivitiesController implements Initializable {
      * @param passedUser Logged in current user
      */
     public static void setUser(User passedUser) {
-        loggedUser = passedUser;
+        thisUser = passedUser;
     }
 
     /**
@@ -331,10 +331,10 @@ public class ActivitiesController implements Initializable {
      * @return logged User
      */
     public static User getUser() {
-        return loggedUser;
+        return thisUser;
     }
 
-    public static void setLoginDetails(LoginDetails loginDetails) {
-        thisLoginDetails = loginDetails;
+    public static void setLoginDetails(LoginDetails passedLoginDetails) {
+        thisLoginDetails = passedLoginDetails;
     }
 }
