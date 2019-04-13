@@ -52,6 +52,7 @@ public class NavPanelController implements Initializable {
                 Main.getPrimaryStage(), Main.getFriendsPage()));
         myProfile.setOnAction(e -> {
             profilePageController.updateUser(thisLoginDetails);
+            profilePageController.updateAchievements(thisLoginDetails);
             StageSwitcher.sceneSwitch(
                     Main.getPrimaryStage(), Main.getProfilePage());
         });

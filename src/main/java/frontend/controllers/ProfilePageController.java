@@ -43,7 +43,7 @@ import java.util.ResourceBundle;
 
 public class ProfilePageController implements Initializable {
     private static User thisUser;
-    private static LoginDetails loginDetails;
+    private static LoginDetails thisLoginDetails;
 
     @FXML
     JFXDrawer drawer;
@@ -217,8 +217,8 @@ public class ProfilePageController implements Initializable {
         EditProfilePopUpController.profilePageController = this;
 
         //fill in the user information on the profile page
-        updateUser(loginDetails);
-        updateAchievements(loginDetails);
+        updateUser(thisLoginDetails);
+        updateAchievements(thisLoginDetails);
 
         editProfile.setOnAction(e -> {
             Stage stage = new Stage();
@@ -299,12 +299,12 @@ public class ProfilePageController implements Initializable {
         }
     }
 
-    public static void setUser(User user) {
-        thisUser = user;
+    public static void setUser(User passedUser) {
+        thisUser = passedUser;
     }
 
     public static void setLoginDetails(LoginDetails passedLoginDetails) {
-        loginDetails = passedLoginDetails;
+        thisLoginDetails = passedLoginDetails;
     }
 
 }
