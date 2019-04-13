@@ -17,7 +17,7 @@
    <children>
       <ImageView fx:id="image" fitHeight="166.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../pics/navbackground.png" />
+            <Image url="@../Pics/navbackground.png" />
          </image>
       </ImageView>
       <Pane prefHeight="150.0" prefWidth="200.0">
