@@ -525,20 +525,10 @@ public class DbService {
 
                 String idstring = Integer.toString(id);
 
-                System.out.println(idstring + "looking for this ");
-
                 List<Achievement> list = getAchievements();
 
                 user.getProgress().addPoints(list.get(id).getBonus());
 
-                System.out.println("Added: id " + userAchievement.getId()
-                        + " list.get(id).getBonus() points "
-                        +
-                        " now have " + user.getProgress().getAchievements().size()
-                        +
-                        " competed" + "this user now has "
-                        +
-                        user.getProgress().getPoints() + " points");
             }
         }
 
@@ -585,6 +575,12 @@ public class DbService {
                 + 1; // Add 1 (to count in the User itself)
     }
 
+    /**
+     * for leader boards achievement logic.
+     *
+     * @param user user to check
+     * @return array of ids
+     */
     public ArrayList<Integer> checkleaderbaords(User user) {
 
         ArrayList<Integer> results = new ArrayList();

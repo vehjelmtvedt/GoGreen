@@ -190,7 +190,13 @@ public class AchievementsLogic {
         return results;
     }
 
-
+    /**
+     * checks if the activity completes an achievement.
+     *
+     * @param user the user
+     * @param activity to check
+     * @return array of ids
+     */
     public static ArrayList<Integer> checkotherActivities(User user, Activity activity) {
         ArrayList<Integer> results = new ArrayList<>();
 

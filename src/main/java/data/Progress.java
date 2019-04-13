@@ -99,6 +99,9 @@ public class Progress extends Observable {
         }
     }
 
+    /**notify Observers that the progress has changed.
+     *
+     */
     public void hasChangedCheck() {
 
         setChanged();

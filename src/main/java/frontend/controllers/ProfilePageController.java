@@ -310,7 +310,7 @@ public class ProfilePageController implements Initializable , Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable observable, Object arg) {
         updateAchievements(thisUser);
     }
 }
