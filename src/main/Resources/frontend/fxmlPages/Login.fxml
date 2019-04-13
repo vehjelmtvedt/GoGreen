@@ -23,17 +23,17 @@
                   <Font size="70.0" />
                </font>
             </Label>
-            <Label fx:id="line1" layoutX="113.0" layoutY="464.0" prefHeight="70.0" prefWidth="320.0" text="○ Add your activities" textFill="WHITE">
+            <Label fx:id="line1" layoutX="113.0" layoutY="450.0" prefHeight="70.0" prefWidth="320.0" text="○ Add your activities" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label fx:id="line2" layoutX="113.0" layoutY="575.0" prefHeight="68.0" prefWidth="320.0" text="○ Compare with friends" textFill="WHITE">
+            <Label fx:id="line2" layoutX="113.0" layoutY="525.0" prefHeight="68.0" prefWidth="320.0" text="○ Compare with friends" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="line3" layoutX="113.0" layoutY="691.0" prefHeight="68.0" prefWidth="320.0" text="○ Save the world!" textFill="WHITE">
+            <Label fx:id="line3" layoutX="113.0" layoutY="600.0" prefHeight="68.0" prefWidth="320.0" text="○ Save the world!" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
@@ -43,22 +43,22 @@
                   <Image url="@../Pics/gogreen.png" />
                </image>
             </ImageView>
-            <Label fx:id="line4" layoutX="113.0" layoutY="759.0" prefHeight="68.0" prefWidth="432.0" text="○ Total Users Registerd:" textFill="WHITE">
+            <Label fx:id="line4" layoutX="113.0" layoutY="750.0" prefHeight="68.0" prefWidth="432.0" text="○ Total Users Registerd:" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="line5" layoutX="113.0" layoutY="818.0" prefHeight="68.0" prefWidth="320.0" text="○ Total Carbon Saved:" textFill="WHITE">
+            <Label fx:id="line5" layoutX="113.0" layoutY="825.0" prefHeight="68.0" prefWidth="320.0" text="○ Total Carbon Saved:" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lblTotalUsers" layoutX="190.0" layoutY="803.0" prefHeight="30.0" prefWidth="320.0" text="Users" textFill="WHITE">
+            <Label fx:id="lblTotalUsers" layoutX="190.0" layoutY="795.0" prefHeight="30.0" prefWidth="320.0" text="Users" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lblSaved" layoutX="190.0" layoutY="862.0" prefHeight="30.0" prefWidth="328.0" text="Saved" textFill="WHITE">
+            <Label fx:id="lblSaved" layoutX="190.0" layoutY="870.0" prefHeight="30.0" prefWidth="328.0" text="Saved" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
