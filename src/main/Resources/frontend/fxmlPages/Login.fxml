@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -17,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" stylesheets="@../Stylesheets/Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.LoginController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" stylesheets="@../Stylesheets/Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.LoginController">
    <children>
       <AnchorPane fx:id="graphics" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="542.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -30,17 +23,17 @@
                   <Font size="70.0" />
                </font>
             </Label>
-            <Label fx:id="line1" layoutX="113.0" layoutY="464.0" prefHeight="70.0" prefWidth="320.0" text="○ Add your activities" textFill="WHITE">
+            <Label fx:id="line1" layoutX="113.0" layoutY="450.0" prefHeight="70.0" prefWidth="320.0" text="○ Add your activities" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label fx:id="line2" layoutX="113.0" layoutY="575.0" prefHeight="68.0" prefWidth="320.0" text="○ Compare with friends" textFill="WHITE">
+            <Label fx:id="line2" layoutX="113.0" layoutY="525.0" prefHeight="68.0" prefWidth="320.0" text="○ Compare with friends" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="line3" layoutX="111.0" layoutY="691.0" prefHeight="68.0" prefWidth="320.0" text="○ Save the world!" textFill="WHITE">
+            <Label fx:id="line3" layoutX="113.0" layoutY="600.0" prefHeight="68.0" prefWidth="320.0" text="○ Save the world!" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
@@ -50,6 +43,26 @@
                   <Image url="@../Pics/gogreen.png" />
                </image>
             </ImageView>
+            <Label fx:id="line4" layoutX="113.0" layoutY="750.0" prefHeight="68.0" prefWidth="432.0" text="○ Total Users Registerd:" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="line5" layoutX="113.0" layoutY="825.0" prefHeight="68.0" prefWidth="320.0" text="○ Total Carbon Saved:" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTotalUsers" layoutX="190.0" layoutY="795.0" prefHeight="30.0" prefWidth="320.0" text="Users" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblSaved" layoutX="190.0" layoutY="870.0" prefHeight="30.0" prefWidth="328.0" text="Saved" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="fieldPane" layoutX="667.0" layoutY="108.0" prefHeight="793.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="108.0">
