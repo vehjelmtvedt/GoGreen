@@ -197,11 +197,11 @@ public class QuestionnaireController implements Initializable {
             if ( !(textElectricity.getText().isEmpty() && textOil.getText().isEmpty())
                     && !(textCarUsage.getText().isEmpty()) ) {
 
-                int householdMembers = Integer.parseInt(houseHoldNo.getValue().toString());
+                int numHouseholdMembers = Integer.parseInt(houseHoldNo.getValue().toString());
                 double dailyElectricityConsumption =
-                        Double.parseDouble(textElectricity.getText()) / 365 / householdMembers;
+                        Double.parseDouble(textElectricity.getText()) / 365 / numHouseholdMembers;
                 double dailyHeatingOilConsumption =
-                        Integer.parseInt(textOil.getText()) / 365.0 / householdMembers;
+                        Integer.parseInt(textOil.getText()) / 365.0 / numHouseholdMembers;
                 String carType = this.carSizes.getValue().toString();
                 int dailyCarKilometres = Integer.parseInt(textCarUsage.getText()) / 365;
                 String meatAndDairyConsumption = this.meatAndDairyOptions.getValue().toString();
