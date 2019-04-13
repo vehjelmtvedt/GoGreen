@@ -194,8 +194,14 @@ public class AchievementsLogicTest {
     public void checkotherActivities1() {
         Assert.assertTrue(AchievementsLogic.checkotherActivities(user , recyclePaper).contains(28));
     }
+
+
     @Test
     public void checkotherActivities2() {
         Assert.assertTrue(AchievementsLogic.checkotherActivities(user , lowerHomeTemperature).contains(30));
+    }
+    @Test
+    public void checkotherActivities3() {
+        Assert.assertTrue(AchievementsLogic.checkotherActivities(user , recyclePlastic).contains(29));
     }
 }

@@ -529,6 +529,7 @@ public class DbService {
 
                 user.getProgress().addPoints(list.get(id).getBonus());
 
+                user.getProgress().hasChangedCheck();
             }
         }
 
@@ -544,7 +545,7 @@ public class DbService {
      */
     public void addCO2Points(User user, double carbonsaved) {
 
-        System.out.println("In addCO2Points   going to add " + carbonsaved);
+        user.getProgress().hasChangedCheck();
 
         user.getProgress().setPoints(user.getProgress().getPoints() + carbonsaved * 300);
 
