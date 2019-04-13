@@ -19,7 +19,6 @@ public class Main extends Application {
     private static Scene activities;
     private static Scene friendPage;
     private static Scene profilePage;
-    private static String cssIntro;
 
     @Override
     public void start(Stage window) throws IOException {
@@ -44,10 +43,6 @@ public class Main extends Application {
         Questionnaire = new Scene(
                 rootQuestionnaire, General.getBounds()[0], General.getBounds()[1]
         );
-
-        //add path for css files and add them to the specific scenes they belong
-        String cssPathIntro = "/frontend/Stylesheets/Style.css";
-        cssIntro = this.getClass().getResource(cssPathIntro).toExternalForm();
 
         //setup the first scene for the primary stage
         General.finaliseStage(primaryStage, signIn);

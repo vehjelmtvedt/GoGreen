@@ -14,6 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 @RunWith(MockitoJUnitRunner.class)
 public class DbLoaderTest {
     @InjectMocks
@@ -27,6 +28,7 @@ public class DbLoaderTest {
     UserStatisticsRepository userStatistics;
 
     private final UserStatistics userStatisticsObj = new UserStatistics("all", 0, 0);
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private final Optional<UserStatistics> userStatisticsOptional = Optional.of(userStatisticsObj);
 
     @Before

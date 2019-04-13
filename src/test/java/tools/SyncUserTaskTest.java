@@ -14,12 +14,12 @@ public class SyncUserTaskTest {
     private final Requests requests = Mockito.mock(Requests.class);
 
     private final User user = new User("Test", "User", 25,
-            "test-user@email.com","testuser","pwd123");
+            "test-user@email.com","testUser","pwd123");
 
     private final User modifiedUser = new User("Test", "User", 25,
-            "test-user@email.com", "testuser", "pwd123");
+            "test-user@email.com", "testUser", "pwd123");
 
-    private final LoginDetails loginDetails = new LoginDetails("testuser", "pwd123");
+    private final LoginDetails loginDetails = new LoginDetails("testUser", "pwd123");
 
     @Before
     public void setupAchievements() {

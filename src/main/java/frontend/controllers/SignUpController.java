@@ -24,13 +24,11 @@ import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 @SuppressWarnings({"unchecked", "WeakerAccess"})
-public class SignupController implements Initializable {
+public class SignUpController implements Initializable {
 
-    private static final ArrayList<JFXTextField> fields = new ArrayList<>();
 
     @FXML
     private JFXTextField firstNameField;
@@ -54,7 +52,7 @@ public class SignupController implements Initializable {
     private JFXTextField ageField;
 
     @FXML
-    private JFXButton signupButton;
+    private JFXButton signUpButton;
 
     @FXML
     private AnchorPane mainPane;
@@ -84,7 +82,7 @@ public class SignupController implements Initializable {
     private Label line5;
 
     @FXML
-    private Label signup;
+    private Label signUp;
 
     @FXML
     private Label goGreen;
@@ -130,7 +128,7 @@ public class SignupController implements Initializable {
 
         background.fitWidthProperty().bind(graphics.widthProperty());
         background.fitHeightProperty().bind(graphics.heightProperty());
-        signupButton.setOnAction(e -> {
+        signUpButton.setOnAction(e -> {
             try {
                 boolean succeeded = InputValidation.signUpValidate(nameFields, primaryFields,
                         passFields, ageField, getSecurityQuestionid(), secAnswer);
@@ -159,7 +157,7 @@ public class SignupController implements Initializable {
         }
         mainPane.setOnKeyPressed(ke -> {
             if (ke.getCode().equals(KeyCode.ENTER)) {
-                signupButton.fire();
+                signUpButton.fire();
             }
         });
         fillSecurityQuestions(secQuestion);
@@ -210,9 +208,9 @@ public class SignupController implements Initializable {
         line5.setFont(Main.getReenieBeanie(40));
         lblSaved.setFont(Main.getReenieBeanie(30));
         lblTotalUsers.setFont(Main.getReenieBeanie(30));
-        signup.setFont(Main.getRobotoThin(45));
+        signUp.setFont(Main.getRobotoThin(45));
         loginForward.setFont(Main.getRobotoThin(45));
-        signupButton.setFont(Main.getRobotoThin(28));
+        signUpButton.setFont(Main.getRobotoThin(28));
     }
 
 

@@ -25,6 +25,7 @@ import static org.junit.Assert.*;
 @AutoConfigureDataMongo
 @DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_CLASS)
 public class DbServiceTest {
+    @SuppressWarnings("unused")
     @Autowired
     private DbService dbService;
 

@@ -10,6 +10,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;
 
+@SuppressWarnings("unused")
 @Configuration
 class DbLoader {
     // Specify JSON to load here
@@ -29,6 +30,7 @@ class DbLoader {
      * Currently loads only achievements into the achievement repository.
      * @return Populator bean for the database
      */
+    @SuppressWarnings("UnusedReturnValue")
     @Bean
     public Jackson2RepositoryPopulatorFactoryBean populateDatabase() {
         // Wipe achievement repository to overwrite with new data

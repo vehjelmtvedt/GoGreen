@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_CLASS)
 public class AppRequestHandlerTest {
+    @SuppressWarnings("unused")
     @MockBean
     private DbService dbService;
 

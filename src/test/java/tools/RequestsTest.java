@@ -29,7 +29,7 @@ import java.util.List;
 import static junit.framework.TestCase.*;
 import static org.junit.Assert.assertFalse;
 
-
+@SuppressWarnings("unused")
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Server.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_CLASS)

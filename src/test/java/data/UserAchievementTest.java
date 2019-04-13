@@ -49,11 +49,11 @@ public class UserAchievementTest {
     @Test
     public void setDate() {
 
-        Date testdate = new Date(1 , 1 ,1 );
+        Date testDate = new Date(1 , 1 ,1 );
 
-        test.setDate(testdate);
+        test.setDate(testDate);
 
-        Assert.assertEquals(testdate, test.getDate());
+        Assert.assertEquals(testDate, test.getDate());
 
     }
 }

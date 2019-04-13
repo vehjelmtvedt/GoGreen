@@ -20,7 +20,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.*;
 
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "unused"})
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_CLASS)

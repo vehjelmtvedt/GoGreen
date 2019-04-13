@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 
 
 
+@SuppressWarnings("ALL")
 @RestController
 public class UserRequestHandler {
     @Resource(name = "DbService")

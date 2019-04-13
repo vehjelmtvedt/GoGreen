@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <!--suppress JavaFxUnresolvedFxIdReference -->
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.SignupController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.SignUpController">
     <AnchorPane fx:id="graphics" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity"
                 minWidth="-Infinity" prefHeight="900.0" prefWidth="542.0" AnchorPane.bottomAnchor="0.0"
                 AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -52,7 +52,7 @@
             <Image url="@../Pics/gogreen.png"/>
         </ImageView>
         <Label fx:id="line4" layoutX="113.0" layoutY="750.0" prefHeight="68.0" prefWidth="432.0"
-               text="○ Total Users Registerd:" textFill="WHITE">
+               text="○ Total Users Registered:" textFill="WHITE">
             <font>
                 <Font size="25.0"/>
             </font>
@@ -77,7 +77,7 @@
         </Label>
     </AnchorPane>
     <AnchorPane fx:id="fieldPane" layoutX="656.0" layoutY="-2.0" prefHeight="902.0" prefWidth="660.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="656.0" AnchorPane.topAnchor="0.0">
-        <JFXButton fx:id="signupButton" contentDisplay="CENTER" layoutX="81.0" layoutY="739.0" prefHeight="74.0" prefWidth="200.0" ripplerFill="WHITE" style="-fx-background-radius: 30px; -fx-border-color: #AFCF2C#AFCF2C; -fx-border-radius: 30px; -fx-border-width: 5px;" text="SIGN UP" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="375.0" AnchorPane.topAnchor="739.0">
+        <JFXButton fx:id="signUpButton" contentDisplay="CENTER" layoutX="81.0" layoutY="739.0" prefHeight="74.0" prefWidth="200.0" ripplerFill="WHITE" style="-fx-background-radius: 30px; -fx-border-color: #AFCF2C#AFCF2C; -fx-border-radius: 30px; -fx-border-width: 5px;" text="SIGN UP" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="375.0" AnchorPane.topAnchor="739.0">
             <font>
                 <Font name="PingFang HK Regular" size="28.0" />
             </font>
@@ -93,7 +93,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Label>
-        <Label fx:id="signup" layoutX="231.0" layoutY="49.0" text="Sign up" textFill="#379b1e" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="49.0">
+        <Label fx:id="signUp" layoutX="231.0" layoutY="49.0" text="Sign up" textFill="#379b1e" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="49.0">
             <font>
                 <Font size="43.0" />
             </font>

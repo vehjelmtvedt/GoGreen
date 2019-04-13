@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-@SuppressWarnings({"ConstantConditions", "EqualsBetweenInconvertibleTypes", "EqualsWithItself"})
 public class UserTest {
 
     private final User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");

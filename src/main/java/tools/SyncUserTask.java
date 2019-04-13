@@ -89,7 +89,7 @@ public class SyncUserTask implements Callable<UserPendingData> {
         HashSet<String> newFriendSet = new HashSet<>(newUser.getFriendRequests());
 
         // Calculate difference between new User's friend requests and current
-        // (and update it to the hashset), (Essentially B - A)
+        // (and update it to the hashSet), (Essentially B - A)
         newFriendSet.removeAll(friendSet);
 
         // Add new requests as pending
@@ -107,7 +107,7 @@ public class SyncUserTask implements Callable<UserPendingData> {
         HashSet<String> newFriendSet = new HashSet<>(newUser.getFriends());
 
         // Calculate difference between new User's friends and current
-        // (and update it to the haset), (Essentially B - A)
+        // (and update it to the hashSet), (Essentially B - A)
         newFriendSet.removeAll(friendSet);
 
         // Add new friends as pending

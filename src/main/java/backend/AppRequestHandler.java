@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import javax.annotation.Resource;
 
+@SuppressWarnings("unused")
 @RestController
 public class AppRequestHandler {
+
     @Resource(name = "DbService")
     private DbService dbService;
 

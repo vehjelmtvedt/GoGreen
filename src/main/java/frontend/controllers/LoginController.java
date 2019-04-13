@@ -30,6 +30,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
+@SuppressWarnings("WeakerAccess")
 public class LoginController implements Initializable {
 
     @FXML

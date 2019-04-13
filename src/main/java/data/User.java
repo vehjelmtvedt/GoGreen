@@ -35,6 +35,7 @@ public class User {
     private String organicFoodConsumption;
     private String processedFoodConsumption;
     private double totalCarbonSaved;
+    @SuppressWarnings("CanBeFinal")
     private Progress progress = new Progress();
 
     private String avatar;

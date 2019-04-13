@@ -32,6 +32,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
+@SuppressWarnings("unused")
 @Service("DbService")
 @Transactional
 public class DbService {

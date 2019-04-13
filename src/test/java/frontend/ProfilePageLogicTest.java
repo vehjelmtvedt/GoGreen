@@ -21,11 +21,10 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings({"deprecation", "unused"})
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Server.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_CLASS)
-
 
 
 

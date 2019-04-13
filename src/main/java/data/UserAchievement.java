@@ -3,9 +3,11 @@ package data;
 import java.util.Date;
 
 
+@SuppressWarnings("unused")
 public class UserAchievement {
 
     private int id;
+    @SuppressWarnings("CanBeFinal")
     private boolean completed;
     private Date date;
 
