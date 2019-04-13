@@ -89,10 +89,6 @@ public class Main extends Application {
         return profilePage;
     }
 
-    public static String getCssIntro() {
-        return cssIntro;
-    }
-
     public static void setActivities(Scene scene) {
         activities = scene;
     }

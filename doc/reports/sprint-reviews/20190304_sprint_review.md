@@ -6,10 +6,10 @@
 
 ### Problem 1: Uneven work distribution
 Our team had a problem with the work distribution, such that the backend has to wait on the frontend to start working.
-We have decided to fix the problem by more careful planning, intermediate deadlines and by havinb the backend people
+We have decided to fix the problem by more careful planning, intermediate deadlines and by having the backend people
 help out on other parts of the project.
 
-### Problem 2: Techincal Issues
+### Problem 2: Technical Issues
 Some minor technical issues with JDK8. We have decided to switch to JDK11 and guiding each team member to go through with it.
 
 ### Problem 3: Too much focus on bonus features

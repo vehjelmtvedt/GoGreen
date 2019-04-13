@@ -3,8 +3,6 @@ package data;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class UserStatisticsTest {
     @Test
     public void getTimePeriod() {
@@ -63,7 +61,7 @@ public class UserStatisticsTest {
     @Test
     public void deleteUser() {
         UserStatistics userStatistics = new UserStatistics("all", 5, 7);
-        User testUser = new User("test", "user", 25, "testuser@email.com", "testuser", "pwd");
+        User testUser = new User("test", "user", 25, "testuser@email.com", "testUser", "pwd");
         userStatistics.deleteUser(testUser);
         Assert.assertEquals(4, userStatistics.getTotalUsers());
     }
@@ -71,7 +69,7 @@ public class UserStatisticsTest {
     @Test
     public void deleteUserWithActivities() {
         UserStatistics userStatistics = new UserStatistics("all", 10, 250);
-        User testUser = new User("test", "user", 25, "testuser@email.com", "testuser", "pwd");
+        User testUser = new User("test", "user", 25, "testuser@email.com", "testUser", "pwd");
 
         for (int i = 0; i < 10; ++i) {
             Activity activity = new EatVegetarianMeal();

@@ -57,12 +57,13 @@ public class BuyOrganicFood extends Activity {
         int timesPerformedInTheSameDay = timesPerformedInTheSameDay(user);
 
         if (timesPerformedInTheSameDay == 0) {
-            if (organicFoodConsumption.equals("none")) {
-                return nonetoSome();
-            } else if (organicFoodConsumption.equals("some")) {
-                return someToMost();
-            } else if (organicFoodConsumption.equals("most")) {
-                return mostToAll();
+            switch (organicFoodConsumption) {
+                case "none":
+                    return nonetoSome();
+                case "some":
+                    return someToMost();
+                case "most":
+                    return mostToAll();
             }
         } else if (timesPerformedInTheSameDay == 1) {
             if (organicFoodConsumption.equals("none")) {

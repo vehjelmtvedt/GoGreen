@@ -11,15 +11,15 @@ import java.util.Calendar;
 import java.util.HashSet;
 
 public class SyncUserTaskTest {
-    private Requests requests = Mockito.mock(Requests.class);
+    private final Requests requests = Mockito.mock(Requests.class);
 
-    private User user = new User("Test", "User", 25,
+    private final User user = new User("Test", "User", 25,
             "test-user@email.com","testuser","pwd123");
 
-    private User modifiedUser = new User("Test", "User", 25,
+    private final User modifiedUser = new User("Test", "User", 25,
             "test-user@email.com", "testuser", "pwd123");
 
-    private LoginDetails loginDetails = new LoginDetails("testuser", "pwd123");
+    private final LoginDetails loginDetails = new LoginDetails("testuser", "pwd123");
 
     @Before
     public void setupAchievements() {
@@ -94,8 +94,8 @@ public class SyncUserTaskTest {
         }
 
         // No equals method or UserAchievement, therefore two asserts here
-        Assert.assertEquals(0, result.getAchievements().size());
-        Assert.assertEquals(0, result.getFriendRequests().size());
+        Assert.assertEquals(0, result != null ? result.getAchievements().size() : 0);
+        Assert.assertEquals(0, result != null ? result.getFriendRequests().size() : 0);
     }
 
     @Test
@@ -112,11 +112,11 @@ public class SyncUserTaskTest {
             e.printStackTrace();
         }
 
-        Assert.assertEquals(1, result.getAchievements().size());
-        Assert.assertEquals(1, result.getFriendRequests().size());
+        Assert.assertEquals(1, result != null ? result.getAchievements().size() : 0);
+        Assert.assertEquals(1, result != null ? result.getFriendRequests().size() : 0);
         Assert.assertEquals(3, user.getProgress().getAchievements().size());
         Assert.assertEquals(2, user.getFriendRequests().size());
-        Assert.assertEquals(2, result.getFriends().size());
+        Assert.assertEquals(2, result != null ? result.getFriends().size() : 0);
         Assert.assertEquals(4, user.getFriends().size());
     }
 

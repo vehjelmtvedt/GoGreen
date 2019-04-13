@@ -6,21 +6,18 @@ import org.junit.Test;
 
 public class AchievementTest {
 
-    Achievement achievement;
-    Achievement test = new Achievement(2 , "test1" , 100);
+    private final Achievement test = new Achievement(2 , "test1" , 100);
 
 
     @Test
     public void constructorTest() {
 
-        achievement = new Achievement(1 , "test" , 10);
+        Achievement achievement = new Achievement(1, "test", 10);
         Assert.assertNotNull(achievement);
     }
 
     @Test
-    public void testid(){
-
-        int id = 2;
+    public void testId(){
         Assert.assertEquals(2 , test.getId());
     }
 
@@ -28,7 +25,7 @@ public class AchievementTest {
     public void testname(){
         String name = "test1";
 
-        Assert.assertTrue(test.getName().equals(name));
+        Assert.assertEquals(test.getName(), name);
     }
 
     @Test
@@ -54,7 +51,7 @@ public class AchievementTest {
 
     @Test
     public void testNotEquals() {
-        Assert.assertNotEquals(test,new String());
+        Assert.assertNotEquals(test, "");
     }
 
     @Test
@@ -62,7 +59,7 @@ public class AchievementTest {
 
         Achievement test1 = new Achievement(1, "test" , 10);
 
-        Assert.assertFalse(test1.equals(test));
+        Assert.assertNotEquals(test1, test);
 
     }
 
@@ -71,7 +68,7 @@ public class AchievementTest {
 
         Achievement test2 = new Achievement(2 , "test1" , 100);
 
-        Assert.assertTrue(test2.equals(test));
+        Assert.assertEquals(test2, test);
 
     }
 
@@ -79,7 +76,7 @@ public class AchievementTest {
     public void equals2() {
         Achievement test2 = new Achievement(2 , "test12" , 100);
 
-        Assert.assertFalse(test2.equals(test));
+        Assert.assertNotEquals(test2, test);
 
     }
 
@@ -87,7 +84,7 @@ public class AchievementTest {
     public void equals3() {
         Achievement test2 = new Achievement(2 , "test1" , 1000);
 
-        Assert.assertFalse(test2.equals(test));
+        Assert.assertNotEquals(test2, test);
 
     }
 }

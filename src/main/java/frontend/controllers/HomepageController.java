@@ -41,13 +41,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("unchecked")
 public class HomepageController implements Initializable {
     private static User thisUser;
     private static LoginDetails thisLoginDetails;
     private static AnchorPane mainCopy;
     private static AnchorPane headerCopy;
     private static NotificationPopup popup;
-    private List<JFXButton> leaderboards = new ArrayList<>();
+    private final List<JFXButton> leaderboards = new ArrayList<>();
 
 
     @FXML
@@ -157,7 +158,7 @@ public class HomepageController implements Initializable {
 
         //update user information for the homepage charts
         fillPieChart(thisUser, chartMyActivities);
-        fillBarChart("Your CO2 Savings", barChart);
+        fillBarChart(barChart);
         fillWeekChart(thisUser, weekChart);
     }
 
@@ -186,21 +187,11 @@ public class HomepageController implements Initializable {
         btnRefresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> updateLeaderboards());
 
         //switch leaderboards upon clicking
-        btnTop5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            hideLeaderboards(tableTop5, tableTop10, tableTop25, tableTop50, tableTop100);
-        });
-        btnTop10.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            hideLeaderboards(tableTop10, tableTop5, tableTop25, tableTop50, tableTop100);
-        });
-        btnTop25.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            hideLeaderboards(tableTop25, tableTop5, tableTop10, tableTop50, tableTop100);
-        });
-        btnTop25.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            hideLeaderboards(tableTop50, tableTop5, tableTop10, tableTop50, tableTop100);
-        });
-        btnTop100.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            hideLeaderboards(tableTop100, tableTop5, tableTop10, tableTop25, tableTop50);
-        });
+        btnTop5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> hideLeaderboards(tableTop5, tableTop10, tableTop25, tableTop50, tableTop100));
+        btnTop10.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> hideLeaderboards(tableTop10, tableTop5, tableTop25, tableTop50, tableTop100));
+        btnTop25.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> hideLeaderboards(tableTop25, tableTop5, tableTop10, tableTop50, tableTop100));
+        btnTop25.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> hideLeaderboards(tableTop50, tableTop5, tableTop10, tableTop50, tableTop100));
+        btnTop100.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> hideLeaderboards(tableTop100, tableTop5, tableTop10, tableTop25, tableTop50));
 
         //update profile information and leaderboards upon initialising page
         updateUser(thisLoginDetails);
@@ -266,14 +257,14 @@ public class HomepageController implements Initializable {
 
     //Used for constructing TreeView
     private class UserItem extends RecursiveTreeObject<UserItem> {
-        StringProperty username;
-        StringProperty level;
-        StringProperty totalActivities;
-        StringProperty totalFriends;
-        StringProperty totalCarbonSaved;
+        final StringProperty username;
+        final StringProperty level;
+        final StringProperty totalActivities;
+        final StringProperty totalFriends;
+        final StringProperty totalCarbonSaved;
 
-        public UserItem(String username, String level, String totalActivities,
-                        String totalFriends, String totalCarbonSaved) {
+        UserItem(String username, String level, String totalActivities,
+                 String totalFriends, String totalCarbonSaved) {
             this.username = new SimpleStringProperty(username);
             this.level = new SimpleStringProperty(level);
             this.totalActivities = new SimpleStringProperty(totalActivities);
@@ -311,7 +302,7 @@ public class HomepageController implements Initializable {
      * @param top - the first x people to show on the leaderboards
      * @param table - the first x people to show on the leaderboards
      */
-    public void fillLeaderboards(int top, JFXTreeTableView table) {
+    private void fillLeaderboards(int top, JFXTreeTableView table) {
         JFXTreeTableColumn<UserItem, String>
                 usernameColumn = new JFXTreeTableColumn<>("User");
         usernameColumn.setCellValueFactory(param -> param.getValue().getValue().username);
@@ -360,7 +351,7 @@ public class HomepageController implements Initializable {
      *
      * @param series - the series to add data to
      */
-    public void populateBarChart(XYChart.Series series) {
+    private void populateBarChart(XYChart.Series series) {
         ActivityQueries thisQuery = new ActivityQueries(thisUser.getActivities());
         series.getData().add(new XYChart.Data("TODAY",
                 thisQuery.getTotalCO2Saved(DateUnit.TODAY)));
@@ -370,9 +361,9 @@ public class HomepageController implements Initializable {
                 thisQuery.getTotalCO2Saved(DateUnit.MONTH)));
     }
 
-    private void fillBarChart(String title, BarChart chart) {
+    private void fillBarChart(BarChart chart) {
         XYChart.Series series = new XYChart.Series();
-        series.setName(title);
+        series.setName("Your CO2 Savings");
         populateBarChart(series);
         chart.getData().clear();
         chart.getData().addAll(series);

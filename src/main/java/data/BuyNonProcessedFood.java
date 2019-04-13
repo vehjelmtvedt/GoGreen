@@ -60,12 +60,13 @@ public class BuyNonProcessedFood extends Activity {
         int timesPerformedInTheSameDay = timesPerformedInTheSameDay(user);
 
         if (timesPerformedInTheSameDay == 0) {
-            if (processedFoodConsumption.equals("above average")) {
-                return aboveAverageToAverage();
-            } else if (processedFoodConsumption.equals("average")) {
-                return averageToBelowAverage();
-            } else if (processedFoodConsumption.equals("below average")) {
-                return belowAverageToVeryLittle();
+            switch (processedFoodConsumption) {
+                case "above average":
+                    return aboveAverageToAverage();
+                case "average":
+                    return averageToBelowAverage();
+                case "below average":
+                    return belowAverageToVeryLittle();
             }
         } else if (timesPerformedInTheSameDay == 1) {
             if (processedFoodConsumption.equals("above average")) {

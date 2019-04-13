@@ -2,24 +2,17 @@ package data;
 
 import data.*;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import tools.DateUnit;
-import tools.DateUtils;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
+@SuppressWarnings({"ConstantConditions", "EqualsBetweenInconvertibleTypes", "EqualsWithItself"})
 public class UserTest {
 
-    User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
-    User emptyUser = new User();
-    User activeUser = new User("Active", "User", 20, "active_user@email.com", "active_user", "pwd123");
+    private final User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
+    private final User emptyUser = new User();
+    private final User activeUser = new User("Active", "User", 20, "active_user@email.com", "active_user", "pwd123");
 
     @Test
     public void testConstructor() { Assert.assertNotNull(userOne);}
@@ -43,8 +36,8 @@ public class UserTest {
     }
 
     @Test
-    public void getLastameFail() {
-        Assert.assertNotEquals("evaldaslastname", userOne.getLastName());
+    public void getLastNameFail() {
+        Assert.assertNotEquals("random", userOne.getLastName());
     }
 
     @Test
@@ -119,7 +112,7 @@ public class UserTest {
     }
 
     @Test
-    public void setElectricityDailyConsumptionSuccsess() {
+    public void setElectricityDailyConsumptionSuccess() {
         userOne.setElectricityDailyConsumption(50000);
         Assert.assertEquals(50000,(int) userOne.getElectricityDailyConsumption());
     }
@@ -127,7 +120,7 @@ public class UserTest {
     @Test
     public void getHeatingOilDailyConsumptionSuccess() {
         userOne.setHeatingOilDailyConsumption(500);
-        Assert.assertTrue("heatingOilDailyConsumption is not equal to 500", userOne.getHeatingOilDailyConsumption() == 500);
+        Assert.assertEquals("heatingOilDailyConsumption is not equal to 500", 500, userOne.getHeatingOilDailyConsumption(), 0.0);
     }
 
     @Test
@@ -136,9 +129,9 @@ public class UserTest {
     }
 
     @Test
-    public void setHeatingOilDailyConsumptionSuccsess() {
+    public void setHeatingOilDailyConsumptionSuccess() {
         userOne.setHeatingOilDailyConsumption(200);
-        Assert.assertTrue("heatingOilDailyConsumption is not equal to 200", userOne.getHeatingOilDailyConsumption() == 200);
+        Assert.assertEquals("heatingOilDailyConsumption is not equal to 200", 200, userOne.getHeatingOilDailyConsumption(), 0.0);
     }
 
     @Test
@@ -246,31 +239,31 @@ public class UserTest {
     @Test
     public void getTotalCarbonSavedSuccess() {
         userOne.setTotalCarbonSaved(50.55);
-        Assert.assertTrue(userOne.getTotalCarbonSaved() == 50.55);
+        Assert.assertEquals(50.55, userOne.getTotalCarbonSaved(), 0.0);
     }
 
     @Test
     public void getTotalCarbonSavedFail() {
-        Assert.assertFalse(userOne.getTotalCarbonSaved() == 50.6);
+        Assert.assertNotEquals(50.6, userOne.getTotalCarbonSaved(), 0.0);
     }
 
     @Test
     public void setTotalCarbonSavedSuccess() {
         userOne.setTotalCarbonSaved(60.1);
-        Assert.assertTrue(userOne.getTotalCarbonSaved() == 60.1);
+        Assert.assertEquals(60.1, userOne.getTotalCarbonSaved(), 0.0);
     }
 
     @Test
     public void getFriendRequestsSuccessNotEmpty() {
-        userOne.newFriendRequest("testname");
+        userOne.newFriendRequest("testName");
         Assert.assertEquals(1, userOne.getFriendRequests().size());
-        Assert.assertEquals(true, userOne.getFriendRequests().contains("testname"));
+        Assert.assertTrue(userOne.getFriendRequests().contains("testName"));
     }
 
     @Test
     public void testAddFriend() {
         userOne.addFriend("friend1");
-        Assert.assertEquals(userOne.getFriends().contains("friend1"),true);
+        Assert.assertTrue(userOne.getFriends().contains("friend1"));
     }
 
     @Test
@@ -283,50 +276,50 @@ public class UserTest {
 
     @Test
     public void testNewFriendRequest() {
-        userOne.newFriendRequest("testfriend");
+        userOne.newFriendRequest("testFriend");
         Assert.assertEquals(1, userOne.getFriendRequests().size());
-        Assert.assertEquals(true, userOne.getFriendRequests().contains("testfriend"));
+        Assert.assertTrue(userOne.getFriendRequests().contains("testFriend"));
     }
 
     @Test
     public void testDeleteFriendRequest() {
-        userOne.newFriendRequest("testfriend");
-        userOne.newFriendRequest("testfriend2");
-        Assert.assertEquals(true, userOne.getFriendRequests().contains("testfriend2"));
-        userOne.deleteFriendRequest("testfriend");
-        Assert.assertEquals(true, userOne.getFriendRequests().contains("testfriend2"));
+        userOne.newFriendRequest("testFriend");
+        userOne.newFriendRequest("testFriend2");
+        Assert.assertTrue(userOne.getFriendRequests().contains("testFriend2"));
+        userOne.deleteFriendRequest("testFriend");
+        Assert.assertTrue(userOne.getFriendRequests().contains("testFriend2"));
     }
 
     @Test
     public void testEqualsSame() {
-        Assert.assertTrue(userOne.equals(userOne));
+        Assert.assertEquals(userOne, userOne);
     }
 
     @Test
     public void testEqualsNull() {
-        Assert.assertFalse(userOne.equals(null));
+        Assert.assertNotEquals(null, userOne);
     }
 
     @Test
     public void testEqualsAnotherClass() {
-        Assert.assertFalse(userOne.equals(new LoginDetails()));
+        Assert.assertNotEquals(userOne, new LoginDetails());
     }
 
     @Test
     public void testEqualsEmpty() {
-        Assert.assertFalse(userOne.equals(emptyUser));
+        Assert.assertNotEquals(userOne, emptyUser);
     }
 
 
     @Test
-    public void testEqalsDiffEmail() {
+    public void testEqualsDiffEmail() {
         User userOne2 = new User("Vetle", "Hjelmtvedt", 19, "vetle2@hjelmtvedt.com","test", "password123");
-        Assert.assertFalse(userOne.equals(userOne2));
+        Assert.assertNotEquals(userOne, userOne2);
     }
 
     @Test
     public void testEqualsDifferentUser() {
-        Assert.assertFalse(userOne.equals(activeUser));
+        Assert.assertNotEquals(userOne, activeUser);
     }
 
     @Test

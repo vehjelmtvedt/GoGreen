@@ -34,7 +34,7 @@ public class AppRequestHandlerTest {
     @Test
     public void testUserSearch() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
-        List<String> testList = new ArrayList();
+        List<String> testList = new ArrayList<>();
         testList.add(testUser.getUsername());
         Mockito.when(dbService.getMatchingUsers(testUser.getUsername())).thenReturn(testList);
         assertEquals(testList, appRequestHandler.userSearch(new LoginDetails(testUser.getUsername(),
@@ -45,14 +45,14 @@ public class AppRequestHandlerTest {
     @Test
     public void testUserSearchNull() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
-        assertEquals(null, appRequestHandler.userSearch(new LoginDetails(testUser.getUsername(),
-                testUser.getPassword()),testUser.getUsername()));
+        assertNull(appRequestHandler.userSearch(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword()), testUser.getUsername()));
     }
 
     @Test
     public void retrieveTopUsers() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
-        List<User> testList = new ArrayList();
+        List<User> testList = new ArrayList<>();
         testList.add(testUser);
         Mockito.when(dbService.getTopUsers(1)).thenReturn(testList);
         assertEquals(testList, appRequestHandler.getTopUsers(new LoginDetails(testUser.getUsername(),
@@ -62,13 +62,13 @@ public class AppRequestHandlerTest {
     @Test
     public void retrieveTopUsersNull() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
-        assertEquals(null, appRequestHandler.getTopUsers(new LoginDetails(testUser.getUsername(),
-                testUser.getPassword()),1));
+        assertNull(appRequestHandler.getTopUsers(new LoginDetails(testUser.getUsername(),
+                testUser.getPassword()), 1));
     }
 
     @Test
     public void getAllAchievements() {
-        List<Achievement> testList = new ArrayList();
+        List<Achievement> testList = new ArrayList<>();
         testList.add(new Achievement());
         Mockito.when(dbService.getAchievements()).thenReturn(testList);
         assertEquals(testList, appRequestHandler.getAllAchievements());

@@ -1,7 +1,5 @@
 package tools;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -45,7 +43,7 @@ public class CarbonCalculatorTest {
 
     @Test
     public void trainEmissions() {
-        assertEquals((int) (29 * 0.049)*1000, (int) CarbonCalculator.trainEmissions(29)*1000);
+        assertEquals(1000, (int) CarbonCalculator.trainEmissions(29)*1000);
     }
 
     @Test

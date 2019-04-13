@@ -13,9 +13,9 @@ public class AchievementsLogic {
      * @param user     current user
      * @param activity current activity
      */
-    public static ArrayList<Integer> checkTranspostActivity(User user, Activity activity) {
+    public static ArrayList<Integer> checkTransportActivity(User user, Activity activity) {
 
-        ArrayList<Integer> results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList<>();
         results.add(0);
 
         ActivityQueries activityQueries = new ActivityQueries(user.getActivities());
@@ -55,8 +55,8 @@ public class AchievementsLogic {
      * @param activity current activity
      */
 
-    public static ArrayList<Integer> checkTranspostActivity1(User user, Activity activity) {
-        ArrayList<Integer> results = new ArrayList();
+    public static ArrayList<Integer> checkTransportActivity1(User user, Activity activity) {
+        ArrayList<Integer> results = new ArrayList<>();
         results.add(0);
 
         ActivityQueries activityQueries = new ActivityQueries(user.getActivities());
@@ -80,14 +80,12 @@ public class AchievementsLogic {
 
     /**
      * checks food related activity if it completes an achievement.
-     *
-     * @param user     current user
      * @param activity current activity
      */
-    public static ArrayList<Integer> checkFoodActivity(User user, Activity activity) {
+    public static ArrayList<Integer> checkFoodActivity(Activity activity) {
 
 
-        ArrayList<Integer> results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList<>();
         results.add(0);
         //Eating vegetarian food for the first time id 6
         if (activity instanceof EatVegetarianMeal) {
@@ -120,14 +118,14 @@ public class AchievementsLogic {
      */
     public static ArrayList<Integer> checkOther(User user) {
 
-        ArrayList<Integer> results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList<>();
 
         //Saved your first CO2 id 0
         if (user.getTotalCarbonSaved() > 0) {
             results.add(0);
         }
 
-        //Adding more than five Activites id 1
+        //Adding more than five Activities id 1
         if (user.getActivities().size() > 5) {
             results.add(1);
         }
@@ -164,7 +162,7 @@ public class AchievementsLogic {
      */
     public static ArrayList<Integer> checkLevel(User user) {
 
-        ArrayList<Integer> results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList<>();
         results.add(0);
 
         //Achieve level 4 19
@@ -193,11 +191,10 @@ public class AchievementsLogic {
     /**
      * checks if the activity completes an achievement.
      *
-     * @param user the user
      * @param activity to check
      * @return array of ids
      */
-    public static ArrayList<Integer> checkotherActivities(User user, Activity activity) {
+    public static ArrayList<Integer> checkOtherActivities(Activity activity) {
         ArrayList<Integer> results = new ArrayList<>();
 
         // solar panels 12

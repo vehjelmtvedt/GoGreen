@@ -21,8 +21,6 @@ import data.User;
 import frontend.controllers.ActivitiesController;
 import frontend.controllers.HomepageController;
 import frontend.controllers.ProfilePageController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
@@ -62,13 +60,9 @@ public class Events {
      * @param image image to add hover event to
      */
     public static void addImageCursor(ImageView image) {
-        image.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
-            image.setCursor(Cursor.HAND);
-        });
+        image.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> image.setCursor(Cursor.HAND));
 
-        image.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
-            image.setCursor(Cursor.DEFAULT);
-        });
+        image.addEventHandler(MouseEvent.MOUSE_EXITED, e -> image.setCursor(Cursor.DEFAULT));
     }
 
     /**
@@ -78,12 +72,8 @@ public class Events {
      * @param button button to style
      */
     public static void addActivityHover(AnchorPane pane, JFXButton button) {
-        pane.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
-            button.setStyle("-fx-background-color: #00db00;");
-        });
-        pane.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
-            button.setStyle("-fx-background-color: green;");
-        });
+        pane.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> button.setStyle("-fx-background-color: #00db00;"));
+        pane.addEventHandler(MouseEvent.MOUSE_EXITED, e -> button.setStyle("-fx-background-color: green;"));
     }
 
     /**
@@ -93,12 +83,8 @@ public class Events {
      * @param button - button to add events to
      */
     public static void addSaveButtonHover(JFXButton button) {
-        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-            button.setStyle("-fx-background-color: #00db00");
-        });
-        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-            button.setStyle("-fx-background-color: transparent;");
-        });
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> button.setStyle("-fx-background-color: #00db00"));
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> button.setStyle("-fx-background-color: transparent;"));
     }
 
     /**
@@ -108,12 +94,8 @@ public class Events {
      * @param button button to add hover to inside nav bar
      */
     public static void addNavButtonHover(Button button) {
-        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-            button.setOpacity(1);
-        });
-        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-            button.setOpacity(0.75);
-        });
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> button.setOpacity(1));
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> button.setOpacity(0.75));
     }
 
     /**
@@ -123,12 +105,8 @@ public class Events {
      * @param button - button to add hover event to
      */
     public static void addJfxButtonHover(JFXButton button) {
-        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-            button.setOpacity(1);
-        });
-        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-            button.setOpacity(0.75);
-        });
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> button.setOpacity(1));
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> button.setOpacity(0.75));
     }
 
     /**
@@ -230,14 +208,9 @@ public class Events {
                 System.out.println("Something went wrong.");
             }
         });
-        input.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                if (!newValue.matches("^[0-9]{0,4}$")) {
-                    input.setText(oldValue);
-                }
+        input.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^[0-9]{0,4}$")) {
+                input.setText(oldValue);
             }
         });
     }
@@ -277,14 +250,9 @@ public class Events {
                     dialog.setHeaderText(
                             "Amount of kwh that your solar panel installation produces per year: ");
                     dialog.setContentText("kwh:");
-                    dialog.getEditor().textProperty().addListener(new ChangeListener<String>() {
-                        @Override
-                        public void changed(
-                                ObservableValue<? extends String> observable,
-                                String oldValue, String newValue) {
-                            if (!newValue.matches("^[0-9]{0,7}$")) {
-                                dialog.getEditor().setText(oldValue);
-                            }
+                    dialog.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+                        if (!newValue.matches("^[0-9]{0,7}$")) {
+                            dialog.getEditor().setText(oldValue);
                         }
                     });
                     Optional<String> result = dialog.showAndWait();
@@ -605,13 +573,9 @@ public class Events {
                 }
             });
 
-            button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-                button.setUnderline(true);
-            });
+            button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> button.setUnderline(true));
 
-            button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-                button.setUnderline(false);
-            });
+            button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> button.setUnderline(false));
         }
     }
 

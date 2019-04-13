@@ -2,7 +2,6 @@ package backend;
 
 import data.Achievement;
 import data.BuyLocallyProducedFood;
-import data.EatVegetarianMeal;
 import data.User;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,6 +19,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("deprecation")
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureDataMongo
@@ -35,15 +35,15 @@ public class DbServiceTest {
             "fperson@email.com","test_user_friends", "pwd456");
 
 
-    // --- Declare new test uesrs for friend test functionality ---
+    // --- Declare new test users for friend test functionality ---
     private static final User testUser2 = new User("Friend", "User", 22, "testF@email.com", "test_userF", "pwd");
     private static final User testUser3 = new User("Friended", "User", 21, "testFr@email.com", "test_userFr", "pwd");
 
-    private static List<User> regexTestUsers = new ArrayList<User>();
-    private static String[] regexTestUsernames = {"a_user", "abcdefg_user", "bcd_user", "b_user", "def", "powerUser",
+    private static final List<User> regexTestUsers = new ArrayList<>();
+    private static final String[] regexTestUsernames = {"a_user", "abcdefg_user", "bcd_user", "b_user", "def", "powerUser",
             "casual_user", "123user456", "UsEr", "soomeone", "anyone", "abcdefghuser123ab", "idontknow", "i_am_user_566",
             "regular"};
-    private static double[] CO2TestScores = {2500.0, 300.0, 543.0, 900.0, 125.0, 9990.0, 12532.0, 1255.0, 4532.0, 1000000.0,
+    private static final double[] CO2TestScores = {2500.0, 300.0, 543.0, 900.0, 125.0, 9990.0, 12532.0, 1255.0, 4532.0, 1000000.0,
         4321.0, 500.0, 1000000.0, 55555.0, 90043.0};
 
     @Before
@@ -105,7 +105,7 @@ public class DbServiceTest {
 
     @Test
     public void testGrantAccessNull() {
-        assertEquals(null,dbService.grantAccess(testUserNonExistent.getEmail(), testUserNonExistent.getPassword()));
+        assertNull(dbService.grantAccess(testUserNonExistent.getEmail(), testUserNonExistent.getPassword()));
     }
 
     @Test
@@ -117,7 +117,7 @@ public class DbServiceTest {
 
     @Test
     public void testAuthenticationReject() {
-        assertEquals(null,dbService.grantAccess(testUser.getEmail(), "someRandomPWD"));
+        assertNull(dbService.grantAccess(testUser.getEmail(), "someRandomPWD"));
     }
 
     @Test
@@ -154,7 +154,7 @@ public class DbServiceTest {
     }
 
     private List<String> returnExpectedRegex(String username) {
-        List<String> matching = new ArrayList<String>();
+        List<String> matching = new ArrayList<>();
         List<User> users = dbService.getAllUsers();
 
         for (User u : users) {
@@ -205,8 +205,8 @@ public class DbServiceTest {
         dbService.addFriendRequest(testUser2.getUsername(), testUser3.getUsername());
         Assert.assertEquals(1, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
         dbService.acceptFriendRequest(dbService.getUser(testUser2.getEmail()).getUsername(), dbService.getUser(testUser3.getEmail()).getUsername());
-        Assert.assertEquals(true,dbService.getUser(testUser2.getEmail()).getFriends().contains("test_userFr"));
-        Assert.assertEquals(true,dbService.getUser(testUser3.getEmail()).getFriends().contains("test_userF"));
+        assertTrue(dbService.getUser(testUser2.getEmail()).getFriends().contains("test_userFr"));
+        assertTrue(dbService.getUser(testUser3.getEmail()).getFriends().contains("test_userF"));
         Assert.assertEquals(0, dbService.getUser(testUser3.getEmail()).getFriendRequests().size());
         dbService.deleteUser(testUser2.getEmail());
         dbService.deleteUser(testUser3.getEmail());
@@ -214,7 +214,7 @@ public class DbServiceTest {
 
     @Test
     public void testBefriendUsersBothNull() {
-        assertEquals(false, dbService.acceptFriendRequest(null, null));
+        assertFalse(dbService.acceptFriendRequest(null, null));
     }
 
     @Test
@@ -245,7 +245,7 @@ public class DbServiceTest {
 
     @Test
     public void testAddFriendRequestBothNull() { //false, false
-        assertEquals(false, dbService.addFriendRequest(null, null));
+        assertFalse(dbService.addFriendRequest(null, null));
     }
 
     @Test
@@ -253,7 +253,7 @@ public class DbServiceTest {
         dbService.addFriendRequest(testUser.getUsername(),testUser2.getUsername());
         dbService.addFriendRequest(testUser2.getUsername(),testUser.getUsername());
         User testUserF = dbService.getUser(testUser.getEmail());
-        assertEquals(testUserF.getFriends().contains(testUser2.getUsername()),true);
+        assertTrue(testUserF.getFriends().contains(testUser2.getUsername()));
     }
     @Test
     public void testRejectFriendRequest() {
@@ -285,7 +285,7 @@ public class DbServiceTest {
 
     @Test
     public void testRejectFriendRequestBothNull() {
-        assertEquals(false, dbService.rejectFriendRequest(null, null));
+        assertFalse(dbService.rejectFriendRequest(null, null));
     }
 
     @Test
@@ -334,7 +334,7 @@ public class DbServiceTest {
 
     @Test
     public void testEditProfileWrongField() {
-        assertEquals(null,dbService.editProfile(testUser,"asd",10));
+        assertNull(dbService.editProfile(testUser, "asd", 10));
     }
 
     @Test
@@ -377,7 +377,7 @@ public class DbServiceTest {
     @Test
     public void addAchievemnt() {
 
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.add(0);
 
         dbService.addAchievement(testUser , arrayList , new Date(1,1,1));
@@ -387,17 +387,18 @@ public class DbServiceTest {
 
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void addAchievemntPoints() {
 
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.add(0);
 
+        //noinspection deprecation
         dbService.addAchievement(testUser , arrayList , new Date(1,1,1));
 
 
-
-        Assert.assertTrue(testUser.getProgress().getAchievements().size() == 1);
+        assertEquals(1, testUser.getProgress().getAchievements().size());
 
 
     }
@@ -428,23 +429,23 @@ public class DbServiceTest {
         dbService.grantAccess(testUser.getEmail(),"ggg");
         dbService.grantAccess(testUser.getEmail(),"ggg");
         dbService.grantAccess(testUser.getEmail(),"ggg");
-        assertEquals(dbService.grantAccess(testUser.getEmail(),testUser.getPassword()),null);
+        assertNull(dbService.grantAccess(testUser.getEmail(), testUser.getPassword()));
     }
 
     @Test
     public void testAddActivityNull() {
-        assertEquals(dbService.addActivityToUser(testUser.getUsername(),null),null);
+        assertNull(dbService.addActivityToUser(testUser.getUsername(), null));
     }
 
     @Test
     public void testAddActivityUserNull() {
-        assertEquals(dbService.addActivityToUser(testUser.getEmail(),new BuyLocallyProducedFood()),null);
+        assertNull(dbService.addActivityToUser(testUser.getEmail(), new BuyLocallyProducedFood()));
     }
 
     @Test
     public void testDeleteUserNonExistent() {
         dbService.deleteUser(testUserNonExistent.getEmail());
-        assertEquals(dbService.getUser(testUserNonExistent.getEmail()),null);
+        assertNull(dbService.getUser(testUserNonExistent.getEmail()));
     }
 
     @Test

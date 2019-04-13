@@ -27,6 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+@SuppressWarnings({"unchecked", "WeakerAccess"})
 public class SignupController implements Initializable {
 
     private static final ArrayList<JFXTextField> fields = new ArrayList<>();
@@ -150,9 +151,7 @@ public class SignupController implements Initializable {
                 e1.printStackTrace();
             }
         });
-        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-            StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignIn());
-        });
+        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignIn()));
         try {
             setFonts();
         } catch (IOException e) {
@@ -171,7 +170,7 @@ public class SignupController implements Initializable {
      *
      * @return - the ID of the question
      */
-    public int getSecurityQuestionid() {
+    private int getSecurityQuestionid() {
         if (secQuestion.getValue() == null) {
             return -1;
         }
@@ -202,7 +201,7 @@ public class SignupController implements Initializable {
     /**
      * Adds fonts to all labels.
      */
-    public void setFonts() throws IOException {
+    private void setFonts() throws IOException {
         goGreen.setFont(Main.getReenieBeanie(100));
         line1.setFont(Main.getReenieBeanie(40));
         line2.setFont(Main.getReenieBeanie(40));
@@ -214,10 +213,6 @@ public class SignupController implements Initializable {
         signup.setFont(Main.getRobotoThin(45));
         loginForward.setFont(Main.getRobotoThin(45));
         signupButton.setFont(Main.getRobotoThin(28));
-    }
-
-    public static ArrayList<JFXTextField> getFields() {
-        return fields;
     }
 
 

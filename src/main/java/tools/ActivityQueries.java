@@ -49,7 +49,7 @@ public class ActivityQueries {
      * @return list of activities filtered by specified categories
      */
     public List<Activity> filterActivitiesByCategories(List<String> categories) {
-        List<Activity> filteredActivities = new ArrayList<Activity>();
+        List<Activity> filteredActivities = new ArrayList<>();
 
         for (Activity a : activities) {
             if (categories.contains(a.getCategory())) {
@@ -179,7 +179,7 @@ public class ActivityQueries {
 
     /**.
      * Returns the activities that match the given types
-     * @param types - Lsit of types of activities to look for
+     * @param types - List of types of activities to look for
      * @return - filtered list of activities of the given types
      */
     public List<Activity> filterActivitiesByType(ArrayList<Class> types) {
@@ -241,7 +241,7 @@ public class ActivityQueries {
      * @param toDate   - end date
      * @return - total CO2 saved
      */
-    public double getTotalCO2Saved(Date fromDate, Date toDate) {
+    private double getTotalCO2Saved(Date fromDate, Date toDate) {
         List<Activity> filteredActivities = filterActivitiesByDate(fromDate, toDate);
 
         return getTotalCO2Saved(filteredActivities);

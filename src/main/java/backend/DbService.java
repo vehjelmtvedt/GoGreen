@@ -280,13 +280,13 @@ public class DbService {
 
         // check if an achievement is completed by this activity
         addAchievement(returned, AchievementsLogic.checkFoodActivity(
+                activity), activity.getDate());
+        addAchievement(returned, AchievementsLogic.checkTransportActivity(
                 returned, activity), activity.getDate());
-        addAchievement(returned, AchievementsLogic.checkTranspostActivity(
+        addAchievement(returned, AchievementsLogic.checkTransportActivity1(
                 returned, activity), activity.getDate());
-        addAchievement(returned, AchievementsLogic.checkTranspostActivity1(
-                returned, activity), activity.getDate());
-        addAchievement(returned , AchievementsLogic.checkotherActivities(
-                returned , activity ), activity.getDate());
+        addAchievement(returned , AchievementsLogic.checkOtherActivities(
+                activity ), activity.getDate());
 
         // adds points to the user
         addCO2Points(returned, activity.getCarbonSaved());
@@ -307,10 +307,10 @@ public class DbService {
 
     /**
      * .
-     * Finds all usernames matching specified string
+     * Finds all username's matching specified string
      *
      * @param username - part of username to match
-     * @return A list of strings containing all matching usernames
+     * @return A list of strings containing all matching username's
      */
     public List<String> getMatchingUsers(String username) {
         String usernamePattern = "/$%s/$";
@@ -545,7 +545,7 @@ public class DbService {
      * @param user        user to add points to
      * @param carbonsaved co2 saved
      */
-    public void addCO2Points(User user, double carbonsaved) {
+    private void addCO2Points(User user, double carbonsaved) {
 
         //user.getProgress().hasChangedCheck();
 
@@ -584,9 +584,9 @@ public class DbService {
      * @param user user to check
      * @return array of ids
      */
-    public ArrayList<Integer> checkLeaderboards(User user) {
+    private ArrayList<Integer> checkLeaderboards(User user) {
 
-        ArrayList<Integer> results = new ArrayList();
+        ArrayList<Integer> results = new ArrayList<>();
 
         //Reach the top ten 26
         if (getTopUsers(10).contains(user)) {

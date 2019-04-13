@@ -59,12 +59,13 @@ public class BuyLocallyProducedFood extends Activity {
         int timesPerformedInTheSameDay = timesPerformedInTheSameDay(user);
 
         if (timesPerformedInTheSameDay == 0) {
-            if (locallyProducedFoodConsumption.equals("very little")) {
-                return veryLittleToAverage();
-            } else if (locallyProducedFoodConsumption.equals("average")) {
-                return averageToAboveAverage();
-            } else if (locallyProducedFoodConsumption.equals("above average")) {
-                return aboveAverageToAlmostAll();
+            switch (locallyProducedFoodConsumption) {
+                case "very little":
+                    return veryLittleToAverage();
+                case "average":
+                    return averageToAboveAverage();
+                case "above average":
+                    return aboveAverageToAlmostAll();
             }
         } else if (timesPerformedInTheSameDay == 1) {
             if (locallyProducedFoodConsumption.equals("very little")) {

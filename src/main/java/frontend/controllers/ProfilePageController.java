@@ -39,6 +39,7 @@ import tools.Requests;
 import java.io.IOException;
 import java.net.URL;
 
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ProfilePageController implements Initializable {
@@ -243,7 +244,7 @@ public class ProfilePageController implements Initializable {
             }
             EditProfilePopUpController controller = loader.getController();
 
-            Scene scene = new Scene(popup,
+            Scene scene = new Scene(Objects.requireNonNull(popup),
                     General.getBounds()[0] / 2, General.getBounds()[1] / 2);
             stage.setScene(scene);
             stage.show();
@@ -270,7 +271,7 @@ public class ProfilePageController implements Initializable {
     /**
      * Checks completed Achievements.
      */
-    public static boolean isComplete(Achievement achievement) {
+    private static boolean isComplete(Achievement achievement) {
         for (UserAchievement userAchievement : thisUser.getProgress().getAchievements()) {
             if (achievement.getId() == userAchievement.getId()) {
                 return true;
@@ -284,7 +285,7 @@ public class ProfilePageController implements Initializable {
      *
      * @return Points needed to achieve the respective level.
      */
-    public double getLevelPoints() {
+    private double getLevelPoints() {
         int level = thisUser.getProgress().getLevel();
         if (level == 1) {
             return 700.0;

@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import static org.junit.Assert.assertEquals;
 
 public class UseTrainInsteadOfCarTest {
-    UseTrainInsteadOfCar travel1 = new UseTrainInsteadOfCar();
+    private final UseTrainInsteadOfCar travel1 = new UseTrainInsteadOfCar();
     @Test
     public void testConstructor()  {
         assertEquals("Transportation", travel1.getCategory());
@@ -35,7 +35,7 @@ public class UseTrainInsteadOfCarTest {
         UseTrainInsteadOfCar travel3 = new UseTrainInsteadOfCar();
         try {
             travel3.setDate(new SimpleDateFormat("dd/MM/yyyy").parse("12/12/1999"));
-        }catch (Exception e){ }
+        }catch (Exception ignored){ }
         user.addActivity(travel3);
 
         assertEquals(0, (int) travel.calculateCarbonSaved(user));
@@ -92,7 +92,7 @@ public class UseTrainInsteadOfCarTest {
         UseTrainInsteadOfCar travel2 = new UseTrainInsteadOfCar();
         try {
             travel2.setDate(new SimpleDateFormat("dd/MM/yyyy").parse("12/12/1999"));
-        }catch (Exception e){ }
+        }catch (Exception ignored){ }
         user.addActivity(travel2);
         assertEquals(1, travel1.timesPerformedInTheSameDay(user));
     }

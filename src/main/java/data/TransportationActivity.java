@@ -16,7 +16,7 @@ public abstract class TransportationActivity extends Activity {
     /**
      * Constructor.
      */
-    public TransportationActivity() {
+    TransportationActivity() {
         super();
         this.setCategory("Transportation");
         this.kilometres = 0;
@@ -38,14 +38,15 @@ public abstract class TransportationActivity extends Activity {
      */
     public double calculateDailyCarEmissions(User user) {
 
-        if (user.getCarType().equals("small")) {
-            return CarbonCalculator.smallCarEmissions(user.getDailyCarKilometres());
-        } else if (user.getCarType().equals("medium")) {
-            return CarbonCalculator.mediumCarEmissions(user.getDailyCarKilometres());
-        } else if (user.getCarType().equals("large")) {
-            return CarbonCalculator.largeCarEmissions(user.getDailyCarKilometres());
-        } else {
-            return 0;
+        switch (user.getCarType()) {
+            case "small":
+                return CarbonCalculator.smallCarEmissions(user.getDailyCarKilometres());
+            case "medium":
+                return CarbonCalculator.mediumCarEmissions(user.getDailyCarKilometres());
+            case "large":
+                return CarbonCalculator.largeCarEmissions(user.getDailyCarKilometres());
+            default:
+                return 0;
         }
     }
 
@@ -55,18 +56,18 @@ public abstract class TransportationActivity extends Activity {
      * @param user currently logged in user
      * @return user's savings in kg
      */
-    public double calculateCarbonSavedTodayByTransportationActivities(User user) {
+    double calculateCarbonSavedTodayByTransportationActivities(User user) {
         Date currentDate = DateUtils.instance.dateToday();
         String currentMonth = currentDate.toString().split(" ")[1];
         String currentDay = currentDate.toString().split(" ")[2];
         String currentYear = currentDate.toString().split(" ")[5];
         ArrayList<TransportationActivity> transportationActivities
-                = new ArrayList<TransportationActivity>();
+                = new ArrayList<>();
 
         double result = 0;
 
         for (Activity activity : user.getActivities()) {
-            if (activity != null && activity instanceof TransportationActivity) {
+            if (activity instanceof TransportationActivity) {
                 String dateNow = currentMonth + currentDay + currentYear;
                 if (dateNow.equals(activity.getDate().toString().split(" ")[1]
                         + activity.getDate().toString().split(" ")[2]
@@ -88,19 +89,19 @@ public abstract class TransportationActivity extends Activity {
      * @param user currently logged in user
      * @return kilometres (int)
      */
-    public int calculateTotalKilometresTravelledToday(User user) {
+    int calculateTotalKilometresTravelledToday(User user) {
         Date currentDate = DateUtils.instance.dateToday();
         String currentMonth = currentDate.toString().split(" ")[1];
         String currentDay = currentDate.toString().split(" ")[2];
         String currentYear =
                 currentDate.toString().split(" ")[5];
         ArrayList<TransportationActivity> transportationActivities
-                = new ArrayList<TransportationActivity>();
+                = new ArrayList<>();
 
         int result = 0;
 
         for (Activity activity : user.getActivities()) {
-            if (activity != null && activity instanceof TransportationActivity) {
+            if (activity instanceof TransportationActivity) {
                 String dateNow = currentMonth + currentDay + currentYear;
                 if (dateNow.equals(activity.getDate().toString().split(" ")[1]
                         + activity.getDate().toString().split(" ")[2]

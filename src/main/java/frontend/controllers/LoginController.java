@@ -152,7 +152,7 @@ public class LoginController implements Initializable {
     /**
      * Adds fonts to all labels.
      */
-    public void setFonts() throws IOException {
+    private void setFonts() throws IOException {
         goGreen.setFont(Main.getReenieBeanie(100));
         line1.setFont(Main.getReenieBeanie(40));
         line2.setFont(Main.getReenieBeanie(40));

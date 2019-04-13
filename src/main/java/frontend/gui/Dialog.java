@@ -19,7 +19,7 @@ public class Dialog {
      * @param headerText - text of header in dialog
      * @param bodyText - text of body in dialog
      * @param buttonText - text on button in dialog
-     * @param icon - what icon to be displayed (sucess/error)
+     * @param icon - what icon to be displayed (success/error)
      * @throws IOException - if fails to load dialog
      */
 

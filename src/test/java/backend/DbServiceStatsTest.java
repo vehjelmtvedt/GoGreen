@@ -15,8 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureDataMongo
@@ -25,7 +23,7 @@ public class DbServiceStatsTest {
     @Autowired
     private DbService dbService;
 
-    public static ArrayList<User> users = new ArrayList<User>();
+    private static final ArrayList<User> users = new ArrayList<>();
 
     @Before
     public void setup() {
@@ -69,6 +67,7 @@ public class DbServiceStatsTest {
 
     @Test
     public void testAverageCO2Saved() {
+        //noinspection OptionalGetWithoutIsPresent
         double expected = users.stream().mapToDouble(User::getTotalCarbonSaved).average().getAsDouble();
         double result = dbService.getAverageCO2Saved();
 

@@ -9,6 +9,7 @@ import tools.Requests;
  *
  * @author Kostas Lyrakis
  */
+@SuppressWarnings("UnusedAssignment")
 public class InstallSolarPanels extends Activity {
     private int kwhSavedPerYear;
     private double dailyCarbonSaved;
@@ -79,7 +80,7 @@ public class InstallSolarPanels extends Activity {
 
         } catch (ResourceAccessException e) {
             System.out.println("Activity was not added to the database");
-            System.out.println(e.fillInStackTrace());
+            e.printStackTrace();
         }
     }
 

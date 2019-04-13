@@ -7,8 +7,8 @@ import tools.Requests;
 import static junit.framework.TestCase.assertEquals;
 
 public class RecyclePlasticTest {
-    RecyclePlastic plastic = new RecyclePlastic();
-    User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
+    private final RecyclePlastic plastic = new RecyclePlastic();
+    private final User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
 
     @Test
     public void testConstructor() {
@@ -25,7 +25,7 @@ public class RecyclePlasticTest {
     public void testPerformActivity() {
         try {
             plastic.performActivity(user, Requests.instance);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         Assert.assertEquals(1, user.getSimilarActivities(new RecyclePlastic()).size());
 

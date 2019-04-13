@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
@@ -10,229 +9,234 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
-   <children>
-      <AnchorPane fx:id="headerPane" prefHeight="137.0" prefWidth="1400.0" style="-fx-background-color: green;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label fx:id="goGreen" alignment="BASELINE_CENTER" layoutX="582.0" layoutY="25.0" text="GoGreen" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="582.0" AnchorPane.rightAnchor="582.0" AnchorPane.topAnchor="32.0">
-               <font>
-                  <Font size="60.0" />
-               </font>
-            </Label>
-            <JFXHamburger fx:id="menu" layoutX="26.0" layoutY="59.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></JFXHamburger>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneMainHome" layoutX="-1.0" layoutY="165.0" prefHeight="695.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
-         <children>
-            <AnchorPane layoutY="44.0" prefHeight="524.0" prefWidth="1400.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
-               <children>
-                  <AnchorPane layoutX="185.0" layoutY="46.0" prefHeight="200.0" prefWidth="1173.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="341.0" AnchorPane.topAnchor="46.0">
-                     <children>
-                        <Circle fx:id="circleProfile" fill="GREEN" layoutX="100.0" layoutY="100.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-                        <AnchorPane layoutX="282.0" prefHeight="200.0" prefWidth="891.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="0.0">
-                           <children>
-                              <HBox layoutY="100.0" prefHeight="100.0" prefWidth="891.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                 <children>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
-                                       <children>
-                                          <Label text="LEVEL" />
-                                          <Label fx:id="lblLevel" text="NaN" />
-                                       </children>
-                                       <padding>
-                                          <Insets top="30.0" />
-                                       </padding>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
-                                       <children>
-                                          <Label text="RANK" />
-                                          <Label fx:id="lblRank" text="NaN" />
-                                       </children>
-                                       <padding>
-                                          <Insets top="30.0" />
-                                       </padding>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
-                                       <children>
-                                          <Label text="FRIENDS" />
-                                          <Label fx:id="lblFriends" text="NaN" />
-                                       </children>
-                                       <padding>
-                                          <Insets top="30.0" />
-                                       </padding>
-                                    </VBox>
-                                    <VBox prefHeight="100.0" prefWidth="132.0" spacing="15.0">
-                                       <children>
-                                          <Label text="ACTIVITIES" />
-                                          <Label fx:id="lblActivities" text="NaN" />
-                                       </children>
-                                       <padding>
-                                          <Insets top="30.0" />
-                                       </padding>
-                                    </VBox>
-                                    <VBox prefHeight="100.0" prefWidth="132.0" spacing="15.0">
-                                       <children>
-                                          <Label text="PROGRESS" />
-                                          <Label fx:id="lblProgress" text="NaN Points left" />
-                                       </children>
-                                       <padding>
-                                          <Insets top="30.0" />
-                                       </padding>
-                                    </VBox>
-                                    <JFXButton fx:id="btnProfile" alignment="CENTER" buttonType="RAISED" opacity="0.75" prefHeight="44.0" prefWidth="123.0" style="-fx-background-color: GREEN;" text="View full profile">
-                                       <HBox.margin>
-                                          <Insets top="35.0" />
-                                       </HBox.margin>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </JFXButton>
-                                 </children>
-                              </HBox>
-                              <HBox layoutY="53.0" prefHeight="47.0" prefWidth="730.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
-                                 <children>
-                                    <Label fx:id="lblEmail" text="your@email.com" />
-                                    <Label fx:id="lblYourCarbon" text="- You have saved NaN kg of CO2 so far - " />
-                                    <Label fx:id="lblAverageCarbon" text="Average person saved NaN kg of CO2" />
-                                 </children>
-                              </HBox>
-                              <Label fx:id="lblFirstName" layoutY="14.0" prefHeight="30.0" prefWidth="132.0" text="FIRST NAME" textFill="GREEN">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblLastName" layoutX="132.0" layoutY="14.0" prefHeight="30.0" prefWidth="158.0" text="LAST NAME" textFill="GREEN">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="256.0" layoutY="259.0" prefHeight="545.0" prefWidth="1225.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="319.0">
-                     <children>
-                        <HBox layoutX="208.0" prefHeight="47.0" prefWidth="815.0" spacing="50.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <JFXButton fx:id="btnTop5" alignment="CENTER" buttonType="RAISED" prefHeight="44.0" prefWidth="123.0" style="-fx-background-color: #00db00;" text="Top 5">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                              <JFXButton fx:id="btnTop10" alignment="CENTER" buttonType="RAISED" prefHeight="44.0" prefWidth="123.0" text="Top 10">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                              <JFXButton fx:id="btnTop25" alignment="CENTER" buttonType="RAISED" prefHeight="44.0" prefWidth="123.0" text="Top 25">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                              <JFXButton fx:id="btnTop50" alignment="CENTER" buttonType="RAISED" prefHeight="44.0" prefWidth="123.0" text="Top 50">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                              <JFXButton fx:id="btnTop100" alignment="CENTER" buttonType="RAISED" prefHeight="44.0" prefWidth="123.0" text="Top 100">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                           </children>
-                        </HBox>
-                        <JFXTreeTableView fx:id="tableTop5" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" />
-                        <JFXTreeTableView fx:id="tableTop10" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView fx:id="tableTop25" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView fx:id="tableTop50" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
-                        <JFXTreeTableView fx:id="tableTop100" layoutX="200.0" layoutY="75.0" prefHeight="350.0" prefWidth="815.0" visible="false" />
-
-                                                <Label alignment="CENTER" layoutX="374.0" layoutY="501.0" text="- Ranking is determined according to the total amount of CO2 saved - " />
-                        <JFXButton fx:id="btnRefresh" layoutX="503.0" layoutY="452.0" opacity="0.75" prefHeight="31.0" prefWidth="209.0" style="-fx-background-color: green;" text="Refresh Leaderboards">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="1410.0" layoutY="-33.0" prefHeight="806.0" prefWidth="369.0">
-                     <children>
-                        <VBox layoutY="14.0" prefHeight="792.0" prefWidth="369.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
-                           <children>
-                              <Label alignment="CENTER" text="ACTIVITY % IN EACH CATEGORY" textFill="GREEN" underline="true">
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                                 <VBox.margin>
-                                    <Insets left="20.0" top="50.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <PieChart fx:id="chartMyActivities" prefHeight="127.0" prefWidth="319.0">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin></PieChart>
-                              <Label alignment="CENTER" text="CO2 SAVED BY TIME PERIOD" textFill="GREEN" underline="true">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                                 <VBox.margin>
-                                    <Insets left="20.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <BarChart fx:id="barChart" prefHeight="239.0" prefWidth="319.0">
-                                <xAxis>
-                                  <CategoryAxis side="BOTTOM" />
-                                </xAxis>
-                                <yAxis>
-                                  <NumberAxis side="LEFT" />
-                                </yAxis>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </BarChart>
-                              <Label alignment="CENTER" text="WEEKLY C02 SAVINGS" textFill="GREEN" underline="true">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                                 <VBox.margin>
-                                    <Insets left="20.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <BarChart fx:id="weekChart" prefHeight="278.0" prefWidth="319.0">
-                                 <xAxis>
-                                    <CategoryAxis side="BOTTOM" />
-                                 </xAxis>
-                                 <yAxis>
-                                    <NumberAxis side="LEFT" />
-                                 </yAxis>
-                              </BarChart>
-                           </children>
-                        </VBox>
-                     </children>
+<!--suppress ALL -->
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="1000.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.HomepageController">
+   <AnchorPane fx:id="headerPane" prefHeight="137.0" prefWidth="1400.0" style="-fx-background-color: green;"
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="goGreen" alignment="BASELINE_CENTER" layoutX="582.0" layoutY="25.0" text="GoGreen"
+             textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="582.0" AnchorPane.rightAnchor="582.0"
+             AnchorPane.topAnchor="32.0">
+         <font>
+            <Font size="60.0"/>
+         </font>
+      </Label>
+      <JFXHamburger fx:id="menu" layoutX="26.0" layoutY="59.0">
+         <cursor>
+            <Cursor fx:constant="HAND"/>
+         </cursor>
+      </JFXHamburger>
+   </AnchorPane>
+   <AnchorPane fx:id="paneMainHome" layoutX="-1.0" layoutY="165.0" prefHeight="695.0" prefWidth="1400.0"
+               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+               AnchorPane.topAnchor="137.0">
+      <AnchorPane layoutY="44.0" prefHeight="524.0" prefWidth="1400.0" AnchorPane.bottomAnchor="13.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+         <AnchorPane layoutX="185.0" layoutY="46.0" prefHeight="200.0" prefWidth="1173.0"
+                     AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="341.0" AnchorPane.topAnchor="46.0">
+            <Circle fx:id="circleProfile" fill="GREEN" layoutX="100.0" layoutY="100.0" radius="100.0"
+                    stroke="BLACK" strokeType="INSIDE"/>
+            <AnchorPane layoutX="282.0" prefHeight="200.0" prefWidth="891.0" AnchorPane.leftAnchor="282.0"
+                        AnchorPane.rightAnchor="0.0">
+               <HBox layoutY="100.0" prefHeight="100.0" prefWidth="891.0" spacing="25.0"
+                     AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                     <Label text="LEVEL"/>
+                     <Label fx:id="lblLevel" text="NaN"/>
                      <padding>
-                        <Insets left="100.0" />
+                        <Insets top="30.0"/>
                      </padding>
-                  </AnchorPane>
-               </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                     <Label text="RANK"/>
+                     <Label fx:id="lblRank" text="NaN"/>
+                     <padding>
+                        <Insets top="30.0"/>
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                     <Label text="FRIENDS"/>
+                     <Label fx:id="lblFriends" text="NaN"/>
+                     <padding>
+                        <Insets top="30.0"/>
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="132.0" spacing="15.0">
+                     <Label text="ACTIVITIES"/>
+                     <Label fx:id="lblActivities" text="NaN"/>
+                     <padding>
+                        <Insets top="30.0"/>
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="132.0" spacing="15.0">
+                     <Label text="PROGRESS"/>
+                     <Label fx:id="lblProgress" text="NaN Points left"/>
+                     <padding>
+                        <Insets top="30.0"/>
+                     </padding>
+                  </VBox>
+                  <JFXButton fx:id="btnProfile" alignment="CENTER" buttonType="RAISED" opacity="0.75"
+                             prefHeight="44.0" prefWidth="123.0" style="-fx-background-color: GREEN;"
+                             text="View full profile">
+                     <HBox.margin>
+                        <Insets top="35.0"/>
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND"/>
+                     </cursor>
+                  </JFXButton>
+               </HBox>
+               <HBox layoutY="53.0" prefHeight="47.0" prefWidth="730.0" spacing="20.0"
+                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+                  <Label fx:id="lblEmail" text="your@email.com"/>
+                  <Label fx:id="lblYourCarbon" text="- You have saved NaN kg of CO2 so far - "/>
+                  <Label fx:id="lblAverageCarbon" text="Average person saved NaN kg of CO2"/>
+               </HBox>
+               <Label fx:id="lblFirstName" layoutY="14.0" prefHeight="30.0" prefWidth="132.0"
+                      text="FIRST NAME" textFill="GREEN">
+                  <font>
+                     <Font name="System Bold" size="20.0"/>
+                  </font>
+               </Label>
+               <Label fx:id="lblLastName" layoutX="132.0" layoutY="14.0" prefHeight="30.0" prefWidth="158.0"
+                      text="LAST NAME" textFill="GREEN">
+                  <font>
+                     <Font name="System Bold" size="20.0"/>
+                  </font>
+               </Label>
             </AnchorPane>
-            <Label fx:id="lblWelcome" alignment="CENTER" layoutX="404.0" layoutY="14.0" prefHeight="30.0" prefWidth="592.0" text="Welcome to #GoGreen! Here is a preview of your dashboard!" AnchorPane.leftAnchor="404.0" AnchorPane.rightAnchor="404.0">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
+         </AnchorPane>
+         <AnchorPane layoutX="256.0" layoutY="259.0" prefHeight="545.0" prefWidth="1225.0"
+                     AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="319.0">
+            <HBox layoutX="208.0" prefHeight="47.0" prefWidth="815.0" spacing="50.0"
+                  AnchorPane.topAnchor="0.0">
+               <JFXButton fx:id="btnTop5" alignment="CENTER" buttonType="RAISED" prefHeight="44.0"
+                          prefWidth="123.0" style="-fx-background-color: #00db00;" text="Top 5">
+                  <cursor>
+                     <Cursor fx:constant="HAND"/>
+                  </cursor>
+               </JFXButton>
+               <JFXButton fx:id="btnTop10" alignment="CENTER" buttonType="RAISED" prefHeight="44.0"
+                          prefWidth="123.0" text="Top 10">
+                  <cursor>
+                     <Cursor fx:constant="HAND"/>
+                  </cursor>
+               </JFXButton>
+               <JFXButton fx:id="btnTop25" alignment="CENTER" buttonType="RAISED" prefHeight="44.0"
+                          prefWidth="123.0" text="Top 25">
+                  <cursor>
+                     <Cursor fx:constant="HAND"/>
+                  </cursor>
+               </JFXButton>
+               <JFXButton fx:id="btnTop50" alignment="CENTER" buttonType="RAISED" prefHeight="44.0"
+                          prefWidth="123.0" text="Top 50">
+                  <cursor>
+                     <Cursor fx:constant="HAND"/>
+                  </cursor>
+               </JFXButton>
+               <JFXButton fx:id="btnTop100" alignment="CENTER" buttonType="RAISED" prefHeight="44.0"
+                          prefWidth="123.0" text="Top 100">
+                  <cursor>
+                     <Cursor fx:constant="HAND"/>
+                  </cursor>
+               </JFXButton>
+            </HBox>
+            <JFXTreeTableView fx:id="tableTop5" layoutX="200.0" layoutY="75.0" prefHeight="350.0"
+                              prefWidth="815.0"/>
+            <JFXTreeTableView fx:id="tableTop10" layoutX="200.0" layoutY="75.0" prefHeight="350.0"
+                              prefWidth="815.0" visible="false"/>
+            <JFXTreeTableView fx:id="tableTop25" layoutX="200.0" layoutY="75.0" prefHeight="350.0"
+                              prefWidth="815.0" visible="false"/>
+            <JFXTreeTableView fx:id="tableTop50" layoutX="200.0" layoutY="75.0" prefHeight="350.0"
+                              prefWidth="815.0" visible="false"/>
+            <JFXTreeTableView fx:id="tableTop100" layoutX="200.0" layoutY="75.0" prefHeight="350.0"
+                              prefWidth="815.0" visible="false"/>
+
+            <Label alignment="CENTER" layoutX="374.0" layoutY="501.0"
+                   text="- Ranking is determined according to the total amount of CO2 saved - "/>
+            <JFXButton fx:id="btnRefresh" layoutX="503.0" layoutY="452.0" opacity="0.75" prefHeight="31.0"
+                       prefWidth="209.0" style="-fx-background-color: green;" text="Refresh Leaderboards">
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+            </JFXButton>
+         </AnchorPane>
+         <AnchorPane layoutX="1410.0" layoutY="-33.0" prefHeight="806.0" prefWidth="369.0">
+            <VBox layoutY="14.0" prefHeight="792.0" prefWidth="369.0" AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+               <Label alignment="CENTER" text="ACTIVITY % IN EACH CATEGORY" textFill="GREEN"
+                      underline="true">
+                  <opaqueInsets>
+                     <Insets/>
+                  </opaqueInsets>
+                  <VBox.margin>
+                     <Insets left="20.0" top="50.0"/>
+                  </VBox.margin>
+                  <font>
+                     <Font name="System Bold" size="15.0"/>
+                  </font>
+               </Label>
+               <PieChart fx:id="chartMyActivities" prefHeight="127.0" prefWidth="319.0">
+                  <VBox.margin>
+                     <Insets/>
+                  </VBox.margin>
+               </PieChart>
+               <Label alignment="CENTER" text="CO2 SAVED BY TIME PERIOD" textFill="GREEN" underline="true">
+                  <font>
+                     <Font name="System Bold" size="15.0"/>
+                  </font>
+                  <opaqueInsets>
+                     <Insets/>
+                  </opaqueInsets>
+                  <VBox.margin>
+                     <Insets left="20.0"/>
+                  </VBox.margin>
+               </Label>
+               <BarChart fx:id="barChart" prefHeight="239.0" prefWidth="319.0">
+                  <xAxis>
+                     <CategoryAxis side="BOTTOM"/>
+                  </xAxis>
+                  <yAxis>
+                     <NumberAxis side="LEFT"/>
+                  </yAxis>
+                  <VBox.margin>
+                     <Insets top="5.0"/>
+                  </VBox.margin>
+               </BarChart>
+               <Label alignment="CENTER" text="WEEKLY C02 SAVINGS" textFill="GREEN" underline="true">
+                  <font>
+                     <Font name="System Bold" size="15.0"/>
+                  </font>
+                  <opaqueInsets>
+                     <Insets/>
+                  </opaqueInsets>
+                  <VBox.margin>
+                     <Insets left="20.0"/>
+                  </VBox.margin>
+               </Label>
+               <BarChart fx:id="weekChart" prefHeight="278.0" prefWidth="319.0">
+                  <xAxis>
+                     <CategoryAxis side="BOTTOM"/>
+                  </xAxis>
+                  <yAxis>
+                     <NumberAxis side="LEFT"/>
+                  </yAxis>
+               </BarChart>
+            </VBox>
+            <padding>
+               <Insets left="100.0"/>
+            </padding>
+         </AnchorPane>
       </AnchorPane>
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" layoutY="137.0" prefHeight="719.0" prefWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="138.0" />
-   </children>
+      <Label fx:id="lblWelcome" alignment="CENTER" layoutX="404.0" layoutY="14.0" prefHeight="30.0" prefWidth="592.0"
+             text="Welcome to #GoGreen! Here is a preview of your dashboard!" AnchorPane.leftAnchor="404.0"
+             AnchorPane.rightAnchor="404.0">
+         <font>
+            <Font size="20.0"/>
+         </font>
+      </Label>
+   </AnchorPane>
+   <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" layoutY="137.0" prefHeight="719.0" prefWidth="244.0"
+              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="138.0"/>
 </AnchorPane>

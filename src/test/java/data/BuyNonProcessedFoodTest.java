@@ -11,8 +11,8 @@ import java.text.SimpleDateFormat;
 import static org.junit.Assert.assertEquals;
 
 public class BuyNonProcessedFoodTest {
-    BuyNonProcessedFood food = new BuyNonProcessedFood();
-    User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
+    private final BuyNonProcessedFood food = new BuyNonProcessedFood();
+    private final User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
 
     @Test
     public void testConstructor() {
@@ -56,7 +56,7 @@ public class BuyNonProcessedFoodTest {
         BuyNonProcessedFood food2 = new BuyNonProcessedFood();
         try {
             food2.setDate(new SimpleDateFormat("dd/MM/yyyy").parse("12/12/1999"));
-        }catch (Exception e){ }
+        }catch (Exception ignored){ }
         userOne.addActivity(food2);
         assertEquals(1, food.timesPerformedInTheSameDay(userOne));
     }

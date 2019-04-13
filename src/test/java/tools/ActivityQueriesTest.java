@@ -2,7 +2,6 @@ package tools;
 
 import data.*;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,13 +9,11 @@ import org.junit.Test;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
-
 public class ActivityQueriesTest {
-    User activeUser = new User("Active", "User", 20, "active_user@email.com", "active_user", "pwd123");
+    private final User activeUser = new User("Active", "User", 20, "active_user@email.com", "active_user", "pwd123");
 
-    ActivityQueries activityQuery = new ActivityQueries(activeUser.getActivities());
-    Date today = Calendar.getInstance().getTime();
+    private final ActivityQueries activityQuery = new ActivityQueries(activeUser.getActivities());
+    private final Date today = Calendar.getInstance().getTime();
 
 
     @Test

@@ -7,7 +7,7 @@ We had some issues where some team members pushed directly on develop, rather th
 
 ### Problem 2: Code reviews
 So far, we have lacked code reviewing, as we have focused on making code suggestions in private communications in WhatsApp. Therefore, this week onwards, we will focus more 
-on actually doing the code rewviews
+on actually doing the code reviews
  
 ### Problem 3: Cross-merging branches
 So far, we have sometimes been doing cross-merges between branches. This is quite an issue at the end, when we want to merge our finished work into develop. This also

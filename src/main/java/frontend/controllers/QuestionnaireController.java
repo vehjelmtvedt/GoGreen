@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("unchecked")
 public class QuestionnaireController implements Initializable {
     private static User thisUser;
 
@@ -75,7 +76,7 @@ public class QuestionnaireController implements Initializable {
     /**
      * Method used to setup the Combo Boxes with the appropriate item sets.
      */
-    public static void comboBoxSetup(JFXComboBox comboBox, ObservableList itemList) {
+    private static void comboBoxSetup(JFXComboBox comboBox, ObservableList itemList) {
         comboBox.setItems(itemList);
         comboBox.setValue(itemList.get(0));
     }
@@ -83,7 +84,7 @@ public class QuestionnaireController implements Initializable {
     /**
      * Method Used to restrict text field inputs to a desired numeric style.
      */
-    public static void changeListener(JFXTextField textField) {
+    private static void changeListener(JFXTextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("^[0-9]{0,7}$")) {
                 textField.setText(oldValue);
@@ -94,7 +95,7 @@ public class QuestionnaireController implements Initializable {
     /**
      * Method used to Check is a text field is filled in or not and accordingly highlight it.
      */
-    public static void textFieldValidate(JFXTextField textField) {
+    private static void textFieldValidate(JFXTextField textField) {
         if (textField.getText().isEmpty()) {
             textField.setUnFocusColor(Color.RED);
         }

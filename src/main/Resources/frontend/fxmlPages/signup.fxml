@@ -11,152 +11,144 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<!--suppress JavaFxUnresolvedFxIdReference -->
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.SignupController">
-   <children>
-      <AnchorPane fx:id="graphics" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="542.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <ImageView fx:id="background" fitHeight="900.0" fitWidth="544.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <image>
-                  <Image url="@../Pics/background.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="goGreen" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="97.0" layoutY="323.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="102.0" prefWidth="351.0" text="GoGreen" textFill="WHITE" AnchorPane.leftAnchor="97.0" AnchorPane.topAnchor="323.0">
-               <font>
-                  <Font size="70.0" />
-               </font>
-            </Label>
-            <Label fx:id="line1" layoutX="113.0" layoutY="450.0" prefHeight="70.0" prefWidth="320.0" text="○ Add your activities" textFill="WHITE">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <Label fx:id="line2" layoutX="111.0" layoutY="525.0" prefHeight="68.0" prefWidth="320.0" text="○ Compare with friends" textFill="WHITE">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="line3" layoutX="113.0" layoutY="600.0" prefHeight="68.0" prefWidth="320.0" text="○ Save the world!" textFill="WHITE">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="288.0" fitWidth="412.0" layoutX="65.0" layoutY="35.0" pickOnBounds="true" AnchorPane.bottomAnchor="577.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="35.0">
-               <image>
-                  <Image url="@../Pics/gogreen.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="line4" layoutX="113.0" layoutY="750.0" prefHeight="68.0" prefWidth="432.0" text="○ Total Users Registerd:" textFill="WHITE">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblTotalUsers" layoutX="190.0" layoutY="795.0" prefHeight="30.0" prefWidth="320.0" text="Users" textFill="WHITE">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="line5" layoutX="113.0" layoutY="825.0" prefHeight="68.0" prefWidth="320.0" text="○ Total Carbon Saved:" textFill="WHITE">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblSaved" layoutX="190.0" layoutY="870.0" prefHeight="30.0" prefWidth="328.0" text="Saved" textFill="WHITE">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="fieldPane" layoutX="656.0" layoutY="-2.0" prefHeight="902.0" prefWidth="660.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="656.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <JFXButton fx:id="signupButton" contentDisplay="CENTER" layoutX="81.0" layoutY="739.0" prefHeight="74.0" prefWidth="200.0" ripplerFill="WHITE" style="-fx-background-radius: 30px; -fx-border-color: #AFCF2C#AFCF2C; -fx-border-radius: 30px; -fx-border-width: 5px;" text="SIGN UP" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="375.0" AnchorPane.topAnchor="739.0">
-               <font>
-                  <Font name="PingFang HK Regular" size="28.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <Label fx:id="loginForward" layoutX="75.0" layoutY="49.0" text="Login /" textFill="#868282" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="49.0">
-               <font>
-                  <Font size="43.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-            <Label fx:id="signup" layoutX="231.0" layoutY="49.0" text="Sign up" textFill="#379b1e" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="49.0">
-               <font>
-                  <Font size="43.0" />
-               </font>
-            </Label>
-            <Label layoutX="214.0" layoutY="486.0" prefHeight="39.0" prefWidth="135.0" style="-fx-background-image: url('/Users/vetle/Desktop/OOPP/template/src/main/Resources/frontend/Pics/email.png/Users/vetle/Desktop/OOPP/template/src/main/Resources/frontend/Pics/email.png');" />
-            <JFXTextField fx:id="firstNameField" focusColor="#379b1e" layoutX="78.0" layoutY="164.0" prefHeight="50.0" prefWidth="232.0" promptText="First name" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="350.0">
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor></JFXTextField>
-            <JFXTextField fx:id="lastNameField" focusColor="#379b1e" layoutX="349.0" layoutY="164.0" prefHeight="50.0" prefWidth="232.0" promptText="Last name" AnchorPane.leftAnchor="349.0" AnchorPane.rightAnchor="79.0">
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor></JFXTextField>
-            <JFXTextField fx:id="emailField" focusColor="#379b1e" layoutX="78.0" layoutY="257.0" prefHeight="50.0" prefWidth="232.0" promptText="Email" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="350.0">
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor></JFXTextField>
-            <JFXTextField fx:id="usernameField" focusColor="#379b1e" layoutX="349.0" layoutY="257.0" prefHeight="50.0" prefWidth="232.0" promptText="Username" AnchorPane.leftAnchor="349.0" AnchorPane.rightAnchor="79.0">
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor></JFXTextField>
-            <JFXPasswordField fx:id="passwordField" focusColor="#379b1e" layoutX="71.0" layoutY="350.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="232.0" promptText="Password" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="350.0">
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor></JFXPasswordField>
-            <JFXPasswordField fx:id="confirmPasswordField" focusColor="#379b1e" layoutX="366.0" layoutY="350.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="232.0" promptText="Confirm Password" AnchorPane.leftAnchor="349.0" AnchorPane.rightAnchor="79.0">
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor></JFXPasswordField>
-            <JFXTextField fx:id="ageField" focusColor="#379b1e" layoutX="97.0" layoutY="443.0" prefHeight="50.0" prefWidth="503.0" promptText="Age" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="79.0">
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor></JFXTextField>
-            <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="282.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="351.0">
-               <image>
-                  <Image url="@../Pics/user.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="550.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="84.0">
-               <image>
-                  <Image url="@../Pics/user.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="28.0" layoutX="282.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="351.0">
-               <image>
-                  <Image url="@../Pics/email.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="549.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="84.0">
-               <image>
-                  <Image url="@../Pics/user.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="281.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="351.0">
-               <image>
-                  <Image url="@../Pics/password.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="547.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="84.0">
-               <image>
-                  <Image url="@../Pics/password.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="532.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="84.0">
-               <image>
-                  <Image url="@../Pics/age.png" />
-               </image>
-            </ImageView>
-            <JFXComboBox fx:id="secQuestion" layoutX="92.0" layoutY="536.0" prefHeight="50.0" prefWidth="503.0" promptText="Security Question" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="79.0" />
-            <JFXTextField fx:id="secAnswer" layoutX="129.0" layoutY="646.0" prefHeight="50.0" prefWidth="503.0" promptText="Answer" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="79.0" />
-         </children>
-      </AnchorPane>
-   </children>
+    <AnchorPane fx:id="graphics" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity"
+                minWidth="-Infinity" prefHeight="900.0" prefWidth="542.0" AnchorPane.bottomAnchor="0.0"
+                AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ImageView fx:id="background" fitHeight="900.0" fitWidth="544.0" pickOnBounds="true"
+                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                   AnchorPane.topAnchor="0.0">
+            <Image url="@../Pics/background.png"/>
+        </ImageView>
+        <Label fx:id="goGreen" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="97.0" layoutY="323.0"
+               minHeight="-Infinity" minWidth="-Infinity" prefHeight="102.0" prefWidth="351.0" text="GoGreen"
+               textFill="WHITE" AnchorPane.leftAnchor="97.0" AnchorPane.topAnchor="323.0">
+            <font>
+                <Font size="70.0"/>
+            </font>
+        </Label>
+        <Label fx:id="line1" layoutX="113.0" layoutY="450.0" prefHeight="70.0" prefWidth="320.0"
+               text="○ Add your activities" textFill="WHITE">
+            <font>
+                <Font size="30.0"/>
+            </font>
+        </Label>
+        <Label fx:id="line2" layoutX="111.0" layoutY="525.0" prefHeight="68.0" prefWidth="320.0"
+               text="○ Compare with friends" textFill="WHITE">
+            <font>
+                <Font size="25.0"/>
+            </font>
+        </Label>
+        <Label fx:id="line3" layoutX="113.0" layoutY="600.0" prefHeight="68.0" prefWidth="320.0"
+               text="○ Save the world!" textFill="WHITE">
+            <font>
+                <Font size="25.0"/>
+            </font>
+        </Label>
+        <ImageView fitHeight="288.0" fitWidth="412.0" layoutX="65.0" layoutY="35.0" pickOnBounds="true"
+                   AnchorPane.bottomAnchor="577.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0"
+                   AnchorPane.topAnchor="35.0">
+            <Image url="@../Pics/gogreen.png"/>
+        </ImageView>
+        <Label fx:id="line4" layoutX="113.0" layoutY="750.0" prefHeight="68.0" prefWidth="432.0"
+               text="○ Total Users Registerd:" textFill="WHITE">
+            <font>
+                <Font size="25.0"/>
+            </font>
+        </Label>
+        <Label fx:id="lblTotalUsers" layoutX="190.0" layoutY="795.0" prefHeight="30.0" prefWidth="320.0" text="Users"
+               textFill="WHITE">
+            <font>
+                <Font size="25.0"/>
+            </font>
+        </Label>
+        <Label fx:id="line5" layoutX="113.0" layoutY="825.0" prefHeight="68.0" prefWidth="320.0"
+               text="○ Total Carbon Saved:" textFill="WHITE">
+            <font>
+                <Font size="25.0"/>
+            </font>
+        </Label>
+        <Label fx:id="lblSaved" layoutX="190.0" layoutY="870.0" prefHeight="30.0" prefWidth="328.0" text="Saved"
+               textFill="WHITE">
+            <font>
+                <Font size="25.0"/>
+            </font>
+        </Label>
+    </AnchorPane>
+    <AnchorPane fx:id="fieldPane" layoutX="656.0" layoutY="-2.0" prefHeight="902.0" prefWidth="660.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="656.0" AnchorPane.topAnchor="0.0">
+        <JFXButton fx:id="signupButton" contentDisplay="CENTER" layoutX="81.0" layoutY="739.0" prefHeight="74.0" prefWidth="200.0" ripplerFill="WHITE" style="-fx-background-radius: 30px; -fx-border-color: #AFCF2C#AFCF2C; -fx-border-radius: 30px; -fx-border-width: 5px;" text="SIGN UP" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="375.0" AnchorPane.topAnchor="739.0">
+            <font>
+                <Font name="PingFang HK Regular" size="28.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <Label fx:id="loginForward" layoutX="75.0" layoutY="49.0" text="Login /" textFill="#868282" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="49.0">
+            <font>
+                <Font size="43.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Label>
+        <Label fx:id="signup" layoutX="231.0" layoutY="49.0" text="Sign up" textFill="#379b1e" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="49.0">
+            <font>
+                <Font size="43.0" />
+            </font>
+        </Label>
+        <Label layoutX="214.0" layoutY="486.0" prefHeight="39.0" prefWidth="135.0" style="-fx-background-image: url('/Users/vetle/Desktop/OOPP/template/src/main/Resources/frontend/Pics/email.png/Users/vetle/Desktop/OOPP/template/src/main/Resources/frontend/Pics/email.png');" />
+        <JFXTextField fx:id="firstNameField" focusColor="#379b1e" layoutX="78.0" layoutY="164.0" prefHeight="50.0" prefWidth="232.0" promptText="First name" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="350.0">
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor></JFXTextField>
+        <JFXTextField fx:id="lastNameField" focusColor="#379b1e" layoutX="349.0" layoutY="164.0" prefHeight="50.0" prefWidth="232.0" promptText="Last name" AnchorPane.leftAnchor="349.0" AnchorPane.rightAnchor="79.0">
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor></JFXTextField>
+        <JFXTextField fx:id="emailField" focusColor="#379b1e" layoutX="78.0" layoutY="257.0" prefHeight="50.0" prefWidth="232.0" promptText="Email" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="350.0">
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor></JFXTextField>
+        <JFXTextField fx:id="usernameField" focusColor="#379b1e" layoutX="349.0" layoutY="257.0" prefHeight="50.0" prefWidth="232.0" promptText="Username" AnchorPane.leftAnchor="349.0" AnchorPane.rightAnchor="79.0">
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor></JFXTextField>
+        <JFXPasswordField fx:id="passwordField" focusColor="#379b1e" layoutX="71.0" layoutY="350.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="232.0" promptText="Password" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="350.0">
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor></JFXPasswordField>
+        <JFXPasswordField fx:id="confirmPasswordField" focusColor="#379b1e" layoutX="366.0" layoutY="350.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="232.0" promptText="Confirm Password" AnchorPane.leftAnchor="349.0" AnchorPane.rightAnchor="79.0">
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor></JFXPasswordField>
+        <JFXTextField fx:id="ageField" focusColor="#379b1e" layoutX="97.0" layoutY="443.0" prefHeight="50.0" prefWidth="503.0" promptText="Age" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="79.0">
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor></JFXTextField>
+        <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="282.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="351.0">
+            <Image url="@../Pics/user.png" />
+        </ImageView>
+        <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="550.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="84.0">
+            <Image url="@../Pics/user.png" />
+        </ImageView>
+        <ImageView fitHeight="20.0" fitWidth="28.0" layoutX="282.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="351.0">
+            <Image url="@../Pics/email.png" />
+        </ImageView>
+        <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="549.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="84.0">
+            <Image url="@../Pics/user.png" />
+        </ImageView>
+        <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="281.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="351.0">
+            <Image url="@../Pics/password.png" />
+        </ImageView>
+        <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="547.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="84.0">
+            <Image url="@../Pics/password.png" />
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="532.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="84.0">
+            <Image url="@../Pics/age.png" />
+        </ImageView>
+        <JFXComboBox fx:id="secQuestion" layoutX="92.0" layoutY="536.0" prefHeight="50.0" prefWidth="503.0" promptText="Security Question" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="79.0" />
+        <JFXTextField fx:id="secAnswer" layoutX="129.0" layoutY="646.0" prefHeight="50.0" prefWidth="503.0" promptText="Answer" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="79.0" />
+    </AnchorPane>
 </AnchorPane>

@@ -9,7 +9,7 @@ public enum DateUnit {
 
     private final int numDays;
 
-    private DateUnit(int numDays) {
+    DateUnit(int numDays) {
         this.numDays = numDays;
     }
 

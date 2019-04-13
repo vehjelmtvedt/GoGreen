@@ -32,7 +32,7 @@ public final class CarbonCalculator {
 
     public enum LocallyProducedFoodConsumption {
         VERY_LITTLE(500), AVERAGE(300), ABOVE_AVERAGE(200), ALMOST_ALL(100);
-        private int carbonEmissions;
+        private final int carbonEmissions;
         LocallyProducedFoodConsumption(int carbonEmissions) {
             this.carbonEmissions = carbonEmissions;
         }
@@ -40,7 +40,7 @@ public final class CarbonCalculator {
 
     public enum ProcessedFoodConsumption {
         ABOVE_AVERAGE(600), AVERAGE(400), BELOW_AVERAGE(200), VERY_LITTLE(50);
-        private int carbonEmissions;
+        private final int carbonEmissions;
         ProcessedFoodConsumption(int carbonEmissions) {
             this.carbonEmissions = carbonEmissions;
         }

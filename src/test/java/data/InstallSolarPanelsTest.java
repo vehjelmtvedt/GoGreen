@@ -9,8 +9,8 @@ import tools.Requests;
 import static org.junit.Assert.assertEquals;
 
 public class InstallSolarPanelsTest {
-    InstallSolarPanels panels = new InstallSolarPanels();
-    User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
+    private final InstallSolarPanels panels = new InstallSolarPanels();
+    private final User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
 
     @Test
     public void testConstructor() {

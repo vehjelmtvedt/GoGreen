@@ -11,11 +11,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;
 
 @Configuration
-public class DbLoader {
+class DbLoader {
     // Specify JSON to load here
-    private Resource achievements = new ClassPathResource("data/achievements.json");
+    private final Resource achievements = new ClassPathResource("data/achievements.json");
 
-    private Resource[] resources = new Resource[] {achievements};
+    private final Resource[] resources = new Resource[] {achievements};
 
     @Autowired
     private AchievementRepository achievementRepository;
@@ -39,7 +39,7 @@ public class DbLoader {
             userStatisticsRepository.insert(allStats);
         }
 
-        // Iniitalize populator factory bean
+        // Initialise populator factory bean
         Jackson2RepositoryPopulatorFactoryBean factory =
                 new Jackson2RepositoryPopulatorFactoryBean();
 

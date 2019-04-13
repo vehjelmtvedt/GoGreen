@@ -5,12 +5,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtils {
-    public static DateUtils instance = new DateUtils();
+    public static final DateUtils instance = new DateUtils();
 
     /**.
      * Constructs a DateUtils instance
      */
-    protected DateUtils() {
+    private DateUtils() {
 
     }
 

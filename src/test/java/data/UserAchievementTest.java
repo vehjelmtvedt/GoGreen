@@ -6,9 +6,10 @@ import org.junit.Test;
 
 import java.util.Date;
 
+@SuppressWarnings("deprecation")
 public class UserAchievementTest {
 
-    private UserAchievement test = new UserAchievement(0 , true , new Date(1 , 1, 1));
+    private final UserAchievement test = new UserAchievement(0 , true , new Date(1 , 1, 1));
 
 
     @Test
@@ -22,7 +23,7 @@ public class UserAchievementTest {
     public void getDate() {
 
         Date date = new Date(1 ,1,1);
-        Assert.assertTrue(date.equals(test.getDate()));
+        Assert.assertEquals(date, test.getDate());
 
     }
 
@@ -52,7 +53,7 @@ public class UserAchievementTest {
 
         test.setDate(testdate);
 
-        Assert.assertTrue(testdate.equals(test.getDate()));
+        Assert.assertEquals(testdate, test.getDate());
 
     }
 }

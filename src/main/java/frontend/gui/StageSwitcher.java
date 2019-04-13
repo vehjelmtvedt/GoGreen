@@ -9,7 +9,6 @@ public class StageSwitcher {
     public static JFXDrawer homeDrawer;
     public static JFXDrawer friendsDrawer;
     public static JFXDrawer activityDrawer;
-    public static JFXDrawer profileDrawer;
 
     /**
      * Changes scene of any stage (usually primary).

@@ -27,7 +27,7 @@ public class EditProfilePopUpController implements Initializable {
     public static ProfilePageController profilePageController;
     private static User thisUser;
     private static LoginDetails thisLoginDetails;
-    private static List<ImageView> avatarList = new ArrayList<>();
+    private static final List<ImageView> avatarList = new ArrayList<>();
 
     @FXML
     private HBox avatarZone;
@@ -58,26 +58,26 @@ public class EditProfilePopUpController implements Initializable {
      * Allows any text field to become editable.
      * Also helps to reduce code duplication.
      * @param button The Button Used to save the changes.
-     * @param textfield The textField to be edited.
+     * @param textField The textField to be edited.
      * @param editableVariable The variable to be edited.
      */
-    public static void editableFields(JFXButton button, JFXTextField textfield,
-                                      String editableVariable) {
+    private static void editableFields(JFXButton button, JFXTextField textField,
+                                       String editableVariable) {
         button.setOnAction(e -> {
-            if (!(textfield.getText().isEmpty())) {
-                textfield.setUnFocusColor(Color.BLACK);
+            if (!(textField.getText().isEmpty())) {
+                textField.setUnFocusColor(Color.BLACK);
                 if (editableVariable.equals("firstName")) {
-                    homepageController.updateFirstName(textfield.getText());
-                    profilePageController.updateFirstName(textfield.getText());
+                    homepageController.updateFirstName(textField.getText());
+                    profilePageController.updateFirstName(textField.getText());
                 }
                 if (editableVariable.equals("lastName")) {
-                    homepageController.updateLastName(textfield.getText());
-                    profilePageController.updateLastName(textfield.getText());
+                    homepageController.updateLastName(textField.getText());
+                    profilePageController.updateLastName(textField.getText());
                 }
                 Requests.instance.editProfile(
-                        thisLoginDetails, editableVariable, textfield.getText());
+                        thisLoginDetails, editableVariable, textField.getText());
             } else {
-                textfield.setUnFocusColor(Color.RED);
+                textField.setUnFocusColor(Color.RED);
             }
         });
     }
@@ -117,23 +117,23 @@ public class EditProfilePopUpController implements Initializable {
         int count = 1;
         for (int i = 1; i <= 12; i++) {
 
-            ImageView avatarimage = new ImageView();
+            ImageView avatarImage = new ImageView();
 
             //set the cursor to be Cursor.Hand whenever it is hovered
-            avatarimage.setCursor(Cursor.HAND);
+            avatarImage.setCursor(Cursor.HAND);
 
             javafx.scene.image.Image path = new Image("avatars/" + count + ".jpg");
-            avatarimage.setId(Integer.toString(count));
-            avatarimage.setFitHeight(150);
-            avatarimage.setFitWidth(150);
-            avatarimage.setImage(path);
+            avatarImage.setId(Integer.toString(count));
+            avatarImage.setFitHeight(150);
+            avatarImage.setFitWidth(150);
+            avatarImage.setImage(path);
 
-            avatarZone.getChildren().add(avatarimage);
+            avatarZone.getChildren().add(avatarImage);
             Separator separator = new Separator();
             separator.setOrientation(Orientation.VERTICAL);
             avatarZone.getChildren().add(separator);
 
-            avatarList.add(avatarimage);
+            avatarList.add(avatarImage);
 
             count ++;
         }

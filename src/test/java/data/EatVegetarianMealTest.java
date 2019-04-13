@@ -3,11 +3,8 @@ package data;
 import data.BuyOrganicFood;
 import data.EatVegetarianMeal;
 import data.User;
-import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mockito;
 import tools.CarbonCalculator;
-import tools.Requests;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,8 +13,8 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 public class EatVegetarianMealTest {
-    EatVegetarianMeal meal = new EatVegetarianMeal();
-    User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
+    private final EatVegetarianMeal meal = new EatVegetarianMeal();
+    private final User userOne = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
     @Test
     public void testConstructor() {
         assertNotNull(meal);
@@ -150,7 +147,7 @@ public class EatVegetarianMealTest {
         EatVegetarianMeal meal2 = new EatVegetarianMeal();
         try {
             meal2.setDate(new SimpleDateFormat("dd/MM/yyyy").parse("12/12/1999"));
-        }catch (Exception e){ }
+        }catch (Exception ignored){ }
         userOne.addActivity(meal2);
         assertEquals(1, meal.timesPerformedInTheSameDay(userOne));
     }

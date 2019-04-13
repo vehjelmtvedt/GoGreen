@@ -6,8 +6,8 @@ import tools.CarbonCalculator;
 import static org.junit.Assert.assertEquals;
 
 public class LowerHomeTemperatureTest {
-    LowerHomeTemperature temp = new LowerHomeTemperature();
-    User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
+    private final LowerHomeTemperature temp = new LowerHomeTemperature();
+    private final User user = new User("Vetle", "Hjelmtvedt", 19, "vetle@hjelmtvedt.com","test", "password123");
 
     @Test
     public void testConstructor() {

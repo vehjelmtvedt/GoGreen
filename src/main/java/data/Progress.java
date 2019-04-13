@@ -10,7 +10,7 @@ public class Progress extends Observable {
 
     public Progress() {
         this.points = 0;
-        this.achievements = new ArrayList<UserAchievement>();
+        this.achievements = new ArrayList<>();
     }
 
     public double getPoints() {
@@ -89,9 +89,7 @@ public class Progress extends Observable {
 
             int level = this.getLevel() + 1;
 
-            double need = Math.round(Math.exp(level) * 100 - points);
-
-            return need;
+            return (double) Math.round(Math.exp(level) * 100 - points);
 
         } else {
             return 0;

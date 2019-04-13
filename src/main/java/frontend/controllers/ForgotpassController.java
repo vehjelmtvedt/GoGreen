@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@SuppressWarnings({"unchecked", "WeakerAccess"})
 public class ForgotpassController implements Initializable {
 
     @FXML
@@ -55,7 +56,6 @@ public class ForgotpassController implements Initializable {
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-                return;
             } else {
                 try {
                     Dialog.show("Oops...", "Something went wrong. Try again later",
@@ -131,7 +131,7 @@ public class ForgotpassController implements Initializable {
      *
      * @return - ID of the question
      */
-    public int getSecurityQuestionid() {
+    private int getSecurityQuestionid() {
         if (secQuestion.getValue() == null) {
             return -1;
         }

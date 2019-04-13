@@ -15,7 +15,7 @@ public class NotificationThread extends ScheduledService<UserPendingData> {
 
     private static final int sleepTimeSeconds = 5;
 
-    private SyncUserTask syncUserTask;
+    private final SyncUserTask syncUserTask;
 
 
 
@@ -55,21 +55,17 @@ public class NotificationThread extends ScheduledService<UserPendingData> {
         });
 
         // failed
-        this.setOnFailed(f -> {
-            System.out.println("FAILED");
-        });
+        this.setOnFailed(f -> System.out.println("FAILED"));
 
         // cancelled?
-        this.setOnCancelled(c -> {
-            System.out.println("CANCELLED");
-        });
+        this.setOnCancelled(c -> System.out.println("CANCELLED"));
     }
 
     @Override
     public Task<UserPendingData> createTask() {
         return new Task<UserPendingData>() {
             @Override
-            protected UserPendingData call() throws Exception {
+            protected UserPendingData call() {
                 return syncUserTask.call();
             }
         };

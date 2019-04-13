@@ -21,6 +21,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 
+@SuppressWarnings("deprecation")
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Server.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_CLASS)
@@ -42,8 +43,8 @@ public class ProfilePageLogicTest {
     @Resource
     AppRequestHandler appRequestHandler;
 
-    private User user = new User("Active", "User", 20, "active_user@email.com", "active_user", "pwd123");
-    private UserAchievement userAchievement = new UserAchievement(0, true, new Date(11, 11, 11));
+    private final User user = new User("Active", "User", 20, "active_user@email.com", "active_user", "pwd123");
+    private final UserAchievement userAchievement = new UserAchievement(0, true, new Date(11, 11, 11));
 
     @Before
     public void setup() {
@@ -77,7 +78,7 @@ public class ProfilePageLogicTest {
 
         String test = new Date(11, 11, 11).toString();
 
-        Assert.assertTrue(test.equals(ProfilePageLogic.getDateString(userAchievement)));
+        Assert.assertEquals(test, ProfilePageLogic.getDateString(userAchievement));
 
     }
 

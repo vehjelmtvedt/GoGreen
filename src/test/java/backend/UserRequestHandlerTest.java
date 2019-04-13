@@ -1,7 +1,6 @@
 package backend;
 
 
-import data.Achievement;
 import data.EatVegetarianMeal;
 import data.LoginDetails;
 import data.User;
@@ -19,8 +18,9 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.*;
 
+@SuppressWarnings("ConstantConditions")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_CLASS)
@@ -38,14 +38,14 @@ public class UserRequestHandlerTest
 
 
     @Test
-    public void testSignupExists()
+    public void testSignUpExists()
     {
         Mockito.when(dbService.getUserByEmail(testUser.getEmail())).thenReturn(testUser);
         assertEquals("Email exists", userRequestHandler.signupController(testUser));
     }
 
     @Test
-    public void testSignupDoesNotExist()
+    public void testSignUpDoesNotExist()
     {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(null);
         assertEquals("success", userRequestHandler.signupController(testUser));
@@ -61,7 +61,7 @@ public class UserRequestHandlerTest
     @Test
     public void testLoginFail() {
         Mockito.when(dbService.grantAccess(testUser.getEmail(), testUser.getPassword())).thenReturn(null);
-        assertEquals(null, userRequestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
+        assertNull(userRequestHandler.loginController(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
     @Test
@@ -73,37 +73,37 @@ public class UserRequestHandlerTest
     @Test
     public void testAddFriendRequestOK() {
         Mockito.when(dbService.addFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(true);
-        assertEquals(true, userRequestHandler.friendRequest(testUser.getUsername(), testUser2.getUsername()));
+        assertTrue(userRequestHandler.friendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
     @Test
     public void testAddFriendRequestNotOK() {
         Mockito.when(dbService.addFriendRequest(testUser.getUsername(), "Invalid")).thenReturn(false);
-        assertEquals(false, userRequestHandler.friendRequest(testUser.getUsername(), "Invalid"));
+        assertFalse(userRequestHandler.friendRequest(testUser.getUsername(), "Invalid"));
     }
 
     @Test
     public void testAcceptFriendRequestOK() {
         Mockito.when(dbService.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(true); //test2 accepts test
-        assertEquals(true, userRequestHandler.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+        assertTrue(userRequestHandler.acceptFriendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
     @Test
     public void testAcceptFriendRequestInvalid() {
         Mockito.when(dbService.acceptFriendRequest(testUser.getUsername(), "invalid")).thenReturn(false); //test2 accepts test
-        assertEquals(false, userRequestHandler.acceptFriendRequest(testUser.getUsername(), "invalid"));
+        assertFalse(userRequestHandler.acceptFriendRequest(testUser.getUsername(), "invalid"));
     }
 
     @Test
     public void testRejectFriendRequestOK() {
         Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername())).thenReturn(true); //test2 rejects test
-        assertEquals(true, userRequestHandler.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername()));
+        assertTrue(userRequestHandler.rejectFriendRequest(testUser.getUsername(), testUser2.getUsername()));
     }
 
     @Test
     public void testRejectFriendRequestInvalid() {
         Mockito.when(dbService.rejectFriendRequest(testUser.getUsername(), "invalid")).thenReturn(false); //test2 accepts test
-        assertEquals(false, userRequestHandler.rejectFriendRequest(testUser.getUsername(), "invalid"));
+        assertFalse(userRequestHandler.rejectFriendRequest(testUser.getUsername(), "invalid"));
     }
 
     @Test
@@ -133,20 +133,20 @@ public class UserRequestHandlerTest
     @Test
     public void testAddActivityNotValidUsername() {
         EatVegetarianMeal act = new EatVegetarianMeal();
-        assertEquals(null, userRequestHandler.addActivity(act, "invalid"));
+        assertNull(userRequestHandler.addActivity(act, "invalid"));
     }
 
     @Test
     public void testAddActivityNotValidActivity() {
         Mockito.when(dbService.getUserByUsername(testUser.getUsername())).thenReturn(testUser);
-        assertEquals(null, userRequestHandler.addActivity(null, testUser.getUsername()));
+        assertNull(userRequestHandler.addActivity(null, testUser.getUsername()));
         assertEquals(0, dbService.getUserByUsername(testUser.getUsername()).getActivities().size());
     }
 
     @Test
     public void getFriends() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(testUser);
-        List<User> testList = new ArrayList();
+        List<User> testList = new ArrayList<>();
         testList.add(testUser);
         Mockito.when(dbService.getFriends(testUser.getUsername())).thenReturn(testList);
         assertEquals(testList, userRequestHandler.getFriends(new LoginDetails(testUser.getUsername(),
@@ -156,7 +156,7 @@ public class UserRequestHandlerTest
     @Test
     public void getFriendsNull() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
-        assertEquals(null, userRequestHandler.getFriends(new LoginDetails(testUser.getUsername(),
+        assertNull(userRequestHandler.getFriends(new LoginDetails(testUser.getUsername(),
                 testUser.getPassword())));
     }
 
@@ -177,8 +177,8 @@ public class UserRequestHandlerTest
     @Test
     public void editProfileAuthFail() {
         Mockito.when(dbService.grantAccess(testUser.getUsername(),testUser.getPassword())).thenReturn(null);
-        assertEquals(null, userRequestHandler.editProfile(new LoginDetails(testUser.getUsername()
-                ,testUser.getPassword()),"firstName","Test5","String"));
+        assertNull(userRequestHandler.editProfile(new LoginDetails(testUser.getUsername()
+                , testUser.getPassword()), "firstName", "Test5", "String"));
     }
     
     @Test
@@ -187,7 +187,7 @@ public class UserRequestHandlerTest
         testUser.setSecurityQuestionAnswer("A");
         testUser.setSecurityQuestionId(1);
         Boolean bool = true;
-        assertEquals(userRequestHandler.forgotPass(testUser.getEmail(),"A",1,"ASD"),bool);
+        assertEquals(userRequestHandler.forgotPass(testUser.getEmail(),"A",1,"ASD"), bool);
     }
 
     @Test
@@ -197,6 +197,7 @@ public class UserRequestHandlerTest
         testUser.setSecurityQuestionId(1);
         dbService.addUser(testUser);
         Boolean bool = false;
+        //noinspection ConstantConditions
         assertEquals(userRequestHandler.forgotPass(testUser.getEmail(), "B", 1, "ASD"), bool);
     }
 
@@ -213,7 +214,7 @@ public class UserRequestHandlerTest
     @Test
     public void forgotPassNull() {
         Mockito.when(dbService.getUser(testUser.getEmail())).thenReturn(null);
-        assertEquals(null, userRequestHandler.forgotPass(testUser.getEmail(),"A",1,"A"));
+        assertNull(userRequestHandler.forgotPass(testUser.getEmail(), "A", 1, "A"));
     }
 
     @Test
@@ -227,7 +228,7 @@ public class UserRequestHandlerTest
     @Test
     public void getRankFail() {
         Mockito.when(dbService.grantAccess(testUser.getEmail(),testUser.getPassword())).thenReturn(null);
-        assertEquals(userRequestHandler.getRank(new LoginDetails(testUser.getEmail(),testUser.getPassword())),null);
+        assertNull(userRequestHandler.getRank(new LoginDetails(testUser.getEmail(), testUser.getPassword())));
     }
 
     @Test

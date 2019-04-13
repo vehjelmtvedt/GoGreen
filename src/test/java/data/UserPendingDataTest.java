@@ -46,7 +46,7 @@ public class UserPendingDataTest {
         userPendingData.addNewRequest("user_b");
         userPendingData.addNewRequest("user_c");
 
-        ArrayList<String> expected = new ArrayList<String>();
+        ArrayList<String> expected = new ArrayList<>();
         expected.add("user_a");
         expected.add("user_b");
         expected.add("user_c");
@@ -60,7 +60,7 @@ public class UserPendingDataTest {
         userPendingData.addNewFriend("user_a");
         userPendingData.addNewFriend("user_c");
 
-        ArrayList<String> expected = new ArrayList<String>();
+        ArrayList<String> expected = new ArrayList<>();
         expected.add("user_a");
         expected.add("user_c");
 

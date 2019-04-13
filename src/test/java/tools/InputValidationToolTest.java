@@ -2,31 +2,31 @@ package tools;
 
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.*;
 
 public class InputValidationToolTest {
     @Test
     public void testAgeValidation() {
-        assertEquals(InputValidationTool.validateAge("5"),true);
+        assertTrue(InputValidationTool.validateAge("5"));
     }
 
     @Test
     public void testAgeValidationFalse() {
-        assertEquals(InputValidationTool.validateAge("-1"),false);
+        assertFalse(InputValidationTool.validateAge("-1"));
     }
 
     @Test
     public void testAgeValidationInvalidInput() {
-        assertEquals(InputValidationTool.validateAge("abc"),false);
+        assertFalse(InputValidationTool.validateAge("abc"));
     }
 
     @Test
     public void testPassValidation() {
-        assertEquals(InputValidationTool.validatePassword("qwerty"),true);
+        assertTrue(InputValidationTool.validatePassword("qwerty"));
     }
 
     @Test
     public void testEmailValidation() {
-        assertEquals(InputValidationTool.validateEmail("a@a.com"),true);
+        assertTrue(InputValidationTool.validateEmail("a@a.com"));
     }
 }

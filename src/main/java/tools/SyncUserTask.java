@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.concurrent.Callable;
 
 public class SyncUserTask implements Callable<UserPendingData> {
-    private Requests requests;
-    private LoginDetails loginDetails;
+    private final Requests requests;
+    private final LoginDetails loginDetails;
     private User user;
 
     /**.

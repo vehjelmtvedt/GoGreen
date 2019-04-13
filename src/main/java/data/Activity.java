@@ -17,7 +17,8 @@ import java.util.Objects;
  *
  * @author Kostas Lyrakis
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@SuppressWarnings("UnusedAssignment")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = EatVegetarianMeal.class, name = "EatVegetarianMeal"),
         @JsonSubTypes.Type(value = BuyLocallyProducedFood.class, name = "BuyLocallyProducedFood"),
@@ -37,7 +38,7 @@ public abstract class Activity {
     private String name;
     private String category;
 
-    public Activity() {
+    Activity() {
         this.date = DateUtils.instance.dateToday();
         this.carbonSaved = 0;
     }
@@ -75,7 +76,7 @@ public abstract class Activity {
         this.category = category;
     }
 
-    public abstract double calculateCarbonSaved(User user);
+    protected abstract double calculateCarbonSaved(User user);
 
     /**
      * calculates how many times on the same day the user has performed this activity.
@@ -87,13 +88,13 @@ public abstract class Activity {
     }
 
     /**
-     * Creates an arraylist that contains the activities of the same type performed on the same day.
+     * Creates an array list that contains the activities of the same type performed on the same day.
      *
      * @param user currently logged in user
      * @return ArrayList
      */
-    public ArrayList<Activity> getActivitiesOfTheSameTypePerformedInTheSameDay(User user) {
-        ArrayList<Activity> result = new ArrayList<Activity>();
+    private ArrayList<Activity> getActivitiesOfTheSameTypePerformedInTheSameDay(User user) {
+        ArrayList<Activity> result = new ArrayList<>();
         Date currentDate = DateUtils.instance.dateToday();
         String currentMonth = currentDate.toString().split(" ")[1];
         String currentDay = currentDate.toString().split(" ")[2];
@@ -114,31 +115,16 @@ public abstract class Activity {
         return result;
     }
 
-    protected static Comparator<Activity> getDateComparator() {
-        return new Comparator<Activity>() {
-            @Override
-            public int compare(Activity o1, Activity o2) {
-                return o1.getDate().compareTo(o2.getDate());
-            }
-        };
+    private static Comparator<Activity> getDateComparator() {
+        return Comparator.comparing(Activity::getDate);
     }
 
     private static Comparator<Activity> getCarbonSavedComparator() {
-        return new Comparator<Activity>() {
-            @Override
-            public int compare(Activity o1, Activity o2) {
-                return Double.compare(o1.getCarbonSaved(), o2.getCarbonSaved());
-            }
-        };
+        return Comparator.comparingDouble(Activity::getCarbonSaved);
     }
 
     static Comparator<Activity> getClassComparator() {
-        return new Comparator<Activity>() {
-            @Override
-            public int compare(Activity o1, Activity o2) {
-                return o1.getClass().getName().compareTo(o2.getClass().getName());
-            }
-        };
+        return Comparator.comparing(o -> o.getClass().getName());
     }
 
     private static List<Activity> sortHelper(List<Activity> activityList,
@@ -235,7 +221,7 @@ public abstract class Activity {
 
         } catch (ResourceAccessException e) {
             System.out.println("Activity was not added to the database");
-            System.out.println(e.fillInStackTrace());
+            e.printStackTrace();
         }
     }
 }

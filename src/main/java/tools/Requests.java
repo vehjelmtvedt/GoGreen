@@ -16,10 +16,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
+@SuppressWarnings("ConstantConditions")
 public class Requests {
     public static Requests instance = new Requests();
 
-    protected String url;
+    String url;
     private RestTemplate restTemplate;
 
     protected Requests() {
@@ -202,7 +203,7 @@ public class Requests {
         ParameterizedTypeReference<List<User>> typeRef =
                 new ParameterizedTypeReference<List<User>>() {};
         return restTemplate.exchange(uriBuilder.toUriString(),HttpMethod.POST,
-                new HttpEntity<LoginDetails>(loginDetails),typeRef).getBody();
+                new HttpEntity<>(loginDetails),typeRef).getBody();
     }
 
     /**

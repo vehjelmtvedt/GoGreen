@@ -3,24 +3,25 @@ package data;
 import data.Progress;
 import data.User;
 import data.UserAchievement;
-import javafx.fxml.FXML;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Date;
 
 
+@SuppressWarnings("deprecation")
 public class ProgressTest {
 
 
-    User user = new User();
-    Progress progress = user.getProgress();
+    private final User user = new User();
+    private final Progress progress = user.getProgress();
 
 
     @Test
     public void addPoints() {
 
         progress.setPoints(10.0);
+        //noinspection OctalInteger
         UserAchievement test = new UserAchievement(1, true, new Date(1999, 02, 22));
 
         progress.getAchievements().add(test);

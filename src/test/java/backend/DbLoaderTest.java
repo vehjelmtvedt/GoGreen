@@ -7,24 +7,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
-
-import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DbLoaderTest {
     @InjectMocks
+    private
     DbLoader dbLoader = new DbLoader();
 
     @Mock
@@ -33,20 +26,17 @@ public class DbLoaderTest {
     @Mock
     UserStatisticsRepository userStatistics;
 
-    UserStatistics userStatisticsObj = new UserStatistics("all", 0, 0);
-    private Optional<UserStatistics> userStatisticsOptional = Optional.of(userStatisticsObj);
+    private final UserStatistics userStatisticsObj = new UserStatistics("all", 0, 0);
+    private final Optional<UserStatistics> userStatisticsOptional = Optional.of(userStatisticsObj);
 
     @Before
     public void setup() {
         // Upon calling insert, update mock
         Mockito.when(userStatistics.insert(userStatisticsObj)).then(
-                new Answer<Object>() {
-                    @Override
-                    public Object answer(InvocationOnMock invocationOnMock) {
-                        // FindById "all" will now return a non-null value
-                        Mockito.when(userStatistics.findById("all")).thenReturn(userStatisticsOptional);
-                        return null;
-                    }
+                invocationOnMock -> {
+                    // FindById "all" will now return a non-null value
+                    Mockito.when(userStatistics.findById("all")).thenReturn(userStatisticsOptional);
+                    return null;
                 }
         );
     }

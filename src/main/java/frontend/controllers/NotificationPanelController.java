@@ -25,7 +25,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class    NotificationPanelController implements Initializable {
-    private static User loggedUser;
     private static LoginDetails loginDetails;
     private static boolean notifySelected = false;
 
@@ -71,7 +70,6 @@ public class    NotificationPanelController implements Initializable {
         for (String fromUser : currUser.getFriendRequests()) {
             addFriendRequest(friendsContainer, fromUser);
         }
-        setUser(currUser);
     }
 
 
@@ -146,16 +144,7 @@ public class    NotificationPanelController implements Initializable {
         setup(notificationIcon, logoutIcon, mainPane);
     }
 
-    /**
-     * .
-     * Sets the current logged in User to the one that was passed
-     *
-     * @param passedUser Logged in current user
-     */
-    public static void setUser(User passedUser) {
-        loggedUser = passedUser;
 
-    }
 
     /**
      * Sets the login details and starts the notification thread.

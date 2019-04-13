@@ -40,8 +40,8 @@ import java.util.ResourceBundle;
 public class ActivitiesController implements Initializable {
     private static User thisUser;
     private static LoginDetails thisLoginDetails;
-    private static List<JFXCheckBox> checkList = new ArrayList<>();
-    private static List<JFXRadioButton> radioList = new ArrayList<>();
+    private static final List<JFXCheckBox> checkList = new ArrayList<>();
+    private static final List<JFXRadioButton> radioList = new ArrayList<>();
     private static AnchorPane mainCopy;
     private static AnchorPane headerCopy;
     private static NotificationPopup popup;

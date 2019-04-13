@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
+@SuppressWarnings("unchecked")
 public class FriendspageController implements Initializable {
 
     private static User thisUser;
@@ -93,7 +94,7 @@ public class FriendspageController implements Initializable {
      * Update the leaderboards and user information on the Friends page
      * @param user - the current logged in user
      */
-    public void updateCharts(User user) {
+    private void updateCharts(User user) {
         //update the user object
         thisUser = user;
 
@@ -146,7 +147,7 @@ public class FriendspageController implements Initializable {
      * @param chart - the chart to edit
      */
 
-    public void fillChart(String title, String color, DateUnit unit, BarChart chart) {
+    private void fillChart(String title, String color, DateUnit unit, BarChart chart) {
         chart.getData().clear();
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(title);
@@ -173,7 +174,7 @@ public class FriendspageController implements Initializable {
      *
      * @param series1 - the series to add data to
      */
-    public void populateBarChart(XYChart.Series series1, DateUnit unit) {
+    private void populateBarChart(XYChart.Series series1, DateUnit unit) {
         int counter = 0;
         ActivityQueries thisQuery = new ActivityQueries(thisUser.getActivities());
         series1.getData().add(new XYChart.Data("You",
@@ -194,7 +195,7 @@ public class FriendspageController implements Initializable {
     /**
      * Adds the drawer to search for users and send them friend requests.
      */
-    public void drawFriendRequestDrawer() {
+    private void drawFriendRequestDrawer() {
 
         searchField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (searchField.getText().trim().isEmpty()) {
@@ -203,15 +204,16 @@ public class FriendspageController implements Initializable {
                 searchResults = getSearchResults(searchField.getText());
 
                 results.getChildren().clear();
-                for (int i = 0; i < searchResults.size(); i++) {
-                    if (!searchResults.get(i).equals(thisUser.getUsername())
-                        && !thisUser.getFriends().contains(searchResults.get(i))) {
+                for (Object searchResult : searchResults) {
+                    //noinspection SuspiciousMethodCalls
+                    if (!searchResult.equals(thisUser.getUsername())
+                            && !thisUser.getFriends().contains(searchResult)) {
                         HBox hbox = new HBox();
                         VBox.setMargin(hbox, new Insets(0, 20, 0, 20));
                         hbox.setStyle("-fx-background-color: #4286f4;");
                         hbox.setPrefWidth(results.getPrefWidth());
                         hbox.setPrefHeight(50);
-                        Label tmpLabel = new Label(searchResults.get(i).toString());
+                        Label tmpLabel = new Label(searchResult.toString());
                         tmpLabel.setPrefWidth(hbox.getPrefWidth() / 2);
                         JFXButton addButton = new JFXButton("+");
                         addButton.setStyle("-fx-background-color: #5b8d5b;");
@@ -252,14 +254,14 @@ public class FriendspageController implements Initializable {
      * @param keyword - keyword to search usernames
      * @return - list of users matching the keyword
      */
-    public List getSearchResults(String keyword) {
+    private List getSearchResults(String keyword) {
         return Requests.instance.getMatchingUsersRequest(keyword, thisLoginDetails);
     }
 
     /**
      * Adds the activity table to the GUI.
      */
-    public void fillFriendsTreeView() {
+    private void fillFriendsTreeView() {
 
         JFXTreeTableColumn<UserItem, String>
                 usernameColumn = new JFXTreeTableColumn<>("Friends");
@@ -296,8 +298,8 @@ public class FriendspageController implements Initializable {
      * @param lastActivity - second column
      * @param carbon       - third column
      */
-    public void styleTreeView(JFXTreeTableColumn username,
-                              JFXTreeTableColumn lastActivity, JFXTreeTableColumn carbon) {
+    private void styleTreeView(JFXTreeTableColumn username,
+                               JFXTreeTableColumn lastActivity, JFXTreeTableColumn carbon) {
         username.setStyle("-fx-alignment: center;");
         lastActivity.setStyle("-fx-alignment: center;");
         carbon.setStyle("-fx-alignment: center;");
@@ -322,11 +324,11 @@ public class FriendspageController implements Initializable {
 
     //Used for constructing TreeView
     private class UserItem extends RecursiveTreeObject<UserItem> {
-        StringProperty username;
-        StringProperty lastActivity;
-        StringProperty carbonSaved;
+        final StringProperty username;
+        final StringProperty lastActivity;
+        final StringProperty carbonSaved;
 
-        public UserItem(String username, String lastActivity, String carbonSaved) {
+        UserItem(String username, String lastActivity, String carbonSaved) {
             this.username = new SimpleStringProperty(username);
             this.lastActivity = new SimpleStringProperty(lastActivity);
             this.carbonSaved = new SimpleStringProperty(carbonSaved);

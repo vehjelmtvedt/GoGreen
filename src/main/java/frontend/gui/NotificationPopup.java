@@ -13,9 +13,10 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 
+@SuppressWarnings("MismatchedReadAndWriteOfArray")
 public class NotificationPopup {
 
-    boolean[] closed = {true, true, true, true};
+    private final boolean[] closed = {true, true, true, true};
 
     /**
      * Opens a notification to the side of your page.
@@ -56,8 +57,8 @@ public class NotificationPopup {
      * @return - the drawer (popup)
      * @throws IOException - if fails to load the font
      */
-    public JFXDrawer addDrawer(JFXDrawer drawer, int drawerNumber, AnchorPane mainPane,
-                             AnchorPane headerPane, String[] popupText) throws IOException {
+    private JFXDrawer addDrawer(JFXDrawer drawer, int drawerNumber, AnchorPane mainPane,
+                                AnchorPane headerPane, String[] popupText) throws IOException {
         Label heading = new Label(popupText[0]);
         heading.setFont(Main.getRobotoBold(24));
         Text body = new Text(popupText[1]);

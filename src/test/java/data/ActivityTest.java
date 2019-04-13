@@ -6,8 +6,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.ResourceAccessException;
 import tools.DateUnit;
 import tools.DateUtils;
 import tools.Requests;
@@ -16,7 +14,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ActivityTest {
-    private static ArrayList<Activity> activityList = new ArrayList<>();
+    private static final ArrayList<Activity> activityList = new ArrayList<>();
 
     @Before
     public void setup() {

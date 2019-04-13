@@ -3,9 +3,9 @@ package data;
 import java.util.ArrayList;
 
 public class UserPendingData {
-    private ArrayList<UserAchievement> achievements;
-    private ArrayList<String> friendRequests;
-    private ArrayList<String> friends;
+    private final ArrayList<UserAchievement> achievements;
+    private final ArrayList<String> friendRequests;
+    private final ArrayList<String> friends;
 
     /**.
      * Constructs new UserPendingData object with initially empty pending request lists

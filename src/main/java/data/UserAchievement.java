@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class UserAchievement {
 
-    public int id;
-    boolean completed;
-    Date date;
+    private int id;
+    private boolean completed;
+    private Date date;
 
 
     /**a default constructor.

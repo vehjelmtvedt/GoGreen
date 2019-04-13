@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class LoginDetailsTest {
 
-    LoginDetails detailOne = new LoginDetails("test","pass");
+    private final LoginDetails detailOne = new LoginDetails("test","pass");
 
 
     @Test
@@ -37,9 +37,11 @@ public class LoginDetailsTest {
 
     @Test
     public void testConstructor(){
-        assertNotNull(new LoginDetails("",""));
+        new LoginDetails("", "");
     }
 
     @Test
-    public void testEmptyConstructor() { assertNotNull(new LoginDetails());}
+    public void testEmptyConstructor() {
+        new LoginDetails();
+    }
 }
