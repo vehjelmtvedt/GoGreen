@@ -11,11 +11,12 @@ import tools.SyncUserTask;
 import java.io.IOException;
 
 public class NotificationThread extends ScheduledService<UserPendingData> {
+    public static NotificationPanelController notificationPanelController;
+
     private static final int sleepTimeSeconds = 5;
 
     private SyncUserTask syncUserTask;
 
-    public static NotificationPanelController notificationPanelController;
 
 
     /**.

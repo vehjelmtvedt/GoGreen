@@ -6,7 +6,16 @@ import data.InstallSolarPanels;
 import data.LoginDetails;
 import data.User;
 
-import frontend.controllers.*;
+import frontend.controllers.ActivitiesController;
+import frontend.controllers.EditProfilePopUpController;
+import frontend.controllers.FriendRequestController;
+import frontend.controllers.FriendspageController;
+import frontend.controllers.HomepageController;
+import frontend.controllers.NavPanelController;
+import frontend.controllers.NotificationPanelController;
+import frontend.controllers.ProfilePageController;
+import frontend.controllers.QuestionnaireController;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
