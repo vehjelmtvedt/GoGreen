@@ -72,8 +72,10 @@ public class Events {
      * @param button button to style
      */
     public static void addActivityHover(AnchorPane pane, JFXButton button) {
-        pane.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> button.setStyle("-fx-background-color: #00db00;"));
-        pane.addEventHandler(MouseEvent.MOUSE_EXITED, e -> button.setStyle("-fx-background-color: green;"));
+        pane.addEventHandler(MouseEvent.MOUSE_ENTERED, e ->
+                button.setStyle("-fx-background-color: #00db00;"));
+        pane.addEventHandler(MouseEvent.MOUSE_EXITED, e ->
+                button.setStyle("-fx-background-color: green;"));
     }
 
     /**
@@ -83,8 +85,10 @@ public class Events {
      * @param button - button to add events to
      */
     public static void addSaveButtonHover(JFXButton button) {
-        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> button.setStyle("-fx-background-color: #00db00"));
-        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> button.setStyle("-fx-background-color: transparent;"));
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event ->
+                button.setStyle("-fx-background-color: #00db00"));
+        button.addEventHandler(MouseEvent.MOUSE_EXITED, event ->
+                button.setStyle("-fx-background-color: transparent;"));
     }
 
     /**.
@@ -92,8 +96,10 @@ public class Events {
      * @param button - button to add events to
      */
     public static void addLoginHover(JFXButton button) {
-        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> button.setUnderline(true));
-        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> button.setUnderline(false));
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED,
+            event -> button.setUnderline(true));
+        button.addEventHandler(MouseEvent.MOUSE_EXITED,
+            event -> button.setUnderline(false));
     }
 
     /**
@@ -103,8 +109,10 @@ public class Events {
      * @param button button to add hover to inside nav bar
      */
     public static void addNavButtonHover(Button button) {
-        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> button.setOpacity(1));
-        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> button.setOpacity(0.75));
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED,
+            event -> button.setOpacity(1));
+        button.addEventHandler(MouseEvent.MOUSE_EXITED,
+            event -> button.setOpacity(0.75));
     }
 
     /**
@@ -114,8 +122,10 @@ public class Events {
      * @param button - button to add hover event to
      */
     public static void addJfxButtonHover(JFXButton button) {
-        button.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> button.setOpacity(1));
-        button.addEventHandler(MouseEvent.MOUSE_EXITED, event -> button.setOpacity(0.75));
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED,
+            event -> button.setOpacity(1));
+        button.addEventHandler(MouseEvent.MOUSE_EXITED,
+            event -> button.setOpacity(0.75));
     }
 
     /**
@@ -259,7 +269,8 @@ public class Events {
                     dialog.setHeaderText(
                             "Amount of kwh that your solar panel installation produces per year: ");
                     dialog.setContentText("kwh:");
-                    dialog.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+                    dialog.getEditor().textProperty().addListener((observable, oldValue, newValue)
+                        -> {
                         if (!newValue.matches("^[0-9]{0,7}$")) {
                             dialog.getEditor().setText(oldValue);
                         }

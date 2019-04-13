@@ -150,7 +150,8 @@ public class SignUpController implements Initializable {
                 e1.printStackTrace();
             }
         });
-        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignIn()));
+        loginForward.addEventHandler(MouseEvent.MOUSE_PRESSED,
+            event -> StageSwitcher.signInUpSwitch(Main.getPrimaryStage(), Main.getSignIn()));
         try {
             setFonts();
         } catch (IOException e) {

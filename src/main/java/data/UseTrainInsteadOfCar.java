@@ -22,22 +22,27 @@ public class UseTrainInsteadOfCar extends TransportationActivity {
         double totalKilometresTraveledToday = this.calculateTotalKilometresTravelledToday(user);
 
         // calculate daily carbon emissions
-        @SuppressWarnings("unused") double dailyCarbonEmissions = this.calculateDailyCarEmissions(user);
+        @SuppressWarnings("unused") double dailyCarbonEmissions = this
+                .calculateDailyCarEmissions(user);
 
         // calculate maximum CO2 this activity can save
         double maxC02SavedByThisActivity;
         switch (user.getCarType()) {
             case "small":
-                maxC02SavedByThisActivity = CarbonCalculator.smallCarEmissions(
-                        this.getKilometres()) - CarbonCalculator.trainEmissions(this.getKilometres());
+                maxC02SavedByThisActivity = CarbonCalculator
+                        .smallCarEmissions(
+                        this.getKilometres()) - CarbonCalculator
+                        .trainEmissions(this.getKilometres());
                 break;
             case "medium":
                 maxC02SavedByThisActivity = CarbonCalculator.mediumCarEmissions(
-                        this.getKilometres()) - CarbonCalculator.trainEmissions(this.getKilometres());
+                        this.getKilometres()) - CarbonCalculator
+                        .trainEmissions(this.getKilometres());
                 break;
             case "large":
                 maxC02SavedByThisActivity = CarbonCalculator.largeCarEmissions(
-                        this.getKilometres()) - CarbonCalculator.trainEmissions(this.getKilometres());
+                        this.getKilometres()) - CarbonCalculator
+                        .trainEmissions(this.getKilometres());
                 break;
             default:
                 maxC02SavedByThisActivity = 0;

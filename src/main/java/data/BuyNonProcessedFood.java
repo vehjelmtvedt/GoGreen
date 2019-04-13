@@ -67,6 +67,8 @@ public class BuyNonProcessedFood extends Activity {
                     return averageToBelowAverage();
                 case "below average":
                     return belowAverageToVeryLittle();
+                default:
+                    return averageToBelowAverage();
             }
         } else if (timesPerformedInTheSameDay == 1) {
             if (processedFoodConsumption.equals("above average")) {

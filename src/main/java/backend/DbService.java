@@ -585,7 +585,7 @@ public class DbService {
      * @param user user to check
      * @return array of ids
      */
-    private ArrayList<Integer> checkLeaderboards(User user) {
+    protected ArrayList<Integer> checkLeaderboards(User user) {
 
         ArrayList<Integer> results = new ArrayList<>();
 

@@ -32,13 +32,16 @@ public class UseBikeInsteadOfCar extends TransportationActivity {
         double maxC02SavedByThisActivity;
         switch (user.getCarType()) {
             case "small":
-                maxC02SavedByThisActivity = CarbonCalculator.smallCarEmissions(this.getKilometres());
+                maxC02SavedByThisActivity = CarbonCalculator
+                        .smallCarEmissions(this.getKilometres());
                 break;
             case "medium":
-                maxC02SavedByThisActivity = CarbonCalculator.mediumCarEmissions(this.getKilometres());
+                maxC02SavedByThisActivity = CarbonCalculator
+                        .mediumCarEmissions(this.getKilometres());
                 break;
             case "large":
-                maxC02SavedByThisActivity = CarbonCalculator.largeCarEmissions(this.getKilometres());
+                maxC02SavedByThisActivity = CarbonCalculator
+                        .largeCarEmissions(this.getKilometres());
                 break;
             default:
                 maxC02SavedByThisActivity = 0;

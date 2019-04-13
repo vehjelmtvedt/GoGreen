@@ -187,11 +187,21 @@ public class HomepageController implements Initializable {
         btnRefresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> updateLeaderboards());
 
         //switch leaderboards upon clicking
-        btnTop5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> hideLeaderboards(tableTop5, tableTop10, tableTop25, tableTop50, tableTop100));
-        btnTop10.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> hideLeaderboards(tableTop10, tableTop5, tableTop25, tableTop50, tableTop100));
-        btnTop25.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> hideLeaderboards(tableTop25, tableTop5, tableTop10, tableTop50, tableTop100));
-        btnTop25.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> hideLeaderboards(tableTop50, tableTop5, tableTop10, tableTop50, tableTop100));
-        btnTop100.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> hideLeaderboards(tableTop100, tableTop5, tableTop10, tableTop25, tableTop50));
+        btnTop5.addEventHandler(MouseEvent.MOUSE_CLICKED,
+            event -> hideLeaderboards(tableTop5, tableTop10, tableTop25,
+                        tableTop50, tableTop100));
+        btnTop10.addEventHandler(MouseEvent.MOUSE_CLICKED,
+            event -> hideLeaderboards(tableTop10, tableTop5, tableTop25,
+                        tableTop50, tableTop100));
+        btnTop25.addEventHandler(MouseEvent.MOUSE_CLICKED,
+            event -> hideLeaderboards(tableTop25, tableTop5, tableTop10,
+                        tableTop50, tableTop100));
+        btnTop25.addEventHandler(MouseEvent.MOUSE_CLICKED,
+            event -> hideLeaderboards(tableTop50, tableTop5, tableTop10,
+                        tableTop50, tableTop100));
+        btnTop100.addEventHandler(MouseEvent.MOUSE_CLICKED,
+            event -> hideLeaderboards(tableTop100, tableTop5, tableTop10,
+                        tableTop25, tableTop50));
 
         //update profile information and leaderboards upon initialising page
         updateUser(thisLoginDetails);

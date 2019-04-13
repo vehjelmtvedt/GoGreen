@@ -88,7 +88,8 @@ public abstract class Activity {
     }
 
     /**
-     * Creates an array list that contains the activities of the same type performed on the same day.
+     * Creates an array list that contains the activities
+     * of the same type performed on the same day.
      *
      * @param user currently logged in user
      * @return ArrayList

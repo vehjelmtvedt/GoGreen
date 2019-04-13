@@ -64,6 +64,8 @@ public class BuyOrganicFood extends Activity {
                     return someToMost();
                 case "most":
                     return mostToAll();
+                default:
+                    return someToMost();
             }
         } else if (timesPerformedInTheSameDay == 1) {
             if (organicFoodConsumption.equals("none")) {

@@ -66,6 +66,8 @@ public class BuyLocallyProducedFood extends Activity {
                     return averageToAboveAverage();
                 case "above average":
                     return aboveAverageToAlmostAll();
+                default:
+                    return averageToAboveAverage();
             }
         } else if (timesPerformedInTheSameDay == 1) {
             if (locallyProducedFoodConsumption.equals("very little")) {
