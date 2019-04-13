@@ -5,6 +5,7 @@ import data.User;
 import frontend.gui.Events;
 import frontend.gui.FriendRequest;
 import frontend.gui.Main;
+import frontend.threading.NotificationThread;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,12 +18,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class NotificationPanelController implements Initializable {
+public class    NotificationPanelController implements Initializable {
     private static User loggedUser;
     private static LoginDetails loginDetails;
     private static boolean notifySelected = false;
@@ -35,13 +37,13 @@ public class NotificationPanelController implements Initializable {
     private VBox friendsContainer;
 
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        int count = 0;
-        for (String fromUser : loggedUser.getFriendRequests()) {
-            ++count;
-            addFriendRequest(friendsContainer, fromUser, count);
-        }
+        NotificationThread.notificationPanelController = this;
+
+
+        fillFriendRequests();
 
         markAllRead.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
             markAllRead.setUnderline(true);
@@ -53,16 +55,37 @@ public class NotificationPanelController implements Initializable {
         });
 
         notificationPane.setVisible(false);
+
     }
 
-    private void addFriendRequest(VBox container, String fromUser, int parity) {
+    /**
+     * Fill the friend requests in the notification panel.
+     */
+    public void fillFriendRequests() {
+        User currUser = Requests.instance.loginRequest(loginDetails);
+
+        System.out.println("NEW SIZE OF FRIEND REQUESTS:" + currUser.getFriendRequests().size());
+
+        friendsContainer.getChildren().clear();
+
+        for (String fromUser : currUser.getFriendRequests()) {
+            addFriendRequest(friendsContainer, fromUser);
+        }
+        setUser(currUser);
+    }
+
+
+    private void addFriendRequest(VBox container, String fromUser) {
         FriendRequest friendRequest = new FriendRequest();
         try {
-            friendRequest.newFriendRequest(container, fromUser, parity);
+            friendRequest.newFriendRequest(container, fromUser);
         } catch (IOException exp) {
             System.out.println("Something went wrong");
         }
     }
+
+
+
 
     private static void setup(ImageView notificationIcon,
                               ImageView logoutIcon, AnchorPane parentPane) throws IOException {

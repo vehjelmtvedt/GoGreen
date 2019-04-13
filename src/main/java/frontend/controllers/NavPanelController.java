@@ -1,6 +1,6 @@
 package frontend.controllers;
 
-import data.User;
+import data.LoginDetails;
 import frontend.gui.Events;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 public class NavPanelController implements Initializable {
     public static ProfilePageController profilePageController;
-    private static User thisUser;
+    private static LoginDetails thisLoginDetails;
 
     @FXML
     private Button myProfile;
@@ -25,8 +25,6 @@ public class NavPanelController implements Initializable {
     @FXML
     private Button friends;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //add button hover event
@@ -34,6 +32,7 @@ public class NavPanelController implements Initializable {
         Events.addNavButtonHover(activity);
         Events.addNavButtonHover(friends);
         Events.addNavButtonHover(myProfile);
+
         home.setOnAction(e -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getHomepage()));
         activity.setOnAction(e -> StageSwitcher.sceneSwitch(
@@ -41,13 +40,15 @@ public class NavPanelController implements Initializable {
         friends.setOnAction(e -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getFriendsPage()));
         myProfile.setOnAction(e -> {
-            profilePageController.updateUser(thisUser);
+            profilePageController.updateUser(thisLoginDetails);
+            profilePageController.updateAchievements(thisLoginDetails);
             StageSwitcher.sceneSwitch(
                     Main.getPrimaryStage(), Main.getProfilePage());
         });
     }
 
-    public static void setUser(User user) {
-        thisUser = user;
+    public static void setLoginDetails(LoginDetails loginDetails) {
+        thisLoginDetails = loginDetails;
     }
+
 }

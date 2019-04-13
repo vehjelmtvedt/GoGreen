@@ -7,6 +7,9 @@ import com.jfoenix.controls.JFXTextField;
 import frontend.gui.InputValidation;
 import frontend.gui.Main;
 import frontend.gui.StageSwitcher;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +19,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
+import tools.Requests;
 
 import java.io.IOException;
 import java.net.URL;
@@ -72,10 +77,22 @@ public class SignupController implements Initializable {
     private Label line3;
 
     @FXML
+    private Label line4;
+
+    @FXML
+    private Label line5;
+
+    @FXML
     private Label signup;
 
     @FXML
     private Label goGreen;
+
+    @FXML
+    private Label lblSaved;
+
+    @FXML
+    private Label lblTotalUsers;
 
     @FXML
     private JFXComboBox secQuestion;
@@ -87,6 +104,18 @@ public class SignupController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
+        lblSaved.setText("0 KG");
+        lblTotalUsers.setText("0 Users");
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2500), ae -> {
+            lblSaved.setText(Math.floor(Requests.instance.getTotalCO2Saved()) + " KG");
+            lblTotalUsers.setText(Requests.instance.getTotalUsers() + " Users");
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+
         JFXTextField[] nameFields = new JFXTextField[2];
         nameFields[0] = firstNameField;
         nameFields[1] = lastNameField;
@@ -98,6 +127,16 @@ public class SignupController implements Initializable {
                         emailField, passwordField,
                         confirmPasswordField, ageField,
                         getSecurityQuestionid(), secAnswer, mainPane);
+
+                //Reset fields
+                firstNameField.setText(null);
+                lastNameField.setText(null);
+                emailField.setText(null);
+                ageField.setText(null);
+                usernameField.setText(null);
+                passwordField.setText(null);
+                confirmPasswordField.setText(null);
+                secAnswer.setText(null);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -126,7 +165,7 @@ public class SignupController implements Initializable {
         if (secQuestion.getValue() == null) {
             return -1;
         }
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
             if (secQuestion.getValue().toString().equals(secQuestions.get(i))) {
                 return i;
             }
@@ -158,6 +197,10 @@ public class SignupController implements Initializable {
         line1.setFont(Main.getReenieBeanie(40));
         line2.setFont(Main.getReenieBeanie(40));
         line3.setFont(Main.getReenieBeanie(50));
+        line4.setFont(Main.getReenieBeanie(40));
+        line5.setFont(Main.getReenieBeanie(40));
+        lblSaved.setFont(Main.getReenieBeanie(30));
+        lblTotalUsers.setFont(Main.getReenieBeanie(30));
         signup.setFont(Main.getRobotoThin(45));
         loginForward.setFont(Main.getRobotoThin(45));
         signupButton.setFont(Main.getRobotoThin(28));

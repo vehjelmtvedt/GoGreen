@@ -46,5 +46,6 @@ public class Dialog {
         stage.setScene(scene);
         stage.show();
         stage.toFront();
+        stage.setAlwaysOnTop(true);
     }
 }
