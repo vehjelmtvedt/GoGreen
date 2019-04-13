@@ -7,6 +7,7 @@ import frontend.gui.StageSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,8 +25,14 @@ public class NavPanelController implements Initializable {
     private Button activity;
     @FXML
     private Button friends;
-
-
+    @FXML
+    private ImageView imgHome;
+    @FXML
+    private ImageView imgProfile;
+    @FXML
+    private ImageView imgActivity;
+    @FXML
+    private ImageView imgFriends;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -34,6 +41,7 @@ public class NavPanelController implements Initializable {
         Events.addNavButtonHover(activity);
         Events.addNavButtonHover(friends);
         Events.addNavButtonHover(myProfile);
+
         home.setOnAction(e -> StageSwitcher.sceneSwitch(
                 Main.getPrimaryStage(), Main.getHomepage()));
         activity.setOnAction(e -> StageSwitcher.sceneSwitch(
