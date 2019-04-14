@@ -1,4 +1,4 @@
-https://img.shields.io/badge/Coverage-100%25-green.svg
+<img src="https://img.shields.io/badge/Coverage-100%25-green.svg">
 
 # GoGreen - CSE1105 Group 38 Project
 
