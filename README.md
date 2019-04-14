@@ -1,5 +1,4 @@
-![coverage](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/develop/coverage.svg)
-![pipeline](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-38/template/badges/develop/pipeline.svg)
+https://img.shields.io/badge/Coverage-100%25-green.svg
 
 # GoGreen - CSE1105 Group 38 Project
 
