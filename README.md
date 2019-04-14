@@ -10,11 +10,11 @@ The project is a web application that functions much like a social network for t
 
 Homepage Overview:
 
-<img src="doc/app-preview/homepage-overview.png"  width="600">
+<img src="pics/homepage-overview.png"  width="600">
 
 Server Workflow Overview:
 
-<img src="doc/app-preview/server-overview.png"  width="600">
+<img src="pics/server-overview.png"  width="600">
 
 
 ### How To Run
