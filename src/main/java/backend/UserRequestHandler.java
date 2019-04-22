@@ -37,7 +37,7 @@ public class UserRequestHandler {
      * .
      * Sign-up REST Method
      */
-    @RequestMapping("/signup")
+    @RequestMapping("/signUp")
     public String signupController(@RequestBody User user) {
 
         if (dbService.getUserByUsername(user.getUsername()) != null) {
@@ -53,19 +53,19 @@ public class UserRequestHandler {
         //return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
-    @RequestMapping("/friendrequest")
+    @RequestMapping("/friendRequest")
     public boolean friendRequest(@RequestParam String sender,
                                  @RequestParam String receiver) {
         return dbService.addFriendRequest(sender, receiver);
     }
 
-    @RequestMapping("/acceptfriend")
+    @RequestMapping("/acceptFriend")
     public boolean acceptFriendRequest(@RequestParam String sender,
                                        @RequestParam String accepting) {
         return dbService.acceptFriendRequest(sender, accepting);
     }
 
-    @RequestMapping("/rejectfriend")
+    @RequestMapping("/rejectFriend")
     public boolean rejectFriendRequest(@RequestParam String sender,
                                        @RequestParam String rejecting) {
         return dbService.rejectFriendRequest(sender, rejecting);

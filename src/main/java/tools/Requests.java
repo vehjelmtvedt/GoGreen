@@ -69,7 +69,7 @@ public class Requests {
      * @return response from the server.
      */
     public String signUpRequest(User user) {
-        return restTemplate.postForEntity(url + "/signup",user,String.class).getBody();
+        return restTemplate.postForEntity(url + "/signUp",user,String.class).getBody();
     }
 
     /**
@@ -89,7 +89,7 @@ public class Requests {
      */
     public boolean sendFriendRequest(String sender, String receiver) {
         //adding the query params to the URL
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/friendrequest")
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/friendRequest")
                 .queryParam("sender", sender)
                 .queryParam("receiver", receiver);
 
@@ -104,7 +104,7 @@ public class Requests {
      */
     public boolean acceptFriendRequest(String sender, String accepting) {
         //adding the query params to the URL
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/acceptfriend")
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/acceptFriend")
                 .queryParam("sender", sender)
                 .queryParam("accepting", accepting);
 
@@ -119,7 +119,7 @@ public class Requests {
      */
     public boolean rejectFriendRequest(String sender, String rejecting) {
         //adding the query params to the URL
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/rejectfriend")
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url + "/rejectFriend")
                 .queryParam("sender", sender)
                 .queryParam("rejecting", rejecting);
 
