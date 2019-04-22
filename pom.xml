@@ -73,8 +73,9 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>5.1.4.RELEASE</version>
+            <version>[5.1.5,)</version>
         </dependency>
+
 
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
@@ -191,7 +192,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>${checkstyle.version}</version>
+                        <version>[8.18,)</version>
                     </dependency>
                 </dependencies>
                 <configuration>
